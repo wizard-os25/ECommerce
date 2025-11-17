@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  ECommerce
+  English Localization
+
+  Created by wizard.os25 on 17/11/25.
+  
+*/
+
+/* App Name */
+"app_name" = "ECommerce";
+
+/* Common */
+"welcome" = "Welcome";
+"home" = "Home";
+"products" = "Products";
+"cart" = "Cart";
+"profile" = "Profile";
+"settings" = "Settings";
+"language" = "Language";
+
+/* Actions */
+"add_to_cart" = "Add to Cart";
+"buy_now" = "Buy Now";
+"checkout" = "Checkout";
+"login" = "Login";
+"logout" = "Logout";
+"save" = "Save";
+"cancel" = "Cancel";
+"delete" = "Delete";
+"ok" = "OK";
+"search" = "Search";
+"filter" = "Filter";
+"sort" = "Sort";
+
+/* Product */
+"price" = "Price";
+"description" = "Description";
+"item_count" = "%lld items";
+"no_items" = "No items";
+
+/* Messages */
+"welcome_message" = "Welcome, %@!";
+"error_loading" = "Error loading data";
+"total" = "Total";

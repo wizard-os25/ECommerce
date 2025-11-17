@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  ECommerce
+  Vietnamese Localization
+
+  Created by wizard.os25 on 17/11/25.
+  
+*/
+
+/* App Name */
+"app_name" = "Thương Mại Điện Tử";
+
+/* Common */
+"welcome" = "Chào mừng";
+"home" = "Trang chủ";
+"products" = "Sản phẩm";
+"cart" = "Giỏ hàng";
+"profile" = "Hồ sơ";
+"settings" = "Cài đặt";
+"language" = "Ngôn ngữ";
+
+/* Actions */
+"add_to_cart" = "Thêm vào giỏ";
+"buy_now" = "Mua ngay";
+"checkout" = "Thanh toán";
+"login" = "Đăng nhập";
+"logout" = "Đăng xuất";
+"save" = "Lưu";
+"cancel" = "Hủy";
+"delete" = "Xóa";
+"ok" = "Đồng ý";
+"search" = "Tìm kiếm";
+"filter" = "Lọc";
+"sort" = "Sắp xếp";
+
+/* Product */
+"price" = "Giá";
+"description" = "Mô tả";
+"item_count" = "%lld sản phẩm";
+"no_items" = "Không có sản phẩm";
+
+/* Messages */
+"welcome_message" = "Chào mừng, %@!";
+"error_loading" = "Lỗi tải dữ liệu";
+"total" = "Tổng cộng";
+
