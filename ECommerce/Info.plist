@@ -6,8 +6,6 @@
 	<string>$(API_BASE_URL)</string>
 	<key>ApiKey</key>
 	<string>$(API_KEY)</string>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

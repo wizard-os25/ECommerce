@@ -30,7 +30,21 @@ final class ProductsViewController: UIViewController, StoryboardInstantiable, Al
         setupViews()
         bind(to: mediatingController)
         setupChildViewController()
+        setupSidebarGesture()
         // viewDidLoad will be called on mediatingController by ProductsTableViewController
+    }
+    
+    // MARK: - Sidebar Integration
+    
+    /// Setup sidebar reveal gesture using SidebarRevealBehavior
+    private func setupSidebarGesture() {
+        // Use SidebarRevealBehavior with custom action to find parent MainViewController and reveal sidebar
+        addSidebarRevealBehavior { [weak self] in
+            // Find parent MainViewController and reveal sidebar
+            if let mainVC: MainViewController = self?.findParentViewController() {
+                mainVC.revealSidebar()
+            }
+        }
     }
     
     private func setupViews() {
