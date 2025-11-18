@@ -19,7 +19,32 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
         super.viewDidLoad()
         setupViews()
         bind(to: mediatingController)
+        setupSidebarGesture()
         mediatingController.viewDidLoad()
+    }
+    
+    // MARK: - Sidebar Integration
+    
+    /// Setup sidebar reveal gesture using SidebarRevealBehavior
+    private func setupSidebarGesture() {
+        // Use SidebarRevealBehavior with custom action to find parent MainViewController and reveal sidebar
+        addSidebarRevealBehavior { [weak self] in
+            if let mainVC: MainViewController = self?.findParentViewController() {
+                mainVC.revealSidebar()
+            }
+        }
+        
+        // For table view, also add swipe gesture directly to tableView
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        tableView.addGestureRecognizer(swipeRightGesture)
+    }
+    
+    @objc private func handleSwipeRight() {
+        // Find parent MainViewController and reveal sidebar
+        if let mainVC: MainViewController = self.findParentViewController() {
+            mainVC.revealSidebar()
+        }
     }
     
     func reload() {

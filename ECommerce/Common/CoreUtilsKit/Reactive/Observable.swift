@@ -27,6 +27,14 @@ final class Observable<Value> {
     }
     
     private func notifyObservers() {
+        /*
+         Clean up deallocated observers
+         This is to prevent memory leaks,
+         can cause crashes if not cleaned up.
+         */
+        observers = observers.filter { $0.observer != nil }
+        
+        /// Notify active observers
         for observer in observers {
             observer.block(self.value)
         }
