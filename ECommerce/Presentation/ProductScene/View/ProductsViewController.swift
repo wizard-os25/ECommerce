@@ -56,7 +56,7 @@ final class ProductsViewController: UIViewController, StoryboardInstantiable, Al
         let tableViewController = ProductsTableViewController.instantiateViewController()
         tableViewController.mediatingController = mediatingController
         
-        add(child: tableViewController, container: productsListContainer)
+        add(tableViewController, to: productsListContainer)
         productsTableViewController = tableViewController
     }
     

@@ -40,6 +40,7 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     // Dependencies
     private var mainCoordinatingController: MainCoordinatingController?
     private var appDIContainer: AppDIContainer?
+    private var sideMenuMediatingController: SideMenuMediatingController?
     
     /// Set coordinating controller (used for dependency injection)
     /// - Parameter coordinatingController: Main coordinating controller
@@ -110,8 +111,9 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     }
     
     deinit {
-        // Clean up observer
+        // Clean up observers
         mediatingController?.isSidebarExpanded.remove(observer: self)
+        sideMenuMediatingController?.horizontalScrollOffset.remove(observer: self)
     }
     
     // MARK: - Setup Methods
@@ -167,20 +169,18 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     }
     
     private func setupSideMenu() {
-        // Ensure coordinating controller is set
-        if mainCoordinatingController == nil {
-            let diContainer = appDIContainer ?? AppDIContainer()
-            let mainSceneDIContainer = diContainer.makeMainSceneDIContainer()
-            let newCoordinatingController = mainSceneDIContainer.makeMainCoordinatingController(delegate: self)
-            // Setup side menu coordinating controller
-            newCoordinatingController.setupSideMenuCoordinatingController()
-            mainCoordinatingController = newCoordinatingController
-        } else {
-            // Ensure side menu coordinating controller is set up (in case it wasn't set up before)
-            mainCoordinatingController?.setupSideMenuCoordinatingController()
+        // Ensure coordinating controller is set (should be set by AppFlowCoordinator)
+        guard let coordinatingController = mainCoordinatingController else {
+            fatalError("MainCoordinatingController must be set before calling setupSideMenu()")
         }
         
-        guard let sideMenuVC = mainCoordinatingController?.makeSideMenuViewController() else {
+        // Setup side menu coordinating controller
+        coordinatingController.setupSideMenuCoordinatingController()
+        
+        // Get side menu mediating controller to observe horizontal scroll
+        sideMenuMediatingController = coordinatingController.getSideMenuMediatingController()
+        
+        guard let sideMenuVC = coordinatingController.makeSideMenuViewController() else {
             fatalError("Failed to create SideMenuViewController")
         }
         
@@ -197,6 +197,9 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
         // Create shadow view
         let shadowView = UIView()
         layoutManager.setupShadowViewLayout(shadowView: shadowView)
+        
+        // Observe horizontal scroll offset to reveal sidebar
+        observeHorizontalScroll()
     }
     
     /// Set dependencies for MainViewController
@@ -239,6 +242,37 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
         }
     }
     
+    /// Observe horizontal scroll offset to reveal sidebar when scrolling horizontally
+    private func observeHorizontalScroll() {
+        guard let sideMenuMediatingController = sideMenuMediatingController else { return }
+        
+        // Observe horizontal scroll offset changes
+        sideMenuMediatingController.horizontalScrollOffset.observe(on: self) { [weak self] offset in
+            self?.handleHorizontalScroll(offset: offset)
+        }
+    }
+    
+    /// Handle horizontal scroll offset changes
+    /// - Parameter offset: The horizontal scroll offset (positive = scroll right)
+    private func handleHorizontalScroll(offset: CGFloat) {
+        // Only reveal sidebar if scrolling right (positive offset) and sidebar is not already expanded
+        guard offset > 0, !mediatingController.isSidebarExpanded.value else { return }
+        
+        // Threshold to trigger sidebar reveal (adjust as needed)
+        let revealThreshold: CGFloat = 50.0
+        
+        if offset >= revealThreshold {
+            // Reveal sidebar when threshold is reached
+            revealSidebar()
+        }
+    }
+    
+    /// Update horizontal scroll offset (called by child view controllers)
+    /// - Parameter offset: The horizontal scroll offset
+    func updateHorizontalScrollOffset(_ offset: CGFloat) {
+        sideMenuMediatingController?.horizontalScrollOffset.value = offset
+    }
+    
     // MARK: - Content Management
     
     /// Set content view controller programmatically
@@ -246,14 +280,14 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     func setContentViewController(_ contentViewController: UIViewController) {
         // Remove existing content view controller
         if let currentContent = currentContentViewController {
-            currentContent.remove()
+            removeChildController(currentContent)
         }
         
         // Use contentContainerView if available, otherwise use main view
         let container = (contentContainerView ?? view)!
         
         // Add new content view controller using extension
-        add(child: contentViewController, container: container)
+        add(contentViewController, to: container)
         currentContentViewController = contentViewController
         mediatingController.setContentViewController(contentViewController)
         
@@ -385,8 +419,17 @@ extension MainViewController: MainCoordinatingControllerDelegate {
     }
 }
 
+// MARK: - UIGestureRecognizerDelegate
 
-childVC.horizontalScrollOffset.observe(on: self) { [weak self] offset in
-    print("User scrolled horizontally: \(offset)")
-    // update UI hoặc animation theo offset
+extension MainViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Allow pan gesture to work simultaneously with scroll gestures
+        return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        // Allow gesture to receive touches
+        return true
+    }
 }

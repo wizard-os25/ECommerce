@@ -25,13 +25,12 @@ protocol SideMenuMediatingControllerOutput {
 typealias SideMenuMediatingController = SideMenuMediatingControllerInput & SideMenuMediatingControllerOutput
 
 final class DefaultSideMenuMediatingController: SideMenuMediatingController {
-    var horizontalScrollOffset: Observable<CGFloat>
-    
     
     // MARK: - OUTPUT
     
     let menuItems: Observable<[SideMenuModel]> = Observable([])
     let selectedIndex: Observable<Int> = Observable(0)
+    let horizontalScrollOffset: Observable<CGFloat> = Observable(0)
     let footerText: String = "Version 1.1"
     
     // MARK: - Private

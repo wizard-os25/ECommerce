@@ -8,8 +8,7 @@
 import UIKit
 
 final class ProductItemCell: UITableViewCell {
-    
-    static let reuseIdentifier = String(describing: ProductItemCell.self)
+
     static let height = CGFloat(130)
     
     @IBOutlet private var nameLabel: UILabel!

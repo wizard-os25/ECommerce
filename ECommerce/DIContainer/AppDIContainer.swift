@@ -34,4 +34,16 @@ final class AppDIContainer {
         )
         return ProductsSceneDIContainer(dependencies: dependencies)
     }
+    
+    func makeSideMenuSceneDIContainer() -> SideMenuSceneDIContainer {
+        return SideMenuSceneDIContainer()
+    }
+    
+    func makeMainSceneDIContainer() -> MainSceneDIContainer {
+        let dependencies = MainSceneDIContainer.Dependencies(
+            sideMenuSceneDIContainer: makeSideMenuSceneDIContainer(),
+            appDIContainer: self
+        )
+        return MainSceneDIContainer(dependencies: dependencies)
+    }
 }

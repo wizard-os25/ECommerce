@@ -38,6 +38,11 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         tableView.addGestureRecognizer(swipeRightGesture)
+        
+        // Add pan gesture to detect horizontal scroll for sidebar reveal
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        panGesture.delegate = self
+        tableView.addGestureRecognizer(panGesture)
     }
     
     @objc private func handleSwipeRight() {
@@ -45,6 +50,36 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
         if let mainVC: MainViewController = self.findParentViewController() {
             mainVC.revealSidebar()
         }
+    }
+    
+    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: tableView)
+        let velocity = gesture.velocity(in: tableView)
+        
+        // Only handle horizontal pan gestures (right swipe)
+        guard abs(velocity.x) > abs(velocity.y), velocity.x > 0 else {
+            // Reset horizontal scroll offset if not horizontal or scrolling left
+            updateHorizontalScrollOffset(0)
+            return
+        }
+        
+        // Update horizontal scroll offset based on translation
+        // Only track positive (right) translation
+        let horizontalOffset = max(0, translation.x)
+        updateHorizontalScrollOffset(horizontalOffset)
+        
+        // Reset offset when gesture ends
+        if gesture.state == .ended || gesture.state == .cancelled {
+            updateHorizontalScrollOffset(0)
+        }
+    }
+    
+    /// Update horizontal scroll offset in SideMenuMediatingController
+    /// - Parameter offset: The horizontal scroll offset
+    private func updateHorizontalScrollOffset(_ offset: CGFloat) {
+        // Find MainViewController and update horizontal scroll offset
+        guard let mainVC: MainViewController = self.findParentViewController() else { return }
+        mainVC.updateHorizontalScrollOffset(offset)
     }
     
     func reload() {
@@ -88,13 +123,7 @@ extension ProductsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ProductItemCell.reuseIdentifier,
-            for: indexPath
-        ) as? ProductItemCell else {
-            assertionFailure("Cannot dequeue reusable cell \(ProductItemCell.self) with reuseIdentifier: \(ProductItemCell.reuseIdentifier)")
-            return UITableViewCell()
-        }
+        let cell: ProductItemCell = tableView.dequeueReusableCell(at: indexPath)
         
         cell.fill(with: mediatingController.items.value[indexPath.row])
         
@@ -111,5 +140,24 @@ extension ProductsTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mediatingController.didSelectItem(at: indexPath.row)
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension ProductsTableViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Allow pan gesture to work simultaneously with table view scrolling
+        return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        // Only handle pan gestures when table view is at the left edge
+        guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else { return true }
+        let location = touch.location(in: tableView)
+        
+        // Only trigger if touch is near left edge (within 20 points)
+        return location.x <= 20
     }
 }

@@ -18,10 +18,15 @@ extension UIViewController {
     }
     
     func removeChildController(_ child: UIViewController) {
-            guard parent != nil else { return }
-            child.willMove(toParent: nil)
-            child.view.removeFromSuperview()
-            child.removeFromParent()
-        }
+        guard child.parent != nil else { return }
+        child.willMove(toParent: nil)
+        child.view.removeFromSuperview()
+        child.removeFromParent()
+    }
+    
+    /// Convenience method to remove self from parent
+    func remove() {
+        parent?.removeChildController(self)
+    }
 }
 

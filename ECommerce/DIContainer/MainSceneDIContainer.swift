@@ -11,6 +11,7 @@ final class MainSceneDIContainer: MainCoordinatingControllerDependencies {
     
     struct Dependencies {
         let sideMenuSceneDIContainer: SideMenuSceneDIContainer
+        let appDIContainer: AppDIContainer
     }
     
     private let dependencies: Dependencies
@@ -36,12 +37,20 @@ final class MainSceneDIContainer: MainCoordinatingControllerDependencies {
         return dependencies.sideMenuSceneDIContainer
     }
     
+    // MARK: - App DI Container
+    
+    func getAppDIContainer() -> AppDIContainer {
+        return dependencies.appDIContainer
+    }
+    
     // MARK: - Flow Coordinators
     
     func makeMainCoordinatingController(
+        navigationController: UINavigationController,
         delegate: MainCoordinatingControllerDelegate? = nil
     ) -> MainCoordinatingController {
         MainCoordinatingController(
+            navigationController: navigationController,
             dependencies: self,
             delegate: delegate
         )
@@ -57,4 +66,5 @@ extension MainSceneDIContainer: MainMediatingControllerDelegate {
         // This can be forwarded to a higher level coordinator if needed
     }
 }
+
 
