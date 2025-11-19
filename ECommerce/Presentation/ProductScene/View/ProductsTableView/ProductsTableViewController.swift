@@ -19,32 +19,7 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
         super.viewDidLoad()
         setupViews()
         bind(to: mediatingController)
-        setupSidebarGesture()
         mediatingController.viewDidLoad()
-    }
-    
-    // MARK: - Sidebar Integration
-    
-    /// Setup sidebar reveal gesture using SidebarRevealBehavior
-    private func setupSidebarGesture() {
-        // Use SidebarRevealBehavior with custom action to find parent MainViewController and reveal sidebar
-        addSidebarRevealBehavior { [weak self] in
-            if let mainVC: MainViewController = self?.findParentViewController() {
-                mainVC.revealSidebar()
-            }
-        }
-        
-        // For table view, also add swipe gesture directly to tableView
-        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
-        swipeRightGesture.direction = .right
-        tableView.addGestureRecognizer(swipeRightGesture)
-    }
-    
-    @objc private func handleSwipeRight() {
-        // Find parent MainViewController and reveal sidebar
-        if let mainVC: MainViewController = self.findParentViewController() {
-            mainVC.revealSidebar()
-        }
     }
     
     func reload() {
@@ -88,13 +63,7 @@ extension ProductsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ProductItemCell.reuseIdentifier,
-            for: indexPath
-        ) as? ProductItemCell else {
-            assertionFailure("Cannot dequeue reusable cell \(ProductItemCell.self) with reuseIdentifier: \(ProductItemCell.reuseIdentifier)")
-            return UITableViewCell()
-        }
+        let cell: ProductItemCell = tableView.dequeueReusableCell(at: indexPath)
         
         cell.fill(with: mediatingController.items.value[indexPath.row])
         

@@ -25,7 +25,7 @@ protocol SideMenuMediatingControllerOutput {
 typealias SideMenuMediatingController = SideMenuMediatingControllerInput & SideMenuMediatingControllerOutput
 
 final class DefaultSideMenuMediatingController: SideMenuMediatingController {
-    var horizontalScrollOffset: Observable<CGFloat>
+    var horizontalScrollOffset: Observable<CGFloat> = Observable(0)
     
     
     // MARK: - OUTPUT
@@ -47,7 +47,7 @@ final class DefaultSideMenuMediatingController: SideMenuMediatingController {
     // MARK: - Init
     
     init() {
-        menuItems.value = defaultMenuItems
+        self.menuItems.value = defaultMenuItems
     }
     
     // MARK: - INPUT

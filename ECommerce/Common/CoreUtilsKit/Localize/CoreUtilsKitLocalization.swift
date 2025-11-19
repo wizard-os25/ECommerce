@@ -8,7 +8,7 @@ public enum CoreUtilsKitLocalization: String {
     case required_face_id
     
     public var localized: String {
-        return rawValue.localized(using: <#T##String?#>)
+        return rawValue.localized(using: "")
     }
 }
 
