@@ -22,65 +22,6 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
         mediatingController.viewDidLoad()
     }
     
-    // MARK: - Sidebar Integration
-    
-    /// Setup sidebar reveal gesture using SidebarRevealBehavior
-    private func setupSidebarGesture() {
-        // Use SidebarRevealBehavior with custom action to find parent MainViewController and reveal sidebar
-        addSidebarRevealBehavior { [weak self] in
-            if let mainVC: MainViewController = self?.findParentViewController() {
-                mainVC.revealSidebar()
-            }
-        }
-        
-        // For table view, also add swipe gesture directly to tableView
-        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
-        swipeRightGesture.direction = .right
-        tableView.addGestureRecognizer(swipeRightGesture)
-        
-        // Add pan gesture to detect horizontal scroll for sidebar reveal
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-        panGesture.delegate = self
-        tableView.addGestureRecognizer(panGesture)
-    }
-    
-    @objc private func handleSwipeRight() {
-        // Find parent MainViewController and reveal sidebar
-        if let mainVC: MainViewController = self.findParentViewController() {
-            mainVC.revealSidebar()
-        }
-    }
-    
-    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: tableView)
-        let velocity = gesture.velocity(in: tableView)
-        
-        // Only handle horizontal pan gestures (right swipe)
-        guard abs(velocity.x) > abs(velocity.y), velocity.x > 0 else {
-            // Reset horizontal scroll offset if not horizontal or scrolling left
-            updateHorizontalScrollOffset(0)
-            return
-        }
-        
-        // Update horizontal scroll offset based on translation
-        // Only track positive (right) translation
-        let horizontalOffset = max(0, translation.x)
-        updateHorizontalScrollOffset(horizontalOffset)
-        
-        // Reset offset when gesture ends
-        if gesture.state == .ended || gesture.state == .cancelled {
-            updateHorizontalScrollOffset(0)
-        }
-    }
-    
-    /// Update horizontal scroll offset in SideMenuMediatingController
-    /// - Parameter offset: The horizontal scroll offset
-    private func updateHorizontalScrollOffset(_ offset: CGFloat) {
-        // Find MainViewController and update horizontal scroll offset
-        guard let mainVC: MainViewController = self.findParentViewController() else { return }
-        mainVC.updateHorizontalScrollOffset(offset)
-    }
-    
     func reload() {
         tableView.reloadData()
     }

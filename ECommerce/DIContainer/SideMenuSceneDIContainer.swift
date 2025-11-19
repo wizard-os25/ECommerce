@@ -38,6 +38,7 @@ final class SideMenuSceneDIContainer: SideMenuCoordinatingControllerDependencies
 //        DefaultSideMenuItemsMediatingController(
 //            item: item
 //        )
+        return UIViewController()
     }
     
     // MARK: - Flow Coordinators

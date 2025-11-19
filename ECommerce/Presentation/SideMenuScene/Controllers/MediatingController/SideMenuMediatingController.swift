@@ -50,6 +50,7 @@ final class DefaultSideMenuMediatingController: SideMenuMediatingController {
     ) {
         self.menuItems.value = defaultMenuItems
         self.mainQueue = mainQueue
+        self.actions = actions
     }
     
     // MARK: - Private

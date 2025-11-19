@@ -9,6 +9,7 @@ import UIKit
 
 final class ProductsSceneDIContainer: ProductCoordinatingControllerDependencies {
     
+    
     struct Dependencies {
         let productsDataTransferService: DataTransferService
     }
@@ -41,6 +42,11 @@ final class ProductsSceneDIContainer: ProductCoordinatingControllerDependencies 
             productsRepository: makeProductsRepository(),
             actions: actions
         )
+    }
+    
+    func makeProductsDetailsViewController(for product: ProductItemModel) -> ProductsViewController {
+        //
+        return ProductsViewController()
     }
     
     // MARK: - Flow Coordinators

@@ -14,13 +14,13 @@ final class AppFlowCoordinator {
     }
 
     func start() {
-        // Create MainSceneDIContainer and MainCoordinatingController
+        // Create MainSceneDIContainer
         let mainSceneDIContainer = appDIContainer.makeMainSceneDIContainer()
-        let mainCoordinatingController = mainSceneDIContainer.makeMainCoordinatingController(
-            navigationController: navigationController
-        )
         
-        // Start MainCoordinatingController - this will set MainViewController as root
-        mainCoordinatingController.start()
+        // Create MainViewController (coordinator is already set up inside)
+        let mainViewController = mainSceneDIContainer.makeMainViewController()
+        
+        // Set MainViewController as root
+        navigationController.setViewControllers([mainViewController], animated: false)
     }
 }

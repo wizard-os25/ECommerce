@@ -30,7 +30,8 @@ final class AppDIContainer {
     
     func makeMainSceneDIContainer() -> MainSceneDIContainer {
         let dependencies = MainSceneDIContainer.Dependencies(
-            sideMenuSceneDIContainer: makeSideMenuSceneDIContainer()
+            sideMenuSceneDIContainer: makeSideMenuSceneDIContainer(),
+            productsSceneDIContainer: makeProductsSceneDIContainer()
         )
         return MainSceneDIContainer(dependencies: dependencies)
     }
