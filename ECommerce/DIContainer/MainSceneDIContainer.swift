@@ -11,7 +11,6 @@ final class MainSceneDIContainer: MainCoordinatingControllerDependencies {
     
     struct Dependencies {
         let sideMenuSceneDIContainer: SideMenuSceneDIContainer
-        let appDIContainer: AppDIContainer
     }
     
     private let dependencies: Dependencies
@@ -27,8 +26,7 @@ final class MainSceneDIContainer: MainCoordinatingControllerDependencies {
     }
     
     func makeMainMediatingController() -> MainMediatingController {
-        let mediatingController = DefaultMainMediatingController(delegate: self)
-        return mediatingController
+         DefaultMainMediatingController()
     }
     
     // MARK: - Side Menu
@@ -37,34 +35,18 @@ final class MainSceneDIContainer: MainCoordinatingControllerDependencies {
         return dependencies.sideMenuSceneDIContainer
     }
     
-    // MARK: - App DI Container
-    
-    func getAppDIContainer() -> AppDIContainer {
-        return dependencies.appDIContainer
-    }
     
     // MARK: - Flow Coordinators
     
     func makeMainCoordinatingController(
-        navigationController: UINavigationController,
-        delegate: MainCoordinatingControllerDelegate? = nil
+        navigationController: UINavigationController
     ) -> MainCoordinatingController {
         MainCoordinatingController(
             navigationController: navigationController,
-            dependencies: self,
-            delegate: delegate
+            dependencies: self
         )
     }
 }
 
-// MARK: - MainMediatingControllerDelegate
-
-extension MainSceneDIContainer: MainMediatingControllerDelegate {
-    
-    func didSelectMenuItem(at index: Int) {
-        // Handle menu item selection
-        // This can be forwarded to a higher level coordinator if needed
-    }
-}
 
 

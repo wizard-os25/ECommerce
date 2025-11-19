@@ -28,22 +28,23 @@ final class AppDIContainer {
     
     // MARK: - DIContainers of scenes
     
+    func makeMainSceneDIContainer() -> MainSceneDIContainer {
+        let dependencies = MainSceneDIContainer.Dependencies(
+            sideMenuSceneDIContainer: makeSideMenuSceneDIContainer()
+        )
+        return MainSceneDIContainer(dependencies: dependencies)
+    }
+    
+    func makeSideMenuSceneDIContainer() -> SideMenuSceneDIContainer {
+        let dependencies = SideMenuSceneDIContainer.Dependencies(
+        )
+        return SideMenuSceneDIContainer(dependencies: dependencies)
+    }
+    
     func makeProductsSceneDIContainer() -> ProductsSceneDIContainer {
         let dependencies = ProductsSceneDIContainer.Dependencies(
             productsDataTransferService: productsDataTransferService
         )
         return ProductsSceneDIContainer(dependencies: dependencies)
-    }
-    
-    func makeSideMenuSceneDIContainer() -> SideMenuSceneDIContainer {
-        return SideMenuSceneDIContainer()
-    }
-    
-    func makeMainSceneDIContainer() -> MainSceneDIContainer {
-        let dependencies = MainSceneDIContainer.Dependencies(
-            sideMenuSceneDIContainer: makeSideMenuSceneDIContainer(),
-            appDIContainer: self
-        )
-        return MainSceneDIContainer(dependencies: dependencies)
     }
 }

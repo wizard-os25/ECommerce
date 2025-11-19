@@ -19,6 +19,9 @@ final class ProductsSceneDIContainer: ProductCoordinatingControllerDependencies 
         self.dependencies = dependencies
     }
     
+    // MARK: - Use Cases
+    
+    
     // MARK: - Repositories
     func makeProductsRepository() -> ProductsRepository {
         DefaultProductsRepository(
@@ -27,15 +30,16 @@ final class ProductsSceneDIContainer: ProductCoordinatingControllerDependencies 
     }
     
     // MARK: - Products List
-    func makeProductsViewController() -> ProductsViewController {
+    func makeProductsViewController(actions: ProductsMediatorActions) -> ProductsViewController {
         ProductsViewController.create(
-            with: makeProductsMediatingController()
+            with: makeProductsMediatingController(actions: actions)
         )
     }
     
-    func makeProductsMediatingController() -> ProductsMediatingController {
+    func makeProductsMediatingController(actions: ProductsMediatorActions) -> ProductsMediatingController {
         DefaultProductsMediatingController(
-            productsRepository: makeProductsRepository()
+            productsRepository: makeProductsRepository(),
+            actions: actions
         )
     }
     

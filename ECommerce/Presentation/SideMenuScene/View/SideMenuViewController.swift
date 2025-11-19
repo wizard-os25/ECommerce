@@ -15,6 +15,8 @@ final class SideMenuViewController: UIViewController, StoryboardInstantiable {
     
     private var mediatingController: SideMenuMediatingController!
     private var sideMenuTableViewController: SideMenuTableViewController?
+//    private var headerView: UITableViewHeaderFooterView?
+//    private var footerView: FooterView?
     
     // MARK: - Lifecycle
     
@@ -29,6 +31,7 @@ final class SideMenuViewController: UIViewController, StoryboardInstantiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        //setupBehaviours()
         setupChildViewController()
         bind(to: mediatingController)
         mediatingController.viewDidLoad()

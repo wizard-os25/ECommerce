@@ -19,7 +19,6 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
         super.viewDidLoad()
         setupViews()
         bind(to: mediatingController)
-        setupSidebarGesture()
         mediatingController.viewDidLoad()
     }
     

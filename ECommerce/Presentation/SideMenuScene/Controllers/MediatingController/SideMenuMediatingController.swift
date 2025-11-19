@@ -8,49 +8,58 @@
 import Foundation
 import UIKit
 
+struct SideMenuMediatorActions {
+    let showMenuItemType: (SideMenuModel) -> Void
+}
+
 protocol SideMenuMediatingControllerInput {
     func viewDidLoad()
+    func didReveal()
     func didSelectMenuItem(at index: Int)
 }
 
 protocol SideMenuMediatingControllerOutput {
     var menuItems: Observable<[SideMenuModel]> { get }
-    var selectedIndex: Observable<Int> { get }
-    //
     var horizontalScrollOffset: Observable<CGFloat> { get }
+    var isEmpty: Bool { get }
+    //var screenTitle: String { get }
     var footerText: String { get }
-    func shouldDeselectItem(at index: Int) -> Bool
 }
 
 typealias SideMenuMediatingController = SideMenuMediatingControllerInput & SideMenuMediatingControllerOutput
 
 final class DefaultSideMenuMediatingController: SideMenuMediatingController {
     
+    private let actions: SideMenuMediatorActions?
+    
+    private let mainQueue: DispatchQueueType
+    //var screenTitle = NSLocalizedString("", comment: "")
+    
     // MARK: - OUTPUT
     
     let menuItems: Observable<[SideMenuModel]> = Observable([])
-    let selectedIndex: Observable<Int> = Observable(0)
     let horizontalScrollOffset: Observable<CGFloat> = Observable(0)
+    var isEmpty: Bool { return self.menuItems.value.isEmpty}
     let footerText: String = "Version 1.1"
-    
-    // MARK: - Private
-    
-    private let defaultMenuItems: [SideMenuModel] = [
-        SideMenuModel(icon: UIImage(systemName: "house.fill")!, title: "home".localized()),
-        SideMenuModel(icon: UIImage(systemName: "bag.fill")!, title: "products".localized()),
-        SideMenuModel(icon: UIImage(systemName: "cart.fill")!, title: "cart".localized()),
-        SideMenuModel(icon: UIImage(systemName: "person.fill")!, title: "profile".localized()),
-        SideMenuModel(icon: UIImage(systemName: "slider.horizontal.3")!, title: "settings".localized())
-    ]
     
     // MARK: - Init
     
-    init() {
-        menuItems.value = defaultMenuItems
+    init(
+        actions: SideMenuMediatorActions? = nil,
+        mainQueue: DispatchQueueType = DispatchQueue.main
+    ) {
+        self.menuItems.value = defaultMenuItems
+        self.mainQueue = mainQueue
     }
     
-    // MARK: - INPUT
+    // MARK: - Private
     
+    private let defaultMenuItems = SideMenuType.allCases.map { $0.model }
+}
+    
+    // MARK: - INPUT. View event methods
+
+extension DefaultSideMenuMediatingController {
     func viewDidLoad() {
         // Initialize menu items if needed
         if menuItems.value.isEmpty {
@@ -58,13 +67,11 @@ final class DefaultSideMenuMediatingController: SideMenuMediatingController {
         }
     }
     
-    func didSelectMenuItem(at index: Int) {
-        guard index >= 0 && index < menuItems.value.count else { return }
-        selectedIndex.value = index
+    func didReveal() {
+        
     }
-    
-    func shouldDeselectItem(at index: Int) -> Bool {
-        // Profile (index 3) and Settings (index 4) should be deselected after selection
-        return index == 3 || index == 4
+
+    func didSelectMenuItem(at index: Int) {
+        self.actions?.showMenuItemType(self.defaultMenuItems[index])
     }
 }

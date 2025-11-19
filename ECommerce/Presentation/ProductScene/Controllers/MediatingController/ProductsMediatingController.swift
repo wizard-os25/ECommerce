@@ -7,6 +7,12 @@
 
 import Foundation
 
+struct ProductsMediatorActions {
+    /// Note: if you would need to edit movie inside Details screen and update this Movies List screen with updated movie then you would need this closure:
+    /// showMovieDetails: (Movie, @escaping (_ updated: Movie) -> Void) -> Void
+    let showProductDetails: (ProductItemModel) -> Void
+}
+
 protocol ProductsMediatingControllerInput {
     func viewDidLoad()
     func didLoadNextPage()
@@ -33,6 +39,9 @@ final class DefaultProductsMediatingController: ProductsMediatingController {
     private let productsRepository: ProductsRepository
     private let mainQueue: DispatchQueueType
     
+    private let actions: ProductsMediatorActions?
+
+    
     var currentPage: Int = 0
     var totalElements: Int = 0
     var hasMorePages: Bool = false
@@ -57,10 +66,13 @@ final class DefaultProductsMediatingController: ProductsMediatingController {
     
     init(
         productsRepository: ProductsRepository,
-        mainQueue: DispatchQueueType = DispatchQueue.main
+        mainQueue: DispatchQueueType = DispatchQueue.main,
+        actions: ProductsMediatorActions? = nil
+
     ) {
         self.productsRepository = productsRepository
         self.mainQueue = mainQueue
+        self.actions = actions
     }
     
     // MARK: - Private

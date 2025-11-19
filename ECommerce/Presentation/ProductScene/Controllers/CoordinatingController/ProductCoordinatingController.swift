@@ -8,7 +8,11 @@
 import UIKit
 
 protocol ProductCoordinatingControllerDependencies {
-    func makeProductsViewController() -> ProductsViewController
+    func makeProductsDetailsViewController(for product: ProductItemModel) -> ProductsViewController
+    //func makeProductsDetailsViewController(product: Product) -> UIViewController
+//    func makeProductsQueriesSuggestionsListViewController(
+//        didSelect: @escaping ProductsQueryListViewModelDidSelectAction
+//    ) -> UIViewController
 }
 
 final class ProductCoordinatingController {
@@ -16,16 +20,16 @@ final class ProductCoordinatingController {
     private weak var navigationController: UINavigationController?
     private let dependencies: ProductCoordinatingControllerDependencies
     
+//    private weak var productsQueriesSuggestionsVC: UIViewController?
+    
     init(navigationController: UINavigationController,
          dependencies: ProductCoordinatingControllerDependencies) {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }
     
-    func start() {
-        let vc = dependencies.makeProductsViewController()
-        //DispatchQueue.main.async {
-            self.navigationController?.pushViewController(vc, animated: true)
-        //}
+    private func showProductDetails(product: ProductItemModel) {
+        let vc = dependencies.makeProductsDetailsViewController(for: product)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
