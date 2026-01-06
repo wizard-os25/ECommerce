@@ -336,6 +336,9 @@
 		D0E6C39F2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38A2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld */; };
 		D0E6C3A02F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38C2F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift */; };
 		D0E6C3A12F0D01EE00527962 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3892F0D01EE00527962 /* CoreDataStorage.swift */; };
+		D0E6C3A32F0D06AC00527962 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3A22F0D06AC00527962 /* ImageCache.swift */; };
+		D0E6C3A42F0D06AC00527962 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3A22F0D06AC00527962 /* ImageCache.swift */; };
+		D0E6C3A52F0D06AC00527962 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3A22F0D06AC00527962 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -471,6 +474,7 @@
 		D0E6C38E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProductsResponseStorage.swift; sourceTree = "<group>"; };
 		D0E6C38F2F0D01EE00527962 /* ProductsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsResponseStorage.swift; sourceTree = "<group>"; };
 		D0E6C3922F0D01EE00527962 /* CoreDataStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStorage.xcdatamodel; sourceTree = "<group>"; };
+		D0E6C3A22F0D06AC00527962 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -727,6 +731,7 @@
 		D0095BC92ECB42CD00FCC7BC /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D0E6C3A22F0D06AC00527962 /* ImageCache.swift */,
 				D0095B7B2ECB258000FCC7BC /* CommonView */,
 				D0095B7A2ECB257500FCC7BC /* CoreUIKit */,
 				D0095B762ECB1F0B00FCC7BC /* CoreUtilsKit */,
@@ -1369,6 +1374,7 @@
 				D0095D8B2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
 				D0095B982ECB41A800FCC7BC /* ProductsRepository.swift in Sources */,
 				D0095BCD2ECB42D200FCC7BC /* Cancellable.swift in Sources */,
+				D0E6C3A52F0D06AC00527962 /* ImageCache.swift in Sources */,
 				D0095D6D2ECC557500FCC7BC /* NSObjectExt.swift in Sources */,
 				D0095BFC2ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
 				D06C3B942ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
@@ -1502,6 +1508,7 @@
 				D0095BE82ECB436700FCC7BC /* AppDIContainer.swift in Sources */,
 				D0095CCE2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095BC12ECB42B100FCC7BC /* NetworkService.swift in Sources */,
+				D0E6C3A42F0D06AC00527962 /* ImageCache.swift in Sources */,
 				D0095BC22ECB42B100FCC7BC /* Endpoint.swift in Sources */,
 				D0095BC32ECB42B100FCC7BC /* DataTransferService.swift in Sources */,
 				D0095BC42ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
@@ -1604,6 +1611,7 @@
 				D0095D3C2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095CCF2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095D4D2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
+				D0E6C3A32F0D06AC00527962 /* ImageCache.swift in Sources */,
 				D0095D932ECC5B8C00FCC7BC /* AES.swift in Sources */,
 				D0095D512ECC50AE00FCC7BC /* UILabel+Extensions.swift in Sources */,
 				D06C3BA72ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,

@@ -19,6 +19,7 @@ final class ProductItemCell: UITableViewCell {
     @IBOutlet private var starsLabel: UILabel!
     
     private var items: ProductItemModel?
+    private let imageCache = DefaultImageCacheService.shared
     
     func fill(with items: ProductItemModel) {
         self.items = items
@@ -36,18 +37,30 @@ final class ProductItemCell: UITableViewCell {
         
         // Load image if URL is available
         if let imageUrl = items.imageUrl {
-            loadImage(from: imageUrl)
+            loadImage(from: imageUrl, blurhash: items.imageBlurhash)
         } else {
             productImageView.image = nil
         }
     }
     
-    private func loadImage(from urlString: String) {
-        // For now, we'll use a simple image loading approach
-        // In production, you might want to use a proper image loading library
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        // Reset image when cell is reused
         productImageView.image = nil
+        productImageView.backgroundColor = nil
+    }
+    
+    private func loadImage(from urlString: String, blurhash: String?) {
+        // Show blurhash placeholder if available
+        if let blurhash = blurhash {
+            // TODO: Decode blurhash to UIImage placeholder
+            // For now, show a placeholder color
+            productImageView.backgroundColor = UIColor.systemGray5
+        } else {
+            productImageView.image = nil
+        }
         
-        // Construct full URL - assuming base URL is http://127.0.0.1:8000
+        // Construct full URL
         let baseURL = "http://127.0.0.1:8000"
         let fullURLString: String
         if urlString.hasPrefix("http") {
@@ -58,11 +71,14 @@ final class ProductItemCell: UITableViewCell {
         
         guard let url = URL(string: fullURLString) else { return }
         
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            guard let data = data, let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self?.productImageView.image = image
+        // Load image using ImageCache service
+        imageCache.loadImage(from: url) { [weak self] image in
+            guard let self = self else { return }
+            // Only update if cell hasn't been reused
+            if self.items?.imageUrl == urlString {
+                self.productImageView.image = image
+                self.productImageView.backgroundColor = nil
             }
-        }.resume()
+        }
     }
 }
