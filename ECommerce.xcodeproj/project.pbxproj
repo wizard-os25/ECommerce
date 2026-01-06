@@ -151,11 +151,11 @@
 		D0095C5F2ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C5C2ECB4C1600FCC7BC /* RepositoryTask.swift */; };
 		D0095C602ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C5C2ECB4C1600FCC7BC /* RepositoryTask.swift */; };
 		D0095C962ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C912ECB579900FCC7BC /* ProductCoordinatingController.swift */; };
-		D0095C972ECB579900FCC7BC /* ProductsMediatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C932ECB579900FCC7BC /* ProductsMediatingController.swift */; };
+		D0095C972ECB579900FCC7BC /* ProductsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C932ECB579900FCC7BC /* ProductsController.swift */; };
 		D0095C982ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C912ECB579900FCC7BC /* ProductCoordinatingController.swift */; };
-		D0095C992ECB579900FCC7BC /* ProductsMediatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C932ECB579900FCC7BC /* ProductsMediatingController.swift */; };
+		D0095C992ECB579900FCC7BC /* ProductsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C932ECB579900FCC7BC /* ProductsController.swift */; };
 		D0095C9A2ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C912ECB579900FCC7BC /* ProductCoordinatingController.swift */; };
-		D0095C9B2ECB579900FCC7BC /* ProductsMediatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C932ECB579900FCC7BC /* ProductsMediatingController.swift */; };
+		D0095C9B2ECB579900FCC7BC /* ProductsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C932ECB579900FCC7BC /* ProductsController.swift */; };
 		D0095CAB2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C9C2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift */; };
 		D0095CAC2ECB57C100FCC7BC /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CA12ECB57C100FCC7BC /* SideMenuModel.swift */; };
 		D0095CAD2ECB57C100FCC7BC /* SideMenuMediatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C9E2ECB57C100FCC7BC /* SideMenuMediatingController.swift */; };
@@ -321,6 +321,21 @@
 		D06C3BB32ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C3BB22ECCA6AF00289D48 /* UIView+AddChild.swift */; };
 		D06C3BB42ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C3BB22ECCA6AF00289D48 /* UIView+AddChild.swift */; };
 		D06C3BB52ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C3BB22ECCA6AF00289D48 /* UIView+AddChild.swift */; };
+		D0E6C3932F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38F2F0D01EE00527962 /* ProductsResponseStorage.swift */; };
+		D0E6C3942F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift */; };
+		D0E6C3952F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38A2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld */; };
+		D0E6C3962F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38C2F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift */; };
+		D0E6C3972F0D01EE00527962 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3892F0D01EE00527962 /* CoreDataStorage.swift */; };
+		D0E6C3982F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38F2F0D01EE00527962 /* ProductsResponseStorage.swift */; };
+		D0E6C3992F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift */; };
+		D0E6C39A2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38A2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld */; };
+		D0E6C39B2F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38C2F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift */; };
+		D0E6C39C2F0D01EE00527962 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3892F0D01EE00527962 /* CoreDataStorage.swift */; };
+		D0E6C39D2F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38F2F0D01EE00527962 /* ProductsResponseStorage.swift */; };
+		D0E6C39E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift */; };
+		D0E6C39F2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38A2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld */; };
+		D0E6C3A02F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C38C2F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift */; };
+		D0E6C3A12F0D01EE00527962 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3892F0D01EE00527962 /* CoreDataStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -395,7 +410,7 @@
 		D0095C202ECB43DC00FCC7BC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		D0095C5C2ECB4C1600FCC7BC /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
 		D0095C912ECB579900FCC7BC /* ProductCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCoordinatingController.swift; sourceTree = "<group>"; };
-		D0095C932ECB579900FCC7BC /* ProductsMediatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsMediatingController.swift; sourceTree = "<group>"; };
+		D0095C932ECB579900FCC7BC /* ProductsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsController.swift; sourceTree = "<group>"; };
 		D0095C9C2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCoordinatingController.swift; sourceTree = "<group>"; };
 		D0095C9E2ECB57C100FCC7BC /* SideMenuMediatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuMediatingController.swift; sourceTree = "<group>"; };
 		D0095CA12ECB57C100FCC7BC /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
@@ -451,6 +466,11 @@
 		D06C3BAA2ECCA42B00289D48 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		D06C3BAE2ECCA45300289D48 /* UIViewController+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Window.swift"; sourceTree = "<group>"; };
 		D06C3BB22ECCA6AF00289D48 /* UIView+AddChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddChild.swift"; sourceTree = "<group>"; };
+		D0E6C3892F0D01EE00527962 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		D0E6C38C2F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsResponseEntity+Mapping.swift"; sourceTree = "<group>"; };
+		D0E6C38E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProductsResponseStorage.swift; sourceTree = "<group>"; };
+		D0E6C38F2F0D01EE00527962 /* ProductsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsResponseStorage.swift; sourceTree = "<group>"; };
+		D0E6C3922F0D01EE00527962 /* CoreDataStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStorage.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -652,16 +672,9 @@
 			children = (
 				D0095BA12ECB422000FCC7BC /* Repositories */,
 				D0095BA02ECB421A00FCC7BC /* Network */,
-				D0095B9F2ECB420C00FCC7BC /* PersistentStorages */,
+				D0E6C3912F0D01EE00527962 /* PersistentStorages */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		D0095B9F2ECB420C00FCC7BC /* PersistentStorages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PersistentStorages;
 			sourceTree = "<group>";
 		};
 		D0095BA02ECB421A00FCC7BC /* Network */ = {
@@ -830,27 +843,11 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		D0095C922ECB579900FCC7BC /* CoordinatingController */ = {
-			isa = PBXGroup;
-			children = (
-				D0095C912ECB579900FCC7BC /* ProductCoordinatingController.swift */,
-			);
-			path = CoordinatingController;
-			sourceTree = "<group>";
-		};
-		D0095C942ECB579900FCC7BC /* MediatingController */ = {
-			isa = PBXGroup;
-			children = (
-				D0095C932ECB579900FCC7BC /* ProductsMediatingController.swift */,
-			);
-			path = MediatingController;
-			sourceTree = "<group>";
-		};
 		D0095C952ECB579900FCC7BC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D0095C922ECB579900FCC7BC /* CoordinatingController */,
-				D0095C942ECB579900FCC7BC /* MediatingController */,
+				D0095C932ECB579900FCC7BC /* ProductsController.swift */,
+				D0095C912ECB579900FCC7BC /* ProductCoordinatingController.swift */,
 			);
 			name = Controllers;
 			path = ECommerce/Presentation/ProductScene/Controllers;
@@ -1124,6 +1121,42 @@
 			path = "UIView+Extensions";
 			sourceTree = "<group>";
 		};
+		D0E6C38B2F0D01EE00527962 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				D0E6C3892F0D01EE00527962 /* CoreDataStorage.swift */,
+				D0E6C38A2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		D0E6C38D2F0D01EE00527962 /* EntityMapping */ = {
+			isa = PBXGroup;
+			children = (
+				D0E6C38C2F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift */,
+			);
+			path = EntityMapping;
+			sourceTree = "<group>";
+		};
+		D0E6C3902F0D01EE00527962 /* ProductsResponseStorage */ = {
+			isa = PBXGroup;
+			children = (
+				D0E6C38D2F0D01EE00527962 /* EntityMapping */,
+				D0E6C38E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift */,
+				D0E6C38F2F0D01EE00527962 /* ProductsResponseStorage.swift */,
+			);
+			path = ProductsResponseStorage;
+			sourceTree = "<group>";
+		};
+		D0E6C3912F0D01EE00527962 /* PersistentStorages */ = {
+			isa = PBXGroup;
+			children = (
+				D0E6C38B2F0D01EE00527962 /* CoreDataStorage */,
+				D0E6C3902F0D01EE00527962 /* ProductsResponseStorage */,
+			);
+			path = PersistentStorages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1301,7 +1334,7 @@
 				D06C3BB02ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
 				D0095C9A2ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
 				D0095D872ECC5B2B00FCC7BC /* PhoneNumber.swift in Sources */,
-				D0095C9B2ECB579900FCC7BC /* ProductsMediatingController.swift in Sources */,
+				D0095C9B2ECB579900FCC7BC /* ProductsController.swift in Sources */,
 				D0095BD72ECB432100FCC7BC /* AppConfigurations.swift in Sources */,
 				D06C3B982ECCA2E500289D48 /* UIView+CornerRadius.swift in Sources */,
 				D0095D1A2ECC2FFF00FCC7BC /* SideMenuAnimator.swift in Sources */,
@@ -1379,6 +1412,11 @@
 				D0095CE82ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
 				D06C3BA82ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
 				D0095D952ECC5B8C00FCC7BC /* AES.swift in Sources */,
+				D0E6C3982F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
+				D0E6C3992F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
+				D0E6C39A2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
+				D0E6C39B2F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */,
+				D0E6C39C2F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
 				D0095B9D2ECB41C500FCC7BC /* ProductsQueriesRepository.swift in Sources */,
 				D0095C602ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
 				D06C3BA32ECCA3A800289D48 /* UIViewController+AddChild.swift in Sources */,
@@ -1411,6 +1449,11 @@
 				D0095D202ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
 				D0095CBE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
 				D06C3BAF2ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
+				D0E6C3932F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
+				D0E6C3942F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
+				D0E6C3952F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
+				D0E6C3962F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */,
+				D0E6C3972F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
 				D0095D172ECC2FFF00FCC7BC /* SideMenuAnimator.swift in Sources */,
 				D0095D972ECC5BA300FCC7BC /* ImageCompressor.swift in Sources */,
 				D0095D7A2ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
@@ -1464,7 +1507,7 @@
 				D0095BC42ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
 				D06C3B9C2ECCA31200289D48 /* UIView+Gesture.swift in Sources */,
 				D0095C962ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
-				D0095C972ECB579900FCC7BC /* ProductsMediatingController.swift in Sources */,
+				D0095C972ECB579900FCC7BC /* ProductsController.swift in Sources */,
 				D0095B922ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0095B972ECB41A800FCC7BC /* ProductsRepository.swift in Sources */,
 				D0095B302ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
@@ -1536,7 +1579,7 @@
 				D0095C982ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
 				D0095D1F2ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
 				D06C3B852ECCA16900289D48 /* UIView+Reusable.swift in Sources */,
-				D0095C992ECB579900FCC7BC /* ProductsMediatingController.swift in Sources */,
+				D0095C992ECB579900FCC7BC /* ProductsController.swift in Sources */,
 				D0095BB62ECB428800FCC7BC /* DefaultProductsRepository.swift in Sources */,
 				D06C3B872ECCA21800289D48 /* UIView+Layout.swift in Sources */,
 				D0095CAB2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift in Sources */,
@@ -1588,6 +1631,11 @@
 				D0095D162ECC2FFF00FCC7BC /* SideMenuLayoutManager.swift in Sources */,
 				D0095CD22ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
 				D0095B992ECB41A900FCC7BC /* ProductsRepository.swift in Sources */,
+				D0E6C39D2F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
+				D0E6C39E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
+				D0E6C39F2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
+				D0E6C3A02F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */,
+				D0E6C3A12F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1646,7 +1694,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "http://127.0.0.1:8000";
-				API_KEY = "";
+				API_KEY = sk_WBLmK71qE7FT8qK7SkohLshssLbUTbbAtVdDzlMyYGjY0MPPWiTClo2Gm4Fa;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1685,7 +1733,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "http://127.0.0.1:8000";
-				API_KEY = "";
+				API_KEY = sk_WBLmK71qE7FT8qK7SkohLshssLbUTbbAtVdDzlMyYGjY0MPPWiTClo2Gm4Fa;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1962,6 +2010,16 @@
 			);
 			currentVersion = D0095B1D2ECB0BA700FCC7BC /* ECommerce.xcdatamodel */;
 			path = ECommerce.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		D0E6C38A2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D0E6C3922F0D01EE00527962 /* CoreDataStorage.xcdatamodel */,
+			);
+			currentVersion = D0E6C3922F0D01EE00527962 /* CoreDataStorage.xcdatamodel */;
+			path = CoreDataStorage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -9,13 +9,48 @@ import Foundation
 
 // MARK: - Data Transfer Object
 
-struct ProductsResponseDTO: Decodable {
+// Product DTOs (shared by both ProductsResponseDTOInternal and ProductsResponseDTO)
+struct ProductDTO: Decodable {
+    let id: Int
+    let name: String?
+    let description: String?
+    let price: String?
+    let stars: Int?
+    let location: String?
+    let image: ProductImageDTO
+}
+
+struct ProductImageDTO: Decodable {
+    let url: String?
+    let blurhash: String?
+    let width: Int?
+    let height: Int?
+}
+
+// API Response Wrapper (top level response structure)
+// Matches API response: { "statusCode": 200, "success": true, "message": "...", "data": {...} }
+struct ProductsAPIResponseWrapper: Decodable {
+    let statusCode: Int
+    let success: Bool
+    let message: String
+    let data: ProductsResponseDTOInternal
+    
+    enum CodingKeys: String, CodingKey {
+        case statusCode
+        case success
+        case message
+        case data
+    }
+}
+
+// Internal DTO for decoding nested "data" structure
+struct ProductsResponseDTOInternal: Decodable {
     let contents: [ProductDTO]
     let page: Int
     let pageSize: Int
     let totalElements: Int
-    let hasMore: Bool
-    let additionalInfo: Any?
+    let hasMore: Bool  // Converted from Int (1/0)
+    let totalPages: Int?
     
     enum CodingKeys: String, CodingKey {
         case contents
@@ -23,7 +58,7 @@ struct ProductsResponseDTO: Decodable {
         case pageSize
         case totalElements
         case hasMore
-        case additionalInfo
+        case totalPages
     }
     
     init(from decoder: Decoder) throws {
@@ -32,29 +67,65 @@ struct ProductsResponseDTO: Decodable {
         page = try container.decode(Int.self, forKey: .page)
         pageSize = try container.decode(Int.self, forKey: .pageSize)
         totalElements = try container.decode(Int.self, forKey: .totalElements)
-        hasMore = try container.decode(Bool.self, forKey: .hasMore)
-        additionalInfo = try? container.decodeIfPresent(String.self, forKey: .additionalInfo)
+        
+        // Handle hasMore as Int (1/0) or Bool
+        if let hasMoreInt = try? container.decode(Int.self, forKey: .hasMore) {
+            hasMore = hasMoreInt != 0
+        } else {
+            hasMore = try container.decode(Bool.self, forKey: .hasMore)
+        }
+        
+        totalPages = try? container.decodeIfPresent(Int.self, forKey: .totalPages)
     }
 }
 
-extension ProductsResponseDTO {
-    struct ProductDTO: Decodable {
-        let id: Int
-        let name: String?
-        let description: String?
-        let price: String?
-        let stars: Int?
-        let location: String?
-        let image: ProductImageDTO
+// ProductsResponseDTO - main DTO used by Endpoint<ProductsResponseDTO>
+// Decodes from API response wrapper and extracts "data" key
+struct ProductsResponseDTO: Decodable {
+    let contents: [ProductDTO]
+    let page: Int
+    let pageSize: Int
+    let totalElements: Int
+    let hasMore: Bool
+    let totalPages: Int?
+    let additionalInfo: Any?
+    
+    // Init from decoder (API response)
+    init(from decoder: Decoder) throws {
+        // Decode the wrapper first to extract "data" key
+        let wrapper = try ProductsAPIResponseWrapper(from: decoder)
+        let data = wrapper.data
+        
+        // Extract values from data
+        self.contents = data.contents
+        self.page = data.page
+        self.pageSize = data.pageSize
+        self.totalElements = data.totalElements
+        self.hasMore = data.hasMore
+        self.totalPages = data.totalPages
+        self.additionalInfo = nil
     }
     
-    struct ProductImageDTO: Decodable {
-        let url: String?
-        let blurhash: String?
-        let width: Int?
-        let height: Int?
+    // Init for manual creation (used by cache mapping)
+    init(
+        contents: [ProductDTO],
+        page: Int,
+        pageSize: Int,
+        totalElements: Int,
+        hasMore: Bool,
+        totalPages: Int?,
+        additionalInfo: Any? = nil
+    ) {
+        self.contents = contents
+        self.page = page
+        self.pageSize = pageSize
+        self.totalElements = totalElements
+        self.hasMore = hasMore
+        self.totalPages = totalPages
+        self.additionalInfo = additionalInfo
     }
 }
+
 
 // MARK: - Mappings to Domain
 
@@ -71,7 +142,7 @@ extension ProductsResponseDTO {
     }
 }
 
-extension ProductsResponseDTO.ProductDTO {
+extension ProductDTO {
     func toDomain() -> Product {
         return .init(
             id: Product.Identifier(id),
@@ -85,7 +156,7 @@ extension ProductsResponseDTO.ProductDTO {
     }
 }
 
-extension ProductsResponseDTO.ProductImageDTO {
+extension ProductImageDTO {
     func toDomain() -> ProductImage {
         return .init(
             url: url,

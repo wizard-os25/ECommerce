@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ProductsMediatingControllerInput {
+protocol ProductsControllerInput {
     func viewDidLoad()
     func didLoadNextPage()
     func didSearch(query: String)
@@ -15,7 +15,7 @@ protocol ProductsMediatingControllerInput {
     func didSelectItem(at index: Int)
 }
 
-protocol ProductsMediatingControllerOutput {
+protocol ProductsControllerOutput {
     var items: Observable<[ProductItemModel]> { get }
     var loading: Observable<Bool> { get }
     var query: Observable<String> { get }
@@ -26,9 +26,9 @@ protocol ProductsMediatingControllerOutput {
     var errorTitle: String { get }
 }
 
-typealias ProductsMediatingController = ProductsMediatingControllerInput & ProductsMediatingControllerOutput
+typealias ProductsController = ProductsControllerInput & ProductsControllerOutput
 
-final class DefaultProductsMediatingController: ProductsMediatingController {
+final class DefaultProductsController: ProductsController {
     
     private let productsRepository: ProductsRepository
     private let mainQueue: DispatchQueueType
@@ -126,7 +126,7 @@ final class DefaultProductsMediatingController: ProductsMediatingController {
 
 // MARK: - INPUT. View event methods
 
-extension DefaultProductsMediatingController {
+extension DefaultProductsController {
     
     func viewDidLoad() {
         // Load initial products with default query

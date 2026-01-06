@@ -58,6 +58,7 @@ final class DefaultNetworkService {
         
         let sessionDataTask = sessionManager.request(request) { data, response, requestError in
             
+            // Check for URLSession errors (network errors like no connection, timeout)
             if let requestError = requestError {
                 var error: NetworkError
                 if let response = response as? HTTPURLResponse {
@@ -68,7 +69,27 @@ final class DefaultNetworkService {
                 
                 self.logger.log(error: error)
                 completion(.failure(error))
+                return
+            }
+            
+            // IMPORTANT: URLSession does NOT treat HTTP error status codes (4xx, 5xx) as errors
+            // It only treats network errors (no connection, timeout) as errors
+            // So we need to check HTTP status code manually
+            if let httpResponse = response as? HTTPURLResponse {
+                let statusCode = httpResponse.statusCode
+                
+                // Success status codes: 200-299
+                if (200...299).contains(statusCode) {
+                    self.logger.log(responseData: data, response: response)
+                    completion(.success(data))
+                } else {
+                    // HTTP error status codes (4xx, 5xx) - treat as error
+                    let error = NetworkError.error(statusCode: statusCode, data: data)
+                    self.logger.log(error: error)
+                    completion(.failure(error))
+                }
             } else {
+                // No HTTP response (for non-HTTP protocols) - treat as success
                 self.logger.log(responseData: data, response: response)
                 completion(.success(data))
             }
@@ -140,13 +161,25 @@ final class DefaultNetworkErrorLogger: NetworkErrorLogger {
 
     func log(responseData data: Data?, response: URLResponse?) {
         guard let data = data else { return }
-        if let dataDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-            printIfDebug("responseData: \(String(describing: dataDict))")
+        if let httpResponse = response as? HTTPURLResponse {
+            printIfDebug("statusCode: \(httpResponse.statusCode)")
         }
+//        if let dataDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+//            printIfDebug("responseData: \(String(describing: dataDict))")
+//        }
     }
 
     func log(error: Error) {
         printIfDebug("\(error)")
+        // Log HTTP error details for debugging
+        if let networkError = error as? NetworkError,
+           case .error(let statusCode, let data) = networkError {
+            printIfDebug("HTTP Error Status Code: \(statusCode)")
+            if let data = data,
+               let errorDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                printIfDebug("Error Response Body: \(String(describing: errorDict))")
+            }
+        }
     }
 }
 

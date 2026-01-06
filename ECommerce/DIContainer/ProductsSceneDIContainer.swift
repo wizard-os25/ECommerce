@@ -19,22 +19,28 @@ final class ProductsSceneDIContainer: ProductCoordinatingControllerDependencies 
         self.dependencies = dependencies
     }
     
+    // MARK: - Cache Storage
+    func makeProductsResponseStorage() -> ProductsResponseStorage {
+        CoreDataProductsResponseStorage()
+    }
+    
     // MARK: - Repositories
     func makeProductsRepository() -> ProductsRepository {
         DefaultProductsRepository(
-            dataTransferService: dependencies.productsDataTransferService
+            dataTransferService: dependencies.productsDataTransferService,
+            cacheStorage: makeProductsResponseStorage()
         )
     }
     
     // MARK: - Products List
     func makeProductsViewController() -> ProductsViewController {
         ProductsViewController.create(
-            with: makeProductsMediatingController()
+            with: makeProductsController()
         )
     }
     
-    func makeProductsMediatingController() -> ProductsMediatingController {
-        DefaultProductsMediatingController(
+    func makeProductsController() -> ProductsController {
+        DefaultProductsController(
             productsRepository: makeProductsRepository()
         )
     }

@@ -9,7 +9,7 @@ import UIKit
 
 final class ProductsTableViewController: UITableViewController, StoryboardInstantiable {
     
-    var mediatingController: ProductsMediatingController!
+    var productsController: ProductsController!
     
     var nextPageLoadingSpinner: UIActivityIndicatorView?
     
@@ -18,9 +18,9 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        bind(to: mediatingController)
+        bind(to: self.productsController)
         setupSidebarGesture()
-        mediatingController.viewDidLoad()
+        self.productsController.viewDidLoad()
     }
     
     // MARK: - Sidebar Integration
@@ -104,11 +104,11 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
         tableView.rowHeight = UITableView.automaticDimension
     }
     
-    private func bind(to mediatingController: ProductsMediatingController) {
-        mediatingController.items.observe(on: self) { [weak self] _ in
+    private func bind(to productsController: ProductsController) {
+        productsController.items.observe(on: self) { [weak self] _ in
             self?.reload()
         }
-        mediatingController.loading.observe(on: self) { [weak self] loading in
+        productsController.loading.observe(on: self) { [weak self] loading in
             self?.updateLoading(loading)
         }
     }
@@ -119,27 +119,27 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
 extension ProductsTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mediatingController.items.value.count
+        return self.productsController.items.value.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ProductItemCell = tableView.dequeueReusableCell(at: indexPath)
         
-        cell.fill(with: mediatingController.items.value[indexPath.row])
+        cell.fill(with: self.productsController.items.value[indexPath.row])
         
-        if indexPath.row == mediatingController.items.value.count - 1 {
-            mediatingController.didLoadNextPage()
+        if indexPath.row == self.productsController.items.value.count - 1 {
+            self.productsController.didLoadNextPage()
         }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return mediatingController.isEmpty ? tableView.frame.height : super.tableView(tableView, heightForRowAt: indexPath)
+        return self.productsController.isEmpty ? tableView.frame.height : super.tableView(tableView, heightForRowAt: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        mediatingController.didSelectItem(at: indexPath.row)
+        self.productsController.didSelectItem(at: indexPath.row)
     }
 }
 

@@ -20,7 +20,10 @@ final class AppDIContainer {
 
     lazy var productsDataTransferService: DataTransferService = {
         let config = ApiDataNetworkConfig(
-            baseURL: URL(string: appConfiguration.apiBaseURL)!
+            baseURL: URL(string: appConfiguration.apiBaseURL)!,
+            headers: [
+                "X_API_KEY": appConfiguration.apiKey
+            ]
         )
         let productsDataNetwork = DefaultNetworkService(config: config)
         return DefaultDataTransferService(with: productsDataNetwork)

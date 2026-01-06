@@ -12,23 +12,23 @@ final class ProductsViewController: UIViewController, StoryboardInstantiable, Al
     @IBOutlet private var productsListContainer: UIView!
     @IBOutlet private var emptyDataLabel: UILabel!
     
-    private var mediatingController: ProductsMediatingController!
+    private var productsController: ProductsController!
     private var productsTableViewController: ProductsTableViewController?
     
     // MARK: - Lifecycle
     
     static func create(
-        with mediatingController: ProductsMediatingController
+        with productsController: ProductsController
     ) -> ProductsViewController {
         let view = ProductsViewController.instantiateViewController()
-        view.mediatingController = mediatingController
+        view.productsController = productsController
         return view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        bind(to: mediatingController)
+        bind(to: productsController)
         setupChildViewController()
         setupSidebarGesture()
         // viewDidLoad will be called on mediatingController by ProductsTableViewController
@@ -48,26 +48,26 @@ final class ProductsViewController: UIViewController, StoryboardInstantiable, Al
     }
     
     private func setupViews() {
-        title = mediatingController.screenTitle
-        emptyDataLabel.text = mediatingController.emptyDataTitle
+        title = productsController.screenTitle
+        emptyDataLabel.text = productsController.emptyDataTitle
     }
     
     private func setupChildViewController() {
         let tableViewController = ProductsTableViewController.instantiateViewController()
-        tableViewController.mediatingController = mediatingController
+        tableViewController.productsController = productsController
         
         add(tableViewController, to: productsListContainer)
         productsTableViewController = tableViewController
     }
     
-    private func bind(to mediatingController: ProductsMediatingController) {
-        mediatingController.items.observe(on: self) { [weak self] _ in
+    private func bind(to productsController: ProductsController) {
+        productsController.items.observe(on: self) { [weak self] _ in
             self?.updateItems()
         }
-        mediatingController.loading.observe(on: self) { [weak self] loading in
+        productsController.loading.observe(on: self) { [weak self] loading in
             self?.updateLoading(loading)
         }
-        mediatingController.error.observe(on: self) { [weak self] error in
+        productsController.error.observe(on: self) { [weak self] error in
             self?.showError(error)
         }
     }
@@ -84,8 +84,8 @@ final class ProductsViewController: UIViewController, StoryboardInstantiable, Al
             LoadingView.show()
         } else {
             LoadingView.hide()
-            productsListContainer.isHidden = mediatingController.isEmpty
-            emptyDataLabel.isHidden = !mediatingController.isEmpty
+            productsListContainer.isHidden = productsController.isEmpty
+            emptyDataLabel.isHidden = !productsController.isEmpty
         }
         
         productsTableViewController?.updateLoading(loading)
@@ -93,6 +93,6 @@ final class ProductsViewController: UIViewController, StoryboardInstantiable, Al
     
     private func showError(_ error: String) {
         guard !error.isEmpty else { return }
-        showAlert(title: mediatingController.errorTitle, message: error)
+        showAlert(title: productsController.errorTitle, message: error)
     }
 }
