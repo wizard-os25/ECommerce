@@ -29,12 +29,9 @@ final class SideMenuSceneDIContainer: SideMenuCoordinatingControllerDependencies
     
     // MARK: - Flow Coordinators
     
-    func makeSideMenuCoordinatingController(
-        delegate: SideMenuCoordinatingControllerDelegate? = nil
-    ) -> SideMenuCoordinatingController {
+    func makeSideMenuCoordinatingController() -> SideMenuCoordinatingController {
         SideMenuCoordinatingController(
-            dependencies: self,
-            delegate: delegate
+            dependencies: self
         )
     }
 }

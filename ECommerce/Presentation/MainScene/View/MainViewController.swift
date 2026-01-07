@@ -289,7 +289,6 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
         // Add new content view controller using extension
         add(contentViewController, to: container)
         currentContentViewController = contentViewController
-        controller.setContentViewController(contentViewController)
         
         // Setup constraints if using main view
         if contentContainerView == nil {
