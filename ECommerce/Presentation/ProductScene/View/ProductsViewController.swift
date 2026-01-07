@@ -81,9 +81,9 @@ final class ProductsViewController: UIViewController, StoryboardInstantiable, Al
         productsListContainer.isHidden = true
         
         if loading {
-            LoadingView.show()
+            EcoLoadingView.show()
         } else {
-            LoadingView.hide()
+            EcoLoadingView.hide()
             productsListContainer.isHidden = productsController.isEmpty
             emptyDataLabel.isHidden = !productsController.isEmpty
         }

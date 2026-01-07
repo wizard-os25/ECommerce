@@ -7,6 +7,264 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0029B6B2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B1D2F0E742000D50804 /* NSMutableAttributedString+Extension.swift */; };
+		D0029B6C2F0E742000D50804 /* EcoDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B0E2F0E742000D50804 /* EcoDivider.swift */; };
+		D0029B6D2F0E742000D50804 /* Sizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B262F0E742000D50804 /* Sizing.swift */; };
+		D0029B6E2F0E742000D50804 /* EcoTick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B1A2F0E742000D50804 /* EcoTick.swift */; };
+		D0029B6F2F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B662F0E742000D50804 /* CoreUIKitLocalization.swift */; };
+		D0029B702F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B102F0E742000D50804 /* EcoHorizontalProgressView.swift */; };
+		D0029B712F0E742000D50804 /* EcoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B112F0E742000D50804 /* EcoProgressView.swift */; };
+		D0029B722F0E742000D50804 /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B202F0E742000D50804 /* Border.swift */; };
+		D0029B732F0E742000D50804 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B272F0E742000D50804 /* Spacing.swift */; };
+		D0029B742F0E742000D50804 /* EcoAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B0C2F0E742000D50804 /* EcoAvatarView.swift */; };
+		D0029B752F0E742000D50804 /* SFFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B242F0E742000D50804 /* SFFont.swift */; };
+		D0029B762F0E742000D50804 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B282F0E742000D50804 /* Typography.swift */; };
+		D0029B772F0E742000D50804 /* EcoRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B132F0E742000D50804 /* EcoRadioButton.swift */; };
+		D0029B782F0E742000D50804 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B252F0E742000D50804 /* Shadows.swift */; };
+		D0029B792F0E742000D50804 /* Opacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B232F0E742000D50804 /* Opacity.swift */; };
+		D0029B7A2F0E742000D50804 /* BorderRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B212F0E742000D50804 /* BorderRadius.swift */; };
+		D0029B7B2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B142F0E742000D50804 /* EcoRadioButtonGroup.swift */; };
+		D0029B7C2F0E742000D50804 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B222F0E742000D50804 /* Colors.swift */; };
+		D0029B7D2F0E742000D50804 /* EcoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B182F0E742000D50804 /* EcoTextView.swift */; };
+		D0029B7E2F0E742000D50804 /* EcoSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B162F0E742000D50804 /* EcoSwitch.swift */; };
+		D0029B7F2F0E742000D50804 /* UIStackView+Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B1E2F0E742000D50804 /* UIStackView+Subview.swift */; };
+		D0029B802F0E742000D50804 /* ic_viettelpay_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B512F0E742000D50804 /* ic_viettelpay_56.png */; };
+		D0029B812F0E742000D50804 /* ic_vietinbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4E2F0E742000D50804 /* ic_vietinbank_56.png */; };
+		D0029B822F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3A2F0E742000D50804 /* ic_tpbank_56@2x.png */; };
+		D0029B832F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4A2F0E742000D50804 /* ic_vietcapitalbank_56@3x.png */; };
+		D0029B842F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B462F0E742000D50804 /* ic_vietbank_56@2x.png */; };
+		D0029B852F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B442F0E742000D50804 /* ic_vietabank_56@3x.png */; };
+		D0029B862F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3B2F0E742000D50804 /* ic_tpbank_56@3x.png */; };
+		D0029B872F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B592F0E742000D50804 /* ic_vrbbank_56@3x.png */; };
+		D0029B882F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2B2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png */; };
+		D0029B892F0E742000D50804 /* ic_viettelpay_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B522F0E742000D50804 /* ic_viettelpay_56@2x.png */; };
+		D0029B8A2F0E742000D50804 /* ic_techcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B362F0E742000D50804 /* ic_techcombank_56.png */; };
+		D0029B8B2F0E742000D50804 /* ic_vpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B542F0E742000D50804 /* ic_vpbank_56.png */; };
+		D0029B8C2F0E742000D50804 /* ic_vietabank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B422F0E742000D50804 /* ic_vietabank_56.png */; };
+		D0029B8D2F0E742000D50804 /* CoreUIKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0029B652F0E742000D50804 /* CoreUIKit.strings */; };
+		D0029B8E2F0E742000D50804 /* ic_viettelpay_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B532F0E742000D50804 /* ic_viettelpay_56@3x.png */; };
+		D0029B8F2F0E742000D50804 /* ic_vietinbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B502F0E742000D50804 /* ic_vietinbank_56@3x.png */; };
+		D0029B902F0E742000D50804 /* ic_vrbbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B582F0E742000D50804 /* ic_vrbbank_56@2x.png */; };
+		D0029B912F0E742000D50804 /* ic_atm_noi_dia_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2A2F0E742000D50804 /* ic_atm_noi_dia_16.png */; };
+		D0029B922F0E742000D50804 /* ic_vietbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B452F0E742000D50804 /* ic_vietbank_56.png */; };
+		D0029B932F0E742000D50804 /* ic_wooribank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5F2F0E742000D50804 /* ic_wooribank_56@3x.png */; };
+		D0029B942F0E742000D50804 /* CoreUIKitImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0029B682F0E742000D50804 /* CoreUIKitImages.xcassets */; };
+		D0029B952F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B432F0E742000D50804 /* ic_vietabank_56@2x.png */; };
+		D0029B962F0E742000D50804 /* ic_vibbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3F2F0E742000D50804 /* ic_vibbank_56.png */; };
+		D0029B972F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4D2F0E742000D50804 /* ic_vietcombank_56@3x.png */; };
+		D0029B982F0E742000D50804 /* ic_quoc_te_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2D2F0E742000D50804 /* ic_quoc_te_16.png */; };
+		D0029B992F0E742000D50804 /* ic_viettelpay_40.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B312F0E742000D50804 /* ic_viettelpay_40.png */; };
+		D0029B9A2F0E742000D50804 /* ic_uobbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3C2F0E742000D50804 /* ic_uobbank_56.png */; };
+		D0029B9B2F0E742000D50804 /* ic_westernunionbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5A2F0E742000D50804 /* ic_westernunionbank_56.png */; };
+		D0029B9C2F0E742000D50804 /* ic_vietcapitalbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B492F0E742000D50804 /* ic_vietcapitalbank_56@2x.png */; };
+		D0029B9D2F0E742000D50804 /* ic_viettelpay_40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B322F0E742000D50804 /* ic_viettelpay_40@2x.png */; };
+		D0029B9E2F0E742000D50804 /* ic_tpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B392F0E742000D50804 /* ic_tpbank_56.png */; };
+		D0029B9F2F0E742000D50804 /* ic_vietinbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4F2F0E742000D50804 /* ic_vietinbank_56@2x.png */; };
+		D0029BA02F0E742000D50804 /* ic_vietcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4B2F0E742000D50804 /* ic_vietcombank_56.png */; };
+		D0029BA12F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B482F0E742000D50804 /* ic_vietcapitalbank_56.png */; };
+		D0029BA22F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B402F0E742000D50804 /* ic_vibbank_56@2x.png */; };
+		D0029BA32F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5B2F0E742000D50804 /* ic_westernunionbank_56@2x.png */; };
+		D0029BA42F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2F2F0E742000D50804 /* ic_quoc_te_16@3x.png */; };
+		D0029BA52F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5E2F0E742000D50804 /* ic_wooribank_56@2x.png */; };
+		D0029BA62F0E742000D50804 /* ic_techcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B382F0E742000D50804 /* ic_techcombank_56@3x.png */; };
+		D0029BA72F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5C2F0E742000D50804 /* ic_westernunionbank_56@3x.png */; };
+		D0029BA82F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2E2F0E742000D50804 /* ic_quoc_te_16@2x.png */; };
+		D0029BA92F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4C2F0E742000D50804 /* ic_vietcombank_56@2x.png */; };
+		D0029BAA2F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B562F0E742000D50804 /* ic_vpbank_56@3x.png */; };
+		D0029BAB2F0E742000D50804 /* ic_vrbbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B572F0E742000D50804 /* ic_vrbbank_56.png */; };
+		D0029BAC2F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B372F0E742000D50804 /* ic_techcombank_56@2x.png */; };
+		D0029BAD2F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3E2F0E742000D50804 /* ic_uobbank_56@3x.png */; };
+		D0029BAE2F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B552F0E742000D50804 /* ic_vpbank_56@2x.png */; };
+		D0029BAF2F0E742000D50804 /* ic_atm_noi_dia_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2C2F0E742000D50804 /* ic_atm_noi_dia_16@3x.png */; };
+		D0029BB02F0E742000D50804 /* ic_wooribank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5D2F0E742000D50804 /* ic_wooribank_56.png */; };
+		D0029BB12F0E742000D50804 /* ic_vibbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B412F0E742000D50804 /* ic_vibbank_56@3x.png */; };
+		D0029BB22F0E742000D50804 /* ic_viettelpay_40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B332F0E742000D50804 /* ic_viettelpay_40@3x.png */; };
+		D0029BB32F0E742000D50804 /* ic_uobbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3D2F0E742000D50804 /* ic_uobbank_56@2x.png */; };
+		D0029BB42F0E742000D50804 /* ic_vietbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B472F0E742000D50804 /* ic_vietbank_56@3x.png */; };
+		D0029BB52F0E742000D50804 /* ic_shinhanbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B352F0E742000D50804 /* ic_shinhanbank_56@3x.png */; };
+		D0029BB62F0E742000D50804 /* ic_viettelpay_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B512F0E742000D50804 /* ic_viettelpay_56.png */; };
+		D0029BB72F0E742000D50804 /* ic_vietinbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4E2F0E742000D50804 /* ic_vietinbank_56.png */; };
+		D0029BB82F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3A2F0E742000D50804 /* ic_tpbank_56@2x.png */; };
+		D0029BB92F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4A2F0E742000D50804 /* ic_vietcapitalbank_56@3x.png */; };
+		D0029BBA2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B462F0E742000D50804 /* ic_vietbank_56@2x.png */; };
+		D0029BBB2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B442F0E742000D50804 /* ic_vietabank_56@3x.png */; };
+		D0029BBC2F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3B2F0E742000D50804 /* ic_tpbank_56@3x.png */; };
+		D0029BBD2F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B592F0E742000D50804 /* ic_vrbbank_56@3x.png */; };
+		D0029BBE2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2B2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png */; };
+		D0029BBF2F0E742000D50804 /* ic_viettelpay_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B522F0E742000D50804 /* ic_viettelpay_56@2x.png */; };
+		D0029BC02F0E742000D50804 /* ic_techcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B362F0E742000D50804 /* ic_techcombank_56.png */; };
+		D0029BC12F0E742000D50804 /* ic_vpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B542F0E742000D50804 /* ic_vpbank_56.png */; };
+		D0029BC22F0E742000D50804 /* ic_vietabank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B422F0E742000D50804 /* ic_vietabank_56.png */; };
+		D0029BC32F0E742000D50804 /* CoreUIKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0029B652F0E742000D50804 /* CoreUIKit.strings */; };
+		D0029BC42F0E742000D50804 /* ic_viettelpay_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B532F0E742000D50804 /* ic_viettelpay_56@3x.png */; };
+		D0029BC52F0E742000D50804 /* ic_vietinbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B502F0E742000D50804 /* ic_vietinbank_56@3x.png */; };
+		D0029BC62F0E742000D50804 /* ic_vrbbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B582F0E742000D50804 /* ic_vrbbank_56@2x.png */; };
+		D0029BC72F0E742000D50804 /* ic_atm_noi_dia_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2A2F0E742000D50804 /* ic_atm_noi_dia_16.png */; };
+		D0029BC82F0E742000D50804 /* ic_vietbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B452F0E742000D50804 /* ic_vietbank_56.png */; };
+		D0029BC92F0E742000D50804 /* ic_wooribank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5F2F0E742000D50804 /* ic_wooribank_56@3x.png */; };
+		D0029BCA2F0E742000D50804 /* CoreUIKitImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0029B682F0E742000D50804 /* CoreUIKitImages.xcassets */; };
+		D0029BCB2F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B432F0E742000D50804 /* ic_vietabank_56@2x.png */; };
+		D0029BCC2F0E742000D50804 /* ic_vibbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3F2F0E742000D50804 /* ic_vibbank_56.png */; };
+		D0029BCD2F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4D2F0E742000D50804 /* ic_vietcombank_56@3x.png */; };
+		D0029BCE2F0E742000D50804 /* ic_quoc_te_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2D2F0E742000D50804 /* ic_quoc_te_16.png */; };
+		D0029BCF2F0E742000D50804 /* ic_viettelpay_40.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B312F0E742000D50804 /* ic_viettelpay_40.png */; };
+		D0029BD02F0E742000D50804 /* ic_uobbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3C2F0E742000D50804 /* ic_uobbank_56.png */; };
+		D0029BD12F0E742000D50804 /* ic_westernunionbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5A2F0E742000D50804 /* ic_westernunionbank_56.png */; };
+		D0029BD22F0E742000D50804 /* ic_vietcapitalbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B492F0E742000D50804 /* ic_vietcapitalbank_56@2x.png */; };
+		D0029BD32F0E742000D50804 /* ic_viettelpay_40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B322F0E742000D50804 /* ic_viettelpay_40@2x.png */; };
+		D0029BD42F0E742000D50804 /* ic_tpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B392F0E742000D50804 /* ic_tpbank_56.png */; };
+		D0029BD52F0E742000D50804 /* ic_vietinbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4F2F0E742000D50804 /* ic_vietinbank_56@2x.png */; };
+		D0029BD62F0E742000D50804 /* ic_vietcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4B2F0E742000D50804 /* ic_vietcombank_56.png */; };
+		D0029BD72F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B482F0E742000D50804 /* ic_vietcapitalbank_56.png */; };
+		D0029BD82F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B402F0E742000D50804 /* ic_vibbank_56@2x.png */; };
+		D0029BD92F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5B2F0E742000D50804 /* ic_westernunionbank_56@2x.png */; };
+		D0029BDA2F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2F2F0E742000D50804 /* ic_quoc_te_16@3x.png */; };
+		D0029BDB2F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5E2F0E742000D50804 /* ic_wooribank_56@2x.png */; };
+		D0029BDC2F0E742000D50804 /* ic_techcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B382F0E742000D50804 /* ic_techcombank_56@3x.png */; };
+		D0029BDD2F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5C2F0E742000D50804 /* ic_westernunionbank_56@3x.png */; };
+		D0029BDE2F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2E2F0E742000D50804 /* ic_quoc_te_16@2x.png */; };
+		D0029BDF2F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4C2F0E742000D50804 /* ic_vietcombank_56@2x.png */; };
+		D0029BE02F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B562F0E742000D50804 /* ic_vpbank_56@3x.png */; };
+		D0029BE12F0E742000D50804 /* ic_vrbbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B572F0E742000D50804 /* ic_vrbbank_56.png */; };
+		D0029BE22F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B372F0E742000D50804 /* ic_techcombank_56@2x.png */; };
+		D0029BE32F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3E2F0E742000D50804 /* ic_uobbank_56@3x.png */; };
+		D0029BE42F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B552F0E742000D50804 /* ic_vpbank_56@2x.png */; };
+		D0029BE52F0E742000D50804 /* ic_atm_noi_dia_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2C2F0E742000D50804 /* ic_atm_noi_dia_16@3x.png */; };
+		D0029BE62F0E742000D50804 /* ic_wooribank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5D2F0E742000D50804 /* ic_wooribank_56.png */; };
+		D0029BE72F0E742000D50804 /* ic_vibbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B412F0E742000D50804 /* ic_vibbank_56@3x.png */; };
+		D0029BE82F0E742000D50804 /* ic_viettelpay_40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B332F0E742000D50804 /* ic_viettelpay_40@3x.png */; };
+		D0029BE92F0E742000D50804 /* ic_uobbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3D2F0E742000D50804 /* ic_uobbank_56@2x.png */; };
+		D0029BEA2F0E742000D50804 /* ic_vietbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B472F0E742000D50804 /* ic_vietbank_56@3x.png */; };
+		D0029BEB2F0E742000D50804 /* ic_shinhanbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B352F0E742000D50804 /* ic_shinhanbank_56@3x.png */; };
+		D0029BEC2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B1D2F0E742000D50804 /* NSMutableAttributedString+Extension.swift */; };
+		D0029BED2F0E742000D50804 /* EcoDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B0E2F0E742000D50804 /* EcoDivider.swift */; };
+		D0029BEE2F0E742000D50804 /* Sizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B262F0E742000D50804 /* Sizing.swift */; };
+		D0029BEF2F0E742000D50804 /* EcoTick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B1A2F0E742000D50804 /* EcoTick.swift */; };
+		D0029BF02F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B662F0E742000D50804 /* CoreUIKitLocalization.swift */; };
+		D0029BF12F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B102F0E742000D50804 /* EcoHorizontalProgressView.swift */; };
+		D0029BF22F0E742000D50804 /* EcoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B112F0E742000D50804 /* EcoProgressView.swift */; };
+		D0029BF32F0E742000D50804 /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B202F0E742000D50804 /* Border.swift */; };
+		D0029BF42F0E742000D50804 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B272F0E742000D50804 /* Spacing.swift */; };
+		D0029BF52F0E742000D50804 /* EcoAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B0C2F0E742000D50804 /* EcoAvatarView.swift */; };
+		D0029BF62F0E742000D50804 /* SFFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B242F0E742000D50804 /* SFFont.swift */; };
+		D0029BF72F0E742000D50804 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B282F0E742000D50804 /* Typography.swift */; };
+		D0029BF82F0E742000D50804 /* EcoRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B132F0E742000D50804 /* EcoRadioButton.swift */; };
+		D0029BF92F0E742000D50804 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B252F0E742000D50804 /* Shadows.swift */; };
+		D0029BFA2F0E742000D50804 /* Opacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B232F0E742000D50804 /* Opacity.swift */; };
+		D0029BFB2F0E742000D50804 /* BorderRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B212F0E742000D50804 /* BorderRadius.swift */; };
+		D0029BFC2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B142F0E742000D50804 /* EcoRadioButtonGroup.swift */; };
+		D0029BFD2F0E742000D50804 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B222F0E742000D50804 /* Colors.swift */; };
+		D0029BFE2F0E742000D50804 /* EcoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B182F0E742000D50804 /* EcoTextView.swift */; };
+		D0029BFF2F0E742000D50804 /* EcoSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B162F0E742000D50804 /* EcoSwitch.swift */; };
+		D0029C002F0E742000D50804 /* UIStackView+Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B1E2F0E742000D50804 /* UIStackView+Subview.swift */; };
+		D0029C012F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B1D2F0E742000D50804 /* NSMutableAttributedString+Extension.swift */; };
+		D0029C022F0E742000D50804 /* EcoDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B0E2F0E742000D50804 /* EcoDivider.swift */; };
+		D0029C032F0E742000D50804 /* Sizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B262F0E742000D50804 /* Sizing.swift */; };
+		D0029C042F0E742000D50804 /* EcoTick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B1A2F0E742000D50804 /* EcoTick.swift */; };
+		D0029C052F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B662F0E742000D50804 /* CoreUIKitLocalization.swift */; };
+		D0029C062F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B102F0E742000D50804 /* EcoHorizontalProgressView.swift */; };
+		D0029C072F0E742000D50804 /* EcoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B112F0E742000D50804 /* EcoProgressView.swift */; };
+		D0029C082F0E742000D50804 /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B202F0E742000D50804 /* Border.swift */; };
+		D0029C092F0E742000D50804 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B272F0E742000D50804 /* Spacing.swift */; };
+		D0029C0A2F0E742000D50804 /* EcoAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B0C2F0E742000D50804 /* EcoAvatarView.swift */; };
+		D0029C0B2F0E742000D50804 /* SFFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B242F0E742000D50804 /* SFFont.swift */; };
+		D0029C0C2F0E742000D50804 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B282F0E742000D50804 /* Typography.swift */; };
+		D0029C0D2F0E742000D50804 /* EcoRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B132F0E742000D50804 /* EcoRadioButton.swift */; };
+		D0029C0E2F0E742000D50804 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B252F0E742000D50804 /* Shadows.swift */; };
+		D0029C0F2F0E742000D50804 /* Opacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B232F0E742000D50804 /* Opacity.swift */; };
+		D0029C102F0E742000D50804 /* BorderRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B212F0E742000D50804 /* BorderRadius.swift */; };
+		D0029C112F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B142F0E742000D50804 /* EcoRadioButtonGroup.swift */; };
+		D0029C122F0E742000D50804 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B222F0E742000D50804 /* Colors.swift */; };
+		D0029C132F0E742000D50804 /* EcoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B182F0E742000D50804 /* EcoTextView.swift */; };
+		D0029C142F0E742000D50804 /* EcoSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B162F0E742000D50804 /* EcoSwitch.swift */; };
+		D0029C152F0E742000D50804 /* UIStackView+Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029B1E2F0E742000D50804 /* UIStackView+Subview.swift */; };
+		D0029C162F0E742000D50804 /* ic_viettelpay_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B512F0E742000D50804 /* ic_viettelpay_56.png */; };
+		D0029C172F0E742000D50804 /* ic_vietinbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4E2F0E742000D50804 /* ic_vietinbank_56.png */; };
+		D0029C182F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3A2F0E742000D50804 /* ic_tpbank_56@2x.png */; };
+		D0029C192F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4A2F0E742000D50804 /* ic_vietcapitalbank_56@3x.png */; };
+		D0029C1A2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B462F0E742000D50804 /* ic_vietbank_56@2x.png */; };
+		D0029C1B2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B442F0E742000D50804 /* ic_vietabank_56@3x.png */; };
+		D0029C1C2F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3B2F0E742000D50804 /* ic_tpbank_56@3x.png */; };
+		D0029C1D2F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B592F0E742000D50804 /* ic_vrbbank_56@3x.png */; };
+		D0029C1E2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2B2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png */; };
+		D0029C1F2F0E742000D50804 /* ic_viettelpay_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B522F0E742000D50804 /* ic_viettelpay_56@2x.png */; };
+		D0029C202F0E742000D50804 /* ic_techcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B362F0E742000D50804 /* ic_techcombank_56.png */; };
+		D0029C212F0E742000D50804 /* ic_vpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B542F0E742000D50804 /* ic_vpbank_56.png */; };
+		D0029C222F0E742000D50804 /* ic_vietabank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B422F0E742000D50804 /* ic_vietabank_56.png */; };
+		D0029C232F0E742000D50804 /* CoreUIKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0029B652F0E742000D50804 /* CoreUIKit.strings */; };
+		D0029C242F0E742000D50804 /* ic_viettelpay_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B532F0E742000D50804 /* ic_viettelpay_56@3x.png */; };
+		D0029C252F0E742000D50804 /* ic_vietinbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B502F0E742000D50804 /* ic_vietinbank_56@3x.png */; };
+		D0029C262F0E742000D50804 /* ic_vrbbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B582F0E742000D50804 /* ic_vrbbank_56@2x.png */; };
+		D0029C272F0E742000D50804 /* ic_atm_noi_dia_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2A2F0E742000D50804 /* ic_atm_noi_dia_16.png */; };
+		D0029C282F0E742000D50804 /* ic_vietbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B452F0E742000D50804 /* ic_vietbank_56.png */; };
+		D0029C292F0E742000D50804 /* ic_wooribank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5F2F0E742000D50804 /* ic_wooribank_56@3x.png */; };
+		D0029C2A2F0E742000D50804 /* CoreUIKitImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0029B682F0E742000D50804 /* CoreUIKitImages.xcassets */; };
+		D0029C2B2F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B432F0E742000D50804 /* ic_vietabank_56@2x.png */; };
+		D0029C2C2F0E742000D50804 /* ic_vibbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3F2F0E742000D50804 /* ic_vibbank_56.png */; };
+		D0029C2D2F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4D2F0E742000D50804 /* ic_vietcombank_56@3x.png */; };
+		D0029C2E2F0E742000D50804 /* ic_quoc_te_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2D2F0E742000D50804 /* ic_quoc_te_16.png */; };
+		D0029C2F2F0E742000D50804 /* ic_viettelpay_40.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B312F0E742000D50804 /* ic_viettelpay_40.png */; };
+		D0029C302F0E742000D50804 /* ic_uobbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3C2F0E742000D50804 /* ic_uobbank_56.png */; };
+		D0029C312F0E742000D50804 /* ic_westernunionbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5A2F0E742000D50804 /* ic_westernunionbank_56.png */; };
+		D0029C322F0E742000D50804 /* ic_vietcapitalbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B492F0E742000D50804 /* ic_vietcapitalbank_56@2x.png */; };
+		D0029C332F0E742000D50804 /* ic_viettelpay_40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B322F0E742000D50804 /* ic_viettelpay_40@2x.png */; };
+		D0029C342F0E742000D50804 /* ic_tpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B392F0E742000D50804 /* ic_tpbank_56.png */; };
+		D0029C352F0E742000D50804 /* ic_vietinbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4F2F0E742000D50804 /* ic_vietinbank_56@2x.png */; };
+		D0029C362F0E742000D50804 /* ic_vietcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4B2F0E742000D50804 /* ic_vietcombank_56.png */; };
+		D0029C372F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B482F0E742000D50804 /* ic_vietcapitalbank_56.png */; };
+		D0029C382F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B402F0E742000D50804 /* ic_vibbank_56@2x.png */; };
+		D0029C392F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5B2F0E742000D50804 /* ic_westernunionbank_56@2x.png */; };
+		D0029C3A2F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2F2F0E742000D50804 /* ic_quoc_te_16@3x.png */; };
+		D0029C3B2F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5E2F0E742000D50804 /* ic_wooribank_56@2x.png */; };
+		D0029C3C2F0E742000D50804 /* ic_techcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B382F0E742000D50804 /* ic_techcombank_56@3x.png */; };
+		D0029C3D2F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5C2F0E742000D50804 /* ic_westernunionbank_56@3x.png */; };
+		D0029C3E2F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2E2F0E742000D50804 /* ic_quoc_te_16@2x.png */; };
+		D0029C3F2F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B4C2F0E742000D50804 /* ic_vietcombank_56@2x.png */; };
+		D0029C402F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B562F0E742000D50804 /* ic_vpbank_56@3x.png */; };
+		D0029C412F0E742000D50804 /* ic_vrbbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B572F0E742000D50804 /* ic_vrbbank_56.png */; };
+		D0029C422F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B372F0E742000D50804 /* ic_techcombank_56@2x.png */; };
+		D0029C432F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3E2F0E742000D50804 /* ic_uobbank_56@3x.png */; };
+		D0029C442F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B552F0E742000D50804 /* ic_vpbank_56@2x.png */; };
+		D0029C452F0E742000D50804 /* ic_atm_noi_dia_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B2C2F0E742000D50804 /* ic_atm_noi_dia_16@3x.png */; };
+		D0029C462F0E742000D50804 /* ic_wooribank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B5D2F0E742000D50804 /* ic_wooribank_56.png */; };
+		D0029C472F0E742000D50804 /* ic_vibbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B412F0E742000D50804 /* ic_vibbank_56@3x.png */; };
+		D0029C482F0E742000D50804 /* ic_viettelpay_40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B332F0E742000D50804 /* ic_viettelpay_40@3x.png */; };
+		D0029C492F0E742000D50804 /* ic_uobbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B3D2F0E742000D50804 /* ic_uobbank_56@2x.png */; };
+		D0029C4A2F0E742000D50804 /* ic_vietbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B472F0E742000D50804 /* ic_vietbank_56@3x.png */; };
+		D0029C4B2F0E742000D50804 /* ic_shinhanbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0029B352F0E742000D50804 /* ic_shinhanbank_56@3x.png */; };
+		D0029C522F0E742E00D50804 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C502F0E742E00D50804 /* StringExtensions.swift */; };
+		D0029C532F0E742E00D50804 /* FloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4E2F0E742E00D50804 /* FloatExtensions.swift */; };
+		D0029C542F0E742E00D50804 /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4C2F0E742E00D50804 /* DoubleExtensions.swift */; };
+		D0029C552F0E742E00D50804 /* NSStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4F2F0E742E00D50804 /* NSStringExtensions.swift */; };
+		D0029C562F0E742E00D50804 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4D2F0E742E00D50804 /* EncodableExtensions.swift */; };
+		D0029C572F0E742E00D50804 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C502F0E742E00D50804 /* StringExtensions.swift */; };
+		D0029C582F0E742E00D50804 /* FloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4E2F0E742E00D50804 /* FloatExtensions.swift */; };
+		D0029C592F0E742E00D50804 /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4C2F0E742E00D50804 /* DoubleExtensions.swift */; };
+		D0029C5A2F0E742E00D50804 /* NSStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4F2F0E742E00D50804 /* NSStringExtensions.swift */; };
+		D0029C5B2F0E742E00D50804 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4D2F0E742E00D50804 /* EncodableExtensions.swift */; };
+		D0029C5C2F0E742E00D50804 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C502F0E742E00D50804 /* StringExtensions.swift */; };
+		D0029C5D2F0E742E00D50804 /* FloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4E2F0E742E00D50804 /* FloatExtensions.swift */; };
+		D0029C5E2F0E742E00D50804 /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4C2F0E742E00D50804 /* DoubleExtensions.swift */; };
+		D0029C5F2F0E742E00D50804 /* NSStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4F2F0E742E00D50804 /* NSStringExtensions.swift */; };
+		D0029C602F0E742E00D50804 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C4D2F0E742E00D50804 /* EncodableExtensions.swift */; };
+		D0029C632F0E744D00D50804 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C612F0E744D00D50804 /* UIColorExtensions.swift */; };
+		D0029C642F0E744D00D50804 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C622F0E744D00D50804 /* UIImageExtensions.swift */; };
+		D0029C652F0E744D00D50804 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C612F0E744D00D50804 /* UIColorExtensions.swift */; };
+		D0029C662F0E744D00D50804 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C622F0E744D00D50804 /* UIImageExtensions.swift */; };
+		D0029C672F0E744D00D50804 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C612F0E744D00D50804 /* UIColorExtensions.swift */; };
+		D0029C682F0E744D00D50804 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C622F0E744D00D50804 /* UIImageExtensions.swift */; };
+		D0029C6C2F0E74BF00D50804 /* PinterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C692F0E74BF00D50804 /* PinterestCell.swift */; };
+		D0029C6D2F0E74BF00D50804 /* PinterestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029C6A2F0E74BF00D50804 /* PinterestCell.xib */; };
+		D0029C6E2F0E74BF00D50804 /* PinterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C692F0E74BF00D50804 /* PinterestCell.swift */; };
+		D0029C6F2F0E74BF00D50804 /* PinterestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029C6A2F0E74BF00D50804 /* PinterestCell.xib */; };
+		D0029C702F0E74BF00D50804 /* PinterestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029C6A2F0E74BF00D50804 /* PinterestCell.xib */; };
+		D0029C712F0E74BF00D50804 /* PinterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C692F0E74BF00D50804 /* PinterestCell.swift */; };
+		D0029C732F0E852E00D50804 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C722F0E852E00D50804 /* ArrayExtensions.swift */; };
+		D0029C742F0E852E00D50804 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C722F0E852E00D50804 /* ArrayExtensions.swift */; };
+		D0029C752F0E852E00D50804 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C722F0E852E00D50804 /* ArrayExtensions.swift */; };
+		D0029C772F0E85E600D50804 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C762F0E85E600D50804 /* IntExtensions.swift */; };
+		D0029C782F0E85E600D50804 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C762F0E85E600D50804 /* IntExtensions.swift */; };
+		D0029C792F0E85E600D50804 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C762F0E85E600D50804 /* IntExtensions.swift */; };
 		D0095B202ECB0BA700FCC7BC /* ECommerce.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0095B0F2ECB0BA700FCC7BC /* ECommerce.xcdatamodeld */; };
 		D0095B212ECB0BA700FCC7BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095B0D2ECB0BA700FCC7BC /* AppDelegate.swift */; };
 		D0095B252ECB0BA700FCC7BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0095B142ECB0BA700FCC7BC /* Main.storyboard */; };
@@ -125,7 +383,7 @@
 		D0095C132ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0095BF02ECB43C500FCC7BC /* ProductsViewController.storyboard */; };
 		D0095C242ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1C2ECB43DC00FCC7BC /* StoryboardInstantiable.swift */; };
 		D0095C252ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1F2ECB43DC00FCC7BC /* AccessibilityIdentifier.swift */; };
-		D0095C262ECB43DC00FCC7BC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C202ECB43DC00FCC7BC /* LoadingView.swift */; };
+		D0095C262ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C202ECB43DC00FCC7BC /* EcoLoadingView.swift */; };
 		D0095C272ECB43DC00FCC7BC /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1B2ECB43DC00FCC7BC /* Alertable.swift */; };
 		D0095C282ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C192ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift */; };
 		D0095C2A2ECB43DC00FCC7BC /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1E2ECB43DC00FCC7BC /* Observable.swift */; };
@@ -133,7 +391,7 @@
 		D0095C2C2ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C142ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift */; };
 		D0095C2F2ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1C2ECB43DC00FCC7BC /* StoryboardInstantiable.swift */; };
 		D0095C302ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1F2ECB43DC00FCC7BC /* AccessibilityIdentifier.swift */; };
-		D0095C312ECB43DC00FCC7BC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C202ECB43DC00FCC7BC /* LoadingView.swift */; };
+		D0095C312ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C202ECB43DC00FCC7BC /* EcoLoadingView.swift */; };
 		D0095C322ECB43DC00FCC7BC /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1B2ECB43DC00FCC7BC /* Alertable.swift */; };
 		D0095C332ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C192ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift */; };
 		D0095C352ECB43DC00FCC7BC /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1E2ECB43DC00FCC7BC /* Observable.swift */; };
@@ -141,7 +399,7 @@
 		D0095C372ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C142ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift */; };
 		D0095C3A2ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1C2ECB43DC00FCC7BC /* StoryboardInstantiable.swift */; };
 		D0095C3B2ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1F2ECB43DC00FCC7BC /* AccessibilityIdentifier.swift */; };
-		D0095C3C2ECB43DC00FCC7BC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C202ECB43DC00FCC7BC /* LoadingView.swift */; };
+		D0095C3C2ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C202ECB43DC00FCC7BC /* EcoLoadingView.swift */; };
 		D0095C3D2ECB43DC00FCC7BC /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1B2ECB43DC00FCC7BC /* Alertable.swift */; };
 		D0095C3E2ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C192ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift */; };
 		D0095C402ECB43DC00FCC7BC /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C1E2ECB43DC00FCC7BC /* Observable.swift */; };
@@ -273,252 +531,6 @@
 		D0095D9F2ECC5BED00FCC7BC /* CoreConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095D9A2ECC5BEC00FCC7BC /* CoreConstant.swift */; };
 		D0095DA02ECC5BED00FCC7BC /* CommonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095D9B2ECC5BEC00FCC7BC /* CommonUtil.swift */; };
 		D0095DA12ECC5BED00FCC7BC /* CoreConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095D9A2ECC5BEC00FCC7BC /* CoreConstant.swift */; };
-		D05E9B4A2F0E5F2B0057564A /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B482F0E5F2B0057564A /* UIColorExtensions.swift */; };
-		D05E9B4B2F0E5F2B0057564A /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B492F0E5F2B0057564A /* UIImageExtensions.swift */; };
-		D05E9B4C2F0E5F2B0057564A /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B482F0E5F2B0057564A /* UIColorExtensions.swift */; };
-		D05E9B4D2F0E5F2B0057564A /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B492F0E5F2B0057564A /* UIImageExtensions.swift */; };
-		D05E9B4E2F0E5F2B0057564A /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B482F0E5F2B0057564A /* UIColorExtensions.swift */; };
-		D05E9B4F2F0E5F2B0057564A /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B492F0E5F2B0057564A /* UIImageExtensions.swift */; };
-		D05E9B562F0E5F3B0057564A /* NSStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B532F0E5F3B0057564A /* NSStringExtensions.swift */; };
-		D05E9B572F0E5F3B0057564A /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B502F0E5F3B0057564A /* DoubleExtensions.swift */; };
-		D05E9B582F0E5F3B0057564A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B542F0E5F3B0057564A /* StringExtensions.swift */; };
-		D05E9B592F0E5F3B0057564A /* FloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B522F0E5F3B0057564A /* FloatExtensions.swift */; };
-		D05E9B5A2F0E5F3B0057564A /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B512F0E5F3B0057564A /* EncodableExtensions.swift */; };
-		D05E9B5B2F0E5F3B0057564A /* NSStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B532F0E5F3B0057564A /* NSStringExtensions.swift */; };
-		D05E9B5C2F0E5F3B0057564A /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B502F0E5F3B0057564A /* DoubleExtensions.swift */; };
-		D05E9B5D2F0E5F3B0057564A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B542F0E5F3B0057564A /* StringExtensions.swift */; };
-		D05E9B5E2F0E5F3B0057564A /* FloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B522F0E5F3B0057564A /* FloatExtensions.swift */; };
-		D05E9B5F2F0E5F3B0057564A /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B512F0E5F3B0057564A /* EncodableExtensions.swift */; };
-		D05E9B602F0E5F3B0057564A /* NSStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B532F0E5F3B0057564A /* NSStringExtensions.swift */; };
-		D05E9B612F0E5F3B0057564A /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B502F0E5F3B0057564A /* DoubleExtensions.swift */; };
-		D05E9B622F0E5F3B0057564A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B542F0E5F3B0057564A /* StringExtensions.swift */; };
-		D05E9B632F0E5F3B0057564A /* FloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B522F0E5F3B0057564A /* FloatExtensions.swift */; };
-		D05E9B642F0E5F3B0057564A /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B512F0E5F3B0057564A /* EncodableExtensions.swift */; };
-		D05E9BC52F0E5F4B0057564A /* ic_tpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B952F0E5F4B0057564A /* ic_tpbank_56@3x.png */; };
-		D05E9BC62F0E5F4B0057564A /* ic_vietcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA52F0E5F4B0057564A /* ic_vietcombank_56.png */; };
-		D05E9BC72F0E5F4B0057564A /* ic_uobbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B972F0E5F4B0057564A /* ic_uobbank_56@2x.png */; };
-		D05E9BC82F0E5F4B0057564A /* ic_vibbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9A2F0E5F4B0057564A /* ic_vibbank_56@2x.png */; };
-		D05E9BC92F0E5F4B0057564A /* ic_vietcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA72F0E5F4B0057564A /* ic_vietcombank_56@3x.png */; };
-		D05E9BCA2F0E5F4B0057564A /* ic_vietabank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9D2F0E5F4B0057564A /* ic_vietabank_56@2x.png */; };
-		D05E9BCB2F0E5F4B0057564A /* ic_vietbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9F2F0E5F4B0057564A /* ic_vietbank_56.png */; };
-		D05E9BCC2F0E5F4B0057564A /* ic_vietabank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9E2F0E5F4B0057564A /* ic_vietabank_56@3x.png */; };
-		D05E9BCD2F0E5F4B0057564A /* ic_vrbbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB12F0E5F4B0057564A /* ic_vrbbank_56.png */; };
-		D05E9BCE2F0E5F4B0057564A /* ic_vietcapitalbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA22F0E5F4B0057564A /* ic_vietcapitalbank_56.png */; };
-		D05E9BCF2F0E5F4B0057564A /* ic_vietbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA02F0E5F4B0057564A /* ic_vietbank_56@2x.png */; };
-		D05E9BD02F0E5F4B0057564A /* ic_vietinbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA92F0E5F4B0057564A /* ic_vietinbank_56@2x.png */; };
-		D05E9BD12F0E5F4B0057564A /* ic_wooribank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB82F0E5F4B0057564A /* ic_wooribank_56@2x.png */; };
-		D05E9BD22F0E5F4B0057564A /* ic_westernunionbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB62F0E5F4B0057564A /* ic_westernunionbank_56@3x.png */; };
-		D05E9BD32F0E5F4B0057564A /* ic_westernunionbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB42F0E5F4B0057564A /* ic_westernunionbank_56.png */; };
-		D05E9BD42F0E5F4B0057564A /* ic_viettelpay_40.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8B2F0E5F4B0057564A /* ic_viettelpay_40.png */; };
-		D05E9BD52F0E5F4B0057564A /* ic_shinhanbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8F2F0E5F4B0057564A /* ic_shinhanbank_56@3x.png */; };
-		D05E9BD62F0E5F4B0057564A /* ic_quoc_te_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B882F0E5F4B0057564A /* ic_quoc_te_16@2x.png */; };
-		D05E9BD72F0E5F4B0057564A /* ic_vibbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9B2F0E5F4B0057564A /* ic_vibbank_56@3x.png */; };
-		D05E9BD82F0E5F4B0057564A /* ic_westernunionbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB52F0E5F4B0057564A /* ic_westernunionbank_56@2x.png */; };
-		D05E9BD92F0E5F4B0057564A /* ic_vietcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA62F0E5F4B0057564A /* ic_vietcombank_56@2x.png */; };
-		D05E9BDA2F0E5F4B0057564A /* ic_vpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB02F0E5F4B0057564A /* ic_vpbank_56@3x.png */; };
-		D05E9BDB2F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA42F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png */; };
-		D05E9BDC2F0E5F4B0057564A /* ic_wooribank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB92F0E5F4B0057564A /* ic_wooribank_56@3x.png */; };
-		D05E9BDD2F0E5F4B0057564A /* ic_viettelpay_40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8D2F0E5F4B0057564A /* ic_viettelpay_40@3x.png */; };
-		D05E9BDE2F0E5F4B0057564A /* ic_tpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B942F0E5F4B0057564A /* ic_tpbank_56@2x.png */; };
-		D05E9BDF2F0E5F4B0057564A /* ic_uobbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B962F0E5F4B0057564A /* ic_uobbank_56.png */; };
-		D05E9BE02F0E5F4B0057564A /* ic_vietabank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9C2F0E5F4B0057564A /* ic_vietabank_56.png */; };
-		D05E9BE12F0E5F4B0057564A /* ic_vietinbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAA2F0E5F4B0057564A /* ic_vietinbank_56@3x.png */; };
-		D05E9BE22F0E5F4B0057564A /* ic_vrbbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB32F0E5F4B0057564A /* ic_vrbbank_56@3x.png */; };
-		D05E9BE32F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B862F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png */; };
-		D05E9BE42F0E5F4B0057564A /* ic_viettelpay_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAB2F0E5F4B0057564A /* ic_viettelpay_56.png */; };
-		D05E9BE52F0E5F4B0057564A /* ic_tpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B932F0E5F4B0057564A /* ic_tpbank_56.png */; };
-		D05E9BE62F0E5F4B0057564A /* ic_wooribank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB72F0E5F4B0057564A /* ic_wooribank_56.png */; };
-		D05E9BE72F0E5F4B0057564A /* ic_viettelpay_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAD2F0E5F4B0057564A /* ic_viettelpay_56@3x.png */; };
-		D05E9BE82F0E5F4B0057564A /* ic_techcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B912F0E5F4B0057564A /* ic_techcombank_56@2x.png */; };
-		D05E9BE92F0E5F4B0057564A /* ic_viettelpay_40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8C2F0E5F4B0057564A /* ic_viettelpay_40@2x.png */; };
-		D05E9BEA2F0E5F4B0057564A /* ic_vrbbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB22F0E5F4B0057564A /* ic_vrbbank_56@2x.png */; };
-		D05E9BEB2F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA32F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png */; };
-		D05E9BEC2F0E5F4B0057564A /* ic_techcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B922F0E5F4B0057564A /* ic_techcombank_56@3x.png */; };
-		D05E9BED2F0E5F4B0057564A /* ic_quoc_te_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B872F0E5F4B0057564A /* ic_quoc_te_16.png */; };
-		D05E9BEE2F0E5F4B0057564A /* ic_vpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAE2F0E5F4B0057564A /* ic_vpbank_56.png */; };
-		D05E9BEF2F0E5F4B0057564A /* ic_techcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B902F0E5F4B0057564A /* ic_techcombank_56.png */; };
-		D05E9BF02F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B852F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png */; };
-		D05E9BF12F0E5F4B0057564A /* CoreUIKitImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BC22F0E5F4B0057564A /* CoreUIKitImages.xcassets */; };
-		D05E9BF22F0E5F4B0057564A /* ic_quoc_te_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B892F0E5F4B0057564A /* ic_quoc_te_16@3x.png */; };
-		D05E9BF32F0E5F4B0057564A /* CoreUIKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BBF2F0E5F4B0057564A /* CoreUIKit.strings */; };
-		D05E9BF42F0E5F4B0057564A /* ic_atm_noi_dia_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B842F0E5F4B0057564A /* ic_atm_noi_dia_16.png */; };
-		D05E9BF52F0E5F4B0057564A /* ic_vibbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B992F0E5F4B0057564A /* ic_vibbank_56.png */; };
-		D05E9BF62F0E5F4B0057564A /* ic_uobbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B982F0E5F4B0057564A /* ic_uobbank_56@3x.png */; };
-		D05E9BF72F0E5F4B0057564A /* ic_vietbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA12F0E5F4B0057564A /* ic_vietbank_56@3x.png */; };
-		D05E9BF82F0E5F4B0057564A /* ic_vietinbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA82F0E5F4B0057564A /* ic_vietinbank_56.png */; };
-		D05E9BF92F0E5F4B0057564A /* ic_vpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAF2F0E5F4B0057564A /* ic_vpbank_56@2x.png */; };
-		D05E9BFA2F0E5F4B0057564A /* ic_viettelpay_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAC2F0E5F4B0057564A /* ic_viettelpay_56@2x.png */; };
-		D05E9BFB2F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B762F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift */; };
-		D05E9BFC2F0E5F4B0057564A /* Opacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7D2F0E5F4B0057564A /* Opacity.swift */; };
-		D05E9BFD2F0E5F4B0057564A /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B812F0E5F4B0057564A /* Spacing.swift */; };
-		D05E9BFE2F0E5F4B0057564A /* UIView+Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B782F0E5F4B0057564A /* UIView+Subview.swift */; };
-		D05E9BFF2F0E5F4B0057564A /* EcoAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B652F0E5F4B0057564A /* EcoAvatarView.swift */; };
-		D05E9C002F0E5F4B0057564A /* EcoTick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B732F0E5F4B0057564A /* EcoTick.swift */; };
-		D05E9C012F0E5F4B0057564A /* CoreUIKitLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9BC02F0E5F4B0057564A /* CoreUIKitLocalization.swift */; };
-		D05E9C022F0E5F4B0057564A /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B822F0E5F4B0057564A /* Typography.swift */; };
-		D05E9C032F0E5F4B0057564A /* SFFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7E2F0E5F4B0057564A /* SFFont.swift */; };
-		D05E9C042F0E5F4B0057564A /* EcoRadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6D2F0E5F4B0057564A /* EcoRadioButtonGroup.swift */; };
-		D05E9C052F0E5F4B0057564A /* EcoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B712F0E5F4B0057564A /* EcoTextView.swift */; };
-		D05E9C062F0E5F4B0057564A /* EcoHorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B692F0E5F4B0057564A /* EcoHorizontalProgressView.swift */; };
-		D05E9C072F0E5F4B0057564A /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7F2F0E5F4B0057564A /* Shadows.swift */; };
-		D05E9C082F0E5F4B0057564A /* EcoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6A2F0E5F4B0057564A /* EcoProgressView.swift */; };
-		D05E9C092F0E5F4B0057564A /* Sizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B802F0E5F4B0057564A /* Sizing.swift */; };
-		D05E9C0A2F0E5F4B0057564A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7C2F0E5F4B0057564A /* Colors.swift */; };
-		D05E9C0C2F0E5F4B0057564A /* BorderRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7B2F0E5F4B0057564A /* BorderRadius.swift */; };
-		D05E9C0D2F0E5F4B0057564A /* EcoRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6C2F0E5F4B0057564A /* EcoRadioButton.swift */; };
-		D05E9C0E2F0E5F4B0057564A /* EcoSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6F2F0E5F4B0057564A /* EcoSwitch.swift */; };
-		D05E9C0F2F0E5F4B0057564A /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7A2F0E5F4B0057564A /* Border.swift */; };
-		D05E9C102F0E5F4B0057564A /* EcoDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B672F0E5F4B0057564A /* EcoDivider.swift */; };
-		D05E9C112F0E5F4B0057564A /* ic_tpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B952F0E5F4B0057564A /* ic_tpbank_56@3x.png */; };
-		D05E9C122F0E5F4B0057564A /* ic_vietcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA52F0E5F4B0057564A /* ic_vietcombank_56.png */; };
-		D05E9C132F0E5F4B0057564A /* ic_uobbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B972F0E5F4B0057564A /* ic_uobbank_56@2x.png */; };
-		D05E9C142F0E5F4B0057564A /* ic_vibbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9A2F0E5F4B0057564A /* ic_vibbank_56@2x.png */; };
-		D05E9C152F0E5F4B0057564A /* ic_vietcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA72F0E5F4B0057564A /* ic_vietcombank_56@3x.png */; };
-		D05E9C162F0E5F4B0057564A /* ic_vietabank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9D2F0E5F4B0057564A /* ic_vietabank_56@2x.png */; };
-		D05E9C172F0E5F4B0057564A /* ic_vietbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9F2F0E5F4B0057564A /* ic_vietbank_56.png */; };
-		D05E9C182F0E5F4B0057564A /* ic_vietabank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9E2F0E5F4B0057564A /* ic_vietabank_56@3x.png */; };
-		D05E9C192F0E5F4B0057564A /* ic_vrbbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB12F0E5F4B0057564A /* ic_vrbbank_56.png */; };
-		D05E9C1A2F0E5F4B0057564A /* ic_vietcapitalbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA22F0E5F4B0057564A /* ic_vietcapitalbank_56.png */; };
-		D05E9C1B2F0E5F4B0057564A /* ic_vietbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA02F0E5F4B0057564A /* ic_vietbank_56@2x.png */; };
-		D05E9C1C2F0E5F4B0057564A /* ic_vietinbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA92F0E5F4B0057564A /* ic_vietinbank_56@2x.png */; };
-		D05E9C1D2F0E5F4B0057564A /* ic_wooribank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB82F0E5F4B0057564A /* ic_wooribank_56@2x.png */; };
-		D05E9C1E2F0E5F4B0057564A /* ic_westernunionbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB62F0E5F4B0057564A /* ic_westernunionbank_56@3x.png */; };
-		D05E9C1F2F0E5F4B0057564A /* ic_westernunionbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB42F0E5F4B0057564A /* ic_westernunionbank_56.png */; };
-		D05E9C202F0E5F4B0057564A /* ic_viettelpay_40.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8B2F0E5F4B0057564A /* ic_viettelpay_40.png */; };
-		D05E9C212F0E5F4B0057564A /* ic_shinhanbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8F2F0E5F4B0057564A /* ic_shinhanbank_56@3x.png */; };
-		D05E9C222F0E5F4B0057564A /* ic_quoc_te_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B882F0E5F4B0057564A /* ic_quoc_te_16@2x.png */; };
-		D05E9C232F0E5F4B0057564A /* ic_vibbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9B2F0E5F4B0057564A /* ic_vibbank_56@3x.png */; };
-		D05E9C242F0E5F4B0057564A /* ic_westernunionbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB52F0E5F4B0057564A /* ic_westernunionbank_56@2x.png */; };
-		D05E9C252F0E5F4B0057564A /* ic_vietcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA62F0E5F4B0057564A /* ic_vietcombank_56@2x.png */; };
-		D05E9C262F0E5F4B0057564A /* ic_vpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB02F0E5F4B0057564A /* ic_vpbank_56@3x.png */; };
-		D05E9C272F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA42F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png */; };
-		D05E9C282F0E5F4B0057564A /* ic_wooribank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB92F0E5F4B0057564A /* ic_wooribank_56@3x.png */; };
-		D05E9C292F0E5F4B0057564A /* ic_viettelpay_40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8D2F0E5F4B0057564A /* ic_viettelpay_40@3x.png */; };
-		D05E9C2A2F0E5F4B0057564A /* ic_tpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B942F0E5F4B0057564A /* ic_tpbank_56@2x.png */; };
-		D05E9C2B2F0E5F4B0057564A /* ic_uobbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B962F0E5F4B0057564A /* ic_uobbank_56.png */; };
-		D05E9C2C2F0E5F4B0057564A /* ic_vietabank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9C2F0E5F4B0057564A /* ic_vietabank_56.png */; };
-		D05E9C2D2F0E5F4B0057564A /* ic_vietinbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAA2F0E5F4B0057564A /* ic_vietinbank_56@3x.png */; };
-		D05E9C2E2F0E5F4B0057564A /* ic_vrbbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB32F0E5F4B0057564A /* ic_vrbbank_56@3x.png */; };
-		D05E9C2F2F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B862F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png */; };
-		D05E9C302F0E5F4B0057564A /* ic_viettelpay_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAB2F0E5F4B0057564A /* ic_viettelpay_56.png */; };
-		D05E9C312F0E5F4B0057564A /* ic_tpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B932F0E5F4B0057564A /* ic_tpbank_56.png */; };
-		D05E9C322F0E5F4B0057564A /* ic_wooribank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB72F0E5F4B0057564A /* ic_wooribank_56.png */; };
-		D05E9C332F0E5F4B0057564A /* ic_viettelpay_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAD2F0E5F4B0057564A /* ic_viettelpay_56@3x.png */; };
-		D05E9C342F0E5F4B0057564A /* ic_techcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B912F0E5F4B0057564A /* ic_techcombank_56@2x.png */; };
-		D05E9C352F0E5F4B0057564A /* ic_viettelpay_40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8C2F0E5F4B0057564A /* ic_viettelpay_40@2x.png */; };
-		D05E9C362F0E5F4B0057564A /* ic_vrbbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB22F0E5F4B0057564A /* ic_vrbbank_56@2x.png */; };
-		D05E9C372F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA32F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png */; };
-		D05E9C382F0E5F4B0057564A /* ic_techcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B922F0E5F4B0057564A /* ic_techcombank_56@3x.png */; };
-		D05E9C392F0E5F4B0057564A /* ic_quoc_te_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B872F0E5F4B0057564A /* ic_quoc_te_16.png */; };
-		D05E9C3A2F0E5F4B0057564A /* ic_vpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAE2F0E5F4B0057564A /* ic_vpbank_56.png */; };
-		D05E9C3B2F0E5F4B0057564A /* ic_techcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B902F0E5F4B0057564A /* ic_techcombank_56.png */; };
-		D05E9C3C2F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B852F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png */; };
-		D05E9C3D2F0E5F4B0057564A /* CoreUIKitImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BC22F0E5F4B0057564A /* CoreUIKitImages.xcassets */; };
-		D05E9C3E2F0E5F4B0057564A /* ic_quoc_te_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B892F0E5F4B0057564A /* ic_quoc_te_16@3x.png */; };
-		D05E9C3F2F0E5F4B0057564A /* CoreUIKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BBF2F0E5F4B0057564A /* CoreUIKit.strings */; };
-		D05E9C402F0E5F4B0057564A /* ic_atm_noi_dia_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B842F0E5F4B0057564A /* ic_atm_noi_dia_16.png */; };
-		D05E9C412F0E5F4B0057564A /* ic_vibbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B992F0E5F4B0057564A /* ic_vibbank_56.png */; };
-		D05E9C422F0E5F4B0057564A /* ic_uobbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B982F0E5F4B0057564A /* ic_uobbank_56@3x.png */; };
-		D05E9C432F0E5F4B0057564A /* ic_vietbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA12F0E5F4B0057564A /* ic_vietbank_56@3x.png */; };
-		D05E9C442F0E5F4B0057564A /* ic_vietinbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA82F0E5F4B0057564A /* ic_vietinbank_56.png */; };
-		D05E9C452F0E5F4B0057564A /* ic_vpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAF2F0E5F4B0057564A /* ic_vpbank_56@2x.png */; };
-		D05E9C462F0E5F4B0057564A /* ic_viettelpay_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAC2F0E5F4B0057564A /* ic_viettelpay_56@2x.png */; };
-		D05E9C472F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B762F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift */; };
-		D05E9C482F0E5F4B0057564A /* Opacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7D2F0E5F4B0057564A /* Opacity.swift */; };
-		D05E9C492F0E5F4B0057564A /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B812F0E5F4B0057564A /* Spacing.swift */; };
-		D05E9C4A2F0E5F4B0057564A /* UIView+Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B782F0E5F4B0057564A /* UIView+Subview.swift */; };
-		D05E9C4B2F0E5F4B0057564A /* EcoAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B652F0E5F4B0057564A /* EcoAvatarView.swift */; };
-		D05E9C4C2F0E5F4B0057564A /* EcoTick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B732F0E5F4B0057564A /* EcoTick.swift */; };
-		D05E9C4D2F0E5F4B0057564A /* CoreUIKitLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9BC02F0E5F4B0057564A /* CoreUIKitLocalization.swift */; };
-		D05E9C4E2F0E5F4B0057564A /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B822F0E5F4B0057564A /* Typography.swift */; };
-		D05E9C4F2F0E5F4B0057564A /* SFFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7E2F0E5F4B0057564A /* SFFont.swift */; };
-		D05E9C502F0E5F4B0057564A /* EcoRadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6D2F0E5F4B0057564A /* EcoRadioButtonGroup.swift */; };
-		D05E9C512F0E5F4B0057564A /* EcoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B712F0E5F4B0057564A /* EcoTextView.swift */; };
-		D05E9C522F0E5F4B0057564A /* EcoHorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B692F0E5F4B0057564A /* EcoHorizontalProgressView.swift */; };
-		D05E9C532F0E5F4B0057564A /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7F2F0E5F4B0057564A /* Shadows.swift */; };
-		D05E9C542F0E5F4B0057564A /* EcoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6A2F0E5F4B0057564A /* EcoProgressView.swift */; };
-		D05E9C552F0E5F4B0057564A /* Sizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B802F0E5F4B0057564A /* Sizing.swift */; };
-		D05E9C562F0E5F4B0057564A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7C2F0E5F4B0057564A /* Colors.swift */; };
-		D05E9C582F0E5F4B0057564A /* BorderRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7B2F0E5F4B0057564A /* BorderRadius.swift */; };
-		D05E9C592F0E5F4B0057564A /* EcoRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6C2F0E5F4B0057564A /* EcoRadioButton.swift */; };
-		D05E9C5A2F0E5F4B0057564A /* EcoSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6F2F0E5F4B0057564A /* EcoSwitch.swift */; };
-		D05E9C5B2F0E5F4B0057564A /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7A2F0E5F4B0057564A /* Border.swift */; };
-		D05E9C5C2F0E5F4B0057564A /* EcoDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B672F0E5F4B0057564A /* EcoDivider.swift */; };
-		D05E9C5D2F0E5F4B0057564A /* ic_tpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B952F0E5F4B0057564A /* ic_tpbank_56@3x.png */; };
-		D05E9C5E2F0E5F4B0057564A /* ic_vietcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA52F0E5F4B0057564A /* ic_vietcombank_56.png */; };
-		D05E9C5F2F0E5F4B0057564A /* ic_uobbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B972F0E5F4B0057564A /* ic_uobbank_56@2x.png */; };
-		D05E9C602F0E5F4B0057564A /* ic_vibbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9A2F0E5F4B0057564A /* ic_vibbank_56@2x.png */; };
-		D05E9C612F0E5F4B0057564A /* ic_vietcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA72F0E5F4B0057564A /* ic_vietcombank_56@3x.png */; };
-		D05E9C622F0E5F4B0057564A /* ic_vietabank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9D2F0E5F4B0057564A /* ic_vietabank_56@2x.png */; };
-		D05E9C632F0E5F4B0057564A /* ic_vietbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9F2F0E5F4B0057564A /* ic_vietbank_56.png */; };
-		D05E9C642F0E5F4B0057564A /* ic_vietabank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9E2F0E5F4B0057564A /* ic_vietabank_56@3x.png */; };
-		D05E9C652F0E5F4B0057564A /* ic_vrbbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB12F0E5F4B0057564A /* ic_vrbbank_56.png */; };
-		D05E9C662F0E5F4B0057564A /* ic_vietcapitalbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA22F0E5F4B0057564A /* ic_vietcapitalbank_56.png */; };
-		D05E9C672F0E5F4B0057564A /* ic_vietbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA02F0E5F4B0057564A /* ic_vietbank_56@2x.png */; };
-		D05E9C682F0E5F4B0057564A /* ic_vietinbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA92F0E5F4B0057564A /* ic_vietinbank_56@2x.png */; };
-		D05E9C692F0E5F4B0057564A /* ic_wooribank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB82F0E5F4B0057564A /* ic_wooribank_56@2x.png */; };
-		D05E9C6A2F0E5F4B0057564A /* ic_westernunionbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB62F0E5F4B0057564A /* ic_westernunionbank_56@3x.png */; };
-		D05E9C6B2F0E5F4B0057564A /* ic_westernunionbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB42F0E5F4B0057564A /* ic_westernunionbank_56.png */; };
-		D05E9C6C2F0E5F4B0057564A /* ic_viettelpay_40.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8B2F0E5F4B0057564A /* ic_viettelpay_40.png */; };
-		D05E9C6D2F0E5F4B0057564A /* ic_shinhanbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8F2F0E5F4B0057564A /* ic_shinhanbank_56@3x.png */; };
-		D05E9C6E2F0E5F4B0057564A /* ic_quoc_te_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B882F0E5F4B0057564A /* ic_quoc_te_16@2x.png */; };
-		D05E9C6F2F0E5F4B0057564A /* ic_vibbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9B2F0E5F4B0057564A /* ic_vibbank_56@3x.png */; };
-		D05E9C702F0E5F4B0057564A /* ic_westernunionbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB52F0E5F4B0057564A /* ic_westernunionbank_56@2x.png */; };
-		D05E9C712F0E5F4B0057564A /* ic_vietcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA62F0E5F4B0057564A /* ic_vietcombank_56@2x.png */; };
-		D05E9C722F0E5F4B0057564A /* ic_vpbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB02F0E5F4B0057564A /* ic_vpbank_56@3x.png */; };
-		D05E9C732F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA42F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png */; };
-		D05E9C742F0E5F4B0057564A /* ic_wooribank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB92F0E5F4B0057564A /* ic_wooribank_56@3x.png */; };
-		D05E9C752F0E5F4B0057564A /* ic_viettelpay_40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8D2F0E5F4B0057564A /* ic_viettelpay_40@3x.png */; };
-		D05E9C762F0E5F4B0057564A /* ic_tpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B942F0E5F4B0057564A /* ic_tpbank_56@2x.png */; };
-		D05E9C772F0E5F4B0057564A /* ic_uobbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B962F0E5F4B0057564A /* ic_uobbank_56.png */; };
-		D05E9C782F0E5F4B0057564A /* ic_vietabank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B9C2F0E5F4B0057564A /* ic_vietabank_56.png */; };
-		D05E9C792F0E5F4B0057564A /* ic_vietinbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAA2F0E5F4B0057564A /* ic_vietinbank_56@3x.png */; };
-		D05E9C7A2F0E5F4B0057564A /* ic_vrbbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB32F0E5F4B0057564A /* ic_vrbbank_56@3x.png */; };
-		D05E9C7B2F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B862F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png */; };
-		D05E9C7C2F0E5F4B0057564A /* ic_viettelpay_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAB2F0E5F4B0057564A /* ic_viettelpay_56.png */; };
-		D05E9C7D2F0E5F4B0057564A /* ic_tpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B932F0E5F4B0057564A /* ic_tpbank_56.png */; };
-		D05E9C7E2F0E5F4B0057564A /* ic_wooribank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB72F0E5F4B0057564A /* ic_wooribank_56.png */; };
-		D05E9C7F2F0E5F4B0057564A /* ic_viettelpay_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAD2F0E5F4B0057564A /* ic_viettelpay_56@3x.png */; };
-		D05E9C802F0E5F4B0057564A /* ic_techcombank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B912F0E5F4B0057564A /* ic_techcombank_56@2x.png */; };
-		D05E9C812F0E5F4B0057564A /* ic_viettelpay_40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B8C2F0E5F4B0057564A /* ic_viettelpay_40@2x.png */; };
-		D05E9C822F0E5F4B0057564A /* ic_vrbbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BB22F0E5F4B0057564A /* ic_vrbbank_56@2x.png */; };
-		D05E9C832F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA32F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png */; };
-		D05E9C842F0E5F4B0057564A /* ic_techcombank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B922F0E5F4B0057564A /* ic_techcombank_56@3x.png */; };
-		D05E9C852F0E5F4B0057564A /* ic_quoc_te_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B872F0E5F4B0057564A /* ic_quoc_te_16.png */; };
-		D05E9C862F0E5F4B0057564A /* ic_vpbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAE2F0E5F4B0057564A /* ic_vpbank_56.png */; };
-		D05E9C872F0E5F4B0057564A /* ic_techcombank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B902F0E5F4B0057564A /* ic_techcombank_56.png */; };
-		D05E9C882F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B852F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png */; };
-		D05E9C892F0E5F4B0057564A /* CoreUIKitImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BC22F0E5F4B0057564A /* CoreUIKitImages.xcassets */; };
-		D05E9C8A2F0E5F4B0057564A /* ic_quoc_te_16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B892F0E5F4B0057564A /* ic_quoc_te_16@3x.png */; };
-		D05E9C8B2F0E5F4B0057564A /* CoreUIKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BBF2F0E5F4B0057564A /* CoreUIKit.strings */; };
-		D05E9C8C2F0E5F4B0057564A /* ic_atm_noi_dia_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B842F0E5F4B0057564A /* ic_atm_noi_dia_16.png */; };
-		D05E9C8D2F0E5F4B0057564A /* ic_vibbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B992F0E5F4B0057564A /* ic_vibbank_56.png */; };
-		D05E9C8E2F0E5F4B0057564A /* ic_uobbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9B982F0E5F4B0057564A /* ic_uobbank_56@3x.png */; };
-		D05E9C8F2F0E5F4B0057564A /* ic_vietbank_56@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA12F0E5F4B0057564A /* ic_vietbank_56@3x.png */; };
-		D05E9C902F0E5F4B0057564A /* ic_vietinbank_56.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BA82F0E5F4B0057564A /* ic_vietinbank_56.png */; };
-		D05E9C912F0E5F4B0057564A /* ic_vpbank_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAF2F0E5F4B0057564A /* ic_vpbank_56@2x.png */; };
-		D05E9C922F0E5F4B0057564A /* ic_viettelpay_56@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D05E9BAC2F0E5F4B0057564A /* ic_viettelpay_56@2x.png */; };
-		D05E9C932F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B762F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift */; };
-		D05E9C942F0E5F4B0057564A /* Opacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7D2F0E5F4B0057564A /* Opacity.swift */; };
-		D05E9C952F0E5F4B0057564A /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B812F0E5F4B0057564A /* Spacing.swift */; };
-		D05E9C962F0E5F4B0057564A /* UIView+Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B782F0E5F4B0057564A /* UIView+Subview.swift */; };
-		D05E9C972F0E5F4B0057564A /* EcoAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B652F0E5F4B0057564A /* EcoAvatarView.swift */; };
-		D05E9C982F0E5F4B0057564A /* EcoTick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B732F0E5F4B0057564A /* EcoTick.swift */; };
-		D05E9C992F0E5F4B0057564A /* CoreUIKitLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9BC02F0E5F4B0057564A /* CoreUIKitLocalization.swift */; };
-		D05E9C9A2F0E5F4B0057564A /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B822F0E5F4B0057564A /* Typography.swift */; };
-		D05E9C9B2F0E5F4B0057564A /* SFFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7E2F0E5F4B0057564A /* SFFont.swift */; };
-		D05E9C9C2F0E5F4B0057564A /* EcoRadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6D2F0E5F4B0057564A /* EcoRadioButtonGroup.swift */; };
-		D05E9C9D2F0E5F4B0057564A /* EcoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B712F0E5F4B0057564A /* EcoTextView.swift */; };
-		D05E9C9E2F0E5F4B0057564A /* EcoHorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B692F0E5F4B0057564A /* EcoHorizontalProgressView.swift */; };
-		D05E9C9F2F0E5F4B0057564A /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7F2F0E5F4B0057564A /* Shadows.swift */; };
-		D05E9CA02F0E5F4B0057564A /* EcoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6A2F0E5F4B0057564A /* EcoProgressView.swift */; };
-		D05E9CA12F0E5F4B0057564A /* Sizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B802F0E5F4B0057564A /* Sizing.swift */; };
-		D05E9CA22F0E5F4B0057564A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7C2F0E5F4B0057564A /* Colors.swift */; };
-		D05E9CA42F0E5F4B0057564A /* BorderRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7B2F0E5F4B0057564A /* BorderRadius.swift */; };
-		D05E9CA52F0E5F4B0057564A /* EcoRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6C2F0E5F4B0057564A /* EcoRadioButton.swift */; };
-		D05E9CA62F0E5F4B0057564A /* EcoSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B6F2F0E5F4B0057564A /* EcoSwitch.swift */; };
-		D05E9CA72F0E5F4B0057564A /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B7A2F0E5F4B0057564A /* Border.swift */; };
-		D05E9CA82F0E5F4B0057564A /* EcoDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E9B672F0E5F4B0057564A /* EcoDivider.swift */; };
 		D06C3B832ECCA16900289D48 /* UIView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C3B822ECCA16900289D48 /* UIView+Reusable.swift */; };
 		D06C3B842ECCA16900289D48 /* UIView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C3B822ECCA16900289D48 /* UIView+Reusable.swift */; };
 		D06C3B852ECCA16900289D48 /* UIView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C3B822ECCA16900289D48 /* UIView+Reusable.swift */; };
@@ -626,6 +638,93 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D0029B0C2F0E742000D50804 /* EcoAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoAvatarView.swift; sourceTree = "<group>"; };
+		D0029B0E2F0E742000D50804 /* EcoDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoDivider.swift; sourceTree = "<group>"; };
+		D0029B102F0E742000D50804 /* EcoHorizontalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoHorizontalProgressView.swift; sourceTree = "<group>"; };
+		D0029B112F0E742000D50804 /* EcoProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoProgressView.swift; sourceTree = "<group>"; };
+		D0029B132F0E742000D50804 /* EcoRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoRadioButton.swift; sourceTree = "<group>"; };
+		D0029B142F0E742000D50804 /* EcoRadioButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoRadioButtonGroup.swift; sourceTree = "<group>"; };
+		D0029B162F0E742000D50804 /* EcoSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSwitch.swift; sourceTree = "<group>"; };
+		D0029B182F0E742000D50804 /* EcoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoTextView.swift; sourceTree = "<group>"; };
+		D0029B1A2F0E742000D50804 /* EcoTick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoTick.swift; sourceTree = "<group>"; };
+		D0029B1D2F0E742000D50804 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		D0029B1E2F0E742000D50804 /* UIStackView+Subview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Subview.swift"; sourceTree = "<group>"; };
+		D0029B202F0E742000D50804 /* Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
+		D0029B212F0E742000D50804 /* BorderRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderRadius.swift; sourceTree = "<group>"; };
+		D0029B222F0E742000D50804 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		D0029B232F0E742000D50804 /* Opacity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opacity.swift; sourceTree = "<group>"; };
+		D0029B242F0E742000D50804 /* SFFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFFont.swift; sourceTree = "<group>"; };
+		D0029B252F0E742000D50804 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
+		D0029B262F0E742000D50804 /* Sizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizing.swift; sourceTree = "<group>"; };
+		D0029B272F0E742000D50804 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		D0029B282F0E742000D50804 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		D0029B2A2F0E742000D50804 /* ic_atm_noi_dia_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_atm_noi_dia_16.png; sourceTree = "<group>"; };
+		D0029B2B2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_atm_noi_dia_16@2x.png"; sourceTree = "<group>"; };
+		D0029B2C2F0E742000D50804 /* ic_atm_noi_dia_16@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_atm_noi_dia_16@3x.png"; sourceTree = "<group>"; };
+		D0029B2D2F0E742000D50804 /* ic_quoc_te_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_quoc_te_16.png; sourceTree = "<group>"; };
+		D0029B2E2F0E742000D50804 /* ic_quoc_te_16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_quoc_te_16@2x.png"; sourceTree = "<group>"; };
+		D0029B2F2F0E742000D50804 /* ic_quoc_te_16@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_quoc_te_16@3x.png"; sourceTree = "<group>"; };
+		D0029B312F0E742000D50804 /* ic_viettelpay_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_viettelpay_40.png; sourceTree = "<group>"; };
+		D0029B322F0E742000D50804 /* ic_viettelpay_40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_viettelpay_40@2x.png"; sourceTree = "<group>"; };
+		D0029B332F0E742000D50804 /* ic_viettelpay_40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_viettelpay_40@3x.png"; sourceTree = "<group>"; };
+		D0029B352F0E742000D50804 /* ic_shinhanbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_shinhanbank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B362F0E742000D50804 /* ic_techcombank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_techcombank_56.png; sourceTree = "<group>"; };
+		D0029B372F0E742000D50804 /* ic_techcombank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_techcombank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B382F0E742000D50804 /* ic_techcombank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_techcombank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B392F0E742000D50804 /* ic_tpbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_tpbank_56.png; sourceTree = "<group>"; };
+		D0029B3A2F0E742000D50804 /* ic_tpbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_tpbank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B3B2F0E742000D50804 /* ic_tpbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_tpbank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B3C2F0E742000D50804 /* ic_uobbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_uobbank_56.png; sourceTree = "<group>"; };
+		D0029B3D2F0E742000D50804 /* ic_uobbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_uobbank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B3E2F0E742000D50804 /* ic_uobbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_uobbank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B3F2F0E742000D50804 /* ic_vibbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vibbank_56.png; sourceTree = "<group>"; };
+		D0029B402F0E742000D50804 /* ic_vibbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vibbank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B412F0E742000D50804 /* ic_vibbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vibbank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B422F0E742000D50804 /* ic_vietabank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vietabank_56.png; sourceTree = "<group>"; };
+		D0029B432F0E742000D50804 /* ic_vietabank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietabank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B442F0E742000D50804 /* ic_vietabank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietabank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B452F0E742000D50804 /* ic_vietbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vietbank_56.png; sourceTree = "<group>"; };
+		D0029B462F0E742000D50804 /* ic_vietbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietbank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B472F0E742000D50804 /* ic_vietbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietbank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B482F0E742000D50804 /* ic_vietcapitalbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vietcapitalbank_56.png; sourceTree = "<group>"; };
+		D0029B492F0E742000D50804 /* ic_vietcapitalbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietcapitalbank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B4A2F0E742000D50804 /* ic_vietcapitalbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietcapitalbank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B4B2F0E742000D50804 /* ic_vietcombank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vietcombank_56.png; sourceTree = "<group>"; };
+		D0029B4C2F0E742000D50804 /* ic_vietcombank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietcombank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B4D2F0E742000D50804 /* ic_vietcombank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietcombank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B4E2F0E742000D50804 /* ic_vietinbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vietinbank_56.png; sourceTree = "<group>"; };
+		D0029B4F2F0E742000D50804 /* ic_vietinbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietinbank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B502F0E742000D50804 /* ic_vietinbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietinbank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B512F0E742000D50804 /* ic_viettelpay_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_viettelpay_56.png; sourceTree = "<group>"; };
+		D0029B522F0E742000D50804 /* ic_viettelpay_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_viettelpay_56@2x.png"; sourceTree = "<group>"; };
+		D0029B532F0E742000D50804 /* ic_viettelpay_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_viettelpay_56@3x.png"; sourceTree = "<group>"; };
+		D0029B542F0E742000D50804 /* ic_vpbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vpbank_56.png; sourceTree = "<group>"; };
+		D0029B552F0E742000D50804 /* ic_vpbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vpbank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B562F0E742000D50804 /* ic_vpbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vpbank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B572F0E742000D50804 /* ic_vrbbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vrbbank_56.png; sourceTree = "<group>"; };
+		D0029B582F0E742000D50804 /* ic_vrbbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vrbbank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B592F0E742000D50804 /* ic_vrbbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vrbbank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B5A2F0E742000D50804 /* ic_westernunionbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_westernunionbank_56.png; sourceTree = "<group>"; };
+		D0029B5B2F0E742000D50804 /* ic_westernunionbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_westernunionbank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B5C2F0E742000D50804 /* ic_westernunionbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_westernunionbank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B5D2F0E742000D50804 /* ic_wooribank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_wooribank_56.png; sourceTree = "<group>"; };
+		D0029B5E2F0E742000D50804 /* ic_wooribank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_wooribank_56@2x.png"; sourceTree = "<group>"; };
+		D0029B5F2F0E742000D50804 /* ic_wooribank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_wooribank_56@3x.png"; sourceTree = "<group>"; };
+		D0029B632F0E742000D50804 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoreUIKit.strings; sourceTree = "<group>"; };
+		D0029B642F0E742000D50804 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/CoreUIKit.strings; sourceTree = "<group>"; };
+		D0029B662F0E742000D50804 /* CoreUIKitLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreUIKitLocalization.swift; sourceTree = "<group>"; };
+		D0029B682F0E742000D50804 /* CoreUIKitImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreUIKitImages.xcassets; sourceTree = "<group>"; };
+		D0029C4C2F0E742E00D50804 /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
+		D0029C4D2F0E742E00D50804 /* EncodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
+		D0029C4E2F0E742E00D50804 /* FloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatExtensions.swift; sourceTree = "<group>"; };
+		D0029C4F2F0E742E00D50804 /* NSStringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStringExtensions.swift; sourceTree = "<group>"; };
+		D0029C502F0E742E00D50804 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		D0029C612F0E744D00D50804 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		D0029C622F0E744D00D50804 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		D0029C692F0E74BF00D50804 /* PinterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestCell.swift; sourceTree = "<group>"; };
+		D0029C6A2F0E74BF00D50804 /* PinterestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinterestCell.xib; sourceTree = "<group>"; };
+		D0029C722F0E852E00D50804 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		D0029C762F0E85E600D50804 /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
 		D0095AD62ECB0B8300FCC7BC /* ECommerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECommerce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0095AEF2ECB0B8400FCC7BC /* ECommerceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ECommerceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0095AF92ECB0B8400FCC7BC /* ECommerceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ECommerceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -677,7 +776,7 @@
 		D0095C1C2ECB43DC00FCC7BC /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		D0095C1E2ECB43DC00FCC7BC /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D0095C1F2ECB43DC00FCC7BC /* AccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifier.swift; sourceTree = "<group>"; };
-		D0095C202ECB43DC00FCC7BC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		D0095C202ECB43DC00FCC7BC /* EcoLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoLoadingView.swift; sourceTree = "<group>"; };
 		D0095C5C2ECB4C1600FCC7BC /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
 		D0095C912ECB579900FCC7BC /* ProductCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCoordinatingController.swift; sourceTree = "<group>"; };
 		D0095C932ECB579900FCC7BC /* ProductsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsController.swift; sourceTree = "<group>"; };
@@ -720,89 +819,6 @@
 		D0095D962ECC5BA300FCC7BC /* ImageCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressor.swift; sourceTree = "<group>"; };
 		D0095D9A2ECC5BEC00FCC7BC /* CoreConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreConstant.swift; sourceTree = "<group>"; };
 		D0095D9B2ECC5BEC00FCC7BC /* CommonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
-		D05E9B482F0E5F2B0057564A /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColorExtensions.swift; path = /Users/macbookair/Desktop/merge_common/UIColorExtensions.swift; sourceTree = "<absolute>"; };
-		D05E9B492F0E5F2B0057564A /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIImageExtensions.swift; path = /Users/macbookair/Desktop/merge_common/UIImageExtensions.swift; sourceTree = "<absolute>"; };
-		D05E9B502F0E5F3B0057564A /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
-		D05E9B512F0E5F3B0057564A /* EncodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
-		D05E9B522F0E5F3B0057564A /* FloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatExtensions.swift; sourceTree = "<group>"; };
-		D05E9B532F0E5F3B0057564A /* NSStringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStringExtensions.swift; sourceTree = "<group>"; };
-		D05E9B542F0E5F3B0057564A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		D05E9B652F0E5F4B0057564A /* EcoAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoAvatarView.swift; sourceTree = "<group>"; };
-		D05E9B672F0E5F4B0057564A /* EcoDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoDivider.swift; sourceTree = "<group>"; };
-		D05E9B692F0E5F4B0057564A /* EcoHorizontalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoHorizontalProgressView.swift; sourceTree = "<group>"; };
-		D05E9B6A2F0E5F4B0057564A /* EcoProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoProgressView.swift; sourceTree = "<group>"; };
-		D05E9B6C2F0E5F4B0057564A /* EcoRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoRadioButton.swift; sourceTree = "<group>"; };
-		D05E9B6D2F0E5F4B0057564A /* EcoRadioButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoRadioButtonGroup.swift; sourceTree = "<group>"; };
-		D05E9B6F2F0E5F4B0057564A /* EcoSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSwitch.swift; sourceTree = "<group>"; };
-		D05E9B712F0E5F4B0057564A /* EcoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoTextView.swift; sourceTree = "<group>"; };
-		D05E9B732F0E5F4B0057564A /* EcoTick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoTick.swift; sourceTree = "<group>"; };
-		D05E9B762F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
-		D05E9B782F0E5F4B0057564A /* UIView+Subview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+Subview.swift"; path = "../../../../../../../../../Desktop/merge_common/CoreUIKit/Extensions/UIView+Subview.swift"; sourceTree = "<group>"; };
-		D05E9B7A2F0E5F4B0057564A /* Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
-		D05E9B7B2F0E5F4B0057564A /* BorderRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderRadius.swift; sourceTree = "<group>"; };
-		D05E9B7C2F0E5F4B0057564A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		D05E9B7D2F0E5F4B0057564A /* Opacity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opacity.swift; sourceTree = "<group>"; };
-		D05E9B7E2F0E5F4B0057564A /* SFFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFFont.swift; sourceTree = "<group>"; };
-		D05E9B7F2F0E5F4B0057564A /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
-		D05E9B802F0E5F4B0057564A /* Sizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizing.swift; sourceTree = "<group>"; };
-		D05E9B812F0E5F4B0057564A /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
-		D05E9B822F0E5F4B0057564A /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
-		D05E9B842F0E5F4B0057564A /* ic_atm_noi_dia_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_atm_noi_dia_16.png; sourceTree = "<group>"; };
-		D05E9B852F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_atm_noi_dia_16@2x.png"; sourceTree = "<group>"; };
-		D05E9B862F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_atm_noi_dia_16@3x.png"; sourceTree = "<group>"; };
-		D05E9B872F0E5F4B0057564A /* ic_quoc_te_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_quoc_te_16.png; sourceTree = "<group>"; };
-		D05E9B882F0E5F4B0057564A /* ic_quoc_te_16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_quoc_te_16@2x.png"; sourceTree = "<group>"; };
-		D05E9B892F0E5F4B0057564A /* ic_quoc_te_16@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_quoc_te_16@3x.png"; sourceTree = "<group>"; };
-		D05E9B8B2F0E5F4B0057564A /* ic_viettelpay_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_viettelpay_40.png; sourceTree = "<group>"; };
-		D05E9B8C2F0E5F4B0057564A /* ic_viettelpay_40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_viettelpay_40@2x.png"; sourceTree = "<group>"; };
-		D05E9B8D2F0E5F4B0057564A /* ic_viettelpay_40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_viettelpay_40@3x.png"; sourceTree = "<group>"; };
-		D05E9B8F2F0E5F4B0057564A /* ic_shinhanbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_shinhanbank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9B902F0E5F4B0057564A /* ic_techcombank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_techcombank_56.png; sourceTree = "<group>"; };
-		D05E9B912F0E5F4B0057564A /* ic_techcombank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_techcombank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9B922F0E5F4B0057564A /* ic_techcombank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_techcombank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9B932F0E5F4B0057564A /* ic_tpbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_tpbank_56.png; sourceTree = "<group>"; };
-		D05E9B942F0E5F4B0057564A /* ic_tpbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_tpbank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9B952F0E5F4B0057564A /* ic_tpbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_tpbank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9B962F0E5F4B0057564A /* ic_uobbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_uobbank_56.png; sourceTree = "<group>"; };
-		D05E9B972F0E5F4B0057564A /* ic_uobbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_uobbank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9B982F0E5F4B0057564A /* ic_uobbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_uobbank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9B992F0E5F4B0057564A /* ic_vibbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vibbank_56.png; sourceTree = "<group>"; };
-		D05E9B9A2F0E5F4B0057564A /* ic_vibbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vibbank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9B9B2F0E5F4B0057564A /* ic_vibbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vibbank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9B9C2F0E5F4B0057564A /* ic_vietabank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vietabank_56.png; sourceTree = "<group>"; };
-		D05E9B9D2F0E5F4B0057564A /* ic_vietabank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietabank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9B9E2F0E5F4B0057564A /* ic_vietabank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietabank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9B9F2F0E5F4B0057564A /* ic_vietbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vietbank_56.png; sourceTree = "<group>"; };
-		D05E9BA02F0E5F4B0057564A /* ic_vietbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietbank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9BA12F0E5F4B0057564A /* ic_vietbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietbank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9BA22F0E5F4B0057564A /* ic_vietcapitalbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vietcapitalbank_56.png; sourceTree = "<group>"; };
-		D05E9BA32F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietcapitalbank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9BA42F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietcapitalbank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9BA52F0E5F4B0057564A /* ic_vietcombank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vietcombank_56.png; sourceTree = "<group>"; };
-		D05E9BA62F0E5F4B0057564A /* ic_vietcombank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietcombank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9BA72F0E5F4B0057564A /* ic_vietcombank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietcombank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9BA82F0E5F4B0057564A /* ic_vietinbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vietinbank_56.png; sourceTree = "<group>"; };
-		D05E9BA92F0E5F4B0057564A /* ic_vietinbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietinbank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9BAA2F0E5F4B0057564A /* ic_vietinbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vietinbank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9BAB2F0E5F4B0057564A /* ic_viettelpay_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_viettelpay_56.png; sourceTree = "<group>"; };
-		D05E9BAC2F0E5F4B0057564A /* ic_viettelpay_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_viettelpay_56@2x.png"; sourceTree = "<group>"; };
-		D05E9BAD2F0E5F4B0057564A /* ic_viettelpay_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_viettelpay_56@3x.png"; sourceTree = "<group>"; };
-		D05E9BAE2F0E5F4B0057564A /* ic_vpbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vpbank_56.png; sourceTree = "<group>"; };
-		D05E9BAF2F0E5F4B0057564A /* ic_vpbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vpbank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9BB02F0E5F4B0057564A /* ic_vpbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vpbank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9BB12F0E5F4B0057564A /* ic_vrbbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_vrbbank_56.png; sourceTree = "<group>"; };
-		D05E9BB22F0E5F4B0057564A /* ic_vrbbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vrbbank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9BB32F0E5F4B0057564A /* ic_vrbbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vrbbank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9BB42F0E5F4B0057564A /* ic_westernunionbank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_westernunionbank_56.png; sourceTree = "<group>"; };
-		D05E9BB52F0E5F4B0057564A /* ic_westernunionbank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_westernunionbank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9BB62F0E5F4B0057564A /* ic_westernunionbank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_westernunionbank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9BB72F0E5F4B0057564A /* ic_wooribank_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_wooribank_56.png; sourceTree = "<group>"; };
-		D05E9BB82F0E5F4B0057564A /* ic_wooribank_56@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_wooribank_56@2x.png"; sourceTree = "<group>"; };
-		D05E9BB92F0E5F4B0057564A /* ic_wooribank_56@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_wooribank_56@3x.png"; sourceTree = "<group>"; };
-		D05E9BBD2F0E5F4B0057564A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoreUIKit.strings; sourceTree = "<group>"; };
-		D05E9BBE2F0E5F4B0057564A /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/CoreUIKit.strings; sourceTree = "<group>"; };
-		D05E9BC02F0E5F4B0057564A /* CoreUIKitLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreUIKitLocalization.swift; sourceTree = "<group>"; };
-		D05E9BC22F0E5F4B0057564A /* CoreUIKitImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CoreUIKitImages.xcassets; sourceTree = "<group>"; };
 		D06C3B822ECCA16900289D48 /* UIView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Reusable.swift"; sourceTree = "<group>"; };
 		D06C3B862ECCA21800289D48 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		D06C3B8A2ECCA25D00289D48 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
@@ -859,6 +875,282 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D0029B0D2F0E742000D50804 /* Avatar */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B0C2F0E742000D50804 /* EcoAvatarView.swift */,
+			);
+			path = Avatar;
+			sourceTree = "<group>";
+		};
+		D0029B0F2F0E742000D50804 /* Divider */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B0E2F0E742000D50804 /* EcoDivider.swift */,
+			);
+			path = Divider;
+			sourceTree = "<group>";
+		};
+		D0029B122F0E742000D50804 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B102F0E742000D50804 /* EcoHorizontalProgressView.swift */,
+				D0029B112F0E742000D50804 /* EcoProgressView.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		D0029B152F0E742000D50804 /* RadioButton */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B132F0E742000D50804 /* EcoRadioButton.swift */,
+				D0029B142F0E742000D50804 /* EcoRadioButtonGroup.swift */,
+			);
+			path = RadioButton;
+			sourceTree = "<group>";
+		};
+		D0029B172F0E742000D50804 /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B162F0E742000D50804 /* EcoSwitch.swift */,
+			);
+			path = Switch;
+			sourceTree = "<group>";
+		};
+		D0029B192F0E742000D50804 /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B182F0E742000D50804 /* EcoTextView.swift */,
+			);
+			path = TextView;
+			sourceTree = "<group>";
+		};
+		D0029B1B2F0E742000D50804 /* Tick */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B1A2F0E742000D50804 /* EcoTick.swift */,
+			);
+			path = Tick;
+			sourceTree = "<group>";
+		};
+		D0029B1C2F0E742000D50804 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B0D2F0E742000D50804 /* Avatar */,
+				D0029B0F2F0E742000D50804 /* Divider */,
+				D0029B122F0E742000D50804 /* Progress */,
+				D0029B152F0E742000D50804 /* RadioButton */,
+				D0029B172F0E742000D50804 /* Switch */,
+				D0029B192F0E742000D50804 /* TextView */,
+				D0029B1B2F0E742000D50804 /* Tick */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		D0029B1F2F0E742000D50804 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B1D2F0E742000D50804 /* NSMutableAttributedString+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D0029B292F0E742000D50804 /* Foundations */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B202F0E742000D50804 /* Border.swift */,
+				D0029B212F0E742000D50804 /* BorderRadius.swift */,
+				D0029B222F0E742000D50804 /* Colors.swift */,
+				D0029B232F0E742000D50804 /* Opacity.swift */,
+				D0029B242F0E742000D50804 /* SFFont.swift */,
+				D0029B252F0E742000D50804 /* Shadows.swift */,
+				D0029B262F0E742000D50804 /* Sizing.swift */,
+				D0029B272F0E742000D50804 /* Spacing.swift */,
+				D0029B282F0E742000D50804 /* Typography.swift */,
+			);
+			path = Foundations;
+			sourceTree = "<group>";
+		};
+		D0029B302F0E742000D50804 /* accountIconSize16 */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B2A2F0E742000D50804 /* ic_atm_noi_dia_16.png */,
+				D0029B2B2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png */,
+				D0029B2C2F0E742000D50804 /* ic_atm_noi_dia_16@3x.png */,
+				D0029B2D2F0E742000D50804 /* ic_quoc_te_16.png */,
+				D0029B2E2F0E742000D50804 /* ic_quoc_te_16@2x.png */,
+				D0029B2F2F0E742000D50804 /* ic_quoc_te_16@3x.png */,
+			);
+			path = accountIconSize16;
+			sourceTree = "<group>";
+		};
+		D0029B342F0E742000D50804 /* accountIconSize40 */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B312F0E742000D50804 /* ic_viettelpay_40.png */,
+				D0029B322F0E742000D50804 /* ic_viettelpay_40@2x.png */,
+				D0029B332F0E742000D50804 /* ic_viettelpay_40@3x.png */,
+			);
+			path = accountIconSize40;
+			sourceTree = "<group>";
+		};
+		D0029B602F0E742000D50804 /* accountIconSize56 */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B352F0E742000D50804 /* ic_shinhanbank_56@3x.png */,
+				D0029B362F0E742000D50804 /* ic_techcombank_56.png */,
+				D0029B372F0E742000D50804 /* ic_techcombank_56@2x.png */,
+				D0029B382F0E742000D50804 /* ic_techcombank_56@3x.png */,
+				D0029B392F0E742000D50804 /* ic_tpbank_56.png */,
+				D0029B3A2F0E742000D50804 /* ic_tpbank_56@2x.png */,
+				D0029B3B2F0E742000D50804 /* ic_tpbank_56@3x.png */,
+				D0029B3C2F0E742000D50804 /* ic_uobbank_56.png */,
+				D0029B3D2F0E742000D50804 /* ic_uobbank_56@2x.png */,
+				D0029B3E2F0E742000D50804 /* ic_uobbank_56@3x.png */,
+				D0029B3F2F0E742000D50804 /* ic_vibbank_56.png */,
+				D0029B402F0E742000D50804 /* ic_vibbank_56@2x.png */,
+				D0029B412F0E742000D50804 /* ic_vibbank_56@3x.png */,
+				D0029B422F0E742000D50804 /* ic_vietabank_56.png */,
+				D0029B432F0E742000D50804 /* ic_vietabank_56@2x.png */,
+				D0029B442F0E742000D50804 /* ic_vietabank_56@3x.png */,
+				D0029B452F0E742000D50804 /* ic_vietbank_56.png */,
+				D0029B462F0E742000D50804 /* ic_vietbank_56@2x.png */,
+				D0029B472F0E742000D50804 /* ic_vietbank_56@3x.png */,
+				D0029B482F0E742000D50804 /* ic_vietcapitalbank_56.png */,
+				D0029B492F0E742000D50804 /* ic_vietcapitalbank_56@2x.png */,
+				D0029B4A2F0E742000D50804 /* ic_vietcapitalbank_56@3x.png */,
+				D0029B4B2F0E742000D50804 /* ic_vietcombank_56.png */,
+				D0029B4C2F0E742000D50804 /* ic_vietcombank_56@2x.png */,
+				D0029B4D2F0E742000D50804 /* ic_vietcombank_56@3x.png */,
+				D0029B4E2F0E742000D50804 /* ic_vietinbank_56.png */,
+				D0029B4F2F0E742000D50804 /* ic_vietinbank_56@2x.png */,
+				D0029B502F0E742000D50804 /* ic_vietinbank_56@3x.png */,
+				D0029B512F0E742000D50804 /* ic_viettelpay_56.png */,
+				D0029B522F0E742000D50804 /* ic_viettelpay_56@2x.png */,
+				D0029B532F0E742000D50804 /* ic_viettelpay_56@3x.png */,
+				D0029B542F0E742000D50804 /* ic_vpbank_56.png */,
+				D0029B552F0E742000D50804 /* ic_vpbank_56@2x.png */,
+				D0029B562F0E742000D50804 /* ic_vpbank_56@3x.png */,
+				D0029B572F0E742000D50804 /* ic_vrbbank_56.png */,
+				D0029B582F0E742000D50804 /* ic_vrbbank_56@2x.png */,
+				D0029B592F0E742000D50804 /* ic_vrbbank_56@3x.png */,
+				D0029B5A2F0E742000D50804 /* ic_westernunionbank_56.png */,
+				D0029B5B2F0E742000D50804 /* ic_westernunionbank_56@2x.png */,
+				D0029B5C2F0E742000D50804 /* ic_westernunionbank_56@3x.png */,
+				D0029B5D2F0E742000D50804 /* ic_wooribank_56.png */,
+				D0029B5E2F0E742000D50804 /* ic_wooribank_56@2x.png */,
+				D0029B5F2F0E742000D50804 /* ic_wooribank_56@3x.png */,
+			);
+			path = accountIconSize56;
+			sourceTree = "<group>";
+		};
+		D0029B612F0E742000D50804 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B302F0E742000D50804 /* accountIconSize16 */,
+				D0029B342F0E742000D50804 /* accountIconSize40 */,
+				D0029B602F0E742000D50804 /* accountIconSize56 */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		D0029B622F0E742000D50804 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B612F0E742000D50804 /* Images */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		D0029B672F0E742000D50804 /* Localize */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B652F0E742000D50804 /* CoreUIKit.strings */,
+				D0029B662F0E742000D50804 /* CoreUIKitLocalization.swift */,
+			);
+			path = Localize;
+			sourceTree = "<group>";
+		};
+		D0029B692F0E742000D50804 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B622F0E742000D50804 /* Assets */,
+				D0029B672F0E742000D50804 /* Localize */,
+				D0029B682F0E742000D50804 /* CoreUIKitImages.xcassets */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		D0029B6A2F0E742000D50804 /* CoreUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				D0029B1C2F0E742000D50804 /* Components */,
+				D0029B1F2F0E742000D50804 /* Extensions */,
+				D0029B292F0E742000D50804 /* Foundations */,
+				D0029B692F0E742000D50804 /* SupportingFiles */,
+			);
+			path = CoreUIKit;
+			sourceTree = "<group>";
+		};
+		D0029C512F0E742E00D50804 /* SwiftStdlib */ = {
+			isa = PBXGroup;
+			children = (
+				D0029C722F0E852E00D50804 /* ArrayExtensions.swift */,
+				D0029C4C2F0E742E00D50804 /* DoubleExtensions.swift */,
+				D0029C4D2F0E742E00D50804 /* EncodableExtensions.swift */,
+				D0029C4E2F0E742E00D50804 /* FloatExtensions.swift */,
+				D0029C4F2F0E742E00D50804 /* NSStringExtensions.swift */,
+				D0029C502F0E742E00D50804 /* StringExtensions.swift */,
+				D0029C762F0E85E600D50804 /* IntExtensions.swift */,
+			);
+			path = SwiftStdlib;
+			sourceTree = "<group>";
+		};
+		D0029C6B2F0E74BF00D50804 /* PinterestCell */ = {
+			isa = PBXGroup;
+			children = (
+				D0029C692F0E74BF00D50804 /* PinterestCell.swift */,
+				D0029C6A2F0E74BF00D50804 /* PinterestCell.xib */,
+			);
+			path = PinterestCell;
+			sourceTree = "<group>";
+		};
+		D0029C7A2F0E95A000D50804 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				D0095C202ECB43DC00FCC7BC /* EcoLoadingView.swift */,
+			);
+			path = LoadingView;
+			sourceTree = "<group>";
+		};
+		D0029C7B2F0E95AD00D50804 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		D0029C7C2F0E95C300D50804 /* CategoryScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CategoryScene;
+			sourceTree = "<group>";
+		};
+		D0029C7D2F0E95D200D50804 /* CartScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CartScene;
+			sourceTree = "<group>";
+		};
+		D0029C7E2F0E95E500D50804 /* AnalysisScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AnalysisScene;
+			sourceTree = "<group>";
+		};
 		D0095ACD2ECB0B8300FCC7BC = {
 			isa = PBXGroup;
 			children = (
@@ -963,8 +1255,10 @@
 		D0095B7B2ECB258000FCC7BC /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
+				D0029C7B2F0E95AD00D50804 /* Popup */,
+				D0029C7A2F0E95A000D50804 /* LoadingView */,
+				D0029C6B2F0E74BF00D50804 /* PinterestCell */,
 				D0E6C3E42F0E0AF600527962 /* UIPageViewController+Segmented */,
-				D0095C202ECB43DC00FCC7BC /* LoadingView.swift */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -1083,8 +1377,8 @@
 			isa = PBXGroup;
 			children = (
 				D0E6C3A22F0D06AC00527962 /* ImageCache.swift */,
-				D05E9BC42F0E5F4B0057564A /* CoreUIKit */,
 				D0095B7B2ECB258000FCC7BC /* CommonView */,
+				D0029B6A2F0E742000D50804 /* CoreUIKit */,
 				D0095B762ECB1F0B00FCC7BC /* CoreUtilsKit */,
 			);
 			path = Common;
@@ -1104,6 +1398,9 @@
 		D0095BEB2ECB43A200FCC7BC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				D0029C7E2F0E95E500D50804 /* AnalysisScene */,
+				D0029C7D2F0E95D200D50804 /* CartScene */,
+				D0029C7C2F0E95C300D50804 /* CategoryScene */,
 				D0E6C3D52F0DFEF400527962 /* TabbarScene */,
 				D0095CED2ECC1E1E00FCC7BC /* MainScene */,
 				D0095CAA2ECB57C100FCC7BC /* SideMenuScene */,
@@ -1161,7 +1458,7 @@
 		D0095C1A2ECB43DC00FCC7BC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D05E9B552F0E5F3B0057564A /* SwiftStdlib */,
+				D0029C512F0E742E00D50804 /* SwiftStdlib */,
 				D0095D6E2ECC562900FCC7BC /* LocalAuthentication */,
 				D0095D692ECC556900FCC7BC /* Foundation */,
 				D0095D472ECC506A00FCC7BC /* Model */,
@@ -1344,15 +1641,15 @@
 				D06C3B812ECCA13C00289D48 /* UIView+Extensions */,
 				D0095CD92ECC137C00FCC7BC /* UIViewController+Extensions */,
 				D0095D3E2ECC4F3700FCC7BC /* UIApplication+Extensions.swift */,
+				D0029C612F0E744D00D50804 /* UIColorExtensions.swift */,
+				D0029C622F0E744D00D50804 /* UIImageExtensions.swift */,
 				D0095D5C2ECC52A400FCC7BC /* UIWindow+Extensions.swift */,
 				D0095D432ECC4FC100FCC7BC /* UIImage+Extensions.swift */,
-				D05E9B482F0E5F2B0057564A /* UIColorExtensions.swift */,
-				D05E9B492F0E5F2B0057564A /* UIImageExtensions.swift */,
 				D0095D502ECC50AE00FCC7BC /* UILabel+Extensions.swift */,
 				D0095D542ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift */,
 				D0095C162ECB43DC00FCC7BC /* UITableViewView+Extensions.swift */,
 				D0095D652ECC54F300FCC7BC /* UICollectionView+Extensions.swift */,
-				D05E9B782F0E5F4B0057564A /* UIView+Subview.swift */,
+				D0029B1E2F0E742000D50804 /* UIStackView+Subview.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1409,237 +1706,6 @@
 			);
 			path = Analysis;
 			sourceTree = "<group>";
-		};
-		D05E9B552F0E5F3B0057564A /* SwiftStdlib */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B502F0E5F3B0057564A /* DoubleExtensions.swift */,
-				D05E9B512F0E5F3B0057564A /* EncodableExtensions.swift */,
-				D05E9B522F0E5F3B0057564A /* FloatExtensions.swift */,
-				D05E9B532F0E5F3B0057564A /* NSStringExtensions.swift */,
-				D05E9B542F0E5F3B0057564A /* StringExtensions.swift */,
-			);
-			name = SwiftStdlib;
-			path = /Users/macbookair/Desktop/merge_common/SwiftStdlib;
-			sourceTree = "<absolute>";
-		};
-		D05E9B662F0E5F4B0057564A /* Avatar */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B652F0E5F4B0057564A /* EcoAvatarView.swift */,
-			);
-			path = Avatar;
-			sourceTree = "<group>";
-		};
-		D05E9B682F0E5F4B0057564A /* Divider */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B672F0E5F4B0057564A /* EcoDivider.swift */,
-			);
-			path = Divider;
-			sourceTree = "<group>";
-		};
-		D05E9B6B2F0E5F4B0057564A /* Progress */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B692F0E5F4B0057564A /* EcoHorizontalProgressView.swift */,
-				D05E9B6A2F0E5F4B0057564A /* EcoProgressView.swift */,
-			);
-			path = Progress;
-			sourceTree = "<group>";
-		};
-		D05E9B6E2F0E5F4B0057564A /* RadioButton */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B6C2F0E5F4B0057564A /* EcoRadioButton.swift */,
-				D05E9B6D2F0E5F4B0057564A /* EcoRadioButtonGroup.swift */,
-			);
-			path = RadioButton;
-			sourceTree = "<group>";
-		};
-		D05E9B702F0E5F4B0057564A /* Switch */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B6F2F0E5F4B0057564A /* EcoSwitch.swift */,
-			);
-			path = Switch;
-			sourceTree = "<group>";
-		};
-		D05E9B722F0E5F4B0057564A /* TextView */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B712F0E5F4B0057564A /* EcoTextView.swift */,
-			);
-			path = TextView;
-			sourceTree = "<group>";
-		};
-		D05E9B742F0E5F4B0057564A /* Tick */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B732F0E5F4B0057564A /* EcoTick.swift */,
-			);
-			path = Tick;
-			sourceTree = "<group>";
-		};
-		D05E9B752F0E5F4B0057564A /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B662F0E5F4B0057564A /* Avatar */,
-				D05E9B682F0E5F4B0057564A /* Divider */,
-				D05E9B6B2F0E5F4B0057564A /* Progress */,
-				D05E9B6E2F0E5F4B0057564A /* RadioButton */,
-				D05E9B702F0E5F4B0057564A /* Switch */,
-				D05E9B722F0E5F4B0057564A /* TextView */,
-				D05E9B742F0E5F4B0057564A /* Tick */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		D05E9B792F0E5F4B0057564A /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B762F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		D05E9B832F0E5F4B0057564A /* Foundations */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B7A2F0E5F4B0057564A /* Border.swift */,
-				D05E9B7B2F0E5F4B0057564A /* BorderRadius.swift */,
-				D05E9B7C2F0E5F4B0057564A /* Colors.swift */,
-				D05E9B7D2F0E5F4B0057564A /* Opacity.swift */,
-				D05E9B7E2F0E5F4B0057564A /* SFFont.swift */,
-				D05E9B7F2F0E5F4B0057564A /* Shadows.swift */,
-				D05E9B802F0E5F4B0057564A /* Sizing.swift */,
-				D05E9B812F0E5F4B0057564A /* Spacing.swift */,
-				D05E9B822F0E5F4B0057564A /* Typography.swift */,
-			);
-			path = Foundations;
-			sourceTree = "<group>";
-		};
-		D05E9B8A2F0E5F4B0057564A /* accountIconSize16 */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B842F0E5F4B0057564A /* ic_atm_noi_dia_16.png */,
-				D05E9B852F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png */,
-				D05E9B862F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png */,
-				D05E9B872F0E5F4B0057564A /* ic_quoc_te_16.png */,
-				D05E9B882F0E5F4B0057564A /* ic_quoc_te_16@2x.png */,
-				D05E9B892F0E5F4B0057564A /* ic_quoc_te_16@3x.png */,
-			);
-			path = accountIconSize16;
-			sourceTree = "<group>";
-		};
-		D05E9B8E2F0E5F4B0057564A /* accountIconSize40 */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B8B2F0E5F4B0057564A /* ic_viettelpay_40.png */,
-				D05E9B8C2F0E5F4B0057564A /* ic_viettelpay_40@2x.png */,
-				D05E9B8D2F0E5F4B0057564A /* ic_viettelpay_40@3x.png */,
-			);
-			path = accountIconSize40;
-			sourceTree = "<group>";
-		};
-		D05E9BBA2F0E5F4B0057564A /* accountIconSize56 */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B8F2F0E5F4B0057564A /* ic_shinhanbank_56@3x.png */,
-				D05E9B902F0E5F4B0057564A /* ic_techcombank_56.png */,
-				D05E9B912F0E5F4B0057564A /* ic_techcombank_56@2x.png */,
-				D05E9B922F0E5F4B0057564A /* ic_techcombank_56@3x.png */,
-				D05E9B932F0E5F4B0057564A /* ic_tpbank_56.png */,
-				D05E9B942F0E5F4B0057564A /* ic_tpbank_56@2x.png */,
-				D05E9B952F0E5F4B0057564A /* ic_tpbank_56@3x.png */,
-				D05E9B962F0E5F4B0057564A /* ic_uobbank_56.png */,
-				D05E9B972F0E5F4B0057564A /* ic_uobbank_56@2x.png */,
-				D05E9B982F0E5F4B0057564A /* ic_uobbank_56@3x.png */,
-				D05E9B992F0E5F4B0057564A /* ic_vibbank_56.png */,
-				D05E9B9A2F0E5F4B0057564A /* ic_vibbank_56@2x.png */,
-				D05E9B9B2F0E5F4B0057564A /* ic_vibbank_56@3x.png */,
-				D05E9B9C2F0E5F4B0057564A /* ic_vietabank_56.png */,
-				D05E9B9D2F0E5F4B0057564A /* ic_vietabank_56@2x.png */,
-				D05E9B9E2F0E5F4B0057564A /* ic_vietabank_56@3x.png */,
-				D05E9B9F2F0E5F4B0057564A /* ic_vietbank_56.png */,
-				D05E9BA02F0E5F4B0057564A /* ic_vietbank_56@2x.png */,
-				D05E9BA12F0E5F4B0057564A /* ic_vietbank_56@3x.png */,
-				D05E9BA22F0E5F4B0057564A /* ic_vietcapitalbank_56.png */,
-				D05E9BA32F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png */,
-				D05E9BA42F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png */,
-				D05E9BA52F0E5F4B0057564A /* ic_vietcombank_56.png */,
-				D05E9BA62F0E5F4B0057564A /* ic_vietcombank_56@2x.png */,
-				D05E9BA72F0E5F4B0057564A /* ic_vietcombank_56@3x.png */,
-				D05E9BA82F0E5F4B0057564A /* ic_vietinbank_56.png */,
-				D05E9BA92F0E5F4B0057564A /* ic_vietinbank_56@2x.png */,
-				D05E9BAA2F0E5F4B0057564A /* ic_vietinbank_56@3x.png */,
-				D05E9BAB2F0E5F4B0057564A /* ic_viettelpay_56.png */,
-				D05E9BAC2F0E5F4B0057564A /* ic_viettelpay_56@2x.png */,
-				D05E9BAD2F0E5F4B0057564A /* ic_viettelpay_56@3x.png */,
-				D05E9BAE2F0E5F4B0057564A /* ic_vpbank_56.png */,
-				D05E9BAF2F0E5F4B0057564A /* ic_vpbank_56@2x.png */,
-				D05E9BB02F0E5F4B0057564A /* ic_vpbank_56@3x.png */,
-				D05E9BB12F0E5F4B0057564A /* ic_vrbbank_56.png */,
-				D05E9BB22F0E5F4B0057564A /* ic_vrbbank_56@2x.png */,
-				D05E9BB32F0E5F4B0057564A /* ic_vrbbank_56@3x.png */,
-				D05E9BB42F0E5F4B0057564A /* ic_westernunionbank_56.png */,
-				D05E9BB52F0E5F4B0057564A /* ic_westernunionbank_56@2x.png */,
-				D05E9BB62F0E5F4B0057564A /* ic_westernunionbank_56@3x.png */,
-				D05E9BB72F0E5F4B0057564A /* ic_wooribank_56.png */,
-				D05E9BB82F0E5F4B0057564A /* ic_wooribank_56@2x.png */,
-				D05E9BB92F0E5F4B0057564A /* ic_wooribank_56@3x.png */,
-			);
-			path = accountIconSize56;
-			sourceTree = "<group>";
-		};
-		D05E9BBB2F0E5F4B0057564A /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B8A2F0E5F4B0057564A /* accountIconSize16 */,
-				D05E9B8E2F0E5F4B0057564A /* accountIconSize40 */,
-				D05E9BBA2F0E5F4B0057564A /* accountIconSize56 */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		D05E9BBC2F0E5F4B0057564A /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9BBB2F0E5F4B0057564A /* Images */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
-		D05E9BC12F0E5F4B0057564A /* Localize */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9BBF2F0E5F4B0057564A /* CoreUIKit.strings */,
-				D05E9BC02F0E5F4B0057564A /* CoreUIKitLocalization.swift */,
-			);
-			path = Localize;
-			sourceTree = "<group>";
-		};
-		D05E9BC32F0E5F4B0057564A /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9BBC2F0E5F4B0057564A /* Assets */,
-				D05E9BC12F0E5F4B0057564A /* Localize */,
-				D05E9BC22F0E5F4B0057564A /* CoreUIKitImages.xcassets */,
-			);
-			path = SupportingFiles;
-			sourceTree = "<group>";
-		};
-		D05E9BC42F0E5F4B0057564A /* CoreUIKit */ = {
-			isa = PBXGroup;
-			children = (
-				D05E9B752F0E5F4B0057564A /* Components */,
-				D05E9B792F0E5F4B0057564A /* Extensions */,
-				D05E9B832F0E5F4B0057564A /* Foundations */,
-				D05E9BC32F0E5F4B0057564A /* SupportingFiles */,
-			);
-			name = CoreUIKit;
-			path = /Users/macbookair/Desktop/merge_common/CoreUIKit;
-			sourceTree = "<absolute>";
 		};
 		D06C3B7A2ECC9A0A00289D48 /* Concurrency */ = {
 			isa = PBXGroup;
@@ -1860,60 +1926,6 @@
 			files = (
 				D0095B692ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D0095D7E2ECC58F200FCC7BC /* accounts.json in Resources */,
-				D05E9C112F0E5F4B0057564A /* ic_tpbank_56@3x.png in Resources */,
-				D05E9C122F0E5F4B0057564A /* ic_vietcombank_56.png in Resources */,
-				D05E9C132F0E5F4B0057564A /* ic_uobbank_56@2x.png in Resources */,
-				D05E9C142F0E5F4B0057564A /* ic_vibbank_56@2x.png in Resources */,
-				D05E9C152F0E5F4B0057564A /* ic_vietcombank_56@3x.png in Resources */,
-				D05E9C162F0E5F4B0057564A /* ic_vietabank_56@2x.png in Resources */,
-				D05E9C172F0E5F4B0057564A /* ic_vietbank_56.png in Resources */,
-				D05E9C182F0E5F4B0057564A /* ic_vietabank_56@3x.png in Resources */,
-				D05E9C192F0E5F4B0057564A /* ic_vrbbank_56.png in Resources */,
-				D05E9C1A2F0E5F4B0057564A /* ic_vietcapitalbank_56.png in Resources */,
-				D05E9C1B2F0E5F4B0057564A /* ic_vietbank_56@2x.png in Resources */,
-				D05E9C1C2F0E5F4B0057564A /* ic_vietinbank_56@2x.png in Resources */,
-				D05E9C1D2F0E5F4B0057564A /* ic_wooribank_56@2x.png in Resources */,
-				D05E9C1E2F0E5F4B0057564A /* ic_westernunionbank_56@3x.png in Resources */,
-				D05E9C1F2F0E5F4B0057564A /* ic_westernunionbank_56.png in Resources */,
-				D05E9C202F0E5F4B0057564A /* ic_viettelpay_40.png in Resources */,
-				D05E9C212F0E5F4B0057564A /* ic_shinhanbank_56@3x.png in Resources */,
-				D05E9C222F0E5F4B0057564A /* ic_quoc_te_16@2x.png in Resources */,
-				D05E9C232F0E5F4B0057564A /* ic_vibbank_56@3x.png in Resources */,
-				D05E9C242F0E5F4B0057564A /* ic_westernunionbank_56@2x.png in Resources */,
-				D05E9C252F0E5F4B0057564A /* ic_vietcombank_56@2x.png in Resources */,
-				D05E9C262F0E5F4B0057564A /* ic_vpbank_56@3x.png in Resources */,
-				D05E9C272F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png in Resources */,
-				D05E9C282F0E5F4B0057564A /* ic_wooribank_56@3x.png in Resources */,
-				D05E9C292F0E5F4B0057564A /* ic_viettelpay_40@3x.png in Resources */,
-				D05E9C2A2F0E5F4B0057564A /* ic_tpbank_56@2x.png in Resources */,
-				D05E9C2B2F0E5F4B0057564A /* ic_uobbank_56.png in Resources */,
-				D05E9C2C2F0E5F4B0057564A /* ic_vietabank_56.png in Resources */,
-				D05E9C2D2F0E5F4B0057564A /* ic_vietinbank_56@3x.png in Resources */,
-				D05E9C2E2F0E5F4B0057564A /* ic_vrbbank_56@3x.png in Resources */,
-				D05E9C2F2F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png in Resources */,
-				D05E9C302F0E5F4B0057564A /* ic_viettelpay_56.png in Resources */,
-				D05E9C312F0E5F4B0057564A /* ic_tpbank_56.png in Resources */,
-				D05E9C322F0E5F4B0057564A /* ic_wooribank_56.png in Resources */,
-				D05E9C332F0E5F4B0057564A /* ic_viettelpay_56@3x.png in Resources */,
-				D05E9C342F0E5F4B0057564A /* ic_techcombank_56@2x.png in Resources */,
-				D05E9C352F0E5F4B0057564A /* ic_viettelpay_40@2x.png in Resources */,
-				D05E9C362F0E5F4B0057564A /* ic_vrbbank_56@2x.png in Resources */,
-				D05E9C372F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png in Resources */,
-				D05E9C382F0E5F4B0057564A /* ic_techcombank_56@3x.png in Resources */,
-				D05E9C392F0E5F4B0057564A /* ic_quoc_te_16.png in Resources */,
-				D05E9C3A2F0E5F4B0057564A /* ic_vpbank_56.png in Resources */,
-				D05E9C3B2F0E5F4B0057564A /* ic_techcombank_56.png in Resources */,
-				D05E9C3C2F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png in Resources */,
-				D05E9C3D2F0E5F4B0057564A /* CoreUIKitImages.xcassets in Resources */,
-				D05E9C3E2F0E5F4B0057564A /* ic_quoc_te_16@3x.png in Resources */,
-				D05E9C3F2F0E5F4B0057564A /* CoreUIKit.strings in Resources */,
-				D05E9C402F0E5F4B0057564A /* ic_atm_noi_dia_16.png in Resources */,
-				D05E9C412F0E5F4B0057564A /* ic_vibbank_56.png in Resources */,
-				D05E9C422F0E5F4B0057564A /* ic_uobbank_56@3x.png in Resources */,
-				D05E9C432F0E5F4B0057564A /* ic_vietbank_56@3x.png in Resources */,
-				D05E9C442F0E5F4B0057564A /* ic_vietinbank_56.png in Resources */,
-				D05E9C452F0E5F4B0057564A /* ic_vpbank_56@2x.png in Resources */,
-				D05E9C462F0E5F4B0057564A /* ic_viettelpay_56@2x.png in Resources */,
 				D0095B702ECB1D4100FCC7BC /* Localizable.strings in Resources */,
 				D0095B3B2ECB0BA700FCC7BC /* Main.storyboard in Resources */,
 				D0095C022ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
@@ -1926,6 +1938,61 @@
 				D0095B3E2ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
 				D0E6C3D92F0DFF9800527962 /* TabBar.storyboard in Resources */,
 				D0E6C3D12F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
+				D0029BB62F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
+				D0029BB72F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
+				D0029BB82F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
+				D0029BB92F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
+				D0029BBA2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
+				D0029BBB2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
+				D0029BBC2F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
+				D0029BBD2F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */,
+				D0029BBE2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */,
+				D0029BBF2F0E742000D50804 /* ic_viettelpay_56@2x.png in Resources */,
+				D0029BC02F0E742000D50804 /* ic_techcombank_56.png in Resources */,
+				D0029BC12F0E742000D50804 /* ic_vpbank_56.png in Resources */,
+				D0029BC22F0E742000D50804 /* ic_vietabank_56.png in Resources */,
+				D0029BC32F0E742000D50804 /* CoreUIKit.strings in Resources */,
+				D0029BC42F0E742000D50804 /* ic_viettelpay_56@3x.png in Resources */,
+				D0029BC52F0E742000D50804 /* ic_vietinbank_56@3x.png in Resources */,
+				D0029BC62F0E742000D50804 /* ic_vrbbank_56@2x.png in Resources */,
+				D0029BC72F0E742000D50804 /* ic_atm_noi_dia_16.png in Resources */,
+				D0029BC82F0E742000D50804 /* ic_vietbank_56.png in Resources */,
+				D0029BC92F0E742000D50804 /* ic_wooribank_56@3x.png in Resources */,
+				D0029BCA2F0E742000D50804 /* CoreUIKitImages.xcassets in Resources */,
+				D0029BCB2F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */,
+				D0029BCC2F0E742000D50804 /* ic_vibbank_56.png in Resources */,
+				D0029BCD2F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */,
+				D0029BCE2F0E742000D50804 /* ic_quoc_te_16.png in Resources */,
+				D0029BCF2F0E742000D50804 /* ic_viettelpay_40.png in Resources */,
+				D0029BD02F0E742000D50804 /* ic_uobbank_56.png in Resources */,
+				D0029BD12F0E742000D50804 /* ic_westernunionbank_56.png in Resources */,
+				D0029BD22F0E742000D50804 /* ic_vietcapitalbank_56@2x.png in Resources */,
+				D0029BD32F0E742000D50804 /* ic_viettelpay_40@2x.png in Resources */,
+				D0029BD42F0E742000D50804 /* ic_tpbank_56.png in Resources */,
+				D0029BD52F0E742000D50804 /* ic_vietinbank_56@2x.png in Resources */,
+				D0029BD62F0E742000D50804 /* ic_vietcombank_56.png in Resources */,
+				D0029BD72F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */,
+				D0029BD82F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */,
+				D0029BD92F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */,
+				D0029BDA2F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */,
+				D0029BDB2F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */,
+				D0029BDC2F0E742000D50804 /* ic_techcombank_56@3x.png in Resources */,
+				D0029BDD2F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */,
+				D0029BDE2F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */,
+				D0029BDF2F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
+				D0029BE02F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
+				D0029BE12F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
+				D0029BE22F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
+				D0029BE32F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */,
+				D0029BE42F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */,
+				D0029BE52F0E742000D50804 /* ic_atm_noi_dia_16@3x.png in Resources */,
+				D0029BE62F0E742000D50804 /* ic_wooribank_56.png in Resources */,
+				D0029C702F0E74BF00D50804 /* PinterestCell.xib in Resources */,
+				D0029BE72F0E742000D50804 /* ic_vibbank_56@3x.png in Resources */,
+				D0029BE82F0E742000D50804 /* ic_viettelpay_40@3x.png in Resources */,
+				D0029BE92F0E742000D50804 /* ic_uobbank_56@2x.png in Resources */,
+				D0029BEA2F0E742000D50804 /* ic_vietbank_56@3x.png in Resources */,
+				D0029BEB2F0E742000D50804 /* ic_shinhanbank_56@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1936,60 +2003,61 @@
 				D0095B6A2ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D0095C042ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
 				D0E6C3CC2F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
-				D05E9BC52F0E5F4B0057564A /* ic_tpbank_56@3x.png in Resources */,
-				D05E9BC62F0E5F4B0057564A /* ic_vietcombank_56.png in Resources */,
-				D05E9BC72F0E5F4B0057564A /* ic_uobbank_56@2x.png in Resources */,
-				D05E9BC82F0E5F4B0057564A /* ic_vibbank_56@2x.png in Resources */,
-				D05E9BC92F0E5F4B0057564A /* ic_vietcombank_56@3x.png in Resources */,
-				D05E9BCA2F0E5F4B0057564A /* ic_vietabank_56@2x.png in Resources */,
-				D05E9BCB2F0E5F4B0057564A /* ic_vietbank_56.png in Resources */,
-				D05E9BCC2F0E5F4B0057564A /* ic_vietabank_56@3x.png in Resources */,
-				D05E9BCD2F0E5F4B0057564A /* ic_vrbbank_56.png in Resources */,
-				D05E9BCE2F0E5F4B0057564A /* ic_vietcapitalbank_56.png in Resources */,
-				D05E9BCF2F0E5F4B0057564A /* ic_vietbank_56@2x.png in Resources */,
-				D05E9BD02F0E5F4B0057564A /* ic_vietinbank_56@2x.png in Resources */,
-				D05E9BD12F0E5F4B0057564A /* ic_wooribank_56@2x.png in Resources */,
-				D05E9BD22F0E5F4B0057564A /* ic_westernunionbank_56@3x.png in Resources */,
-				D05E9BD32F0E5F4B0057564A /* ic_westernunionbank_56.png in Resources */,
-				D05E9BD42F0E5F4B0057564A /* ic_viettelpay_40.png in Resources */,
-				D05E9BD52F0E5F4B0057564A /* ic_shinhanbank_56@3x.png in Resources */,
-				D05E9BD62F0E5F4B0057564A /* ic_quoc_te_16@2x.png in Resources */,
-				D05E9BD72F0E5F4B0057564A /* ic_vibbank_56@3x.png in Resources */,
-				D05E9BD82F0E5F4B0057564A /* ic_westernunionbank_56@2x.png in Resources */,
-				D05E9BD92F0E5F4B0057564A /* ic_vietcombank_56@2x.png in Resources */,
-				D05E9BDA2F0E5F4B0057564A /* ic_vpbank_56@3x.png in Resources */,
-				D05E9BDB2F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png in Resources */,
-				D05E9BDC2F0E5F4B0057564A /* ic_wooribank_56@3x.png in Resources */,
-				D05E9BDD2F0E5F4B0057564A /* ic_viettelpay_40@3x.png in Resources */,
-				D05E9BDE2F0E5F4B0057564A /* ic_tpbank_56@2x.png in Resources */,
-				D05E9BDF2F0E5F4B0057564A /* ic_uobbank_56.png in Resources */,
-				D05E9BE02F0E5F4B0057564A /* ic_vietabank_56.png in Resources */,
-				D05E9BE12F0E5F4B0057564A /* ic_vietinbank_56@3x.png in Resources */,
-				D05E9BE22F0E5F4B0057564A /* ic_vrbbank_56@3x.png in Resources */,
-				D05E9BE32F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png in Resources */,
-				D05E9BE42F0E5F4B0057564A /* ic_viettelpay_56.png in Resources */,
-				D05E9BE52F0E5F4B0057564A /* ic_tpbank_56.png in Resources */,
-				D05E9BE62F0E5F4B0057564A /* ic_wooribank_56.png in Resources */,
-				D05E9BE72F0E5F4B0057564A /* ic_viettelpay_56@3x.png in Resources */,
-				D05E9BE82F0E5F4B0057564A /* ic_techcombank_56@2x.png in Resources */,
-				D05E9BE92F0E5F4B0057564A /* ic_viettelpay_40@2x.png in Resources */,
-				D05E9BEA2F0E5F4B0057564A /* ic_vrbbank_56@2x.png in Resources */,
-				D05E9BEB2F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png in Resources */,
-				D05E9BEC2F0E5F4B0057564A /* ic_techcombank_56@3x.png in Resources */,
-				D05E9BED2F0E5F4B0057564A /* ic_quoc_te_16.png in Resources */,
-				D05E9BEE2F0E5F4B0057564A /* ic_vpbank_56.png in Resources */,
-				D05E9BEF2F0E5F4B0057564A /* ic_techcombank_56.png in Resources */,
-				D05E9BF02F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png in Resources */,
-				D05E9BF12F0E5F4B0057564A /* CoreUIKitImages.xcassets in Resources */,
-				D05E9BF22F0E5F4B0057564A /* ic_quoc_te_16@3x.png in Resources */,
-				D05E9BF32F0E5F4B0057564A /* CoreUIKit.strings in Resources */,
-				D05E9BF42F0E5F4B0057564A /* ic_atm_noi_dia_16.png in Resources */,
-				D05E9BF52F0E5F4B0057564A /* ic_vibbank_56.png in Resources */,
-				D05E9BF62F0E5F4B0057564A /* ic_uobbank_56@3x.png in Resources */,
-				D05E9BF72F0E5F4B0057564A /* ic_vietbank_56@3x.png in Resources */,
-				D05E9BF82F0E5F4B0057564A /* ic_vietinbank_56.png in Resources */,
-				D05E9BF92F0E5F4B0057564A /* ic_vpbank_56@2x.png in Resources */,
-				D05E9BFA2F0E5F4B0057564A /* ic_viettelpay_56@2x.png in Resources */,
+				D0029B802F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
+				D0029C6D2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
+				D0029B812F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
+				D0029B822F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
+				D0029B832F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
+				D0029B842F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
+				D0029B852F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
+				D0029B862F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
+				D0029B872F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */,
+				D0029B882F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */,
+				D0029B892F0E742000D50804 /* ic_viettelpay_56@2x.png in Resources */,
+				D0029B8A2F0E742000D50804 /* ic_techcombank_56.png in Resources */,
+				D0029B8B2F0E742000D50804 /* ic_vpbank_56.png in Resources */,
+				D0029B8C2F0E742000D50804 /* ic_vietabank_56.png in Resources */,
+				D0029B8D2F0E742000D50804 /* CoreUIKit.strings in Resources */,
+				D0029B8E2F0E742000D50804 /* ic_viettelpay_56@3x.png in Resources */,
+				D0029B8F2F0E742000D50804 /* ic_vietinbank_56@3x.png in Resources */,
+				D0029B902F0E742000D50804 /* ic_vrbbank_56@2x.png in Resources */,
+				D0029B912F0E742000D50804 /* ic_atm_noi_dia_16.png in Resources */,
+				D0029B922F0E742000D50804 /* ic_vietbank_56.png in Resources */,
+				D0029B932F0E742000D50804 /* ic_wooribank_56@3x.png in Resources */,
+				D0029B942F0E742000D50804 /* CoreUIKitImages.xcassets in Resources */,
+				D0029B952F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */,
+				D0029B962F0E742000D50804 /* ic_vibbank_56.png in Resources */,
+				D0029B972F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */,
+				D0029B982F0E742000D50804 /* ic_quoc_te_16.png in Resources */,
+				D0029B992F0E742000D50804 /* ic_viettelpay_40.png in Resources */,
+				D0029B9A2F0E742000D50804 /* ic_uobbank_56.png in Resources */,
+				D0029B9B2F0E742000D50804 /* ic_westernunionbank_56.png in Resources */,
+				D0029B9C2F0E742000D50804 /* ic_vietcapitalbank_56@2x.png in Resources */,
+				D0029B9D2F0E742000D50804 /* ic_viettelpay_40@2x.png in Resources */,
+				D0029B9E2F0E742000D50804 /* ic_tpbank_56.png in Resources */,
+				D0029B9F2F0E742000D50804 /* ic_vietinbank_56@2x.png in Resources */,
+				D0029BA02F0E742000D50804 /* ic_vietcombank_56.png in Resources */,
+				D0029BA12F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */,
+				D0029BA22F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */,
+				D0029BA32F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */,
+				D0029BA42F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */,
+				D0029BA52F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */,
+				D0029BA62F0E742000D50804 /* ic_techcombank_56@3x.png in Resources */,
+				D0029BA72F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */,
+				D0029BA82F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */,
+				D0029BA92F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
+				D0029BAA2F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
+				D0029BAB2F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
+				D0029BAC2F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
+				D0029BAD2F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */,
+				D0029BAE2F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */,
+				D0029BAF2F0E742000D50804 /* ic_atm_noi_dia_16@3x.png in Resources */,
+				D0029BB02F0E742000D50804 /* ic_wooribank_56.png in Resources */,
+				D0029BB12F0E742000D50804 /* ic_vibbank_56@3x.png in Resources */,
+				D0029BB22F0E742000D50804 /* ic_viettelpay_40@3x.png in Resources */,
+				D0029BB32F0E742000D50804 /* ic_uobbank_56@2x.png in Resources */,
+				D0029BB42F0E742000D50804 /* ic_vietbank_56@3x.png in Resources */,
+				D0029BB52F0E742000D50804 /* ic_shinhanbank_56@3x.png in Resources */,
 				D0095CEB2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
 				D0095C052ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */,
 				D0095CC12ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
@@ -2012,60 +2080,61 @@
 				D0095B682ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D0095C122ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
 				D0E6C3D42F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
-				D05E9C5D2F0E5F4B0057564A /* ic_tpbank_56@3x.png in Resources */,
-				D05E9C5E2F0E5F4B0057564A /* ic_vietcombank_56.png in Resources */,
-				D05E9C5F2F0E5F4B0057564A /* ic_uobbank_56@2x.png in Resources */,
-				D05E9C602F0E5F4B0057564A /* ic_vibbank_56@2x.png in Resources */,
-				D05E9C612F0E5F4B0057564A /* ic_vietcombank_56@3x.png in Resources */,
-				D05E9C622F0E5F4B0057564A /* ic_vietabank_56@2x.png in Resources */,
-				D05E9C632F0E5F4B0057564A /* ic_vietbank_56.png in Resources */,
-				D05E9C642F0E5F4B0057564A /* ic_vietabank_56@3x.png in Resources */,
-				D05E9C652F0E5F4B0057564A /* ic_vrbbank_56.png in Resources */,
-				D05E9C662F0E5F4B0057564A /* ic_vietcapitalbank_56.png in Resources */,
-				D05E9C672F0E5F4B0057564A /* ic_vietbank_56@2x.png in Resources */,
-				D05E9C682F0E5F4B0057564A /* ic_vietinbank_56@2x.png in Resources */,
-				D05E9C692F0E5F4B0057564A /* ic_wooribank_56@2x.png in Resources */,
-				D05E9C6A2F0E5F4B0057564A /* ic_westernunionbank_56@3x.png in Resources */,
-				D05E9C6B2F0E5F4B0057564A /* ic_westernunionbank_56.png in Resources */,
-				D05E9C6C2F0E5F4B0057564A /* ic_viettelpay_40.png in Resources */,
-				D05E9C6D2F0E5F4B0057564A /* ic_shinhanbank_56@3x.png in Resources */,
-				D05E9C6E2F0E5F4B0057564A /* ic_quoc_te_16@2x.png in Resources */,
-				D05E9C6F2F0E5F4B0057564A /* ic_vibbank_56@3x.png in Resources */,
-				D05E9C702F0E5F4B0057564A /* ic_westernunionbank_56@2x.png in Resources */,
-				D05E9C712F0E5F4B0057564A /* ic_vietcombank_56@2x.png in Resources */,
-				D05E9C722F0E5F4B0057564A /* ic_vpbank_56@3x.png in Resources */,
-				D05E9C732F0E5F4B0057564A /* ic_vietcapitalbank_56@3x.png in Resources */,
-				D05E9C742F0E5F4B0057564A /* ic_wooribank_56@3x.png in Resources */,
-				D05E9C752F0E5F4B0057564A /* ic_viettelpay_40@3x.png in Resources */,
-				D05E9C762F0E5F4B0057564A /* ic_tpbank_56@2x.png in Resources */,
-				D05E9C772F0E5F4B0057564A /* ic_uobbank_56.png in Resources */,
-				D05E9C782F0E5F4B0057564A /* ic_vietabank_56.png in Resources */,
-				D05E9C792F0E5F4B0057564A /* ic_vietinbank_56@3x.png in Resources */,
-				D05E9C7A2F0E5F4B0057564A /* ic_vrbbank_56@3x.png in Resources */,
-				D05E9C7B2F0E5F4B0057564A /* ic_atm_noi_dia_16@3x.png in Resources */,
-				D05E9C7C2F0E5F4B0057564A /* ic_viettelpay_56.png in Resources */,
-				D05E9C7D2F0E5F4B0057564A /* ic_tpbank_56.png in Resources */,
-				D05E9C7E2F0E5F4B0057564A /* ic_wooribank_56.png in Resources */,
-				D05E9C7F2F0E5F4B0057564A /* ic_viettelpay_56@3x.png in Resources */,
-				D05E9C802F0E5F4B0057564A /* ic_techcombank_56@2x.png in Resources */,
-				D05E9C812F0E5F4B0057564A /* ic_viettelpay_40@2x.png in Resources */,
-				D05E9C822F0E5F4B0057564A /* ic_vrbbank_56@2x.png in Resources */,
-				D05E9C832F0E5F4B0057564A /* ic_vietcapitalbank_56@2x.png in Resources */,
-				D05E9C842F0E5F4B0057564A /* ic_techcombank_56@3x.png in Resources */,
-				D05E9C852F0E5F4B0057564A /* ic_quoc_te_16.png in Resources */,
-				D05E9C862F0E5F4B0057564A /* ic_vpbank_56.png in Resources */,
-				D05E9C872F0E5F4B0057564A /* ic_techcombank_56.png in Resources */,
-				D05E9C882F0E5F4B0057564A /* ic_atm_noi_dia_16@2x.png in Resources */,
-				D05E9C892F0E5F4B0057564A /* CoreUIKitImages.xcassets in Resources */,
-				D05E9C8A2F0E5F4B0057564A /* ic_quoc_te_16@3x.png in Resources */,
-				D05E9C8B2F0E5F4B0057564A /* CoreUIKit.strings in Resources */,
-				D05E9C8C2F0E5F4B0057564A /* ic_atm_noi_dia_16.png in Resources */,
-				D05E9C8D2F0E5F4B0057564A /* ic_vibbank_56.png in Resources */,
-				D05E9C8E2F0E5F4B0057564A /* ic_uobbank_56@3x.png in Resources */,
-				D05E9C8F2F0E5F4B0057564A /* ic_vietbank_56@3x.png in Resources */,
-				D05E9C902F0E5F4B0057564A /* ic_vietinbank_56.png in Resources */,
-				D05E9C912F0E5F4B0057564A /* ic_vpbank_56@2x.png in Resources */,
-				D05E9C922F0E5F4B0057564A /* ic_viettelpay_56@2x.png in Resources */,
+				D0029C162F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
+				D0029C6F2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
+				D0029C172F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
+				D0029C182F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
+				D0029C192F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
+				D0029C1A2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
+				D0029C1B2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
+				D0029C1C2F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
+				D0029C1D2F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */,
+				D0029C1E2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */,
+				D0029C1F2F0E742000D50804 /* ic_viettelpay_56@2x.png in Resources */,
+				D0029C202F0E742000D50804 /* ic_techcombank_56.png in Resources */,
+				D0029C212F0E742000D50804 /* ic_vpbank_56.png in Resources */,
+				D0029C222F0E742000D50804 /* ic_vietabank_56.png in Resources */,
+				D0029C232F0E742000D50804 /* CoreUIKit.strings in Resources */,
+				D0029C242F0E742000D50804 /* ic_viettelpay_56@3x.png in Resources */,
+				D0029C252F0E742000D50804 /* ic_vietinbank_56@3x.png in Resources */,
+				D0029C262F0E742000D50804 /* ic_vrbbank_56@2x.png in Resources */,
+				D0029C272F0E742000D50804 /* ic_atm_noi_dia_16.png in Resources */,
+				D0029C282F0E742000D50804 /* ic_vietbank_56.png in Resources */,
+				D0029C292F0E742000D50804 /* ic_wooribank_56@3x.png in Resources */,
+				D0029C2A2F0E742000D50804 /* CoreUIKitImages.xcassets in Resources */,
+				D0029C2B2F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */,
+				D0029C2C2F0E742000D50804 /* ic_vibbank_56.png in Resources */,
+				D0029C2D2F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */,
+				D0029C2E2F0E742000D50804 /* ic_quoc_te_16.png in Resources */,
+				D0029C2F2F0E742000D50804 /* ic_viettelpay_40.png in Resources */,
+				D0029C302F0E742000D50804 /* ic_uobbank_56.png in Resources */,
+				D0029C312F0E742000D50804 /* ic_westernunionbank_56.png in Resources */,
+				D0029C322F0E742000D50804 /* ic_vietcapitalbank_56@2x.png in Resources */,
+				D0029C332F0E742000D50804 /* ic_viettelpay_40@2x.png in Resources */,
+				D0029C342F0E742000D50804 /* ic_tpbank_56.png in Resources */,
+				D0029C352F0E742000D50804 /* ic_vietinbank_56@2x.png in Resources */,
+				D0029C362F0E742000D50804 /* ic_vietcombank_56.png in Resources */,
+				D0029C372F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */,
+				D0029C382F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */,
+				D0029C392F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */,
+				D0029C3A2F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */,
+				D0029C3B2F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */,
+				D0029C3C2F0E742000D50804 /* ic_techcombank_56@3x.png in Resources */,
+				D0029C3D2F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */,
+				D0029C3E2F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */,
+				D0029C3F2F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
+				D0029C402F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
+				D0029C412F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
+				D0029C422F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
+				D0029C432F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */,
+				D0029C442F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */,
+				D0029C452F0E742000D50804 /* ic_atm_noi_dia_16@3x.png in Resources */,
+				D0029C462F0E742000D50804 /* ic_wooribank_56.png in Resources */,
+				D0029C472F0E742000D50804 /* ic_vibbank_56@3x.png in Resources */,
+				D0029C482F0E742000D50804 /* ic_viettelpay_40@3x.png in Resources */,
+				D0029C492F0E742000D50804 /* ic_uobbank_56@2x.png in Resources */,
+				D0029C4A2F0E742000D50804 /* ic_vietbank_56@3x.png in Resources */,
+				D0029C4B2F0E742000D50804 /* ic_shinhanbank_56@3x.png in Resources */,
 				D0095CEA2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
 				D0095C132ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */,
 				D0095CB12ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
@@ -2105,7 +2174,7 @@
 				D0095D402ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
 				D0095C252ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
 				D0095CCD2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
-				D0095C262ECB43DC00FCC7BC /* LoadingView.swift in Sources */,
+				D0095C262ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
 				D06C3BAD2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0095D3B2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095C272ECB43DC00FCC7BC /* Alertable.swift in Sources */,
@@ -2114,38 +2183,17 @@
 				D06C3BB52ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */,
 				D0095C282ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
 				D06C3B9B2ECCA31200289D48 /* UIView+Gesture.swift in Sources */,
+				D0029C672F0E744D00D50804 /* UIColorExtensions.swift in Sources */,
+				D0029C682F0E744D00D50804 /* UIImageExtensions.swift in Sources */,
 				D0095CB62ECB57C100FCC7BC /* SideMenuModel.swift in Sources */,
 				D0095CB82ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
 				D0095CC62ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
 				D0E6C3CF2F0DFEC000527962 /* MainContainerViewController.swift in Sources */,
-				D05E9B4E2F0E5F2B0057564A /* UIColorExtensions.swift in Sources */,
-				D05E9B4F2F0E5F2B0057564A /* UIImageExtensions.swift in Sources */,
 				D0E6C3D02F0DFEC000527962 /* HomeViewController.swift in Sources */,
 				D0095CB92ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */,
 				D0095C2A2ECB43DC00FCC7BC /* Observable.swift in Sources */,
 				D0095C2B2ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
 				D0095C2C2ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
-				D05E9C472F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift in Sources */,
-				D05E9C482F0E5F4B0057564A /* Opacity.swift in Sources */,
-				D05E9C492F0E5F4B0057564A /* Spacing.swift in Sources */,
-				D05E9C4A2F0E5F4B0057564A /* UIView+Subview.swift in Sources */,
-				D05E9C4B2F0E5F4B0057564A /* EcoAvatarView.swift in Sources */,
-				D05E9C4C2F0E5F4B0057564A /* EcoTick.swift in Sources */,
-				D05E9C4D2F0E5F4B0057564A /* CoreUIKitLocalization.swift in Sources */,
-				D05E9C4E2F0E5F4B0057564A /* Typography.swift in Sources */,
-				D05E9C4F2F0E5F4B0057564A /* SFFont.swift in Sources */,
-				D05E9C502F0E5F4B0057564A /* EcoRadioButtonGroup.swift in Sources */,
-				D05E9C512F0E5F4B0057564A /* EcoTextView.swift in Sources */,
-				D05E9C522F0E5F4B0057564A /* EcoHorizontalProgressView.swift in Sources */,
-				D05E9C532F0E5F4B0057564A /* Shadows.swift in Sources */,
-				D05E9C542F0E5F4B0057564A /* EcoProgressView.swift in Sources */,
-				D05E9C552F0E5F4B0057564A /* Sizing.swift in Sources */,
-				D05E9C562F0E5F4B0057564A /* Colors.swift in Sources */,
-				D05E9C582F0E5F4B0057564A /* BorderRadius.swift in Sources */,
-				D05E9C592F0E5F4B0057564A /* EcoRadioButton.swift in Sources */,
-				D05E9C5A2F0E5F4B0057564A /* EcoSwitch.swift in Sources */,
-				D05E9C5B2F0E5F4B0057564A /* Border.swift in Sources */,
-				D05E9C5C2F0E5F4B0057564A /* EcoDivider.swift in Sources */,
 				D0095CFE2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
 				D0095D8B2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
 				D0095B982ECB41A800FCC7BC /* ProductsRepository.swift in Sources */,
@@ -2160,6 +2208,28 @@
 				D0095BFF2ECB43C500FCC7BC /* ProductsViewController.swift in Sources */,
 				D0095BCE2ECB42D200FCC7BC /* DispatchQueueType.swift in Sources */,
 				D0095D762ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
+				D0029BEC2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
+				D0029BED2F0E742000D50804 /* EcoDivider.swift in Sources */,
+				D0029BEE2F0E742000D50804 /* Sizing.swift in Sources */,
+				D0029BEF2F0E742000D50804 /* EcoTick.swift in Sources */,
+				D0029BF02F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
+				D0029BF12F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
+				D0029BF22F0E742000D50804 /* EcoProgressView.swift in Sources */,
+				D0029BF32F0E742000D50804 /* Border.swift in Sources */,
+				D0029BF42F0E742000D50804 /* Spacing.swift in Sources */,
+				D0029BF52F0E742000D50804 /* EcoAvatarView.swift in Sources */,
+				D0029BF62F0E742000D50804 /* SFFont.swift in Sources */,
+				D0029BF72F0E742000D50804 /* Typography.swift in Sources */,
+				D0029BF82F0E742000D50804 /* EcoRadioButton.swift in Sources */,
+				D0029C712F0E74BF00D50804 /* PinterestCell.swift in Sources */,
+				D0029BF92F0E742000D50804 /* Shadows.swift in Sources */,
+				D0029BFA2F0E742000D50804 /* Opacity.swift in Sources */,
+				D0029BFB2F0E742000D50804 /* BorderRadius.swift in Sources */,
+				D0029BFC2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */,
+				D0029BFD2F0E742000D50804 /* Colors.swift in Sources */,
+				D0029BFE2F0E742000D50804 /* EcoTextView.swift in Sources */,
+				D0029BFF2F0E742000D50804 /* EcoSwitch.swift in Sources */,
+				D0029C002F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
 				D0095BCF2ECB42D200FCC7BC /* ConnectionError.swift in Sources */,
 				D0E6C3BA2F0DFB0E00527962 /* MainController.swift in Sources */,
 				D0095D462ECC4FC100FCC7BC /* UIImage+Extensions.swift in Sources */,
@@ -2168,11 +2238,6 @@
 				D0095D4E2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
 				D06C3B842ECCA16900289D48 /* UIView+Reusable.swift in Sources */,
 				D0095D832ECC5ABD00FCC7BC /* Constant.swift in Sources */,
-				D05E9B562F0E5F3B0057564A /* NSStringExtensions.swift in Sources */,
-				D05E9B572F0E5F3B0057564A /* DoubleExtensions.swift in Sources */,
-				D05E9B582F0E5F3B0057564A /* StringExtensions.swift in Sources */,
-				D05E9B592F0E5F3B0057564A /* FloatExtensions.swift in Sources */,
-				D05E9B5A2F0E5F3B0057564A /* EncodableExtensions.swift in Sources */,
 				D0095B742ECB1D7B00FCC7BC /* Localize.swift in Sources */,
 				D0095B932ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0095BB32ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
@@ -2190,6 +2255,7 @@
 				D0095BEA2ECB436700FCC7BC /* AppDIContainer.swift in Sources */,
 				D0095BC82ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
 				D0095B362ECB0BA700FCC7BC /* ECommerce.xcdatamodeld in Sources */,
+				D0029C772F0E85E600D50804 /* IntExtensions.swift in Sources */,
 				D0095BDD2ECB433B00FCC7BC /* AppFlowCoordinator.swift in Sources */,
 				D0095D532ECC50AE00FCC7BC /* UILabel+Extensions.swift in Sources */,
 				D0095B802ECB412200FCC7BC /* Product.swift in Sources */,
@@ -2207,7 +2273,13 @@
 				D0E6C39C2F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
 				D0095B9D2ECB41C500FCC7BC /* ProductsQueriesRepository.swift in Sources */,
 				D0095C602ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
+				D0029C742F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
 				D06C3BA32ECCA3A800289D48 /* UIViewController+AddChild.swift in Sources */,
+				D0029C5C2F0E742E00D50804 /* StringExtensions.swift in Sources */,
+				D0029C5D2F0E742E00D50804 /* FloatExtensions.swift in Sources */,
+				D0029C5E2F0E742E00D50804 /* DoubleExtensions.swift in Sources */,
+				D0029C5F2F0E742E00D50804 /* NSStringExtensions.swift in Sources */,
+				D0029C602F0E742E00D50804 /* EncodableExtensions.swift in Sources */,
 				D0095D0E2ECC235800FCC7BC /* ViewController.swift in Sources */,
 				D0E6C3E02F0E02AC00527962 /* TabBarController.swift in Sources */,
 				D06C3B8B2ECCA25D00289D48 /* UIView+Shadow.swift in Sources */,
@@ -2225,7 +2297,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0029C6C2F0E74BF00D50804 /* PinterestCell.swift in Sources */,
 				D06C3BAC2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
+				D0029C752F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
 				D0095D6C2ECC557500FCC7BC /* NSObjectExt.swift in Sources */,
 				D0095D062ECC215100FCC7BC /* MainViewController.swift in Sources */,
 				D0095C3A2ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
@@ -2251,28 +2325,48 @@
 				D0095D7A2ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
 				D0095D192ECC2FFF00FCC7BC /* SideMenuLayoutManager.swift in Sources */,
 				D0095CBF2ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */,
-				D05E9B4A2F0E5F2B0057564A /* UIColorExtensions.swift in Sources */,
-				D05E9B4B2F0E5F2B0057564A /* UIImageExtensions.swift in Sources */,
 				D06C3BA02ECCA33300289D48 /* UIView+Screen.swift in Sources */,
 				D0095C3B2ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
-				D0095C3C2ECB43DC00FCC7BC /* LoadingView.swift in Sources */,
+				D0095C3C2ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
 				D0095C3D2ECB43DC00FCC7BC /* Alertable.swift in Sources */,
 				D0095C3E2ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
 				D0095D3D2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095D572ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift in Sources */,
 				D0095C402ECB43DC00FCC7BC /* Observable.swift in Sources */,
-				D05E9B602F0E5F3B0057564A /* NSStringExtensions.swift in Sources */,
-				D05E9B612F0E5F3B0057564A /* DoubleExtensions.swift in Sources */,
-				D05E9B622F0E5F3B0057564A /* StringExtensions.swift in Sources */,
-				D05E9B632F0E5F3B0057564A /* FloatExtensions.swift in Sources */,
-				D05E9B642F0E5F3B0057564A /* EncodableExtensions.swift in Sources */,
 				D0095C412ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
 				D0095CC72ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
+				D0029C522F0E742E00D50804 /* StringExtensions.swift in Sources */,
+				D0029C532F0E742E00D50804 /* FloatExtensions.swift in Sources */,
+				D0029C542F0E742E00D50804 /* DoubleExtensions.swift in Sources */,
+				D0029C552F0E742E00D50804 /* NSStringExtensions.swift in Sources */,
+				D0029C562F0E742E00D50804 /* EncodableExtensions.swift in Sources */,
 				D0095C422ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
 				D0E6C3B92F0DFB0E00527962 /* MainController.swift in Sources */,
 				D0095D942ECC5B8C00FCC7BC /* AES.swift in Sources */,
+				D0029B6B2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
+				D0029B6C2F0E742000D50804 /* EcoDivider.swift in Sources */,
+				D0029B6D2F0E742000D50804 /* Sizing.swift in Sources */,
+				D0029B6E2F0E742000D50804 /* EcoTick.swift in Sources */,
+				D0029B6F2F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
+				D0029B702F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
+				D0029B712F0E742000D50804 /* EcoProgressView.swift in Sources */,
+				D0029B722F0E742000D50804 /* Border.swift in Sources */,
+				D0029B732F0E742000D50804 /* Spacing.swift in Sources */,
+				D0029B742F0E742000D50804 /* EcoAvatarView.swift in Sources */,
+				D0029B752F0E742000D50804 /* SFFont.swift in Sources */,
+				D0029B762F0E742000D50804 /* Typography.swift in Sources */,
+				D0029B772F0E742000D50804 /* EcoRadioButton.swift in Sources */,
+				D0029B782F0E742000D50804 /* Shadows.swift in Sources */,
+				D0029B792F0E742000D50804 /* Opacity.swift in Sources */,
+				D0029B7A2F0E742000D50804 /* BorderRadius.swift in Sources */,
+				D0029B7B2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */,
+				D0029B7C2F0E742000D50804 /* Colors.swift in Sources */,
+				D0029B7D2F0E742000D50804 /* EcoTextView.swift in Sources */,
+				D0029B7E2F0E742000D50804 /* EcoSwitch.swift in Sources */,
+				D0029B7F2F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
 				D0095B822ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095B832ECB412200FCC7BC /* ProductQuery.swift in Sources */,
+				D0029C782F0E85E600D50804 /* IntExtensions.swift in Sources */,
 				D0095BE02ECB434200FCC7BC /* AppAppearance.swift in Sources */,
 				D0095BB12ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
 				D06C3B912ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
@@ -2307,27 +2401,6 @@
 				D0095BC22ECB42B100FCC7BC /* Endpoint.swift in Sources */,
 				D0095BC32ECB42B100FCC7BC /* DataTransferService.swift in Sources */,
 				D0095BC42ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
-				D05E9BFB2F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift in Sources */,
-				D05E9BFC2F0E5F4B0057564A /* Opacity.swift in Sources */,
-				D05E9BFD2F0E5F4B0057564A /* Spacing.swift in Sources */,
-				D05E9BFE2F0E5F4B0057564A /* UIView+Subview.swift in Sources */,
-				D05E9BFF2F0E5F4B0057564A /* EcoAvatarView.swift in Sources */,
-				D05E9C002F0E5F4B0057564A /* EcoTick.swift in Sources */,
-				D05E9C012F0E5F4B0057564A /* CoreUIKitLocalization.swift in Sources */,
-				D05E9C022F0E5F4B0057564A /* Typography.swift in Sources */,
-				D05E9C032F0E5F4B0057564A /* SFFont.swift in Sources */,
-				D05E9C042F0E5F4B0057564A /* EcoRadioButtonGroup.swift in Sources */,
-				D05E9C052F0E5F4B0057564A /* EcoTextView.swift in Sources */,
-				D05E9C062F0E5F4B0057564A /* EcoHorizontalProgressView.swift in Sources */,
-				D05E9C072F0E5F4B0057564A /* Shadows.swift in Sources */,
-				D05E9C082F0E5F4B0057564A /* EcoProgressView.swift in Sources */,
-				D05E9C092F0E5F4B0057564A /* Sizing.swift in Sources */,
-				D05E9C0A2F0E5F4B0057564A /* Colors.swift in Sources */,
-				D05E9C0C2F0E5F4B0057564A /* BorderRadius.swift in Sources */,
-				D05E9C0D2F0E5F4B0057564A /* EcoRadioButton.swift in Sources */,
-				D05E9C0E2F0E5F4B0057564A /* EcoSwitch.swift in Sources */,
-				D05E9C0F2F0E5F4B0057564A /* Border.swift in Sources */,
-				D05E9C102F0E5F4B0057564A /* EcoDivider.swift in Sources */,
 				D06C3B9C2ECCA31200289D48 /* UIView+Gesture.swift in Sources */,
 				D0095C962ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
 				D0095C972ECB579900FCC7BC /* ProductsController.swift in Sources */,
@@ -2351,6 +2424,8 @@
 				D0095D412ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
 				D06C3BB42ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */,
 				D0095BD32ECB42D200FCC7BC /* Cancellable.swift in Sources */,
+				D0029C652F0E744D00D50804 /* UIColorExtensions.swift in Sources */,
+				D0029C662F0E744D00D50804 /* UIImageExtensions.swift in Sources */,
 				D0095BD42ECB42D200FCC7BC /* DispatchQueueType.swift in Sources */,
 				D0095BD52ECB42D200FCC7BC /* ConnectionError.swift in Sources */,
 				D0095BD92ECB432100FCC7BC /* AppConfigurations.swift in Sources */,
@@ -2379,42 +2454,30 @@
 				D0095B462ECB0C0B00FCC7BC /* ECommerceUITestsLaunchTests.swift in Sources */,
 				D0095D562ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift in Sources */,
 				D0095B912ECB415F00FCC7BC /* UseCase.swift in Sources */,
+				D0029C6E2F0E74BF00D50804 /* PinterestCell.swift in Sources */,
 				D0095B842ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095BAB2ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift in Sources */,
 				D06C3BAB2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0095D712ECC565200FCC7BC /* LocalAuthenticationContextExtensions.swift in Sources */,
 				D0095BAC2ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift in Sources */,
 				D0095B852ECB412200FCC7BC /* ProductQuery.swift in Sources */,
+				D0029C732F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
 				D0095D752ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
 				D0095D852ECC5ABD00FCC7BC /* Constant.swift in Sources */,
 				D0095BA42ECB426200FCC7BC /* APIEndpoints.swift in Sources */,
 				D0095BB52ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
+				D0029C632F0E744D00D50804 /* UIColorExtensions.swift in Sources */,
+				D0029C642F0E744D00D50804 /* UIImageExtensions.swift in Sources */,
 				D0095BBD2ECB42B100FCC7BC /* NetworkService.swift in Sources */,
 				D0095D8D2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
 				D0095BBE2ECB42B100FCC7BC /* Endpoint.swift in Sources */,
-				D05E9C932F0E5F4B0057564A /* NSMutableAttributedString+Extension.swift in Sources */,
-				D05E9C942F0E5F4B0057564A /* Opacity.swift in Sources */,
-				D05E9C952F0E5F4B0057564A /* Spacing.swift in Sources */,
-				D05E9C962F0E5F4B0057564A /* UIView+Subview.swift in Sources */,
-				D05E9C972F0E5F4B0057564A /* EcoAvatarView.swift in Sources */,
-				D05E9C982F0E5F4B0057564A /* EcoTick.swift in Sources */,
-				D05E9C992F0E5F4B0057564A /* CoreUIKitLocalization.swift in Sources */,
-				D05E9C9A2F0E5F4B0057564A /* Typography.swift in Sources */,
-				D05E9C9B2F0E5F4B0057564A /* SFFont.swift in Sources */,
-				D05E9C9C2F0E5F4B0057564A /* EcoRadioButtonGroup.swift in Sources */,
-				D05E9C9D2F0E5F4B0057564A /* EcoTextView.swift in Sources */,
-				D05E9C9E2F0E5F4B0057564A /* EcoHorizontalProgressView.swift in Sources */,
-				D05E9C9F2F0E5F4B0057564A /* Shadows.swift in Sources */,
-				D05E9CA02F0E5F4B0057564A /* EcoProgressView.swift in Sources */,
-				D05E9CA12F0E5F4B0057564A /* Sizing.swift in Sources */,
-				D05E9CA22F0E5F4B0057564A /* Colors.swift in Sources */,
-				D05E9CA42F0E5F4B0057564A /* BorderRadius.swift in Sources */,
-				D05E9CA52F0E5F4B0057564A /* EcoRadioButton.swift in Sources */,
-				D05E9CA62F0E5F4B0057564A /* EcoSwitch.swift in Sources */,
-				D05E9CA72F0E5F4B0057564A /* Border.swift in Sources */,
-				D05E9CA82F0E5F4B0057564A /* EcoDivider.swift in Sources */,
 				D0095D052ECC215100FCC7BC /* MainViewController.swift in Sources */,
 				D0095BDC2ECB433B00FCC7BC /* AppFlowCoordinator.swift in Sources */,
+				D0029C572F0E742E00D50804 /* StringExtensions.swift in Sources */,
+				D0029C582F0E742E00D50804 /* FloatExtensions.swift in Sources */,
+				D0029C592F0E742E00D50804 /* DoubleExtensions.swift in Sources */,
+				D0029C5A2F0E742E00D50804 /* NSStringExtensions.swift in Sources */,
+				D0029C5B2F0E742E00D50804 /* EncodableExtensions.swift in Sources */,
 				D0095D6B2ECC557500FCC7BC /* NSObjectExt.swift in Sources */,
 				D06C3B8C2ECCA25D00289D48 /* UIView+Shadow.swift in Sources */,
 				D0095CE62ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
@@ -2423,11 +2486,6 @@
 				D0095BD12ECB42D200FCC7BC /* DispatchQueueType.swift in Sources */,
 				D0095BD22ECB42D200FCC7BC /* ConnectionError.swift in Sources */,
 				D0095BD82ECB432100FCC7BC /* AppConfigurations.swift in Sources */,
-				D05E9B5B2F0E5F3B0057564A /* NSStringExtensions.swift in Sources */,
-				D05E9B5C2F0E5F3B0057564A /* DoubleExtensions.swift in Sources */,
-				D05E9B5D2F0E5F3B0057564A /* StringExtensions.swift in Sources */,
-				D05E9B5E2F0E5F3B0057564A /* FloatExtensions.swift in Sources */,
-				D05E9B5F2F0E5F3B0057564A /* EncodableExtensions.swift in Sources */,
 				D0095D892ECC5B2B00FCC7BC /* PhoneNumber.swift in Sources */,
 				D0095D982ECC5BA300FCC7BC /* ImageCompressor.swift in Sources */,
 				D0095BC02ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
@@ -2445,8 +2503,6 @@
 				D0095CAE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
 				D0095CAF2ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */,
 				D0095BE52ECB436700FCC7BC /* ProductsSceneDIContainer.swift in Sources */,
-				D05E9B4C2F0E5F2B0057564A /* UIColorExtensions.swift in Sources */,
-				D05E9B4D2F0E5F2B0057564A /* UIImageExtensions.swift in Sources */,
 				D0095BE62ECB436700FCC7BC /* AppDIContainer.swift in Sources */,
 				D0095C0C2ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
 				D0095C0D2ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
@@ -2472,8 +2528,9 @@
 				D0095B202ECB0BA700FCC7BC /* ECommerce.xcdatamodeld in Sources */,
 				D0095CFF2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
 				D0095C2F2ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
+				D0029C792F0E85E600D50804 /* IntExtensions.swift in Sources */,
 				D0095C302ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
-				D0095C312ECB43DC00FCC7BC /* LoadingView.swift in Sources */,
+				D0095C312ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
 				D0095C322ECB43DC00FCC7BC /* Alertable.swift in Sources */,
 				D0095C332ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
 				D0095C352ECB43DC00FCC7BC /* Observable.swift in Sources */,
@@ -2494,6 +2551,27 @@
 				D0E6C39E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
 				D0E6C39F2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
 				D0E6C3A02F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */,
+				D0029C012F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
+				D0029C022F0E742000D50804 /* EcoDivider.swift in Sources */,
+				D0029C032F0E742000D50804 /* Sizing.swift in Sources */,
+				D0029C042F0E742000D50804 /* EcoTick.swift in Sources */,
+				D0029C052F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
+				D0029C062F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
+				D0029C072F0E742000D50804 /* EcoProgressView.swift in Sources */,
+				D0029C082F0E742000D50804 /* Border.swift in Sources */,
+				D0029C092F0E742000D50804 /* Spacing.swift in Sources */,
+				D0029C0A2F0E742000D50804 /* EcoAvatarView.swift in Sources */,
+				D0029C0B2F0E742000D50804 /* SFFont.swift in Sources */,
+				D0029C0C2F0E742000D50804 /* Typography.swift in Sources */,
+				D0029C0D2F0E742000D50804 /* EcoRadioButton.swift in Sources */,
+				D0029C0E2F0E742000D50804 /* Shadows.swift in Sources */,
+				D0029C0F2F0E742000D50804 /* Opacity.swift in Sources */,
+				D0029C102F0E742000D50804 /* BorderRadius.swift in Sources */,
+				D0029C112F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */,
+				D0029C122F0E742000D50804 /* Colors.swift in Sources */,
+				D0029C132F0E742000D50804 /* EcoTextView.swift in Sources */,
+				D0029C142F0E742000D50804 /* EcoSwitch.swift in Sources */,
+				D0029C152F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
 				D0E6C3A12F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2514,6 +2592,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D0029B652F0E742000D50804 /* CoreUIKit.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D0029B632F0E742000D50804 /* en */,
+				D0029B642F0E742000D50804 /* vi */,
+			);
+			name = CoreUIKit.strings;
+			sourceTree = "<group>";
+		};
 		D0095B122ECB0BA700FCC7BC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2544,15 +2631,6 @@
 				D0095B6B2ECB1D4100FCC7BC /* vi */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		D05E9BBF2F0E5F4B0057564A /* CoreUIKit.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D05E9BBD2F0E5F4B0057564A /* en */,
-				D05E9BBE2F0E5F4B0057564A /* vi */,
-			);
-			name = CoreUIKit.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

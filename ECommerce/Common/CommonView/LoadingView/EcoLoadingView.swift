@@ -1,6 +1,6 @@
 import UIKit
 
-class LoadingView {
+class EcoLoadingView {
 
     internal static var spinner: UIActivityIndicatorView?
 
