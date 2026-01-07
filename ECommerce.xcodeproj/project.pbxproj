@@ -307,17 +307,11 @@
 		D0029CC42F0E9E3100D50804 /* GroceryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CC32F0E9E3100D50804 /* GroceryController.swift */; };
 		D0029CC52F0E9E3100D50804 /* GroceryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CC32F0E9E3100D50804 /* GroceryController.swift */; };
 		D0029CC62F0E9E3100D50804 /* GroceryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CC32F0E9E3100D50804 /* GroceryController.swift */; };
-		D0029CCA2F0E9EAB00D50804 /* GroceryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CC92F0E9EAB00D50804 /* GroceryItemCell.xib */; };
 		D0029CCB2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CC82F0E9EAB00D50804 /* GroceryItemCell.swift */; };
 		D0029CCC2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CC82F0E9EAB00D50804 /* GroceryItemCell.swift */; };
-		D0029CCD2F0E9EAB00D50804 /* GroceryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CC92F0E9EAB00D50804 /* GroceryItemCell.xib */; };
 		D0029CCE2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CC82F0E9EAB00D50804 /* GroceryItemCell.swift */; };
-		D0029CCF2F0E9EAB00D50804 /* GroceryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CC92F0E9EAB00D50804 /* GroceryItemCell.xib */; };
 		D0029CD82F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CD62F0E9FBC00D50804 /* PricingCaculationPopup.swift */; };
-		D0029CD92F0E9FBC00D50804 /* PricingCaculationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CD72F0E9FBC00D50804 /* PricingCaculationPopup.xib */; };
 		D0029CDA2F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CD62F0E9FBC00D50804 /* PricingCaculationPopup.swift */; };
-		D0029CDB2F0E9FBC00D50804 /* PricingCaculationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CD72F0E9FBC00D50804 /* PricingCaculationPopup.xib */; };
-		D0029CDC2F0E9FBC00D50804 /* PricingCaculationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CD72F0E9FBC00D50804 /* PricingCaculationPopup.xib */; };
 		D0029CDD2F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CD62F0E9FBC00D50804 /* PricingCaculationPopup.swift */; };
 		D0029CDF2F0EA08000D50804 /* CartViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029CDE2F0EA08000D50804 /* CartViewController.storyboard */; };
 		D0029CE02F0EA08000D50804 /* CartViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029CDE2F0EA08000D50804 /* CartViewController.storyboard */; };
@@ -343,6 +337,12 @@
 		D0029CFC2F0EA11A00D50804 /* GuaranteedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CE72F0EA11A00D50804 /* GuaranteedHeaderView.xib */; };
 		D0029CFD2F0EA11A00D50804 /* CartItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CE92F0EA11A00D50804 /* CartItemCell.xib */; };
 		D0029CFE2F0EA11A00D50804 /* RecommendedItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CEB2F0EA11A00D50804 /* RecommendedItemCell.xib */; };
+		D0029D002F0EA4F600D50804 /* GroceryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CFF2F0EA4F600D50804 /* GroceryItemCell.xib */; };
+		D0029D012F0EA4F600D50804 /* GroceryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CFF2F0EA4F600D50804 /* GroceryItemCell.xib */; };
+		D0029D022F0EA4F600D50804 /* GroceryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CFF2F0EA4F600D50804 /* GroceryItemCell.xib */; };
+		D0029D042F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */; };
+		D0029D052F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */; };
+		D0029D062F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */; };
 		D0095B202ECB0BA700FCC7BC /* ECommerce.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0095B0F2ECB0BA700FCC7BC /* ECommerce.xcdatamodeld */; };
 		D0095B212ECB0BA700FCC7BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095B0D2ECB0BA700FCC7BC /* AppDelegate.swift */; };
 		D0095B252ECB0BA700FCC7BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0095B142ECB0BA700FCC7BC /* Main.storyboard */; };
@@ -818,9 +818,7 @@
 		D0029CBF2F0E9E2300D50804 /* GroceryCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCoordinatingController.swift; sourceTree = "<group>"; };
 		D0029CC32F0E9E3100D50804 /* GroceryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryController.swift; sourceTree = "<group>"; };
 		D0029CC82F0E9EAB00D50804 /* GroceryItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItemCell.swift; sourceTree = "<group>"; };
-		D0029CC92F0E9EAB00D50804 /* GroceryItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroceryItemCell.xib; sourceTree = "<group>"; };
 		D0029CD62F0E9FBC00D50804 /* PricingCaculationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingCaculationPopup.swift; sourceTree = "<group>"; };
-		D0029CD72F0E9FBC00D50804 /* PricingCaculationPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PricingCaculationPopup.xib; sourceTree = "<group>"; };
 		D0029CDE2F0EA08000D50804 /* CartViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CartViewController.storyboard; sourceTree = "<group>"; };
 		D0029CE22F0EA09400D50804 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		D0029CE62F0EA11A00D50804 /* GuaranteedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteedHeaderView.swift; sourceTree = "<group>"; };
@@ -829,6 +827,8 @@
 		D0029CE92F0EA11A00D50804 /* CartItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartItemCell.xib; sourceTree = "<group>"; };
 		D0029CEA2F0EA11A00D50804 /* RecommendedItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedItemCell.swift; sourceTree = "<group>"; };
 		D0029CEB2F0EA11A00D50804 /* RecommendedItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendedItemCell.xib; sourceTree = "<group>"; };
+		D0029CFF2F0EA4F600D50804 /* GroceryItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroceryItemCell.xib; sourceTree = "<group>"; };
+		D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PricingCaculationPopup.xib; sourceTree = "<group>"; };
 		D0095AD62ECB0B8300FCC7BC /* ECommerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECommerce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0095AEF2ECB0B8400FCC7BC /* ECommerceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ECommerceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0095AF92ECB0B8400FCC7BC /* ECommerceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ECommerceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1231,7 +1231,7 @@
 			isa = PBXGroup;
 			children = (
 				D0029CD62F0E9FBC00D50804 /* PricingCaculationPopup.swift */,
-				D0029CD72F0E9FBC00D50804 /* PricingCaculationPopup.xib */,
+				D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */,
 				D0029C802F0E974700D50804 /* Popup1.swift */,
 				D0029C842F0E975300D50804 /* Popup2.swift */,
 				D0029C882F0E975900D50804 /* Popup3.swift */,
@@ -1407,7 +1407,7 @@
 			isa = PBXGroup;
 			children = (
 				D0029CC82F0E9EAB00D50804 /* GroceryItemCell.swift */,
-				D0029CC92F0E9EAB00D50804 /* GroceryItemCell.xib */,
+				D0029CFF2F0EA4F600D50804 /* GroceryItemCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2248,11 +2248,11 @@
 			files = (
 				D0095B692ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D0095D7E2ECC58F200FCC7BC /* accounts.json in Resources */,
+				D0029D012F0EA4F600D50804 /* GroceryItemCell.xib in Resources */,
 				D0095B702ECB1D4100FCC7BC /* Localizable.strings in Resources */,
 				D0095B3B2ECB0BA700FCC7BC /* Main.storyboard in Resources */,
 				D0095C022ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
 				D0095C032ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */,
-				D0029CCA2F0E9EAB00D50804 /* GroceryItemCell.xib in Resources */,
 				D0095B3C2ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095CB32ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
 				D0095CB42ECB57C100FCC7BC /* SideMenuCell.xib in Resources */,
@@ -2271,6 +2271,7 @@
 				D0029BBD2F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */,
 				D0029BBE2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */,
 				D0029BBF2F0E742000D50804 /* ic_viettelpay_56@2x.png in Resources */,
+				D0029D062F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */,
 				D0029BC02F0E742000D50804 /* ic_techcombank_56.png in Resources */,
 				D0029BC12F0E742000D50804 /* ic_vpbank_56.png in Resources */,
 				D0029BC22F0E742000D50804 /* ic_vietabank_56.png in Resources */,
@@ -2299,7 +2300,6 @@
 				D0029BD92F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */,
 				D0029BDA2F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */,
 				D0029BDB2F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */,
-				D0029CDC2F0E9FBC00D50804 /* PricingCaculationPopup.xib in Resources */,
 				D0029BDC2F0E742000D50804 /* ic_techcombank_56@3x.png in Resources */,
 				D0029BDD2F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */,
 				D0029BDE2F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */,
@@ -2344,6 +2344,7 @@
 				D0029B882F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */,
 				D0029B892F0E742000D50804 /* ic_viettelpay_56@2x.png in Resources */,
 				D0029B8A2F0E742000D50804 /* ic_techcombank_56.png in Resources */,
+				D0029D022F0EA4F600D50804 /* GroceryItemCell.xib in Resources */,
 				D0029B8B2F0E742000D50804 /* ic_vpbank_56.png in Resources */,
 				D0029B8C2F0E742000D50804 /* ic_vietabank_56.png in Resources */,
 				D0029B8D2F0E742000D50804 /* CoreUIKit.strings in Resources */,
@@ -2357,7 +2358,6 @@
 				D0029B952F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */,
 				D0029B962F0E742000D50804 /* ic_vibbank_56.png in Resources */,
 				D0029B972F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */,
-				D0029CCD2F0E9EAB00D50804 /* GroceryItemCell.xib in Resources */,
 				D0029B982F0E742000D50804 /* ic_quoc_te_16.png in Resources */,
 				D0029B992F0E742000D50804 /* ic_viettelpay_40.png in Resources */,
 				D0029B9A2F0E742000D50804 /* ic_uobbank_56.png in Resources */,
@@ -2375,7 +2375,6 @@
 				D0029BA62F0E742000D50804 /* ic_techcombank_56@3x.png in Resources */,
 				D0029BA72F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */,
 				D0029BA82F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */,
-				D0029CDB2F0E9FBC00D50804 /* PricingCaculationPopup.xib in Resources */,
 				D0029BA92F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
 				D0029BAA2F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
 				D0029BAB2F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
@@ -2391,6 +2390,7 @@
 				D0029BB22F0E742000D50804 /* ic_viettelpay_40@3x.png in Resources */,
 				D0029BB32F0E742000D50804 /* ic_uobbank_56@2x.png in Resources */,
 				D0029BB42F0E742000D50804 /* ic_vietbank_56@3x.png in Resources */,
+				D0029D042F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */,
 				D0029BB52F0E742000D50804 /* ic_shinhanbank_56@3x.png in Resources */,
 				D0095CEB2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
 				D0095C052ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */,
@@ -2427,6 +2427,7 @@
 				D0029C1E2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */,
 				D0029C1F2F0E742000D50804 /* ic_viettelpay_56@2x.png in Resources */,
 				D0029C202F0E742000D50804 /* ic_techcombank_56.png in Resources */,
+				D0029D002F0EA4F600D50804 /* GroceryItemCell.xib in Resources */,
 				D0029C212F0E742000D50804 /* ic_vpbank_56.png in Resources */,
 				D0029C222F0E742000D50804 /* ic_vietabank_56.png in Resources */,
 				D0029C232F0E742000D50804 /* CoreUIKit.strings in Resources */,
@@ -2440,7 +2441,6 @@
 				D0029C2B2F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */,
 				D0029C2C2F0E742000D50804 /* ic_vibbank_56.png in Resources */,
 				D0029C2D2F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */,
-				D0029CCF2F0E9EAB00D50804 /* GroceryItemCell.xib in Resources */,
 				D0029C2E2F0E742000D50804 /* ic_quoc_te_16.png in Resources */,
 				D0029C2F2F0E742000D50804 /* ic_viettelpay_40.png in Resources */,
 				D0029C302F0E742000D50804 /* ic_uobbank_56.png in Resources */,
@@ -2458,7 +2458,6 @@
 				D0029C3C2F0E742000D50804 /* ic_techcombank_56@3x.png in Resources */,
 				D0029C3D2F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */,
 				D0029C3E2F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */,
-				D0029CD92F0E9FBC00D50804 /* PricingCaculationPopup.xib in Resources */,
 				D0029C3F2F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
 				D0029C402F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
 				D0029C412F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
@@ -2474,6 +2473,7 @@
 				D0029C482F0E742000D50804 /* ic_viettelpay_40@3x.png in Resources */,
 				D0029C492F0E742000D50804 /* ic_uobbank_56@2x.png in Resources */,
 				D0029C4A2F0E742000D50804 /* ic_vietbank_56@3x.png in Resources */,
+				D0029D052F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */,
 				D0029C4B2F0E742000D50804 /* ic_shinhanbank_56@3x.png in Resources */,
 				D0095CEA2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
 				D0095C132ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */,
