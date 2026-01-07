@@ -9,23 +9,23 @@ import UIKit
 
 final class SideMenuTableViewController: UITableViewController, StoryboardInstantiable {
     
-    private var mediatingController: SideMenuMediatingController!
+    private var controller: SideMenuController!
     
     // MARK: - Lifecycle
     
     static func create(
-        with mediatingController: SideMenuMediatingController
+        with controller: SideMenuController
     ) -> SideMenuTableViewController {
         let viewController = SideMenuTableViewController.instantiateViewController()
-        viewController.mediatingController = mediatingController
+        viewController.controller = controller
         return viewController
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        bind(to: mediatingController)
-        mediatingController.viewDidLoad()
+        bind(to: controller)
+        controller.viewDidLoad()
     }
     
     // MARK: - Private
@@ -39,22 +39,22 @@ final class SideMenuTableViewController: UITableViewController, StoryboardInstan
         tableView.register(cell: SideMenuCell.self)
     }
     
-    private func bind(to mediatingController: SideMenuMediatingController) {
-        mediatingController.menuItems.observe(on: self) { [weak self] _ in
+    private func bind(to controller: SideMenuController) {
+        controller.menuItems.observe(on: self) { [weak self] _ in
             self?.updateMenuItems()
         }
-        mediatingController.selectedIndex.observe(on: self) { [weak self] selectedIndex in
+        controller.selectedIndex.observe(on: self) { [weak self] selectedIndex in
             self?.updateSelectedIndex(selectedIndex)
         }
     }
     
     private func updateMenuItems() {
         tableView.reloadData()
-        updateSelectedIndex(mediatingController.selectedIndex.value)
+        updateSelectedIndex(controller.selectedIndex.value)
     }
     
     private func updateSelectedIndex(_ index: Int) {
-        guard index >= 0 && index < mediatingController.menuItems.value.count else { return }
+        guard index >= 0 && index < controller.menuItems.value.count else { return }
         let indexPath = IndexPath(row: index, section: 0)
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
     }
@@ -69,10 +69,10 @@ extension SideMenuTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        mediatingController.didSelectMenuItem(at: indexPath.row)
+        controller.didSelectMenuItem(at: indexPath.row)
         
         // Deselect certain items if needed
-        if mediatingController.shouldDeselectItem(at: indexPath.row) {
+        if controller.shouldDeselectItem(at: indexPath.row) {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
@@ -83,13 +83,13 @@ extension SideMenuTableViewController {
 extension SideMenuTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mediatingController.menuItems.value.count
+        return controller.menuItems.value.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: SideMenuCell = tableView.dequeueReusableCell(at: indexPath)
-        let menuItem = mediatingController.menuItems.value[indexPath.row]
+        let menuItem = controller.menuItems.value[indexPath.row]
         cell.fill(with: menuItem)
         
         // Highlighted color

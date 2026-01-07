@@ -156,23 +156,17 @@
 		D0095C992ECB579900FCC7BC /* ProductsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C932ECB579900FCC7BC /* ProductsController.swift */; };
 		D0095C9A2ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C912ECB579900FCC7BC /* ProductCoordinatingController.swift */; };
 		D0095C9B2ECB579900FCC7BC /* ProductsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C932ECB579900FCC7BC /* ProductsController.swift */; };
-		D0095CAB2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C9C2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift */; };
 		D0095CAC2ECB57C100FCC7BC /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CA12ECB57C100FCC7BC /* SideMenuModel.swift */; };
-		D0095CAD2ECB57C100FCC7BC /* SideMenuMediatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C9E2ECB57C100FCC7BC /* SideMenuMediatingController.swift */; };
 		D0095CAE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CA32ECB57C100FCC7BC /* SideMenuCell.swift */; };
 		D0095CAF2ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CA82ECB57C100FCC7BC /* SideMenuViewController.swift */; };
 		D0095CB12ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0095CA72ECB57C100FCC7BC /* SideMenuViewController.storyboard */; };
 		D0095CB22ECB57C100FCC7BC /* SideMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0095CA42ECB57C100FCC7BC /* SideMenuCell.xib */; };
 		D0095CB32ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0095CA72ECB57C100FCC7BC /* SideMenuViewController.storyboard */; };
 		D0095CB42ECB57C100FCC7BC /* SideMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0095CA42ECB57C100FCC7BC /* SideMenuCell.xib */; };
-		D0095CB52ECB57C100FCC7BC /* SideMenuCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C9C2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift */; };
 		D0095CB62ECB57C100FCC7BC /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CA12ECB57C100FCC7BC /* SideMenuModel.swift */; };
-		D0095CB72ECB57C100FCC7BC /* SideMenuMediatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C9E2ECB57C100FCC7BC /* SideMenuMediatingController.swift */; };
 		D0095CB82ECB57C100FCC7BC /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CA32ECB57C100FCC7BC /* SideMenuCell.swift */; };
 		D0095CB92ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CA82ECB57C100FCC7BC /* SideMenuViewController.swift */; };
-		D0095CBB2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C9C2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift */; };
 		D0095CBC2ECB57C100FCC7BC /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CA12ECB57C100FCC7BC /* SideMenuModel.swift */; };
-		D0095CBD2ECB57C100FCC7BC /* SideMenuMediatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095C9E2ECB57C100FCC7BC /* SideMenuMediatingController.swift */; };
 		D0095CBE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CA32ECB57C100FCC7BC /* SideMenuCell.swift */; };
 		D0095CBF2ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CA82ECB57C100FCC7BC /* SideMenuViewController.swift */; };
 		D0095CC12ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0095CA72ECB57C100FCC7BC /* SideMenuViewController.storyboard */; };
@@ -198,9 +192,6 @@
 		D0095CFD2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CFC2ECC212600FCC7BC /* MainCoordinatingController.swift */; };
 		D0095CFE2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CFC2ECC212600FCC7BC /* MainCoordinatingController.swift */; };
 		D0095CFF2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095CFC2ECC212600FCC7BC /* MainCoordinatingController.swift */; };
-		D0095D012ECC213B00FCC7BC /* MainMediatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095D002ECC213B00FCC7BC /* MainMediatingController.swift */; };
-		D0095D022ECC213B00FCC7BC /* MainMediatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095D002ECC213B00FCC7BC /* MainMediatingController.swift */; };
-		D0095D032ECC213B00FCC7BC /* MainMediatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095D002ECC213B00FCC7BC /* MainMediatingController.swift */; };
 		D0095D052ECC215100FCC7BC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095D042ECC215100FCC7BC /* MainViewController.swift */; };
 		D0095D062ECC215100FCC7BC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095D042ECC215100FCC7BC /* MainViewController.swift */; };
 		D0095D072ECC215100FCC7BC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095D042ECC215100FCC7BC /* MainViewController.swift */; };
@@ -339,6 +330,15 @@
 		D0E6C3A32F0D06AC00527962 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3A22F0D06AC00527962 /* ImageCache.swift */; };
 		D0E6C3A42F0D06AC00527962 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3A22F0D06AC00527962 /* ImageCache.swift */; };
 		D0E6C3A52F0D06AC00527962 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3A22F0D06AC00527962 /* ImageCache.swift */; };
+		D0E6C3B12F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3B02F0DFAF700527962 /* SideMenuCoordinatingController.swift */; };
+		D0E6C3B22F0DFAF700527962 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3AF2F0DFAF700527962 /* SideMenuController.swift */; };
+		D0E6C3B32F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3B02F0DFAF700527962 /* SideMenuCoordinatingController.swift */; };
+		D0E6C3B42F0DFAF700527962 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3AF2F0DFAF700527962 /* SideMenuController.swift */; };
+		D0E6C3B52F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3B02F0DFAF700527962 /* SideMenuCoordinatingController.swift */; };
+		D0E6C3B62F0DFAF700527962 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3AF2F0DFAF700527962 /* SideMenuController.swift */; };
+		D0E6C3B82F0DFB0E00527962 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3B72F0DFB0E00527962 /* MainController.swift */; };
+		D0E6C3B92F0DFB0E00527962 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3B72F0DFB0E00527962 /* MainController.swift */; };
+		D0E6C3BA2F0DFB0E00527962 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3B72F0DFB0E00527962 /* MainController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -414,8 +414,6 @@
 		D0095C5C2ECB4C1600FCC7BC /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
 		D0095C912ECB579900FCC7BC /* ProductCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCoordinatingController.swift; sourceTree = "<group>"; };
 		D0095C932ECB579900FCC7BC /* ProductsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsController.swift; sourceTree = "<group>"; };
-		D0095C9C2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCoordinatingController.swift; sourceTree = "<group>"; };
-		D0095C9E2ECB57C100FCC7BC /* SideMenuMediatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuMediatingController.swift; sourceTree = "<group>"; };
 		D0095CA12ECB57C100FCC7BC /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		D0095CA32ECB57C100FCC7BC /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		D0095CA42ECB57C100FCC7BC /* SideMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuCell.xib; sourceTree = "<group>"; };
@@ -428,7 +426,6 @@
 		D0095CE52ECC153900FCC7BC /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 		D0095CE92ECC154000FCC7BC /* SideMenuTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenuTableViewController.storyboard; sourceTree = "<group>"; };
 		D0095CFC2ECC212600FCC7BC /* MainCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatingController.swift; sourceTree = "<group>"; };
-		D0095D002ECC213B00FCC7BC /* MainMediatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMediatingController.swift; sourceTree = "<group>"; };
 		D0095D042ECC215100FCC7BC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D0095D082ECC21A000FCC7BC /* MainSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneDIContainer.swift; sourceTree = "<group>"; };
 		D0095D0C2ECC235800FCC7BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -475,6 +472,9 @@
 		D0E6C38F2F0D01EE00527962 /* ProductsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsResponseStorage.swift; sourceTree = "<group>"; };
 		D0E6C3922F0D01EE00527962 /* CoreDataStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStorage.xcdatamodel; sourceTree = "<group>"; };
 		D0E6C3A22F0D06AC00527962 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		D0E6C3AF2F0DFAF700527962 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
+		D0E6C3B02F0DFAF700527962 /* SideMenuCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCoordinatingController.swift; sourceTree = "<group>"; };
+		D0E6C3B72F0DFB0E00527962 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -858,27 +858,11 @@
 			path = ECommerce/Presentation/ProductScene/Controllers;
 			sourceTree = SOURCE_ROOT;
 		};
-		D0095C9D2ECB57C100FCC7BC /* CoordinatingController */ = {
-			isa = PBXGroup;
-			children = (
-				D0095C9C2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift */,
-			);
-			path = CoordinatingController;
-			sourceTree = "<group>";
-		};
-		D0095C9F2ECB57C100FCC7BC /* MediatingController */ = {
-			isa = PBXGroup;
-			children = (
-				D0095C9E2ECB57C100FCC7BC /* SideMenuMediatingController.swift */,
-			);
-			path = MediatingController;
-			sourceTree = "<group>";
-		};
 		D0095CA02ECB57C100FCC7BC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D0095C9D2ECB57C100FCC7BC /* CoordinatingController */,
-				D0095C9F2ECB57C100FCC7BC /* MediatingController */,
+				D0E6C3AF2F0DFAF700527962 /* SideMenuController.swift */,
+				D0E6C3B02F0DFAF700527962 /* SideMenuCoordinatingController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -968,8 +952,8 @@
 		D0095CEE2ECC1E2800FCC7BC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D0095CF22ECC1E4800FCC7BC /* CoordinatingController */,
-				D0095CF12ECC1E4000FCC7BC /* MediatingController */,
+				D0E6C3B72F0DFB0E00527962 /* MainController.swift */,
+				D0095CFC2ECC212600FCC7BC /* MainCoordinatingController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -988,22 +972,6 @@
 			children = (
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		D0095CF12ECC1E4000FCC7BC /* MediatingController */ = {
-			isa = PBXGroup;
-			children = (
-				D0095D002ECC213B00FCC7BC /* MainMediatingController.swift */,
-			);
-			path = MediatingController;
-			sourceTree = "<group>";
-		};
-		D0095CF22ECC1E4800FCC7BC /* CoordinatingController */ = {
-			isa = PBXGroup;
-			children = (
-				D0095CFC2ECC212600FCC7BC /* MainCoordinatingController.swift */,
-			);
-			path = CoordinatingController;
 			sourceTree = "<group>";
 		};
 		D0095D132ECC2FFF00FCC7BC /* SideMenu */ = {
@@ -1336,6 +1304,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E6C3B12F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */,
+				D0E6C3B22F0DFAF700527962 /* SideMenuController.swift in Sources */,
 				D06C3BB02ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
 				D0095C9A2ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
 				D0095D872ECC5B2B00FCC7BC /* PhoneNumber.swift in Sources */,
@@ -1349,7 +1319,6 @@
 				D0095CD32ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
 				D0095C242ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
 				D0095D402ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
-				D0095D032ECC213B00FCC7BC /* MainMediatingController.swift in Sources */,
 				D0095C252ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
 				D0095CCD2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095C262ECB43DC00FCC7BC /* LoadingView.swift in Sources */,
@@ -1361,9 +1330,7 @@
 				D06C3BB52ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */,
 				D0095C282ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
 				D06C3B9B2ECCA31200289D48 /* UIView+Gesture.swift in Sources */,
-				D0095CB52ECB57C100FCC7BC /* SideMenuCoordinatingController.swift in Sources */,
 				D0095CB62ECB57C100FCC7BC /* SideMenuModel.swift in Sources */,
-				D0095CB72ECB57C100FCC7BC /* SideMenuMediatingController.swift in Sources */,
 				D0095CB82ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
 				D0095CC62ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
 				D0095CB92ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */,
@@ -1385,6 +1352,7 @@
 				D0095BCE2ECB42D200FCC7BC /* DispatchQueueType.swift in Sources */,
 				D0095D762ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
 				D0095BCF2ECB42D200FCC7BC /* ConnectionError.swift in Sources */,
+				D0E6C3BA2F0DFB0E00527962 /* MainController.swift in Sources */,
 				D0095D462ECC4FC100FCC7BC /* UIImage+Extensions.swift in Sources */,
 				D0095D9E2ECC5BED00FCC7BC /* CommonUtil.swift in Sources */,
 				D0095D9F2ECC5BED00FCC7BC /* CoreConstant.swift in Sources */,
@@ -1445,18 +1413,18 @@
 				D0095D062ECC215100FCC7BC /* MainViewController.swift in Sources */,
 				D0095C3A2ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
 				D0095D522ECC50AE00FCC7BC /* UILabel+Extensions.swift in Sources */,
-				D0095CBB2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift in Sources */,
 				D0095D842ECC5ABD00FCC7BC /* Constant.swift in Sources */,
 				D0095D772ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
 				D06C3B832ECCA16900289D48 /* UIView+Reusable.swift in Sources */,
 				D0095CBC2ECB57C100FCC7BC /* SideMenuModel.swift in Sources */,
-				D0095CBD2ECB57C100FCC7BC /* SideMenuMediatingController.swift in Sources */,
 				D06C3B882ECCA21800289D48 /* UIView+Layout.swift in Sources */,
 				D0095D202ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
 				D0095CBE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
 				D06C3BAF2ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
 				D0E6C3932F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
 				D0E6C3942F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
+				D0E6C3B52F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */,
+				D0E6C3B62F0DFAF700527962 /* SideMenuController.swift in Sources */,
 				D0E6C3952F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
 				D0E6C3962F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */,
 				D0E6C3972F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
@@ -1476,6 +1444,7 @@
 				D0095C412ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
 				D0095CC72ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
 				D0095C422ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
+				D0E6C3B92F0DFB0E00527962 /* MainController.swift in Sources */,
 				D0095D942ECC5B8C00FCC7BC /* AES.swift in Sources */,
 				D0095B822ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095B832ECB412200FCC7BC /* ProductQuery.swift in Sources */,
@@ -1490,7 +1459,6 @@
 				D0095C072ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
 				D0095CC92ECB59DA00FCC7BC /* UIViewController+Parent.swift in Sources */,
 				D0095C082ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
-				D0095D022ECC213B00FCC7BC /* MainMediatingController.swift in Sources */,
 				D0095CFD2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
 				D0095D8C2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
 				D0095CE72ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
@@ -1585,14 +1553,13 @@
 				D0095BC02ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
 				D0095C982ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
 				D0095D1F2ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
+				D0E6C3B82F0DFB0E00527962 /* MainController.swift in Sources */,
 				D06C3B852ECCA16900289D48 /* UIView+Reusable.swift in Sources */,
 				D0095C992ECB579900FCC7BC /* ProductsController.swift in Sources */,
 				D0095BB62ECB428800FCC7BC /* DefaultProductsRepository.swift in Sources */,
 				D06C3B872ECCA21800289D48 /* UIView+Layout.swift in Sources */,
-				D0095CAB2ECB57C100FCC7BC /* SideMenuCoordinatingController.swift in Sources */,
 				D06C3BB32ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */,
 				D0095CAC2ECB57C100FCC7BC /* SideMenuModel.swift in Sources */,
-				D0095CAD2ECB57C100FCC7BC /* SideMenuMediatingController.swift in Sources */,
 				D0095D792ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
 				D06C3B972ECCA2E500289D48 /* UIView+CornerRadius.swift in Sources */,
 				D0095CAE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
@@ -1630,12 +1597,13 @@
 				D0095C362ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
 				D0095C372ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
 				D06C3BA12ECCA33300289D48 /* UIView+Screen.swift in Sources */,
-				D0095D012ECC213B00FCC7BC /* MainMediatingController.swift in Sources */,
 				D06C3B952ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
 				D06C3BA42ECCA3A800289D48 /* UIViewController+AddChild.swift in Sources */,
 				D06C3B9D2ECCA31200289D48 /* UIView+Gesture.swift in Sources */,
 				D0095B212ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
 				D0095D142ECC2FFF00FCC7BC /* SideMenuAnimator.swift in Sources */,
+				D0E6C3B32F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */,
+				D0E6C3B42F0DFAF700527962 /* SideMenuController.swift in Sources */,
 				D0095D162ECC2FFF00FCC7BC /* SideMenuLayoutManager.swift in Sources */,
 				D0095CD22ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
 				D0095B992ECB41A900FCC7BC /* ProductsRepository.swift in Sources */,

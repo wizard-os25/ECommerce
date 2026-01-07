@@ -23,12 +23,12 @@ final class MainSceneDIContainer: MainCoordinatingControllerDependencies {
     // MARK: - Main View Controller
     
     func makeMainViewController() -> MainViewController {
-        MainViewController.create(with: makeMainMediatingController())
+        MainViewController.create(with: makeMainController())
     }
     
-    func makeMainMediatingController() -> MainMediatingController {
-        let mediatingController = DefaultMainMediatingController(delegate: self)
-        return mediatingController
+    func makeMainController() -> MainController {
+        let controller = DefaultMainController(delegate: self)
+        return controller
     }
     
     // MARK: - Side Menu
@@ -57,9 +57,9 @@ final class MainSceneDIContainer: MainCoordinatingControllerDependencies {
     }
 }
 
-// MARK: - MainMediatingControllerDelegate
+// MARK: - MainControllerDelegate
 
-extension MainSceneDIContainer: MainMediatingControllerDelegate {
+extension MainSceneDIContainer: MainControllerDelegate {
     
     func didSelectMenuItem(at index: Int) {
         // Handle menu item selection

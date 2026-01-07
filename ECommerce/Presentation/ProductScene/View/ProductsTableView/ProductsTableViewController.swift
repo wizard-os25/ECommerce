@@ -74,7 +74,7 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
         }
     }
     
-    /// Update horizontal scroll offset in SideMenuMediatingController
+    /// Update horizontal scroll offset in SideMenuController
     /// - Parameter offset: The horizontal scroll offset
     private func updateHorizontalScrollOffset(_ offset: CGFloat) {
         // Find MainViewController and update horizontal scroll offset

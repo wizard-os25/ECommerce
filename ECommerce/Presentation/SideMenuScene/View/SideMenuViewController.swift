@@ -13,16 +13,16 @@ final class SideMenuViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet private var headerImageView: UIImageView!
     @IBOutlet private var footerLabel: UILabel!
     
-    private var mediatingController: SideMenuMediatingController!
+    private var controller: SideMenuController!
     private var sideMenuTableViewController: SideMenuTableViewController?
     
     // MARK: - Lifecycle
     
     static func create(
-        with mediatingController: SideMenuMediatingController
+        with controller: SideMenuController
     ) -> SideMenuViewController {
         let view = SideMenuViewController.instantiateViewController()
-        view.mediatingController = mediatingController
+        view.controller = controller
         return view
     }
     
@@ -30,8 +30,8 @@ final class SideMenuViewController: UIViewController, StoryboardInstantiable {
         super.viewDidLoad()
         setupViews()
         setupChildViewController()
-        bind(to: mediatingController)
-        mediatingController.viewDidLoad()
+        bind(to: controller)
+        controller.viewDidLoad()
     }
     
     // MARK: - Private
@@ -40,19 +40,19 @@ final class SideMenuViewController: UIViewController, StoryboardInstantiable {
         // Footer setup
         footerLabel.textColor = UIColor.white
         footerLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        footerLabel.text = mediatingController.footerText
+        footerLabel.text = controller.footerText
     }
     
     private func setupChildViewController() {
-        // Create SideMenuTableViewController using the same mediating controller
-        let tableViewController = SideMenuTableViewController.create(with: mediatingController)
+        // Create SideMenuTableViewController using the same controller
+        let tableViewController = SideMenuTableViewController.create(with: controller)
         
         // Add as child view controller using extension
         add(tableViewController, to: sideMenuContainer)
         sideMenuTableViewController = tableViewController
     }
     
-    private func bind(to mediatingController: SideMenuMediatingController) {
+    private func bind(to controller: SideMenuController) {
         // Binding is handled by SideMenuTableViewController
         // No need to bind here as the table view controller manages its own updates
     }
@@ -60,6 +60,6 @@ final class SideMenuViewController: UIViewController, StoryboardInstantiable {
 
 extension SideMenuViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.mediatingController.horizontalScrollOffset.value = scrollView.contentOffset.x
+        self.controller.horizontalScrollOffset.value = scrollView.contentOffset.x
         }
 }

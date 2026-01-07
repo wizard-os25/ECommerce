@@ -27,7 +27,7 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     
     // MARK: - Properties
     
-    private var mediatingController: MainMediatingController!
+    private var controller: MainController!
     private var sideMenuViewController: SideMenuViewController!
     private let sideMenuRevealWidth: CGFloat = 260
     
@@ -40,7 +40,7 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     // Dependencies
     private var mainCoordinatingController: MainCoordinatingController?
     private var appDIContainer: AppDIContainer?
-    private var sideMenuMediatingController: SideMenuMediatingController?
+    private var sideMenuController: SideMenuController?
     
     /// Set coordinating controller (used for dependency injection)
     /// - Parameter coordinatingController: Main coordinating controller
@@ -65,24 +65,24 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     }
     
     func revealSidebar() {
-        mediatingController.setSidebarExpanded(true)
+        controller.setSidebarExpanded(true)
     }
     
     func hideSidebar() {
-        mediatingController.setSidebarExpanded(false)
+        controller.setSidebarExpanded(false)
     }
     
     func toggleSidebar() {
-        mediatingController.toggleSidebar()
+        controller.toggleSidebar()
     }
     
     // MARK: - Lifecycle
     
     static func create(
-        with mediatingController: MainMediatingController
+        with controller: MainController
     ) -> MainViewController {
         let viewController = MainViewController.instantiateViewController()
-        viewController.mediatingController = mediatingController
+        viewController.controller = controller
         return viewController
     }
     
@@ -92,8 +92,8 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
         setupSideMenuComponents()
         setupSideMenu()
         setupGestures()
-        bind(to: mediatingController)
-        mediatingController.viewDidLoad()
+        bind(to: controller)
+        controller.viewDidLoad()
         // Content will be set by AppFlowCoordinator via onViewDidAppear callback
     }
     
@@ -106,14 +106,14 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        let isExpanded = mediatingController.isSidebarExpanded.value
+        let isExpanded = controller.isSidebarExpanded.value
         layoutManager.handleRotation(to: size, isExpanded: isExpanded, coordinator: coordinator)
     }
     
     deinit {
         // Clean up observers
-        mediatingController?.isSidebarExpanded.remove(observer: self)
-        sideMenuMediatingController?.horizontalScrollOffset.remove(observer: self)
+        controller?.isSidebarExpanded.remove(observer: self)
+        sideMenuController?.horizontalScrollOffset.remove(observer: self)
     }
     
     // MARK: - Setup Methods
@@ -177,8 +177,8 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
         // Setup side menu coordinating controller
         coordinatingController.setupSideMenuCoordinatingController()
         
-        // Get side menu mediating controller to observe horizontal scroll
-        sideMenuMediatingController = coordinatingController.getSideMenuMediatingController()
+        // Get side menu controller to observe horizontal scroll
+        sideMenuController = coordinatingController.getSideMenuController()
         
         guard let sideMenuVC = coordinatingController.makeSideMenuViewController() else {
             fatalError("Failed to create SideMenuViewController")
@@ -234,9 +234,9 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     
     // MARK: - Binding
     
-    private func bind(to mediatingController: MainMediatingController) {
+    private func bind(to controller: MainController) {
         // Use weak self to prevent retain cycles
-        mediatingController.isSidebarExpanded.observe(on: self) { [weak self] expanded in
+        controller.isSidebarExpanded.observe(on: self) { [weak self] expanded in
             self?.sideMenuState(expanded: expanded)
             self?.gestureProcessor.updateExpandedState(expanded)
         }
@@ -244,10 +244,10 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     
     /// Observe horizontal scroll offset to reveal sidebar when scrolling horizontally
     private func observeHorizontalScroll() {
-        guard let sideMenuMediatingController = sideMenuMediatingController else { return }
+        guard let sideMenuController = sideMenuController else { return }
         
         // Observe horizontal scroll offset changes
-        sideMenuMediatingController.horizontalScrollOffset.observe(on: self) { [weak self] offset in
+        sideMenuController.horizontalScrollOffset.observe(on: self) { [weak self] offset in
             self?.handleHorizontalScroll(offset: offset)
         }
     }
@@ -256,7 +256,7 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     /// - Parameter offset: The horizontal scroll offset (positive = scroll right)
     private func handleHorizontalScroll(offset: CGFloat) {
         // Only reveal sidebar if scrolling right (positive offset) and sidebar is not already expanded
-        guard offset > 0, !mediatingController.isSidebarExpanded.value else { return }
+        guard offset > 0, !controller.isSidebarExpanded.value else { return }
         
         // Threshold to trigger sidebar reveal (adjust as needed)
         let revealThreshold: CGFloat = 50.0
@@ -270,7 +270,7 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     /// Update horizontal scroll offset (called by child view controllers)
     /// - Parameter offset: The horizontal scroll offset
     func updateHorizontalScrollOffset(_ offset: CGFloat) {
-        sideMenuMediatingController?.horizontalScrollOffset.value = offset
+        sideMenuController?.horizontalScrollOffset.value = offset
     }
     
     // MARK: - Content Management
@@ -289,7 +289,7 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
         // Add new content view controller using extension
         add(contentViewController, to: container)
         currentContentViewController = contentViewController
-        mediatingController.setContentViewController(contentViewController)
+        controller.setContentViewController(contentViewController)
         
         // Setup constraints if using main view
         if contentContainerView == nil {
@@ -369,7 +369,7 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
     
     @objc private func handleTapGesture(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
-            if mediatingController.isSidebarExpanded.value {
+            if controller.isSidebarExpanded.value {
                 hideSidebar()
             }
         }
@@ -433,3 +433,4 @@ extension MainViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+

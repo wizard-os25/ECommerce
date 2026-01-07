@@ -9,22 +9,22 @@ import UIKit
 
 final class SideMenuSceneDIContainer: SideMenuCoordinatingControllerDependencies {
     
-    // Shared instance to ensure same mediating controller is used
-    private lazy var sharedMediatingController: SideMenuMediatingController = {
-        DefaultSideMenuMediatingController()
+    // Shared instance to ensure same controller is used
+    private lazy var sharedController: SideMenuController = {
+        DefaultSideMenuController()
     }()
     
     // MARK: - Side Menu
     
     func makeSideMenuViewController() -> SideMenuViewController {
         SideMenuViewController.create(
-            with: makeSideMenuMediatingController()
+            with: makeSideMenuController()
         )
     }
     
-    func makeSideMenuMediatingController() -> SideMenuMediatingController {
+    func makeSideMenuController() -> SideMenuController {
         // Return shared instance so coordinating controller can observe it
-        return sharedMediatingController
+        return sharedController
     }
     
     // MARK: - Flow Coordinators
