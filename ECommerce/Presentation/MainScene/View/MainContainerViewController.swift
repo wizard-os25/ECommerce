@@ -1,0 +1,652 @@
+//
+//  MainContainerViewController.swift
+//  ECommerce
+//
+//  Created by wizard.os25 on 18/11/25.
+//
+
+import UIKit
+
+class MainContainerViewController: UIViewController {
+    
+    // MARK: - Properties
+    
+    // Content Layer: TabBarController
+    internal var mainTabBarController: TabBarController!
+    
+    // SideMenu Layer: SideMenuViewController
+    private var sideMenuViewController: SideMenuViewController!
+    private var sideMenuController: SideMenuController!
+    
+    // Side Menu Configuration
+    private var sideMenuRevealWidth: CGFloat = 260
+    private let paddingForRotation: CGFloat = 150
+    private var isExpanded: Bool = false
+    private var sideMenuTrailingConstraint: NSLayoutConstraint!
+    private var tabBarControllerLeadingConstraint: NSLayoutConstraint!
+    private var revealSideMenuOnTop: Bool = false // side-in
+    
+    // Shadow View
+    private var sideMenuShadowView: UIView!
+    
+    // Gesture Handling
+    private var draggingIsEnabled: Bool = false
+    private var panBaseLocation: CGFloat = 0.0
+    
+    // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+        setupSideMenu()
+        setupTabBarController()
+        setupGestures()
+    }
+    
+    // MARK: - Setup Methods
+    
+    private func setupView() {
+        view.backgroundColor = #colorLiteral(red: 0, green: 0.375862439, blue: 1, alpha: 1)
+    }
+    
+    private func setupSideMenu() {
+        // Create SideMenuController first
+        sideMenuController = DefaultSideMenuController()
+        
+        // Create SideMenuViewController with controller using factory method
+        sideMenuViewController = SideMenuViewController.create(with: sideMenuController)
+        
+        // Add SideMenu as child view controller (at index 0 - below TabBarController)
+        addChild(sideMenuViewController)
+        view.insertSubview(sideMenuViewController.view, at: revealSideMenuOnTop ? 2 : 0)
+        sideMenuViewController.didMove(toParent: self)
+        
+        // Setup SideMenu constraints
+        sideMenuViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        if revealSideMenuOnTop {
+            sideMenuTrailingConstraint = sideMenuViewController.view.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: -sideMenuRevealWidth - paddingForRotation
+            )
+            sideMenuTrailingConstraint.isActive = true
+        } else {
+            sideMenuTrailingConstraint = sideMenuViewController.view.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: -sideMenuRevealWidth // Hidden to the left initially
+            )
+            sideMenuTrailingConstraint.isActive = true
+        }
+        
+        NSLayoutConstraint.activate([
+            sideMenuViewController.view.widthAnchor.constraint(equalToConstant: sideMenuRevealWidth),
+            sideMenuViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            sideMenuViewController.view.topAnchor.constraint(equalTo: view.topAnchor)
+        ])
+    }
+    
+    private func setupTabBarController() {
+        // Create TabBarController
+        mainTabBarController = TabBarController()
+        
+        // Add TabBarController as child view controller
+        addChild(mainTabBarController)
+        view.insertSubview(mainTabBarController.view, at: revealSideMenuOnTop ? 0 : 1)
+        mainTabBarController.didMove(toParent: self)
+        
+        // Setup TabBarController constraints
+        mainTabBarController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        if revealSideMenuOnTop {
+            NSLayoutConstraint.activate([
+                mainTabBarController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                mainTabBarController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                mainTabBarController.view.topAnchor.constraint(equalTo: view.topAnchor),
+                mainTabBarController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+        } else {
+            // Side-in mode: TabBarController can move to the right but keeps full width
+            tabBarControllerLeadingConstraint = mainTabBarController.view.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: 0 // Starts at 0, will move to sideMenuRevealWidth when menu opens
+            )
+            tabBarControllerLeadingConstraint.isActive = true
+            
+            NSLayoutConstraint.activate([
+                // Use width constraint instead of trailing to keep full screen width
+                mainTabBarController.view.widthAnchor.constraint(equalTo: view.widthAnchor),
+                mainTabBarController.view.topAnchor.constraint(equalTo: view.topAnchor),
+                mainTabBarController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+        }
+        
+        // Setup shadow view for TabBarController
+        setupShadowView()
+    }
+    
+    private func setupShadowView() {
+        sideMenuShadowView = UIView(frame: view.bounds)
+        sideMenuShadowView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        sideMenuShadowView.backgroundColor = .black
+        sideMenuShadowView.alpha = 0.0
+        
+        // Add to mainTabBarController.view in both modes (keeps consistent)
+        mainTabBarController.view.addSubview(sideMenuShadowView)
+        sideMenuShadowView.frame = mainTabBarController.view.bounds
+    }
+    
+    private func setupGestures() {
+        // Add pan gesture to TabBarController view
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+        panGestureRecognizer.delegate = self
+        panGestureRecognizer.cancelsTouchesInView = false
+        mainTabBarController.view.addGestureRecognizer(panGestureRecognizer)
+        
+        // Add tap gesture to close menu
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tapGestureRecognizer.delegate = self
+        tapGestureRecognizer.cancelsTouchesInView = false
+        mainTabBarController.view.addGestureRecognizer(tapGestureRecognizer)
+        
+        // Add gestures to each navigation controller (so gestures work when nav controller covers screen)
+        if let viewControllers = mainTabBarController.viewControllers {
+            for viewController in viewControllers {
+                if let navController = viewController as? UINavigationController {
+                    let navPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+                    navPanGesture.delegate = self
+                    navPanGesture.cancelsTouchesInView = false
+                    navController.view.addGestureRecognizer(navPanGesture)
+                    
+                    let navTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+                    navTapGesture.numberOfTapsRequired = 1
+                    navTapGesture.delegate = self
+                    navTapGesture.cancelsTouchesInView = false
+                    navController.view.addGestureRecognizer(navTapGesture)
+                }
+            }
+        }
+    }
+    
+    // MARK: - Side Menu Control
+    
+    @objc open func revealSideMenu() {
+        sideMenuState(expanded: isExpanded ? false : true)
+    }
+    
+    private func sideMenuState(expanded: Bool) {
+        if expanded {
+            // Open menu: Side menu moves to 0, TabBarController moves to sideMenuRevealWidth
+            animateSideMenu(targetPosition: revealSideMenuOnTop ? 0 : 0, tabBarPosition: revealSideMenuOnTop ? 0 : sideMenuRevealWidth) { _ in
+                self.isExpanded = true
+            }
+            UIView.animate(withDuration: 0.5) {
+                self.sideMenuShadowView.alpha = 0.6
+            }
+        } else {
+            // Close menu: Side menu moves to -sideMenuRevealWidth, TabBarController moves to 0
+            animateSideMenu(targetPosition: revealSideMenuOnTop ? (-sideMenuRevealWidth - paddingForRotation) : -sideMenuRevealWidth, tabBarPosition: revealSideMenuOnTop ? 0 : 0) { _ in
+                self.isExpanded = false
+            }
+            UIView.animate(withDuration: 0.5) {
+                self.sideMenuShadowView.alpha = 0.0
+            }
+        }
+    }
+    
+    private func animateSideMenu(targetPosition: CGFloat, tabBarPosition: CGFloat, completion: @escaping (Bool) -> ()) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0, options: .layoutSubviews, animations: {
+            if self.revealSideMenuOnTop {
+                self.sideMenuTrailingConstraint.constant = targetPosition
+                self.view.layoutIfNeeded()
+            } else {
+                // Side-in mode: Move both side menu and TabBarController
+                self.sideMenuTrailingConstraint.constant = targetPosition
+                self.tabBarControllerLeadingConstraint.constant = tabBarPosition
+                self.view.layoutIfNeeded()
+            }
+        }, completion: completion)
+    }
+    
+    // MARK: - Rotation Handling
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate { _ in
+            if self.revealSideMenuOnTop {
+                self.sideMenuTrailingConstraint.constant = self.isExpanded ? 0 : (-self.sideMenuRevealWidth - self.paddingForRotation)
+            } else {
+                // Side-in mode: Update both constraints
+                self.sideMenuTrailingConstraint.constant = self.isExpanded ? 0 : -self.sideMenuRevealWidth
+                self.tabBarControllerLeadingConstraint.constant = self.isExpanded ? self.sideMenuRevealWidth : 0
+            }
+        }
+    }
+}
+
+// MARK: - SideMenuViewControllerDelegate
+
+//extension MainContainerViewController: SideMenuViewControllerDelegate {
+//    func selectedCell(_ row: Int) {
+//        switch row {
+//        case 0:
+//            mainTabBarController.selectedIndex = 0
+//        case 1:
+//            mainTabBarController.selectedIndex = 1
+//        case 2:
+//            mainTabBarController.selectedIndex = 2
+//        case 3:
+//            mainTabBarController.selectedIndex = 3
+//        default:
+//            break
+//        }
+//        
+//        // Collapse side menu
+//        DispatchQueue.main.async {
+//            self.sideMenuState(expanded: false)
+//        }
+//    }
+//}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension MainContainerViewController: UIGestureRecognizerDelegate {
+    
+    @objc private func handleTapGesture(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            if isExpanded {
+                sideMenuState(expanded: false)
+            }
+        }
+    }
+    
+    // Avoid intercepting taps that should go to SideMenu
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        // Convert touch point to root view coordinates and check if it's inside side menu view
+        let pt = touch.location(in: self.view)
+        if let menuView = sideMenuViewController?.view,
+           menuView.convert(menuView.bounds, to: self.view).contains(pt) {
+            return false
+        }
+        return true
+    }
+    
+    // We generally don't want simultaneous recognition for this design
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+    
+    // ✅ QUAN TRỌNG: Yêu cầu PageViewController scrollView gesture phải fail
+    // khi ở page 0 (Home) và swipe right, để container gesture có thể xử lý
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Kiểm tra xem gesture khác có phải là từ PageViewController scrollView không
+        guard let otherPan = otherGestureRecognizer as? UIPanGestureRecognizer,
+              let scrollView = otherPan.view as? UIScrollView else {
+            return false
+        }
+        
+        // Kiểm tra xem scrollView có phải từ PageViewController không
+        guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+              let contentVC = nav.viewControllers.first(where: { $0 is ContentViewController }) as? ContentViewController else {
+            return false
+        }
+        
+        // ContentViewController chứa SegmentedPageContainer
+        // SegmentedPageContainer addChild UIPageViewController vào ContentViewController
+        // Tìm UIPageViewController trong children của ContentViewController
+        guard let pageViewController = contentVC.children.first(where: { $0 is UIPageViewController }) as? UIPageViewController,
+              scrollView.isDescendant(of: pageViewController.view) else {
+            return false
+        }
+        
+        // Lấy thông tin về page hiện tại
+        let currentPageIndex = contentVC.currentPageIndex
+        
+        // ✅ QUAN TRỌNG: shouldBeRequiredToFailBy được gọi rất sớm, velocity có thể = 0
+        // Thay vào đó, chỉ kiểm tra page index và location
+        // Nếu ở page 0 (Home) và swipe từ cạnh trái → Yêu cầu scrollView gesture FAIL
+        if currentPageIndex == 0 {
+            let location = otherPan.location(in: self.view)
+            // Nếu swipe từ cạnh trái (x < 100) → Yêu cầu scrollView gesture FAIL
+            if location.x < 100 {
+                print("✅ [shouldBeRequiredToFailBy] Page 0 + swipe from left edge (x: \(location.x)) → Require scrollView gesture to FAIL")
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    // Decide whether a pan gesture should begin (important central logic)
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
+            return true
+        }
+        
+        // Use root view coords for location & velocity to keep checks consistent
+        let locationInRoot = panGesture.location(in: self.view)
+        let velocityInRoot = panGesture.velocity(in: self.view)
+        let vx = velocityInRoot.x
+        
+        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), isExpanded:\(isExpanded)")
+        
+        // If menu is expanded, allow pan (to close)
+        if isExpanded {
+            return true
+        }
+        
+        // If touch is inside side menu area, don't intercept
+        if let menuView = sideMenuViewController?.view,
+           menuView.convert(menuView.bounds, to: self.view).contains(locationInRoot) {
+            return false
+        }
+        
+        // Find inner page scroll view (if exists) and current page index (via ContentViewController API)
+        if let (scrollView, currentPageIndex) = findInnerScrollViewAndPageIndex(from: panGesture) {
+            print("📄 [gestureRecognizerShouldBegin] Found PageViewController - currentPageIndex: \(currentPageIndex)")
+            
+            // If the gesture started inside the page scrollView bounds, consider letting inner scroll handle it
+            let gestureStartedInScroll = {
+                // location relative to scrollView
+                let local = panGesture.location(in: scrollView)
+                return scrollView.bounds.contains(local)
+            }()
+            
+            print("📄 [gestureRecognizerShouldBegin] gestureStartedInScroll: \(gestureStartedInScroll)")
+            
+            if gestureStartedInScroll {
+                // If inner scroll cannot scroll horizontally (single page) — let container handle
+                let canScrollHorizontally = scrollView.contentSize.width > scrollView.frame.width + 0.5
+                let scrollOffset = scrollView.contentOffset.x
+                print("📄 [gestureRecognizerShouldBegin] canScrollHorizontally: \(canScrollHorizontally), scrollOffset: \(scrollOffset)")
+                
+                if !canScrollHorizontally {
+                    print("✅ [gestureRecognizerShouldBegin] Cannot scroll horizontally → Allow container")
+                    return true
+                }
+                
+                // If current page is NOT the left-most, prefer inner scroll to handle horizontal gestures
+                if currentPageIndex != 0 {
+                    // However, if the inner scroll is at its left edge and user swipes right, allow container takeover
+                    let atLeftEdge = scrollOffset <= 0.5
+                    if atLeftEdge || vx > 0 {
+                        print("✅ [gestureRecognizerShouldBegin] Page \(currentPageIndex) at left edge + right swipe → Allow container")
+                        return true
+                    }
+                    print("❌ [gestureRecognizerShouldBegin] Page \(currentPageIndex) → Block (let PageViewController handle)")
+                    return false // inner page handles it
+                } else {
+                    // currentPageIndex == 0 (Home)
+                    // ✅ QUAN TRỌNG: Ở page 0, nếu scrollOffset gần 0 (trong phạm vi 1 page width)
+                    // thì coi như đang ở left edge và cho phép container xử lý right swipe
+                    let pageWidth = scrollView.frame.width
+                    let atLeftEdge = scrollOffset <= pageWidth + 10 // Cho phép một chút tolerance
+                    
+                    if atLeftEdge || vx > 0 {
+                        print("✅ [gestureRecognizerShouldBegin] Page 0 (Home) at left edge (offset: \(scrollOffset) <= \(pageWidth + 10)) + right swipe → Allow container")
+                        return true
+                    }
+                    // If user is swiping left (to go to next page) → prefer inner scroll
+                    if vx < 0 {
+                        print("❌ [gestureRecognizerShouldBegin] Page 0 (Home) + left swipe → Block (let PageViewController handle)")
+                        return false
+                    }
+                    // ✅ Nếu ở page 0 và velocity > 0 (right swipe) nhưng không ở left edge
+                    // Vẫn cho phép container xử lý nếu velocity đủ hoặc location từ cạnh trái
+                    // (fallthrough to edge checks below)
+                }
+            }
+            // If gesture didn't start in the scrollView's bounds, continue with edge/velocity checks below
+        }
+        
+        // Allow right swipe from left edge (first 80 points)
+        if locationInRoot.x < 80 && vx > 0 {
+            print("✅ [gestureRecognizerShouldBegin] Right swipe from left edge (x < 80) → Allow")
+            return true
+        }
+        
+        // ✅ Nếu đang ở page 0, cho phép right swipe với velocity thấp hơn
+        if let (_, currentPageIndex) = findInnerScrollViewAndPageIndex(from: panGesture), currentPageIndex == 0 {
+            if vx > 0 && vx > 30 { // Lower threshold for page 0
+                print("✅ [gestureRecognizerShouldBegin] Page 0 + right swipe (vx: \(vx) > 30) → Allow")
+                return true
+            }
+        }
+        
+        // Allow sufficiently fast right swipes anywhere
+        if vx > 200 {
+            print("✅ [gestureRecognizerShouldBegin] Fast right swipe (vx > 200) → Allow")
+            return true
+        }
+        
+        print("❌ [gestureRecognizerShouldBegin] Default → Block")
+        return false
+    }
+    
+    // Helper: Try to find the inner UIScrollView of PageViewController and the current page index (if any).
+    // Returns (scrollView, currentPageIndex) or nil if not found.
+    // 
+    // Hierarchy: ContentViewController -> SegmentedPageContainer -> UIPageViewController (as child) -> UIScrollView (internal)
+    private func findInnerScrollViewAndPageIndex(from panGesture: UIPanGestureRecognizer) -> (UIScrollView, Int)? {
+        // 1. Get current nav and ContentViewController
+        guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+              let contentVC = nav.viewControllers.first(where: { $0 is ContentViewController }) as? ContentViewController
+        else {
+            print("🟡 [findInnerScrollViewAndPageIndex] No ContentViewController found")
+            return nil
+        }
+        
+        // 2. SegmentedPageContainer addChild UIPageViewController vào ContentViewController
+        // (Trong SegmentedPageContainer.setupPageViewController(), gọi parent.addChild(pageViewController))
+        // Vậy UIPageViewController sẽ là child của ContentViewController
+        guard let pageVC = contentVC.children.first(where: { $0 is UIPageViewController }) as? UIPageViewController else {
+            print("🟡 [findInnerScrollViewAndPageIndex] No UIPageViewController found")
+            return nil
+        }
+        
+        // 3. Find UIScrollView inside pageVC.view.subviews
+        // UIPageViewController có internal UIScrollView để scroll giữa các pages
+        guard let scrollView = pageVC.view.subviews.first(where: { $0 is UIScrollView }) as? UIScrollView else {
+            print("🟡 [findInnerScrollViewAndPageIndex] No UIScrollView found")
+            return nil
+        }
+        
+        // 4. Obtain current page index via ContentViewController API
+        // ContentViewController.currentPageIndex lấy từ SegmentedPageContainer.currentIndex
+        let currentPageIndex = contentVC.currentPageIndex
+        print("🟢 [findInnerScrollViewAndPageIndex] Found - currentPageIndex: \(currentPageIndex), scrollView.frame: \(scrollView.frame), contentSize: \(scrollView.contentSize), offset: \(scrollView.contentOffset)")
+        return (scrollView, currentPageIndex)
+    }
+    
+    @objc private func handlePanGesture(sender: UIPanGestureRecognizer) {
+        let gestureView = sender.view ?? self.view
+        let position: CGFloat = sender.translation(in: gestureView).x
+        let velocity: CGFloat = sender.velocity(in: gestureView).x
+        
+        print("🟣 [handlePanGesture] State: \(sender.state.rawValue), position: \(position), velocity: \(velocity)")
+        
+        switch sender.state {
+        case .began:
+            print("🟣 [handlePanGesture] .began - Checking if gesture from PageViewController...")
+            // If gesture originates from an inner page scroll view that should handle it, skip container drag
+            let isInsidePageScroll = isGestureInsidePageScrollView(sender)
+            print("🟣 [handlePanGesture] .began - isGestureInsidePageScrollView: \(isInsidePageScroll)")
+            
+            if isInsidePageScroll {
+                print("❌ [handlePanGesture] .began - Gesture from PageViewController → Skip container drag")
+                draggingIsEnabled = false
+                return
+            }
+            
+            print("✅ [handlePanGesture] .began - Gesture NOT from PageViewController → Continue")
+            
+            // If user tries to expand while already expanded and swipes right, cancel (no extra expand)
+            if velocity > 0, isExpanded {
+                print("❌ [handlePanGesture] .began - Already expanded + right swipe → Cancel")
+                sender.state = .cancelled
+                return
+            }
+            
+            // Enable dragging when swiping right to open (and not expanded) OR swiping left to close (when expanded)
+            if velocity > 0, !isExpanded {
+                draggingIsEnabled = true
+                print("✅ [handlePanGesture] .began - Right swipe + not expanded → Enable dragging")
+            } else if velocity < 0, isExpanded {
+                draggingIsEnabled = true
+                print("✅ [handlePanGesture] .began - Left swipe + expanded → Enable dragging")
+            }
+            
+            if draggingIsEnabled {
+                // If swipe is sufficiently fast, complete toggle immediately
+                let velocityThreshold: CGFloat = 550
+                if abs(velocity) > velocityThreshold {
+                    print("⚡ [handlePanGesture] .began - Fast swipe (velocity > \(velocityThreshold)) → Toggle immediately")
+                    sideMenuState(expanded: isExpanded ? false : true)
+                    draggingIsEnabled = false
+                    return
+                }
+                
+                panBaseLocation = isExpanded ? sideMenuRevealWidth : 0.0
+                print("✅ [handlePanGesture] .began - Dragging enabled, panBaseLocation: \(panBaseLocation)")
+            }
+            
+        case .changed:
+            // Expand/Collapse side menu while dragging
+            if draggingIsEnabled {
+                if revealSideMenuOnTop {
+                    // Show/Hide shadow background view while dragging
+                    let xLocation: CGFloat = panBaseLocation + position
+                    let percentage = max(0, min(xLocation / sideMenuRevealWidth, 1.0))
+                    let alpha = percentage >= 0.6 ? 0.6 : percentage
+                    sideMenuShadowView.alpha = alpha
+                    
+                    // Move side menu while dragging
+                    if xLocation <= sideMenuRevealWidth {
+                        sideMenuTrailingConstraint.constant = xLocation - sideMenuRevealWidth
+                    }
+                } else {
+                    // Side-in mode: Move both side menu and TabBarController
+                    let xLocation: CGFloat = panBaseLocation + position
+                    let clampedX = max(0, min(xLocation, sideMenuRevealWidth))
+                    
+                    let percentage = clampedX / sideMenuRevealWidth
+                    let alpha = percentage >= 0.6 ? 0.6 : percentage
+                    sideMenuShadowView.alpha = alpha
+                    
+                    sideMenuTrailingConstraint.constant = clampedX - sideMenuRevealWidth
+                    tabBarControllerLeadingConstraint.constant = clampedX
+                }
+            }
+            
+        case .ended, .cancelled, .failed:
+            // Reset dragging flag and decide final state based on threshold
+            if draggingIsEnabled {
+                draggingIsEnabled = false
+                if revealSideMenuOnTop {
+                    let movedMoreThanHalf = sideMenuTrailingConstraint.constant > -(sideMenuRevealWidth * 0.5)
+                    sideMenuState(expanded: movedMoreThanHalf)
+                } else {
+                    let movedMoreThanHalf = tabBarControllerLeadingConstraint.constant > (sideMenuRevealWidth * 0.5)
+                    sideMenuState(expanded: movedMoreThanHalf)
+                }
+            } else {
+                draggingIsEnabled = false
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    // This function determines whether the pan gesture originates from a PageViewController's UIScrollView
+    // that should keep handling the gesture (return true) or not.
+    // 
+    // Hierarchy: ContentViewController -> SegmentedPageContainer -> UIPageViewController (as child) -> UIScrollView (internal)
+    func isGestureInsidePageScrollView(_ gesture: UIPanGestureRecognizer) -> Bool {
+        // 1. Get current nav and ContentViewController
+        guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+              let contentVC = nav.viewControllers.first(where: { $0 is ContentViewController }) as? ContentViewController
+        else {
+            print("🟡 [isGestureInsidePageScrollView] No ContentViewController found → false")
+            return false
+        }
+        
+        // 2. SegmentedPageContainer addChild UIPageViewController vào ContentViewController
+        // Tìm UIPageViewController trong children của ContentViewController
+        guard let pageVC = contentVC.children.first(where: { $0 is UIPageViewController }) as? UIPageViewController else {
+            print("🟡 [isGestureInsidePageScrollView] No UIPageViewController found → false")
+            return false
+        }
+        
+        // 3. Get internal UIScrollView
+        guard let scrollView = pageVC.view.subviews.first(where: { $0 is UIScrollView }) as? UIScrollView else {
+            print("🟡 [isGestureInsidePageScrollView] No UIScrollView found → false")
+            return false
+        }
+        
+        // 4. If gesture's start point is inside that scrollView's bounds, and the inner page should handle => return true
+        let startPointInScroll = gesture.location(in: scrollView)
+        if scrollView.bounds.contains(startPointInScroll) {
+            print("🟢 [isGestureInsidePageScrollView] Gesture is inside PageViewController scrollView")
+            
+            // If inner cannot scroll horizontally -> treat as container opportunity
+            let canScrollHorizontally = scrollView.contentSize.width > scrollView.frame.width + 0.5
+            let scrollOffset = scrollView.contentOffset.x
+            let vx = gesture.velocity(in: scrollView).x
+            let currentIndex = contentVC.currentPageIndex
+            
+            print("🟢 [isGestureInsidePageScrollView] canScrollHorizontally: \(canScrollHorizontally), scrollOffset: \(scrollOffset), velocityX: \(vx), currentIndex: \(currentIndex)")
+            
+            if !canScrollHorizontally {
+                print("✅ [isGestureInsidePageScrollView] Cannot scroll horizontally → Return false (let container handle)")
+                return false
+            }
+            
+            // Use ContentViewController.currentPageIndex as truth
+            // If we're not on page 0 -> inner should handle horizontal swipes
+            if currentIndex != 0 {
+                print("❌ [isGestureInsidePageScrollView] Page \(currentIndex) → Return true (let PageViewController handle)")
+                return true
+            }
+            
+            // If on page 0: if scrollView at left edge and user swipes right -> allow container takeover (return false)
+            // ✅ QUAN TRỌNG: Ở page 0, nếu scrollOffset gần 0 (trong phạm vi 1 page width)
+            // thì coi như đang ở left edge
+            let pageWidth = scrollView.frame.width
+            let atLeftEdge = scrollOffset <= pageWidth + 10 // Cho phép một chút tolerance
+            
+            print("🟢 [isGestureInsidePageScrollView] Page 0 check - scrollOffset: \(scrollOffset), pageWidth: \(pageWidth), atLeftEdge: \(atLeftEdge), vx: \(vx)")
+            
+            if atLeftEdge || vx > 0 {
+                print("✅ [isGestureInsidePageScrollView] Page 0 at left edge (offset: \(scrollOffset) <= \(pageWidth + 10)) + right swipe → Return false (let container handle)")
+                return false
+            }
+            
+            // Otherwise allow inner to handle (e.g. swipe left to change page)
+            print("❌ [isGestureInsidePageScrollView] Page 0 → Return true (let PageViewController handle) - atLeftEdge: \(atLeftEdge), vx: \(vx)")
+            return true
+        }
+        
+        print("🟡 [isGestureInsidePageScrollView] Gesture NOT inside PageViewController scrollView → false")
+        return false
+    }
+}
+
+
+// MARK: - UIViewController Extension
+
+extension UIViewController {
+    
+    func container<T: UIViewController>() -> T? {
+        var viewController: UIViewController? = self
+        while viewController != nil {
+            if let container = viewController as? T {
+                return container
+            }
+            viewController = viewController?.parent
+        }
+        return nil
+    }
+}
+
+

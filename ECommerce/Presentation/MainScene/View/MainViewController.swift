@@ -378,46 +378,46 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
 
 // MARK: - MainCoordinatingControllerDelegate
 
-extension MainViewController: MainCoordinatingControllerDelegate {
-    
-    func didSelectMenuItem(at index: Int) {
-        handleMenuItemSelection(at: index)
-    }
-    
-    func didSetContentViewController(_ viewController: UIViewController) {
-        setContentViewController(viewController)
-    }
-    
-    // MARK: - Private
-    
-    private func handleMenuItemSelection(at index: Int) {
-        switch index {
-        case 0:
-            // Home - Navigate to ProductsViewController (default content)
-            // ProductsViewController is already set as content by AppFlowCoordinator
-            break
-        case 1:
-            // Products - already showing, just hide sidebar
-            break
-        case 2:
-            // Cart - TODO: Navigate to cart
-            break
-        case 3:
-            // Profile - TODO: Navigate to profile
-            break
-        case 4:
-            // Settings - TODO: Navigate to settings
-            break
-        default:
-            break
-        }
-        
-        // Collapse side menu with animation
-        DispatchQueue.main.async { [weak self] in
-            self?.hideSidebar()
-        }
-    }
-}
+//extension MainViewController: MainCoordinatingControllerDelegate {
+//    
+//    func didSelectMenuItem(at index: Int) {
+//        handleMenuItemSelection(at: index)
+//    }
+//    
+//    func didSetContentViewController(_ viewController: UIViewController) {
+//        setContentViewController(viewController)
+//    }
+//    
+//    // MARK: - Private
+//    
+//    private func handleMenuItemSelection(at index: Int) {
+//        switch index {
+//        case 0:
+//            // Home - Navigate to ProductsViewController (default content)
+//            // ProductsViewController is already set as content by AppFlowCoordinator
+//            break
+//        case 1:
+//            // Products - already showing, just hide sidebar
+//            break
+//        case 2:
+//            // Cart - TODO: Navigate to cart
+//            break
+//        case 3:
+//            // Profile - TODO: Navigate to profile
+//            break
+//        case 4:
+//            // Settings - TODO: Navigate to settings
+//            break
+//        default:
+//            break
+//        }
+//        
+//        // Collapse side menu with animation
+//        DispatchQueue.main.async { [weak self] in
+//            self?.hideSidebar()
+//        }
+//    }
+//}
 
 // MARK: - UIGestureRecognizerDelegate
 

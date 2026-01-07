@@ -339,6 +339,27 @@
 		D0E6C3B82F0DFB0E00527962 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3B72F0DFB0E00527962 /* MainController.swift */; };
 		D0E6C3B92F0DFB0E00527962 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3B72F0DFB0E00527962 /* MainController.swift */; };
 		D0E6C3BA2F0DFB0E00527962 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3B72F0DFB0E00527962 /* MainController.swift */; };
+		D0E6C3CC2F0DFEC000527962 /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0E6C3C82F0DFEC000527962 /* HomeViewController.storyboard */; };
+		D0E6C3CD2F0DFEC000527962 /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3CB2F0DFEC000527962 /* MainContainerViewController.swift */; };
+		D0E6C3CE2F0DFEC000527962 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3C92F0DFEC000527962 /* HomeViewController.swift */; };
+		D0E6C3CF2F0DFEC000527962 /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3CB2F0DFEC000527962 /* MainContainerViewController.swift */; };
+		D0E6C3D02F0DFEC000527962 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3C92F0DFEC000527962 /* HomeViewController.swift */; };
+		D0E6C3D12F0DFEC000527962 /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0E6C3C82F0DFEC000527962 /* HomeViewController.storyboard */; };
+		D0E6C3D22F0DFEC000527962 /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3CB2F0DFEC000527962 /* MainContainerViewController.swift */; };
+		D0E6C3D32F0DFEC000527962 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3C92F0DFEC000527962 /* HomeViewController.swift */; };
+		D0E6C3D42F0DFEC000527962 /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0E6C3C82F0DFEC000527962 /* HomeViewController.storyboard */; };
+		D0E6C3D92F0DFF9800527962 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0E6C3D72F0DFF9800527962 /* TabBar.storyboard */; };
+		D0E6C3DB2F0DFF9800527962 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0E6C3D72F0DFF9800527962 /* TabBar.storyboard */; };
+		D0E6C3DC2F0DFF9800527962 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0E6C3D72F0DFF9800527962 /* TabBar.storyboard */; };
+		D0E6C3DF2F0E02AC00527962 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3DE2F0E02AC00527962 /* TabBarController.swift */; };
+		D0E6C3E02F0E02AC00527962 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3DE2F0E02AC00527962 /* TabBarController.swift */; };
+		D0E6C3E12F0E02AC00527962 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3DE2F0E02AC00527962 /* TabBarController.swift */; };
+		D0E6C3E52F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3E32F0E0AF600527962 /* SegmentedPageContainer.swift */; };
+		D0E6C3E62F0E0AF600527962 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3E22F0E0AF600527962 /* SegmentedControl.swift */; };
+		D0E6C3E72F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3E32F0E0AF600527962 /* SegmentedPageContainer.swift */; };
+		D0E6C3E82F0E0AF600527962 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3E22F0E0AF600527962 /* SegmentedControl.swift */; };
+		D0E6C3E92F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3E32F0E0AF600527962 /* SegmentedPageContainer.swift */; };
+		D0E6C3EA2F0E0AF600527962 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3E22F0E0AF600527962 /* SegmentedControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -475,6 +496,13 @@
 		D0E6C3AF2F0DFAF700527962 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
 		D0E6C3B02F0DFAF700527962 /* SideMenuCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCoordinatingController.swift; sourceTree = "<group>"; };
 		D0E6C3B72F0DFB0E00527962 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		D0E6C3C82F0DFEC000527962 /* HomeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeViewController.storyboard; sourceTree = "<group>"; };
+		D0E6C3C92F0DFEC000527962 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D0E6C3CB2F0DFEC000527962 /* MainContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
+		D0E6C3D72F0DFF9800527962 /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
+		D0E6C3DE2F0E02AC00527962 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		D0E6C3E22F0E0AF600527962 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		D0E6C3E32F0E0AF600527962 /* SegmentedPageContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPageContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -613,6 +641,7 @@
 		D0095B7B2ECB258000FCC7BC /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
+				D0E6C3E42F0E0AF600527962 /* UIPageViewController+Segmented */,
 				D0095C202ECB43DC00FCC7BC /* LoadingView.swift */,
 			);
 			path = CommonView;
@@ -753,6 +782,7 @@
 		D0095BEB2ECB43A200FCC7BC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				D0E6C3D52F0DFEF400527962 /* TabbarScene */,
 				D0095CED2ECC1E1E00FCC7BC /* MainScene */,
 				D0095CAA2ECB57C100FCC7BC /* SideMenuScene */,
 				D0095BEC2ECB43AB00FCC7BC /* ProductScene */,
@@ -963,6 +993,7 @@
 			children = (
 				D0095D132ECC2FFF00FCC7BC /* SideMenu */,
 				D0095D042ECC215100FCC7BC /* MainViewController.swift */,
+				D0E6C3CB2F0DFEC000527962 /* MainContainerViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1130,6 +1161,34 @@
 			path = PersistentStorages;
 			sourceTree = "<group>";
 		};
+		D0E6C3CA2F0DFEC000527962 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				D0E6C3C92F0DFEC000527962 /* HomeViewController.swift */,
+				D0E6C3C82F0DFEC000527962 /* HomeViewController.storyboard */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		D0E6C3D52F0DFEF400527962 /* TabbarScene */ = {
+			isa = PBXGroup;
+			children = (
+				D0E6C3CA2F0DFEC000527962 /* HomeView */,
+				D0E6C3D72F0DFF9800527962 /* TabBar.storyboard */,
+				D0E6C3DE2F0E02AC00527962 /* TabBarController.swift */,
+			);
+			path = TabbarScene;
+			sourceTree = "<group>";
+		};
+		D0E6C3E42F0E0AF600527962 /* UIPageViewController+Segmented */ = {
+			isa = PBXGroup;
+			children = (
+				D0E6C3E22F0E0AF600527962 /* SegmentedControl.swift */,
+				D0E6C3E32F0E0AF600527962 /* SegmentedPageContainer.swift */,
+			);
+			path = "UIPageViewController+Segmented";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1254,6 +1313,8 @@
 				D0095CEC2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
 				D0095D672ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
 				D0095B3E2ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
+				D0E6C3D92F0DFF9800527962 /* TabBar.storyboard in Resources */,
+				D0E6C3D12F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1263,6 +1324,7 @@
 			files = (
 				D0095B6A2ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D0095C042ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
+				D0E6C3CC2F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
 				D0095CEB2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
 				D0095C052ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */,
 				D0095CC12ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
@@ -1270,6 +1332,7 @@
 				D0095B292ECB0BA700FCC7BC /* Main.storyboard in Resources */,
 				D0095D7D2ECC58F200FCC7BC /* accounts.json in Resources */,
 				D0095B6F2ECB1D4100FCC7BC /* Localizable.strings in Resources */,
+				D0E6C3DB2F0DFF9800527962 /* TabBar.storyboard in Resources */,
 				D0095B2A2ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095D682ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
 				D0095B2B2ECB0BA700FCC7BC /* Info.plist in Resources */,
@@ -1283,6 +1346,7 @@
 			files = (
 				D0095B682ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D0095C122ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
+				D0E6C3D42F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
 				D0095CEA2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
 				D0095C132ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */,
 				D0095CB12ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
@@ -1290,6 +1354,7 @@
 				D0095B252ECB0BA700FCC7BC /* Main.storyboard in Resources */,
 				D0095D7F2ECC58F200FCC7BC /* accounts.json in Resources */,
 				D0095B6E2ECB1D4100FCC7BC /* Localizable.strings in Resources */,
+				D0E6C3DC2F0DFF9800527962 /* TabBar.storyboard in Resources */,
 				D0095B262ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095D662ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
 				D0095B272ECB0BA700FCC7BC /* Info.plist in Resources */,
@@ -1333,6 +1398,8 @@
 				D0095CB62ECB57C100FCC7BC /* SideMenuModel.swift in Sources */,
 				D0095CB82ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
 				D0095CC62ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
+				D0E6C3CF2F0DFEC000527962 /* MainContainerViewController.swift in Sources */,
+				D0E6C3D02F0DFEC000527962 /* HomeViewController.swift in Sources */,
 				D0095CB92ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */,
 				D0095C2A2ECB43DC00FCC7BC /* Observable.swift in Sources */,
 				D0095C2B2ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
@@ -1395,10 +1462,13 @@
 				D0095C602ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
 				D06C3BA32ECCA3A800289D48 /* UIViewController+AddChild.swift in Sources */,
 				D0095D0E2ECC235800FCC7BC /* ViewController.swift in Sources */,
+				D0E6C3E02F0E02AC00527962 /* TabBarController.swift in Sources */,
 				D06C3B8B2ECCA25D00289D48 /* UIView+Shadow.swift in Sources */,
 				D0095B812ECB412200FCC7BC /* ProductQuery.swift in Sources */,
 				D0095D1E2ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
 				D0095B372ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
+				D0E6C3E72F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */,
+				D0E6C3E82F0E0AF600527962 /* SegmentedControl.swift in Sources */,
 				D0095B892ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
 				D0095D492ECC506E00FCC7BC /* AttributedText.swift in Sources */,
 			);
@@ -1420,6 +1490,7 @@
 				D06C3B882ECCA21800289D48 /* UIView+Layout.swift in Sources */,
 				D0095D202ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
 				D0095CBE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
+				D0E6C3DF2F0E02AC00527962 /* TabBarController.swift in Sources */,
 				D06C3BAF2ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
 				D0E6C3932F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
 				D0E6C3942F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
@@ -1458,6 +1529,8 @@
 				D0095C062ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
 				D0095C072ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
 				D0095CC92ECB59DA00FCC7BC /* UIViewController+Parent.swift in Sources */,
+				D0E6C3E52F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */,
+				D0E6C3E62F0E0AF600527962 /* SegmentedControl.swift in Sources */,
 				D0095C082ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D0095CFD2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
 				D0095D8C2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
@@ -1487,6 +1560,8 @@
 				D0095B972ECB41A800FCC7BC /* ProductsRepository.swift in Sources */,
 				D0095B302ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
 				D0095D4A2ECC506E00FCC7BC /* AttributedText.swift in Sources */,
+				D0E6C3CD2F0DFEC000527962 /* MainContainerViewController.swift in Sources */,
+				D0E6C3CE2F0DFEC000527962 /* HomeViewController.swift in Sources */,
 				D0095D9C2ECC5BED00FCC7BC /* CommonUtil.swift in Sources */,
 				D06C3BA52ECCA3A800289D48 /* UIViewController+AddChild.swift in Sources */,
 				D0095D9D2ECC5BED00FCC7BC /* CoreConstant.swift in Sources */,
@@ -1513,6 +1588,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E6C3E92F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */,
+				D0E6C3EA2F0E0AF600527962 /* SegmentedControl.swift in Sources */,
 				D0095B882ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
 				D0095B752ECB1D7B00FCC7BC /* Localize.swift in Sources */,
 				D0095DA02ECC5BED00FCC7BC /* CommonUtil.swift in Sources */,
@@ -1522,6 +1599,8 @@
 				D0095B452ECB0C0B00FCC7BC /* ECommerceUITests.swift in Sources */,
 				D0095BDF2ECB434200FCC7BC /* AppAppearance.swift in Sources */,
 				D0095D3F2ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
+				D0E6C3D22F0DFEC000527962 /* MainContainerViewController.swift in Sources */,
+				D0E6C3D32F0DFEC000527962 /* HomeViewController.swift in Sources */,
 				D0095B462ECB0C0B00FCC7BC /* ECommerceUITestsLaunchTests.swift in Sources */,
 				D0095D562ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift in Sources */,
 				D0095B912ECB415F00FCC7BC /* UseCase.swift in Sources */,
@@ -1568,6 +1647,7 @@
 				D0095BE62ECB436700FCC7BC /* AppDIContainer.swift in Sources */,
 				D0095C0C2ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
 				D0095C0D2ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
+				D0E6C3E12F0E02AC00527962 /* TabBarController.swift in Sources */,
 				D0095D5E2ECC52A400FCC7BC /* UIWindow+Extensions.swift in Sources */,
 				D0095C5E2ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
 				D0095D0F2ECC235800FCC7BC /* ViewController.swift in Sources */,

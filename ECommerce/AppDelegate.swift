@@ -22,8 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppAppearance.setupAppearance()
         
         window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // Use MainContainerViewController directly as entry point (as in sum.md)
+        let mainContainer = MainContainerViewController()
+        window?.rootViewController = mainContainer
+        window?.makeKeyAndVisible()
+        
+        // MARK: - Old Flow (Commented)
+        // Old logic using AppFlowCoordinator with MainViewController
+        /*
         let navigationController = UINavigationController()
-
         window?.rootViewController = navigationController
         appFlowCoordinator = AppFlowCoordinator(
             navigationController: navigationController,
@@ -31,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         appFlowCoordinator?.start()
         window?.makeKeyAndVisible()
+        */
     
         return true
     }

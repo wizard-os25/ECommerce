@@ -11,27 +11,19 @@ protocol MainCoordinatingControllerDependencies {
     func makeMainViewController() -> MainViewController
 }
 
-protocol MainCoordinatingControllerDelegate: AnyObject {
-    func didSelectMenuItem(at index: Int)
-    func didSetContentViewController(_ viewController: UIViewController)
-}
-
 final class MainCoordinatingController {
     
     private weak var navigationController: UINavigationController?
-    private weak var delegate: MainCoordinatingControllerDelegate?
     private let dependencies: MainCoordinatingControllerDependencies
     private var sideMenuCoordinatingController: SideMenuCoordinatingController?
     private var appDIContainer: AppDIContainer?
     
     init(
         navigationController: UINavigationController,
-        dependencies: MainCoordinatingControllerDependencies,
-        delegate: MainCoordinatingControllerDelegate? = nil
+        dependencies: MainCoordinatingControllerDependencies
     ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
-        self.delegate = delegate
     }
     
     func start() {
@@ -81,8 +73,6 @@ final class MainCoordinatingController {
         guard let mainSceneDIContainer = dependencies as? MainSceneDIContainer else { return }
         let sideMenuDIContainer = mainSceneDIContainer.makeSideMenuSceneDIContainer()
         
-        // Create side menu coordinating controller
-        sideMenuCoordinatingController = sideMenuDIContainer.makeSideMenuCoordinatingController(delegate: self)
     }
     
     func makeSideMenuViewController() -> SideMenuViewController? {
@@ -112,13 +102,3 @@ final class MainCoordinatingController {
         mainViewController.setContentViewController(productsViewController)
     }
 }
-
-// MARK: - SideMenuCoordinatingControllerDelegate
-
-extension MainCoordinatingController: SideMenuCoordinatingControllerDelegate {
-    
-    func didSelectMenuItem(at index: Int) {
-        delegate?.didSelectMenuItem(at: index)
-    }
-}
-

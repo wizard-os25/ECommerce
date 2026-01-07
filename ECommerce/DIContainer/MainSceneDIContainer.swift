@@ -31,6 +31,13 @@ final class MainSceneDIContainer: MainCoordinatingControllerDependencies {
         return controller
     }
     
+    // MARK: - Main Container View Controller
+    
+    func makeMainContainerViewController() -> MainContainerViewController {
+        // MainContainerViewController doesn't need controller pattern, create directly
+        return MainContainerViewController()
+    }
+    
     // MARK: - Side Menu
     
     func makeSideMenuSceneDIContainer() -> SideMenuSceneDIContainer {
@@ -46,13 +53,11 @@ final class MainSceneDIContainer: MainCoordinatingControllerDependencies {
     // MARK: - Flow Coordinators
     
     func makeMainCoordinatingController(
-        navigationController: UINavigationController,
-        delegate: MainCoordinatingControllerDelegate? = nil
+        navigationController: UINavigationController
     ) -> MainCoordinatingController {
         MainCoordinatingController(
             navigationController: navigationController,
-            dependencies: self,
-            delegate: delegate
+            dependencies: self
         )
     }
 }
