@@ -8,7 +8,7 @@
 import UIKit
 
 final class ProductItemCell: UITableViewCell {
-
+    
     static let height = CGFloat(130)
     
     @IBOutlet private var nameLabel: UILabel!
@@ -29,9 +29,14 @@ final class ProductItemCell: UITableViewCell {
         descriptionLabel.text = items.description
         
         if let stars = items.stars {
-            starsLabel.text = String(repeating: "⭐", count: stars)
+            let attributedString = NSMutableAttributedString()
+            let starImage = UIImage(systemName: "star.fill")?.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
+            for _ in 0..<stars {
+                attributedString.icon(starImage, font: starsLabel.font)
+            }
+            starsLabel.attributedText = attributedString
         } else {
-            starsLabel.text = ""
+            starsLabel.attributedText = nil
         }
         
         // Load image if URL is available

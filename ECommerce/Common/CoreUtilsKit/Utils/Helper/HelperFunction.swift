@@ -34,6 +34,10 @@ public class HelperFunction {
             completion(false)
         }
     }
+    
+    public static func getImage(named: String, in bundle: Bundle) -> UIImage? {
+        return UIImage(named: named, in: bundle, compatibleWith: nil)
+    }
 }
 
 // MARK: - Navigation Bars

@@ -32,3 +32,12 @@ extension UIView {
         subviews.forEach { $0.removeFromSuperview() }
     }
 }
+
+public extension UIView {
+    func getLayoutSizeFitting() -> CGSize {
+        setNeedsLayout()
+        layoutIfNeeded()
+        return systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    }
+}
+
