@@ -1,176 +1,257 @@
-// SegmentedPageContainer.swift (fixed)
+//
+//  SegmentedPageContainer.swift
+//  ECommerce
+//
+//  Created by wizard.os25 on 8/1/26.
+//
+
 import UIKit
 
-class SegmentedPageContainer: UIView {
-
-    var onTabChanged: ((Int) -> Void)?
-
+/// Container view that combines a segmented control with a page view controller
+/// Provides synchronized navigation between tabs and pages
+public final class SegmentedPageContainer: UIView {
+    
+    // MARK: - Properties
+    
+    /// Callback when tab/page changes
+    public var onTabChanged: ((Int) -> Void)?
+    
+    /// Current selected index (read-only from outside)
+    public private(set) var currentIndex: Int = 0
+    
+    /// View controllers for each page
+    public var viewControllers: [UIViewController] = []
+    
+    // MARK: - Private Properties
+    
     private var isSetupDone: Bool = false
-
-    // Make currentIndex readable outside but writable only inside
-    private(set) var currentIndex: Int = 0
-
     private let tabScrollView = UIScrollView()
     private let segmentedControl = SegmentedControl()
-    private var pageViewController: UIPageViewController!
-
-    // Keep strong refs to view controllers
-    var viewControllers: [UIViewController] = []
-
+    private var pageViewController: UIPageViewController?
     private weak var parentVC: UIViewController?
-
-    // keep width constraint to update later
     private var segmentedControlWidthConstraint: NSLayoutConstraint?
-
+    private var previousIndex: Int = 0
+    private var isTransitioning: Bool = false
+    
+    // MARK: - Initialization
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
     deinit {
-        print("SegmentedPageContainer deinitialized")
+        pageViewController?.willMove(toParent: nil)
+        pageViewController?.view.removeFromSuperview()
+        pageViewController?.removeFromParent()
     }
-
+    
     // MARK: - Public API
-
-    func configUI(titles: [String],
-                   viewControllers: [UIViewController],
-                   parent: UIViewController,
-                   defaultIndex: Int = 0) {
-
-        // set items before layout
-        self.segmentedControl.items = titles
-        self.viewControllers = viewControllers
-        self.parentVC = parent
-
-        // use closure (single source of truth) when user taps segmentedControl
-        self.segmentedControl.didSelectIndex = { [weak self] index in
-            guard let self = self else { return }
-            self.setPage(index: index, animated: true)
-            self.onTabChanged?(index)
+    
+    /// Configure the container with titles, view controllers, and parent
+    /// - Parameters:
+    ///   - titles: Array of segment titles
+    ///   - viewControllers: Array of view controllers for each page
+    ///   - parent: Parent view controller that will contain the page view controller
+    ///   - defaultIndex: Initial selected index (default: 0)
+    public func configUI(
+        titles: [String],
+        viewControllers: [UIViewController],
+        parent: UIViewController,
+        defaultIndex: Int = 0
+    ) {
+        guard !titles.isEmpty, !viewControllers.isEmpty else {
+            assertionFailure("Titles and viewControllers must not be empty")
+            return
         }
-
-        // select default
-        self.segmentedControl.selectedIndex = defaultIndex
-
-        self.setupView()
-        self.setupPageViewController()
-        // set initial page (no animation)
-        self.setPage(index: defaultIndex, animated: false)
+        
+        guard titles.count == viewControllers.count else {
+            assertionFailure("Titles count must match viewControllers count")
+            return
+        }
+        
+        // Validate defaultIndex
+        let validDefaultIndex = max(0, min(defaultIndex, viewControllers.count - 1))
+        
+        // Set items before layout
+        segmentedControl.items = titles
+        self.viewControllers = viewControllers
+        parentVC = parent
+        currentIndex = validDefaultIndex
+        previousIndex = validDefaultIndex
+        
+        // Setup callback for segmented control selection
+        segmentedControl.didSelectIndex = { [weak self] index in
+            guard let self = self else { return }
+            // Allow tap even during transition to handle rapid taps
+            self.setPage(index: index, animated: true)
+            // Don't call onTabChanged here - it will be called in delegate
+        }
+        
+        setupView()
+        setupPageViewController()
+        
+        // Set default selection after setup
+        segmentedControl.selectedIndex = validDefaultIndex
+        
+        // Set initial page (no animation)
+        setPage(index: validDefaultIndex, animated: false)
     }
-
+    
     // MARK: - Setup Views
+    
     private func setupView() {
-        guard !self.isSetupDone else { return }
-        self.isSetupDone = true
-
-        self.tabScrollView.showsHorizontalScrollIndicator = false
-        self.tabScrollView.bounces = true
-        self.tabScrollView.alwaysBounceHorizontal = true
-        self.tabScrollView.delaysContentTouches = false
-        self.tabScrollView.canCancelContentTouches = true
-        self.tabScrollView.translatesAutoresizingMaskIntoConstraints = false
-
-        self.segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-
-        self.addSubview(self.tabScrollView)
-        self.tabScrollView.addSubview(self.segmentedControl)
-
-        NSLayoutConstraint.activate([
-            self.tabScrollView.topAnchor.constraint(equalTo: self.topAnchor),
-            self.tabScrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.tabScrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.tabScrollView.heightAnchor.constraint(equalToConstant: 32),
-
-            self.segmentedControl.leadingAnchor.constraint(equalTo: self.tabScrollView.contentLayoutGuide.leadingAnchor, constant: 16),
-            // trailing anchor to scrollView's contentLayoutGuide will be updated by width constraint
-            self.segmentedControl.topAnchor.constraint(equalTo: self.tabScrollView.contentLayoutGuide.topAnchor),
-            self.segmentedControl.heightAnchor.constraint(equalToConstant: 32)
-        ])
-
-        // Create width constraint but don't set constant yet (will set in layoutSubviews)
-        let widthConstraint = self.segmentedControl.widthAnchor.constraint(equalToConstant: 0)
-        widthConstraint.isActive = true
-        self.segmentedControlWidthConstraint = widthConstraint
-
-        // Only use closure handler above; do NOT addTarget here to avoid double-calls
-        // self.segmentedControl.addTarget(self, action: #selector(self.tabChanged(_:)), for: .valueChanged)
+        guard !isSetupDone else { return }
+        isSetupDone = true
+        
+        configureScrollView()
+        configureSegmentedControl()
+        setupConstraints()
     }
-
+    
+    private func configureScrollView() {
+        tabScrollView.showsHorizontalScrollIndicator = false
+        tabScrollView.bounces = true
+        tabScrollView.alwaysBounceHorizontal = true
+        tabScrollView.delaysContentTouches = false
+        tabScrollView.canCancelContentTouches = true
+        tabScrollView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func configureSegmentedControl() {
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func setupConstraints() {
+        addSubview(tabScrollView)
+        tabScrollView.addSubview(segmentedControl)
+        
+        NSLayoutConstraint.activate([
+            tabScrollView.topAnchor.constraint(equalTo: topAnchor),
+            tabScrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tabScrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tabScrollView.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing32),
+            
+            segmentedControl.leadingAnchor.constraint(
+                equalTo: tabScrollView.contentLayoutGuide.leadingAnchor,
+                constant: Spacing.tokenSpacing16
+            ),
+            segmentedControl.topAnchor.constraint(
+                equalTo: tabScrollView.contentLayoutGuide.topAnchor
+            ),
+            segmentedControl.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing32)
+        ])
+        
+        // Create width constraint (will be updated in layoutSubviews)
+        let widthConstraint = segmentedControl.widthAnchor.constraint(equalToConstant: 0)
+        widthConstraint.isActive = true
+        segmentedControlWidthConstraint = widthConstraint
+    }
+    
     private func setupPageViewController() {
         guard let parent = parentVC else { return }
-
-        self.pageViewController = UIPageViewController(
+        
+        let pageVC = UIPageViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal,
             options: nil
         )
-
-        self.pageViewController.delegate = self
-        self.pageViewController.dataSource = self
-
-        parent.addChild(self.pageViewController)
-        addSubview(self.pageViewController.view)
-
-        self.pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        pageVC.delegate = self
+        pageVC.dataSource = self
+        
+        self.pageViewController = pageVC
+        
+        parent.addChild(pageVC)
+        addSubview(pageVC.view)
+        
+        pageVC.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.pageViewController.view.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 4),
-            self.pageViewController.view.leadingAnchor.constraint(equalTo: leadingAnchor),
-            self.pageViewController.view.trailingAnchor.constraint(equalTo: trailingAnchor),
-            self.pageViewController.view.bottomAnchor.constraint(equalTo: bottomAnchor)
+            pageVC.view.topAnchor.constraint(
+                equalTo: segmentedControl.bottomAnchor,
+                constant: Spacing.tokenSpacing04
+            ),
+            pageVC.view.leadingAnchor.constraint(equalTo: leadingAnchor),
+            pageVC.view.trailingAnchor.constraint(equalTo: trailingAnchor),
+            pageVC.view.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-
-        self.pageViewController.didMove(toParent: parent)
-
-        // Important: find UIPageViewController's UIScrollView and set delegate
-        // Do it async to ensure subviews are laid out
+        
+        pageVC.didMove(toParent: parent)
+        
+        // Find and configure UIPageViewController's internal scroll view
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            for subview in self.pageViewController.view.subviews {
+            for subview in pageVC.view.subviews {
                 if let scrollView = subview as? UIScrollView {
                     scrollView.delegate = self
-                    // do not alter other properties unless needed
                     break
                 }
             }
         }
     }
-
-    @objc private func tabChanged(_ sender: SegmentedControl) {
-        let index = sender.selectedIndex
-        self.setPage(index: index, animated: true)
-        self.onTabChanged?(index)
-    }
-
+    
+    // MARK: - Page Navigation
+    
     private func setPage(index: Int, animated: Bool) {
-        guard index < viewControllers.count, index >= 0 else { return }
-
-        let direction: UIPageViewController.NavigationDirection = (index >= self.currentIndex) ? .forward : .reverse
-
-        // use completion to sync currentIndex after transition finishes
-        self.pageViewController.setViewControllers(
-            [self.viewControllers[index]],
+        guard index >= 0,
+              index < viewControllers.count,
+              let pageVC = pageViewController else { return }
+        
+        // Don't set if already at this index (unless not animated)
+        if index == currentIndex && animated {
+            return
+        }
+        
+        // Determine direction based on current index
+        let direction: UIPageViewController.NavigationDirection = 
+            (index > currentIndex) ? .forward : .reverse
+        
+        isTransitioning = animated
+        
+        pageVC.setViewControllers(
+            [viewControllers[index]],
             direction: direction,
             animated: animated,
             completion: { [weak self] finished in
                 guard let self = self else { return }
-                // If animation completed or we set without animation, update currentIndex immediately
-                self.currentIndex = index
-                self.segmentedControl.selectedIndex = index
+                self.isTransitioning = false
+                // Only update if transition completed or was not animated
+                if finished || !animated {
+                    self.previousIndex = self.currentIndex
+                    self.currentIndex = index
+                    // Sync segmented control
+                    if self.segmentedControl.selectedIndex != index {
+                        self.segmentedControl.selectedIndex = index
+                    }
+                }
             }
         )
     }
-
-    // MARK: Layout - compute segmentedControl width after AutoLayout
-    override func layoutSubviews() {
+    
+    // MARK: - Layout
+    
+    public override func layoutSubviews() {
         super.layoutSubviews()
-
-        // Calculate segmented control total width after its layout is known.
-        // Run once or when items change.
-        guard let widthConstraint = segmentedControlWidthConstraint else { return }
-
-        // Measure total tab width from segmentedControl's own method (assume it uses items)
-        let measuredTotal = self.segmentedControl.totalTabWidth() + 32 // padding
-        if measuredTotal > 0 && widthConstraint.constant != measuredTotal {
+        
+        // Calculate and update segmented control width
+        // Only update if labels have been laid out
+        guard let widthConstraint = segmentedControlWidthConstraint,
+              !segmentedControl.items.isEmpty else { return }
+        
+        // Force layout of segmented control to get accurate measurements
+        segmentedControl.setNeedsLayout()
+        segmentedControl.layoutIfNeeded()
+        
+        let measuredTotal = segmentedControl.totalTabWidth() + Spacing.tokenSpacing32
+        if measuredTotal > 0 && abs(widthConstraint.constant - measuredTotal) > 0.1 {
             widthConstraint.constant = measuredTotal
-            // update layout immediately
-            self.segmentedControl.layoutIfNeeded()
-            self.tabScrollView.layoutIfNeeded()
+            segmentedControl.layoutIfNeeded()
+            tabScrollView.layoutIfNeeded()
         }
     }
 }
@@ -178,58 +259,100 @@ class SegmentedPageContainer: UIView {
 // MARK: - UIPageViewControllerDataSource
 
 extension SegmentedPageContainer: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = self.viewControllers.firstIndex(of: viewController),
+    
+    public func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerBefore viewController: UIViewController
+    ) -> UIViewController? {
+        guard let index = viewControllers.firstIndex(of: viewController),
               index > 0 else {
             return nil
         }
-        return self.viewControllers[index - 1]
+        return viewControllers[index - 1]
     }
-
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = self.viewControllers.firstIndex(of: viewController),
-              index < self.viewControllers.count - 1 else {
+    
+    public func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerAfter viewController: UIViewController
+    ) -> UIViewController? {
+        guard let index = viewControllers.firstIndex(of: viewController),
+              index < viewControllers.count - 1 else {
             return nil
         }
-
-        return self.viewControllers[index + 1]
+        return viewControllers[index + 1]
     }
 }
 
 // MARK: - UIPageViewControllerDelegate
 
 extension SegmentedPageContainer: UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            didFinishAnimating finished: Bool,
-                            previousViewControllers: [UIViewController],
-                            transitionCompleted completed: Bool) {
-        if completed, let visibleVC = pageViewController.viewControllers?.first,
-           let index = self.viewControllers.firstIndex(of: visibleVC) {
-            self.segmentedControl.selectedIndex = index
-            self.currentIndex = index
-            self.onTabChanged?(index)
+    
+    public func pageViewController(
+        _ pageViewController: UIPageViewController,
+        didFinishAnimating finished: Bool,
+        previousViewControllers: [UIViewController],
+        transitionCompleted completed: Bool
+    ) {
+        guard completed,
+              let visibleVC = pageViewController.viewControllers?.first,
+              let index = viewControllers.firstIndex(of: visibleVC),
+              index != currentIndex else {
+            return
         }
+        
+        isTransitioning = false
+        previousIndex = currentIndex
+        currentIndex = index
+        
+        // Update segmented control if needed
+        if segmentedControl.selectedIndex != index {
+            segmentedControl.selectedIndex = index
+        }
+        
+        onTabChanged?(index)
     }
 }
 
 // MARK: - UIScrollViewDelegate
 
 extension SegmentedPageContainer: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // page view width
-        guard let viewWidth = scrollView.superview?.frame.width, viewWidth > 0 else { return }
-
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Update thumb position during manual scroll (swipe gesture)
+        // Skip if we're programmatically setting page to avoid conflicts
+        guard let viewWidth = scrollView.superview?.frame.width,
+              viewWidth > 0,
+              viewControllers.count > 1 else { return }
+        
         let offsetX = scrollView.contentOffset.x
-        // default contentOffset for UIPageViewController's scroll view is pageWidth
-        // progress: -1..0..1  we normalize to 0..1 forward
-        let progress = (offsetX - viewWidth) / viewWidth
-
-        let index = CGFloat(currentIndex)
-        let newIndexFloat = index + progress
-
-        // update segmented control thumb position using float-based progress
-        self.segmentedControl.updateThumbPosition(progress: newIndexFloat)
+        
+        // UIPageViewController's internal scrollView behavior:
+        // The scrollView uses a special offset system where:
+        // - contentOffset.x = viewWidth * (pageIndex + 1) when at a page
+        // - When scrolling: offset changes smoothly between pages
+        //
+        // To get page index as float: pageIndex = offsetX / viewWidth - 1
+        // But we want 0-based index, so: pageIndex = offsetX / viewWidth - 1 + 1 = offsetX / viewWidth
+        // However, this gives us values like 1.0 for page 0, 2.0 for page 1
+        // So we need: pageIndex = (offsetX / viewWidth) - 1
+        
+        let rawPageIndex = offsetX / viewWidth - 1
+        
+        // Clamp to valid range
+        let clampedProgress = max(0, min(CGFloat(viewControllers.count - 1), rawPageIndex))
+        
+        // Only update if significantly different to avoid jitter
+        let currentProgress = CGFloat(currentIndex)
+        if abs(clampedProgress - currentProgress) > 0.01 {
+            // Update thumb position WITHOUT animation for smooth drag following
+            // This ensures thumb follows finger immediately without delay
+            segmentedControl.updateThumbPosition(progress: clampedProgress, animated: false)
+        }
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // When drag ends, optionally animate thumb to final position for polish
+        // This is optional - the thumb should already be at correct position
+        // But we can add a subtle animation if needed
     }
 }

@@ -60,11 +60,9 @@ class ContentViewController: UIViewController {
             // Fallback: Create simple view controllers
             let productsVC = UIViewController()
             productsVC.view.backgroundColor = .systemBlue
-            productsVC.title = "Products"
             
             let groceryVC = UIViewController()
             groceryVC.view.backgroundColor = .systemPurple
-            groceryVC.title = "Grocery"
             
             segmentedPageContainer.configUI(
                 titles: ["Products", "Grocery"],
