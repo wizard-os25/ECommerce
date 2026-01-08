@@ -23,25 +23,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        // Use MainContainerViewController directly as entry point (as in sum.md)
-        let mainContainer = MainContainerViewController()
-        window?.rootViewController = mainContainer
+        // Set MainContainerViewController as entry point
+        let mainContainerViewController = MainContainerViewController()
+        window?.rootViewController = mainContainerViewController
         window?.makeKeyAndVisible()
-        
-        // MARK: - Old Flow (Commented)
-        // Old logic using AppFlowCoordinator with MainViewController
-        /*
-        let navigationController = UINavigationController()
-        window?.rootViewController = navigationController
-        appFlowCoordinator = AppFlowCoordinator(
-            navigationController: navigationController,
-            appDIContainer: appDIContainer
-        )
-        appFlowCoordinator?.start()
-        window?.makeKeyAndVisible()
-        */
     
         return true
+        
+        // MARK: - Old Flow (Commented)
+                // Old logic using AppFlowCoordinator with MainViewController
+                /*
+                let navigationController = UINavigationController()
+                window?.rootViewController = navigationController
+                appFlowCoordinator = AppFlowCoordinator(
+                    navigationController: navigationController,
+                    appDIContainer: appDIContainer
+                )
+                appFlowCoordinator?.start()
+                window?.makeKeyAndVisible()
+                */
     }
 
 //    func applicationDidEnterBackground(_ application: UIApplication) {

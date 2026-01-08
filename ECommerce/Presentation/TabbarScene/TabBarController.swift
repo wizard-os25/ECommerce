@@ -38,6 +38,12 @@ class TabBarController: UITabBarController {
         let navCart = UINavigationController(rootViewController: cartVC)
         let navAccount = UINavigationController(rootViewController: accountVC)
         
+        // Hide system navigation bar since we use custom EcoNavigationBar
+        navTabContainer.isNavigationBarHidden = true
+        navGrocery.isNavigationBarHidden = true
+        navCart.isNavigationBarHidden = true
+        navAccount.isNavigationBarHidden = true
+        
         /// Set TabBar item
         contentVC.tabBarItem = UITabBarItem(title: "Bazaar", image: UIImage(systemName: "house"), tag: 0)
         groceryVC.tabBarItem = UITabBarItem(title: "Grocery", image: UIImage(systemName: "cart.fill"), tag: 1)

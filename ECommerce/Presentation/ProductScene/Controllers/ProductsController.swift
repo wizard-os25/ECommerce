@@ -6,9 +6,9 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ProductsControllerInput {
-    func viewDidLoad()
     func didLoadNextPage()
     func didSearch(query: String)
     func didCancelSearch()
@@ -16,17 +16,16 @@ protocol ProductsControllerInput {
 }
 
 protocol ProductsControllerOutput {
+    // Products-specific outputs (EcoController already provides: loading, error, navigationState)
     var items: Observable<[ProductItemModel]> { get }
-    var loading: Observable<Bool> { get }
     var query: Observable<String> { get }
-    var error: Observable<String> { get }
     var isEmpty: Bool { get }
     var screenTitle: String { get }
     var emptyDataTitle: String { get }
     var errorTitle: String { get }
 }
 
-typealias ProductsController = ProductsControllerInput & ProductsControllerOutput
+typealias ProductsController = ProductsControllerInput & ProductsControllerOutput & EcoController
 
 final class DefaultProductsController: ProductsController {
     
@@ -42,16 +41,62 @@ final class DefaultProductsController: ProductsController {
     private var pages: [ProductPage] = []
     private var productsLoadTask: Cancellable? { willSet { productsLoadTask?.cancel() } }
     
-    // MARK: - OUTPUT
+    // MARK: - OUTPUT (Products-specific)
     
     let items: Observable<[ProductItemModel]> = Observable([])
-    let loading: Observable<Bool> = Observable(false)
     let query: Observable<String> = Observable("")
-    let error: Observable<String> = Observable("")
     var isEmpty: Bool { return items.value.isEmpty }
     let screenTitle = NSLocalizedString("Products", comment: "")
     let emptyDataTitle = NSLocalizedString("No products found", comment: "")
     let errorTitle = NSLocalizedString("Error", comment: "")
+    
+    // MARK: - Navigation Bar Configuration
+    
+    /// Navigation bar title (override default to use screenTitle)
+    var navigationBarTitle: String? {
+        return self.screenTitle
+    }
+    
+    /// Whether to show search field in navigation bar (override default to enable search for Products scene)
+    var navigationBarShowsSearch: Bool {
+        return true
+    }
+    
+    /// Search field state configuration (override default to use "Search products" placeholder)
+    var navigationBarSearchState: EcoSearchState {
+        return EcoSearchState(
+            text: "",
+            placeholder: "Search products",
+            isEditing: false,
+            showsClearButton: true,
+            showsCameraButton: true,
+            height: navigationBarSearchFieldHeight,
+            backgroundColor: navigationBarSearchFieldBackgroundColor,
+            borderWidth: navigationBarSearchFieldBorderWidth,
+            borderColor: navigationBarSearchFieldBorderColor
+        )
+    }
+    
+    /// Navigation bar scroll behavior (override default to enable collapse with search)
+    var navigationBarScrollBehavior: EcoNavigationScrollBehavior {
+        return .collapseWithSearch
+    }
+    
+    /// Initial height of navigation bar for Products scene
+    var navigationBarInitialHeight: CGFloat {
+        return 120
+    }
+    
+    /// Collapsed height of navigation bar when scrolling
+    var navigationBarCollapsedHeight: CGFloat {
+        return 80
+    }
+    
+    // MARK: - EcoController Output (common to all controllers)
+    
+    let loading: Observable<Bool> = Observable(false)
+    let error: Observable<Error?> = Observable(nil)
+    let navigationState: Observable<EcoNavigationState> = Observable(.init())
     
     // MARK: - Init
     
@@ -113,25 +158,25 @@ final class DefaultProductsController: ProductsController {
     }
     
     private func handle(error: Error) {
-        self.error.value = error.isInternetConnectionError ?
-            NSLocalizedString("No internet connection", comment: "") :
-            NSLocalizedString("Failed loading products", comment: "")
+        self.error.value = error
     }
     
     private func update(productQuery: ProductQuery) {
         resetPages()
         load(productQuery: productQuery, loading: true)
     }
+    
+    private func updateSearchState(text: String) {
+        // Không update navigationState.value để tránh trigger render lại toàn bộ navigation bar
+        // Chỉ update text trực tiếp trong searchTextField thông qua callback
+        // Callback sẽ được gọi từ searchTextField.onTextChange
+        // Không cần update state ở đây vì text đã được update trực tiếp trong textField
+    }
 }
 
 // MARK: - INPUT. View event methods
 
 extension DefaultProductsController {
-    
-    func viewDidLoad() {
-        // Load initial products with default query
-        update(productQuery: ProductQuery(query: "13"))
-    }
     
     func didLoadNextPage() {
         guard hasMorePages, !loading.value else { return }
@@ -147,8 +192,78 @@ extension DefaultProductsController {
         productsLoadTask?.cancel()
     }
     
+    func openCamera() {
+        // TODO: Implement camera opening logic
+        // Example: Present UIImagePickerController or custom camera view
+        print("Camera button tapped - implement camera opening logic here")
+    }
+    
     func didSelectItem(at index: Int) {
         // Handle item selection if needed
+    }
+}
+
+    // MARK: - EcoController Implementation
+
+extension DefaultProductsController {
+    
+    // MARK: - Navigation Bar Callbacks
+    
+    var onNavigationBarSearchTextChange: ((String) -> Void)? {
+        { [weak self] text in
+            self?.updateSearchState(text: text)
+        }
+    }
+    
+    var onNavigationBarSearchSubmit: ((String) -> Void)? {
+        { [weak self] text in
+            guard let self = self, !text.isEmpty else { return }
+            self.didSearch(query: text)
+        }
+    }
+    
+    var onNavigationBarSearchClear: (() -> Void)? {
+        { [weak self] in
+            guard let self = self else { return }
+            self.updateSearchState(text: "")
+            self.didCancelSearch()
+        }
+    }
+    
+    var onNavigationBarCameraTap: (() -> Void)? {
+        { [weak self] in
+            self?.openCamera()
+        }
+    }
+    
+    func onViewDidLoad() {
+        // Initialize navigation state using customizable properties
+        // All navigation bar properties can be customized by overriding the computed properties above
+        navigationState.value = EcoNavigationState(
+            title: navigationBarTitle,
+            titleFont: navigationBarTitleFont,
+            titleColor: navigationBarTitleColor,
+            showsSearch: navigationBarShowsSearch,
+            searchState: navigationBarShowsSearch ? navigationBarSearchState : nil,
+            leftItem: navigationBarLeftItem,
+            rightItems: navigationBarRightItems,
+            background: navigationBarBackground,
+            backgroundColor: navigationBarBackgroundColor,
+            height: navigationBarInitialHeight,
+            collapsedHeight: navigationBarCollapsedHeight,
+            scrollBehavior: navigationBarScrollBehavior
+        )
+        
+        // Load initial products with default query
+        update(productQuery: ProductQuery(query: "13"))
+    }
+    
+    func onViewWillAppear() {
+        // Handle view will appear if needed
+    }
+    
+    func onViewDidDisappear() {
+        // Handle view did disappear if needed
     }
 }
 

@@ -6,7 +6,7 @@ class ContentViewController: UIViewController {
     // Helper to get AppDIContainer from parent hierarchy or create new one
     private func getAppDIContainer() -> AppDIContainer? {
         // Try to find MainContainerViewController in parent hierarchy
-        if let mainContainer: MainContainerViewController = findParentViewController() {
+        if let _: MainContainerViewController = findParentViewController() {
             // MainContainer might have appDIContainer property in the future
             // For now, create new one as fallback
         }

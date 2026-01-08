@@ -121,6 +121,8 @@ public enum Colors {
     // Gradient
     public static let tokenRainbowBlueStart = #colorLiteral(red: 0.09019607843, green: 0.6784313725, blue: 0.6901960784, alpha: 1)
     public static let tokenRainbowBlueEnd = #colorLiteral(red: 0.03137254902, green: 0.4784313725, blue: 0.8666666667, alpha: 1)
+    public static let tokenMiddleRainbow = #colorLiteral(red: 0, green: 1, blue: 1, alpha: 1)
+
     
     // Tet holiday event gradient
     public static let tokenRainbowRedStart = #colorLiteral(red: 0.9450980392, green: 0.1058823529, blue: 0.3254901961, alpha: 1)

@@ -160,7 +160,7 @@ final class DefaultNetworkErrorLogger: NetworkErrorLogger {
     }
 
     func log(responseData data: Data?, response: URLResponse?) {
-        guard let data = data else { return }
+        guard let _ = data else { return }
         if let httpResponse = response as? HTTPURLResponse {
             printIfDebug("statusCode: \(httpResponse.statusCode)")
         }

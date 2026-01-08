@@ -265,9 +265,9 @@
 		D0029C772F0E85E600D50804 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C762F0E85E600D50804 /* IntExtensions.swift */; };
 		D0029C782F0E85E600D50804 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C762F0E85E600D50804 /* IntExtensions.swift */; };
 		D0029C792F0E85E600D50804 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C762F0E85E600D50804 /* IntExtensions.swift */; };
-		D0029C812F0E974700D50804 /* Popup1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C802F0E974700D50804 /* Popup1.swift */; };
-		D0029C822F0E974700D50804 /* Popup1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C802F0E974700D50804 /* Popup1.swift */; };
-		D0029C832F0E974700D50804 /* Popup1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C802F0E974700D50804 /* Popup1.swift */; };
+		D0029C812F0E974700D50804 /* LinkBankPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C802F0E974700D50804 /* LinkBankPopup.swift */; };
+		D0029C822F0E974700D50804 /* LinkBankPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C802F0E974700D50804 /* LinkBankPopup.swift */; };
+		D0029C832F0E974700D50804 /* LinkBankPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C802F0E974700D50804 /* LinkBankPopup.swift */; };
 		D0029C852F0E975300D50804 /* Popup2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C842F0E975300D50804 /* Popup2.swift */; };
 		D0029C862F0E975300D50804 /* Popup2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C842F0E975300D50804 /* Popup2.swift */; };
 		D0029C872F0E975300D50804 /* Popup2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029C842F0E975300D50804 /* Popup2.swift */; };
@@ -320,21 +320,15 @@
 		D0029CE42F0EA09400D50804 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CE22F0EA09400D50804 /* CartViewController.swift */; };
 		D0029CE52F0EA09400D50804 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CE22F0EA09400D50804 /* CartViewController.swift */; };
 		D0029CED2F0EA11A00D50804 /* RecommendedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CEA2F0EA11A00D50804 /* RecommendedItemCell.swift */; };
-		D0029CEE2F0EA11A00D50804 /* GuaranteedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CE62F0EA11A00D50804 /* GuaranteedHeaderView.swift */; };
 		D0029CEF2F0EA11A00D50804 /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CE82F0EA11A00D50804 /* CartItemCell.swift */; };
-		D0029CF02F0EA11A00D50804 /* GuaranteedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CE72F0EA11A00D50804 /* GuaranteedHeaderView.xib */; };
 		D0029CF12F0EA11A00D50804 /* CartItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CE92F0EA11A00D50804 /* CartItemCell.xib */; };
 		D0029CF22F0EA11A00D50804 /* RecommendedItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CEB2F0EA11A00D50804 /* RecommendedItemCell.xib */; };
-		D0029CF32F0EA11A00D50804 /* GuaranteedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CE72F0EA11A00D50804 /* GuaranteedHeaderView.xib */; };
 		D0029CF42F0EA11A00D50804 /* CartItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CE92F0EA11A00D50804 /* CartItemCell.xib */; };
 		D0029CF52F0EA11A00D50804 /* RecommendedItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CEB2F0EA11A00D50804 /* RecommendedItemCell.xib */; };
 		D0029CF62F0EA11A00D50804 /* RecommendedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CEA2F0EA11A00D50804 /* RecommendedItemCell.swift */; };
-		D0029CF72F0EA11A00D50804 /* GuaranteedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CE62F0EA11A00D50804 /* GuaranteedHeaderView.swift */; };
 		D0029CF82F0EA11A00D50804 /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CE82F0EA11A00D50804 /* CartItemCell.swift */; };
 		D0029CF92F0EA11A00D50804 /* RecommendedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CEA2F0EA11A00D50804 /* RecommendedItemCell.swift */; };
-		D0029CFA2F0EA11A00D50804 /* GuaranteedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CE62F0EA11A00D50804 /* GuaranteedHeaderView.swift */; };
 		D0029CFB2F0EA11A00D50804 /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029CE82F0EA11A00D50804 /* CartItemCell.swift */; };
-		D0029CFC2F0EA11A00D50804 /* GuaranteedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CE72F0EA11A00D50804 /* GuaranteedHeaderView.xib */; };
 		D0029CFD2F0EA11A00D50804 /* CartItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CE92F0EA11A00D50804 /* CartItemCell.xib */; };
 		D0029CFE2F0EA11A00D50804 /* RecommendedItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CEB2F0EA11A00D50804 /* RecommendedItemCell.xib */; };
 		D0029D002F0EA4F600D50804 /* GroceryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029CFF2F0EA4F600D50804 /* GroceryItemCell.xib */; };
@@ -343,6 +337,88 @@
 		D0029D042F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */; };
 		D0029D052F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */; };
 		D0029D062F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */; };
+		D0029D122F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D112F0F456600D50804 /* GuaranteedHeaderView.xib */; };
+		D0029D132F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D102F0F456600D50804 /* GuaranteedHeaderView.swift */; };
+		D0029D142F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D112F0F456600D50804 /* GuaranteedHeaderView.xib */; };
+		D0029D152F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D102F0F456600D50804 /* GuaranteedHeaderView.swift */; };
+		D0029D162F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D112F0F456600D50804 /* GuaranteedHeaderView.xib */; };
+		D0029D172F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D102F0F456600D50804 /* GuaranteedHeaderView.swift */; };
+		D0029D1C2F0F46A700D50804 /* SplashViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D1B2F0F46A700D50804 /* SplashViewController.storyboard */; };
+		D0029D1D2F0F46A700D50804 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D1A2F0F46A700D50804 /* SplashViewController.swift */; };
+		D0029D1E2F0F46A700D50804 /* SplashViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D1B2F0F46A700D50804 /* SplashViewController.storyboard */; };
+		D0029D1F2F0F46A700D50804 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D1A2F0F46A700D50804 /* SplashViewController.swift */; };
+		D0029D202F0F46A700D50804 /* SplashViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D1B2F0F46A700D50804 /* SplashViewController.storyboard */; };
+		D0029D212F0F46A700D50804 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D1A2F0F46A700D50804 /* SplashViewController.swift */; };
+		D0029D332F0F46FF00D50804 /* RegisterViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D312F0F46FF00D50804 /* RegisterViewController.storyboard */; };
+		D0029D342F0F46FF00D50804 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D2B2F0F46FF00D50804 /* LoginViewController.storyboard */; };
+		D0029D352F0F46FF00D50804 /* SignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D242F0F46FF00D50804 /* SignUpViewController.storyboard */; };
+		D0029D362F0F46FF00D50804 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D262F0F46FF00D50804 /* SignUpViewController.swift */; };
+		D0029D372F0F46FF00D50804 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D302F0F46FF00D50804 /* RegisterViewController.swift */; };
+		D0029D382F0F46FF00D50804 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D292F0F46FF00D50804 /* LoginModel.swift */; };
+		D0029D392F0F46FF00D50804 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D2D2F0F46FF00D50804 /* LoginViewController.swift */; };
+		D0029D3A2F0F46FF00D50804 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D222F0F46FF00D50804 /* SignUpModel.swift */; };
+		D0029D3B2F0F46FF00D50804 /* RegisterViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D312F0F46FF00D50804 /* RegisterViewController.storyboard */; };
+		D0029D3C2F0F46FF00D50804 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D2B2F0F46FF00D50804 /* LoginViewController.storyboard */; };
+		D0029D3D2F0F46FF00D50804 /* SignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D242F0F46FF00D50804 /* SignUpViewController.storyboard */; };
+		D0029D3E2F0F46FF00D50804 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D262F0F46FF00D50804 /* SignUpViewController.swift */; };
+		D0029D3F2F0F46FF00D50804 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D302F0F46FF00D50804 /* RegisterViewController.swift */; };
+		D0029D402F0F46FF00D50804 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D292F0F46FF00D50804 /* LoginModel.swift */; };
+		D0029D412F0F46FF00D50804 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D2D2F0F46FF00D50804 /* LoginViewController.swift */; };
+		D0029D422F0F46FF00D50804 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D222F0F46FF00D50804 /* SignUpModel.swift */; };
+		D0029D432F0F46FF00D50804 /* RegisterViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D312F0F46FF00D50804 /* RegisterViewController.storyboard */; };
+		D0029D442F0F46FF00D50804 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D2B2F0F46FF00D50804 /* LoginViewController.storyboard */; };
+		D0029D452F0F46FF00D50804 /* SignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0029D242F0F46FF00D50804 /* SignUpViewController.storyboard */; };
+		D0029D462F0F46FF00D50804 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D262F0F46FF00D50804 /* SignUpViewController.swift */; };
+		D0029D472F0F46FF00D50804 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D302F0F46FF00D50804 /* RegisterViewController.swift */; };
+		D0029D482F0F46FF00D50804 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D292F0F46FF00D50804 /* LoginModel.swift */; };
+		D0029D492F0F46FF00D50804 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D2D2F0F46FF00D50804 /* LoginViewController.swift */; };
+		D0029D4A2F0F46FF00D50804 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D222F0F46FF00D50804 /* SignUpModel.swift */; };
+		D0029D4D2F0F48F300D50804 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D4C2F0F48F300D50804 /* Utilities.swift */; };
+		D0029D4E2F0F48F300D50804 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D4C2F0F48F300D50804 /* Utilities.swift */; };
+		D0029D4F2F0F48F300D50804 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D4C2F0F48F300D50804 /* Utilities.swift */; };
+		D0029D512F0F492B00D50804 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D502F0F492B00D50804 /* Constants.swift */; };
+		D0029D522F0F492B00D50804 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D502F0F492B00D50804 /* Constants.swift */; };
+		D0029D532F0F492B00D50804 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D502F0F492B00D50804 /* Constants.swift */; };
+		D0029D5C2F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D552F0F4B5200D50804 /* CollectionSectionHeader.xib */; };
+		D0029D5D2F0F4B5200D50804 /* TableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D5A2F0F4B5200D50804 /* TableSectionHeader.xib */; };
+		D0029D5E2F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D572F0F4B5200D50804 /* CollectionDescripSectionHeader.xib */; };
+		D0029D5F2F0F4B5200D50804 /* TableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D592F0F4B5200D50804 /* TableSectionHeader.swift */; };
+		D0029D602F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D562F0F4B5200D50804 /* CollectionDescripSectionHeader.swift */; };
+		D0029D612F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D542F0F4B5200D50804 /* CollectionSectionHeader.swift */; };
+		D0029D622F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D552F0F4B5200D50804 /* CollectionSectionHeader.xib */; };
+		D0029D632F0F4B5200D50804 /* TableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D5A2F0F4B5200D50804 /* TableSectionHeader.xib */; };
+		D0029D642F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D572F0F4B5200D50804 /* CollectionDescripSectionHeader.xib */; };
+		D0029D652F0F4B5200D50804 /* TableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D592F0F4B5200D50804 /* TableSectionHeader.swift */; };
+		D0029D662F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D562F0F4B5200D50804 /* CollectionDescripSectionHeader.swift */; };
+		D0029D672F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D542F0F4B5200D50804 /* CollectionSectionHeader.swift */; };
+		D0029D682F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D552F0F4B5200D50804 /* CollectionSectionHeader.xib */; };
+		D0029D692F0F4B5200D50804 /* TableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D5A2F0F4B5200D50804 /* TableSectionHeader.xib */; };
+		D0029D6A2F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D572F0F4B5200D50804 /* CollectionDescripSectionHeader.xib */; };
+		D0029D6B2F0F4B5200D50804 /* TableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D592F0F4B5200D50804 /* TableSectionHeader.swift */; };
+		D0029D6C2F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D562F0F4B5200D50804 /* CollectionDescripSectionHeader.swift */; };
+		D0029D6D2F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D542F0F4B5200D50804 /* CollectionSectionHeader.swift */; };
+		D0029DB72F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DB62F0F5D6D00D50804 /* EcoNavigationModel.swift */; };
+		D0029DB82F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DB62F0F5D6D00D50804 /* EcoNavigationModel.swift */; };
+		D0029DB92F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DB62F0F5D6D00D50804 /* EcoNavigationModel.swift */; };
+		D0029DBF2F0F5DD000D50804 /* EcoNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DBE2F0F5DD000D50804 /* EcoNavigationBarView.swift */; };
+		D0029DC02F0F5DD000D50804 /* EcoNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DBE2F0F5DD000D50804 /* EcoNavigationBarView.swift */; };
+		D0029DC12F0F5DD000D50804 /* EcoNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DBE2F0F5DD000D50804 /* EcoNavigationBarView.swift */; };
+		D0029DC32F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DC22F0F5F9000D50804 /* EcoNavigationBarController.swift */; };
+		D0029DC42F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DC22F0F5F9000D50804 /* EcoNavigationBarController.swift */; };
+		D0029DC52F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DC22F0F5F9000D50804 /* EcoNavigationBarController.swift */; };
+		D0029DD22F0F645F00D50804 /* EcoSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DD12F0F645F00D50804 /* EcoSearchTextField.swift */; };
+		D0029DD42F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DD32F0F8B4900D50804 /* EcoBaseViewController.swift */; };
+		D0029DD52F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DD32F0F8B4900D50804 /* EcoBaseViewController.swift */; };
+		D0029DD62F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DD32F0F8B4900D50804 /* EcoBaseViewController.swift */; };
+		D0029DDD2F0F8E2700D50804 /* EcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DDC2F0F8E2700D50804 /* EcoViewController.swift */; };
+		D0029DDE2F0F8E2700D50804 /* EcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DDC2F0F8E2700D50804 /* EcoViewController.swift */; };
+		D0029DDF2F0F8E2700D50804 /* EcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DDC2F0F8E2700D50804 /* EcoViewController.swift */; };
+		D0029DE52F0F9B6F00D50804 /* EcoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DE42F0F9B6F00D50804 /* EcoController.swift */; };
+		D0029DE62F0F9B6F00D50804 /* EcoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DE42F0F9B6F00D50804 /* EcoController.swift */; };
+		D0029DE72F0F9B6F00D50804 /* EcoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DE42F0F9B6F00D50804 /* EcoController.swift */; };
+		D0029DF12F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DF02F0FBEE700D50804 /* EcoNavigationBarViewController.swift */; };
+		D0029DF22F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DF02F0FBEE700D50804 /* EcoNavigationBarViewController.swift */; };
+		D0029DF32F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DF02F0FBEE700D50804 /* EcoNavigationBarViewController.swift */; };
 		D0095B202ECB0BA700FCC7BC /* ECommerce.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0095B0F2ECB0BA700FCC7BC /* ECommerce.xcdatamodeld */; };
 		D0095B212ECB0BA700FCC7BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095B0D2ECB0BA700FCC7BC /* AppDelegate.swift */; };
 		D0095B252ECB0BA700FCC7BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0095B142ECB0BA700FCC7BC /* Main.storyboard */; };
@@ -803,7 +879,7 @@
 		D0029C6A2F0E74BF00D50804 /* PinterestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinterestCell.xib; sourceTree = "<group>"; };
 		D0029C722F0E852E00D50804 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		D0029C762F0E85E600D50804 /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
-		D0029C802F0E974700D50804 /* Popup1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup1.swift; sourceTree = "<group>"; };
+		D0029C802F0E974700D50804 /* LinkBankPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkBankPopup.swift; sourceTree = "<group>"; };
 		D0029C842F0E975300D50804 /* Popup2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup2.swift; sourceTree = "<group>"; };
 		D0029C882F0E975900D50804 /* Popup3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup3.swift; sourceTree = "<group>"; };
 		D0029C8C2F0E976000D50804 /* Popup4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup4.swift; sourceTree = "<group>"; };
@@ -821,14 +897,40 @@
 		D0029CD62F0E9FBC00D50804 /* PricingCaculationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingCaculationPopup.swift; sourceTree = "<group>"; };
 		D0029CDE2F0EA08000D50804 /* CartViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CartViewController.storyboard; sourceTree = "<group>"; };
 		D0029CE22F0EA09400D50804 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
-		D0029CE62F0EA11A00D50804 /* GuaranteedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteedHeaderView.swift; sourceTree = "<group>"; };
-		D0029CE72F0EA11A00D50804 /* GuaranteedHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuaranteedHeaderView.xib; sourceTree = "<group>"; };
 		D0029CE82F0EA11A00D50804 /* CartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCell.swift; sourceTree = "<group>"; };
 		D0029CE92F0EA11A00D50804 /* CartItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartItemCell.xib; sourceTree = "<group>"; };
 		D0029CEA2F0EA11A00D50804 /* RecommendedItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedItemCell.swift; sourceTree = "<group>"; };
 		D0029CEB2F0EA11A00D50804 /* RecommendedItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendedItemCell.xib; sourceTree = "<group>"; };
 		D0029CFF2F0EA4F600D50804 /* GroceryItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroceryItemCell.xib; sourceTree = "<group>"; };
 		D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PricingCaculationPopup.xib; sourceTree = "<group>"; };
+		D0029D102F0F456600D50804 /* GuaranteedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteedHeaderView.swift; sourceTree = "<group>"; };
+		D0029D112F0F456600D50804 /* GuaranteedHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuaranteedHeaderView.xib; sourceTree = "<group>"; };
+		D0029D1A2F0F46A700D50804 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		D0029D1B2F0F46A700D50804 /* SplashViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashViewController.storyboard; sourceTree = "<group>"; };
+		D0029D222F0F46FF00D50804 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
+		D0029D242F0F46FF00D50804 /* SignUpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpViewController.storyboard; sourceTree = "<group>"; };
+		D0029D262F0F46FF00D50804 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		D0029D292F0F46FF00D50804 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		D0029D2B2F0F46FF00D50804 /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
+		D0029D2D2F0F46FF00D50804 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D0029D302F0F46FF00D50804 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		D0029D312F0F46FF00D50804 /* RegisterViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RegisterViewController.storyboard; sourceTree = "<group>"; };
+		D0029D4C2F0F48F300D50804 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		D0029D502F0F492B00D50804 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D0029D542F0F4B5200D50804 /* CollectionSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSectionHeader.swift; sourceTree = "<group>"; };
+		D0029D552F0F4B5200D50804 /* CollectionSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionSectionHeader.xib; sourceTree = "<group>"; };
+		D0029D562F0F4B5200D50804 /* CollectionDescripSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDescripSectionHeader.swift; sourceTree = "<group>"; };
+		D0029D572F0F4B5200D50804 /* CollectionDescripSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionDescripSectionHeader.xib; sourceTree = "<group>"; };
+		D0029D592F0F4B5200D50804 /* TableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSectionHeader.swift; sourceTree = "<group>"; };
+		D0029D5A2F0F4B5200D50804 /* TableSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableSectionHeader.xib; sourceTree = "<group>"; };
+		D0029DB62F0F5D6D00D50804 /* EcoNavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoNavigationModel.swift; sourceTree = "<group>"; };
+		D0029DBE2F0F5DD000D50804 /* EcoNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoNavigationBarView.swift; sourceTree = "<group>"; };
+		D0029DC22F0F5F9000D50804 /* EcoNavigationBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoNavigationBarController.swift; sourceTree = "<group>"; };
+		D0029DD12F0F645F00D50804 /* EcoSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSearchTextField.swift; sourceTree = "<group>"; };
+		D0029DD32F0F8B4900D50804 /* EcoBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoBaseViewController.swift; sourceTree = "<group>"; };
+		D0029DDC2F0F8E2700D50804 /* EcoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoViewController.swift; sourceTree = "<group>"; };
+		D0029DE42F0F9B6F00D50804 /* EcoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoController.swift; sourceTree = "<group>"; };
+		D0029DF02F0FBEE700D50804 /* EcoNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EcoNavigationBarViewController.swift; path = ECommerce/Common/CommonView/NavigationBar/NavBarViewController/View/EcoNavigationBarViewController.swift; sourceTree = SOURCE_ROOT; };
 		D0095AD62ECB0B8300FCC7BC /* ECommerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECommerce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0095AEF2ECB0B8400FCC7BC /* ECommerceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ECommerceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0095AF92ECB0B8400FCC7BC /* ECommerceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ECommerceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1232,7 +1334,7 @@
 			children = (
 				D0029CD62F0E9FBC00D50804 /* PricingCaculationPopup.swift */,
 				D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */,
-				D0029C802F0E974700D50804 /* Popup1.swift */,
+				D0029C802F0E974700D50804 /* LinkBankPopup.swift */,
 				D0029C842F0E975300D50804 /* Popup2.swift */,
 				D0029C882F0E975900D50804 /* Popup3.swift */,
 				D0029C8C2F0E976000D50804 /* Popup4.swift */,
@@ -1285,6 +1387,7 @@
 		D0029C982F0E977400D50804 /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
+				D0029DD12F0F645F00D50804 /* EcoSearchTextField.swift */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -1460,14 +1563,207 @@
 		D0029CEC2F0EA11A00D50804 /* TableViewHeader+Cell */ = {
 			isa = PBXGroup;
 			children = (
-				D0029CE62F0EA11A00D50804 /* GuaranteedHeaderView.swift */,
-				D0029CE72F0EA11A00D50804 /* GuaranteedHeaderView.xib */,
 				D0029CE82F0EA11A00D50804 /* CartItemCell.swift */,
 				D0029CE92F0EA11A00D50804 /* CartItemCell.xib */,
 				D0029CEA2F0EA11A00D50804 /* RecommendedItemCell.swift */,
 				D0029CEB2F0EA11A00D50804 /* RecommendedItemCell.xib */,
 			);
 			path = "TableViewHeader+Cell";
+			sourceTree = "<group>";
+		};
+		D0029D092F0F3CCB00D50804 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D0C2F0F44D900D50804 /* NavBarViewController */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		D0029D0A2F0F3CD500D50804 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D0029DD32F0F8B4900D50804 /* EcoBaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		D0029D0C2F0F44D900D50804 /* NavBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D0029DB52F0F5D6900D50804 /* Model */,
+				D0029DB42F0F5D6500D50804 /* View */,
+				D0029DB32F0F5D5400D50804 /* Controller */,
+			);
+			path = NavBarViewController;
+			sourceTree = "<group>";
+		};
+		D0029D0D2F0F450800D50804 /* Header&FooterView */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D582F0F4B5200D50804 /* CollectionViewHeader */,
+				D0029D5B2F0F4B5200D50804 /* TableViewHeader */,
+			);
+			path = "Header&FooterView";
+			sourceTree = "<group>";
+		};
+		D0029D182F0F465500D50804 /* OnboardScene */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D192F0F465E00D50804 /* SplashScreen */,
+			);
+			path = OnboardScene;
+			sourceTree = "<group>";
+		};
+		D0029D192F0F465E00D50804 /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D1A2F0F46A700D50804 /* SplashViewController.swift */,
+				D0029D1B2F0F46A700D50804 /* SplashViewController.storyboard */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		D0029D232F0F46FF00D50804 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D222F0F46FF00D50804 /* SignUpModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0029D252F0F46FF00D50804 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D242F0F46FF00D50804 /* SignUpViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D0029D272F0F46FF00D50804 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D262F0F46FF00D50804 /* SignUpViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D0029D282F0F46FF00D50804 /* Sign-up */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D232F0F46FF00D50804 /* Model */,
+				D0029D252F0F46FF00D50804 /* View */,
+				D0029D272F0F46FF00D50804 /* Controller */,
+			);
+			path = "Sign-up";
+			sourceTree = "<group>";
+		};
+		D0029D2A2F0F46FF00D50804 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D292F0F46FF00D50804 /* LoginModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0029D2C2F0F46FF00D50804 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D2B2F0F46FF00D50804 /* LoginViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D0029D2E2F0F46FF00D50804 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D2D2F0F46FF00D50804 /* LoginViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D0029D2F2F0F46FF00D50804 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D2A2F0F46FF00D50804 /* Model */,
+				D0029D2C2F0F46FF00D50804 /* View */,
+				D0029D2E2F0F46FF00D50804 /* Controller */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D0029D322F0F46FF00D50804 /* AuthScene */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D4B2F0F471400D50804 /* Register */,
+				D0029D282F0F46FF00D50804 /* Sign-up */,
+				D0029D2F2F0F46FF00D50804 /* Login */,
+			);
+			path = AuthScene;
+			sourceTree = "<group>";
+		};
+		D0029D4B2F0F471400D50804 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D302F0F46FF00D50804 /* RegisterViewController.swift */,
+				D0029D312F0F46FF00D50804 /* RegisterViewController.storyboard */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		D0029D582F0F4B5200D50804 /* CollectionViewHeader */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D542F0F4B5200D50804 /* CollectionSectionHeader.swift */,
+				D0029D552F0F4B5200D50804 /* CollectionSectionHeader.xib */,
+				D0029D562F0F4B5200D50804 /* CollectionDescripSectionHeader.swift */,
+				D0029D572F0F4B5200D50804 /* CollectionDescripSectionHeader.xib */,
+			);
+			path = CollectionViewHeader;
+			sourceTree = "<group>";
+		};
+		D0029D5B2F0F4B5200D50804 /* TableViewHeader */ = {
+			isa = PBXGroup;
+			children = (
+				D0029D102F0F456600D50804 /* GuaranteedHeaderView.swift */,
+				D0029D112F0F456600D50804 /* GuaranteedHeaderView.xib */,
+				D0029D592F0F4B5200D50804 /* TableSectionHeader.swift */,
+				D0029D5A2F0F4B5200D50804 /* TableSectionHeader.xib */,
+			);
+			path = TableViewHeader;
+			sourceTree = "<group>";
+		};
+		D0029DB32F0F5D5400D50804 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D0029DC22F0F5F9000D50804 /* EcoNavigationBarController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D0029DB42F0F5D6500D50804 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D0029DF02F0FBEE700D50804 /* EcoNavigationBarViewController.swift */,
+				D0029DBE2F0F5DD000D50804 /* EcoNavigationBarView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D0029DB52F0F5D6900D50804 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0029DB62F0F5D6D00D50804 /* EcoNavigationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0029DD72F0F8DBB00D50804 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D0029DDC2F0F8E2700D50804 /* EcoViewController.swift */,
+				D0029DE42F0F9B6F00D50804 /* EcoController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		D0095ACD2ECB0B8300FCC7BC = {
@@ -1574,6 +1870,10 @@
 		D0095B7B2ECB258000FCC7BC /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
+				D0029DD72F0F8DBB00D50804 /* ViewController */,
+				D0029D0D2F0F450800D50804 /* Header&FooterView */,
+				D0029D0A2F0F3CD500D50804 /* Base */,
+				D0029D092F0F3CCB00D50804 /* NavigationBar */,
 				D0029C982F0E977400D50804 /* SearchView */,
 				D0029C7B2F0E95AD00D50804 /* Popup */,
 				D0029C7A2F0E95A000D50804 /* LoadingView */,
@@ -1696,6 +1996,8 @@
 		D0095BC92ECB42CD00FCC7BC /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D0029D502F0F492B00D50804 /* Constants.swift */,
+				D0029D4C2F0F48F300D50804 /* Utilities.swift */,
 				D0E6C3A22F0D06AC00527962 /* ImageCache.swift */,
 				D0095B7B2ECB258000FCC7BC /* CommonView */,
 				D0029B6A2F0E742000D50804 /* CoreUIKit */,
@@ -1718,6 +2020,8 @@
 		D0095BEB2ECB43A200FCC7BC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				D0029D182F0F465500D50804 /* OnboardScene */,
+				D0029D322F0F46FF00D50804 /* AuthScene */,
 				D0E6C3D52F0DFEF400527962 /* TabbarScene */,
 				D0029C992F0E979900D50804 /* SearchScene */,
 				D0095CAA2ECB57C100FCC7BC /* SideMenuScene */,
@@ -2248,6 +2552,7 @@
 			files = (
 				D0095B692ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D0095D7E2ECC58F200FCC7BC /* accounts.json in Resources */,
+				D0029D202F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0029D012F0EA4F600D50804 /* GroceryItemCell.xib in Resources */,
 				D0095B702ECB1D4100FCC7BC /* Localizable.strings in Resources */,
 				D0095B3B2ECB0BA700FCC7BC /* Main.storyboard in Resources */,
@@ -2259,6 +2564,7 @@
 				D0095CEC2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
 				D0095D672ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
 				D0095B3E2ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
+				D0029D162F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0E6C3D92F0DFF9800527962 /* TabBar.storyboard in Resources */,
 				D0E6C3D12F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
 				D0029BB62F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
@@ -2266,6 +2572,9 @@
 				D0029BB82F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
 				D0029BB92F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
 				D0029BBA2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
+				D0029D682F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
+				D0029D692F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
+				D0029D6A2F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */,
 				D0029BBB2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
 				D0029BBC2F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
 				D0029BBD2F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */,
@@ -2312,10 +2621,12 @@
 				D0029BE52F0E742000D50804 /* ic_atm_noi_dia_16@3x.png in Resources */,
 				D0029CE02F0EA08000D50804 /* CartViewController.storyboard in Resources */,
 				D0029BE62F0E742000D50804 /* ic_wooribank_56.png in Resources */,
+				D0029D3B2F0F46FF00D50804 /* RegisterViewController.storyboard in Resources */,
+				D0029D3C2F0F46FF00D50804 /* LoginViewController.storyboard in Resources */,
+				D0029D3D2F0F46FF00D50804 /* SignUpViewController.storyboard in Resources */,
 				D0029C702F0E74BF00D50804 /* PinterestCell.xib in Resources */,
 				D0029BE72F0E742000D50804 /* ic_vibbank_56@3x.png in Resources */,
 				D0029BE82F0E742000D50804 /* ic_viettelpay_40@3x.png in Resources */,
-				D0029CF32F0EA11A00D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0029CF42F0EA11A00D50804 /* CartItemCell.xib in Resources */,
 				D0029CF52F0EA11A00D50804 /* RecommendedItemCell.xib in Resources */,
 				D0029BE92F0E742000D50804 /* ic_uobbank_56@2x.png in Resources */,
@@ -2330,10 +2641,14 @@
 			files = (
 				D0095B6A2ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D0095C042ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
+				D0029D142F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0E6C3CC2F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
 				D0029B802F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
 				D0029C6D2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
 				D0029B812F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
+				D0029D332F0F46FF00D50804 /* RegisterViewController.storyboard in Resources */,
+				D0029D342F0F46FF00D50804 /* LoginViewController.storyboard in Resources */,
+				D0029D352F0F46FF00D50804 /* SignUpViewController.storyboard in Resources */,
 				D0029B822F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
 				D0029B832F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
 				D0029B842F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
@@ -2378,7 +2693,6 @@
 				D0029BA92F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
 				D0029BAA2F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
 				D0029BAB2F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
-				D0029CF02F0EA11A00D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0029CF12F0EA11A00D50804 /* CartItemCell.xib in Resources */,
 				D0029CF22F0EA11A00D50804 /* RecommendedItemCell.xib in Resources */,
 				D0029BAC2F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
@@ -2402,8 +2716,12 @@
 				D0E6C3DB2F0DFF9800527962 /* TabBar.storyboard in Resources */,
 				D0095B2A2ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095D682ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
+				D0029D1E2F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0095B2B2ECB0BA700FCC7BC /* Info.plist in Resources */,
 				D0095B2C2ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
+				D0029D5C2F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
+				D0029D5D2F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
+				D0029D5E2F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2413,10 +2731,14 @@
 			files = (
 				D0095B682ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D0095C122ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
+				D0029D122F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0E6C3D42F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
 				D0029C162F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
 				D0029C6F2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
 				D0029C172F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
+				D0029D432F0F46FF00D50804 /* RegisterViewController.storyboard in Resources */,
+				D0029D442F0F46FF00D50804 /* LoginViewController.storyboard in Resources */,
+				D0029D452F0F46FF00D50804 /* SignUpViewController.storyboard in Resources */,
 				D0029C182F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
 				D0029C192F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
 				D0029C1A2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
@@ -2461,7 +2783,6 @@
 				D0029C3F2F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
 				D0029C402F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
 				D0029C412F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
-				D0029CFC2F0EA11A00D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0029CFD2F0EA11A00D50804 /* CartItemCell.xib in Resources */,
 				D0029CFE2F0EA11A00D50804 /* RecommendedItemCell.xib in Resources */,
 				D0029C422F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
@@ -2485,8 +2806,12 @@
 				D0E6C3DC2F0DFF9800527962 /* TabBar.storyboard in Resources */,
 				D0095B262ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095D662ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
+				D0029D1C2F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0095B272ECB0BA700FCC7BC /* Info.plist in Resources */,
 				D0095B282ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
+				D0029D622F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
+				D0029D632F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
+				D0029D642F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2497,9 +2822,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0029D3E2F0F46FF00D50804 /* SignUpViewController.swift in Sources */,
+				D0029D3F2F0F46FF00D50804 /* RegisterViewController.swift in Sources */,
+				D0029D402F0F46FF00D50804 /* LoginModel.swift in Sources */,
+				D0029D412F0F46FF00D50804 /* LoginViewController.swift in Sources */,
+				D0029D422F0F46FF00D50804 /* SignUpModel.swift in Sources */,
 				D0E6C3B12F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */,
 				D0E6C3B22F0DFAF700527962 /* SideMenuController.swift in Sources */,
 				D06C3BB02ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
+				D0029DDE2F0F8E2700D50804 /* EcoViewController.swift in Sources */,
 				D0029CAF2F0E988D00D50804 /* CategoryMainItemModel.swift in Sources */,
 				D0095C9A2ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
 				D0095D872ECC5B2B00FCC7BC /* PhoneNumber.swift in Sources */,
@@ -2512,15 +2843,17 @@
 				D0095D1A2ECC2FFF00FCC7BC /* SideMenuAnimator.swift in Sources */,
 				D06C3B892ECCA21800289D48 /* UIView+Layout.swift in Sources */,
 				D0095D1C2ECC2FFF00FCC7BC /* SideMenuLayoutManager.swift in Sources */,
+				D0029DC02F0F5DD000D50804 /* EcoNavigationBarView.swift in Sources */,
 				D0095D5F2ECC52A400FCC7BC /* UIWindow+Extensions.swift in Sources */,
 				D0095CD32ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
 				D0095C242ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
+				D0029DB92F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */,
 				D0095D402ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
 				D0095C252ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
 				D0095CCD2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095C262ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
 				D0029CF62F0EA11A00D50804 /* RecommendedItemCell.swift in Sources */,
-				D0029CF72F0EA11A00D50804 /* GuaranteedHeaderView.swift in Sources */,
+				D0029DC52F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */,
 				D0029CF82F0EA11A00D50804 /* CartItemCell.swift in Sources */,
 				D06C3BAD2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0095D3B2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
@@ -2539,6 +2872,7 @@
 				D0E6C3D02F0DFEC000527962 /* HomeViewController.swift in Sources */,
 				D0095CB92ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */,
 				D0095C2A2ECB43DC00FCC7BC /* Observable.swift in Sources */,
+				D0029DD22F0F645F00D50804 /* EcoSearchTextField.swift in Sources */,
 				D0095C2B2ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
 				D0095C2C2ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
 				D0095CFE2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
@@ -2550,7 +2884,9 @@
 				D0095BFC2ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
 				D06C3B942ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
 				D0095BFD2ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
+				D0029DD42F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */,
 				D06C3B902ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
+				D0029D4F2F0F48F300D50804 /* Utilities.swift in Sources */,
 				D0095BFE2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D0029C8E2F0E976000D50804 /* Popup4.swift in Sources */,
 				D0095BFF2ECB43C500FCC7BC /* ProductsViewController.swift in Sources */,
@@ -2561,17 +2897,19 @@
 				D0029BEC2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
 				D0029BED2F0E742000D50804 /* EcoDivider.swift in Sources */,
 				D0029BEE2F0E742000D50804 /* Sizing.swift in Sources */,
-				D0029C832F0E974700D50804 /* Popup1.swift in Sources */,
+				D0029C832F0E974700D50804 /* LinkBankPopup.swift in Sources */,
 				D0029C912F0E976400D50804 /* Popup5.swift in Sources */,
 				D0029BEF2F0E742000D50804 /* EcoTick.swift in Sources */,
 				D0029BF02F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
 				D0029BF12F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D0029BF22F0E742000D50804 /* EcoProgressView.swift in Sources */,
 				D0029BF32F0E742000D50804 /* Border.swift in Sources */,
+				D0029D172F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */,
 				D0029BF42F0E742000D50804 /* Spacing.swift in Sources */,
 				D0029C952F0E976B00D50804 /* Popup6.swift in Sources */,
 				D0029BF52F0E742000D50804 /* EcoAvatarView.swift in Sources */,
 				D0029BF62F0E742000D50804 /* SFFont.swift in Sources */,
+				D0029DE72F0F9B6F00D50804 /* EcoController.swift in Sources */,
 				D0029BF72F0E742000D50804 /* Typography.swift in Sources */,
 				D0029BF82F0E742000D50804 /* EcoRadioButton.swift in Sources */,
 				D0029C712F0E74BF00D50804 /* PinterestCell.swift in Sources */,
@@ -2582,6 +2920,7 @@
 				D0029BFD2F0E742000D50804 /* Colors.swift in Sources */,
 				D0029BFE2F0E742000D50804 /* EcoTextView.swift in Sources */,
 				D0029BFF2F0E742000D50804 /* EcoSwitch.swift in Sources */,
+				D0029DF22F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */,
 				D0029CE32F0EA09400D50804 /* CartViewController.swift in Sources */,
 				D0029C002F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
 				D0095BCF2ECB42D200FCC7BC /* ConnectionError.swift in Sources */,
@@ -2615,6 +2954,7 @@
 				D0029CA22F0E980A00D50804 /* CategoryController.swift in Sources */,
 				D0029C772F0E85E600D50804 /* IntExtensions.swift in Sources */,
 				D0095BDD2ECB433B00FCC7BC /* AppFlowCoordinator.swift in Sources */,
+				D0029D212F0F46A700D50804 /* SplashViewController.swift in Sources */,
 				D0095D532ECC50AE00FCC7BC /* UILabel+Extensions.swift in Sources */,
 				D0095B802ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095BAD2ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift in Sources */,
@@ -2622,6 +2962,9 @@
 				D0095BAE2ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift in Sources */,
 				D0095D0B2ECC21A000FCC7BC /* MainSceneDIContainer.swift in Sources */,
 				D0029C862F0E975300D50804 /* Popup2.swift in Sources */,
+				D0029D6B2F0F4B5200D50804 /* TableSectionHeader.swift in Sources */,
+				D0029D6C2F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */,
+				D0029D6D2F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
 				D0029CC12F0E9E2300D50804 /* GroceryCoordinatingController.swift in Sources */,
 				D0095CE82ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
 				D06C3BA82ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
@@ -2650,6 +2993,7 @@
 				D0E6C3E82F0E0AF600527962 /* SegmentedControl.swift in Sources */,
 				D0095B892ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
 				D0095D492ECC506E00FCC7BC /* AttributedText.swift in Sources */,
+				D0029D512F0F492B00D50804 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2657,9 +3001,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0029D362F0F46FF00D50804 /* SignUpViewController.swift in Sources */,
+				D0029D372F0F46FF00D50804 /* RegisterViewController.swift in Sources */,
+				D0029D382F0F46FF00D50804 /* LoginModel.swift in Sources */,
+				D0029D392F0F46FF00D50804 /* LoginViewController.swift in Sources */,
+				D0029D3A2F0F46FF00D50804 /* SignUpModel.swift in Sources */,
 				D0029C6C2F0E74BF00D50804 /* PinterestCell.swift in Sources */,
 				D06C3BAC2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0029C752F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
+				D0029DDF2F0F8E2700D50804 /* EcoViewController.swift in Sources */,
 				D0095D6C2ECC557500FCC7BC /* NSObjectExt.swift in Sources */,
 				D0095D062ECC215100FCC7BC /* MainViewController.swift in Sources */,
 				D0029C8F2F0E976000D50804 /* Popup4.swift in Sources */,
@@ -2672,14 +3022,17 @@
 				D06C3B882ECCA21800289D48 /* UIView+Layout.swift in Sources */,
 				D0095D202ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
 				D0095CBE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
+				D0029DC12F0F5DD000D50804 /* EcoNavigationBarView.swift in Sources */,
 				D0E6C3DF2F0E02AC00527962 /* TabBarController.swift in Sources */,
 				D06C3BAF2ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
 				D0E6C3932F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
+				D0029DB72F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */,
 				D0E6C3942F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
 				D0E6C3B52F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */,
 				D0E6C3B62F0DFAF700527962 /* SideMenuController.swift in Sources */,
 				D0E6C3952F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
 				D0E6C3962F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */,
+				D0029DC32F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */,
 				D0E6C3972F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
 				D0029CDA2F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */,
 				D0029CBD2F0E9DFF00D50804 /* GroceryItemModel.swift in Sources */,
@@ -2710,6 +3063,8 @@
 				D0029C562F0E742E00D50804 /* EncodableExtensions.swift in Sources */,
 				D0095C422ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
 				D0E6C3B92F0DFB0E00527962 /* MainController.swift in Sources */,
+				D0029DD52F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */,
+				D0029D4E2F0F48F300D50804 /* Utilities.swift in Sources */,
 				D0095D942ECC5B8C00FCC7BC /* AES.swift in Sources */,
 				D0029B6B2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
 				D0029B6C2F0E742000D50804 /* EcoDivider.swift in Sources */,
@@ -2728,10 +3083,12 @@
 				D0029B772F0E742000D50804 /* EcoRadioButton.swift in Sources */,
 				D0029B782F0E742000D50804 /* Shadows.swift in Sources */,
 				D0029B792F0E742000D50804 /* Opacity.swift in Sources */,
+				D0029D152F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */,
 				D0029B7A2F0E742000D50804 /* BorderRadius.swift in Sources */,
 				D0029B7B2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */,
 				D0029B7C2F0E742000D50804 /* Colors.swift in Sources */,
 				D0029B7D2F0E742000D50804 /* EcoTextView.swift in Sources */,
+				D0029DE62F0F9B6F00D50804 /* EcoController.swift in Sources */,
 				D0029B7E2F0E742000D50804 /* EcoSwitch.swift in Sources */,
 				D0029B7F2F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
 				D0095B822ECB412200FCC7BC /* Product.swift in Sources */,
@@ -2742,8 +3099,8 @@
 				D06C3B912ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
 				D0095BB22ECB428800FCC7BC /* DefaultProductsRepository.swift in Sources */,
 				D0095BA32ECB426200FCC7BC /* APIEndpoints.swift in Sources */,
+				D0029DF32F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */,
 				D0029CED2F0EA11A00D50804 /* RecommendedItemCell.swift in Sources */,
-				D0029CEE2F0EA11A00D50804 /* GuaranteedHeaderView.swift in Sources */,
 				D0029CEF2F0EA11A00D50804 /* CartItemCell.swift in Sources */,
 				D0029C972F0E976B00D50804 /* Popup6.swift in Sources */,
 				D0095B2F2ECB0BA700FCC7BC /* ECommerce.xcdatamodeld in Sources */,
@@ -2776,6 +3133,7 @@
 				D0095CCE2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095BC12ECB42B100FCC7BC /* NetworkService.swift in Sources */,
 				D0E6C3A42F0D06AC00527962 /* ImageCache.swift in Sources */,
+				D0029D1F2F0F46A700D50804 /* SplashViewController.swift in Sources */,
 				D0095BC22ECB42B100FCC7BC /* Endpoint.swift in Sources */,
 				D0095BC32ECB42B100FCC7BC /* DataTransferService.swift in Sources */,
 				D0029C922F0E976400D50804 /* Popup5.swift in Sources */,
@@ -2783,7 +3141,10 @@
 				D06C3B9C2ECCA31200289D48 /* UIView+Gesture.swift in Sources */,
 				D0095C962ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
 				D0095C972ECB579900FCC7BC /* ProductsController.swift in Sources */,
-				D0029C822F0E974700D50804 /* Popup1.swift in Sources */,
+				D0029D5F2F0F4B5200D50804 /* TableSectionHeader.swift in Sources */,
+				D0029D602F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */,
+				D0029D612F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
+				D0029C822F0E974700D50804 /* LinkBankPopup.swift in Sources */,
 				D0095B922ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0095B972ECB41A800FCC7BC /* ProductsRepository.swift in Sources */,
 				D0095B302ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
@@ -2811,6 +3172,7 @@
 				D0095BD92ECB432100FCC7BC /* AppConfigurations.swift in Sources */,
 				D06C3B8D2ECCA25D00289D48 /* UIView+Shadow.swift in Sources */,
 				D0095B9B2ECB41C500FCC7BC /* ProductsQueriesRepository.swift in Sources */,
+				D0029D522F0F492B00D50804 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2824,6 +3186,7 @@
 				D0095B752ECB1D7B00FCC7BC /* Localize.swift in Sources */,
 				D0095DA02ECC5BED00FCC7BC /* CommonUtil.swift in Sources */,
 				D0095DA12ECC5BED00FCC7BC /* CoreConstant.swift in Sources */,
+				D0029DBF2F0F5DD000D50804 /* EcoNavigationBarView.swift in Sources */,
 				D0095CCB2ECB59DA00FCC7BC /* UIViewController+Parent.swift in Sources */,
 				D0095CC52ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
 				D0095B452ECB0C0B00FCC7BC /* ECommerceUITests.swift in Sources */,
@@ -2842,6 +3205,7 @@
 				D0095BAB2ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift in Sources */,
 				D06C3BAB2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0095D712ECC565200FCC7BC /* LocalAuthenticationContextExtensions.swift in Sources */,
+				D0029DE52F0F9B6F00D50804 /* EcoController.swift in Sources */,
 				D0095BAC2ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift in Sources */,
 				D0095B852ECB412200FCC7BC /* ProductQuery.swift in Sources */,
 				D0029C732F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
@@ -2850,10 +3214,17 @@
 				D0029CA42F0E980A00D50804 /* CategoryController.swift in Sources */,
 				D0095D852ECC5ABD00FCC7BC /* Constant.swift in Sources */,
 				D0029CF92F0EA11A00D50804 /* RecommendedItemCell.swift in Sources */,
-				D0029CFA2F0EA11A00D50804 /* GuaranteedHeaderView.swift in Sources */,
 				D0029CFB2F0EA11A00D50804 /* CartItemCell.swift in Sources */,
 				D0095BA42ECB426200FCC7BC /* APIEndpoints.swift in Sources */,
+				D0029D652F0F4B5200D50804 /* TableSectionHeader.swift in Sources */,
+				D0029D662F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */,
+				D0029D672F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
 				D0095BB52ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
+				D0029D462F0F46FF00D50804 /* SignUpViewController.swift in Sources */,
+				D0029D472F0F46FF00D50804 /* RegisterViewController.swift in Sources */,
+				D0029D482F0F46FF00D50804 /* LoginModel.swift in Sources */,
+				D0029D492F0F46FF00D50804 /* LoginViewController.swift in Sources */,
+				D0029D4A2F0F46FF00D50804 /* SignUpModel.swift in Sources */,
 				D0029CD82F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */,
 				D0029C632F0E744D00D50804 /* UIColorExtensions.swift in Sources */,
 				D0029C642F0E744D00D50804 /* UIImageExtensions.swift in Sources */,
@@ -2892,7 +3263,7 @@
 				D06C3B872ECCA21800289D48 /* UIView+Layout.swift in Sources */,
 				D06C3BB32ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */,
 				D0095CAC2ECB57C100FCC7BC /* SideMenuModel.swift in Sources */,
-				D0029C812F0E974700D50804 /* Popup1.swift in Sources */,
+				D0029C812F0E974700D50804 /* LinkBankPopup.swift in Sources */,
 				D0095D792ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
 				D06C3B972ECCA2E500289D48 /* UIView+CornerRadius.swift in Sources */,
 				D0095CAE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
@@ -2901,6 +3272,7 @@
 				D0095BE62ECB436700FCC7BC /* AppDIContainer.swift in Sources */,
 				D0095C0C2ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
 				D0095C0D2ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
+				D0029DF12F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */,
 				D0E6C3E12F0E02AC00527962 /* TabBarController.swift in Sources */,
 				D0029C932F0E976400D50804 /* Popup5.swift in Sources */,
 				D0095D5E2ECC52A400FCC7BC /* UIWindow+Extensions.swift in Sources */,
@@ -2910,12 +3282,15 @@
 				D0095C0E2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D0095D4B2ECC506E00FCC7BC /* AttributedText.swift in Sources */,
 				D0095D092ECC21A000FCC7BC /* MainSceneDIContainer.swift in Sources */,
+				D0029D4D2F0F48F300D50804 /* Utilities.swift in Sources */,
 				D0095D3C2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095CCF2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095D4D2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
 				D0029C962F0E976B00D50804 /* Popup6.swift in Sources */,
 				D0E6C3A32F0D06AC00527962 /* ImageCache.swift in Sources */,
 				D0095D932ECC5B8C00FCC7BC /* AES.swift in Sources */,
+				D0029DC42F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */,
+				D0029DDD2F0F8E2700D50804 /* EcoViewController.swift in Sources */,
 				D0095D512ECC50AE00FCC7BC /* UILabel+Extensions.swift in Sources */,
 				D06C3BA72ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
 				D06C3BB12ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
@@ -2942,11 +3317,14 @@
 				D0095B212ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
 				D0095D142ECC2FFF00FCC7BC /* SideMenuAnimator.swift in Sources */,
 				D0E6C3B32F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */,
+				D0029D1D2F0F46A700D50804 /* SplashViewController.swift in Sources */,
 				D0E6C3B42F0DFAF700527962 /* SideMenuController.swift in Sources */,
+				D0029D132F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */,
 				D0095D162ECC2FFF00FCC7BC /* SideMenuLayoutManager.swift in Sources */,
 				D0095CD22ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
 				D0095B992ECB41A900FCC7BC /* ProductsRepository.swift in Sources */,
 				D0E6C39D2F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
+				D0029DB82F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */,
 				D0E6C39E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
 				D0E6C39F2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
 				D0E6C3A02F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */,
@@ -2954,6 +3332,7 @@
 				D0029C022F0E742000D50804 /* EcoDivider.swift in Sources */,
 				D0029C032F0E742000D50804 /* Sizing.swift in Sources */,
 				D0029C042F0E742000D50804 /* EcoTick.swift in Sources */,
+				D0029DD62F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */,
 				D0029CB02F0E988D00D50804 /* CategoryMainItemModel.swift in Sources */,
 				D0029C052F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
 				D0029C062F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
@@ -2963,6 +3342,7 @@
 				D0029C0A2F0E742000D50804 /* EcoAvatarView.swift in Sources */,
 				D0029C0B2F0E742000D50804 /* SFFont.swift in Sources */,
 				D0029C0C2F0E742000D50804 /* Typography.swift in Sources */,
+				D0029D532F0F492B00D50804 /* Constants.swift in Sources */,
 				D0029C0D2F0E742000D50804 /* EcoRadioButton.swift in Sources */,
 				D0029C0E2F0E742000D50804 /* Shadows.swift in Sources */,
 				D0029C0F2F0E742000D50804 /* Opacity.swift in Sources */,

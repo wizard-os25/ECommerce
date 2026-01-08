@@ -1,6 +1,6 @@
 import Foundation
 
-final class Observable<Value> {
+public final class Observable<Value> {
     
     struct Observer<T> {
         weak var observer: AnyObject?

@@ -1,8 +1,6 @@
-
-
 import UIKit
 
-public protocol KeyboardHandler: class {
+public protocol KeyboardHandler: AnyObject {
     var bottomKeyboardConstraint: NSLayoutConstraint! { get set }
     func keyboardWillShow(_ notification: Notification)
     func keyboardWillHide(_ notification: Notification)

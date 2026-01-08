@@ -7,12 +7,14 @@
 
 import UIKit
 
-final class ProductsViewController: UIViewController, StoryboardInstantiable, Alertable {
+final class ProductsViewController: EcoViewController {
     
     @IBOutlet private var productsListContainer: UIView!
     @IBOutlet private var emptyDataLabel: UILabel!
     
-    private var productsController: ProductsController!
+    private var productsController: ProductsController! {
+        get { controller as? ProductsController }
+    }
     private var productsTableViewController: ProductsTableViewController?
     
     // MARK: - Lifecycle
@@ -21,17 +23,56 @@ final class ProductsViewController: UIViewController, StoryboardInstantiable, Al
         with productsController: ProductsController
     ) -> ProductsViewController {
         let view = ProductsViewController.instantiateViewController()
-        view.productsController = productsController
+        // Inject controller for EcoViewController
+        view.controller = productsController
         return view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        bind(to: productsController)
+        bindProductsSpecific()
         setupChildViewController()
         setupSidebarGesture()
         // viewDidLoad will be called on mediatingController by ProductsTableViewController
+    }
+    
+    // MARK: - Common Binding Override
+    
+    override func bindCommon() {
+        super.bindCommon()
+        bindProductsSpecific()
+    }
+    
+    // MARK: - Products-Specific Binding
+    
+    private func bindProductsSpecific() {
+        productsController.items.observe(on: self) { [weak self] _ in
+            self?.updateItems()
+        }
+    }
+    
+    // MARK: - Loading Handler Override
+    
+    override func handleLoading(_ isLoading: Bool) {
+        super.handleLoading(isLoading)
+        
+        emptyDataLabel.isHidden = true
+        productsListContainer.isHidden = true
+        
+        if !isLoading {
+            productsListContainer.isHidden = productsController.isEmpty
+            emptyDataLabel.isHidden = !productsController.isEmpty
+        }
+        
+        productsTableViewController?.updateLoading(isLoading)
+    }
+    
+    // MARK: - Error Handler Override
+    
+    override func handleError(_ error: Error?) {
+        guard let error else { return }
+        showAlert(title: productsController.errorTitle, message: error.localizedDescription)
     }
     
     // MARK: - Sidebar Integration
@@ -58,41 +99,14 @@ final class ProductsViewController: UIViewController, StoryboardInstantiable, Al
         
         add(tableViewController, to: productsListContainer)
         productsTableViewController = tableViewController
-    }
-    
-    private func bind(to productsController: ProductsController) {
-        productsController.items.observe(on: self) { [weak self] _ in
-            self?.updateItems()
-        }
-        productsController.loading.observe(on: self) { [weak self] loading in
-            self?.updateLoading(loading)
-        }
-        productsController.error.observe(on: self) { [weak self] error in
-            self?.showError(error)
+        
+        // Bind tableView with navigation bar for scroll behavior
+        if let tableView = tableViewController.tableView {
+            bindNavigationBar(to: tableView)
         }
     }
     
     private func updateItems() {
         productsTableViewController?.reload()
-    }
-    
-    private func updateLoading(_ loading: Bool) {
-        emptyDataLabel.isHidden = true
-        productsListContainer.isHidden = true
-        
-        if loading {
-            EcoLoadingView.show()
-        } else {
-            EcoLoadingView.hide()
-            productsListContainer.isHidden = productsController.isEmpty
-            emptyDataLabel.isHidden = !productsController.isEmpty
-        }
-        
-        productsTableViewController?.updateLoading(loading)
-    }
-    
-    private func showError(_ error: String) {
-        guard !error.isEmpty else { return }
-        showAlert(title: productsController.errorTitle, message: error)
     }
 }

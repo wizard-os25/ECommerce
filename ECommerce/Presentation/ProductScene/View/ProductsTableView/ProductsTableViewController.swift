@@ -20,7 +20,7 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
         setupViews()
         bind(to: self.productsController)
         setupSidebarGesture()
-        self.productsController.viewDidLoad()
+        // viewDidLoad() của controller đã được gọi tự động bởi ProductsViewController (EcoViewController)
     }
     
     // MARK: - Sidebar Integration

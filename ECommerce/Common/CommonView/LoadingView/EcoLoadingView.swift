@@ -31,7 +31,7 @@ class EcoLoadingView {
             let frame = UIScreen.main.bounds
             let spinner = UIActivityIndicatorView(frame: frame)
             spinner.backgroundColor = UIColor.black.withAlphaComponent(0.2)
-            spinner.style = .whiteLarge
+            spinner.style = UIActivityIndicatorView.Style.large
             window.addSubview(spinner)
 
             spinner.startAnimating()
