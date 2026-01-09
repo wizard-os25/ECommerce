@@ -38,6 +38,14 @@ final class AppDIContainer {
         return ProductsSceneDIContainer(dependencies: dependencies)
     }
     
+    func makeAuthSceneDIContainer() -> AuthSceneDIContainer {
+        let dependencies = AuthSceneDIContainer.Dependencies(
+            apiDataTransferService: apiDataTransferService,
+            appDIContainer: self
+        )
+        return AuthSceneDIContainer(dependencies: dependencies)
+    }
+    
     func makeSideMenuSceneDIContainer() -> SideMenuSceneDIContainer {
         return SideMenuSceneDIContainer()
     }
@@ -48,5 +56,13 @@ final class AppDIContainer {
             appDIContainer: self
         )
         return MainSceneDIContainer(dependencies: dependencies)
+    }
+    
+    func makeOnboardSceneDIContainer() -> OnboardSceneDIContainer {
+        let dependencies = OnboardSceneDIContainer.Dependencies(
+            authSceneDIContainer: makeAuthSceneDIContainer(),
+            mainSceneDIContainer: makeMainSceneDIContainer()
+        )
+        return OnboardSceneDIContainer(dependencies: dependencies)
     }
 }

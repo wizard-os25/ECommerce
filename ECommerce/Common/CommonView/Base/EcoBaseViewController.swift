@@ -14,9 +14,8 @@ open class EcoBaseViewController: UIViewController {
     public private(set) var navigationBarViewController: EcoNavigationBarViewController?
     private var navigationBarHeightConstraint: NSLayoutConstraint?
     
-    // MARK: - Keyboard Overlay
+    // MARK: - Keyboard Handling
     
-    private var keyboardOverlayView: UIView?
     private var keyboardObserverTokens: [NSObjectProtocol] = []
 
     // MARK: - Status Bar
@@ -45,17 +44,33 @@ open class EcoBaseViewController: UIViewController {
         super.viewDidLoad()
         configureBaseUI()
         setupKeyboardObservers()
+        setupSwipeBackGestureDelegate()
+    }
+    
+    private func setupSwipeBackGestureDelegate() {
+        // Set delegate for interactive pop gesture recognizer
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        print("🔵 [EcoBaseViewController] Swipe back gesture delegate set")
     }
 
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Ensure system navigation bar is always hidden
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // Ensure system navigation bar is always hidden
+        navigationController?.isNavigationBarHidden = true
         updateSwipeBackGesture()
         syncStatusBarStyleFromNavigationBar()
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        removeKeyboardOverlay()
+        // Reset scroll view insets when view disappears
+        adjustScrollViewForKeyboard(keyboardHeight: 0)
     }
 
     deinit {
@@ -81,9 +96,13 @@ private extension EcoBaseViewController {
     }
 
     func updateSwipeBackGesture() {
-        guard let navigationController else { return }
-        navigationController.interactivePopGestureRecognizer?.isEnabled =
-            isSwipeBackEnabled && navigationController.viewControllers.count > 1
+        guard let navigationController else {
+            print("⚠️ [EcoBaseViewController] updateSwipeBackGesture - navigationController is nil")
+            return
+        }
+        let isEnabled = isSwipeBackEnabled && navigationController.viewControllers.count > 1
+        navigationController.interactivePopGestureRecognizer?.isEnabled = isEnabled
+        print("🔵 [EcoBaseViewController] updateSwipeBackGesture - isSwipeBackEnabled: \(isSwipeBackEnabled), viewControllers.count: \(navigationController.viewControllers.count), gesture enabled: \(isEnabled)")
     }
 
     func syncStatusBarStyleFromNavigationBar() {
@@ -123,60 +142,22 @@ private extension EcoBaseViewController {
             return
         }
         
-        showKeyboardOverlay(keyboardHeight: keyboardFrame.height)
+        adjustScrollViewForKeyboard(keyboardHeight: keyboardFrame.height)
     }
     
     func handleKeyboardWillHide(_ notification: Notification) {
-        removeKeyboardOverlay()
+        adjustScrollViewForKeyboard(keyboardHeight: 0)
     }
     
-    func showKeyboardOverlay(keyboardHeight: CGFloat) {
-        // Remove existing overlay if any
-        removeKeyboardOverlay()
-        
-        // Create overlay view
-        let overlay = UIView()
-        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-        overlay.alpha = 0
-        view.addSubview(overlay)
-        overlay.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Overlay phủ từ dưới navigation bar tới hết màn hình (trên keyboard)
-        let navBarBottom = navigationBarViewController?.view.bottomAnchor ?? view.safeAreaLayoutGuide.topAnchor
-        
-        NSLayoutConstraint.activate([
-            overlay.topAnchor.constraint(equalTo: navBarBottom),
-            overlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            overlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            overlay.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardHeight)
-        ])
-        
-        // Add tap gesture to dismiss keyboard
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(overlayTapped))
-        overlay.addGestureRecognizer(tapGesture)
-        
-        keyboardOverlayView = overlay
-        
-        // Animate in
-        UIView.animate(withDuration: 0.25) {
-            overlay.alpha = 1.0
+    func adjustScrollViewForKeyboard(keyboardHeight: CGFloat) {
+        // Find all scroll views in view hierarchy and adjust contentInset
+        view.subviews.forEach { subview in
+            if let scrollView = subview as? UIScrollView {
+                let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+                scrollView.contentInset = contentInset
+                scrollView.scrollIndicatorInsets = contentInset
+            }
         }
-    }
-    
-    func removeKeyboardOverlay() {
-        guard let overlay = keyboardOverlayView else { return }
-        
-        UIView.animate(withDuration: 0.25, animations: {
-            overlay.alpha = 0
-        }) { _ in
-            overlay.removeFromSuperview()
-        }
-        
-        keyboardOverlayView = nil
-    }
-    
-    @objc func overlayTapped() {
-        view.endEditing(true)
     }
 }
 
@@ -220,7 +201,7 @@ public extension EcoBaseViewController {
 
             NSLayoutConstraint.activate([
                 navBarVC.view.topAnchor.constraint(
-                    equalTo: view.safeAreaLayoutGuide.topAnchor
+                    equalTo: view.topAnchor
                 ),
                 navBarVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 navBarVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -228,6 +209,27 @@ public extension EcoBaseViewController {
             ])
 
             navigationBarViewController = navBarVC
+            
+            // Ensure navigation bar is on top of all other views
+            view.bringSubviewToFront(navBarVC.view)
+            
+            // Ensure navigation bar view can receive touch events
+            navBarVC.view.isUserInteractionEnabled = true
+            
+            // Debug: Check if scrollView might be blocking touches
+            if let scrollView = view.subviews.first(where: { $0 is UIScrollView }) as? UIScrollView {
+                print("⚠️ [EcoBaseViewController] ScrollView found - checking if it blocks navigation bar")
+                print("   - ScrollView frame: \(scrollView.frame)")
+                print("   - ScrollView isUserInteractionEnabled: \(scrollView.isUserInteractionEnabled)")
+            }
+            
+            // Debug logging
+            print("🔵 [EcoBaseViewController] Navigation bar attached:")
+            print("   - Height: \(height)")
+            print("   - Frame after layout: \(navBarVC.view.frame)")
+            print("   - Superview: \(navBarVC.view.superview != nil ? "EXISTS" : "nil")")
+            print("   - isHidden: \(navBarVC.view.isHidden)")
+            print("   - alpha: \(navBarVC.view.alpha)")
             
             // Setup height change callback for scroll behavior
             navBarVC.setHeightChangeCallback { [weak self] newHeight in
@@ -242,6 +244,7 @@ public extension EcoBaseViewController {
                 controller.onSearchClear = onSearchClear
                 controller.onLeftItemTap = onLeftItemTap
                 controller.onRightItemTap = onRightItemTap
+                controller.onCameraTap = onCameraTap
             }
         }
 
@@ -312,6 +315,22 @@ public extension EcoBaseViewController {
     var navigationBarController: EcoNavigationBarController? {
         navigationBarViewController?.controller
     }
+    
+    /// Get navigation bar height for layout calculations
+    var navigationBarHeight: CGFloat {
+        guard let navBarVC = navigationBarViewController else {
+            return 0
+        }
+        // Use frame height if available (after layout), otherwise use constraint constant or default
+        if navBarVC.view.frame.height > 0 {
+            return navBarVC.view.frame.height
+        }
+        // Try to get from state height or use default
+        if let stateHeight = navBarVC.controller.state.value.height {
+            return stateHeight
+        }
+        return EcoNavigationBarMetrics.barHeight
+    }
 }
 
 extension EcoBaseViewController: UIScrollViewDelegate {
@@ -320,5 +339,60 @@ extension EcoBaseViewController: UIScrollViewDelegate {
         navigationBarViewController?.handleScroll(
             offset: scrollView.contentOffset.y
         )
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension EcoBaseViewController: UIGestureRecognizerDelegate {
+    
+    // Allow interactive pop gesture to work simultaneously with scroll view
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Allow pop gesture to work with scroll view gestures
+        if gestureRecognizer === navigationController?.interactivePopGestureRecognizer {
+            print("🔵 [EcoBaseViewController] shouldRecognizeSimultaneouslyWith - allowing pop gesture with scroll")
+            return true
+        }
+        return false
+    }
+    
+    // Make scroll gesture fail when pop gesture should work (at top and swiping from left)
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // If pop gesture, require scroll view pan gesture to fail when at top and swiping from left
+        if gestureRecognizer === navigationController?.interactivePopGestureRecognizer,
+           let panGesture = otherGestureRecognizer as? UIPanGestureRecognizer,
+           let scrollView = panGesture.view as? UIScrollView {
+            let isAtTop = scrollView.contentOffset.y <= 0
+            if isAtTop {
+                // Check if swipe is from left edge
+                let location = panGesture.location(in: view)
+                let isFromLeftEdge = location.x < 50 // Within 50pt from left edge
+                print("🔵 [EcoBaseViewController] shouldBeRequiredToFailBy - scrollView pan at top: \(isAtTop), from left: \(isFromLeftEdge)")
+                return isFromLeftEdge
+            }
+        }
+        return false
+    }
+    
+    // Allow pop gesture to begin
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer === navigationController?.interactivePopGestureRecognizer {
+            // Only allow if there's more than one view controller
+            let shouldBegin = (navigationController?.viewControllers.count ?? 0) > 1
+            print("🔵 [EcoBaseViewController] gestureRecognizerShouldBegin - interactivePopGestureRecognizer: \(shouldBegin), viewControllers.count: \(navigationController?.viewControllers.count ?? 0)")
+            return shouldBegin
+        }
+        return true
+    }
+    
+    // Check if touch is at left edge (for pop gesture)
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if gestureRecognizer === navigationController?.interactivePopGestureRecognizer {
+            let location = touch.location(in: view)
+            let isAtLeftEdge = location.x < 20 // Within 20pt from left edge
+            print("🔵 [EcoBaseViewController] shouldReceive touch - location: \(location), isAtLeftEdge: \(isAtLeftEdge)")
+            return true // Always allow, but log for debugging
+        }
+        return true
     }
 }

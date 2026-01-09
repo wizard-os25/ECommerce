@@ -112,6 +112,10 @@ public enum CoreUIKitLocalization: String {
     case swipe_seen_title
     case swipe_auto_payment_title
     
+    public var localized: String {
+        return rawValue.localized(using: "")
+    }
+    
 //    public var localized: String {
 //        if ECoConfigure.shared.isCocoaPodsState() {
 //            let bundle = Bundle(for: ECoButton.self)

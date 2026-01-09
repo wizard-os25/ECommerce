@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let appDIContainer = AppDIContainer()
     var appFlowCoordinator: AppFlowCoordinator?
     var window: UIWindow?
+    var splashCoordinatingController: SplashCoordinatingController? // Keep strong reference
     
     func application(
         _ application: UIApplication,
@@ -23,10 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        // Set MainContainerViewController as entry point
-        let mainContainerViewController = MainContainerViewController()
-        window?.rootViewController = mainContainerViewController
-        window?.makeKeyAndVisible()
+        // Set SplashViewController as entry point
+        let onboardSceneDIContainer = appDIContainer.makeOnboardSceneDIContainer()
+        splashCoordinatingController = onboardSceneDIContainer.makeSplashCoordinatingController(
+            navigationController: nil,
+            window: window
+        )
+        splashCoordinatingController?.start()
+        // Note: window.makeKeyAndVisible() is called inside start() method
     
         return true
         

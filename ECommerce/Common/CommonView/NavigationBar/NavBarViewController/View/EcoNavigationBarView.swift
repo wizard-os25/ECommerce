@@ -73,6 +73,8 @@ private extension EcoNavigationBarView {
 
     func setupUI() {
         backgroundColor = .clear
+        // Ensure view can receive touch events
+        isUserInteractionEnabled = true
 
         // Background
         addSubview(backgroundView)
@@ -87,11 +89,19 @@ private extension EcoNavigationBarView {
         // Left stack
         leftStack.axis = .horizontal
         leftStack.spacing = 8
+        leftStack.alignment = .center
+        leftStack.distribution = .fill
+        leftStack.isHidden = false
+        leftStack.isUserInteractionEnabled = true
         addSubview(leftStack)
 
         // Right stack
         rightStack.axis = .horizontal
         rightStack.spacing = 12
+        rightStack.alignment = .center
+        rightStack.distribution = .fill
+        rightStack.isHidden = false
+        rightStack.isUserInteractionEnabled = true
         addSubview(rightStack)
 
         // Title
@@ -161,6 +171,11 @@ public extension EcoNavigationBarView {
         self.currentState = state
 
         applyBackground(state.background, customColor: state.backgroundColor)
+        
+        // Debug logging
+        print("🔵 [EcoNavigationBarView] render - View frame: \(frame), bounds: \(bounds)")
+        print("   - Background applied: \(state.background)")
+        print("   - isHidden: \(isHidden), alpha: \(alpha)")
 
         // Title
         titleLabel.text = state.title
@@ -217,8 +232,29 @@ public extension EcoNavigationBarView {
             // If no height in state, keep the default height (32) set in layoutUI()
         }
 
+        // Debug logging
+        print("🔵 [EcoNavigationBarView] render - LeftItem: \(state.leftItem != nil ? "EXISTS" : "nil"), RightItems: \(state.rightItems.count)")
+        
         render(stack: leftStack, items: state.leftItem.map { [$0] } ?? [])
         render(stack: rightStack, items: state.rightItems)
+        
+        print("🔵 [EcoNavigationBarView] render - LeftStack arrangedSubviews: \(leftStack.arrangedSubviews.count), RightStack arrangedSubviews: \(rightStack.arrangedSubviews.count)")
+        
+        // Apply button tint color if provided
+        if let buttonTintColor = state.buttonTintColor {
+            print("🔵 [EcoNavigationBarView] Applying button tint color: \(buttonTintColor)")
+            applyButtonTintColor(buttonTintColor, to: leftStack)
+            applyButtonTintColor(buttonTintColor, to: rightStack)
+        } else {
+            print("⚠️ [EcoNavigationBarView] No button tint color provided")
+        }
+        
+        // Ensure stacks are visible
+        leftStack.isHidden = false
+        rightStack.isHidden = false
+        leftStack.alpha = 1.0
+        rightStack.alpha = 1.0
+        print("🔵 [EcoNavigationBarView] Stacks visibility - leftStack.isHidden: \(leftStack.isHidden), rightStack.isHidden: \(rightStack.isHidden)")
 
         if animated {
             UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseInOut]) {
@@ -299,28 +335,71 @@ private extension EcoNavigationBarView {
     func render(stack: UIStackView, items: [EcoNavItem]) {
         stack.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
+        print("🔵 [EcoNavigationBarView] render(stack) - Items count: \(items.count), isLeftStack: \(stack === leftStack)")
+        
         for (index, item) in items.enumerated() {
             let isLeftStack = (stack === leftStack)
-            stack.addArrangedSubview(makeView(for: item, index: index, isLeft: isLeftStack))
+            let view = makeView(for: item, index: index, isLeft: isLeftStack)
+            // Ensure view can receive touch events
+            view.isUserInteractionEnabled = true
+            stack.addArrangedSubview(view)
+            print("   ✅ Added item \(index) to \(isLeftStack ? "left" : "right") stack")
+            print("      - View type: \(type(of: view))")
+            print("      - isUserInteractionEnabled: \(view.isUserInteractionEnabled)")
+            if let button = view as? UIButton {
+                print("      - Button isEnabled: \(button.isEnabled)")
+                print("      - Button frame: \(button.frame)")
+            }
+        }
+        
+        // Ensure stack can receive touch events
+        stack.isUserInteractionEnabled = true
+        print("   ✅ Stack isUserInteractionEnabled: \(stack.isUserInteractionEnabled)")
+    }
+    
+    func applyButtonTintColor(_ color: UIColor, to stack: UIStackView) {
+        print("🔵 [EcoNavigationBarView] applyButtonTintColor - stack arrangedSubviews: \(stack.arrangedSubviews.count)")
+        for (index, view) in stack.arrangedSubviews.enumerated() {
+            if let button = view as? UIButton {
+                button.tintColor = color
+                print("   ✅ Applied tint color to button \(index), tintColor: \(button.tintColor?.description ?? "nil")")
+            } else {
+                print("   ⚠️ View \(index) is not a UIButton: \(type(of: view))")
+            }
         }
     }
 
     func makeView(for item: EcoNavItem, index: Int, isLeft: Bool) -> UIView {
         let button = UIButton(type: .system)
         
+        // Set button size and content mode
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.contentHorizontalAlignment = .center
+        button.contentVerticalAlignment = .center
+        // Ensure button can receive touch events
+        button.isUserInteractionEnabled = true
+        button.isEnabled = true
+        
         // Store action closure using associated object
         let actionWrapper = ButtonActionWrapper(action: { [weak self] in
+            print("🔵 [EcoNavigationBarView] ButtonActionWrapper action called - isLeft: \(isLeft), index: \(index)")
             // First execute the action from state
             switch item {
-            case .back(let action), .close(let action), .icon(_, let action), 
+            case .back(let action):
+                print("   📍 Executing back button action from state")
+                action()
+            case .close(let action), .icon(_, let action), 
                  .text(_, let action), .cart(_, let action):
                 action()
             }
             
             // Then notify handlers if set
             if isLeft {
+                print("   📍 Calling onLeftItemTap callback")
                 self?.onLeftItemTap?()
             } else {
+                print("   📍 Calling onRightItemTap callback with index: \(index)")
                 self?.onRightItemTap?(index)
             }
         })
@@ -330,16 +409,47 @@ private extension EcoNavigationBarView {
 
         switch item {
         case .back:
-            button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            if let chevronImage = UIImage(systemName: "chevron.left") {
+                button.setImage(chevronImage, for: .normal)
+                print("   ✅ [EcoNavigationBarView] Back button image set: chevron.left")
+            } else {
+                print("   ⚠️ [EcoNavigationBarView] Failed to load chevron.left image")
+            }
+            button.imageView?.contentMode = .scaleAspectFit
             button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
+            // Set button size
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+            // Ensure button is visible and interactive
+            button.isHidden = false
+            button.alpha = 1.0
+            button.isUserInteractionEnabled = true
+            button.isEnabled = true
+            // Set default tint color to black (will be overridden by state.buttonTintColor if provided)
+            button.tintColor = Colors.tokenDark100
+            print("   ✅ [EcoNavigationBarView] Created back button:")
+            print("      - Size: 44x44")
+            print("      - isHidden: \(button.isHidden)")
+            print("      - alpha: \(button.alpha)")
+            print("      - isUserInteractionEnabled: \(button.isUserInteractionEnabled)")
+            print("      - isEnabled: \(button.isEnabled)")
+            print("      - tintColor: black")
+            print("      - Frame: \(button.frame)")
 
         case .close:
             button.setImage(UIImage(systemName: "xmark"), for: .normal)
+            button.imageView?.contentMode = .scaleAspectFit
             button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
+            button.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         case .icon(let image, _):
             button.setImage(image, for: .normal)
+            button.imageView?.contentMode = .scaleAspectFit
             button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
+            button.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         case .text(let title, _):
             button.setTitle(title, for: .normal)
@@ -347,8 +457,13 @@ private extension EcoNavigationBarView {
 
         case .cart:
             button.setImage(UIImage(systemName: "cart"), for: .normal)
+            button.imageView?.contentMode = .scaleAspectFit
             button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
+            button.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         }
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
     }
@@ -506,7 +621,9 @@ private class ButtonActionWrapper: NSObject {
     }
     
     @objc func execute() {
+        print("🔵 [ButtonActionWrapper] execute() called - button tapped")
         action()
+        print("✅ [ButtonActionWrapper] execute() completed")
     }
 }
 

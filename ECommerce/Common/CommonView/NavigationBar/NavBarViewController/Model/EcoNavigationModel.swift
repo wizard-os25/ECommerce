@@ -34,6 +34,7 @@ public struct EcoNavigationState {
     public var rightItems: [EcoNavItem]
     public var background: EcoNavigationBackground
     public var backgroundColor: UIColor?
+    public var buttonTintColor: UIColor?
     public var height: CGFloat?
     public var collapsedHeight: CGFloat?
     
@@ -50,6 +51,7 @@ public struct EcoNavigationState {
         rightItems: [EcoNavItem] = [],
         background: EcoNavigationBackground = .solid(.white),
         backgroundColor: UIColor? = nil,
+        buttonTintColor: UIColor? = nil,
         height: CGFloat? = nil,
         collapsedHeight: CGFloat? = nil,
         scrollBehavior: EcoNavigationScrollBehavior = .default
@@ -63,6 +65,7 @@ public struct EcoNavigationState {
         self.rightItems = rightItems
         self.background = background
         self.backgroundColor = backgroundColor
+        self.buttonTintColor = buttonTintColor
         self.height = height
         self.collapsedHeight = collapsedHeight
         self.scrollBehavior = scrollBehavior

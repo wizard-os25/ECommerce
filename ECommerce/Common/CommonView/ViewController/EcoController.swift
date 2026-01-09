@@ -99,11 +99,16 @@ public extension EcoController {
     
     /// Navigation bar background style
     var navigationBarBackground: EcoNavigationBackground {
-        return .solid(.white)
+        return .solid(Colors.tokenRainbowBlueEnd)
     }
     
     /// Navigation bar background color (overrides background style if set)
     var navigationBarBackgroundColor: UIColor? {
+        return Colors.tokenRainbowBlueEnd
+    }
+    
+    /// Navigation bar button tint color (for back button, icons, etc.)
+    var navigationBarButtonTintColor: UIColor? {
         return Colors.tokenRainbowBlueEnd
     }
     

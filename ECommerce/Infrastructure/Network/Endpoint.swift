@@ -120,10 +120,24 @@ extension Requestable {
         var allHeaders: [String: String] = config.headers
         headerParameters.forEach { allHeaders.updateValue($1, forKey: $0) }
 
-        let bodyParameters = try bodyParametersEncodable?.toDictionary() ?? self.bodyParameters
-        if !bodyParameters.isEmpty {
+        // Handle body parameters
+        if let encodable = bodyParametersEncodable {
+            // Encode Encodable directly to JSON Data
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .useDefaultKeys
+            urlRequest.httpBody = try encoder.encode(encodable)
+            // Set Content-Type header if not already set
+            if allHeaders["Content-Type"] == nil {
+                allHeaders["Content-Type"] = "application/json"
+            }
+        } else if !bodyParameters.isEmpty {
             urlRequest.httpBody = bodyEncoder.encode(bodyParameters)
+            // Set Content-Type header if not already set
+            if allHeaders["Content-Type"] == nil {
+                allHeaders["Content-Type"] = "application/json"
+            }
         }
+        
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = allHeaders
         return urlRequest

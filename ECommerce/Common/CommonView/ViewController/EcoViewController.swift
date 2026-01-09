@@ -65,6 +65,7 @@ open class EcoViewController: EcoBaseViewController,
 
     open func bindNavigation() {
         controller.navigationState.observe(on: self) { [weak self] state in
+            print("🔵 [EcoViewController] Navigation state changed - Title: \(state.title ?? "nil"), LeftItem: \(state.leftItem != nil ? "EXISTS" : "nil"), RightItems: \(state.rightItems.count)")
             self?.applyNavigation(state)
         }
     }
@@ -81,6 +82,11 @@ open class EcoViewController: EcoBaseViewController,
     }
 
     open func applyNavigation(_ state: EcoNavigationState) {
+        print("🔵 [EcoViewController] applyNavigation called")
+        print("   - navigationBarViewController: \(navigationBarViewController != nil ? "EXISTS" : "nil")")
+        print("   - State leftItem: \(state.leftItem != nil ? "EXISTS" : "nil")")
+        print("   - State rightItems: \(state.rightItems.count)")
+        
         // Get callbacks from controller (using protocol extension defaults if not implemented)
         let callbacks = (
             onSearchTextChange: controller.onNavigationBarSearchTextChange,
@@ -92,6 +98,7 @@ open class EcoViewController: EcoBaseViewController,
         )
         
         if navigationBarViewController == nil {
+            print("🔵 [EcoViewController] Attaching navigation bar for the first time")
             attachNavigationBar(
                 initialState: state,
                 onSearchTextChange: callbacks.onSearchTextChange,
@@ -101,7 +108,9 @@ open class EcoViewController: EcoBaseViewController,
                 onRightItemTap: callbacks.onRightItemTap,
                 onCameraTap: callbacks.onCameraTap
             )
+            print("✅ [EcoViewController] Navigation bar attached")
         } else {
+            print("🔵 [EcoViewController] Updating existing navigation bar")
             updateNavigationBar(state, animated: true)
             // Update callbacks after navigation bar is updated
             if let navBarController = navigationBarViewController?.controller as? DefaultEcoNavigationBarController {
@@ -111,6 +120,7 @@ open class EcoViewController: EcoBaseViewController,
                 navBarController.onLeftItemTap = callbacks.onLeftItemTap
                 navBarController.onRightItemTap = callbacks.onRightItemTap
                 navBarController.onCameraTap = callbacks.onCameraTap
+                print("✅ [EcoViewController] Navigation bar callbacks updated")
             }
         }
     }

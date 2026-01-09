@@ -249,6 +249,7 @@ extension DefaultProductsController {
             rightItems: navigationBarRightItems,
             background: navigationBarBackground,
             backgroundColor: navigationBarBackgroundColor,
+            buttonTintColor: navigationBarButtonTintColor,
             height: navigationBarInitialHeight,
             collapsedHeight: navigationBarCollapsedHeight,
             scrollBehavior: navigationBarScrollBehavior
@@ -272,3 +273,4 @@ extension DefaultProductsController {
 private extension Array where Element == ProductPage {
     var products: [Product] { flatMap { $0.contents } }
 }
+

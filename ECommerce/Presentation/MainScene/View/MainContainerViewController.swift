@@ -53,6 +53,11 @@ class MainContainerViewController: UIViewController {
         // Create SideMenuController first
         sideMenuController = DefaultSideMenuController()
         
+        // Set logout callback
+        sideMenuController.onLogout = { [weak self] in
+            self?.handleLogout()
+        }
+        
         // Create SideMenuViewController with controller using factory method
         sideMenuViewController = SideMenuViewController.create(with: sideMenuController)
         
@@ -629,6 +634,64 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         
         print("🟡 [isGestureInsidePageScrollView] Gesture NOT inside PageViewController scrollView → false")
         return false
+    }
+    
+    // MARK: - Logout Handling
+    
+    private func handleLogout() {
+        print("========== HANDLE LOGOUT ==========")
+        print("1️⃣ Closing side menu...")
+        // Close side menu first
+        sideMenuState(expanded: false)
+        
+        print("2️⃣ Clearing session and user data...")
+        // Clear session and user data
+        let utilities = Utilities()
+        utilities.logout()
+        
+        print("3️⃣ Navigating to Login screen...")
+        // Navigate to Login screen
+        navigateToLogin()
+        print("===================================")
+    }
+    
+    private func navigateToLogin() {
+        // Create AuthSceneDIContainer and LoginCoordinatingController
+        // We need to get AppDIContainer - check if we can access it
+        // For now, create a new instance
+        let appDIContainer = AppDIContainer()
+        let authSceneDIContainer = appDIContainer.makeAuthSceneDIContainer()
+        let navigationController = UINavigationController()
+        let loginCoordinatingController = authSceneDIContainer.makeLoginCoordinatingController(
+            navigationController: navigationController
+        )
+        
+        // Start LoginCoordinatingController which will push LoginViewController
+        loginCoordinatingController.start()
+        
+        // Transition to Login screen as root view controller
+        transitionToRootViewController(navigationController)
+    }
+    
+    private func transitionToRootViewController(_ viewController: UIViewController) {
+        guard let window = view.window ?? UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
+            print("MainContainerViewController: No window available for transition")
+            return
+        }
+        
+        print("MainContainerViewController: Transitioning to Login screen")
+        
+        UIView.transition(
+            with: window,
+            duration: 0.4,
+            options: .transitionCrossDissolve,
+            animations: {
+                window.rootViewController = viewController
+            },
+            completion: { finished in
+                print("MainContainerViewController: Transition to Login completed: \(finished)")
+            }
+        )
     }
 }
 

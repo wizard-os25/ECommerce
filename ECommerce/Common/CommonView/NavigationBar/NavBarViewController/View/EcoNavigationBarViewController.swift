@@ -52,6 +52,9 @@ public final class EcoNavigationBarViewController: UIViewController {
     private func setupView() {
         view = navigationBarView
         navigationBarView.translatesAutoresizingMaskIntoConstraints = false
+        // Ensure view can receive touch events
+        view.isUserInteractionEnabled = true
+        view.backgroundColor = .clear
     }
     
     // MARK: - Binding
