@@ -16,6 +16,7 @@ protocol AddressRepository {
         addressType: String,
         longitude: String,
         latitude: String,
+        isDefault: Bool,
         completion: @escaping (Result<Address, Error>) -> Void
     ) -> Cancellable?
 }

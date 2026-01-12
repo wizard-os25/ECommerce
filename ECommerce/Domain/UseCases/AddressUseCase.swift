@@ -16,6 +16,7 @@ protocol CreateAddressUseCase {
         addressType: String,
         longitude: String,
         latitude: String,
+        isDefault: Bool,
         completion: @escaping (Result<Address, Error>) -> Void
     ) -> Cancellable?
 }
@@ -35,6 +36,7 @@ final class DefaultCreateAddressUseCase: CreateAddressUseCase {
         addressType: String,
         longitude: String,
         latitude: String,
+        isDefault: Bool,
         completion: @escaping (Result<Address, Error>) -> Void
     ) -> Cancellable? {
         return addressRepository.createAddress(
@@ -44,6 +46,7 @@ final class DefaultCreateAddressUseCase: CreateAddressUseCase {
             addressType: addressType,
             longitude: longitude,
             latitude: latitude,
+            isDefault: isDefault,
             completion: completion
         )
     }

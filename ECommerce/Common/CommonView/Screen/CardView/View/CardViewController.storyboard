@@ -41,6 +41,8 @@
                     </view>
                     <connections>
                         <outlet property="contentContainerView" destination="Zwg-VC-yON" id="Gaf-xs-xL8"/>
+                        <outlet property="dragIndicator" destination="MgS-tT-Wci" id="ewd-aX-5oj"/>
+                        <outlet property="heightDragIndicatorConstraint" destination="aWx-me-n5E" id="Hjd-T2-DXA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -14,6 +14,7 @@ struct AddressRequestDTO: Encodable {
     let addressType: String
     let longitude: String
     let latitude: String
+    let defaultShipping: Bool
     
     enum CodingKeys: String, CodingKey {
         case contactPersonName = "contact_person_name"
@@ -22,5 +23,6 @@ struct AddressRequestDTO: Encodable {
         case addressType = "address_type"
         case longitude
         case latitude
+        case defaultShipping = "default_shipping"
     }
 }

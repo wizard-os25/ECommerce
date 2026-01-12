@@ -370,12 +370,6 @@
 		D0029D482F0F46FF00D50804 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D292F0F46FF00D50804 /* LoginModel.swift */; };
 		D0029D492F0F46FF00D50804 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D2D2F0F46FF00D50804 /* LoginViewController.swift */; };
 		D0029D4A2F0F46FF00D50804 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D222F0F46FF00D50804 /* SignUpModel.swift */; };
-		D0029D4D2F0F48F300D50804 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D4C2F0F48F300D50804 /* Utilities.swift */; };
-		D0029D4E2F0F48F300D50804 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D4C2F0F48F300D50804 /* Utilities.swift */; };
-		D0029D4F2F0F48F300D50804 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D4C2F0F48F300D50804 /* Utilities.swift */; };
-		D0029D512F0F492B00D50804 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D502F0F492B00D50804 /* Constants.swift */; };
-		D0029D522F0F492B00D50804 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D502F0F492B00D50804 /* Constants.swift */; };
-		D0029D532F0F492B00D50804 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029D502F0F492B00D50804 /* Constants.swift */; };
 		D0029D5C2F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D552F0F4B5200D50804 /* CollectionSectionHeader.xib */; };
 		D0029D5D2F0F4B5200D50804 /* TableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D5A2F0F4B5200D50804 /* TableSectionHeader.xib */; };
 		D0029D5E2F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0029D572F0F4B5200D50804 /* CollectionDescripSectionHeader.xib */; };
@@ -979,6 +973,9 @@
 		D0FF94662F1487D9006146F8 /* EcoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945C2F1487D9006146F8 /* EcoController.swift */; };
 		D0FF94672F1487D9006146F8 /* EcoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945B2F1487D9006146F8 /* EcoBaseViewController.swift */; };
 		D0FF94682F1487D9006146F8 /* EcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945D2F1487D9006146F8 /* EcoViewController.swift */; };
+		D0FF946E2F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF946D2F14B8D2006146F8 /* MapSearchHistoryStore.swift */; };
+		D0FF946F2F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF946D2F14B8D2006146F8 /* MapSearchHistoryStore.swift */; };
+		D0FF94702F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF946D2F14B8D2006146F8 /* MapSearchHistoryStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1121,8 +1118,6 @@
 		D0029D2D2F0F46FF00D50804 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D0029D302F0F46FF00D50804 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		D0029D312F0F46FF00D50804 /* RegisterViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RegisterViewController.storyboard; sourceTree = "<group>"; };
-		D0029D4C2F0F48F300D50804 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		D0029D502F0F492B00D50804 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D0029D542F0F4B5200D50804 /* CollectionSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSectionHeader.swift; sourceTree = "<group>"; };
 		D0029D552F0F4B5200D50804 /* CollectionSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionSectionHeader.xib; sourceTree = "<group>"; };
 		D0029D562F0F4B5200D50804 /* CollectionDescripSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDescripSectionHeader.swift; sourceTree = "<group>"; };
@@ -1331,6 +1326,7 @@
 		D0FF945B2F1487D9006146F8 /* EcoBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoBaseViewController.swift; sourceTree = "<group>"; };
 		D0FF945C2F1487D9006146F8 /* EcoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoController.swift; sourceTree = "<group>"; };
 		D0FF945D2F1487D9006146F8 /* EcoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoViewController.swift; sourceTree = "<group>"; };
+		D0FF946D2F14B8D2006146F8 /* MapSearchHistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchHistoryStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2281,8 +2277,6 @@
 				D00B91E82F10A61C00AEE1B6 /* QRGenerator.swift */,
 				D00B91E92F10A61C00AEE1B6 /* VTPSKWebView.swift */,
 				D00B91E42F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift */,
-				D0029D502F0F492B00D50804 /* Constants.swift */,
-				D0029D4C2F0F48F300D50804 /* Utilities.swift */,
 				D0E6C3A22F0D06AC00527962 /* ImageCache.swift */,
 				D0095B7B2ECB258000FCC7BC /* CommonView */,
 				D0029B6A2F0E742000D50804 /* CoreUIKit */,
@@ -3028,6 +3022,7 @@
 		D0FF94002F14014F006146F8 /* LocationSearch */ = {
 			isa = PBXGroup;
 			children = (
+				D0FF946D2F14B8D2006146F8 /* MapSearchHistoryStore.swift */,
 				D0FF94012F140173006146F8 /* LocationSearchModel.swift */,
 				D0FF94092F140189006146F8 /* LocationSearchViewController.swift */,
 				D0FF940D2F14019F006146F8 /* LocationSearchViewController.storyboard */,
@@ -3497,6 +3492,7 @@
 				D06C3B982ECCA2E500289D48 /* UIView+CornerRadius.swift in Sources */,
 				D0029CCB2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */,
 				D0029CDD2F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */,
+				D0FF946E2F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */,
 				D0095D1A2ECC2FFF00FCC7BC /* SideMenuAnimator.swift in Sources */,
 				D00B92D02F11054F00AEE1B6 /* APIErrorParser.swift in Sources */,
 				D00B92862F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
@@ -3558,7 +3554,6 @@
 				D06C3B942ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
 				D0095BFD2ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
 				D06C3B902ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
-				D0029D4F2F0F48F300D50804 /* Utilities.swift in Sources */,
 				D0FF93E82F13EDA3006146F8 /* MapController.swift in Sources */,
 				D0095BFE2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D00B923D2F10B1B300AEE1B6 /* User.swift in Sources */,
@@ -3710,7 +3705,6 @@
 				D0E6C3E82F0E0AF600527962 /* SegmentedControl.swift in Sources */,
 				D0095B892ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
 				D0095D492ECC506E00FCC7BC /* AttributedText.swift in Sources */,
-				D0029D512F0F492B00D50804 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3738,6 +3732,7 @@
 				D0095D772ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
 				D06C3B832ECCA16900289D48 /* UIView+Reusable.swift in Sources */,
 				D0095CBC2ECB57C100FCC7BC /* SideMenuModel.swift in Sources */,
+				D0FF94702F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */,
 				D06C3B882ECCA21800289D48 /* UIView+Layout.swift in Sources */,
 				D00B92CF2F11054F00AEE1B6 /* APIErrorParser.swift in Sources */,
 				D00B92822F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
@@ -3798,7 +3793,6 @@
 				D0029C562F0E742E00D50804 /* EncodableExtensions.swift in Sources */,
 				D0095C422ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
 				D0E6C3B92F0DFB0E00527962 /* MainController.swift in Sources */,
-				D0029D4E2F0F48F300D50804 /* Utilities.swift in Sources */,
 				D0095D942ECC5B8C00FCC7BC /* AES.swift in Sources */,
 				D0FF93EA2F13EDA3006146F8 /* MapController.swift in Sources */,
 				D0029B6B2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
@@ -3951,7 +3945,6 @@
 				D0095BD92ECB432100FCC7BC /* AppConfigurations.swift in Sources */,
 				D06C3B8D2ECCA25D00289D48 /* UIView+Shadow.swift in Sources */,
 				D0095B9B2ECB41C500FCC7BC /* ProductsQueriesRepository.swift in Sources */,
-				D0029D522F0F492B00D50804 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4097,7 +4090,6 @@
 				D00B92622F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
 				D00B92632F10D39200AEE1B6 /* LoginResponseDTO+Mapping.swift in Sources */,
 				D0095D092ECC21A000FCC7BC /* MainSceneDIContainer.swift in Sources */,
-				D0029D4D2F0F48F300D50804 /* Utilities.swift in Sources */,
 				D0095D3C2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095CCF2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095D4D2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
@@ -4156,6 +4148,7 @@
 				D0FF940C2F140189006146F8 /* LocationSearchViewController.swift in Sources */,
 				D0095B992ECB41A900FCC7BC /* ProductsRepository.swift in Sources */,
 				D0E6C39D2F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
+				D0FF946F2F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */,
 				D0029DB82F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */,
 				D0FF941F2F140514006146F8 /* DefaultAddressRepository.swift in Sources */,
 				D0FF939A2F11F953006146F8 /* CardViewController.swift in Sources */,
@@ -4181,7 +4174,6 @@
 				D0029C0B2F0E742000D50804 /* SFFont.swift in Sources */,
 				D0FF93F42F13F997006146F8 /* AddressViewController.swift in Sources */,
 				D0029C0C2F0E742000D50804 /* Typography.swift in Sources */,
-				D0029D532F0F492B00D50804 /* Constants.swift in Sources */,
 				D0029C0D2F0E742000D50804 /* EcoRadioButton.swift in Sources */,
 				D0029C0E2F0E742000D50804 /* Shadows.swift in Sources */,
 				D0029C0F2F0E742000D50804 /* Opacity.swift in Sources */,
@@ -4269,7 +4261,7 @@
 		D0095B032ECB0B8400FCC7BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_BASE_URL = "http://127.0.0.1:8000";
+				API_BASE_URL = "http://192.168.1.2:8000";
 				API_KEY = sk_WBLmK71qE7FT8qK7SkohLshssLbUTbbAtVdDzlMyYGjY0MPPWiTClo2Gm4Fa;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -4308,7 +4300,7 @@
 		D0095B042ECB0B8400FCC7BC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_BASE_URL = "http://127.0.0.1:8000";
+				API_BASE_URL = "http://192.168.1.2:8000";
 				API_KEY = sk_WBLmK71qE7FT8qK7SkohLshssLbUTbbAtVdDzlMyYGjY0MPPWiTClo2Gm4Fa;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

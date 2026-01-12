@@ -20,6 +20,7 @@ public enum CardPresentationMode {
 public enum CardState {
     case hidden
     case collapsed
+    case intermediate // Intermediate state for peek mode with 2-step expansion
     case expanded
 }
 
@@ -30,16 +31,21 @@ public struct CardConfiguration {
     public let collapsedHeight: CGFloat
     public let presentationMode: CardPresentationMode
     public let enableGesture: Bool
+    /// Optional intermediate Y position (from top of parent view) for peek mode with 2-step expansion
+    /// Only used when presentationMode == .peek
+    public let intermediateY: CGFloat?
     
     public init(
         expandedHeight: CGFloat,
         collapsedHeight: CGFloat,
         presentationMode: CardPresentationMode,
+        intermediateY: CGFloat? = nil,
         enableGesture: Bool = true
     ) {
         self.expandedHeight = expandedHeight
         self.collapsedHeight = collapsedHeight
         self.presentationMode = presentationMode
+        self.intermediateY = intermediateY
         self.enableGesture = enableGesture
     }
 }

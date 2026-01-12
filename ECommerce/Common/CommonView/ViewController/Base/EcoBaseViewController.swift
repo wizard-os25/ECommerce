@@ -17,6 +17,7 @@ open class EcoBaseViewController: UIViewController {
     // MARK: - Keyboard Handling
     
     private var keyboardObserverTokens: [NSObjectProtocol] = []
+    private var dismissKeyboardTapGesture: UITapGestureRecognizer?
 
     // MARK: - Status Bar
 
@@ -45,6 +46,7 @@ open class EcoBaseViewController: UIViewController {
         configureBaseUI()
         setupKeyboardObservers()
         setupSwipeBackGestureDelegate()
+        setupDismissKeyboardGesture()
     }
     
     private func setupSwipeBackGestureDelegate() {
@@ -75,6 +77,7 @@ open class EcoBaseViewController: UIViewController {
 
     deinit {
         removeKeyboardObservers()
+        removeDismissKeyboardGesture()
         detachNavigationBar()
     }
 }
@@ -158,6 +161,25 @@ private extension EcoBaseViewController {
                 scrollView.scrollIndicatorInsets = contentInset
             }
         }
+    }
+    
+    func setupDismissKeyboardGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        tapGesture.delegate = self
+        view.addGestureRecognizer(tapGesture)
+        dismissKeyboardTapGesture = tapGesture
+    }
+    
+    func removeDismissKeyboardGesture() {
+        if let gesture = dismissKeyboardTapGesture {
+            view.removeGestureRecognizer(gesture)
+            dismissKeyboardTapGesture = nil
+        }
+    }
+    
+    @objc public override func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
@@ -353,6 +375,12 @@ extension EcoBaseViewController: UIGestureRecognizerDelegate {
             print("🔵 [EcoBaseViewController] shouldRecognizeSimultaneouslyWith - allowing pop gesture with scroll")
             return true
         }
+        
+        // Allow dismiss keyboard gesture to work simultaneously with other gestures
+        if gestureRecognizer === dismissKeyboardTapGesture {
+            return true
+        }
+        
         return false
     }
     
@@ -393,6 +421,25 @@ extension EcoBaseViewController: UIGestureRecognizerDelegate {
             print("🔵 [EcoBaseViewController] shouldReceive touch - location: \(location), isAtLeftEdge: \(isAtLeftEdge)")
             return true // Always allow, but log for debugging
         }
+        
+        // For dismiss keyboard tap gesture, only dismiss if not tapping on a control
+        if gestureRecognizer === dismissKeyboardTapGesture {
+            let location = touch.location(in: view)
+            let hitView = view.hitTest(location, with: nil)
+            // Don't dismiss if tapping on button, text field, text view, or other interactive controls
+            if let hitView = hitView {
+                if hitView is UIControl || hitView is UITextField || hitView is UITextView {
+                    return false
+                }
+                // Check if the view is part of navigation bar
+                if let navBarView = navigationBarViewController?.view,
+                   hitView.isDescendant(of: navBarView) {
+                    return false
+                }
+            }
+            return true
+        }
+        
         return true
     }
 }

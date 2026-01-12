@@ -46,6 +46,24 @@ class MainContainerViewController: UIViewController {
         setupGestures()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Ensure side menu is closed when view appears
+        // This helps prevent side menu from staying open after swipe back
+        if didOpenFromSideMenu {
+            // Check if AddressViewController still exists in navigation stack
+            if let nav = mainTabBarController?.selectedViewController as? UINavigationController {
+                let hasAddressViewController = nav.viewControllers.contains { $0 is AddressViewController }
+                if !hasAddressViewController && (isExpanded || sideMenuShadowView.alpha > 0) {
+                    // AddressViewController no longer in stack, ensure side menu is closed
+                    sideMenuState(expanded: false)
+                    sideMenuShadowView.alpha = 0.0
+                    didOpenFromSideMenu = false
+                }
+            }
+        }
+    }
+    
     // MARK: - Setup Methods
     
     private func setupView() {
@@ -351,7 +369,38 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             return topVC is AddressViewController
         }()
         
-        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), isExpanded:\(isExpanded), isTopAddressViewController:\(isTopAddressViewController), didOpenFromSideMenu:\(didOpenFromSideMenu)")
+        // Check if any view controller in the navigation stack was opened after AddressViewController (when flag is set)
+        // This includes MapViewController and any other screens pushed after AddressViewController
+        let hasViewControllersAfterAddressWithSideMenu = {
+            guard didOpenFromSideMenu,
+                  let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+                  nav.viewControllers.count >= 2 else { return false }
+            
+            // Find AddressViewController index in the stack
+            guard let addressVCIndex = nav.viewControllers.firstIndex(where: { $0 is AddressViewController }) else {
+                // Debug: Print stack if AddressViewController not found
+                let stackDescription = nav.viewControllers.map { String(describing: type(of: $0)) }.joined(separator: " -> ")
+                print("⚠️ [gestureRecognizerShouldBegin] AddressViewController not found in stack: \(stackDescription)")
+                return false
+            }
+            
+            // If topViewController is not AddressViewController, it means some screen was pushed after it
+            // All screens pushed after AddressViewController should block side menu gesture
+            let topVCIndex = nav.viewControllers.count - 1
+            let result = topVCIndex > addressVCIndex
+            
+            // Debug logging
+            if result {
+                let stackDescription = nav.viewControllers.map { String(describing: type(of: $0)) }.joined(separator: " -> ")
+                print("🔵 [gestureRecognizerShouldBegin] Found view controllers after AddressViewController")
+                print("   - AddressVC index: \(addressVCIndex), TopVC index: \(topVCIndex)")
+                print("   - Stack: \(stackDescription)")
+            }
+            
+            return result
+        }()
+        
+        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), isExpanded:\(isExpanded), isTopAddressViewController:\(isTopAddressViewController), hasViewControllersAfterAddressWithSideMenu:\(hasViewControllersAfterAddressWithSideMenu), didOpenFromSideMenu:\(didOpenFromSideMenu)")
         
         // If menu is expanded, allow pan (to close)
         if isExpanded {
@@ -369,6 +418,13 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                 print("✅ [gestureRecognizerShouldBegin] AddressViewController NOT opened from side menu → Allow side menu gesture")
                 // Continue with normal side menu gesture logic below
             }
+        }
+        
+        // If any view controller was pushed after AddressViewController (when flag is set),
+        // block side menu gesture to allow swipe back for all screens in that navigation flow
+        if hasViewControllersAfterAddressWithSideMenu {
+            print("❌ [gestureRecognizerShouldBegin] View controller opened after AddressViewController (side menu) → Block side menu gesture (let swipe back handle)")
+            return false
         }
         
         // If touch is inside side menu area, don't intercept
@@ -771,31 +827,54 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
 extension MainContainerViewController: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        // Check if we're back from AddressViewController
+        // Check if AddressViewController still exists in the navigation stack
+        let hasAddressViewControllerInStack = navigationController.viewControllers.contains { $0 is AddressViewController }
         let isAddressViewController = viewController is AddressViewController
         
-        print("🔄 [UINavigationControllerDelegate] didShow - isAddressViewController: \(isAddressViewController), isExpanded: \(isExpanded), shadowAlpha: \(sideMenuShadowView.alpha), isAddressViewControllerOpenedFromSideMenu: \(didOpenFromSideMenu)")
+        // Debug: Print all view controllers in stack
+        let stackDescription = navigationController.viewControllers.map { vc in
+            let className = String(describing: type(of: vc))
+            let isAddress = vc is AddressViewController
+            let isMap = vc is MapViewController
+            return "\(className)\(isAddress ? " [AddressVC]" : "")\(isMap ? " [MapVC]" : "")"
+        }.joined(separator: " -> ")
         
-        if isAddressViewController {
-            // AddressViewController is being shown
-            // Flag is already set in navigateToShippingAddress()
-        } else if didOpenFromSideMenu {
-            // User has popped back from AddressViewController that was opened from side menu
-            // Reset flag
-            didOpenFromSideMenu = false
-            
-            // Always ensure side menu and overlay are completely closed
-            print("🔄 Back from AddressViewController (opened from side menu), ensuring side menu and overlay are closed")
-            
-            // Force close side menu and hide overlay regardless of isExpanded state
-            // This prevents overlay from remaining visible after swipe back
-            if isExpanded || sideMenuShadowView.alpha > 0 {
-                sideMenuState(expanded: false)
-            }
-            
-            // Ensure shadow view is completely hidden (in case animation didn't complete)
-            DispatchQueue.main.async { [weak self] in
-                self?.sideMenuShadowView.alpha = 0.0
+        print("🔄 [UINavigationControllerDelegate] didShow")
+        print("   - Current top VC: \(String(describing: type(of: viewController)))")
+        print("   - isAddressViewController: \(isAddressViewController)")
+        print("   - hasAddressViewControllerInStack: \(hasAddressViewControllerInStack)")
+        print("   - Stack count: \(navigationController.viewControllers.count)")
+        print("   - Stack: \(stackDescription)")
+        print("   - isExpanded: \(isExpanded), shadowAlpha: \(sideMenuShadowView.alpha)")
+        print("   - didOpenFromSideMenu: \(didOpenFromSideMenu)")
+        
+        if didOpenFromSideMenu {
+            // If AddressViewController is no longer in the stack, we've fully popped back
+            if !hasAddressViewControllerInStack {
+                // User has completely popped back from AddressViewController flow
+                // Reset flag
+                didOpenFromSideMenu = false
+                
+                // Always ensure side menu and overlay are completely closed
+                print("🔄 Completely back from AddressViewController flow (opened from side menu), ensuring side menu and overlay are closed")
+                
+                // Force close side menu and hide overlay regardless of isExpanded state
+                // This prevents overlay from remaining visible after swipe back
+                if isExpanded || sideMenuShadowView.alpha > 0 {
+                    sideMenuState(expanded: false)
+                }
+                
+                // Ensure shadow view is completely hidden (in case animation didn't complete)
+                DispatchQueue.main.async { [weak self] in
+                    self?.sideMenuShadowView.alpha = 0.0
+                }
+            } else if isAddressViewController {
+                // We're back to AddressViewController (from MapViewController or other screens)
+                // Ensure side menu is closed when returning to AddressViewController
+                print("🔄 Back to AddressViewController, ensuring side menu is closed")
+                if isExpanded || sideMenuShadowView.alpha > 0 {
+                    sideMenuState(expanded: false)
+                }
             }
         }
     }

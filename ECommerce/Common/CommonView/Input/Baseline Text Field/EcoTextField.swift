@@ -581,6 +581,12 @@ open class EcoTextField: UITextField {
 
 extension EcoTextField: UITextFieldDelegate {
     
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Cho phép tất cả ký tự bao gồm dấu cách
+        // Mặc định return true để cho phép tất cả input
+        return true
+    }
+    
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         updateBorder()
         updateRightButtons()

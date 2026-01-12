@@ -167,6 +167,8 @@ private extension EcoNavigationBarView {
 public extension EcoNavigationBarView {
 
     func render(state: EcoNavigationState, animated: Bool) {
+        // Store state for access in makeView
+        currentState = state
         let previousState = self.currentState
         self.currentState = state
 
@@ -247,6 +249,41 @@ public extension EcoNavigationBarView {
             applyButtonTintColor(buttonTintColor, to: rightStack)
         } else {
             print("⚠️ [EcoNavigationBarView] No button tint color provided")
+        }
+        
+        // Update search field layout: centerX, centerY, leading và trailing 12pt khi không có left/right items
+        let hasLeftItems = state.leftItem != nil
+        let hasRightItems = !state.rightItems.isEmpty
+        
+        if state.showsSearch && !hasLeftItems && !hasRightItems {
+            // Không có left/right items: center search field với padding 12pt
+            searchFieldLeadingConstraint?.isActive = false
+            searchFieldTrailingConstraint?.isActive = false
+            
+            if searchFieldCenterXConstraint?.isActive != true {
+                searchFieldCenterXConstraint?.isActive = true
+            }
+            
+            // Create or update width constraint for search field when centered
+            let searchPadding: CGFloat = 12
+            if searchFieldWidthConstraint == nil {
+                let searchWidth = searchTextField.widthAnchor.constraint(
+                    equalTo: widthAnchor,
+                    constant: -(searchPadding * 2)
+                )
+                searchWidth.priority = .required
+                searchWidth.isActive = true
+                searchFieldWidthConstraint = searchWidth
+            } else {
+                searchFieldWidthConstraint?.constant = -(searchPadding * 2)
+                searchFieldWidthConstraint?.isActive = true
+            }
+        } else {
+            // Có left/right items: layout bình thường giữa left và right stacks
+            searchFieldCenterXConstraint?.isActive = false
+            searchFieldWidthConstraint?.isActive = false
+            searchFieldLeadingConstraint?.isActive = true
+            searchFieldTrailingConstraint?.isActive = true
         }
         
         // Ensure stacks are visible
@@ -409,33 +446,89 @@ private extension EcoNavigationBarView {
 
         switch item {
         case .back:
-            if let chevronImage = UIImage(systemName: "chevron.left") {
-                button.setImage(chevronImage, for: .normal)
-                print("   ✅ [EcoNavigationBarView] Back button image set: chevron.left")
+            // Check backButtonStyle from current state
+            let backButtonStyle = currentState?.backButtonStyle ?? .circular
+            
+            if backButtonStyle == .circular {
+                // Create container view for circular background
+                let containerView = UIView()
+                containerView.translatesAutoresizingMaskIntoConstraints = false
+                containerView.backgroundColor = UIColor.black.withAlphaComponent(0.1) // Nền nhám
+                containerView.layer.cornerRadius = 18 // Hình tròn (36/2)
+                containerView.isUserInteractionEnabled = false // Container không nhận touch, chỉ button nhận
+                
+                // Add container to button (button will be added to stack later)
+                // For now, we'll add container as a wrapper
+                containerView.addSubview(button)
+                
+                if let chevronImage = UIImage(systemName: "chevron.left") {
+                    button.setImage(chevronImage, for: .normal)
+                    print("   ✅ [EcoNavigationBarView] Back button image set: chevron.left")
+                } else {
+                    print("   ⚠️ [EcoNavigationBarView] Failed to load chevron.left image")
+                }
+                button.imageView?.contentMode = .scaleAspectFit
+                button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
+                
+                // Set button size - smaller for circular button
+                button.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    button.widthAnchor.constraint(equalToConstant: 36),
+                    button.heightAnchor.constraint(equalToConstant: 36),
+                    button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+                    button.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+                ])
+                
+                // Set container size
+                NSLayoutConstraint.activate([
+                    containerView.widthAnchor.constraint(equalToConstant: 36),
+                    containerView.heightAnchor.constraint(equalToConstant: 36)
+                ])
+                
+                // Ensure button is visible and interactive
+                button.isHidden = false
+                button.alpha = 1.0
+                button.isUserInteractionEnabled = true
+                button.isEnabled = true
+                containerView.isHidden = false
+                containerView.alpha = 1.0
+                
+                // Set default tint color to black (will be overridden by state.buttonTintColor if provided)
+                button.tintColor = Colors.tokenDark100
+                
+                print("   ✅ [EcoNavigationBarView] Created back button with circular background:")
+                print("      - Container size: 36x36")
+                print("      - Button size: 36x36")
+                print("      - Corner radius: 18")
+                print("      - Background: black with alpha 0.1")
+                
+                // Return container view instead of button for back case
+                return containerView
             } else {
-                print("   ⚠️ [EcoNavigationBarView] Failed to load chevron.left image")
+                // Simple back button without circular background
+                if let chevronImage = UIImage(systemName: "chevron.left") {
+                    button.setImage(chevronImage, for: .normal)
+                    print("   ✅ [EcoNavigationBarView] Back button image set: chevron.left (simple)")
+                } else {
+                    print("   ⚠️ [EcoNavigationBarView] Failed to load chevron.left image")
+                }
+                button.imageView?.contentMode = .scaleAspectFit
+                button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
+                
+                // Set button size - standard size for simple button
+                button.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    button.widthAnchor.constraint(equalToConstant: 44),
+                    button.heightAnchor.constraint(equalToConstant: 44)
+                ])
+                
+                // Set default tint color to black (will be overridden by state.buttonTintColor if provided)
+                button.tintColor = Colors.tokenDark100
+                
+                print("   ✅ [EcoNavigationBarView] Created simple back button (no circular background)")
+                
+                return button
             }
-            button.imageView?.contentMode = .scaleAspectFit
-            button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
-            // Set button size
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.widthAnchor.constraint(equalToConstant: 44).isActive = true
-            button.heightAnchor.constraint(equalToConstant: 44).isActive = true
-            // Ensure button is visible and interactive
-            button.isHidden = false
-            button.alpha = 1.0
-            button.isUserInteractionEnabled = true
-            button.isEnabled = true
-            // Set default tint color to black (will be overridden by state.buttonTintColor if provided)
-            button.tintColor = Colors.tokenDark100
-            print("   ✅ [EcoNavigationBarView] Created back button:")
-            print("      - Size: 44x44")
-            print("      - isHidden: \(button.isHidden)")
-            print("      - alpha: \(button.alpha)")
-            print("      - isUserInteractionEnabled: \(button.isUserInteractionEnabled)")
-            print("      - isEnabled: \(button.isEnabled)")
-            print("      - tintColor: black")
-            print("      - Frame: \(button.frame)")
 
         case .close:
             button.setImage(UIImage(systemName: "xmark"), for: .normal)

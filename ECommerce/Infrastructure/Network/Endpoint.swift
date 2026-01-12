@@ -119,6 +119,16 @@ extension Requestable {
         var urlRequest = URLRequest(url: url)
         var allHeaders: [String: String] = config.headers
         headerParameters.forEach { allHeaders.updateValue($1, forKey: $0) }
+        
+        // Add Bearer token from access_token if available (for authenticated requests)
+        // Only add if not already present (to allow override)
+        if allHeaders["Authorization"] == nil {
+            let utilities = Utilities()
+            if let accessToken = utilities.getAccessToken(), !accessToken.isEmpty {
+                allHeaders["Authorization"] = "Bearer \(accessToken)"
+                print("🔐 [Endpoint] Added Bearer token to Authorization header")
+            }
+        }
 
         // Handle body parameters
         if let encodable = bodyParametersEncodable {

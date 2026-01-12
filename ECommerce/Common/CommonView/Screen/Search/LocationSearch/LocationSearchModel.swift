@@ -6,19 +6,23 @@
 //
 
 import Foundation
+import CoreLocation
 
 public struct LocationSearchKeyword {
     public let id: String
     public let keyword: String
     public let timestamp: Date
+    public let coordinate: CLLocationCoordinate2D? // Tọa độ của vị trí
     
     public init(
         id: String = UUID().uuidString,
         keyword: String,
-        timestamp: Date = Date()
+        timestamp: Date = Date(),
+        coordinate: CLLocationCoordinate2D? = nil
     ) {
         self.id = id
         self.keyword = keyword
         self.timestamp = timestamp
+        self.coordinate = coordinate
     }
 }

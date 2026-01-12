@@ -14,6 +14,7 @@ public protocol CardControllerInput {
     func didTapShow()
     func didTapExpand()
     func didTapCollapse()
+    func didTapIntermediate() // For peek mode with 2-step expansion
     func didTapDismiss()
     func didPanGesture(translation: CGFloat, velocity: CGFloat)
     func didPanGestureEnded(velocity: CGFloat)
@@ -104,6 +105,13 @@ public final class DefaultCardController: CardController {
             return parentHeight + 100
         case .collapsed:
             return parentHeight - configuration.collapsedHeight
+        case .intermediate:
+            // Intermediate: Y từ top của view cha (chỉ dùng cho peek mode)
+            if let intermediateY = configuration.intermediateY {
+                return intermediateY
+            }
+            // Fallback to expanded if no intermediateY specified
+            return parentHeight - configuration.expandedHeight
         case .expanded:
             // Expanded: cách đỉnh theo configuration
             return parentHeight - configuration.expandedHeight
@@ -149,11 +157,25 @@ extension DefaultCardController {
     }
     
     public func didTapCollapse() {
-        guard isVisible.value, state.value == .expanded else { return }
+        guard isVisible.value else { return }
+        // Allow collapse from both expanded and intermediate states
+        guard state.value == .expanded || state.value == .intermediate else { return }
         updateState(.collapsed)
         let y = calculateY(for: .collapsed, parentHeight: parentViewHeight)
         updateCurrentY(y)
         onCollapsed?()
+    }
+    
+    public func didTapIntermediate() {
+        guard isVisible.value else { return }
+        guard configuration.intermediateY != nil else {
+            // If no intermediateY, go directly to expanded
+            didTapExpand()
+            return
+        }
+        updateState(.intermediate)
+        let y = calculateY(for: .intermediate, parentHeight: parentViewHeight)
+        updateCurrentY(y)
     }
     
     public func didTapDismiss() {
@@ -170,38 +192,102 @@ extension DefaultCardController {
         guard isVisible.value, let currentYValue = currentY.value else { return }
         
         let newY = currentYValue + translation
-        // Allow dragging down to dismiss, but not above expanded position
-        let minY = parentViewHeight - configuration.expandedHeight
-        // Allow dragging down beyond screen to prepare for dismiss
-        let maxY = parentViewHeight + 50 // Allow some extra space for smooth dismiss
         
-        let clampedY = min(max(newY, minY), maxY)
-        updateCurrentY(clampedY)
+        // For peek mode with intermediate: allow dragging between collapsed, intermediate, and expanded
+        // For onDemand mode: only allow dragging between expanded and hidden
+        if configuration.presentationMode == .peek && configuration.intermediateY != nil {
+            // Peek mode: allow dragging from collapsed to expanded (through intermediate)
+            let collapsedY = parentViewHeight - configuration.collapsedHeight
+            let expandedY = parentViewHeight - configuration.expandedHeight
+            let minY = expandedY // Can't drag above expanded
+            let maxY = parentViewHeight + 50 // Allow dragging below screen for dismiss
+            let clampedY = min(max(newY, minY), maxY)
+            updateCurrentY(clampedY)
+        } else {
+            // onDemand mode: only expand or dismiss
+            let minY = parentViewHeight - configuration.expandedHeight
+            let maxY = parentViewHeight + 50
+            let clampedY = min(max(newY, minY), maxY)
+            updateCurrentY(clampedY)
+        }
     }
     
     public func didPanGestureEnded(velocity: CGFloat) {
         guard isVisible.value, let currentYValue = currentY.value else { return }
         
-        // For full-screen-like presentation: only expand or dismiss, no collapse
-        let threshold = parentViewHeight - configuration.expandedHeight + (configuration.expandedHeight * 0.3) // 30% from top
+        // Check if this is peek mode with intermediate support
+        let hasIntermediate = configuration.presentationMode == .peek && configuration.intermediateY != nil
         
-        if velocity < -300 {
-            // Swiping up fast - expand (if not already)
-            if state.value != .expanded {
-                didTapExpand()
-            }
-        } else if velocity > 300 {
-            // Swiping down fast - dismiss completely
-            didTapDismiss()
-        } else {
-            // No significant velocity - determine by position
-            if currentYValue > threshold {
-                // Swiped down more than 30% - dismiss
-                didTapDismiss()
+        if hasIntermediate {
+            // Peek mode with 2-step expansion: collapsed -> intermediate -> expanded
+            let collapsedY = parentViewHeight - configuration.collapsedHeight
+            let intermediateY = configuration.intermediateY ?? (parentViewHeight - configuration.expandedHeight)
+            let expandedY = parentViewHeight - configuration.expandedHeight
+            
+            if velocity < -300 {
+                // Swiping up fast - move to next state up
+                switch state.value {
+                case .collapsed:
+                    didTapIntermediate()
+                case .intermediate:
+                    didTapExpand()
+                case .expanded:
+                    // Already at top
+                    break
+                case .hidden:
+                    break
+                }
+            } else if velocity > 300 {
+                // Swiping down fast - move to next state down or dismiss
+                switch state.value {
+                case .expanded:
+                    didTapIntermediate()
+                case .intermediate:
+                    didTapCollapse()
+                case .collapsed:
+                    // Already at bottom (peek), could dismiss but stay collapsed for peek mode
+                    break
+                case .hidden:
+                    break
+                }
             } else {
-                // Swiped down less than 30% - stay expanded
+                // No significant velocity - snap to nearest position based on current Y
+                let distanceToCollapsed = abs(currentYValue - collapsedY)
+                let distanceToIntermediate = abs(currentYValue - intermediateY)
+                let distanceToExpanded = abs(currentYValue - expandedY)
+                
+                let minDistance = min(distanceToCollapsed, min(distanceToIntermediate, distanceToExpanded))
+                
+                if minDistance == distanceToCollapsed {
+                    didTapCollapse()
+                } else if minDistance == distanceToIntermediate {
+                    didTapIntermediate()
+                } else {
+                    didTapExpand()
+                }
+            }
+        } else {
+            // onDemand mode: only expand or dismiss, no collapse
+            let threshold = parentViewHeight - configuration.expandedHeight + (configuration.expandedHeight * 0.3) // 30% from top
+            
+            if velocity < -300 {
+                // Swiping up fast - expand (if not already)
                 if state.value != .expanded {
                     didTapExpand()
+                }
+            } else if velocity > 300 {
+                // Swiping down fast - dismiss completely
+                didTapDismiss()
+            } else {
+                // No significant velocity - determine by position
+                if currentYValue > threshold {
+                    // Swiped down more than 30% - dismiss
+                    didTapDismiss()
+                } else {
+                    // Swiped down less than 30% - stay expanded
+                    if state.value != .expanded {
+                        didTapExpand()
+                    }
                 }
             }
         }

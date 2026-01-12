@@ -7,10 +7,11 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 protocol LocationSearchControllerInput {
     func didSearch(keyword: String)
-    func didSelectKeyword(_ keyword: String)
+    func didSelectKeyword(_ keyword: LocationSearchKeyword)
     func didClearSearch()
 }
 
@@ -18,6 +19,7 @@ protocol LocationSearchControllerOutput {
     var searchSuggestions: Observable<[LocationSearchKeyword]> { get }
     var recentSearches: Observable<[LocationSearchKeyword]> { get }
     var screenTitle: String { get }
+    var onLocationSelected: ((LocationSearchKeyword) -> Void)? { get set } // Callback khi chọn vị trí
 }
 
 typealias LocationSearchController = LocationSearchControllerInput & LocationSearchControllerOutput & EcoController
@@ -29,6 +31,7 @@ final class DefaultLocationSearchController: LocationSearchController {
     let searchSuggestions: Observable<[LocationSearchKeyword]> = Observable([])
     let recentSearches: Observable<[LocationSearchKeyword]> = Observable([])
     let screenTitle = "Search Location"
+    var onLocationSelected: ((LocationSearchKeyword) -> Void)? // Callback khi chọn vị trí
     
     // MARK: - EcoController Output
     
@@ -39,7 +42,9 @@ final class DefaultLocationSearchController: LocationSearchController {
     // MARK: - Private
     
     private var searchTask: Cancellable? { willSet { searchTask?.cancel() } }
+    private var localSearch: MKLocalSearch? { willSet { localSearch?.cancel() } }
     private let maxRecentSearches = 10
+    private let historyStore = MapSearchHistoryStore.shared
     
     // MARK: - Navigation Bar Configuration
     
@@ -57,7 +62,11 @@ final class DefaultLocationSearchController: LocationSearchController {
             placeholder: "Search location",
             isEditing: false,
             showsClearButton: true,
-            showsCameraButton: false
+            showsCameraButton: false, // Bỏ icon chụp ảnh
+            height: navigationBarSearchFieldHeight,
+            backgroundColor: navigationBarSearchFieldBackgroundColor,
+            borderWidth: navigationBarSearchFieldBorderWidth,
+            borderColor: navigationBarSearchFieldBorderColor
         )
     }
     
@@ -70,11 +79,16 @@ final class DefaultLocationSearchController: LocationSearchController {
     }
     
     var navigationBarInitialHeight: CGFloat {
-        return 80
+        return 52 // Chiều cao mặc định 80pt, luôn hiển thị search bar
     }
     
-    var navigationBarCollapsedHeight: CGFloat {
-        return 80
+//    var navigationBarCollapsedHeight: CGFloat {
+//        return 64 // Giữ nguyên 80pt, không collapse
+//    }
+    
+    /// Navigation bar scroll behavior (luôn hiển thị search bar, không collapse)
+    var navigationBarScrollBehavior: EcoNavigationScrollBehavior {
+        return .sticky // Luôn hiển thị, không collapse
     }
     
     // MARK: - Init
@@ -85,24 +99,19 @@ final class DefaultLocationSearchController: LocationSearchController {
     
     // MARK: - Private
     
+    /// Load search history từ MapSearchHistoryStore
     private func loadRecentSearches() {
-        // Load from UserDefaults or CoreData
-        // For now, use empty array
-        recentSearches.value = []
+        let history = historyStore.load()
+        recentSearches.value = history
     }
     
-    private func saveRecentSearch(_ keyword: String) {
-        var searches = recentSearches.value
-        // Remove if already exists
-        searches.removeAll { $0.keyword.lowercased() == keyword.lowercased() }
-        // Add to beginning
-        searches.insert(LocationSearchKeyword(keyword: keyword), at: 0)
-        // Keep only max items
-        if searches.count > maxRecentSearches {
-            searches = Array(searches.prefix(maxRecentSearches))
-        }
-        recentSearches.value = searches
-        // TODO: Save to UserDefaults or CoreData
+    /// Save search keyword vào MapSearchHistoryStore
+    private func saveRecentSearch(_ keyword: LocationSearchKeyword) {
+        // Save vào history store
+        historyStore.save(keyword)
+        
+        // Update recent searches từ store
+        loadRecentSearches()
     }
 }
 
@@ -116,20 +125,55 @@ extension DefaultLocationSearchController {
             return
         }
         
-        // Use MapController to search
-        // For now, create mock suggestions
-        // In real implementation, this would call MapController.search()
-        let suggestions = [
-            LocationSearchKeyword(keyword: "\(keyword) - Location 1"),
-            LocationSearchKeyword(keyword: "\(keyword) - Location 2"),
-            LocationSearchKeyword(keyword: "\(keyword) - Location 3")
-        ]
-        searchSuggestions.value = suggestions
+        // Cancel previous search
+        localSearch?.cancel()
+        
+        // Use MKLocalSearch để tìm kiếm địa điểm thực tế
+        loading.value = true
+        
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = keyword
+        request.region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 10.8231, longitude: 106.6297), // Default: Ho Chi Minh City
+            span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+        )
+        
+        localSearch = MKLocalSearch(request: request)
+        localSearch?.start { [weak self] response, error in
+            DispatchQueue.main.async {
+                self?.loading.value = false
+                
+                if let error = error {
+                    // Ignore cancellation errors
+                    if (error as NSError).code != NSUserCancelledError {
+                        self?.error.value = error
+                    }
+                    return
+                }
+                
+                guard let response = response else {
+                    self?.searchSuggestions.value = []
+                    return
+                }
+                
+                // Convert MKMapItem to LocationSearchKeyword với tọa độ
+                let suggestions = response.mapItems.prefix(10).map { mapItem -> LocationSearchKeyword in
+                    LocationSearchKeyword(
+                        keyword: mapItem.name ?? mapItem.placemark.title ?? "",
+                        coordinate: mapItem.placemark.coordinate
+                    )
+                }
+                
+                self?.searchSuggestions.value = Array(suggestions)
+            }
+        }
     }
     
-    func didSelectKeyword(_ keyword: String) {
+    func didSelectKeyword(_ keyword: LocationSearchKeyword) {
+        // Save vào history (với coordinate nếu có)
         saveRecentSearch(keyword)
-        // Handle selection - will be implemented later
+        // Call callback để thông báo đã chọn vị trí
+        onLocationSelected?(keyword)
     }
     
     func didClearSearch() {
@@ -152,12 +196,16 @@ extension DefaultLocationSearchController {
             backgroundColor: navigationBarBackgroundColor,
             height: navigationBarInitialHeight,
             collapsedHeight: navigationBarCollapsedHeight,
-            scrollBehavior: .default
+            scrollBehavior: navigationBarScrollBehavior // Animate navbar khi scroll
         )
+        
+        // Load search history khi viewDidLoad (mỗi khi mở lại màn hình)
+        loadRecentSearches()
     }
     
     func onViewWillAppear() {
-        // Handle view will appear if needed
+        // Load search history mỗi khi màn hình xuất hiện (đảm bảo có dữ liệu mới nhất)
+        loadRecentSearches()
     }
     
     func onViewDidDisappear() {

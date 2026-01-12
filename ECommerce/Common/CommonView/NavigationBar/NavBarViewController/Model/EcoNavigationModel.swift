@@ -16,6 +16,12 @@ public enum EcoNavItem {
     case cart(count: Int, action: () -> Void)
 }
 
+// MARK: - Back Button Style
+public enum EcoBackButtonStyle {
+    case simple // Back button không có vòng tròn nhám
+    case circular // Back button có vòng tròn nhám (default)
+}
+
 // MARK: - Background Style
 public enum EcoNavigationBackground {
     case transparent
@@ -38,6 +44,9 @@ public struct EcoNavigationState {
     public var height: CGFloat?
     public var collapsedHeight: CGFloat?
     
+    // MARK: - Back Button Style
+    public var backButtonStyle: EcoBackButtonStyle
+    
     // MARK: - Scroll Behavior
     public var scrollBehavior: EcoNavigationScrollBehavior
     
@@ -54,6 +63,7 @@ public struct EcoNavigationState {
         buttonTintColor: UIColor? = nil,
         height: CGFloat? = nil,
         collapsedHeight: CGFloat? = nil,
+        backButtonStyle: EcoBackButtonStyle = .circular,
         scrollBehavior: EcoNavigationScrollBehavior = .default
     ) {
         self.title = title
@@ -68,6 +78,7 @@ public struct EcoNavigationState {
         self.buttonTintColor = buttonTintColor
         self.height = height
         self.collapsedHeight = collapsedHeight
+        self.backButtonStyle = backButtonStyle
         self.scrollBehavior = scrollBehavior
     }
 }

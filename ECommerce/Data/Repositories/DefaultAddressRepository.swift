@@ -29,16 +29,29 @@ extension DefaultAddressRepository: AddressRepository {
         addressType: String,
         longitude: String,
         latitude: String,
+        isDefault: Bool,
         completion: @escaping (Result<Address, Error>) -> Void
     ) -> Cancellable? {
+        // Address type values must match backend keys exactly: "shipping", "shop", "other"
+        // No mapping needed - send as is
+        print("📍 [AddressRepository] createAddress - addressType: '\(addressType)' (sending as is)")
+        print("📍 [AddressRepository] createAddress - defaultShipping: \(isDefault)")
+        
         let requestDTO = AddressRequestDTO(
             contactPersonName: contactPersonName,
             contactPersonNumber: contactPersonNumber,
             address: address,
-            addressType: addressType,
+            addressType: addressType, // Send exact value: "shipping", "shop", or "other"
             longitude: longitude,
-            latitude: latitude
+            latitude: latitude,
+            defaultShipping: isDefault
         )
+        
+        // Debug: Print encoded request
+        if let jsonData = try? JSONEncoder().encode(requestDTO),
+           let jsonString = String(data: jsonData, encoding: .utf8) {
+            print("📍 [AddressRepository] Request DTO JSON: \(jsonString)")
+        }
         let task = RepositoryTask()
         
         guard !task.isCancelled else { return nil }

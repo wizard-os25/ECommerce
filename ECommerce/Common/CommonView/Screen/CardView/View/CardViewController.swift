@@ -11,8 +11,10 @@ public final class CardViewController: EcoViewController {
     
     // MARK: - IBOutlets
     
+    @IBOutlet var dragIndicator: UIView!
     @IBOutlet private var contentContainerView: UIView!
     
+    @IBOutlet weak var heightDragIndicatorConstraint: NSLayoutConstraint!
     // MARK: - Properties
     
     private var cardController: CardController! {
@@ -60,10 +62,18 @@ public final class CardViewController: EcoViewController {
         super.viewDidAppear(animated)
         updateParentViewHeight()
         
-        // Setup initial position only if not already set and card is not visible yet
-        // This ensures the card starts from below screen, ready for animation
-        if !isInitialPositionSet && !cardController.isVisible.value {
+        // Setup initial position
+        if !isInitialPositionSet {
             setupInitialPosition()
+        }
+        
+        // For peek mode, ensure currentY is set from initial position
+        if cardController.configuration.presentationMode == .peek && cardController.isVisible.value {
+            guard let parent = parentVC else { return }
+            let initialY = calculateInitialY(in: parent.view)
+            if cardController.currentY.value == nil {
+                cardController.currentY.value = initialY
+            }
         }
     }
     
@@ -160,9 +170,22 @@ public final class CardViewController: EcoViewController {
     // MARK: - Setup
     
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         view.layer.cornerRadius = 16
-        view.clipsToBounds = true
+        
+        // Setup shadow effect for natural drop shadow (only on main view)
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.12
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.shadowRadius = 12
+        view.layer.masksToBounds = false
+        
+        // Setup drag indicator (iOS system style)
+        dragIndicator.layer.cornerRadius = self.heightDragIndicatorConstraint.constant / 2
+        dragIndicator.backgroundColor = .systemGray4
+        
+        // Content container: no shadow, no corner radius (keep original)
+        contentContainerView.clipsToBounds = false
     }
     
     private func setupGestureIfNeeded() {
@@ -172,6 +195,11 @@ public final class CardViewController: EcoViewController {
             target: self,
             action: #selector(handlePan(_:))
         )
+        pan.delegate = self
+        // Don't cancel touches in view to allow content scrolling when not dragging card
+        pan.cancelsTouchesInView = false
+        // Set maximum number of touches to 1 for better gesture recognition
+        pan.maximumNumberOfTouches = 1
         view.addGestureRecognizer(pan)
     }
     
@@ -250,7 +278,16 @@ public final class CardViewController: EcoViewController {
         // Setup initial position after layout
         // Use async to ensure view is laid out first
         DispatchQueue.main.async { [weak self] in
-            self?.setupInitialPosition()
+            guard let self = self else { return }
+            self.setupInitialPosition()
+            
+            // For peek mode, ensure currentY is set from initial position
+            if self.cardController.configuration.presentationMode == .peek && self.cardController.isVisible.value {
+                let initialY = self.calculateInitialY(in: parentVC.view)
+                if self.cardController.currentY.value == nil {
+                    self.cardController.currentY.value = initialY
+                }
+            }
         }
     }
     
@@ -291,11 +328,10 @@ public final class CardViewController: EcoViewController {
         let transformY = initialY - baseY // Transform offset from base position
         view.transform = CGAffineTransform(translationX: 0, y: transformY)
         
-        // Update currentY to match initial position (but won't animate because isVisible is false)
-        // This ensures the position is tracked correctly
-        if !cardController.isVisible.value {
-            cardController.currentY.value = initialY
-        }
+        // Update currentY to match initial position
+        // For peek mode, card is visible, so we need to set currentY
+        // For onDemand mode, card is hidden, so we set currentY but won't animate
+        cardController.currentY.value = initialY
         isInitialPositionSet = true
     }
     
@@ -378,7 +414,14 @@ public final class CardViewController: EcoViewController {
             // Hide completely below screen - no peek, completely hidden
             return parent.bounds.height + 100
         case .collapsed:
-            // For full-screen-like, collapsed same as expanded
+            // Collapsed: peek từ bottom
+            return parent.bounds.height - cardController.configuration.collapsedHeight
+        case .intermediate:
+            // Intermediate: Y từ top của view cha (chỉ dùng cho peek mode)
+            if let intermediateY = cardController.configuration.intermediateY {
+                return intermediateY
+            }
+            // Fallback to expanded if no intermediateY specified
             return parent.bounds.height - cardController.configuration.expandedHeight
         case .expanded:
             // Expanded: cách đỉnh theo configuration (80pt)
@@ -425,28 +468,36 @@ public final class CardViewController: EcoViewController {
             self.runningAnimators.removeAll()
         }
         
-        // Blur effect animator - only blur effect, keep it simple
-        let blurAnimator = UIViewPropertyAnimator(
-            duration: duration,
-            dampingRatio: dampingRatio,
-            animations: {
-                if isExpanding {
-                    self.visualEffectView?.effect = UIBlurEffect(style: .systemMaterial)
-                    self.visualEffectView?.alpha = 1.0
-                    self.visualEffectView?.isUserInteractionEnabled = false // Never block touches
-                } else {
-                    self.visualEffectView?.effect = nil
-                    self.visualEffectView?.alpha = 0
-                    self.visualEffectView?.isUserInteractionEnabled = false
+        // Blur effect animator - disable blur for peek mode as requested
+        // Only show blur for onDemand mode
+        if cardController.configuration.presentationMode == .peek {
+            // No blur effect for peek mode - only animate frame
+            frameAnimator.startAnimation()
+            runningAnimators = [frameAnimator]
+        } else {
+            // Blur effect animator - only for onDemand mode
+            let blurAnimator = UIViewPropertyAnimator(
+                duration: duration,
+                dampingRatio: dampingRatio,
+                animations: {
+                    if isExpanding {
+                        self.visualEffectView?.effect = UIBlurEffect(style: .systemMaterial)
+                        self.visualEffectView?.alpha = 1.0
+                        self.visualEffectView?.isUserInteractionEnabled = false // Never block touches
+                    } else {
+                        self.visualEffectView?.effect = nil
+                        self.visualEffectView?.alpha = 0
+                        self.visualEffectView?.isUserInteractionEnabled = false
+                    }
                 }
-            }
-        )
-        
-        // Start animators
-        frameAnimator.startAnimation()
-        blurAnimator.startAnimation()
-        
-        runningAnimators = [frameAnimator, blurAnimator]
+            )
+            
+            // Start animators
+            frameAnimator.startAnimation()
+            blurAnimator.startAnimation()
+            
+            runningAnimators = [frameAnimator, blurAnimator]
+        }
     }
     
     // MARK: - Gesture Handling
@@ -468,45 +519,80 @@ public final class CardViewController: EcoViewController {
             let currentTransformY = view.transform.ty
             initialCardY = baseY + currentTransformY
             
+            // Ensure currentY is set if it's nil (for peek mode)
+            if cardController.currentY.value == nil {
+                cardController.currentY.value = initialCardY
+            }
+            
         case .changed:
             // Calculate new Y position based on translation (relative movement)
             // This ensures smooth following of finger movement
             let newY = initialCardY + translation.y
             
-            // Allow dragging down to dismiss, but not above expanded position
-            let expandedY = parent.view.bounds.height - cardController.configuration.expandedHeight
-            let minY = expandedY
-            let maxY = parent.view.bounds.height + 100 // Allow dragging below screen for smooth dismiss
+            // Check if peek mode with intermediate support
+            let isPeekWithIntermediate = cardController.configuration.presentationMode == .peek && cardController.configuration.intermediateY != nil
             
-            let clampedY = min(max(newY, minY), maxY)
-            
-            // Update view position using transform (follows finger naturally)
-            let baseY = parent.view.bounds.height
-            let transformY = clampedY - baseY
-            view.transform = CGAffineTransform(translationX: 0, y: transformY)
-            
-            // Ensure corner radius is always 16
-            view.layer.cornerRadius = 16
-            
-            // Update blur effect based on position (simple linear interpolation)
-            let expandedYPosition = parent.view.bounds.height - cardController.configuration.expandedHeight
-            let hiddenYPosition = parent.view.bounds.height + 100
-            let totalRange = hiddenYPosition - expandedYPosition
-            let currentProgress = (clampedY - expandedYPosition) / totalRange
-            let blurProgress = 1 - min(max(currentProgress, 0), 1) // 1 when expanded, 0 when hidden
-            
-            // Update blur effect smoothly - always ensure it doesn't block touches
-            visualEffectView?.isUserInteractionEnabled = false
-            if blurProgress > 0.1 {
-                visualEffectView?.effect = UIBlurEffect(style: .systemMaterial)
-                visualEffectView?.alpha = blurProgress
-            } else {
+            if isPeekWithIntermediate {
+                // Peek mode: handle directly in view (like onDemand) but with 3 states support
+                let collapsedY = parent.view.bounds.height - cardController.configuration.collapsedHeight
+                let expandedY = parent.view.bounds.height - cardController.configuration.expandedHeight
+                let minY = expandedY // Can't drag above expanded
+                let maxY = parent.view.bounds.height + 100 // Allow dragging below screen for smooth dismiss
+                
+                let clampedY = min(max(newY, minY), maxY)
+                
+                // Update view position using transform (follows finger naturally)
+                let baseY = parent.view.bounds.height
+                let transformY = clampedY - baseY
+                view.transform = CGAffineTransform(translationX: 0, y: transformY)
+                
+                // Ensure corner radius is always 16
+                view.layer.cornerRadius = 16
+                
+                // For peek mode, disable blur effect as requested
                 visualEffectView?.effect = nil
                 visualEffectView?.alpha = 0
+                visualEffectView?.isUserInteractionEnabled = false
+                
+                // Update controller state for tracking
+                cardController.currentY.value = clampedY
+            } else {
+                // onDemand mode: handle directly in view (original logic)
+                // Allow dragging down to dismiss, but not above expanded position
+                let expandedY = parent.view.bounds.height - cardController.configuration.expandedHeight
+                let minY = expandedY
+                let maxY = parent.view.bounds.height + 100 // Allow dragging below screen for smooth dismiss
+                
+                let clampedY = min(max(newY, minY), maxY)
+                
+                // Update view position using transform (follows finger naturally)
+                let baseY = parent.view.bounds.height
+                let transformY = clampedY - baseY
+                view.transform = CGAffineTransform(translationX: 0, y: transformY)
+                
+                // Ensure corner radius is always 16
+                view.layer.cornerRadius = 16
+                
+                // Update blur effect based on position (simple linear interpolation)
+                let expandedYPosition = parent.view.bounds.height - cardController.configuration.expandedHeight
+                let hiddenYPosition = parent.view.bounds.height + 100
+                let totalRange = hiddenYPosition - expandedYPosition
+                let currentProgress = (clampedY - expandedYPosition) / totalRange
+                let blurProgress = 1 - min(max(currentProgress, 0), 1) // 1 when expanded, 0 when hidden
+                
+                // Update blur effect smoothly - always ensure it doesn't block touches
+                visualEffectView?.isUserInteractionEnabled = false
+                if blurProgress > 0.1 {
+                    visualEffectView?.effect = UIBlurEffect(style: .systemMaterial)
+                    visualEffectView?.alpha = blurProgress
+                } else {
+                    visualEffectView?.effect = nil
+                    visualEffectView?.alpha = 0
+                }
+                
+                // Update controller state for tracking
+                cardController.currentY.value = clampedY
             }
-            
-            // Update controller state for tracking
-            cardController.currentY.value = clampedY
             
         case .ended, .cancelled:
             // Determine final state based on velocity and position
@@ -514,31 +600,129 @@ public final class CardViewController: EcoViewController {
             let baseY = parent.view.bounds.height
             let currentTransformY = view.transform.ty
             let currentY = baseY + currentTransformY
-            let expandedY = parent.view.bounds.height - cardController.configuration.expandedHeight
-            let dismissThreshold = expandedY + (cardController.configuration.expandedHeight * 0.3) // 30% down
             
-            if velocity.y > 500 {
-                // Fast swipe down - dismiss with animation
-                cardController.didTapDismiss()
-            } else if velocity.y < -300 {
-                // Fast swipe up - snap back to expanded with spring animation
-                animateToY(expandedY) {
-                    // Update state to expanded after animation completes
-                    if self.cardController.state.value != .expanded {
-                        self.cardController.didTapExpand()
+            // Check if peek mode with intermediate support
+            let isPeekWithIntermediate = cardController.configuration.presentationMode == .peek && cardController.configuration.intermediateY != nil
+            
+            if isPeekWithIntermediate {
+                // Peek mode: handle directly in view (like onDemand) but snap to 3 states
+                let collapsedY = parent.view.bounds.height - cardController.configuration.collapsedHeight
+                let intermediateY = cardController.configuration.intermediateY ?? (parent.view.bounds.height - cardController.configuration.expandedHeight)
+                let expandedY = parent.view.bounds.height - cardController.configuration.expandedHeight
+                
+                if velocity.y < -300 {
+                    // Fast swipe up - move to next state up
+                    switch cardController.state.value {
+                    case .collapsed:
+                        // Animate to intermediate
+                        animateToY(intermediateY) {
+                            if self.cardController.state.value != .intermediate {
+                                self.cardController.didTapIntermediate()
+                            }
+                        }
+                    case .intermediate:
+                        // Animate to expanded
+                        animateToY(expandedY) {
+                            if self.cardController.state.value != .expanded {
+                                self.cardController.didTapExpand()
+                            }
+                        }
+                    case .expanded:
+                        // Already at top, stay expanded
+                        animateToY(expandedY) {
+                            if self.cardController.state.value != .expanded {
+                                self.cardController.didTapExpand()
+                            }
+                        }
+                    case .hidden:
+                        break
+                    }
+                } else if velocity.y > 300 {
+                    // Fast swipe down - move to next state down
+                    switch cardController.state.value {
+                    case .expanded:
+                        // Animate to intermediate
+                        animateToY(intermediateY) {
+                            if self.cardController.state.value != .intermediate {
+                                self.cardController.didTapIntermediate()
+                            }
+                        }
+                    case .intermediate:
+                        // Animate to collapsed
+                        animateToY(collapsedY) {
+                            if self.cardController.state.value != .collapsed {
+                                self.cardController.didTapCollapse()
+                            }
+                        }
+                    case .collapsed:
+                        // Already at bottom (peek), stay collapsed
+                        animateToY(collapsedY) {
+                            if self.cardController.state.value != .collapsed {
+                                self.cardController.didTapCollapse()
+                            }
+                        }
+                    case .hidden:
+                        break
+                    }
+                } else {
+                    // No significant velocity - snap to nearest position based on current Y
+                    let distanceToCollapsed = abs(currentY - collapsedY)
+                    let distanceToIntermediate = abs(currentY - intermediateY)
+                    let distanceToExpanded = abs(currentY - expandedY)
+                    
+                    let minDistance = min(distanceToCollapsed, min(distanceToIntermediate, distanceToExpanded))
+                    
+                    if minDistance == distanceToCollapsed {
+                        // Snap to collapsed
+                        animateToY(collapsedY) {
+                            if self.cardController.state.value != .collapsed {
+                                self.cardController.didTapCollapse()
+                            }
+                        }
+                    } else if minDistance == distanceToIntermediate {
+                        // Snap to intermediate
+                        animateToY(intermediateY) {
+                            if self.cardController.state.value != .intermediate {
+                                self.cardController.didTapIntermediate()
+                            }
+                        }
+                    } else {
+                        // Snap to expanded
+                        animateToY(expandedY) {
+                            if self.cardController.state.value != .expanded {
+                                self.cardController.didTapExpand()
+                            }
+                        }
                     }
                 }
             } else {
-                // Check position - natural threshold based on drag distance
-                if currentY > dismissThreshold {
-                    // Dragged down more than 30% - dismiss
+                // onDemand mode: handle directly in view (original logic)
+                let expandedY = parent.view.bounds.height - cardController.configuration.expandedHeight
+                let dismissThreshold = expandedY + (cardController.configuration.expandedHeight * 0.3) // 30% down
+                
+                if velocity.y > 500 {
+                    // Fast swipe down - dismiss with animation
                     cardController.didTapDismiss()
-                } else {
-                    // Snap back to expanded position with spring animation
+                } else if velocity.y < -300 {
+                    // Fast swipe up - snap back to expanded with spring animation
                     animateToY(expandedY) {
                         // Update state to expanded after animation completes
                         if self.cardController.state.value != .expanded {
                             self.cardController.didTapExpand()
+                        }
+                    }
+                } else {
+                    // Check position - natural threshold based on drag distance
+                    if currentY > dismissThreshold {
+                        // Dragged down more than 30% - dismiss
+                        cardController.didTapDismiss()
+                    } else {
+                        // Snap back to expanded position with spring animation
+                        animateToY(expandedY) {
+                            // Update state to expanded after animation completes
+                            if self.cardController.state.value != .expanded {
+                                self.cardController.didTapExpand()
+                            }
                         }
                     }
                 }
@@ -625,6 +809,112 @@ public final class CardViewController: EcoViewController {
         // Parent can listen to this callback and cleanup if needed
         // For now, we just log it
         print("🔵 [CardViewController] Dismiss completed - view hidden")
+    }
+    
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension CardViewController {
+    
+    /// Check if touch should be received by this gesture recognizer
+    /// This ensures that touches starting in CardView are handled by CardView, not parent MapView
+    public override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        // Check if this is our card pan gesture
+        guard gestureRecognizer.view == view,
+              gestureRecognizer is UIPanGestureRecognizer else {
+            // For other gestures (like pop gesture), use parent implementation
+            return super.gestureRecognizer(gestureRecognizer, shouldReceive: touch)
+        }
+        
+        // Always receive touches that start in CardView
+        let location = touch.location(in: view)
+        let shouldReceive = view.bounds.contains(location)
+        return shouldReceive
+    }
+    
+    /// Allow pan gesture to begin only if it's a vertical pan starting in CardView
+    public override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Check if this is our card pan gesture
+        guard gestureRecognizer.view == view,
+              let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
+            // For other gestures (like pop gesture), use parent implementation
+            return super.gestureRecognizerShouldBegin(gestureRecognizer)
+        }
+        
+        // Check if touch started in CardView
+        let locationInCardView = panGesture.location(in: view)
+        guard view.bounds.contains(locationInCardView) else {
+            // Touch didn't start in CardView, don't handle
+            return false
+        }
+        
+        // Only allow vertical pan gestures (for card dragging)
+        let velocity = panGesture.velocity(in: view)
+        let translation = panGesture.translation(in: view)
+        
+        // Allow if vertical movement is greater than horizontal movement
+        // For initial touch, translation might be small, so check velocity first
+        let isVerticalPan = abs(velocity.y) > abs(velocity.x) || abs(translation.y) > abs(translation.x) || (abs(velocity.x) < 50 && abs(velocity.y) < 50)
+        
+        return isVerticalPan
+    }
+    
+    /// Prevent other gesture recognizers from recognizing when CardView pan is active
+    public override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Check if this is our card pan gesture
+        guard gestureRecognizer.view == view,
+              gestureRecognizer is UIPanGestureRecognizer else {
+            // For other gestures, use parent implementation
+            return super.gestureRecognizer(gestureRecognizer, shouldBeRequiredToFailBy: otherGestureRecognizer)
+        }
+        
+        // If other gesture is from parent view (like MapView), require it to fail
+        // This ensures CardView pan has priority when touch starts in CardView
+        if let otherView = otherGestureRecognizer.view,
+           let parentView = parentVC?.view,
+           otherView.isDescendant(of: parentView) && !otherView.isDescendant(of: view) {
+            // Other gesture is from parent hierarchy, require it to fail
+            return true
+        }
+        return false
+    }
+    
+    /// Allow simultaneous recognition with scroll views inside CardView content
+    public override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Check if this is our card pan gesture
+        guard gestureRecognizer.view == view else {
+            // For other gestures (like pop gesture), use parent implementation
+            return super.gestureRecognizer(gestureRecognizer, shouldRecognizeSimultaneouslyWith: otherGestureRecognizer)
+        }
+        
+        // Allow simultaneous recognition with scroll gestures inside CardView content
+        if let otherView = otherGestureRecognizer.view,
+           otherView.isDescendant(of: view),
+           otherGestureRecognizer is UIPanGestureRecognizer {
+            // Check current card state
+            let currentState = cardController.state.value
+            let isExpandedOrIntermediate = currentState == .expanded || currentState == .intermediate
+            
+            if let otherPan = otherGestureRecognizer as? UIPanGestureRecognizer {
+                let velocity = otherPan.velocity(in: view)
+                
+                // When expanded or intermediate: allow both horizontal and vertical scroll
+                // When collapsed: only allow horizontal scroll (card can be dragged vertically)
+                if isExpandedOrIntermediate {
+                    // Allow both horizontal and vertical scroll when expanded/intermediate
+                    // This allows content to scroll naturally
+                    return true
+                } else {
+                    // When collapsed: only allow horizontal scroll (for content scrolling)
+                    // Vertical scroll should be handled by card drag gesture
+                    if abs(velocity.x) > abs(velocity.y) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
     
 }

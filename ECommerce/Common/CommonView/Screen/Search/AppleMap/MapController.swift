@@ -58,6 +58,9 @@ public final class DefaultMapController: NSObject, MapController {
     private let locationManager = CLLocationManager()
     private let mainQueue: DispatchQueueType
     
+    // Callback for back button tap
+    var onNavigationBarLeftItemTap: (() -> Void)?
+    
     // MARK: - Init
     
     init(
@@ -317,17 +320,27 @@ extension DefaultMapController: CLLocationManagerDelegate {
 extension DefaultMapController {
     
     public func onViewDidLoad() {
-        // Initialize navigation state - MapView typically doesn't show navigation bar when embedded
+        // Initialize navigation state with clear background and back button
+        // Use same height as AddressViewController (140pt)
+        let leftItem = EcoNavItem.back { [weak self] in
+            // Back action will be handled by MapViewController
+            print("🗺️ [MapController] Back button action called")
+            self?.onNavigationBarLeftItemTap?()
+        }
+        
+        print("🗺️ [MapController] onViewDidLoad - Setting navigation state with leftItem")
         navigationState.value = EcoNavigationState(
             title: nil,
             showsSearch: false,
             searchState: nil,
-            leftItem: nil,
+            leftItem: leftItem,
             rightItems: [],
-            background: .transparent,
-            height: 0,
-            collapsedHeight: 0
+            background: .transparent, // Clear color to show map behind
+            backgroundColor: .clear,
+            height: 140, // Same height as AddressViewController
+            collapsedHeight: 140
         )
+        print("🗺️ [MapController] Navigation state set - leftItem: EXISTS, height: 140")
     }
     
     public func onViewWillAppear() {

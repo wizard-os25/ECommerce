@@ -49,7 +49,11 @@ final class LocationSearchViewController: EcoViewController {
                     self?.locationSearchController.didSearch(keyword: text)
                 }
                 navBarController.onSearchSubmit = { [weak self] text in
-                    self?.locationSearchController.didSelectKeyword(text)
+                    // Khi submit từ search bar, chỉ search lại keyword (không chọn vì chưa có coordinate)
+                    // User cần chọn từ suggestions để có coordinate
+                    if !text.isEmpty {
+                        self?.locationSearchController.didSearch(keyword: text)
+                    }
                 }
                 navBarController.onSearchClear = { [weak self] in
                     self?.locationSearchController.didClearSearch()
@@ -86,14 +90,16 @@ final class LocationSearchViewController: EcoViewController {
         // Register cell
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "KeywordCell")
         
-        // Constraints
+        // Constraints - navbar luôn 80pt, không collapse
         let navBarHeight = locationSearchController.navigationBarInitialHeight
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: navBarHeight),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: navBarHeight),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        // Không cần bind navigation bar vì scrollBehavior là .sticky (luôn hiển thị)
     }
 }
 
@@ -146,13 +152,20 @@ extension LocationSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let keyword: String
         if indexPath.section == 0 {
-            keyword = locationSearchController.searchSuggestions.value[indexPath.row].keyword
+            // Section 0: Search suggestions (có coordinate) - cho phép chọn
+            let keyword = locationSearchController.searchSuggestions.value[indexPath.row]
+            locationSearchController.didSelectKeyword(keyword)
         } else {
-            keyword = locationSearchController.recentSearches.value[indexPath.row].keyword
+            // Section 1: Recent searches - chọn keyword đó (có coordinate từ history)
+            let recentKeyword = locationSearchController.recentSearches.value[indexPath.row]
+            // Nếu recent search có coordinate, chọn luôn; nếu không, search lại
+            if recentKeyword.coordinate != nil {
+                locationSearchController.didSelectKeyword(recentKeyword)
+            } else {
+                // Không có coordinate, search lại để lấy suggestions
+                locationSearchController.didSearch(keyword: recentKeyword.keyword)
+            }
         }
-        
-        locationSearchController.didSelectKeyword(keyword)
     }
 }

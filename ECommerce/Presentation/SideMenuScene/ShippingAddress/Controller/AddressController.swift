@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 protocol AddressControllerInput {
     func didTapSave(
@@ -25,11 +26,12 @@ protocol AddressControllerOutput {
     var isSaveSuccess: Observable<Bool> { get }
     var successMessage: Observable<String?> { get }
     var screenTitle: String { get }
+    var onCurrentLocationReceived: ((String, String, String) -> Void)? { get set } // (address, latitude, longitude)
 }
 
 typealias AddressController = AddressControllerInput & AddressControllerOutput & EcoController
 
-final class DefaultAddressController: AddressController {
+final class DefaultAddressController: NSObject, AddressController {
     
     private let createAddressUseCase: CreateAddressUseCase
     private let mainQueue: DispatchQueueType
@@ -37,11 +39,17 @@ final class DefaultAddressController: AddressController {
     
     private var saveTask: Cancellable? { willSet { saveTask?.cancel() } }
     
+    // MARK: - Location Services
+    
+    private let locationManager = CLLocationManager()
+    private let geocoder = CLGeocoder()
+    
     // MARK: - OUTPUT
     
     let isSaveSuccess: Observable<Bool> = Observable(false)
     let successMessage: Observable<String?> = Observable(nil)
     let screenTitle = "Add a new address"
+    var onCurrentLocationReceived: ((String, String, String) -> Void)? // (address, latitude, longitude)
     
     // MARK: - EcoController Output (common to all controllers)
     
@@ -73,6 +81,10 @@ final class DefaultAddressController: AddressController {
         return Colors.tokenDark100
     }
     
+    var navigationBarTitleColor: UIColor? {
+        return .black
+    }
+    
     var navigationBarInitialHeight: CGFloat {
         return 140
     }
@@ -91,6 +103,21 @@ final class DefaultAddressController: AddressController {
         self.createAddressUseCase = createAddressUseCase
         self.utilities = utilities
         self.mainQueue = mainQueue
+        super.init()
+        setupLocation()
+    }
+    
+    deinit {
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+        geocoder.cancelGeocode()
+    }
+    
+    // MARK: - Private Setup
+    
+    private func setupLocation() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     // MARK: - Private
@@ -145,7 +172,8 @@ extension DefaultAddressController {
             address: address,
             addressType: addressType,
             longitude: longitude,
-            latitude: latitude
+            latitude: latitude,
+            isDefault: isDefault
         ) { [weak self] result in
             self?.mainQueue.async {
                 self?.loading.value = false
@@ -161,8 +189,41 @@ extension DefaultAddressController {
     }
     
     func didTapUseCurrentLocation() {
-        // Logic will be handled later
-        // This will trigger location services and update address field
+        guard CLLocationManager.locationServicesEnabled() else {
+            let error = NSError(
+                domain: "AddressController",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "Location services are not enabled"]
+            )
+            handle(error: error)
+            return
+        }
+        
+        // Check authorization status - compatible with iOS 13.0+
+        let status: CLAuthorizationStatus
+        if #available(iOS 14.0, *) {
+            status = locationManager.authorizationStatus
+        } else {
+            status = CLLocationManager.authorizationStatus()
+        }
+        
+        switch status {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse, .authorizedAlways:
+            // Start requesting location
+            loading.value = true
+            locationManager.requestLocation() // One-time location request
+        case .denied, .restricted:
+            let error = NSError(
+                domain: "AddressController",
+                code: -2,
+                userInfo: [NSLocalizedDescriptionKey: "Location permission denied. Please enable location services in Settings."]
+            )
+            handle(error: error)
+        @unknown default:
+            break
+        }
     }
 }
 
@@ -184,6 +245,7 @@ extension DefaultAddressController {
             buttonTintColor: navigationBarButtonTintColor,
             height: navigationBarInitialHeight,
             collapsedHeight: navigationBarCollapsedHeight,
+            backButtonStyle: .simple, // AddressViewController không cần vòng tròn nhám
             scrollBehavior: navigationBarScrollBehavior
         )
     }
@@ -194,5 +256,93 @@ extension DefaultAddressController {
     
     func onViewDidDisappear() {
         // Handle view did disappear if needed
+    }
+}
+
+// MARK: - CLLocationManagerDelegate
+
+extension DefaultAddressController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            // User granted permission, request location
+            loading.value = true
+            locationManager.requestLocation()
+        case .denied, .restricted:
+            loading.value = false
+            let error = NSError(
+                domain: "AddressController",
+                code: -2,
+                userInfo: [NSLocalizedDescriptionKey: "Location permission denied. Please enable location services in Settings."]
+            )
+            handle(error: error)
+        default:
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {
+            loading.value = false
+            return
+        }
+        
+        // Stop updating location (one-time request)
+        locationManager.stopUpdatingLocation()
+        
+        // Reverse geocode to get address
+        geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
+            self?.mainQueue.async {
+                self?.loading.value = false
+                
+                if let error = error {
+                    self?.handle(error: error)
+                    return
+                }
+                
+                guard let placemark = placemarks?.first else {
+                    let noAddressError = NSError(
+                        domain: "AddressController",
+                        code: -3,
+                        userInfo: [NSLocalizedDescriptionKey: "Could not determine address for current location"]
+                    )
+                    self?.handle(error: noAddressError)
+                    return
+                }
+                
+                // Build address string from placemark
+                var addressComponents: [String] = []
+                if let street = placemark.thoroughfare {
+                    addressComponents.append(street)
+                }
+                if let subThoroughfare = placemark.subThoroughfare {
+                    addressComponents.append(subThoroughfare)
+                }
+                if let locality = placemark.locality {
+                    addressComponents.append(locality)
+                }
+                if let administrativeArea = placemark.administrativeArea {
+                    addressComponents.append(administrativeArea)
+                }
+                if let country = placemark.country {
+                    addressComponents.append(country)
+                }
+                
+                let address = addressComponents.joined(separator: ", ")
+                let latitude = String(location.coordinate.latitude)
+                let longitude = String(location.coordinate.longitude)
+                
+                // Call callback to update UI
+                self?.onCurrentLocationReceived?(address, latitude, longitude)
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        mainQueue.async { [weak self] in
+            self?.loading.value = false
+            self?.handle(error: error)
+        }
     }
 }

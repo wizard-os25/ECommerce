@@ -293,6 +293,11 @@ private extension EcoSearchTextField {
 // MARK: - UITextFieldDelegate
 extension EcoSearchTextField: UITextFieldDelegate {
 
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Cho phép tất cả ký tự bao gồm dấu cách
+        return true
+    }
+
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Ẩn bàn phím nhưng giữ nguyên trạng thái text field
         resignFirstResponder()

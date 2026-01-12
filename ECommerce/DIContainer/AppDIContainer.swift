@@ -6,6 +6,8 @@ final class AppDIContainer {
     
     // MARK: - Network
     lazy var apiDataTransferService: DataTransferService = {
+        // Keep api_key in query parameters for existing working cases
+        // Bearer token will be added to Authorization header when available (for authenticated endpoints)
         let config = ApiDataNetworkConfig(
             baseURL: URL(string: appConfiguration.apiBaseURL)!,
             queryParameters: [

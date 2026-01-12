@@ -26,6 +26,7 @@ final class AddressViewController: EcoViewController {
     private let useCurrentLocationStack = UIStackView()
     private let useCurrentLocationIcon = UIImageView()
     private let useCurrentLocationLabel = UILabel()
+    private let chooseOnMapButton = UIButton(type: .system) // Changed from UILabel to UIButton for UIMenu support
     
     private let defaultAddressStack = UIStackView()
     private let defaultAddressCheckbox = UIImageView()
@@ -37,6 +38,13 @@ final class AddressViewController: EcoViewController {
     private var addressController: AddressController! {
         get { controller as? AddressController }
     }
+    
+    // Lưu tọa độ để dùng khi save
+    private var selectedLatitude: String = ""
+    private var selectedLongitude: String = ""
+    
+    // Lưu address type từ MapViewController
+    private var selectedAddressType: String = "home" // Default: "home"
     
     // MARK: - Lifecycle
     
@@ -86,6 +94,26 @@ final class AddressViewController: EcoViewController {
     // MARK: - Address-Specific Binding
     
     private func bindAddressSpecific() {
+        // Setup callback for current location
+        if let defaultController = addressController as? DefaultAddressController {
+            defaultController.onCurrentLocationReceived = { [weak self] address, latitude, longitude in
+                guard let self = self else { return }
+                
+                // Lưu tọa độ
+                self.selectedLatitude = latitude
+                self.selectedLongitude = longitude
+                
+                // Lưu address type mặc định là "shipping"
+                self.selectedAddressType = "shipping"
+                
+                // Điền vào addressSearchTextField
+                self.addressSearchTextField.text = address
+                
+                // Thay đổi button "Choose on Map" thành "Shipping address" và enable menu
+                self.updateAddressTypeButton(text: "Shipping address", addressType: "shipping")
+            }
+        }
+        
         addressController.isSaveSuccess.observe(on: self) { [weak self] isSuccess in
             if isSuccess {
                 // Success state is handled via successMessage Observable
@@ -156,6 +184,7 @@ final class AddressViewController: EcoViewController {
             iconName: "person.fill",
             stackView: stackView
         )
+        contactPersonNameTextField.placeholder = "Contact Person Name"
         
         // Contact Person Number
         setupField(
@@ -165,6 +194,7 @@ final class AddressViewController: EcoViewController {
             iconName: "phone.fill",
             stackView: stackView
         )
+        contactPersonNumberTextField.placeholder = "Contact Person Number"
         contactPersonNumberTextField.keyboardType = .phonePad
         
         // Address
@@ -244,6 +274,7 @@ final class AddressViewController: EcoViewController {
         useCurrentLocationStack.axis = .horizontal
         useCurrentLocationStack.spacing = Spacing.tokenSpacing08
         useCurrentLocationStack.alignment = .center
+        useCurrentLocationStack.distribution = .fill
         useCurrentLocationStack.translatesAutoresizingMaskIntoConstraints = false
         
         useCurrentLocationIcon.image = UIImage(systemName: "location.fill")
@@ -254,10 +285,30 @@ final class AddressViewController: EcoViewController {
         useCurrentLocationLabel.font = Typography.fontRegular14
         useCurrentLocationLabel.textColor = Colors.tokenRainbowBlueEnd
         
+        // Choose on Map button (can be tapped to open map, or long pressed to show address type menu)
+        chooseOnMapButton.setTitle("Choose on Map", for: .normal)
+        chooseOnMapButton.titleLabel?.font = UIFont.italicSystemFont(ofSize: 14) // Italic font
+        chooseOnMapButton.setTitleColor(Colors.tokenRainbowBlueEnd, for: .normal)
+        chooseOnMapButton.contentHorizontalAlignment = .right
+        
+        // Add underline to title
+        let title = "Choose on Map"
+        let attributedTitle = NSMutableAttributedString(string: title)
+        attributedTitle.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: title.count))
+        chooseOnMapButton.setAttributedTitle(attributedTitle, for: .normal)
+        
+        // Setup menu for address type selection (shows on long press)
+        updateAddressTypeButtonMenu()
+        
+        // Add tap gesture for "Choose on Map" (to open map)
+        let chooseOnMapTapGesture = UITapGestureRecognizer(target: self, action: #selector(chooseOnMapTapped))
+        chooseOnMapButton.addGestureRecognizer(chooseOnMapTapGesture)
+        
         useCurrentLocationStack.addArrangedSubview(useCurrentLocationIcon)
         useCurrentLocationStack.addArrangedSubview(useCurrentLocationLabel)
+        useCurrentLocationStack.addArrangedSubview(chooseOnMapButton)
         
-        // Add tap gesture
+        // Add tap gesture for use current location (only on icon and label area)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(useCurrentLocationTapped))
         useCurrentLocationStack.addGestureRecognizer(tapGesture)
         useCurrentLocationStack.isUserInteractionEnabled = true
@@ -266,7 +317,8 @@ final class AddressViewController: EcoViewController {
         
         NSLayoutConstraint.activate([
             useCurrentLocationIcon.widthAnchor.constraint(equalToConstant: 20),
-            useCurrentLocationIcon.heightAnchor.constraint(equalToConstant: 20)
+            useCurrentLocationIcon.heightAnchor.constraint(equalToConstant: 20),
+            chooseOnMapButton.leadingAnchor.constraint(greaterThanOrEqualTo: useCurrentLocationLabel.trailingAnchor, constant: Spacing.tokenSpacing08)
         ])
     }
     
@@ -323,6 +375,127 @@ final class AddressViewController: EcoViewController {
         addressController.didTapUseCurrentLocation()
     }
     
+    // MARK: - Address Type Menu
+    
+    private func updateAddressTypeButtonMenu() {
+        // Only show menu if location has been selected (has latitude/longitude)
+        guard !selectedLatitude.isEmpty && !selectedLongitude.isEmpty else {
+            if #available(iOS 14.0, *) {
+                chooseOnMapButton.menu = nil
+            } else {
+                // Fallback on earlier versions
+            }
+            return
+        }
+        
+        // Create menu items for address type selection
+        let shippingAction = UIAction(title: "Shipping address", handler: { [weak self] _ in
+            self?.didSelectAddressType("shipping", displayText: "Shipping address")
+        })
+        
+        let shopAction = UIAction(title: "Shop address", handler: { [weak self] _ in
+            self?.didSelectAddressType("shop", displayText: "Shop address")
+        })
+        
+        let otherAction = UIAction(title: "Other", handler: { [weak self] _ in
+            self?.didSelectAddressType("other", displayText: "Other")
+        })
+        
+        // Create menu
+        let menu = UIMenu(title: "", children: [shippingAction, shopAction, otherAction])
+        
+        // Set menu to button (shows on long press)
+        if #available(iOS 14.0, *) {
+            chooseOnMapButton.menu = menu
+        } else {
+            // Fallback on earlier versions
+        }
+        if #available(iOS 14.0, *) {
+            chooseOnMapButton.showsMenuAsPrimaryAction = false
+        } else {
+            // Fallback on earlier versions
+        } // Only show on long press, tap still works for opening map
+    }
+    
+    private func updateAddressTypeButton(text: String, addressType: String) {
+        // Update button title with underline
+        let attributedTitle = NSMutableAttributedString(string: text)
+        attributedTitle.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: text.count))
+        chooseOnMapButton.setAttributedTitle(attributedTitle, for: .normal)
+        
+        // Enable menu interaction (only show menu if location has been selected)
+        chooseOnMapButton.isEnabled = true
+        updateAddressTypeButtonMenu()
+    }
+    
+    private func didSelectAddressType(_ addressType: String, displayText: String) {
+        // Update selected address type
+        selectedAddressType = addressType
+        
+        // Update button text
+        updateAddressTypeButton(text: displayText, addressType: addressType)
+    }
+    
+    @objc private func chooseOnMapTapped() {
+        // Create MapController
+        let mapController = DefaultMapController()
+        
+        // Create MapViewController
+        let mapViewController = MapViewController.create(with: mapController)
+        
+        // Setup callback khi chọn vị trí (sẽ được gọi khi back về AddressViewController)
+        mapViewController.onLocationSelected = { [weak self] address, latitude, longitude, addressType in
+            guard let self = self else { return }
+            
+            // Lưu tọa độ
+            self.selectedLatitude = latitude
+            self.selectedLongitude = longitude
+            
+            // Lưu address type
+            self.selectedAddressType = addressType
+            
+            // Điền vào addressSearchTextField
+            self.addressSearchTextField.text = address
+            
+            // Update button text based on selected address type
+            let displayText: String
+            switch addressType {
+            case "shipping":
+                displayText = "Shipping address"
+            case "shop":
+                displayText = "Shop address"
+            case "other":
+                displayText = "Other"
+            default:
+                displayText = "Shipping address"
+            }
+            self.updateAddressTypeButton(text: displayText, addressType: addressType)
+        }
+        
+        // Debug: Log navigation stack before push
+        if let navController = navigationController {
+            let stackBefore = navController.viewControllers.map { String(describing: type(of: $0)) }.joined(separator: " -> ")
+            print("📍 [AddressViewController] Before push MapViewController")
+            print("   - Stack count: \(navController.viewControllers.count)")
+            print("   - Stack: \(stackBefore)")
+            print("   - Current VC: \(String(describing: type(of: self)))")
+        }
+        
+        // Push MapViewController
+        navigationController?.pushViewController(mapViewController, animated: true)
+        
+        // Debug: Log navigation stack after push (with delay to allow push to complete)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            if let navController = self?.navigationController {
+                let stackAfter = navController.viewControllers.map { String(describing: type(of: $0)) }.joined(separator: " -> ")
+                print("📍 [AddressViewController] After push MapViewController")
+                print("   - Stack count: \(navController.viewControllers.count)")
+                print("   - Stack: \(stackAfter)")
+                print("   - Top VC: \(String(describing: type(of: navController.topViewController ?? UIViewController())))")
+            }
+        }
+    }
+    
     @objc private func defaultAddressTapped() {
         isCheckboxSelected.toggle()
         updateCheckboxImage()
@@ -354,13 +527,16 @@ extension AddressViewController: EcoButtonDelegate {
     func buttonDidTap(_ button: EcoButton) {
         guard button == saveButton else { return }
         
+        // Use selectedAddressType from MapViewController, or default to "home" if not set
+        let addressType = selectedAddressType.isEmpty ? "home" : selectedAddressType
+        
         addressController.didTapSave(
             contactPersonName: contactPersonNameTextField.text ?? "",
             contactPersonNumber: contactPersonNumberTextField.text ?? "",
             address: addressSearchTextField.text ?? "",
-            addressType: "home", // Default address type
-            longitude: "", // Will be set by location if needed
-            latitude: "", // Will be set by location if needed
+            addressType: addressType,
+            longitude: selectedLongitude, // Tọa độ từ map selection
+            latitude: selectedLatitude, // Tọa độ từ map selection
             isDefault: isCheckboxSelected
         )
     }
