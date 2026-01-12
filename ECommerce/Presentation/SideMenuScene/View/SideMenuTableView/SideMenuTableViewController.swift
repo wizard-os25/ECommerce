@@ -37,25 +37,45 @@ final class SideMenuTableViewController: UITableViewController, StoryboardInstan
         
         // Register TableView Cell
         tableView.register(cell: SideMenuCell.self)
+        
+        // Register divider cell
+        tableView.register(cell: DividerCell.self)
     }
     
     private func bind(to controller: SideMenuController) {
-        controller.menuItems.observe(on: self) { [weak self] _ in
+        controller.firstSectionMenuItems.observe(on: self) { [weak self] _ in
+            self?.updateMenuItems()
+        }
+        controller.secondSectionMenuItems.observe(on: self) { [weak self] _ in
             self?.updateMenuItems()
         }
         controller.selectedIndex.observe(on: self) { [weak self] selectedIndex in
-            self?.updateSelectedIndex(selectedIndex)
+            self?.updateSelectedIndex(controller.selectedSection.value, index: selectedIndex)
+        }
+        controller.selectedSection.observe(on: self) { [weak self] selectedSection in
+            self?.updateSelectedIndex(selectedSection, index: controller.selectedIndex.value)
         }
     }
     
     private func updateMenuItems() {
         tableView.reloadData()
-        updateSelectedIndex(controller.selectedIndex.value)
+        updateSelectedIndex(controller.selectedSection.value, index: controller.selectedIndex.value)
     }
     
-    private func updateSelectedIndex(_ index: Int) {
-        guard index >= 0 && index < controller.menuItems.value.count else { return }
-        let indexPath = IndexPath(row: index, section: 0)
+    private func updateSelectedIndex(_ section: Int, index: Int) {
+        guard section >= 0 && section <= 1 else { return }
+        let items = section == 0 ? controller.firstSectionMenuItems.value : controller.secondSectionMenuItems.value
+        guard index >= 0 && index < items.count else { return }
+        
+        // Deselect all rows first to ensure only one item is selected
+        if let selectedIndexPaths = tableView.indexPathsForSelectedRows {
+            for indexPath in selectedIndexPaths {
+                tableView.deselectRow(at: indexPath, animated: false)
+            }
+        }
+        
+        // Select the new row
+        let indexPath = IndexPath(row: index, section: section)
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
     }
 }
@@ -64,17 +84,58 @@ final class SideMenuTableViewController: UITableViewController, StoryboardInstan
 
 extension SideMenuTableViewController {
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Divider row between sections
+        if indexPath.section == 0 && indexPath.row == controller.firstSectionMenuItems.value.count {
+            return 1 // Divider height
+        }
         return 44
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        controller.didSelectMenuItem(at: indexPath.row)
+        print("DEBUG: tableView didSelectRowAt - section: \(indexPath.section), row: \(indexPath.row)")
+        
+        // Skip divider row
+        if indexPath.section == 0 && indexPath.row == controller.firstSectionMenuItems.value.count {
+            print("DEBUG: Skipping divider row")
+            return
+        }
+        
+        // Check if item should be selected
+        guard controller.shouldSelectItem(at: indexPath.section, index: indexPath.row) else {
+            print("DEBUG: Item should not be selected")
+            return
+        }
+        
+        print("DEBUG: Calling controller.didSelectMenuItem")
+        controller.didSelectMenuItem(at: indexPath.section, index: indexPath.row)
         
         // Deselect certain items if needed
-        if controller.shouldDeselectItem(at: indexPath.row) {
+        if controller.shouldDeselectItem(at: indexPath.section, index: indexPath.row) {
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        // Add spacing between sections to push section 2 closer to footer
+        if section == 0 {
+            let spacerView = UIView()
+            spacerView.backgroundColor = .clear
+            return spacerView
+        }
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        // Large spacing between section 0 and section 1 to push section 2 closer to footer
+        if section == 0 {
+            return 200 // Large spacing
+        }
+        return 0
     }
 }
 
@@ -83,14 +144,35 @@ extension SideMenuTableViewController {
 extension SideMenuTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return controller.menuItems.value.count
+        if section == 0 {
+            // Section 0: first section items + divider
+            return controller.firstSectionMenuItems.value.count + 1
+        } else {
+            // Section 1: second section items
+            return controller.secondSectionMenuItems.value.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // Divider row between sections
+        if indexPath.section == 0 && indexPath.row == controller.firstSectionMenuItems.value.count {
+            let dividerCell: DividerCell = tableView.dequeueReusableCell(at: indexPath)
+            return dividerCell
+        }
+        
         let cell: SideMenuCell = tableView.dequeueReusableCell(at: indexPath)
-        let menuItem = controller.menuItems.value[indexPath.row]
+        let items = indexPath.section == 0 ? controller.firstSectionMenuItems.value : controller.secondSectionMenuItems.value
+        let menuItem = items[indexPath.row]
         cell.fill(with: menuItem)
+        
+        // Section 2 items have smaller font and icon
+        if indexPath.section == 1 {
+            cell.titleLabel.font = Typography.fontRegular14
+            // Icon size can be adjusted if needed
+        } else {
+            cell.titleLabel.font = Typography.fontRegular16
+        }
         
         // Highlighted color
         let selectionColorView = UIView()

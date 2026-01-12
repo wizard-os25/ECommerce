@@ -10,16 +10,20 @@ import UIKit
 
 protocol SideMenuControllerInput {
     func viewDidLoad()
-    func didSelectMenuItem(at index: Int)
+    func didSelectMenuItem(at section: Int, index: Int)
 }
 
 protocol SideMenuControllerOutput {
-    var menuItems: Observable<[SideMenuModel]> { get }
+    var firstSectionMenuItems: Observable<[SideMenuModel]> { get }
+    var secondSectionMenuItems: Observable<[SideMenuModel]> { get }
     var selectedIndex: Observable<Int> { get }
+    var selectedSection: Observable<Int> { get }
     var horizontalScrollOffset: Observable<CGFloat> { get }
     var footerText: String { get }
-    func shouldDeselectItem(at index: Int) -> Bool
+    func shouldSelectItem(at section: Int, index: Int) -> Bool
+    func shouldDeselectItem(at section: Int, index: Int) -> Bool
     var onLogout: (() -> Void)? { get set }
+    var onNavigateToShippingAddress: (() -> Void)? { get set }
 }
 
 typealias SideMenuController = SideMenuControllerInput & SideMenuControllerOutput
@@ -28,55 +32,94 @@ final class DefaultSideMenuController: SideMenuController {
     
     // MARK: - OUTPUT
     
-    let menuItems: Observable<[SideMenuModel]> = Observable([])
+    let firstSectionMenuItems: Observable<[SideMenuModel]> = Observable([])
+    let secondSectionMenuItems: Observable<[SideMenuModel]> = Observable([])
     let selectedIndex: Observable<Int> = Observable(0)
+    let selectedSection: Observable<Int> = Observable(0)
     let horizontalScrollOffset: Observable<CGFloat> = Observable(0)
     let footerText: String = "Version 1.1"
     var onLogout: (() -> Void)?
+    var onNavigateToShippingAddress: (() -> Void)?
     
     // MARK: - Private
     
-    private let defaultMenuItems: [SideMenuModel] = [
-        SideMenuModel(icon: UIImage(systemName: "house.fill")!, title: "home".localized()),
-        SideMenuModel(icon: UIImage(systemName: "bag.fill")!, title: "products".localized()),
-        SideMenuModel(icon: UIImage(systemName: "cart.fill")!, title: "cart".localized()),
-        SideMenuModel(icon: UIImage(systemName: "person.fill")!, title: "profile".localized()),
-        SideMenuModel(icon: UIImage(systemName: "slider.horizontal.3")!, title: "settings".localized()),
+    private let firstSectionMenuItemsData: [SideMenuModel] = [
+        SideMenuModel(icon: UIImage(systemName: "person")!, title: "Profile"),
+        SideMenuModel(icon: UIImage(systemName: "bag")!, title: "My Order"),
+        SideMenuModel(icon: UIImage(systemName: "clock")!, title: "Browsing History"),
+        SideMenuModel(icon: UIImage(systemName: "heart")!, title: "Favorites"),
+        SideMenuModel(icon: UIImage(systemName: "mappin.circle")!, title: "Shipping Address"),
+        SideMenuModel(icon: UIImage(systemName: "creditcard")!, title: "Payment"),
+        SideMenuModel(icon: UIImage(systemName: "tag")!, title: "Selling")
+    ]
+    
+    private let secondSectionMenuItemsData: [SideMenuModel] = [
+        SideMenuModel(icon: UIImage(systemName: "gearshape")!, title: "Settings and Privacy"),
+        SideMenuModel(icon: UIImage(systemName: "questionmark.circle")!, title: "Help Center"),
         SideMenuModel(icon: UIImage(systemName: "rectangle.portrait.and.arrow.right")!, title: "logout".localized())
     ]
     
     // MARK: - Init
     
     init() {
-        menuItems.value = defaultMenuItems
+        firstSectionMenuItems.value = firstSectionMenuItemsData
+        secondSectionMenuItems.value = secondSectionMenuItemsData
     }
     
     // MARK: - INPUT
     
     func viewDidLoad() {
         // Initialize menu items if needed
-        if menuItems.value.isEmpty {
-            menuItems.value = defaultMenuItems
+        if firstSectionMenuItems.value.isEmpty {
+            firstSectionMenuItems.value = firstSectionMenuItemsData
+        }
+        if secondSectionMenuItems.value.isEmpty {
+            secondSectionMenuItems.value = secondSectionMenuItemsData
         }
     }
     
-    func didSelectMenuItem(at index: Int) {
-        guard index >= 0 && index < menuItems.value.count else { return }
+    func didSelectMenuItem(at section: Int, index: Int) {
+        print("DEBUG: didSelectMenuItem - section: \(section), index: \(index)")
+        guard section >= 0 && section <= 1 else { return }
         
-        // Check if logout item was selected (last item)
-        let logoutIndex = menuItems.value.count - 1
-        if index == logoutIndex {
+        let items = section == 0 ? firstSectionMenuItems.value : secondSectionMenuItems.value
+        guard index >= 0 && index < items.count else { return }
+        
+        // Check if logout item was selected (section 1, last item)
+        if section == 1 && index == items.count - 1 {
             // Handle logout
+            print("DEBUG: Logout selected")
             onLogout?()
             return
         }
         
+        // Update selected state first
+        selectedSection.value = section
         selectedIndex.value = index
+        
+        // Handle navigation based on section and index
+        if section == 0 && index == 4 {
+            // Shipping Address - trigger navigation callback
+            print("DEBUG: Shipping Address selected, onNavigateToShippingAddress: \(onNavigateToShippingAddress != nil ? "set" : "nil")")
+            onNavigateToShippingAddress?()
+        }
+        // TODO: Handle other menu items
     }
     
-    func shouldDeselectItem(at index: Int) -> Bool {
-        // Profile (index 3), Settings (index 4), and Logout (last index) should be deselected after selection
-        let logoutIndex = menuItems.value.count - 1
-        return index == 3 || index == 4 || index == logoutIndex
+    func shouldSelectItem(at section: Int, index: Int) -> Bool {
+        // All items can be selected except divider row
+        return true
+    }
+    
+    func shouldDeselectItem(at section: Int, index: Int) -> Bool {
+        // Only deselect logout item (section 1, last item)
+        // Other items should remain selected to show which screen is active
+        if section == 1 {
+            let items = secondSectionMenuItems.value
+            if index == items.count - 1 {
+                return true // Logout can be deselected
+            }
+        }
+        return false // Keep other items selected
     }
 }

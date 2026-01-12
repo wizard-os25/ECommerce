@@ -33,6 +33,9 @@ class MainContainerViewController: UIViewController {
     private var draggingIsEnabled: Bool = false
     private var panBaseLocation: CGFloat = 0.0
     
+    // Flag to track if AddressViewController is opened from side menu
+    private var didOpenFromSideMenu: Bool = false
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -56,6 +59,11 @@ class MainContainerViewController: UIViewController {
         // Set logout callback
         sideMenuController.onLogout = { [weak self] in
             self?.handleLogout()
+        }
+        
+        // Set navigate to shipping address callback
+        sideMenuController.onNavigateToShippingAddress = { [weak self] in
+            self?.handleNavigateToShippingAddress()
         }
         
         // Create SideMenuViewController with controller using factory method
@@ -179,19 +187,21 @@ class MainContainerViewController: UIViewController {
         sideMenuState(expanded: isExpanded ? false : true)
     }
     
-    private func sideMenuState(expanded: Bool) {
+    private func sideMenuState(expanded: Bool, completion: ((Bool) -> Void)? = nil) {
         if expanded {
             // Open menu: Side menu moves to 0, TabBarController moves to sideMenuRevealWidth
-            animateSideMenu(targetPosition: revealSideMenuOnTop ? 0 : 0, tabBarPosition: revealSideMenuOnTop ? 0 : sideMenuRevealWidth) { _ in
+            animateSideMenu(targetPosition: revealSideMenuOnTop ? 0 : 0, tabBarPosition: revealSideMenuOnTop ? 0 : sideMenuRevealWidth) { finished in
                 self.isExpanded = true
+                completion?(finished)
             }
             UIView.animate(withDuration: 0.5) {
                 self.sideMenuShadowView.alpha = 0.6
             }
         } else {
             // Close menu: Side menu moves to -sideMenuRevealWidth, TabBarController moves to 0
-            animateSideMenu(targetPosition: revealSideMenuOnTop ? (-sideMenuRevealWidth - paddingForRotation) : -sideMenuRevealWidth, tabBarPosition: revealSideMenuOnTop ? 0 : 0) { _ in
+            animateSideMenu(targetPosition: revealSideMenuOnTop ? (-sideMenuRevealWidth - paddingForRotation) : -sideMenuRevealWidth, tabBarPosition: revealSideMenuOnTop ? 0 : 0) { finished in
                 self.isExpanded = false
+                completion?(finished)
             }
             UIView.animate(withDuration: 0.5) {
                 self.sideMenuShadowView.alpha = 0.0
@@ -228,6 +238,7 @@ class MainContainerViewController: UIViewController {
         }
     }
 }
+
 
 // MARK: - SideMenuViewControllerDelegate
 
@@ -333,11 +344,31 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         let velocityInRoot = panGesture.velocity(in: self.view)
         let vx = velocityInRoot.x
         
-        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), isExpanded:\(isExpanded)")
+        // Check if current top view controller is AddressViewController
+        let isTopAddressViewController = {
+            guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+                  let topVC = nav.topViewController else { return false }
+            return topVC is AddressViewController
+        }()
+        
+        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), isExpanded:\(isExpanded), isTopAddressViewController:\(isTopAddressViewController), didOpenFromSideMenu:\(didOpenFromSideMenu)")
         
         // If menu is expanded, allow pan (to close)
         if isExpanded {
             return true
+        }
+        
+        // If AddressViewController is on top, check flag to decide behavior
+        if isTopAddressViewController {
+            if didOpenFromSideMenu {
+                // Opened from side menu: block side menu gesture (let swipe back handle)
+                print("❌ [gestureRecognizerShouldBegin] AddressViewController opened from side menu → Block side menu gesture (let swipe back handle)")
+                return false
+            } else {
+                // NOT opened from side menu: allow side menu gesture (drag from left edge opens side menu)
+                print("✅ [gestureRecognizerShouldBegin] AddressViewController NOT opened from side menu → Allow side menu gesture")
+                // Continue with normal side menu gesture logic below
+            }
         }
         
         // If touch is inside side menu area, don't intercept
@@ -636,6 +667,15 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         return false
     }
     
+    // MARK: - Navigation Handlers
+    
+    private func handleNavigateToShippingAddress() {
+        print("========== HANDLE NAVIGATE TO SHIPPING ADDRESS ==========")
+        print("1️⃣ Navigating to Shipping Address (push immediately)...")
+        // Push immediately without closing side menu first
+        navigateToShippingAddress()
+    }
+    
     // MARK: - Logout Handling
     
     private func handleLogout() {
@@ -673,6 +713,37 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         transitionToRootViewController(navigationController)
     }
     
+    private func navigateToShippingAddress() {
+        print("2️⃣ Navigating to Shipping Address screen...")
+        // Get navigation controller from current tab
+        // selectedViewController is already a UINavigationController (see TabBarController.swift)
+        guard let navController = mainTabBarController.selectedViewController as? UINavigationController else {
+            print("DEBUG: selectedViewController is not a UINavigationController")
+            return
+        }
+        
+        // Set navigation controller delegate to detect when back
+        navController.delegate = self
+        
+        // Mark that AddressViewController is opened from side menu
+        didOpenFromSideMenu = true
+        
+        // Create AddressCoordinatingController and push AddressViewController
+        let appDIContainer = AppDIContainer()
+        let addressDIContainer = appDIContainer.makeAddressDIContainer()
+        let addressCoordinatingController = addressDIContainer.makeAddressCoordinatingController(
+            navigationController: navController
+        )
+        
+        // Start AddressCoordinatingController which will push AddressViewController
+        addressCoordinatingController.start()
+        
+        // Close side menu after push
+        sideMenuState(expanded: false)
+        
+        print("=========================================================")
+    }
+    
     private func transitionToRootViewController(_ viewController: UIViewController) {
         guard let window = view.window ?? UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
             print("MainContainerViewController: No window available for transition")
@@ -692,6 +763,41 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                 print("MainContainerViewController: Transition to Login completed: \(finished)")
             }
         )
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+
+extension MainContainerViewController: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        // Check if we're back from AddressViewController
+        let isAddressViewController = viewController is AddressViewController
+        
+        print("🔄 [UINavigationControllerDelegate] didShow - isAddressViewController: \(isAddressViewController), isExpanded: \(isExpanded), shadowAlpha: \(sideMenuShadowView.alpha), isAddressViewControllerOpenedFromSideMenu: \(didOpenFromSideMenu)")
+        
+        if isAddressViewController {
+            // AddressViewController is being shown
+            // Flag is already set in navigateToShippingAddress()
+        } else if didOpenFromSideMenu {
+            // User has popped back from AddressViewController that was opened from side menu
+            // Reset flag
+            didOpenFromSideMenu = false
+            
+            // Always ensure side menu and overlay are completely closed
+            print("🔄 Back from AddressViewController (opened from side menu), ensuring side menu and overlay are closed")
+            
+            // Force close side menu and hide overlay regardless of isExpanded state
+            // This prevents overlay from remaining visible after swipe back
+            if isExpanded || sideMenuShadowView.alpha > 0 {
+                sideMenuState(expanded: false)
+            }
+            
+            // Ensure shadow view is completely hidden (in case animation didn't complete)
+            DispatchQueue.main.async { [weak self] in
+                self?.sideMenuShadowView.alpha = 0.0
+            }
+        }
     }
 }
 

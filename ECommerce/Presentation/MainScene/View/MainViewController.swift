@@ -174,12 +174,13 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
             fatalError("MainCoordinatingController must be set before calling setupSideMenu()")
         }
         
-        // Setup side menu coordinating controller
+        // Setup side menu coordinating controller (if not already setup)
         coordinatingController.setupSideMenuCoordinatingController()
         
         // Get side menu controller to observe horizontal scroll
         sideMenuController = coordinatingController.getSideMenuController()
         
+        // Create SideMenuViewController with controller using factory method
         guard let sideMenuVC = coordinatingController.makeSideMenuViewController() else {
             fatalError("Failed to create SideMenuViewController")
         }

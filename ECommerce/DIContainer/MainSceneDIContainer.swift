@@ -40,8 +40,13 @@ final class MainSceneDIContainer: MainCoordinatingControllerDependencies {
     
     // MARK: - Side Menu
     
-    func makeSideMenuSceneDIContainer() -> SideMenuSceneDIContainer {
+    // Use shared instance to ensure same SideMenuController is used everywhere
+    private lazy var sharedSideMenuDIContainer: SideMenuSceneDIContainer = {
         return dependencies.sideMenuSceneDIContainer
+    }()
+    
+    func makeSideMenuSceneDIContainer() -> SideMenuSceneDIContainer {
+        return sharedSideMenuDIContainer
     }
     
     // MARK: - App DI Container

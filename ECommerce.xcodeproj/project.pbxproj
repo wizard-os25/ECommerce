@@ -404,15 +404,6 @@
 		D0029DC42F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DC22F0F5F9000D50804 /* EcoNavigationBarController.swift */; };
 		D0029DC52F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DC22F0F5F9000D50804 /* EcoNavigationBarController.swift */; };
 		D0029DD22F0F645F00D50804 /* EcoSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DD12F0F645F00D50804 /* EcoSearchTextField.swift */; };
-		D0029DD42F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DD32F0F8B4900D50804 /* EcoBaseViewController.swift */; };
-		D0029DD52F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DD32F0F8B4900D50804 /* EcoBaseViewController.swift */; };
-		D0029DD62F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DD32F0F8B4900D50804 /* EcoBaseViewController.swift */; };
-		D0029DDD2F0F8E2700D50804 /* EcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DDC2F0F8E2700D50804 /* EcoViewController.swift */; };
-		D0029DDE2F0F8E2700D50804 /* EcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DDC2F0F8E2700D50804 /* EcoViewController.swift */; };
-		D0029DDF2F0F8E2700D50804 /* EcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DDC2F0F8E2700D50804 /* EcoViewController.swift */; };
-		D0029DE52F0F9B6F00D50804 /* EcoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DE42F0F9B6F00D50804 /* EcoController.swift */; };
-		D0029DE62F0F9B6F00D50804 /* EcoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DE42F0F9B6F00D50804 /* EcoController.swift */; };
-		D0029DE72F0F9B6F00D50804 /* EcoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DE42F0F9B6F00D50804 /* EcoController.swift */; };
 		D0029DF12F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DF02F0FBEE700D50804 /* EcoNavigationBarViewController.swift */; };
 		D0029DF22F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DF02F0FBEE700D50804 /* EcoNavigationBarViewController.swift */; };
 		D0029DF32F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0029DF02F0FBEE700D50804 /* EcoNavigationBarViewController.swift */; };
@@ -898,6 +889,96 @@
 		D0E6C3E82F0E0AF600527962 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3E22F0E0AF600527962 /* SegmentedControl.swift */; };
 		D0E6C3E92F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3E32F0E0AF600527962 /* SegmentedPageContainer.swift */; };
 		D0E6C3EA2F0E0AF600527962 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6C3E22F0E0AF600527962 /* SegmentedControl.swift */; };
+		D0FF93982F11F953006146F8 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93972F11F953006146F8 /* CardViewController.swift */; };
+		D0FF93992F11F953006146F8 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93972F11F953006146F8 /* CardViewController.swift */; };
+		D0FF939A2F11F953006146F8 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93972F11F953006146F8 /* CardViewController.swift */; };
+		D0FF939C2F11F95B006146F8 /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF939B2F11F95B006146F8 /* CardController.swift */; };
+		D0FF939D2F11F95B006146F8 /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF939B2F11F95B006146F8 /* CardController.swift */; };
+		D0FF939E2F11F95B006146F8 /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF939B2F11F95B006146F8 /* CardController.swift */; };
+		D0FF93A02F11F978006146F8 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF939F2F11F978006146F8 /* CardModel.swift */; };
+		D0FF93A12F11F978006146F8 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF939F2F11F978006146F8 /* CardModel.swift */; };
+		D0FF93A22F11F978006146F8 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF939F2F11F978006146F8 /* CardModel.swift */; };
+		D0FF93D72F11FEB0006146F8 /* CardViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF93D62F11FEB0006146F8 /* CardViewController.storyboard */; };
+		D0FF93D82F11FEB0006146F8 /* CardViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF93D62F11FEB0006146F8 /* CardViewController.storyboard */; };
+		D0FF93D92F11FEB0006146F8 /* CardViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF93D62F11FEB0006146F8 /* CardViewController.storyboard */; };
+		D0FF93DC2F13ECFB006146F8 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93DB2F13ECFB006146F8 /* MapModel.swift */; };
+		D0FF93DD2F13ECFB006146F8 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93DB2F13ECFB006146F8 /* MapModel.swift */; };
+		D0FF93DE2F13ECFB006146F8 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93DB2F13ECFB006146F8 /* MapModel.swift */; };
+		D0FF93E02F13ED3C006146F8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93DF2F13ED3C006146F8 /* MapViewController.swift */; };
+		D0FF93E12F13ED3C006146F8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93DF2F13ED3C006146F8 /* MapViewController.swift */; };
+		D0FF93E22F13ED3C006146F8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93DF2F13ED3C006146F8 /* MapViewController.swift */; };
+		D0FF93E42F13ED49006146F8 /* MapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF93E32F13ED49006146F8 /* MapViewController.storyboard */; };
+		D0FF93E52F13ED49006146F8 /* MapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF93E32F13ED49006146F8 /* MapViewController.storyboard */; };
+		D0FF93E62F13ED49006146F8 /* MapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF93E32F13ED49006146F8 /* MapViewController.storyboard */; };
+		D0FF93E82F13EDA3006146F8 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93E72F13EDA3006146F8 /* MapController.swift */; };
+		D0FF93E92F13EDA3006146F8 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93E72F13EDA3006146F8 /* MapController.swift */; };
+		D0FF93EA2F13EDA3006146F8 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93E72F13EDA3006146F8 /* MapController.swift */; };
+		D0FF93EE2F13F993006146F8 /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93ED2F13F993006146F8 /* AddressModel.swift */; };
+		D0FF93EF2F13F993006146F8 /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93ED2F13F993006146F8 /* AddressModel.swift */; };
+		D0FF93F02F13F993006146F8 /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93ED2F13F993006146F8 /* AddressModel.swift */; };
+		D0FF93F22F13F997006146F8 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93F12F13F997006146F8 /* AddressViewController.swift */; };
+		D0FF93F32F13F997006146F8 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93F12F13F997006146F8 /* AddressViewController.swift */; };
+		D0FF93F42F13F997006146F8 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93F12F13F997006146F8 /* AddressViewController.swift */; };
+		D0FF93F62F13F9C9006146F8 /* AddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93F52F13F9C9006146F8 /* AddressController.swift */; };
+		D0FF93F72F13F9C9006146F8 /* AddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93F52F13F9C9006146F8 /* AddressController.swift */; };
+		D0FF93F82F13F9C9006146F8 /* AddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF93F52F13F9C9006146F8 /* AddressController.swift */; };
+		D0FF93FA2F13F9D3006146F8 /* AddressViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF93F92F13F9D3006146F8 /* AddressViewController.storyboard */; };
+		D0FF93FB2F13F9D3006146F8 /* AddressViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF93F92F13F9D3006146F8 /* AddressViewController.storyboard */; };
+		D0FF93FC2F13F9D3006146F8 /* AddressViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF93F92F13F9D3006146F8 /* AddressViewController.storyboard */; };
+		D0FF94022F140173006146F8 /* LocationSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94012F140173006146F8 /* LocationSearchModel.swift */; };
+		D0FF94032F140173006146F8 /* LocationSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94012F140173006146F8 /* LocationSearchModel.swift */; };
+		D0FF94042F140173006146F8 /* LocationSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94012F140173006146F8 /* LocationSearchModel.swift */; };
+		D0FF94062F14017E006146F8 /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94052F14017E006146F8 /* LocationSearchController.swift */; };
+		D0FF94072F14017E006146F8 /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94052F14017E006146F8 /* LocationSearchController.swift */; };
+		D0FF94082F14017E006146F8 /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94052F14017E006146F8 /* LocationSearchController.swift */; };
+		D0FF940A2F140189006146F8 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94092F140189006146F8 /* LocationSearchViewController.swift */; };
+		D0FF940B2F140189006146F8 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94092F140189006146F8 /* LocationSearchViewController.swift */; };
+		D0FF940C2F140189006146F8 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94092F140189006146F8 /* LocationSearchViewController.swift */; };
+		D0FF940E2F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF940D2F14019F006146F8 /* LocationSearchViewController.storyboard */; };
+		D0FF940F2F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF940D2F14019F006146F8 /* LocationSearchViewController.storyboard */; };
+		D0FF94102F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF940D2F14019F006146F8 /* LocationSearchViewController.storyboard */; };
+		D0FF94142F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94122F1404D3006146F8 /* AddressResponseDTO+Mapping.swift */; };
+		D0FF94152F1404D3006146F8 /* AddressRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94112F1404D3006146F8 /* AddressRequestDTO+Mapping.swift */; };
+		D0FF94162F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94122F1404D3006146F8 /* AddressResponseDTO+Mapping.swift */; };
+		D0FF94172F1404D3006146F8 /* AddressRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94112F1404D3006146F8 /* AddressRequestDTO+Mapping.swift */; };
+		D0FF94182F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94122F1404D3006146F8 /* AddressResponseDTO+Mapping.swift */; };
+		D0FF94192F1404D3006146F8 /* AddressRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94112F1404D3006146F8 /* AddressRequestDTO+Mapping.swift */; };
+		D0FF941B2F1404FF006146F8 /* AddressEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF941A2F1404FF006146F8 /* AddressEndpoints.swift */; };
+		D0FF941C2F1404FF006146F8 /* AddressEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF941A2F1404FF006146F8 /* AddressEndpoints.swift */; };
+		D0FF941D2F1404FF006146F8 /* AddressEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF941A2F1404FF006146F8 /* AddressEndpoints.swift */; };
+		D0FF941F2F140514006146F8 /* DefaultAddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF941E2F140514006146F8 /* DefaultAddressRepository.swift */; };
+		D0FF94202F140514006146F8 /* DefaultAddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF941E2F140514006146F8 /* DefaultAddressRepository.swift */; };
+		D0FF94212F140514006146F8 /* DefaultAddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF941E2F140514006146F8 /* DefaultAddressRepository.swift */; };
+		D0FF94232F140529006146F8 /* AddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94222F140529006146F8 /* AddressRepository.swift */; };
+		D0FF94242F140529006146F8 /* AddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94222F140529006146F8 /* AddressRepository.swift */; };
+		D0FF94252F140529006146F8 /* AddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94222F140529006146F8 /* AddressRepository.swift */; };
+		D0FF94272F14053B006146F8 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94262F14053B006146F8 /* Address.swift */; };
+		D0FF94282F14053B006146F8 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94262F14053B006146F8 /* Address.swift */; };
+		D0FF94292F14053B006146F8 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94262F14053B006146F8 /* Address.swift */; };
+		D0FF942B2F140552006146F8 /* AddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF942A2F140552006146F8 /* AddressUseCase.swift */; };
+		D0FF942C2F140552006146F8 /* AddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF942A2F140552006146F8 /* AddressUseCase.swift */; };
+		D0FF942D2F140552006146F8 /* AddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF942A2F140552006146F8 /* AddressUseCase.swift */; };
+		D0FF94302F140614006146F8 /* DividerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF942F2F140614006146F8 /* DividerCell.xib */; };
+		D0FF94312F140614006146F8 /* DividerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF942E2F140614006146F8 /* DividerCell.swift */; };
+		D0FF94322F140614006146F8 /* DividerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF942F2F140614006146F8 /* DividerCell.xib */; };
+		D0FF94332F140614006146F8 /* DividerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF942E2F140614006146F8 /* DividerCell.swift */; };
+		D0FF94342F140614006146F8 /* DividerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF942F2F140614006146F8 /* DividerCell.xib */; };
+		D0FF94352F140614006146F8 /* DividerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF942E2F140614006146F8 /* DividerCell.swift */; };
+		D0FF94382F140911006146F8 /* AddressDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94372F140911006146F8 /* AddressDIContainer.swift */; };
+		D0FF94392F140911006146F8 /* AddressDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94372F140911006146F8 /* AddressDIContainer.swift */; };
+		D0FF943A2F140911006146F8 /* AddressDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94372F140911006146F8 /* AddressDIContainer.swift */; };
+		D0FF943C2F1416DD006146F8 /* AddressCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF943B2F1416DD006146F8 /* AddressCoordinatingController.swift */; };
+		D0FF943D2F1416DD006146F8 /* AddressCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF943B2F1416DD006146F8 /* AddressCoordinatingController.swift */; };
+		D0FF943E2F1416DD006146F8 /* AddressCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF943B2F1416DD006146F8 /* AddressCoordinatingController.swift */; };
+		D0FF94602F1487D9006146F8 /* EcoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945C2F1487D9006146F8 /* EcoController.swift */; };
+		D0FF94612F1487D9006146F8 /* EcoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945B2F1487D9006146F8 /* EcoBaseViewController.swift */; };
+		D0FF94622F1487D9006146F8 /* EcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945D2F1487D9006146F8 /* EcoViewController.swift */; };
+		D0FF94632F1487D9006146F8 /* EcoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945C2F1487D9006146F8 /* EcoController.swift */; };
+		D0FF94642F1487D9006146F8 /* EcoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945B2F1487D9006146F8 /* EcoBaseViewController.swift */; };
+		D0FF94652F1487D9006146F8 /* EcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945D2F1487D9006146F8 /* EcoViewController.swift */; };
+		D0FF94662F1487D9006146F8 /* EcoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945C2F1487D9006146F8 /* EcoController.swift */; };
+		D0FF94672F1487D9006146F8 /* EcoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945B2F1487D9006146F8 /* EcoBaseViewController.swift */; };
+		D0FF94682F1487D9006146F8 /* EcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF945D2F1487D9006146F8 /* EcoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1052,9 +1133,6 @@
 		D0029DBE2F0F5DD000D50804 /* EcoNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoNavigationBarView.swift; sourceTree = "<group>"; };
 		D0029DC22F0F5F9000D50804 /* EcoNavigationBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoNavigationBarController.swift; sourceTree = "<group>"; };
 		D0029DD12F0F645F00D50804 /* EcoSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSearchTextField.swift; sourceTree = "<group>"; };
-		D0029DD32F0F8B4900D50804 /* EcoBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoBaseViewController.swift; sourceTree = "<group>"; };
-		D0029DDC2F0F8E2700D50804 /* EcoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoViewController.swift; sourceTree = "<group>"; };
-		D0029DE42F0F9B6F00D50804 /* EcoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoController.swift; sourceTree = "<group>"; };
 		D0029DF02F0FBEE700D50804 /* EcoNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EcoNavigationBarViewController.swift; path = ECommerce/Common/CommonView/NavigationBar/NavBarViewController/View/EcoNavigationBarViewController.swift; sourceTree = SOURCE_ROOT; };
 		D0095AD62ECB0B8300FCC7BC /* ECommerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECommerce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0095AEF2ECB0B8400FCC7BC /* ECommerceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ECommerceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1223,6 +1301,36 @@
 		D0E6C3DE2F0E02AC00527962 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D0E6C3E22F0E0AF600527962 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		D0E6C3E32F0E0AF600527962 /* SegmentedPageContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPageContainer.swift; sourceTree = "<group>"; };
+		D0FF93972F11F953006146F8 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		D0FF939B2F11F95B006146F8 /* CardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
+		D0FF939F2F11F978006146F8 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		D0FF93D62F11FEB0006146F8 /* CardViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardViewController.storyboard; sourceTree = "<group>"; };
+		D0FF93DB2F13ECFB006146F8 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		D0FF93DF2F13ED3C006146F8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		D0FF93E32F13ED49006146F8 /* MapViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapViewController.storyboard; sourceTree = "<group>"; };
+		D0FF93E72F13EDA3006146F8 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		D0FF93ED2F13F993006146F8 /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
+		D0FF93F12F13F997006146F8 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		D0FF93F52F13F9C9006146F8 /* AddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressController.swift; sourceTree = "<group>"; };
+		D0FF93F92F13F9D3006146F8 /* AddressViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddressViewController.storyboard; sourceTree = "<group>"; };
+		D0FF94012F140173006146F8 /* LocationSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchModel.swift; sourceTree = "<group>"; };
+		D0FF94052F14017E006146F8 /* LocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
+		D0FF94092F140189006146F8 /* LocationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewController.swift; sourceTree = "<group>"; };
+		D0FF940D2F14019F006146F8 /* LocationSearchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationSearchViewController.storyboard; sourceTree = "<group>"; };
+		D0FF94112F1404D3006146F8 /* AddressRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddressRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		D0FF94122F1404D3006146F8 /* AddressResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddressResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		D0FF941A2F1404FF006146F8 /* AddressEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressEndpoints.swift; sourceTree = "<group>"; };
+		D0FF941E2F140514006146F8 /* DefaultAddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAddressRepository.swift; sourceTree = "<group>"; };
+		D0FF94222F140529006146F8 /* AddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRepository.swift; sourceTree = "<group>"; };
+		D0FF94262F14053B006146F8 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		D0FF942A2F140552006146F8 /* AddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressUseCase.swift; sourceTree = "<group>"; };
+		D0FF942E2F140614006146F8 /* DividerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerCell.swift; sourceTree = "<group>"; };
+		D0FF942F2F140614006146F8 /* DividerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DividerCell.xib; sourceTree = "<group>"; };
+		D0FF94372F140911006146F8 /* AddressDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDIContainer.swift; sourceTree = "<group>"; };
+		D0FF943B2F1416DD006146F8 /* AddressCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCoordinatingController.swift; sourceTree = "<group>"; };
+		D0FF945B2F1487D9006146F8 /* EcoBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoBaseViewController.swift; sourceTree = "<group>"; };
+		D0FF945C2F1487D9006146F8 /* EcoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoController.swift; sourceTree = "<group>"; };
+		D0FF945D2F1487D9006146F8 /* EcoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1553,11 +1661,13 @@
 			path = GroceryScene;
 			sourceTree = "<group>";
 		};
-		D0029C982F0E977400D50804 /* SearchView */ = {
+		D0029C982F0E977400D50804 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				D0FF94002F14014F006146F8 /* LocationSearch */,
+				D0FF93DA2F13ECED006146F8 /* AppleMap */,
 			);
-			path = SearchView;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		D0029C992F0E979900D50804 /* SearchScene */ = {
@@ -1747,14 +1857,6 @@
 			path = NavigationBar;
 			sourceTree = "<group>";
 		};
-		D0029D0A2F0F3CD500D50804 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				D0029DD32F0F8B4900D50804 /* EcoBaseViewController.swift */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
 		D0029D0C2F0F44D900D50804 /* NavBarViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1931,15 +2033,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		D0029DD72F0F8DBB00D50804 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				D0029DDC2F0F8E2700D50804 /* EcoViewController.swift */,
-				D0029DE42F0F9B6F00D50804 /* EcoController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		D0095ACD2ECB0B8300FCC7BC = {
 			isa = PBXGroup;
 			children = (
@@ -2044,19 +2137,16 @@
 		D0095B7B2ECB258000FCC7BC /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
+				D0FF938E2F11F6DF006146F8 /* View */,
 				D00B92022F10A6D100AEE1B6 /* Input */,
 				D00B91CE2F10A44E00AEE1B6 /* DynaButton */,
 				D00B91B82F10A02900AEE1B6 /* Screen */,
-				D0029DD72F0F8DBB00D50804 /* ViewController */,
-				D0029D0D2F0F450800D50804 /* Header&FooterView */,
-				D0029D0A2F0F3CD500D50804 /* Base */,
 				D0029D092F0F3CCB00D50804 /* NavigationBar */,
-				D0029C982F0E977400D50804 /* SearchView */,
 				D0029C7B2F0E95AD00D50804 /* Popup */,
-				D0029C7A2F0E95A000D50804 /* LoadingView */,
 				D0029C6B2F0E74BF00D50804 /* PinterestCell */,
 				D0E6C3E42F0E0AF600527962 /* UIPageViewController+Segmented */,
 				D00B91AB2F109F9E00AEE1B6 /* Supporting Files */,
+				D0FF945F2F1487D9006146F8 /* ViewController */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -2078,6 +2168,7 @@
 				D00B92642F10D95400AEE1B6 /* Authentication.swift */,
 				D0095B7E2ECB412200FCC7BC /* Product.swift */,
 				D0095B7F2ECB412200FCC7BC /* ProductQuery.swift */,
+				D0FF94262F14053B006146F8 /* Address.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2089,6 +2180,7 @@
 				D0095B872ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift */,
 				D00B92682F10DF5500AEE1B6 /* LoginUseCase.swift */,
 				D00B926C2F10DF5D00AEE1B6 /* SignUpUseCase.swift */,
+				D0FF942A2F140552006146F8 /* AddressUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -2115,6 +2207,7 @@
 				D00B92402F10B23800AEE1B6 /* AuthRepository.swift */,
 				D0095B962ECB41A800FCC7BC /* ProductsRepository.swift */,
 				D0095B9A2ECB41C500FCC7BC /* ProductsQueriesRepository.swift */,
+				D0FF94222F140529006146F8 /* AddressRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -2146,6 +2239,7 @@
 				D00B924C2F10B2C500AEE1B6 /* DefaultAuthRepository.swift */,
 				D0095BAF2ECB428800FCC7BC /* DefaultProductsRepository.swift */,
 				D0095BB02ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift */,
+				D0FF941E2F140514006146F8 /* DefaultAddressRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -2153,11 +2247,11 @@
 		D0095BA62ECB426400FCC7BC /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
-				D0095BA72ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift */,
-				D0095BA82ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift */,
 				D00B92902F10E32E00AEE1B6 /* Authentication */,
+				D0FF94362F14068B006146F8 /* Product */,
 				D00B928F2F10E31200AEE1B6 /* SignUp&Login */,
 				D00B928E2F10E30400AEE1B6 /* User */,
+				D0FF94132F1404D3006146F8 /* Address */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -2206,6 +2300,7 @@
 				D0095D082ECC21A000FCC7BC /* MainSceneDIContainer.swift */,
 				D0095BE32ECB436700FCC7BC /* ProductsSceneDIContainer.swift */,
 				D0095CCC2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift */,
+				D0FF94372F140911006146F8 /* AddressDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -2349,6 +2444,8 @@
 			children = (
 				D0095CA32ECB57C100FCC7BC /* SideMenuCell.swift */,
 				D0095CA42ECB57C100FCC7BC /* SideMenuCell.xib */,
+				D0FF942E2F140614006146F8 /* DividerCell.swift */,
+				D0FF942F2F140614006146F8 /* DividerCell.xib */,
 			);
 			path = SideMenuCell;
 			sourceTree = "<group>";
@@ -2366,6 +2463,8 @@
 		D0095CAA2ECB57C100FCC7BC /* SideMenuScene */ = {
 			isa = PBXGroup;
 			children = (
+				D0FF93EC2F13F981006146F8 /* ShippingAddress */,
+				D0FF93EB2F13F974006146F8 /* SideMenu */,
 				D0095CA22ECB57C100FCC7BC /* Model */,
 				D0095CA92ECB57C100FCC7BC /* View */,
 				D0095CA02ECB57C100FCC7BC /* Controllers */,
@@ -2555,8 +2654,11 @@
 		D00B91B82F10A02900AEE1B6 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				D0029C982F0E977400D50804 /* Search */,
 				D00B91BB2F10A02C00AEE1B6 /* PasswordSetting */,
 				D00B91BD2F10A02C00AEE1B6 /* Terms&Conditions */,
+				D0FF938D2F11F690006146F8 /* Checkout */,
+				D0FF938C2F11F5F5006146F8 /* CardView */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -2661,6 +2763,7 @@
 				D00B92952F10EA3100AEE1B6 /* AuthEndpoints.swift */,
 				D00B92962F10EA3100AEE1B6 /* GroceryEndpoints.swift */,
 				D00B92972F10EA3100AEE1B6 /* ProductsEndpoints.swift */,
+				D0FF941A2F1404FF006146F8 /* AddressEndpoints.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -2809,6 +2912,166 @@
 			path = "UIPageViewController+Segmented";
 			sourceTree = "<group>";
 		};
+		D0FF938C2F11F5F5006146F8 /* CardView */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF93922F11F935006146F8 /* Model */,
+				D0FF93912F11F932006146F8 /* View */,
+				D0FF93902F11F92B006146F8 /* Controller */,
+			);
+			path = CardView;
+			sourceTree = "<group>";
+		};
+		D0FF938D2F11F690006146F8 /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Checkout;
+			sourceTree = "<group>";
+		};
+		D0FF938E2F11F6DF006146F8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF938F2F11F732006146F8 /* PaymentConditionView */,
+				D0029D0D2F0F450800D50804 /* Header&FooterView */,
+				D0029C7A2F0E95A000D50804 /* LoadingView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D0FF938F2F11F732006146F8 /* PaymentConditionView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PaymentConditionView;
+			sourceTree = "<group>";
+		};
+		D0FF93902F11F92B006146F8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF939B2F11F95B006146F8 /* CardController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D0FF93912F11F932006146F8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF93972F11F953006146F8 /* CardViewController.swift */,
+				D0FF93D62F11FEB0006146F8 /* CardViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D0FF93922F11F935006146F8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF939F2F11F978006146F8 /* CardModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0FF93DA2F13ECED006146F8 /* AppleMap */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF93DB2F13ECFB006146F8 /* MapModel.swift */,
+				D0FF93DF2F13ED3C006146F8 /* MapViewController.swift */,
+				D0FF93E32F13ED49006146F8 /* MapViewController.storyboard */,
+				D0FF93E72F13EDA3006146F8 /* MapController.swift */,
+			);
+			path = AppleMap;
+			sourceTree = "<group>";
+		};
+		D0FF93EB2F13F974006146F8 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		D0FF93EC2F13F981006146F8 /* ShippingAddress */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF93FF2F13FA01006146F8 /* Model */,
+				D0FF93FE2F13F9FD006146F8 /* View */,
+				D0FF93FD2F13F9F6006146F8 /* Controller */,
+			);
+			path = ShippingAddress;
+			sourceTree = "<group>";
+		};
+		D0FF93FD2F13F9F6006146F8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF93F52F13F9C9006146F8 /* AddressController.swift */,
+				D0FF943B2F1416DD006146F8 /* AddressCoordinatingController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D0FF93FE2F13F9FD006146F8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF93F12F13F997006146F8 /* AddressViewController.swift */,
+				D0FF93F92F13F9D3006146F8 /* AddressViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D0FF93FF2F13FA01006146F8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF93ED2F13F993006146F8 /* AddressModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0FF94002F14014F006146F8 /* LocationSearch */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF94012F140173006146F8 /* LocationSearchModel.swift */,
+				D0FF94092F140189006146F8 /* LocationSearchViewController.swift */,
+				D0FF940D2F14019F006146F8 /* LocationSearchViewController.storyboard */,
+				D0FF94052F14017E006146F8 /* LocationSearchController.swift */,
+			);
+			path = LocationSearch;
+			sourceTree = "<group>";
+		};
+		D0FF94132F1404D3006146F8 /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF94112F1404D3006146F8 /* AddressRequestDTO+Mapping.swift */,
+				D0FF94122F1404D3006146F8 /* AddressResponseDTO+Mapping.swift */,
+			);
+			path = Address;
+			sourceTree = "<group>";
+		};
+		D0FF94362F14068B006146F8 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				D0095BA72ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift */,
+				D0095BA82ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
+		D0FF945E2F1487D9006146F8 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF945B2F1487D9006146F8 /* EcoBaseViewController.swift */,
+				D0FF945C2F1487D9006146F8 /* EcoController.swift */,
+				D0FF945D2F1487D9006146F8 /* EcoViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		D0FF945F2F1487D9006146F8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF945E2F1487D9006146F8 /* Base */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2925,6 +3188,7 @@
 				D0095D7E2ECC58F200FCC7BC /* accounts.json in Resources */,
 				D0029D202F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0029D012F0EA4F600D50804 /* GroceryItemCell.xib in Resources */,
+				D0FF940E2F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */,
 				D0095B702ECB1D4100FCC7BC /* Localizable.strings in Resources */,
 				D0095B3B2ECB0BA700FCC7BC /* Main.storyboard in Resources */,
 				D0095C022ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
@@ -2942,6 +3206,7 @@
 				D0029BB72F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
 				D0029BB82F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
 				D0029BB92F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
+				D0FF94342F140614006146F8 /* DividerCell.xib in Resources */,
 				D0029BBA2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
 				D0029D682F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
 				D0029D692F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
@@ -2955,12 +3220,15 @@
 				D0029BBF2F0E742000D50804 /* ic_viettelpay_56@2x.png in Resources */,
 				D0029D062F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */,
 				D0029BC02F0E742000D50804 /* ic_techcombank_56.png in Resources */,
+				D0FF93D72F11FEB0006146F8 /* CardViewController.storyboard in Resources */,
 				D0029BC12F0E742000D50804 /* ic_vpbank_56.png in Resources */,
 				D0029BC22F0E742000D50804 /* ic_vietabank_56.png in Resources */,
 				D0029BC32F0E742000D50804 /* CoreUIKit.strings in Resources */,
 				D0029BC42F0E742000D50804 /* ic_viettelpay_56@3x.png in Resources */,
 				D0029BC52F0E742000D50804 /* ic_vietinbank_56@3x.png in Resources */,
+				D0FF93E62F13ED49006146F8 /* MapViewController.storyboard in Resources */,
 				D0029BC62F0E742000D50804 /* ic_vrbbank_56@2x.png in Resources */,
+				D0FF93FB2F13F9D3006146F8 /* AddressViewController.storyboard in Resources */,
 				D0029BC72F0E742000D50804 /* ic_atm_noi_dia_16.png in Resources */,
 				D0029BC82F0E742000D50804 /* ic_vietbank_56.png in Resources */,
 				D0029BC92F0E742000D50804 /* ic_wooribank_56@3x.png in Resources */,
@@ -3020,6 +3288,7 @@
 				D0029C6D2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
 				D0029B812F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
 				D0029D332F0F46FF00D50804 /* RegisterViewController.storyboard in Resources */,
+				D0FF93E52F13ED49006146F8 /* MapViewController.storyboard in Resources */,
 				D0029D342F0F46FF00D50804 /* LoginViewController.storyboard in Resources */,
 				D0029D352F0F46FF00D50804 /* SignUpViewController.storyboard in Resources */,
 				D0029B822F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
@@ -3027,6 +3296,7 @@
 				D0029B842F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
 				D0029B852F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
 				D0029B862F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
+				D0FF93FC2F13F9D3006146F8 /* AddressViewController.storyboard in Resources */,
 				D0029CDF2F0EA08000D50804 /* CartViewController.storyboard in Resources */,
 				D0029B872F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */,
 				D0029B882F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */,
@@ -3069,6 +3339,8 @@
 				D0029CF12F0EA11A00D50804 /* CartItemCell.xib in Resources */,
 				D0029CF22F0EA11A00D50804 /* RecommendedItemCell.xib in Resources */,
 				D0029BAC2F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
+				D0FF94322F140614006146F8 /* DividerCell.xib in Resources */,
+				D0FF93D82F11FEB0006146F8 /* CardViewController.storyboard in Resources */,
 				D0029BAD2F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */,
 				D0029BAE2F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */,
 				D0029BAF2F0E742000D50804 /* ic_atm_noi_dia_16@3x.png in Resources */,
@@ -3091,6 +3363,7 @@
 				D0E6C3DB2F0DFF9800527962 /* TabBar.storyboard in Resources */,
 				D0095B2A2ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095D682ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
+				D0FF94102F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */,
 				D0029D1E2F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0095B2B2ECB0BA700FCC7BC /* Info.plist in Resources */,
 				D0095B2C2ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
@@ -3112,6 +3385,7 @@
 				D0029C6F2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
 				D0029C172F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
 				D0029D432F0F46FF00D50804 /* RegisterViewController.storyboard in Resources */,
+				D0FF93E42F13ED49006146F8 /* MapViewController.storyboard in Resources */,
 				D0029D442F0F46FF00D50804 /* LoginViewController.storyboard in Resources */,
 				D0029D452F0F46FF00D50804 /* SignUpViewController.storyboard in Resources */,
 				D0029C182F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
@@ -3119,6 +3393,7 @@
 				D0029C1A2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
 				D0029C1B2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
 				D0029C1C2F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
+				D0FF93FA2F13F9D3006146F8 /* AddressViewController.storyboard in Resources */,
 				D0029CE12F0EA08000D50804 /* CartViewController.storyboard in Resources */,
 				D0029C1D2F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */,
 				D0029C1E2F0E742000D50804 /* ic_atm_noi_dia_16@2x.png in Resources */,
@@ -3161,6 +3436,8 @@
 				D0029CFD2F0EA11A00D50804 /* CartItemCell.xib in Resources */,
 				D0029CFE2F0EA11A00D50804 /* RecommendedItemCell.xib in Resources */,
 				D0029C422F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
+				D0FF94302F140614006146F8 /* DividerCell.xib in Resources */,
+				D0FF93D92F11FEB0006146F8 /* CardViewController.storyboard in Resources */,
 				D0029C432F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */,
 				D0029C442F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */,
 				D0029C452F0E742000D50804 /* ic_atm_noi_dia_16@3x.png in Resources */,
@@ -3183,6 +3460,7 @@
 				D0E6C3DC2F0DFF9800527962 /* TabBar.storyboard in Resources */,
 				D0095B262ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095D662ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
+				D0FF940F2F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */,
 				D0029D1C2F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0095B272ECB0BA700FCC7BC /* Info.plist in Resources */,
 				D0095B282ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
@@ -3201,19 +3479,20 @@
 			files = (
 				D0029D3E2F0F46FF00D50804 /* SignUpViewController.swift in Sources */,
 				D0029D3F2F0F46FF00D50804 /* RegisterViewController.swift in Sources */,
+				D0FF93F62F13F9C9006146F8 /* AddressController.swift in Sources */,
 				D0029D402F0F46FF00D50804 /* LoginModel.swift in Sources */,
 				D0029D412F0F46FF00D50804 /* LoginViewController.swift in Sources */,
 				D0029D422F0F46FF00D50804 /* SignUpModel.swift in Sources */,
 				D0E6C3B12F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */,
 				D0E6C3B22F0DFAF700527962 /* SideMenuController.swift in Sources */,
 				D06C3BB02ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
-				D0029DDE2F0F8E2700D50804 /* EcoViewController.swift in Sources */,
 				D0029CAF2F0E988D00D50804 /* CategoryMainItemModel.swift in Sources */,
 				D0095C9A2ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
 				D00B92422F10B23800AEE1B6 /* AuthRepository.swift in Sources */,
 				D0095D872ECC5B2B00FCC7BC /* PhoneNumber.swift in Sources */,
 				D0095C9B2ECB579900FCC7BC /* ProductsController.swift in Sources */,
 				D0095BD72ECB432100FCC7BC /* AppConfigurations.swift in Sources */,
+				D0FF942B2F140552006146F8 /* AddressUseCase.swift in Sources */,
 				D0029CA82F0E981600D50804 /* CategoryCodinatingController.swift in Sources */,
 				D06C3B982ECCA2E500289D48 /* UIView+CornerRadius.swift in Sources */,
 				D0029CCB2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */,
@@ -3222,6 +3501,7 @@
 				D00B92D02F11054F00AEE1B6 /* APIErrorParser.swift in Sources */,
 				D00B92862F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
 				D00B92872F10E2FB00AEE1B6 /* UserDTO+Mapping.swift in Sources */,
+				D0FF940A2F140189006146F8 /* LocationSearchViewController.swift in Sources */,
 				D00B92882F10E2FB00AEE1B6 /* RefreshTokenResponseDTO+Mapping.swift in Sources */,
 				D00B92892F10E2FB00AEE1B6 /* UserInfoResponseDTO+Mapping.swift in Sources */,
 				D06C3B892ECCA21800289D48 /* UIView+Layout.swift in Sources */,
@@ -3235,6 +3515,7 @@
 				D00B91EB2F10A61C00AEE1B6 /* VTPSKWebView.swift in Sources */,
 				D0095D402ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
 				D0095C252ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
+				D0FF94022F140173006146F8 /* LocationSearchModel.swift in Sources */,
 				D00B92552F10B8F100AEE1B6 /* LoginController.swift in Sources */,
 				D0095CCD2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095C262ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
@@ -3244,6 +3525,9 @@
 				D06C3BAD2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0095D3B2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095C272ECB43DC00FCC7BC /* Alertable.swift in Sources */,
+				D0FF94602F1487D9006146F8 /* EcoController.swift in Sources */,
+				D0FF94612F1487D9006146F8 /* EcoBaseViewController.swift in Sources */,
+				D0FF94622F1487D9006146F8 /* EcoViewController.swift in Sources */,
 				D0095D552ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift in Sources */,
 				D0095D702ECC565200FCC7BC /* LocalAuthenticationContextExtensions.swift in Sources */,
 				D06C3BB52ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */,
@@ -3259,6 +3543,8 @@
 				D0095CB92ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */,
 				D0095C2A2ECB43DC00FCC7BC /* Observable.swift in Sources */,
 				D0029DD22F0F645F00D50804 /* EcoSearchTextField.swift in Sources */,
+				D0FF94232F140529006146F8 /* AddressRepository.swift in Sources */,
+				D0FF93E12F13ED3C006146F8 /* MapViewController.swift in Sources */,
 				D0095C2B2ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
 				D0095C2C2ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
 				D0095CFE2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
@@ -3267,12 +3553,13 @@
 				D0095BCD2ECB42D200FCC7BC /* Cancellable.swift in Sources */,
 				D0E6C3A52F0D06AC00527962 /* ImageCache.swift in Sources */,
 				D0095D6D2ECC557500FCC7BC /* NSObjectExt.swift in Sources */,
+				D0FF94282F14053B006146F8 /* Address.swift in Sources */,
 				D0095BFC2ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
 				D06C3B942ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
 				D0095BFD2ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
-				D0029DD42F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */,
 				D06C3B902ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
 				D0029D4F2F0F48F300D50804 /* Utilities.swift in Sources */,
+				D0FF93E82F13EDA3006146F8 /* MapController.swift in Sources */,
 				D0095BFE2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D00B923D2F10B1B300AEE1B6 /* User.swift in Sources */,
 				D0029C8E2F0E976000D50804 /* Popup4.swift in Sources */,
@@ -3281,6 +3568,8 @@
 				D00B92C62F10FA1F00AEE1B6 /* LoginFooterView.swift in Sources */,
 				D00B92C72F10FA1F00AEE1B6 /* LoginFormView.swift in Sources */,
 				D00B92C82F10FA1F00AEE1B6 /* LoginHeaderView.swift in Sources */,
+				D0FF94182F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */,
+				D0FF94192F1404D3006146F8 /* AddressRequestDTO+Mapping.swift in Sources */,
 				D0029CC52F0E9E3100D50804 /* GroceryController.swift in Sources */,
 				D00B92602F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
 				D00B92612F10D39200AEE1B6 /* LoginResponseDTO+Mapping.swift in Sources */,
@@ -3299,17 +3588,21 @@
 				D0029BF12F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D0029BF22F0E742000D50804 /* EcoProgressView.swift in Sources */,
 				D0029BF32F0E742000D50804 /* Border.swift in Sources */,
+				D0FF94212F140514006146F8 /* DefaultAddressRepository.swift in Sources */,
+				D0FF94082F14017E006146F8 /* LocationSearchController.swift in Sources */,
 				D0029D172F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */,
 				D0029BF42F0E742000D50804 /* Spacing.swift in Sources */,
 				D0029C952F0E976B00D50804 /* Popup6.swift in Sources */,
 				D0029BF52F0E742000D50804 /* EcoAvatarView.swift in Sources */,
 				D0029BF62F0E742000D50804 /* SFFont.swift in Sources */,
-				D0029DE72F0F9B6F00D50804 /* EcoController.swift in Sources */,
+				D0FF93EF2F13F993006146F8 /* AddressModel.swift in Sources */,
+				D0FF939D2F11F95B006146F8 /* CardController.swift in Sources */,
 				D0029BF72F0E742000D50804 /* Typography.swift in Sources */,
 				D0029BF82F0E742000D50804 /* EcoRadioButton.swift in Sources */,
 				D0029C712F0E74BF00D50804 /* PinterestCell.swift in Sources */,
 				D0029BF92F0E742000D50804 /* Shadows.swift in Sources */,
 				D0029BFA2F0E742000D50804 /* Opacity.swift in Sources */,
+				D0FF943C2F1416DD006146F8 /* AddressCoordinatingController.swift in Sources */,
 				D0029BFB2F0E742000D50804 /* BorderRadius.swift in Sources */,
 				D0029BFC2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */,
 				D0029BFD2F0E742000D50804 /* Colors.swift in Sources */,
@@ -3332,6 +3625,7 @@
 				D0095B742ECB1D7B00FCC7BC /* Localize.swift in Sources */,
 				D0095B932ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0095BB32ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
+				D0FF94352F140614006146F8 /* DividerCell.swift in Sources */,
 				D0029CBE2F0E9DFF00D50804 /* GroceryItemModel.swift in Sources */,
 				D00B92AA2F10ED0000AEE1B6 /* SplashCoordinatingController.swift in Sources */,
 				D00B92AB2F10ED0000AEE1B6 /* SplashViewController.swift in Sources */,
@@ -3347,6 +3641,7 @@
 				D00B926B2F10DF5500AEE1B6 /* LoginUseCase.swift in Sources */,
 				D0095CCA2ECB59DA00FCC7BC /* UIViewController+Parent.swift in Sources */,
 				D0095BC62ECB42B100FCC7BC /* Endpoint.swift in Sources */,
+				D0FF93F32F13F997006146F8 /* AddressViewController.swift in Sources */,
 				D0029C8B2F0E975900D50804 /* Popup3.swift in Sources */,
 				D0095BC72ECB42B100FCC7BC /* DataTransferService.swift in Sources */,
 				D0095BE92ECB436700FCC7BC /* ProductsSceneDIContainer.swift in Sources */,
@@ -3361,6 +3656,7 @@
 				D00B91B32F109F9E00AEE1B6 /* CommonViewsLocalization.swift in Sources */,
 				D0095B802ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095BAD2ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift in Sources */,
+				D0FF941B2F1404FF006146F8 /* AddressEndpoints.swift in Sources */,
 				D0095BE12ECB434200FCC7BC /* AppAppearance.swift in Sources */,
 				D00B92B12F10ED2000AEE1B6 /* OnboardSceneDIContainer.swift in Sources */,
 				D00B92532F10B38E00AEE1B6 /* AuthSceneDIContainer.swift in Sources */,
@@ -3369,6 +3665,7 @@
 				D0029C862F0E975300D50804 /* Popup2.swift in Sources */,
 				D0029D6B2F0F4B5200D50804 /* TableSectionHeader.swift in Sources */,
 				D00B92792F10DFD400AEE1B6 /* CoreDataUserResponseStorage.swift in Sources */,
+				D0FF93992F11F953006146F8 /* CardViewController.swift in Sources */,
 				D0029D6C2F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */,
 				D0029D6D2F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
 				D0029CC12F0E9E2300D50804 /* GroceryCoordinatingController.swift in Sources */,
@@ -3376,6 +3673,7 @@
 				D0095CE82ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
 				D06C3BA82ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
 				D00B92372F10AE2300AEE1B6 /* SignUpController.swift in Sources */,
+				D0FF93A22F11F978006146F8 /* CardModel.swift in Sources */,
 				D0095D952ECC5B8C00FCC7BC /* AES.swift in Sources */,
 				D0E6C3982F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
 				D00B92652F10D95400AEE1B6 /* Authentication.swift in Sources */,
@@ -3384,6 +3682,8 @@
 				D0E6C39B2F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */,
 				D0E6C39C2F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
 				D0095B9D2ECB41C500FCC7BC /* ProductsQueriesRepository.swift in Sources */,
+				D0FF943A2F140911006146F8 /* AddressDIContainer.swift in Sources */,
+				D0FF93DC2F13ECFB006146F8 /* MapModel.swift in Sources */,
 				D0095C602ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
 				D00B924F2F10B2C500AEE1B6 /* DefaultAuthRepository.swift in Sources */,
 				D0029C742F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
@@ -3420,19 +3720,20 @@
 			files = (
 				D0029D362F0F46FF00D50804 /* SignUpViewController.swift in Sources */,
 				D0029D372F0F46FF00D50804 /* RegisterViewController.swift in Sources */,
+				D0FF93F82F13F9C9006146F8 /* AddressController.swift in Sources */,
 				D0029D382F0F46FF00D50804 /* LoginModel.swift in Sources */,
 				D0029D392F0F46FF00D50804 /* LoginViewController.swift in Sources */,
 				D0029D3A2F0F46FF00D50804 /* SignUpModel.swift in Sources */,
 				D0029C6C2F0E74BF00D50804 /* PinterestCell.swift in Sources */,
 				D06C3BAC2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0029C752F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
-				D0029DDF2F0F8E2700D50804 /* EcoViewController.swift in Sources */,
 				D0095D6C2ECC557500FCC7BC /* NSObjectExt.swift in Sources */,
 				D0095D062ECC215100FCC7BC /* MainViewController.swift in Sources */,
 				D00B92412F10B23800AEE1B6 /* AuthRepository.swift in Sources */,
 				D0029C8F2F0E976000D50804 /* Popup4.swift in Sources */,
 				D0095C3A2ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
 				D0095D522ECC50AE00FCC7BC /* UILabel+Extensions.swift in Sources */,
+				D0FF942C2F140552006146F8 /* AddressUseCase.swift in Sources */,
 				D0095D842ECC5ABD00FCC7BC /* Constant.swift in Sources */,
 				D0095D772ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
 				D06C3B832ECCA16900289D48 /* UIView+Reusable.swift in Sources */,
@@ -3441,6 +3742,7 @@
 				D00B92CF2F11054F00AEE1B6 /* APIErrorParser.swift in Sources */,
 				D00B92822F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
 				D00B92832F10E2FB00AEE1B6 /* UserDTO+Mapping.swift in Sources */,
+				D0FF940B2F140189006146F8 /* LocationSearchViewController.swift in Sources */,
 				D00B92842F10E2FB00AEE1B6 /* RefreshTokenResponseDTO+Mapping.swift in Sources */,
 				D00B92852F10E2FB00AEE1B6 /* UserInfoResponseDTO+Mapping.swift in Sources */,
 				D0095D202ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
@@ -3454,6 +3756,7 @@
 				D00B91ED2F10A61C00AEE1B6 /* VTPSKWebView.swift in Sources */,
 				D0E6C3942F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
 				D0E6C3B52F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */,
+				D0FF94042F140173006146F8 /* LocationSearchModel.swift in Sources */,
 				D00B92572F10B8F100AEE1B6 /* LoginController.swift in Sources */,
 				D0E6C3B62F0DFAF700527962 /* SideMenuController.swift in Sources */,
 				D0E6C3952F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
@@ -3463,6 +3766,9 @@
 				D0029CDA2F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */,
 				D0029CBD2F0E9DFF00D50804 /* GroceryItemModel.swift in Sources */,
 				D0095D172ECC2FFF00FCC7BC /* SideMenuAnimator.swift in Sources */,
+				D0FF94662F1487D9006146F8 /* EcoController.swift in Sources */,
+				D0FF94672F1487D9006146F8 /* EcoBaseViewController.swift in Sources */,
+				D0FF94682F1487D9006146F8 /* EcoViewController.swift in Sources */,
 				D0029CA32F0E980A00D50804 /* CategoryController.swift in Sources */,
 				D0095D972ECC5BA300FCC7BC /* ImageCompressor.swift in Sources */,
 				D0095D7A2ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
@@ -3478,6 +3784,8 @@
 				D0095C3E2ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
 				D0095D3D2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095D572ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift in Sources */,
+				D0FF94242F140529006146F8 /* AddressRepository.swift in Sources */,
+				D0FF93E02F13ED3C006146F8 /* MapViewController.swift in Sources */,
 				D0095C402ECB43DC00FCC7BC /* Observable.swift in Sources */,
 				D0095C412ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
 				D0095CC72ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
@@ -3486,12 +3794,13 @@
 				D0029C542F0E742E00D50804 /* DoubleExtensions.swift in Sources */,
 				D0029C9C2F0E97D200D50804 /* CategoryViewController.swift in Sources */,
 				D0029C552F0E742E00D50804 /* NSStringExtensions.swift in Sources */,
+				D0FF94292F14053B006146F8 /* Address.swift in Sources */,
 				D0029C562F0E742E00D50804 /* EncodableExtensions.swift in Sources */,
 				D0095C422ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
 				D0E6C3B92F0DFB0E00527962 /* MainController.swift in Sources */,
-				D0029DD52F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */,
 				D0029D4E2F0F48F300D50804 /* Utilities.swift in Sources */,
 				D0095D942ECC5B8C00FCC7BC /* AES.swift in Sources */,
+				D0FF93EA2F13EDA3006146F8 /* MapController.swift in Sources */,
 				D0029B6B2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
 				D00B923F2F10B1B300AEE1B6 /* User.swift in Sources */,
 				D0029B6C2F0E742000D50804 /* EcoDivider.swift in Sources */,
@@ -3500,6 +3809,8 @@
 				D00B92C92F10FA1F00AEE1B6 /* LoginFooterView.swift in Sources */,
 				D00B92CA2F10FA1F00AEE1B6 /* LoginFormView.swift in Sources */,
 				D00B92CB2F10FA1F00AEE1B6 /* LoginHeaderView.swift in Sources */,
+				D0FF94162F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */,
+				D0FF94172F1404D3006146F8 /* AddressRequestDTO+Mapping.swift in Sources */,
 				D0029B6E2F0E742000D50804 /* EcoTick.swift in Sources */,
 				D00B925E2F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
 				D00B925F2F10D39200AEE1B6 /* LoginResponseDTO+Mapping.swift in Sources */,
@@ -3518,17 +3829,21 @@
 				D0029B772F0E742000D50804 /* EcoRadioButton.swift in Sources */,
 				D0029B782F0E742000D50804 /* Shadows.swift in Sources */,
 				D0029B792F0E742000D50804 /* Opacity.swift in Sources */,
+				D0FF94202F140514006146F8 /* DefaultAddressRepository.swift in Sources */,
+				D0FF94062F14017E006146F8 /* LocationSearchController.swift in Sources */,
 				D0029D152F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */,
 				D0029B7A2F0E742000D50804 /* BorderRadius.swift in Sources */,
 				D0029B7B2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */,
 				D0029B7C2F0E742000D50804 /* Colors.swift in Sources */,
 				D0029B7D2F0E742000D50804 /* EcoTextView.swift in Sources */,
-				D0029DE62F0F9B6F00D50804 /* EcoController.swift in Sources */,
+				D0FF93F02F13F993006146F8 /* AddressModel.swift in Sources */,
+				D0FF939E2F11F95B006146F8 /* CardController.swift in Sources */,
 				D0029B7E2F0E742000D50804 /* EcoSwitch.swift in Sources */,
 				D0029B7F2F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
 				D0095B822ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095B832ECB412200FCC7BC /* ProductQuery.swift in Sources */,
 				D0029C782F0E85E600D50804 /* IntExtensions.swift in Sources */,
+				D0FF943D2F1416DD006146F8 /* AddressCoordinatingController.swift in Sources */,
 				D0095BE02ECB434200FCC7BC /* AppAppearance.swift in Sources */,
 				D0095BB12ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
 				D06C3B912ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
@@ -3551,6 +3866,7 @@
 				D0E6C3E62F0E0AF600527962 /* SegmentedControl.swift in Sources */,
 				D0095C082ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D0095CFD2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
+				D0FF94332F140614006146F8 /* DividerCell.swift in Sources */,
 				D0029CA72F0E981600D50804 /* CategoryCodinatingController.swift in Sources */,
 				D00B92A72F10ED0000AEE1B6 /* SplashCoordinatingController.swift in Sources */,
 				D00B92A82F10ED0000AEE1B6 /* SplashViewController.swift in Sources */,
@@ -3566,6 +3882,7 @@
 				D00B92692F10DF5500AEE1B6 /* LoginUseCase.swift in Sources */,
 				D0095B732ECB1D7B00FCC7BC /* Localize.swift in Sources */,
 				D0095BE72ECB436700FCC7BC /* ProductsSceneDIContainer.swift in Sources */,
+				D0FF93F22F13F997006146F8 /* AddressViewController.swift in Sources */,
 				D0095D4F2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
 				D0095D0A2ECC21A000FCC7BC /* MainSceneDIContainer.swift in Sources */,
 				D06C3B932ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
@@ -3580,6 +3897,7 @@
 				D00B91AC2F109F9E00AEE1B6 /* CommonViewsLocalization.swift in Sources */,
 				D0095BC32ECB42B100FCC7BC /* DataTransferService.swift in Sources */,
 				D0029C922F0E976400D50804 /* Popup5.swift in Sources */,
+				D0FF941D2F1404FF006146F8 /* AddressEndpoints.swift in Sources */,
 				D0095BC42ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
 				D00B92B22F10ED2000AEE1B6 /* OnboardSceneDIContainer.swift in Sources */,
 				D00B92522F10B38E00AEE1B6 /* AuthSceneDIContainer.swift in Sources */,
@@ -3588,6 +3906,7 @@
 				D0095C972ECB579900FCC7BC /* ProductsController.swift in Sources */,
 				D0029D5F2F0F4B5200D50804 /* TableSectionHeader.swift in Sources */,
 				D00B92782F10DFD400AEE1B6 /* CoreDataUserResponseStorage.swift in Sources */,
+				D0FF93982F11F953006146F8 /* CardViewController.swift in Sources */,
 				D0029D602F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */,
 				D0029D612F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
 				D0029C822F0E974700D50804 /* LinkBankPopup.swift in Sources */,
@@ -3595,6 +3914,7 @@
 				D0095B922ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0095B972ECB41A800FCC7BC /* ProductsRepository.swift in Sources */,
 				D00B92362F10AE2300AEE1B6 /* SignUpController.swift in Sources */,
+				D0FF93A12F11F978006146F8 /* CardModel.swift in Sources */,
 				D0095B302ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
 				D0095D4A2ECC506E00FCC7BC /* AttributedText.swift in Sources */,
 				D00B92672F10D95400AEE1B6 /* Authentication.swift in Sources */,
@@ -3603,6 +3923,8 @@
 				D0095D9C2ECC5BED00FCC7BC /* CommonUtil.swift in Sources */,
 				D06C3BA52ECCA3A800289D48 /* UIViewController+AddChild.swift in Sources */,
 				D0095D9D2ECC5BED00FCC7BC /* CoreConstant.swift in Sources */,
+				D0FF94392F140911006146F8 /* AddressDIContainer.swift in Sources */,
+				D0FF93DD2F13ECFB006146F8 /* MapModel.swift in Sources */,
 				D0095BA92ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift in Sources */,
 				D00B924E2F10B2C500AEE1B6 /* DefaultAuthRepository.swift in Sources */,
 				D0095BDB2ECB433B00FCC7BC /* AppFlowCoordinator.swift in Sources */,
@@ -3660,6 +3982,7 @@
 				D00B92392F10AE2F00AEE1B6 /* SignUpCoordinatingController.swift in Sources */,
 				D0E6C3D32F0DFEC000527962 /* HomeViewController.swift in Sources */,
 				D00B920A2F10A6D100AEE1B6 /* EcoTextField.swift in Sources */,
+				D0FF941C2F1404FF006146F8 /* AddressEndpoints.swift in Sources */,
 				D0095B462ECB0C0B00FCC7BC /* ECommerceUITestsLaunchTests.swift in Sources */,
 				D0095D562ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift in Sources */,
 				D0095B912ECB415F00FCC7BC /* UseCase.swift in Sources */,
@@ -3669,13 +3992,13 @@
 				D00B92432F10B23800AEE1B6 /* AuthRepository.swift in Sources */,
 				D06C3BAB2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0095D712ECC565200FCC7BC /* LocalAuthenticationContextExtensions.swift in Sources */,
-				D0029DE52F0F9B6F00D50804 /* EcoController.swift in Sources */,
 				D0095BAC2ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift in Sources */,
 				D0095B852ECB412200FCC7BC /* ProductQuery.swift in Sources */,
 				D0029C732F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
 				D0095D752ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
 				D00B91EE2F10A61C00AEE1B6 /* QRGenerator.swift in Sources */,
 				D00B92662F10D95400AEE1B6 /* Authentication.swift in Sources */,
+				D0FF93DE2F13ECFB006146F8 /* MapModel.swift in Sources */,
 				D00B91EF2F10A61C00AEE1B6 /* VTPSKWebView.swift in Sources */,
 				D00B928A2F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
 				D00B928B2F10E2FB00AEE1B6 /* UserDTO+Mapping.swift in Sources */,
@@ -3683,6 +4006,7 @@
 				D00B928D2F10E2FB00AEE1B6 /* UserInfoResponseDTO+Mapping.swift in Sources */,
 				D0029CE42F0EA09400D50804 /* CartViewController.swift in Sources */,
 				D00B924D2F10B2C500AEE1B6 /* DefaultAuthRepository.swift in Sources */,
+				D0FF94382F140911006146F8 /* AddressDIContainer.swift in Sources */,
 				D0029CA42F0E980A00D50804 /* CategoryController.swift in Sources */,
 				D0095D852ECC5ABD00FCC7BC /* Constant.swift in Sources */,
 				D00B92352F10AE2300AEE1B6 /* SignUpController.swift in Sources */,
@@ -3713,7 +4037,9 @@
 				D0029C592F0E742E00D50804 /* DoubleExtensions.swift in Sources */,
 				D0029C5A2F0E742E00D50804 /* NSStringExtensions.swift in Sources */,
 				D0029C5B2F0E742E00D50804 /* EncodableExtensions.swift in Sources */,
+				D0FF94072F14017E006146F8 /* LocationSearchController.swift in Sources */,
 				D0029CA62F0E981600D50804 /* CategoryCodinatingController.swift in Sources */,
+				D0FF93A02F11F978006146F8 /* CardModel.swift in Sources */,
 				D0095D6B2ECC557500FCC7BC /* NSObjectExt.swift in Sources */,
 				D00B92C32F10FA1F00AEE1B6 /* LoginFooterView.swift in Sources */,
 				D00B92C42F10FA1F00AEE1B6 /* LoginFormView.swift in Sources */,
@@ -3756,10 +4082,16 @@
 				D0029DF12F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */,
 				D0E6C3E12F0E02AC00527962 /* TabBarController.swift in Sources */,
 				D0029C932F0E976400D50804 /* Popup5.swift in Sources */,
+				D0FF94632F1487D9006146F8 /* EcoController.swift in Sources */,
+				D0FF94642F1487D9006146F8 /* EcoBaseViewController.swift in Sources */,
+				D0FF94652F1487D9006146F8 /* EcoViewController.swift in Sources */,
 				D0095D5E2ECC52A400FCC7BC /* UIWindow+Extensions.swift in Sources */,
 				D0095C5E2ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
+				D0FF943E2F1416DD006146F8 /* AddressCoordinatingController.swift in Sources */,
 				D0095D0F2ECC235800FCC7BC /* ViewController.swift in Sources */,
 				D06C3B8F2ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
+				D0FF94252F140529006146F8 /* AddressRepository.swift in Sources */,
+				D0FF93E92F13EDA3006146F8 /* MapController.swift in Sources */,
 				D0095C0E2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D0095D4B2ECC506E00FCC7BC /* AttributedText.swift in Sources */,
 				D00B92622F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
@@ -3774,9 +4106,10 @@
 				D00B929A2F10EA3100AEE1B6 /* GroceryEndpoints.swift in Sources */,
 				D00B929B2F10EA3100AEE1B6 /* AuthEndpoints.swift in Sources */,
 				D0E6C3A32F0D06AC00527962 /* ImageCache.swift in Sources */,
+				D0FF942D2F140552006146F8 /* AddressUseCase.swift in Sources */,
 				D0095D932ECC5B8C00FCC7BC /* AES.swift in Sources */,
+				D0FF94032F140173006146F8 /* LocationSearchModel.swift in Sources */,
 				D0029DC42F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */,
-				D0029DDD2F0F8E2700D50804 /* EcoViewController.swift in Sources */,
 				D0095D512ECC50AE00FCC7BC /* UILabel+Extensions.swift in Sources */,
 				D06C3BA72ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
 				D06C3BB12ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
@@ -3789,8 +4122,10 @@
 				D0095C2F2ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
 				D0029C892F0E975900D50804 /* Popup3.swift in Sources */,
 				D0029C792F0E85E600D50804 /* IntExtensions.swift in Sources */,
+				D0FF93E22F13ED3C006146F8 /* MapViewController.swift in Sources */,
 				D0095C302ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
 				D0095C312ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
+				D0FF94272F14053B006146F8 /* Address.swift in Sources */,
 				D0095C322ECB43DC00FCC7BC /* Alertable.swift in Sources */,
 				D0095C332ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
 				D0095C352ECB43DC00FCC7BC /* Observable.swift in Sources */,
@@ -3802,9 +4137,11 @@
 				D00B92AD2F10ED0000AEE1B6 /* SplashCoordinatingController.swift in Sources */,
 				D00B92BE2F10FA1400AEE1B6 /* SignUpHeaderView.swift in Sources */,
 				D00B92BF2F10FA1400AEE1B6 /* SignUpFormView.swift in Sources */,
+				D0FF93F72F13F9C9006146F8 /* AddressController.swift in Sources */,
 				D00B92AE2F10ED0000AEE1B6 /* SplashViewController.swift in Sources */,
 				D00B92AF2F10ED0000AEE1B6 /* SplashController.swift in Sources */,
 				D06C3BA12ECCA33300289D48 /* UIView+Screen.swift in Sources */,
+				D0FF94312F140614006146F8 /* DividerCell.swift in Sources */,
 				D06C3B952ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
 				D00B927D2F10DFE000AEE1B6 /* UserResponseStorage.swift in Sources */,
 				D06C3BA42ECCA3A800289D48 /* UIViewController+AddChild.swift in Sources */,
@@ -3816,9 +4153,12 @@
 				D0029D132F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */,
 				D0095D162ECC2FFF00FCC7BC /* SideMenuLayoutManager.swift in Sources */,
 				D0095CD22ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
+				D0FF940C2F140189006146F8 /* LocationSearchViewController.swift in Sources */,
 				D0095B992ECB41A900FCC7BC /* ProductsRepository.swift in Sources */,
 				D0E6C39D2F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
 				D0029DB82F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */,
+				D0FF941F2F140514006146F8 /* DefaultAddressRepository.swift in Sources */,
+				D0FF939A2F11F953006146F8 /* CardViewController.swift in Sources */,
 				D00B923E2F10B1B300AEE1B6 /* User.swift in Sources */,
 				D0E6C39E2F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
 				D0E6C39F2F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
@@ -3826,11 +4166,12 @@
 				D0029C012F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
 				D0029C022F0E742000D50804 /* EcoDivider.swift in Sources */,
 				D00B92512F10B38E00AEE1B6 /* AuthSceneDIContainer.swift in Sources */,
+				D0FF93EE2F13F993006146F8 /* AddressModel.swift in Sources */,
 				D0029C032F0E742000D50804 /* Sizing.swift in Sources */,
 				D0029C042F0E742000D50804 /* EcoTick.swift in Sources */,
-				D0029DD62F0F8B4900D50804 /* EcoBaseViewController.swift in Sources */,
 				D0029CB02F0E988D00D50804 /* CategoryMainItemModel.swift in Sources */,
 				D0029C052F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
+				D0FF939C2F11F95B006146F8 /* CardController.swift in Sources */,
 				D0029C062F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D00B91B42F109F9E00AEE1B6 /* CommonViewsLocalization.swift in Sources */,
 				D0029C072F0E742000D50804 /* EcoProgressView.swift in Sources */,
@@ -3838,6 +4179,7 @@
 				D0029C092F0E742000D50804 /* Spacing.swift in Sources */,
 				D0029C0A2F0E742000D50804 /* EcoAvatarView.swift in Sources */,
 				D0029C0B2F0E742000D50804 /* SFFont.swift in Sources */,
+				D0FF93F42F13F997006146F8 /* AddressViewController.swift in Sources */,
 				D0029C0C2F0E742000D50804 /* Typography.swift in Sources */,
 				D0029D532F0F492B00D50804 /* Constants.swift in Sources */,
 				D0029C0D2F0E742000D50804 /* EcoRadioButton.swift in Sources */,
@@ -3850,6 +4192,8 @@
 				D0029C142F0E742000D50804 /* EcoSwitch.swift in Sources */,
 				D0029C152F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
 				D0E6C3A12F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
+				D0FF94142F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */,
+				D0FF94152F1404D3006146F8 /* AddressRequestDTO+Mapping.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,9 @@ protocol ProductsControllerOutput {
     var screenTitle: String { get }
     var emptyDataTitle: String { get }
     var errorTitle: String { get }
+    
+    // Callbacks
+    var onOpenCard: (() -> Void)? { get set }
 }
 
 typealias ProductsController = ProductsControllerInput & ProductsControllerOutput & EcoController
@@ -91,6 +94,23 @@ final class DefaultProductsController: ProductsController {
     var navigationBarCollapsedHeight: CGFloat {
         return 80
     }
+    
+    /// Navigation bar button tint color (set to black for right bar items)
+    var navigationBarButtonTintColor: UIColor? {
+        return .black
+    }
+    
+    /// Navigation bar right items (add card button)
+    var navigationBarRightItems: [EcoNavItem] {
+        return [
+            EcoNavItem.icon(UIImage(systemName: "rectangle.bottomthird.inset.filled") ?? UIImage(), action: { [weak self] in
+                self?.didTapOpenCard()
+            })
+        ]
+    }
+    
+    // Callback for opening card
+    var onOpenCard: (() -> Void)?
     
     // MARK: - EcoController Output (common to all controllers)
     
@@ -200,6 +220,10 @@ extension DefaultProductsController {
     
     func didSelectItem(at index: Int) {
         // Handle item selection if needed
+    }
+    
+    func didTapOpenCard() {
+        onOpenCard?()
     }
 }
 

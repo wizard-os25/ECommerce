@@ -17,6 +17,7 @@ final class MainCoordinatingController {
     private let dependencies: MainCoordinatingControllerDependencies
     private var sideMenuCoordinatingController: SideMenuCoordinatingController?
     private var appDIContainer: AppDIContainer?
+    private weak var mainViewController: MainViewController?
     
     init(
         navigationController: UINavigationController,
@@ -28,6 +29,7 @@ final class MainCoordinatingController {
     
     func start() {
         let viewController = dependencies.makeMainViewController()
+        self.mainViewController = viewController
         
         // Set coordinating controller so MainViewController can create side menu
         viewController.setCoordinatingController(self)
@@ -39,7 +41,7 @@ final class MainCoordinatingController {
             self.appDIContainer = appDIContainer
         }
         
-        // Setup side menu coordinating controller
+        // Setup side menu coordinating controller (after appDIContainer is set)
         setupSideMenuCoordinatingController()
         
         // Setup callback to set initial content after view appears
@@ -69,10 +71,27 @@ final class MainCoordinatingController {
     /// Setup side menu coordinating controller
     /// This is called automatically in start() and makeMainViewController()
     func setupSideMenuCoordinatingController() {
+        print("DEBUG: setupSideMenuCoordinatingController called")
         // Get side menu DI container from dependencies
-        guard let mainSceneDIContainer = dependencies as? MainSceneDIContainer else { return }
+        guard let mainSceneDIContainer = dependencies as? MainSceneDIContainer else {
+            print("DEBUG: mainSceneDIContainer is nil in setupSideMenuCoordinatingController")
+            return
+        }
         let sideMenuDIContainer = mainSceneDIContainer.makeSideMenuSceneDIContainer()
         
+        // Only create coordinating controller if not already created
+        if sideMenuCoordinatingController == nil {
+            let coordinatingController = sideMenuDIContainer.makeSideMenuCoordinatingController()
+            self.sideMenuCoordinatingController = coordinatingController
+        }
+        
+        // Setup navigation callbacks for side menu (always setup to ensure callback is set)
+        setupSideMenuNavigationCallbacks()
+    }
+    
+    private func setupSideMenuNavigationCallbacks() {
+        // Navigation callbacks are handled in MainContainerViewController
+        // This method is kept for compatibility but does nothing
     }
     
     func makeSideMenuViewController() -> SideMenuViewController? {
@@ -102,3 +121,4 @@ final class MainCoordinatingController {
         mainViewController.setContentViewController(productsViewController)
     }
 }
+

@@ -46,8 +46,23 @@ final class AppDIContainer {
         return AuthSceneDIContainer(dependencies: dependencies)
     }
     
+    func makeAddressDIContainer() -> AddressDIContainer {
+        let dependencies = AddressDIContainer.Dependencies(
+            apiDataTransferService: apiDataTransferService
+        )
+        return AddressDIContainer(dependencies: dependencies)
+    }
+    
+    // Shared instance to ensure same SideMenuController is used everywhere
+    private lazy var sharedSideMenuSceneDIContainer: SideMenuSceneDIContainer = {
+        let dependencies = SideMenuSceneDIContainer.Dependencies(
+            addressDIContainer: makeAddressDIContainer()
+        )
+        return SideMenuSceneDIContainer(dependencies: dependencies)
+    }()
+    
     func makeSideMenuSceneDIContainer() -> SideMenuSceneDIContainer {
-        return SideMenuSceneDIContainer()
+        return sharedSideMenuSceneDIContainer
     }
     
     func makeMainSceneDIContainer() -> MainSceneDIContainer {

@@ -9,10 +9,20 @@ import UIKit
 
 final class SideMenuSceneDIContainer: SideMenuCoordinatingControllerDependencies {
     
+    struct Dependencies {
+        let addressDIContainer: AddressDIContainer
+    }
+    
+    private let dependencies: Dependencies
+    
     // Shared instance to ensure same controller is used
     private lazy var sharedController: SideMenuController = {
         DefaultSideMenuController()
     }()
+    
+    init(dependencies: Dependencies) {
+        self.dependencies = dependencies
+    }
     
     // MARK: - Side Menu
     
@@ -25,6 +35,16 @@ final class SideMenuSceneDIContainer: SideMenuCoordinatingControllerDependencies
     func makeSideMenuController() -> SideMenuController {
         // Return shared instance so coordinating controller can observe it
         return sharedController
+    }
+    
+    // MARK: - Address Scene
+    
+    func makeAddressViewController() -> AddressViewController {
+        dependencies.addressDIContainer.makeAddressViewController()
+    }
+    
+    func makeAddressController() -> AddressController {
+        dependencies.addressDIContainer.makeAddressController()
     }
     
     // MARK: - Flow Coordinators

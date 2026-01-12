@@ -11,5 +11,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+    
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Ứng dụng cần vị trí của bạn để hiển thị bản đồ và đường đi</string>
 </dict>
 </plist>

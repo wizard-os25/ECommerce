@@ -42,4 +42,11 @@ struct APIEndpoints {
     // static func getGroceryItems() -> Endpoint<GroceryResponseDTO> {
     //     return GroceryEndpoints.getGroceryItems()
     // }
+    
+    // MARK: - Address Endpoints
+    
+    /// Create address endpoint
+    static func createAddress(with requestDTO: AddressRequestDTO) -> Endpoint<AddressResponseDTO> {
+        return AddressEndpoints.createAddress(with: requestDTO)
+    }
 }
