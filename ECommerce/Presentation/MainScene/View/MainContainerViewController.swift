@@ -33,7 +33,7 @@ class MainContainerViewController: UIViewController {
     private var draggingIsEnabled: Bool = false
     private var panBaseLocation: CGFloat = 0.0
     
-    // Flag to track if AddressViewController is opened from side menu
+    // Flag to track if AddressViewController or ProfileViewController is opened from side menu
     private var didOpenFromSideMenu: Bool = false
     
     // MARK: - Lifecycle
@@ -82,6 +82,11 @@ class MainContainerViewController: UIViewController {
         // Set navigate to shipping address callback
         sideMenuController.onNavigateToShippingAddress = { [weak self] in
             self?.handleNavigateToShippingAddress()
+        }
+        
+        // Set navigate to profile callback
+        sideMenuController.onNavigateToProfile = { [weak self] in
+            self?.handleNavigateToProfile()
         }
         
         // Create SideMenuViewController with controller using factory method
@@ -369,61 +374,78 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             return topVC is AddressViewController
         }()
         
-        // Check if any view controller in the navigation stack was opened after AddressViewController (when flag is set)
-        // This includes MapViewController and any other screens pushed after AddressViewController
-        let hasViewControllersAfterAddressWithSideMenu = {
+        // Check if current top view controller is ProfileViewController
+        let isTopProfileViewController = {
+            guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+                  let topVC = nav.topViewController else { return false }
+            return topVC is ProfileViewController
+        }()
+        
+        // Check if any view controller in the navigation stack was opened after AddressViewController or ProfileViewController (when flag is set)
+        // This includes MapViewController, EditProfileViewController and any other screens pushed after them
+        let hasViewControllersAfterSideMenuVC = {
             guard didOpenFromSideMenu,
                   let nav = mainTabBarController?.selectedViewController as? UINavigationController,
                   nav.viewControllers.count >= 2 else { return false }
             
-            // Find AddressViewController index in the stack
-            guard let addressVCIndex = nav.viewControllers.firstIndex(where: { $0 is AddressViewController }) else {
-                // Debug: Print stack if AddressViewController not found
-                let stackDescription = nav.viewControllers.map { String(describing: type(of: $0)) }.joined(separator: " -> ")
-                print("⚠️ [gestureRecognizerShouldBegin] AddressViewController not found in stack: \(stackDescription)")
+            // Find AddressViewController or ProfileViewController index in the stack
+            let addressVCIndex = nav.viewControllers.firstIndex(where: { $0 is AddressViewController })
+            let profileVCIndex = nav.viewControllers.firstIndex(where: { $0 is ProfileViewController })
+            
+            // Get the minimum index (the one that was opened first)
+            let sideMenuVCIndex: Int?
+            if let addressIndex = addressVCIndex, let profileIndex = profileVCIndex {
+                sideMenuVCIndex = min(addressIndex, profileIndex)
+            } else {
+                sideMenuVCIndex = addressVCIndex ?? profileVCIndex
+            }
+            
+            guard let vcIndex = sideMenuVCIndex else {
                 return false
             }
             
-            // If topViewController is not AddressViewController, it means some screen was pushed after it
-            // All screens pushed after AddressViewController should block side menu gesture
+            // If topViewController is not the side menu VC, it means some screen was pushed after it
+            // All screens pushed after the side menu VC should block side menu gesture
             let topVCIndex = nav.viewControllers.count - 1
-            let result = topVCIndex > addressVCIndex
+            let result = topVCIndex > vcIndex
             
             // Debug logging
             if result {
                 let stackDescription = nav.viewControllers.map { String(describing: type(of: $0)) }.joined(separator: " -> ")
-                print("🔵 [gestureRecognizerShouldBegin] Found view controllers after AddressViewController")
-                print("   - AddressVC index: \(addressVCIndex), TopVC index: \(topVCIndex)")
+                print("🔵 [gestureRecognizerShouldBegin] Found view controllers after side menu VC")
+                print("   - Side menu VC index: \(vcIndex), TopVC index: \(topVCIndex)")
                 print("   - Stack: \(stackDescription)")
             }
             
             return result
         }()
         
-        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), isExpanded:\(isExpanded), isTopAddressViewController:\(isTopAddressViewController), hasViewControllersAfterAddressWithSideMenu:\(hasViewControllersAfterAddressWithSideMenu), didOpenFromSideMenu:\(didOpenFromSideMenu)")
+        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), isExpanded:\(isExpanded), isTopAddressViewController:\(isTopAddressViewController), isTopProfileViewController:\(isTopProfileViewController), hasViewControllersAfterSideMenuVC:\(hasViewControllersAfterSideMenuVC), didOpenFromSideMenu:\(didOpenFromSideMenu)")
         
         // If menu is expanded, allow pan (to close)
         if isExpanded {
             return true
         }
         
-        // If AddressViewController is on top, check flag to decide behavior
-        if isTopAddressViewController {
+        // If AddressViewController or ProfileViewController is on top, check flag to decide behavior
+        if isTopAddressViewController || isTopProfileViewController {
             if didOpenFromSideMenu {
                 // Opened from side menu: block side menu gesture (let swipe back handle)
-                print("❌ [gestureRecognizerShouldBegin] AddressViewController opened from side menu → Block side menu gesture (let swipe back handle)")
+                let vcName = isTopAddressViewController ? "AddressViewController" : "ProfileViewController"
+                print("❌ [gestureRecognizerShouldBegin] \(vcName) opened from side menu → Block side menu gesture (let swipe back handle)")
                 return false
             } else {
                 // NOT opened from side menu: allow side menu gesture (drag from left edge opens side menu)
-                print("✅ [gestureRecognizerShouldBegin] AddressViewController NOT opened from side menu → Allow side menu gesture")
+                let vcName = isTopAddressViewController ? "AddressViewController" : "ProfileViewController"
+                print("✅ [gestureRecognizerShouldBegin] \(vcName) NOT opened from side menu → Allow side menu gesture")
                 // Continue with normal side menu gesture logic below
             }
         }
         
-        // If any view controller was pushed after AddressViewController (when flag is set),
+        // If any view controller was pushed after AddressViewController or ProfileViewController (when flag is set),
         // block side menu gesture to allow swipe back for all screens in that navigation flow
-        if hasViewControllersAfterAddressWithSideMenu {
-            print("❌ [gestureRecognizerShouldBegin] View controller opened after AddressViewController (side menu) → Block side menu gesture (let swipe back handle)")
+        if hasViewControllersAfterSideMenuVC {
+            print("❌ [gestureRecognizerShouldBegin] View controller opened after side menu VC → Block side menu gesture (let swipe back handle)")
             return false
         }
         
@@ -800,6 +822,38 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         print("=========================================================")
     }
     
+    private func handleNavigateToProfile() {
+        navigateToProfile()
+    }
+    
+    private func navigateToProfile() {
+        print("2️⃣ Navigating to Profile screen...")
+        // Get navigation controller from current tab
+        guard let navController = mainTabBarController.selectedViewController as? UINavigationController else {
+            print("DEBUG: selectedViewController is not a UINavigationController")
+            return
+        }
+        
+        // Set navigation controller delegate to detect when back
+        navController.delegate = self
+        
+        // Mark that ProfileViewController is opened from side menu
+        didOpenFromSideMenu = true
+        
+        // Create ProfileViewController and push
+        let appDIContainer = AppDIContainer()
+        let profileDIContainer = appDIContainer.makeProfileDIContainer()
+        let profileViewController = profileDIContainer.makeProfileViewController()
+        
+        // Push ProfileViewController
+        navController.pushViewController(profileViewController, animated: true)
+        
+        // Close side menu after push
+        sideMenuState(expanded: false)
+        
+        print("=========================================================")
+    }
+    
     private func transitionToRootViewController(_ viewController: UIViewController) {
         guard let window = view.window ?? UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
             print("MainContainerViewController: No window available for transition")
@@ -831,6 +885,10 @@ extension MainContainerViewController: UINavigationControllerDelegate {
         let hasAddressViewControllerInStack = navigationController.viewControllers.contains { $0 is AddressViewController }
         let isAddressViewController = viewController is AddressViewController
         
+        // Check if ProfileViewController still exists in the navigation stack
+        let hasProfileViewControllerInStack = navigationController.viewControllers.contains { $0 is ProfileViewController }
+        let isProfileViewController = viewController is ProfileViewController
+        
         // Debug: Print all view controllers in stack
         let stackDescription = navigationController.viewControllers.map { vc in
             let className = String(describing: type(of: vc))
@@ -849,14 +907,14 @@ extension MainContainerViewController: UINavigationControllerDelegate {
         print("   - didOpenFromSideMenu: \(didOpenFromSideMenu)")
         
         if didOpenFromSideMenu {
-            // If AddressViewController is no longer in the stack, we've fully popped back
-            if !hasAddressViewControllerInStack {
-                // User has completely popped back from AddressViewController flow
+            // If both AddressViewController and ProfileViewController are no longer in the stack, we've fully popped back
+            if !hasAddressViewControllerInStack && !hasProfileViewControllerInStack {
+                // User has completely popped back from side menu flow
                 // Reset flag
                 didOpenFromSideMenu = false
                 
                 // Always ensure side menu and overlay are completely closed
-                print("🔄 Completely back from AddressViewController flow (opened from side menu), ensuring side menu and overlay are closed")
+                print("🔄 Completely back from side menu flow, ensuring side menu and overlay are closed")
                 
                 // Force close side menu and hide overlay regardless of isExpanded state
                 // This prevents overlay from remaining visible after swipe back
@@ -868,10 +926,11 @@ extension MainContainerViewController: UINavigationControllerDelegate {
                 DispatchQueue.main.async { [weak self] in
                     self?.sideMenuShadowView.alpha = 0.0
                 }
-            } else if isAddressViewController {
-                // We're back to AddressViewController (from MapViewController or other screens)
-                // Ensure side menu is closed when returning to AddressViewController
-                print("🔄 Back to AddressViewController, ensuring side menu is closed")
+            } else if isAddressViewController || isProfileViewController {
+                // We're back to AddressViewController or ProfileViewController (from other screens)
+                // Ensure side menu is closed when returning
+                let vcName = isAddressViewController ? "AddressViewController" : "ProfileViewController"
+                print("🔄 Back to \(vcName), ensuring side menu is closed")
                 if isExpanded || sideMenuShadowView.alpha > 0 {
                     sideMenuState(expanded: false)
                 }

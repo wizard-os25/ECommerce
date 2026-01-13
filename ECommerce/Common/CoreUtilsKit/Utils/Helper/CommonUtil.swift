@@ -87,7 +87,6 @@ class Utilities: NSObject {
         print("   - Email: \(user.email) -> Key: \(Constants.UserDefaultsKey.userEmail)")
         print("   - Phone: \(user.phone) -> Key: \(Constants.UserDefaultsKey.userPhone)")
         print("   - Avatar URL: \(user.avatarURL?.absoluteString ?? "nil") -> Key: \(Constants.UserDefaultsKey.userAvatarURL)")
-        print("   - Is Phone Verified: \(user.isPhoneVerified) -> Key: \(Constants.UserDefaultsKey.isPhoneVerified)")
         print("   - Order Count: \(user.orderCount) -> Key: \(Constants.UserDefaultsKey.orderCount)")
         print("   - Member Since Days: \(user.memberSinceDays) -> Key: \(Constants.UserDefaultsKey.memberSinceDays)")
         
@@ -96,7 +95,6 @@ class Utilities: NSObject {
         defaults.set(user.email, forKey: Constants.UserDefaultsKey.userEmail)
         defaults.set(user.phone, forKey: Constants.UserDefaultsKey.userPhone)
         defaults.set(user.avatarURL?.absoluteString, forKey: Constants.UserDefaultsKey.userAvatarURL)
-        defaults.set(user.isPhoneVerified, forKey: Constants.UserDefaultsKey.isPhoneVerified)
         defaults.set(user.orderCount, forKey: Constants.UserDefaultsKey.orderCount)
         defaults.set(user.memberSinceDays, forKey: Constants.UserDefaultsKey.memberSinceDays)
         
@@ -157,16 +155,10 @@ class Utilities: NSObject {
             phone: phone,
             avatarURL: getUserAvatarURL(),
             bankAccount: [],
-            isPhoneVerified: defaults.integer(forKey: Constants.UserDefaultsKey.isPhoneVerified),
             orderCount: defaults.integer(forKey: Constants.UserDefaultsKey.orderCount),
             memberSinceDays: defaults.integer(forKey: Constants.UserDefaultsKey.memberSinceDays),
             createdAt: nil
         )
-    }
-    
-    /// Check if phone is verified
-    func isPhoneVerified() -> Bool {
-        return defaults.integer(forKey: Constants.UserDefaultsKey.isPhoneVerified) == 1
     }
     
     // MARK: - Legacy Support (for backward compatibility)
@@ -211,10 +203,9 @@ class Utilities: NSObject {
         defaults.removeObject(forKey: Constants.UserDefaultsKey.userEmail)
         defaults.removeObject(forKey: Constants.UserDefaultsKey.userPhone)
         defaults.removeObject(forKey: Constants.UserDefaultsKey.userAvatarURL)
-        defaults.removeObject(forKey: Constants.UserDefaultsKey.isPhoneVerified)
         defaults.removeObject(forKey: Constants.UserDefaultsKey.orderCount)
         defaults.removeObject(forKey: Constants.UserDefaultsKey.memberSinceDays)
-        print("   ✅ Removed: userId, userName, userEmail, userPhone, userAvatarURL, isPhoneVerified, orderCount, memberSinceDays")
+        print("   ✅ Removed: userId, userName, userEmail, userPhone, userAvatarURL, orderCount, memberSinceDays")
         
         // Legacy support
         defaults.removeObject(forKey: Constants.UserDefaultsKey.authToken)

@@ -529,7 +529,7 @@ final class AddressViewController: EcoViewController {
         // Create Card Configuration for deCommand mode (onDemand)
         // Height: reduced by 100pt from full screen
         let screenHeight = view.bounds.height
-        let cardHeight = screenHeight - 100
+        let cardHeight = screenHeight - 120
         let cardConfig = CardConfiguration(
             expandedHeight: cardHeight,
             collapsedHeight: cardHeight,

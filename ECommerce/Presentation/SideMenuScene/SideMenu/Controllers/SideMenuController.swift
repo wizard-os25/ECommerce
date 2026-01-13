@@ -24,6 +24,7 @@ protocol SideMenuControllerOutput {
     func shouldDeselectItem(at section: Int, index: Int) -> Bool
     var onLogout: (() -> Void)? { get set }
     var onNavigateToShippingAddress: (() -> Void)? { get set }
+    var onNavigateToProfile: (() -> Void)? { get set }
 }
 
 typealias SideMenuController = SideMenuControllerInput & SideMenuControllerOutput
@@ -40,6 +41,7 @@ final class DefaultSideMenuController: SideMenuController {
     let footerText: String = "Version 1.1"
     var onLogout: (() -> Void)?
     var onNavigateToShippingAddress: (() -> Void)?
+    var onNavigateToProfile: (() -> Void)?
     
     // MARK: - Private
     
@@ -98,7 +100,11 @@ final class DefaultSideMenuController: SideMenuController {
         selectedIndex.value = index
         
         // Handle navigation based on section and index
-        if section == 0 && index == 4 {
+        if section == 0 && index == 0 {
+            // Profile - trigger navigation callback
+            print("DEBUG: Profile selected, onNavigateToProfile: \(onNavigateToProfile != nil ? "set" : "nil")")
+            onNavigateToProfile?()
+        } else if section == 0 && index == 4 {
             // Shipping Address - trigger navigation callback
             print("DEBUG: Shipping Address selected, onNavigateToShippingAddress: \(onNavigateToShippingAddress != nil ? "set" : "nil")")
             onNavigateToShippingAddress?()

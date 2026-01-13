@@ -1066,6 +1066,72 @@
 		D0FF94F82F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94F72F15CFF1006146F8 /* LocationListQueriesRepository.swift */; };
 		D0FF94F92F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94F72F15CFF1006146F8 /* LocationListQueriesRepository.swift */; };
 		D0FF94FA2F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94F72F15CFF1006146F8 /* LocationListQueriesRepository.swift */; };
+		D0FF95002F15F9EA006146F8 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94FF2F15F9EA006146F8 /* ProfileModel.swift */; };
+		D0FF95012F15F9EA006146F8 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94FF2F15F9EA006146F8 /* ProfileModel.swift */; };
+		D0FF95022F15F9EA006146F8 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF94FF2F15F9EA006146F8 /* ProfileModel.swift */; };
+		D0FF95042F15F9FB006146F8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95032F15F9FB006146F8 /* ProfileViewController.swift */; };
+		D0FF95052F15F9FB006146F8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95032F15F9FB006146F8 /* ProfileViewController.swift */; };
+		D0FF95062F15F9FB006146F8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95032F15F9FB006146F8 /* ProfileViewController.swift */; };
+		D0FF95082F15FA05006146F8 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95072F15FA05006146F8 /* ProfileController.swift */; };
+		D0FF95092F15FA05006146F8 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95072F15FA05006146F8 /* ProfileController.swift */; };
+		D0FF950A2F15FA05006146F8 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95072F15FA05006146F8 /* ProfileController.swift */; };
+		D0FF950C2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF950B2F15FA0E006146F8 /* ProfileCoordinatingController.swift */; };
+		D0FF950D2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF950B2F15FA0E006146F8 /* ProfileCoordinatingController.swift */; };
+		D0FF950E2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF950B2F15FA0E006146F8 /* ProfileCoordinatingController.swift */; };
+		D0FF95102F15FA15006146F8 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF950F2F15FA15006146F8 /* ProfileViewController.storyboard */; };
+		D0FF95112F15FA15006146F8 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF950F2F15FA15006146F8 /* ProfileViewController.storyboard */; };
+		D0FF95122F15FA15006146F8 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF950F2F15FA15006146F8 /* ProfileViewController.storyboard */; };
+		D0FF95142F15FA49006146F8 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95132F15FA49006146F8 /* Profile.swift */; };
+		D0FF95152F15FA49006146F8 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95132F15FA49006146F8 /* Profile.swift */; };
+		D0FF95162F15FA49006146F8 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95132F15FA49006146F8 /* Profile.swift */; };
+		D0FF95182F15FA66006146F8 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95172F15FA66006146F8 /* ProfileUseCase.swift */; };
+		D0FF95192F15FA66006146F8 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95172F15FA66006146F8 /* ProfileUseCase.swift */; };
+		D0FF951A2F15FA66006146F8 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95172F15FA66006146F8 /* ProfileUseCase.swift */; };
+		D0FF951C2F15FA72006146F8 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF951B2F15FA72006146F8 /* ProfileRepository.swift */; };
+		D0FF951D2F15FA72006146F8 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF951B2F15FA72006146F8 /* ProfileRepository.swift */; };
+		D0FF951E2F15FA72006146F8 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF951B2F15FA72006146F8 /* ProfileRepository.swift */; };
+		D0FF95202F15FA81006146F8 /* DefaultProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF951F2F15FA81006146F8 /* DefaultProfileRepository.swift */; };
+		D0FF95212F15FA81006146F8 /* DefaultProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF951F2F15FA81006146F8 /* DefaultProfileRepository.swift */; };
+		D0FF95222F15FA81006146F8 /* DefaultProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF951F2F15FA81006146F8 /* DefaultProfileRepository.swift */; };
+		D0FF95242F15FA90006146F8 /* ProfileEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95232F15FA90006146F8 /* ProfileEndpoints.swift */; };
+		D0FF95252F15FA90006146F8 /* ProfileEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95232F15FA90006146F8 /* ProfileEndpoints.swift */; };
+		D0FF95262F15FA90006146F8 /* ProfileEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95232F15FA90006146F8 /* ProfileEndpoints.swift */; };
+		D0FF95332F15FF63006146F8 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95322F15FF63006146F8 /* EditProfileViewController.swift */; };
+		D0FF95342F15FF63006146F8 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95322F15FF63006146F8 /* EditProfileViewController.swift */; };
+		D0FF95352F15FF63006146F8 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95322F15FF63006146F8 /* EditProfileViewController.swift */; };
+		D0FF953A2F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95362F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift */; };
+		D0FF953B2F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95372F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift */; };
+		D0FF953C2F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95382F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift */; };
+		D0FF953D2F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95392F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift */; };
+		D0FF953E2F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95362F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift */; };
+		D0FF953F2F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95372F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift */; };
+		D0FF95402F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95382F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift */; };
+		D0FF95412F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95392F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift */; };
+		D0FF95422F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95362F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift */; };
+		D0FF95432F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95372F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift */; };
+		D0FF95442F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95382F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift */; };
+		D0FF95452F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95392F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift */; };
+		D0FF954B2F160793006146F8 /* ProfileDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF954A2F160793006146F8 /* ProfileDIContainer.swift */; };
+		D0FF954C2F160793006146F8 /* ProfileDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF954A2F160793006146F8 /* ProfileDIContainer.swift */; };
+		D0FF954D2F160793006146F8 /* ProfileDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF954A2F160793006146F8 /* ProfileDIContainer.swift */; };
+		D0FF954F2F16092C006146F8 /* EditProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF954E2F16092C006146F8 /* EditProfileViewController.storyboard */; };
+		D0FF95502F16092C006146F8 /* EditProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF954E2F16092C006146F8 /* EditProfileViewController.storyboard */; };
+		D0FF95512F16092C006146F8 /* EditProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF954E2F16092C006146F8 /* EditProfileViewController.storyboard */; };
+		D0FF95552F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95532F160DEA006146F8 /* ProfileTableViewCell.swift */; };
+		D0FF95562F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF95542F160DEA006146F8 /* ProfileTableViewCell.xib */; };
+		D0FF95572F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95532F160DEA006146F8 /* ProfileTableViewCell.swift */; };
+		D0FF95582F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF95542F160DEA006146F8 /* ProfileTableViewCell.xib */; };
+		D0FF95592F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF95542F160DEA006146F8 /* ProfileTableViewCell.xib */; };
+		D0FF955A2F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95532F160DEA006146F8 /* ProfileTableViewCell.swift */; };
+		D0FF95732F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95712F161584006146F8 /* ProfileImagePickerPopup.swift */; };
+		D0FF95742F161584006146F8 /* ProfileImagePickerPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF95722F161584006146F8 /* ProfileImagePickerPopup.xib */; };
+		D0FF95752F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95712F161584006146F8 /* ProfileImagePickerPopup.swift */; };
+		D0FF95762F161584006146F8 /* ProfileImagePickerPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF95722F161584006146F8 /* ProfileImagePickerPopup.xib */; };
+		D0FF95772F161584006146F8 /* ProfileImagePickerPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF95722F161584006146F8 /* ProfileImagePickerPopup.xib */; };
+		D0FF95782F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95712F161584006146F8 /* ProfileImagePickerPopup.swift */; };
+		D0FF957A2F16163E006146F8 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95792F16163E006146F8 /* EditProfileController.swift */; };
+		D0FF957B2F16163E006146F8 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95792F16163E006146F8 /* EditProfileController.swift */; };
+		D0FF957C2F16163E006146F8 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95792F16163E006146F8 /* EditProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1447,6 +1513,28 @@
 		D0FF94EF2F15CE55006146F8 /* LocationListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListUseCase.swift; sourceTree = "<group>"; };
 		D0FF94F32F15CFD9006146F8 /* LocationListQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListQuery.swift; sourceTree = "<group>"; };
 		D0FF94F72F15CFF1006146F8 /* LocationListQueriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListQueriesRepository.swift; sourceTree = "<group>"; };
+		D0FF94FF2F15F9EA006146F8 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		D0FF95032F15F9FB006146F8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D0FF95072F15FA05006146F8 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		D0FF950B2F15FA0E006146F8 /* ProfileCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinatingController.swift; sourceTree = "<group>"; };
+		D0FF950F2F15FA15006146F8 /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
+		D0FF95132F15FA49006146F8 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		D0FF95172F15FA66006146F8 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
+		D0FF951B2F15FA72006146F8 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
+		D0FF951F2F15FA81006146F8 /* DefaultProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileRepository.swift; sourceTree = "<group>"; };
+		D0FF95232F15FA90006146F8 /* ProfileEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEndpoints.swift; sourceTree = "<group>"; };
+		D0FF95322F15FF63006146F8 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		D0FF95362F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChangePasswordRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		D0FF95372F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChangePasswordResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		D0FF95382F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpdateProfileRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		D0FF95392F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpdateProfileResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		D0FF954A2F160793006146F8 /* ProfileDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDIContainer.swift; sourceTree = "<group>"; };
+		D0FF954E2F16092C006146F8 /* EditProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditProfileViewController.storyboard; sourceTree = "<group>"; };
+		D0FF95532F160DEA006146F8 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		D0FF95542F160DEA006146F8 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
+		D0FF95712F161584006146F8 /* ProfileImagePickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePickerPopup.swift; sourceTree = "<group>"; };
+		D0FF95722F161584006146F8 /* ProfileImagePickerPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileImagePickerPopup.xib; sourceTree = "<group>"; };
+		D0FF95792F16163E006146F8 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1725,8 +1813,8 @@
 		D0029C7B2F0E95AD00D50804 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
-				D0029CD62F0E9FBC00D50804 /* PricingCaculationPopup.swift */,
-				D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */,
+				D0FF955C2F1612D0006146F8 /* SimplePopup */,
+				D0FF955B2F1612B6006146F8 /* PriceSum */,
 				D0029C802F0E974700D50804 /* LinkBankPopup.swift */,
 				D0029C842F0E975300D50804 /* Popup2.swift */,
 				D0029C882F0E975900D50804 /* Popup3.swift */,
@@ -2284,6 +2372,7 @@
 			children = (
 				D00B923C2F10B1B300AEE1B6 /* User.swift */,
 				D00B92642F10D95400AEE1B6 /* Authentication.swift */,
+				D0FF95132F15FA49006146F8 /* Profile.swift */,
 				D0095B7E2ECB412200FCC7BC /* Product.swift */,
 				D0095B7F2ECB412200FCC7BC /* ProductQuery.swift */,
 				D0FF94822F14E893006146F8 /* Grocery.swift */,
@@ -2304,6 +2393,7 @@
 				D0FF94B92F15CAE3006146F8 /* FetchRecentLocationListQueriesUseCase.swift */,
 				D00B92682F10DF5500AEE1B6 /* LoginUseCase.swift */,
 				D00B926C2F10DF5D00AEE1B6 /* SignUpUseCase.swift */,
+				D0FF95172F15FA66006146F8 /* ProfileUseCase.swift */,
 				D0FF942A2F140552006146F8 /* AddressUseCase.swift */,
 				D0FF94EF2F15CE55006146F8 /* LocationListUseCase.swift */,
 			);
@@ -2331,6 +2421,7 @@
 			children = (
 				D0FF94F72F15CFF1006146F8 /* LocationListQueriesRepository.swift */,
 				D00B92402F10B23800AEE1B6 /* AuthRepository.swift */,
+				D0FF951B2F15FA72006146F8 /* ProfileRepository.swift */,
 				D0095B962ECB41A800FCC7BC /* ProductsRepository.swift */,
 				D0095B9A2ECB41C500FCC7BC /* ProductsQueriesRepository.swift */,
 				D0FF948E2F14E8C0006146F8 /* GrocerysRepository.swift */,
@@ -2366,6 +2457,7 @@
 			children = (
 				D0095C5D2ECB4C1600FCC7BC /* Utils */,
 				D00B924C2F10B2C500AEE1B6 /* DefaultAuthRepository.swift */,
+				D0FF951F2F15FA81006146F8 /* DefaultProfileRepository.swift */,
 				D0095BAF2ECB428800FCC7BC /* DefaultProductsRepository.swift */,
 				D0095BB02ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift */,
 				D0FF94962F14E8DE006146F8 /* DefaultGrocerysRepository.swift */,
@@ -2380,6 +2472,7 @@
 			isa = PBXGroup;
 			children = (
 				D00B92902F10E32E00AEE1B6 /* Authentication */,
+				D0FF95272F15FA9B006146F8 /* Profile */,
 				D0FF94362F14068B006146F8 /* Product */,
 				D0FF949E2F14E90F006146F8 /* Grocery */,
 				D00B928F2F10E31200AEE1B6 /* SignUp&Login */,
@@ -2426,9 +2519,10 @@
 		D0095BE22ECB435300FCC7BC /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
+				D0095BE42ECB436700FCC7BC /* AppDIContainer.swift */,
 				D00B92B02F10ED2000AEE1B6 /* OnboardSceneDIContainer.swift */,
 				D00B92502F10B38E00AEE1B6 /* AuthSceneDIContainer.swift */,
-				D0095BE42ECB436700FCC7BC /* AppDIContainer.swift */,
+				D0FF954A2F160793006146F8 /* ProfileDIContainer.swift */,
 				D0095D082ECC21A000FCC7BC /* MainSceneDIContainer.swift */,
 				D0095BE32ECB436700FCC7BC /* ProductsSceneDIContainer.swift */,
 				D0095CCC2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift */,
@@ -2597,11 +2691,9 @@
 		D0095CAA2ECB57C100FCC7BC /* SideMenuScene */ = {
 			isa = PBXGroup;
 			children = (
-				D0FF93EC2F13F981006146F8 /* Address */,
 				D0FF93EB2F13F974006146F8 /* SideMenu */,
-				D0095CA22ECB57C100FCC7BC /* Model */,
-				D0095CA92ECB57C100FCC7BC /* View */,
-				D0095CA02ECB57C100FCC7BC /* Controllers */,
+				D0FF93EC2F13F981006146F8 /* Address */,
+				D0FF94FB2F15F9B0006146F8 /* Profile */,
 			);
 			name = SideMenuScene;
 			path = ECommerce/Presentation/SideMenuScene;
@@ -2895,6 +2987,7 @@
 			isa = PBXGroup;
 			children = (
 				D00B92952F10EA3100AEE1B6 /* AuthEndpoints.swift */,
+				D0FF95232F15FA90006146F8 /* ProfileEndpoints.swift */,
 				D00B92972F10EA3100AEE1B6 /* ProductsEndpoints.swift */,
 				D00B92962F10EA3100AEE1B6 /* GroceryEndpoints.swift */,
 				D0FF941A2F1404FF006146F8 /* AddressEndpoints.swift */,
@@ -3121,6 +3214,9 @@
 		D0FF93EB2F13F974006146F8 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				D0095CA22ECB57C100FCC7BC /* Model */,
+				D0095CA92ECB57C100FCC7BC /* View */,
+				D0095CA02ECB57C100FCC7BC /* Controllers */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -3203,6 +3299,7 @@
 		D0FF945F2F1487D9006146F8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D0FF95302F15FF3A006146F8 /* Profile */,
 				D0FF945E2F1487D9006146F8 /* Base */,
 			);
 			path = ViewController;
@@ -3295,6 +3392,99 @@
 				D0FF94D72F15CBA0006146F8 /* LocationListModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D0FF94FB2F15F9B0006146F8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF94FE2F15F9DF006146F8 /* Model */,
+				D0FF94FD2F15F9DB006146F8 /* View */,
+				D0FF94FC2F15F9D6006146F8 /* Controller */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		D0FF94FC2F15F9D6006146F8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF95792F16163E006146F8 /* EditProfileController.swift */,
+				D0FF95072F15FA05006146F8 /* ProfileController.swift */,
+				D0FF950B2F15FA0E006146F8 /* ProfileCoordinatingController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D0FF94FD2F15F9DB006146F8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF95522F160DD3006146F8 /* ProfileCell */,
+				D0FF95312F15FF49006146F8 /* EditProfile */,
+				D0FF95032F15F9FB006146F8 /* ProfileViewController.swift */,
+				D0FF950F2F15FA15006146F8 /* ProfileViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D0FF94FE2F15F9DF006146F8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF94FF2F15F9EA006146F8 /* ProfileModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0FF95272F15FA9B006146F8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF95362F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift */,
+				D0FF95372F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift */,
+				D0FF95382F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift */,
+				D0FF95392F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		D0FF95302F15FF3A006146F8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		D0FF95312F15FF49006146F8 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF95322F15FF63006146F8 /* EditProfileViewController.swift */,
+				D0FF954E2F16092C006146F8 /* EditProfileViewController.storyboard */,
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
+		D0FF95522F160DD3006146F8 /* ProfileCell */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF95532F160DEA006146F8 /* ProfileTableViewCell.swift */,
+				D0FF95542F160DEA006146F8 /* ProfileTableViewCell.xib */,
+			);
+			path = ProfileCell;
+			sourceTree = "<group>";
+		};
+		D0FF955B2F1612B6006146F8 /* PriceSum */ = {
+			isa = PBXGroup;
+			children = (
+				D0029CD62F0E9FBC00D50804 /* PricingCaculationPopup.swift */,
+				D0029D032F0EA50B00D50804 /* PricingCaculationPopup.xib */,
+			);
+			path = PriceSum;
+			sourceTree = "<group>";
+		};
+		D0FF955C2F1612D0006146F8 /* SimplePopup */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF95712F161584006146F8 /* ProfileImagePickerPopup.swift */,
+				D0FF95722F161584006146F8 /* ProfileImagePickerPopup.xib */,
+			);
+			path = SimplePopup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3412,6 +3602,7 @@
 				D0095B692ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D0095D7E2ECC58F200FCC7BC /* accounts.json in Resources */,
 				D0029D202F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
+				D0FF95562F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */,
 				D0029D012F0EA4F600D50804 /* GroceryItemCell.xib in Resources */,
 				D0FF940E2F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */,
 				D0095B702ECB1D4100FCC7BC /* Localizable.strings in Resources */,
@@ -3421,6 +3612,7 @@
 				D0095B3C2ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095CB32ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
 				D0FF94E52F15CBCA006146F8 /* LocationListViewController.storyboard in Resources */,
+				D0FF95502F16092C006146F8 /* EditProfileViewController.storyboard in Resources */,
 				D0095CB42ECB57C100FCC7BC /* SideMenuCell.xib in Resources */,
 				D0095CEC2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
 				D0095D672ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
@@ -3435,6 +3627,7 @@
 				D0FF94342F140614006146F8 /* DividerCell.xib in Resources */,
 				D0029BBA2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
 				D0029D682F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
+				D0FF95122F15FA15006146F8 /* ProfileViewController.storyboard in Resources */,
 				D0029D692F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
 				D0029D6A2F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */,
 				D0029BBB2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
@@ -3467,6 +3660,7 @@
 				D0029BD02F0E742000D50804 /* ic_uobbank_56.png in Resources */,
 				D0029BD12F0E742000D50804 /* ic_westernunionbank_56.png in Resources */,
 				D0029BD22F0E742000D50804 /* ic_vietcapitalbank_56@2x.png in Resources */,
+				D0FF95762F161584006146F8 /* ProfileImagePickerPopup.xib in Resources */,
 				D0029BD32F0E742000D50804 /* ic_viettelpay_40@2x.png in Resources */,
 				D0029BD42F0E742000D50804 /* ic_tpbank_56.png in Resources */,
 				D0029BD52F0E742000D50804 /* ic_vietinbank_56@2x.png in Resources */,
@@ -3511,6 +3705,7 @@
 				D0095C042ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
 				D0029D142F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0E6C3CC2F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
+				D0FF95582F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */,
 				D0029B802F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
 				D0029C6D2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
 				D0029B812F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
@@ -3554,6 +3749,7 @@
 				D0029BA02F0E742000D50804 /* ic_vietcombank_56.png in Resources */,
 				D0029BA12F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */,
 				D0029BA22F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */,
+				D0FF95112F15FA15006146F8 /* ProfileViewController.storyboard in Resources */,
 				D0029BA32F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */,
 				D0029BA42F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */,
 				D0029BA52F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */,
@@ -3581,11 +3777,13 @@
 				D0029D042F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */,
 				D0029BB52F0E742000D50804 /* ic_shinhanbank_56@3x.png in Resources */,
 				D0095CEB2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
+				D0FF95512F16092C006146F8 /* EditProfileViewController.storyboard in Resources */,
 				D0095C052ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */,
 				D0095CC12ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
 				D0095CC22ECB57C100FCC7BC /* SideMenuCell.xib in Resources */,
 				D0095B292ECB0BA700FCC7BC /* Main.storyboard in Resources */,
 				D0095D7D2ECC58F200FCC7BC /* accounts.json in Resources */,
+				D0FF95742F161584006146F8 /* ProfileImagePickerPopup.xib in Resources */,
 				D0095B6F2ECB1D4100FCC7BC /* Localizable.strings in Resources */,
 				D0E6C3DB2F0DFF9800527962 /* TabBar.storyboard in Resources */,
 				D0095B2A2ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
@@ -3610,6 +3808,7 @@
 				D0095C122ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
 				D0029D122F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0E6C3D42F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
+				D0FF95592F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */,
 				D0029C162F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
 				D0029C6F2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
 				D0029C172F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
@@ -3653,6 +3852,7 @@
 				D0029C362F0E742000D50804 /* ic_vietcombank_56.png in Resources */,
 				D0029C372F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */,
 				D0029C382F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */,
+				D0FF95102F15FA15006146F8 /* ProfileViewController.storyboard in Resources */,
 				D0029C392F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */,
 				D0029C3A2F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */,
 				D0029C3B2F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */,
@@ -3680,11 +3880,13 @@
 				D0029D052F0EA50B00D50804 /* PricingCaculationPopup.xib in Resources */,
 				D0029C4B2F0E742000D50804 /* ic_shinhanbank_56@3x.png in Resources */,
 				D0095CEA2ECC154000FCC7BC /* SideMenuTableViewController.storyboard in Resources */,
+				D0FF954F2F16092C006146F8 /* EditProfileViewController.storyboard in Resources */,
 				D0095C132ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */,
 				D0095CB12ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
 				D0095CB22ECB57C100FCC7BC /* SideMenuCell.xib in Resources */,
 				D0095B252ECB0BA700FCC7BC /* Main.storyboard in Resources */,
 				D0095D7F2ECC58F200FCC7BC /* accounts.json in Resources */,
+				D0FF95772F161584006146F8 /* ProfileImagePickerPopup.xib in Resources */,
 				D0095B6E2ECB1D4100FCC7BC /* Localizable.strings in Resources */,
 				D0E6C3DC2F0DFF9800527962 /* TabBar.storyboard in Resources */,
 				D0095B262ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
@@ -3734,6 +3936,7 @@
 				D0029CDD2F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */,
 				D0FF946E2F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */,
 				D0095D1A2ECC2FFF00FCC7BC /* SideMenuAnimator.swift in Sources */,
+				D0FF95242F15FA90006146F8 /* ProfileEndpoints.swift in Sources */,
 				D0FF94E22F15CBB7006146F8 /* LocationListController.swift in Sources */,
 				D00B92D02F11054F00AEE1B6 /* APIErrorParser.swift in Sources */,
 				D00B92862F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
@@ -3761,6 +3964,7 @@
 				D0029CF62F0EA11A00D50804 /* RecommendedItemCell.swift in Sources */,
 				D0029DC52F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */,
 				D0FF94942F14E8CC006146F8 /* GrocerysQueriesRepository.swift in Sources */,
+				D0FF95202F15FA81006146F8 /* DefaultProfileRepository.swift in Sources */,
 				D0029CF82F0EA11A00D50804 /* CartItemCell.swift in Sources */,
 				D06C3BAD2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0095D3B2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
@@ -3771,6 +3975,7 @@
 				D0FF94622F1487D9006146F8 /* EcoViewController.swift in Sources */,
 				D0095D552ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift in Sources */,
 				D0095D702ECC565200FCC7BC /* LocalAuthenticationContextExtensions.swift in Sources */,
+				D0FF95022F15F9EA006146F8 /* ProfileModel.swift in Sources */,
 				D06C3BB52ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */,
 				D0095C282ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
 				D06C3B9B2ECCA31200289D48 /* UIView+Gesture.swift in Sources */,
@@ -3780,6 +3985,7 @@
 				D0095CB82ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
 				D0FF94A12F14E923006146F8 /* GrocerysRequestDTO+Mapping.swift in Sources */,
 				D0095CC62ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
+				D0FF95142F15FA49006146F8 /* Profile.swift in Sources */,
 				D0E6C3CF2F0DFEC000527962 /* MainContainerViewController.swift in Sources */,
 				D0E6C3D02F0DFEC000527962 /* HomeViewController.swift in Sources */,
 				D0095CB92ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */,
@@ -3802,11 +4008,13 @@
 				D0095BFC2ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
 				D06C3B942ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
 				D0095BFD2ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
+				D0FF950A2F15FA05006146F8 /* ProfileController.swift in Sources */,
 				D06C3B902ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
 				D0FF93E82F13EDA3006146F8 /* MapController.swift in Sources */,
 				D0095BFE2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D0FF94F52F15CFD9006146F8 /* LocationListQuery.swift in Sources */,
 				D00B923D2F10B1B300AEE1B6 /* User.swift in Sources */,
+				D0FF95332F15FF63006146F8 /* EditProfileViewController.swift in Sources */,
 				D0029C8E2F0E976000D50804 /* Popup4.swift in Sources */,
 				D0095BFF2ECB43C500FCC7BC /* ProductsViewController.swift in Sources */,
 				D0FF94DD2F15CBAD006146F8 /* LocationListViewController.swift in Sources */,
@@ -3823,6 +4031,7 @@
 				D0095D762ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
 				D00B92482F10B26100AEE1B6 /* SignUpRequestDTO+Mapping.swift in Sources */,
 				D00B92492F10B26100AEE1B6 /* SignUpResponseDTO+Mapping.swift in Sources */,
+				D0FF957C2F16163E006146F8 /* EditProfileController.swift in Sources */,
 				D0029CAC2F0E987900D50804 /* CategoryMenuItemModel.swift in Sources */,
 				D0FF94892F14E89D006146F8 /* GroceryQuery.swift in Sources */,
 				D00B91E72F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift in Sources */,
@@ -3831,6 +4040,7 @@
 				D0029BEE2F0E742000D50804 /* Sizing.swift in Sources */,
 				D0029C832F0E974700D50804 /* LinkBankPopup.swift in Sources */,
 				D0FF94FA2F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */,
+				D0FF954B2F160793006146F8 /* ProfileDIContainer.swift in Sources */,
 				D0029C912F0E976400D50804 /* Popup5.swift in Sources */,
 				D0029BEF2F0E742000D50804 /* EcoTick.swift in Sources */,
 				D0029BF02F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
@@ -3841,6 +4051,10 @@
 				D0FF94082F14017E006146F8 /* LocationSearchController.swift in Sources */,
 				D0FF94992F14E8DE006146F8 /* DefaultGrocerysRepository.swift in Sources */,
 				D0029D172F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */,
+				D0FF953A2F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift in Sources */,
+				D0FF953B2F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift in Sources */,
+				D0FF953C2F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift in Sources */,
+				D0FF953D2F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */,
 				D0029BF42F0E742000D50804 /* Spacing.swift in Sources */,
 				D0029C952F0E976B00D50804 /* Popup6.swift in Sources */,
 				D0029BF52F0E742000D50804 /* EcoAvatarView.swift in Sources */,
@@ -3879,6 +4093,7 @@
 				D0095BB32ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
 				D0FF94352F140614006146F8 /* DividerCell.swift in Sources */,
 				D0029CBE2F0E9DFF00D50804 /* GroceryItemModel.swift in Sources */,
+				D0FF95752F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */,
 				D00B92AA2F10ED0000AEE1B6 /* SplashCoordinatingController.swift in Sources */,
 				D00B92AB2F10ED0000AEE1B6 /* SplashViewController.swift in Sources */,
 				D00B92AC2F10ED0000AEE1B6 /* SplashController.swift in Sources */,
@@ -3886,6 +4101,7 @@
 				D0095D992ECC5BA300FCC7BC /* ImageCompressor.swift in Sources */,
 				D0095D7B2ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
 				D0095BB42ECB428800FCC7BC /* DefaultProductsRepository.swift in Sources */,
+				D0FF95042F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
 				D0095BA52ECB426200FCC7BC /* APIEndpoints.swift in Sources */,
 				D0095BC52ECB42B100FCC7BC /* NetworkService.swift in Sources */,
 				D06C3B9F2ECCA33300289D48 /* UIView+Screen.swift in Sources */,
@@ -3900,6 +4116,7 @@
 				D0095BE92ECB436700FCC7BC /* ProductsSceneDIContainer.swift in Sources */,
 				D0029C9E2F0E97D200D50804 /* CategoryViewController.swift in Sources */,
 				D0095BEA2ECB436700FCC7BC /* AppDIContainer.swift in Sources */,
+				D0FF951A2F15FA66006146F8 /* ProfileUseCase.swift in Sources */,
 				D0095BC82ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
 				D0095B362ECB0BA700FCC7BC /* ECommerce.xcdatamodeld in Sources */,
 				D0029CA22F0E980A00D50804 /* CategoryController.swift in Sources */,
@@ -3923,12 +4140,15 @@
 				D0029D6D2F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
 				D0029CC12F0E9E2300D50804 /* GroceryCoordinatingController.swift in Sources */,
 				D0FF947F2F14E874006146F8 /* GrocerySceneDIContainer.swift in Sources */,
+				D0FF950E2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */,
 				D0FF94BE2F15CAF5006146F8 /* LocationListRepository.swift in Sources */,
+				D0FF95552F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */,
 				D0FF94C22F15CB0C006146F8 /* DefaultLocationListRepository.swift in Sources */,
 				D00B92B62F10F72500AEE1B6 /* EcoButton.swift in Sources */,
 				D0095CE82ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
 				D06C3BA82ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
 				D00B92372F10AE2300AEE1B6 /* SignUpController.swift in Sources */,
+				D0FF951E2F15FA72006146F8 /* ProfileRepository.swift in Sources */,
 				D0FF947B2F14E7FC006146F8 /* GroceryTableViewController.swift in Sources */,
 				D0FF93A22F11F978006146F8 /* CardModel.swift in Sources */,
 				D0095D952ECC5B8C00FCC7BC /* AES.swift in Sources */,
@@ -4002,6 +4222,7 @@
 				D0095CBC2ECB57C100FCC7BC /* SideMenuModel.swift in Sources */,
 				D0FF94702F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */,
 				D06C3B882ECCA21800289D48 /* UIView+Layout.swift in Sources */,
+				D0FF95252F15FA90006146F8 /* ProfileEndpoints.swift in Sources */,
 				D0FF94E12F15CBB7006146F8 /* LocationListController.swift in Sources */,
 				D00B92CF2F11054F00AEE1B6 /* APIErrorParser.swift in Sources */,
 				D00B92822F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
@@ -4029,6 +4250,7 @@
 				D0E6C3962F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */,
 				D0029DC32F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */,
 				D0FF94952F14E8CC006146F8 /* GrocerysQueriesRepository.swift in Sources */,
+				D0FF95212F15FA81006146F8 /* DefaultProfileRepository.swift in Sources */,
 				D0E6C3972F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
 				D0029CDA2F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */,
 				D0029CBD2F0E9DFF00D50804 /* GroceryItemModel.swift in Sources */,
@@ -4039,6 +4261,7 @@
 				D0FF94682F1487D9006146F8 /* EcoViewController.swift in Sources */,
 				D0029CA32F0E980A00D50804 /* CategoryController.swift in Sources */,
 				D0095D972ECC5BA300FCC7BC /* ImageCompressor.swift in Sources */,
+				D0FF95002F15F9EA006146F8 /* ProfileModel.swift in Sources */,
 				D0095D7A2ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
 				D0029CC42F0E9E3100D50804 /* GroceryController.swift in Sources */,
 				D0095D192ECC2FFF00FCC7BC /* SideMenuLayoutManager.swift in Sources */,
@@ -4048,6 +4271,7 @@
 				D0029C8A2F0E975900D50804 /* Popup3.swift in Sources */,
 				D0FF94A02F14E923006146F8 /* GrocerysRequestDTO+Mapping.swift in Sources */,
 				D0095C3B2ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
+				D0FF95162F15FA49006146F8 /* Profile.swift in Sources */,
 				D0095C3C2ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
 				D0095C3D2ECB43DC00FCC7BC /* Alertable.swift in Sources */,
 				D0095C3E2ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
@@ -4070,11 +4294,13 @@
 				D0029C562F0E742E00D50804 /* EncodableExtensions.swift in Sources */,
 				D0095C422ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
 				D0E6C3B92F0DFB0E00527962 /* MainController.swift in Sources */,
+				D0FF95092F15FA05006146F8 /* ProfileController.swift in Sources */,
 				D0095D942ECC5B8C00FCC7BC /* AES.swift in Sources */,
 				D0FF93EA2F13EDA3006146F8 /* MapController.swift in Sources */,
 				D0029B6B2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
 				D0FF94F42F15CFD9006146F8 /* LocationListQuery.swift in Sources */,
 				D00B923F2F10B1B300AEE1B6 /* User.swift in Sources */,
+				D0FF95352F15FF63006146F8 /* EditProfileViewController.swift in Sources */,
 				D0029B6C2F0E742000D50804 /* EcoDivider.swift in Sources */,
 				D0029B6D2F0E742000D50804 /* Sizing.swift in Sources */,
 				D0FF94DE2F15CBAD006146F8 /* LocationListViewController.swift in Sources */,
@@ -4091,6 +4317,7 @@
 				D0029B6F2F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
 				D00B92462F10B26100AEE1B6 /* SignUpRequestDTO+Mapping.swift in Sources */,
 				D00B92472F10B26100AEE1B6 /* SignUpResponseDTO+Mapping.swift in Sources */,
+				D0FF957A2F16163E006146F8 /* EditProfileController.swift in Sources */,
 				D0029B702F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D0FF94872F14E89D006146F8 /* GroceryQuery.swift in Sources */,
 				D00B91E52F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift in Sources */,
@@ -4099,6 +4326,7 @@
 				D0029B732F0E742000D50804 /* Spacing.swift in Sources */,
 				D0029B742F0E742000D50804 /* EcoAvatarView.swift in Sources */,
 				D0FF94F82F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */,
+				D0FF954C2F160793006146F8 /* ProfileDIContainer.swift in Sources */,
 				D0029CC02F0E9E2300D50804 /* GroceryCoordinatingController.swift in Sources */,
 				D0029B752F0E742000D50804 /* SFFont.swift in Sources */,
 				D0029B762F0E742000D50804 /* Typography.swift in Sources */,
@@ -4109,6 +4337,10 @@
 				D0FF94062F14017E006146F8 /* LocationSearchController.swift in Sources */,
 				D0FF94982F14E8DE006146F8 /* DefaultGrocerysRepository.swift in Sources */,
 				D0029D152F0F456600D50804 /* GuaranteedHeaderView.swift in Sources */,
+				D0FF95422F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift in Sources */,
+				D0FF95432F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift in Sources */,
+				D0FF95442F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift in Sources */,
+				D0FF95452F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */,
 				D0029B7A2F0E742000D50804 /* BorderRadius.swift in Sources */,
 				D0029B7B2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */,
 				D0029B7C2F0E742000D50804 /* Colors.swift in Sources */,
@@ -4147,6 +4379,7 @@
 				D0095CFD2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
 				D0FF94332F140614006146F8 /* DividerCell.swift in Sources */,
 				D0029CA72F0E981600D50804 /* CategoryCodinatingController.swift in Sources */,
+				D0FF95732F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */,
 				D00B92A72F10ED0000AEE1B6 /* SplashCoordinatingController.swift in Sources */,
 				D00B92A82F10ED0000AEE1B6 /* SplashViewController.swift in Sources */,
 				D00B92A92F10ED0000AEE1B6 /* SplashController.swift in Sources */,
@@ -4154,6 +4387,7 @@
 				D0095D8C2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
 				D0095CE72ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
 				D0095C5F2ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
+				D0FF95062F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
 				D0029CAE2F0E988D00D50804 /* CategoryMainItemModel.swift in Sources */,
 				D0095C092ECB43C500FCC7BC /* ProductsViewController.swift in Sources */,
 				D0095B8A2ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
@@ -4168,6 +4402,7 @@
 				D06C3B932ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
 				D0095D722ECC565200FCC7BC /* LocalAuthenticationContextExtensions.swift in Sources */,
 				D0095CD12ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
+				D0FF95182F15FA66006146F8 /* ProfileUseCase.swift in Sources */,
 				D0095D0D2ECC235800FCC7BC /* ViewController.swift in Sources */,
 				D0095BE82ECB436700FCC7BC /* AppDIContainer.swift in Sources */,
 				D0095CCE2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
@@ -4191,12 +4426,15 @@
 				D0029D612F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
 				D0029C822F0E974700D50804 /* LinkBankPopup.swift in Sources */,
 				D0FF94812F14E874006146F8 /* GrocerySceneDIContainer.swift in Sources */,
+				D0FF950C2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */,
 				D0FF94C02F15CAF5006146F8 /* LocationListRepository.swift in Sources */,
+				D0FF95572F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */,
 				D0FF94C42F15CB0C006146F8 /* DefaultLocationListRepository.swift in Sources */,
 				D00B92B72F10F72500AEE1B6 /* EcoButton.swift in Sources */,
 				D0095B922ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0095B972ECB41A800FCC7BC /* ProductsRepository.swift in Sources */,
 				D00B92362F10AE2300AEE1B6 /* SignUpController.swift in Sources */,
+				D0FF951C2F15FA72006146F8 /* ProfileRepository.swift in Sources */,
 				D0FF947C2F14E7FC006146F8 /* GroceryTableViewController.swift in Sources */,
 				D0FF93A12F11F978006146F8 /* CardModel.swift in Sources */,
 				D0095B302ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
@@ -4247,9 +4485,12 @@
 				D0E6C3E92F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */,
 				D0FF94832F14E893006146F8 /* Grocery.swift in Sources */,
 				D0E6C3EA2F0E0AF600527962 /* SegmentedControl.swift in Sources */,
+				D0FF955A2F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */,
 				D00B92B52F10F72500AEE1B6 /* EcoButton.swift in Sources */,
 				D0FF94A22F14E923006146F8 /* GrocerysRequestDTO+Mapping.swift in Sources */,
+				D0FF95782F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */,
 				D0095B882ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
+				D0FF95052F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
 				D0095B752ECB1D7B00FCC7BC /* Localize.swift in Sources */,
 				D0095DA02ECC5BED00FCC7BC /* CommonUtil.swift in Sources */,
 				D0095DA12ECC5BED00FCC7BC /* CoreConstant.swift in Sources */,
@@ -4262,6 +4503,7 @@
 				D0095BDF2ECB434200FCC7BC /* AppAppearance.swift in Sources */,
 				D00B92562F10B8F100AEE1B6 /* LoginController.swift in Sources */,
 				D0FF94E92F15CC07006146F8 /* LocationListDIContainer.swift in Sources */,
+				D0FF95152F15FA49006146F8 /* Profile.swift in Sources */,
 				D0029C8D2F0E976000D50804 /* Popup4.swift in Sources */,
 				D00B924A2F10B26100AEE1B6 /* SignUpRequestDTO+Mapping.swift in Sources */,
 				D00B924B2F10B26100AEE1B6 /* SignUpResponseDTO+Mapping.swift in Sources */,
@@ -4296,6 +4538,10 @@
 				D00B928B2F10E2FB00AEE1B6 /* UserDTO+Mapping.swift in Sources */,
 				D00B928C2F10E2FB00AEE1B6 /* RefreshTokenResponseDTO+Mapping.swift in Sources */,
 				D00B928D2F10E2FB00AEE1B6 /* UserInfoResponseDTO+Mapping.swift in Sources */,
+				D0FF953E2F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift in Sources */,
+				D0FF953F2F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift in Sources */,
+				D0FF95402F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift in Sources */,
+				D0FF95412F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */,
 				D0029CE42F0EA09400D50804 /* CartViewController.swift in Sources */,
 				D00B924D2F10B2C500AEE1B6 /* DefaultAuthRepository.swift in Sources */,
 				D0FF94382F140911006146F8 /* AddressDIContainer.swift in Sources */,
@@ -4328,6 +4574,7 @@
 				D0095BDC2ECB433B00FCC7BC /* AppFlowCoordinator.swift in Sources */,
 				D0029C572F0E742E00D50804 /* StringExtensions.swift in Sources */,
 				D0FF94A62F14E92C006146F8 /* GrocerysResponseDTO+Mapping.swift in Sources */,
+				D0FF95342F15FF63006146F8 /* EditProfileViewController.swift in Sources */,
 				D0029C582F0E742E00D50804 /* FloatExtensions.swift in Sources */,
 				D0029CCE2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */,
 				D0029C592F0E742E00D50804 /* DoubleExtensions.swift in Sources */,
@@ -4366,6 +4613,7 @@
 				D00B91E62F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift in Sources */,
 				D0095C992ECB579900FCC7BC /* ProductsController.swift in Sources */,
 				D0095BB62ECB428800FCC7BC /* DefaultProductsRepository.swift in Sources */,
+				D0FF95012F15F9EA006146F8 /* ProfileModel.swift in Sources */,
 				D0FF94722F14E7B5006146F8 /* GroceryViewController.swift in Sources */,
 				D06C3B872ECCA21800289D48 /* UIView+Layout.swift in Sources */,
 				D06C3BB32ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */,
@@ -4398,6 +4646,7 @@
 				D0095D4B2ECC506E00FCC7BC /* AttributedText.swift in Sources */,
 				D00B92622F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
 				D00B92632F10D39200AEE1B6 /* LoginResponseDTO+Mapping.swift in Sources */,
+				D0FF951D2F15FA72006146F8 /* ProfileRepository.swift in Sources */,
 				D0095D092ECC21A000FCC7BC /* MainSceneDIContainer.swift in Sources */,
 				D0095D3C2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095CCF2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
@@ -4430,8 +4679,10 @@
 				D0FF94272F14053B006146F8 /* Address.swift in Sources */,
 				D0095C322ECB43DC00FCC7BC /* Alertable.swift in Sources */,
 				D0095C332ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
+				D0FF95192F15FA66006146F8 /* ProfileUseCase.swift in Sources */,
 				D0095C352ECB43DC00FCC7BC /* Observable.swift in Sources */,
 				D0095C362ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
+				D0FF95082F15FA05006146F8 /* ProfileController.swift in Sources */,
 				D00B926A2F10DF5500AEE1B6 /* LoginUseCase.swift in Sources */,
 				D0095C372ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
 				D00B926F2F10DF5D00AEE1B6 /* SignUpUseCase.swift in Sources */,
@@ -4441,6 +4692,7 @@
 				D00B92BF2F10FA1400AEE1B6 /* SignUpFormView.swift in Sources */,
 				D0FF93F72F13F9C9006146F8 /* AddressController.swift in Sources */,
 				D00B92AE2F10ED0000AEE1B6 /* SplashViewController.swift in Sources */,
+				D0FF950D2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */,
 				D00B92AF2F10ED0000AEE1B6 /* SplashController.swift in Sources */,
 				D0FF94AF2F14E967006146F8 /* CoreDataGrocerysResponseStorage.swift in Sources */,
 				D06C3BA12ECCA33300289D48 /* UIView+Screen.swift in Sources */,
@@ -4458,11 +4710,14 @@
 				D0095D162ECC2FFF00FCC7BC /* SideMenuLayoutManager.swift in Sources */,
 				D0095CD22ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
 				D0FF940C2F140189006146F8 /* LocationSearchViewController.swift in Sources */,
+				D0FF95222F15FA81006146F8 /* DefaultProfileRepository.swift in Sources */,
 				D0095B992ECB41A900FCC7BC /* ProductsRepository.swift in Sources */,
+				D0FF95262F15FA90006146F8 /* ProfileEndpoints.swift in Sources */,
 				D0FF94F12F15CE55006146F8 /* LocationListUseCase.swift in Sources */,
 				D0FF94F62F15CFD9006146F8 /* LocationListQuery.swift in Sources */,
 				D0E6C39D2F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
 				D0FF946F2F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */,
+				D0FF954D2F160793006146F8 /* ProfileDIContainer.swift in Sources */,
 				D0029DB82F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */,
 				D0FF941F2F140514006146F8 /* DefaultAddressRepository.swift in Sources */,
 				D0FF939A2F11F953006146F8 /* CardViewController.swift in Sources */,
@@ -4480,6 +4735,7 @@
 				D0029CB02F0E988D00D50804 /* CategoryMainItemModel.swift in Sources */,
 				D0029C052F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
 				D0FF939C2F11F95B006146F8 /* CardController.swift in Sources */,
+				D0FF957B2F16163E006146F8 /* EditProfileController.swift in Sources */,
 				D0029C062F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D00B91B42F109F9E00AEE1B6 /* CommonViewsLocalization.swift in Sources */,
 				D0029C072F0E742000D50804 /* EcoProgressView.swift in Sources */,

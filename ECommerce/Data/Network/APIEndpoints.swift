@@ -54,4 +54,16 @@ struct APIEndpoints {
     static func getAddresses() -> Endpoint<LocationListResponseDTO> {
         return LocationListEndpoints.getAddresses()
     }
+    
+    // MARK: - Profile Endpoints
+    
+    /// Update profile endpoint
+    static func updateProfile(with requestDTO: UpdateProfileRequestDTO) -> Endpoint<UpdateProfileResponseDTO> {
+        return ProfileEndpoints.updateProfile(with: requestDTO)
+    }
+    
+    /// Change password endpoint
+    static func changePassword(with requestDTO: ChangePasswordRequestDTO) -> Endpoint<ChangePasswordResponseDTO> {
+        return ProfileEndpoints.changePassword(with: requestDTO)
+    }
 }

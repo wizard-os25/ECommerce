@@ -43,9 +43,13 @@
                                     <constraint firstItem="i8W-uA-ck9" firstAttribute="leading" secondItem="HQ5-g3-T6E" secondAttribute="leading" constant="20" id="0ah-CM-w8s"/>
                                     <constraint firstItem="9y3-qq-4LW" firstAttribute="top" secondItem="HQ5-g3-T6E" secondAttribute="top" constant="29" id="0bz-43-nKB"/>
                                     <constraint firstItem="9y3-qq-4LW" firstAttribute="leading" secondItem="i8W-uA-ck9" secondAttribute="trailing" constant="20" id="451-Lt-H68"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RbP-Zz-sgh" secondAttribute="trailing" constant="16" id="6Hs-8R-EDX"/>
+                                    <constraint firstItem="9y3-qq-4LW" firstAttribute="leading" secondItem="RbP-Zz-sgh" secondAttribute="leading" id="BSN-S6-KTs"/>
                                     <constraint firstItem="i8W-uA-ck9" firstAttribute="centerY" secondItem="HQ5-g3-T6E" secondAttribute="centerY" constant="-9.5" id="ZAO-qP-Teb"/>
                                     <constraint firstItem="RbP-Zz-sgh" firstAttribute="top" secondItem="9y3-qq-4LW" secondAttribute="bottom" constant="7.5" id="eT3-3g-cd3"/>
+                                    <constraint firstItem="9y3-qq-4LW" firstAttribute="top" secondItem="i8W-uA-ck9" secondAttribute="top" id="fWy-K1-UPb"/>
                                     <constraint firstAttribute="height" constant="128" id="hR6-it-jJF"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9y3-qq-4LW" secondAttribute="trailing" constant="16" id="jOK-Cm-NBf"/>
                                     <constraint firstItem="RbP-Zz-sgh" firstAttribute="leading" secondItem="i8W-uA-ck9" secondAttribute="trailing" constant="20" id="qvA-LN-x70"/>
                                 </constraints>
                             </view>
@@ -79,6 +83,8 @@
                         <outlet property="footerLabel" destination="nx0-X5-sbz" id="Aih-7I-ywh"/>
                         <outlet property="headerImageView" destination="i8W-uA-ck9" id="Ni6-0Y-Tla"/>
                         <outlet property="sideMenuContainer" destination="tIG-5v-bCe" id="NnM-kM-QOJ"/>
+                        <outlet property="userEmailLabel" destination="RbP-Zz-sgh" id="dRO-9L-Tf5"/>
+                        <outlet property="userNameLabel" destination="9y3-qq-4LW" id="mhS-WL-1Gi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JzL-Cm-UoN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

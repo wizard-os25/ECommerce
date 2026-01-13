@@ -91,9 +91,9 @@ final class DefaultProductsController: ProductsController {
     }
     
     /// Collapsed height of navigation bar when scrolling
-    var navigationBarCollapsedHeight: CGFloat {
-        return 80
-    }
+//    var navigationBarCollapsedHeight: CGFloat {
+//        return 80
+//    }
     
     /// Navigation bar button tint color (set to black for right bar items)
     var navigationBarButtonTintColor: UIColor? {

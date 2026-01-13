@@ -98,7 +98,6 @@ final class DefaultSignUpController: SignUpController {
         print("   - Email: \(authResult.user.email)")
         print("   - Phone: \(authResult.user.phone)")
         print("   - Avatar URL: \(authResult.user.avatarURL?.absoluteString ?? "nil")")
-        print("   - Is Phone Verified: \(authResult.user.isPhoneVerified)")
         print("   - Order Count: \(authResult.user.orderCount)")
         print("   - Member Since Days: \(authResult.user.memberSinceDays)")
         

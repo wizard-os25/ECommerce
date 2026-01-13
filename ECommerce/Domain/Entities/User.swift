@@ -16,7 +16,6 @@ public struct User: Identifiable {
     public let phone: String
     public let avatarURL: URL?
     public let bankAccount: [String]
-    public let isPhoneVerified: Int
     public let orderCount: Int
     public let memberSinceDays: Int
     public let createdAt: Date?
@@ -28,7 +27,6 @@ public struct User: Identifiable {
         phone: String,
         avatarURL: URL?,
         bankAccount: [String] = [],
-        isPhoneVerified: Int = 0,
         orderCount: Int = 0,
         memberSinceDays: Int = 0,
         createdAt: Date? = nil
@@ -39,7 +37,6 @@ public struct User: Identifiable {
         self.phone = phone
         self.avatarURL = avatarURL
         self.bankAccount = bankAccount
-        self.isPhoneVerified = isPhoneVerified
         self.orderCount = orderCount
         self.memberSinceDays = memberSinceDays
         self.createdAt = createdAt

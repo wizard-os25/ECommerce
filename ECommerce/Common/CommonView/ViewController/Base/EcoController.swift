@@ -135,7 +135,7 @@ public extension EcoController {
     /// Initial height of navigation bar for this scene
     /// Default: 120pt (can be customized per scene)
     var navigationBarInitialHeight: CGFloat {
-        return 120
+        return 140
     }
     
     /// Collapsed height of navigation bar when scrolling

@@ -10,27 +10,29 @@ import Foundation
 // MARK: - User DTO (shared between Login, SignUp, and UserInfo)
 struct UserDTO: Decodable {
     let id: Int
-    let fullName: String
+    let fullName: String? // Optional for backward compatibility
     let email: String
     let phone: String
     let avatarUrl: String?
-    let bankAccount: [String]
-    let isPhoneVerified: Int
+    let bankAccount: [String]?
     let orderCount: Int
     let memberSinceDays: Int
     let createdAt: String?
+    let accountType: String?
+    let cardInfo: [String]?
     
     enum CodingKeys: String, CodingKey {
         case id
-        case fullName
+        case fullName // API now returns fullName directly
         case email
         case phone
-        case avatarUrl
+        case avatarUrl // API now returns avatarUrl directly
         case bankAccount
-        case isPhoneVerified
-        case orderCount
-        case memberSinceDays
-        case createdAt
+        case orderCount = "orderCount"
+        case memberSinceDays = "memberSinceDays"
+        case createdAt = "createdAt"
+        case accountType = "accountType"
+        case cardInfo = "cardInfo"
     }
 }
 
@@ -62,14 +64,26 @@ extension UserDTO {
             return dateFormatter1.date(from: dateString) ?? dateFormatter2.date(from: dateString)
         }
         
+        // Use cardInfo if available, otherwise fallback to bankAccount for backward compatibility
+        let accountInfo: [String]
+        if let cardInfo = cardInfo, !cardInfo.isEmpty {
+            accountInfo = cardInfo
+        } else if let bankAccount = bankAccount {
+            accountInfo = bankAccount
+        } else {
+            accountInfo = []
+        }
+        
+        // Use fullName if available, otherwise fallback to empty string
+        let finalFullName = fullName ?? ""
+        
         return .init(
             id: User.Identifier(id),
-            fullName: fullName,
+            fullName: finalFullName,
             email: email,
             phone: phone,
             avatarURL: avatarUrl.flatMap { URL(string: $0) },
-            bankAccount: bankAccount,
-            isPhoneVerified: isPhoneVerified,
+            bankAccount: accountInfo,
             orderCount: orderCount,
             memberSinceDays: memberSinceDays,
             createdAt: createdAt.flatMap { parseDate($0) }

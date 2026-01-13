@@ -98,13 +98,13 @@ final class DefaultAddressController: NSObject, AddressController {
         return .black
     }
     
-    var navigationBarInitialHeight: CGFloat {
-        return 140
-    }
-    
-    var navigationBarCollapsedHeight: CGFloat {
-        return 80
-    }
+//    var navigationBarInitialHeight: CGFloat {
+//        return 140
+//    }
+//    
+//    var navigationBarCollapsedHeight: CGFloat {
+//        return 80
+//    }
     
     // MARK: - Init
     
