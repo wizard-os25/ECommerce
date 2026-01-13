@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 final class ProfileViewController: EcoViewController {
     
@@ -250,23 +251,58 @@ final class ProfileViewController: EcoViewController {
         
         // Setup callbacks
         popup.onChooseFromPhotos = { [weak self] in
-            // Will implement later
-            print("Choose from Photos tapped")
+            self?.presentPhotoLibrary()
         }
         
         popup.onOpenCamera = { [weak self] in
-            // Will implement later
-            print("Open Camera tapped")
+            self?.presentCameraViewController()
         }
         
         popup.onCancel = { [weak self] in
             // Just dismiss
-            print("Cancel tapped")
         }
         
         // Show popup
         popup.show(in: view)
         imagePickerPopup = popup
+    }
+    
+    // MARK: - Camera & Photo Library
+    
+    private func presentCameraViewController() {
+        // Present camera in normal mode using CameraHelper
+        CameraHelper.presentCamera(
+            mode: .aiSearch,
+            from: self,
+            onImageCaptured: { [weak self] image in
+                self?.handleCapturedImage(image)
+            },
+            onDismiss: nil
+        )
+    }
+    
+    private func presentPhotoLibrary() {
+        if #available(iOS 14, *) {
+            var config = PHPickerConfiguration()
+            config.filter = .images
+            config.selectionLimit = 1
+            let picker = PHPickerViewController(configuration: config)
+            picker.delegate = self
+            present(picker, animated: true)
+        } else {
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = self
+            present(picker, animated: true)
+        }
+    }
+    
+    private func handleCapturedImage(_ image: UIImage) {
+        // TODO: Upload image to server
+        print("[Profile] 📸 Image captured: \(image.size)")
+        // Here you can add logic to upload the image
+        // For now, just show success message
+        showAlert(title: "Success", message: "Image captured successfully")
     }
     
     // MARK: - Helper Methods
@@ -354,5 +390,44 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         profileController.didSelectCell(at: indexPath.section, row: indexPath.row)
+    }
+}
+
+// MARK: - PHPickerViewControllerDelegate
+
+@available(iOS 14, *)
+extension ProfileViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        guard let itemProvider = results.first?.itemProvider,
+              itemProvider.canLoadObject(ofClass: UIImage.self) else {
+            return
+        }
+        
+        itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, _ in
+            guard let image = object as? UIImage else { return }
+            DispatchQueue.main.async {
+                self?.handleCapturedImage(image)
+            }
+        }
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        if let editedImage = info[.editedImage] as? UIImage {
+            handleCapturedImage(editedImage)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            handleCapturedImage(originalImage)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }

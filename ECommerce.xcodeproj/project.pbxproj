@@ -796,6 +796,15 @@
 		D00B92CF2F11054F00AEE1B6 /* APIErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B92CE2F11054F00AEE1B6 /* APIErrorParser.swift */; };
 		D00B92D02F11054F00AEE1B6 /* APIErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B92CE2F11054F00AEE1B6 /* APIErrorParser.swift */; };
 		D00B92D12F11054F00AEE1B6 /* APIErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B92CE2F11054F00AEE1B6 /* APIErrorParser.swift */; };
+		D061A8F92F163F1F00C137EB /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F62F163F1F00C137EB /* CameraHelper.swift */; };
+		D061A8FA2F163F1F00C137EB /* CameraMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F72F163F1F00C137EB /* CameraMode.swift */; };
+		D061A8FB2F163F1F00C137EB /* UIViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F82F163F1F00C137EB /* UIViewController+Camera.swift */; };
+		D061A8FC2F163F1F00C137EB /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F62F163F1F00C137EB /* CameraHelper.swift */; };
+		D061A8FD2F163F1F00C137EB /* CameraMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F72F163F1F00C137EB /* CameraMode.swift */; };
+		D061A8FE2F163F1F00C137EB /* UIViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F82F163F1F00C137EB /* UIViewController+Camera.swift */; };
+		D061A8FF2F163F1F00C137EB /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F62F163F1F00C137EB /* CameraHelper.swift */; };
+		D061A9002F163F1F00C137EB /* CameraMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F72F163F1F00C137EB /* CameraMode.swift */; };
+		D061A9012F163F1F00C137EB /* UIViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F82F163F1F00C137EB /* UIViewController+Camera.swift */; };
 		D06C3B832ECCA16900289D48 /* UIView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C3B822ECCA16900289D48 /* UIView+Reusable.swift */; };
 		D06C3B842ECCA16900289D48 /* UIView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C3B822ECCA16900289D48 /* UIView+Reusable.swift */; };
 		D06C3B852ECCA16900289D48 /* UIView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C3B822ECCA16900289D48 /* UIView+Reusable.swift */; };
@@ -1132,6 +1141,39 @@
 		D0FF957A2F16163E006146F8 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95792F16163E006146F8 /* EditProfileController.swift */; };
 		D0FF957B2F16163E006146F8 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95792F16163E006146F8 /* EditProfileController.swift */; };
 		D0FF957C2F16163E006146F8 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95792F16163E006146F8 /* EditProfileController.swift */; };
+		D0FF95C42F1635B2006146F8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95C32F1635B2006146F8 /* CameraViewController.swift */; };
+		D0FF95C52F1635B2006146F8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95C32F1635B2006146F8 /* CameraViewController.swift */; };
+		D0FF95C62F1635B2006146F8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95C32F1635B2006146F8 /* CameraViewController.swift */; };
+		D0FF95CC2F163612006146F8 /* CameraViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF95CB2F163612006146F8 /* CameraViewController.storyboard */; };
+		D0FF95CD2F163612006146F8 /* CameraViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF95CB2F163612006146F8 /* CameraViewController.storyboard */; };
+		D0FF95CE2F163612006146F8 /* CameraViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF95CB2F163612006146F8 /* CameraViewController.storyboard */; };
+		D0FF95E32F16373D006146F8 /* AILabelServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95E22F16373D006146F8 /* AILabelServiceType.swift */; };
+		D0FF95E42F16373D006146F8 /* AILabelServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95E22F16373D006146F8 /* AILabelServiceType.swift */; };
+		D0FF95E52F16373D006146F8 /* AILabelServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95E22F16373D006146F8 /* AILabelServiceType.swift */; };
+		D0FF95E72F16375A006146F8 /* ImageSimilarityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95E62F16375A006146F8 /* ImageSimilarityService.swift */; };
+		D0FF95E82F16375A006146F8 /* ImageSimilarityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95E62F16375A006146F8 /* ImageSimilarityService.swift */; };
+		D0FF95E92F16375A006146F8 /* ImageSimilarityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95E62F16375A006146F8 /* ImageSimilarityService.swift */; };
+		D0FF95EB2F16376B006146F8 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95EA2F16376B006146F8 /* MotionManager.swift */; };
+		D0FF95EC2F16376B006146F8 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95EA2F16376B006146F8 /* MotionManager.swift */; };
+		D0FF95ED2F16376B006146F8 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95EA2F16376B006146F8 /* MotionManager.swift */; };
+		D0FF95F02F16378C006146F8 /* ImageLabelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95EF2F16378C006146F8 /* ImageLabelModel.swift */; };
+		D0FF95F12F16378C006146F8 /* ImageLabelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95EF2F16378C006146F8 /* ImageLabelModel.swift */; };
+		D0FF95F22F16378C006146F8 /* ImageLabelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95EF2F16378C006146F8 /* ImageLabelModel.swift */; };
+		D0FF95F42F1637A5006146F8 /* CameraGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95F32F1637A5006146F8 /* CameraGestureHandler.swift */; };
+		D0FF95F52F1637A5006146F8 /* CameraGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95F32F1637A5006146F8 /* CameraGestureHandler.swift */; };
+		D0FF95F62F1637A5006146F8 /* CameraGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95F32F1637A5006146F8 /* CameraGestureHandler.swift */; };
+		D0FF95FC2F1637E6006146F8 /* UIImage+PixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95FB2F1637E6006146F8 /* UIImage+PixelBuffer.swift */; };
+		D0FF95FD2F1637E6006146F8 /* UIImage+PixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95FB2F1637E6006146F8 /* UIImage+PixelBuffer.swift */; };
+		D0FF95FE2F1637E6006146F8 /* UIImage+PixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF95FB2F1637E6006146F8 /* UIImage+PixelBuffer.swift */; };
+		D0FF96032F163939006146F8 /* CameraObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF96012F163939006146F8 /* CameraObservable.swift */; };
+		D0FF96052F163939006146F8 /* CameraObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF96012F163939006146F8 /* CameraObservable.swift */; };
+		D0FF96072F163939006146F8 /* CameraObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF96012F163939006146F8 /* CameraObservable.swift */; };
+		D0FF964F2F163BFE006146F8 /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D0FF964E2F163BFE006146F8 /* MobileNetV2.mlmodel */; };
+		D0FF96502F163BFE006146F8 /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D0FF964E2F163BFE006146F8 /* MobileNetV2.mlmodel */; };
+		D0FF96512F163BFE006146F8 /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D0FF964E2F163BFE006146F8 /* MobileNetV2.mlmodel */; };
+		D0FF96532F163CB9006146F8 /* CameraAILabelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF96522F163CB9006146F8 /* CameraAILabelService.swift */; };
+		D0FF96542F163CB9006146F8 /* CameraAILabelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF96522F163CB9006146F8 /* CameraAILabelService.swift */; };
+		D0FF96552F163CB9006146F8 /* CameraAILabelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF96522F163CB9006146F8 /* CameraAILabelService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1423,6 +1465,9 @@
 		D00B92C12F10FA1F00AEE1B6 /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
 		D00B92C22F10FA1F00AEE1B6 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		D00B92CE2F11054F00AEE1B6 /* APIErrorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorParser.swift; sourceTree = "<group>"; };
+		D061A8F62F163F1F00C137EB /* CameraHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHelper.swift; sourceTree = "<group>"; };
+		D061A8F72F163F1F00C137EB /* CameraMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraMode.swift; sourceTree = "<group>"; };
+		D061A8F82F163F1F00C137EB /* UIViewController+Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Camera.swift"; sourceTree = "<group>"; };
 		D06C3B822ECCA16900289D48 /* UIView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Reusable.swift"; sourceTree = "<group>"; };
 		D06C3B862ECCA21800289D48 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		D06C3B8A2ECCA25D00289D48 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
@@ -1535,6 +1580,17 @@
 		D0FF95712F161584006146F8 /* ProfileImagePickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePickerPopup.swift; sourceTree = "<group>"; };
 		D0FF95722F161584006146F8 /* ProfileImagePickerPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileImagePickerPopup.xib; sourceTree = "<group>"; };
 		D0FF95792F16163E006146F8 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
+		D0FF95C32F1635B2006146F8 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		D0FF95CB2F163612006146F8 /* CameraViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CameraViewController.storyboard; sourceTree = "<group>"; };
+		D0FF95E22F16373D006146F8 /* AILabelServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AILabelServiceType.swift; sourceTree = "<group>"; };
+		D0FF95E62F16375A006146F8 /* ImageSimilarityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSimilarityService.swift; sourceTree = "<group>"; };
+		D0FF95EA2F16376B006146F8 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
+		D0FF95EF2F16378C006146F8 /* ImageLabelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLabelModel.swift; sourceTree = "<group>"; };
+		D0FF95F32F1637A5006146F8 /* CameraGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGestureHandler.swift; sourceTree = "<group>"; };
+		D0FF95FB2F1637E6006146F8 /* UIImage+PixelBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+PixelBuffer.swift"; sourceTree = "<group>"; };
+		D0FF96012F163939006146F8 /* CameraObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraObservable.swift; sourceTree = "<group>"; };
+		D0FF964E2F163BFE006146F8 /* MobileNetV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2.mlmodel; sourceTree = "<group>"; };
+		D0FF96522F163CB9006146F8 /* CameraAILabelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAILabelService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2273,6 +2329,7 @@
 				D0095BD62ECB432100FCC7BC /* AppConfigurations.swift */,
 				D0095BDA2ECB433B00FCC7BC /* AppFlowCoordinator.swift */,
 				D0095B0E2ECB0BA700FCC7BC /* Assets.xcassets */,
+				D0FF964E2F163BFE006146F8 /* MobileNetV2.mlmodel */,
 				D0095B0F2ECB0BA700FCC7BC /* ECommerce.xcdatamodeld */,
 				D0095B102ECB0BA700FCC7BC /* Info.plist */,
 				D0095B122ECB0BA700FCC7BC /* LaunchScreen.storyboard */,
@@ -2880,6 +2937,7 @@
 		D00B91B82F10A02900AEE1B6 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				D0FF95CF2F1636B0006146F8 /* Camera & Image Similarity */,
 				D0029C982F0E977400D50804 /* Search */,
 				D00B91BB2F10A02C00AEE1B6 /* PasswordSetting */,
 				D00B91BD2F10A02C00AEE1B6 /* Terms&Conditions */,
@@ -3487,6 +3545,66 @@
 			path = SimplePopup;
 			sourceTree = "<group>";
 		};
+		D0FF95C22F16359A006146F8 /* CameraViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D061A8F62F163F1F00C137EB /* CameraHelper.swift */,
+				D061A8F72F163F1F00C137EB /* CameraMode.swift */,
+				D061A8F82F163F1F00C137EB /* UIViewController+Camera.swift */,
+				D0FF95C32F1635B2006146F8 /* CameraViewController.swift */,
+				D0FF95CB2F163612006146F8 /* CameraViewController.storyboard */,
+			);
+			path = CameraViewController;
+			sourceTree = "<group>";
+		};
+		D0FF95CF2F1636B0006146F8 /* Camera & Image Similarity */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF96022F163939006146F8 /* CameraObservable */,
+				D0FF95EE2F16377B006146F8 /* ImageModel */,
+				D0FF95E12F163726006146F8 /* ImageProcessing */,
+				D0FF95C22F16359A006146F8 /* CameraViewController */,
+				D0FF95FF2F1637ED006146F8 /* Extensions */,
+			);
+			path = "Camera & Image Similarity";
+			sourceTree = "<group>";
+		};
+		D0FF95E12F163726006146F8 /* ImageProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF96522F163CB9006146F8 /* CameraAILabelService.swift */,
+				D0FF95E22F16373D006146F8 /* AILabelServiceType.swift */,
+				D0FF95E62F16375A006146F8 /* ImageSimilarityService.swift */,
+				D0FF95EA2F16376B006146F8 /* MotionManager.swift */,
+			);
+			path = ImageProcessing;
+			sourceTree = "<group>";
+		};
+		D0FF95EE2F16377B006146F8 /* ImageModel */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF95EF2F16378C006146F8 /* ImageLabelModel.swift */,
+				D0FF95F32F1637A5006146F8 /* CameraGestureHandler.swift */,
+			);
+			path = ImageModel;
+			sourceTree = "<group>";
+		};
+		D0FF95FF2F1637ED006146F8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF95FB2F1637E6006146F8 /* UIImage+PixelBuffer.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D0FF96022F163939006146F8 /* CameraObservable */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF96012F163939006146F8 /* CameraObservable.swift */,
+			);
+			path = CameraObservable;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3629,6 +3747,7 @@
 				D0029D682F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
 				D0FF95122F15FA15006146F8 /* ProfileViewController.storyboard in Resources */,
 				D0029D692F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
+				D0FF95CE2F163612006146F8 /* CameraViewController.storyboard in Resources */,
 				D0029D6A2F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */,
 				D0029BBB2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
 				D0029BBC2F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
@@ -3748,6 +3867,7 @@
 				D0029B9F2F0E742000D50804 /* ic_vietinbank_56@2x.png in Resources */,
 				D0029BA02F0E742000D50804 /* ic_vietcombank_56.png in Resources */,
 				D0029BA12F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */,
+				D0FF95CC2F163612006146F8 /* CameraViewController.storyboard in Resources */,
 				D0029BA22F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */,
 				D0FF95112F15FA15006146F8 /* ProfileViewController.storyboard in Resources */,
 				D0029BA32F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */,
@@ -3851,6 +3971,7 @@
 				D0029C352F0E742000D50804 /* ic_vietinbank_56@2x.png in Resources */,
 				D0029C362F0E742000D50804 /* ic_vietcombank_56.png in Resources */,
 				D0029C372F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */,
+				D0FF95CD2F163612006146F8 /* CameraViewController.storyboard in Resources */,
 				D0029C382F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */,
 				D0FF95102F15FA15006146F8 /* ProfileViewController.storyboard in Resources */,
 				D0029C392F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */,
@@ -3948,13 +4069,18 @@
 				D0FF94EA2F15CC07006146F8 /* LocationListDIContainer.swift in Sources */,
 				D06C3B892ECCA21800289D48 /* UIView+Layout.swift in Sources */,
 				D0095D1C2ECC2FFF00FCC7BC /* SideMenuLayoutManager.swift in Sources */,
+				D061A8F92F163F1F00C137EB /* CameraHelper.swift in Sources */,
+				D061A8FA2F163F1F00C137EB /* CameraMode.swift in Sources */,
+				D061A8FB2F163F1F00C137EB /* UIViewController+Camera.swift in Sources */,
 				D0029DC02F0F5DD000D50804 /* EcoNavigationBarView.swift in Sources */,
 				D0095D5F2ECC52A400FCC7BC /* UIWindow+Extensions.swift in Sources */,
+				D0FF95F52F1637A5006146F8 /* CameraGestureHandler.swift in Sources */,
 				D0095CD32ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
 				D0095C242ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
 				D0029DB92F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */,
 				D00B91EA2F10A61C00AEE1B6 /* QRGenerator.swift in Sources */,
 				D00B91EB2F10A61C00AEE1B6 /* VTPSKWebView.swift in Sources */,
+				D0FF96542F163CB9006146F8 /* CameraAILabelService.swift in Sources */,
 				D0095D402ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
 				D0095C252ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
 				D0FF94022F140173006146F8 /* LocationSearchModel.swift in Sources */,
@@ -3985,6 +4111,7 @@
 				D0095CB82ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
 				D0FF94A12F14E923006146F8 /* GrocerysRequestDTO+Mapping.swift in Sources */,
 				D0095CC62ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
+				D0FF95EC2F16376B006146F8 /* MotionManager.swift in Sources */,
 				D0FF95142F15FA49006146F8 /* Profile.swift in Sources */,
 				D0E6C3CF2F0DFEC000527962 /* MainContainerViewController.swift in Sources */,
 				D0E6C3D02F0DFEC000527962 /* HomeViewController.swift in Sources */,
@@ -4014,6 +4141,7 @@
 				D0095BFE2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D0FF94F52F15CFD9006146F8 /* LocationListQuery.swift in Sources */,
 				D00B923D2F10B1B300AEE1B6 /* User.swift in Sources */,
+				D0FF96502F163BFE006146F8 /* MobileNetV2.mlmodel in Sources */,
 				D0FF95332F15FF63006146F8 /* EditProfileViewController.swift in Sources */,
 				D0029C8E2F0E976000D50804 /* Popup4.swift in Sources */,
 				D0095BFF2ECB43C500FCC7BC /* ProductsViewController.swift in Sources */,
@@ -4024,6 +4152,7 @@
 				D0FF94EC2F15CE2F006146F8 /* LocationListResponseDTO+Mapping.swift in Sources */,
 				D00B92C82F10FA1F00AEE1B6 /* LoginHeaderView.swift in Sources */,
 				D0FF94182F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */,
+				D0FF95FC2F1637E6006146F8 /* UIImage+PixelBuffer.swift in Sources */,
 				D0FF94192F1404D3006146F8 /* AddressRequestDTO+Mapping.swift in Sources */,
 				D0029CC52F0E9E3100D50804 /* GroceryController.swift in Sources */,
 				D00B92602F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
@@ -4084,8 +4213,10 @@
 				D0095D462ECC4FC100FCC7BC /* UIImage+Extensions.swift in Sources */,
 				D0095D9E2ECC5BED00FCC7BC /* CommonUtil.swift in Sources */,
 				D0095D9F2ECC5BED00FCC7BC /* CoreConstant.swift in Sources */,
+				D0FF96032F163939006146F8 /* CameraObservable.swift in Sources */,
 				D0095D4E2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
 				D06C3B842ECCA16900289D48 /* UIView+Reusable.swift in Sources */,
+				D0FF95E82F16375A006146F8 /* ImageSimilarityService.swift in Sources */,
 				D0FF94B32F14E972006146F8 /* GrocerysResponseStorage.swift in Sources */,
 				D0095D832ECC5ABD00FCC7BC /* Constant.swift in Sources */,
 				D0095B742ECB1D7B00FCC7BC /* Localize.swift in Sources */,
@@ -4104,6 +4235,7 @@
 				D0FF95042F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
 				D0095BA52ECB426200FCC7BC /* APIEndpoints.swift in Sources */,
 				D0095BC52ECB42B100FCC7BC /* NetworkService.swift in Sources */,
+				D0FF95E42F16373D006146F8 /* AILabelServiceType.swift in Sources */,
 				D06C3B9F2ECCA33300289D48 /* UIView+Screen.swift in Sources */,
 				D00B92202F10A6D100AEE1B6 /* EcoTextField.swift in Sources */,
 				D0095D072ECC215100FCC7BC /* MainViewController.swift in Sources */,
@@ -4127,10 +4259,12 @@
 				D0095B802ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095BAD2ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift in Sources */,
 				D0FF941B2F1404FF006146F8 /* AddressEndpoints.swift in Sources */,
+				D0FF95F12F16378C006146F8 /* ImageLabelModel.swift in Sources */,
 				D0095BE12ECB434200FCC7BC /* AppAppearance.swift in Sources */,
 				D00B92B12F10ED2000AEE1B6 /* OnboardSceneDIContainer.swift in Sources */,
 				D00B92532F10B38E00AEE1B6 /* AuthSceneDIContainer.swift in Sources */,
 				D0095BAE2ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift in Sources */,
+				D0FF95C42F1635B2006146F8 /* CameraViewController.swift in Sources */,
 				D0095D0B2ECC21A000FCC7BC /* MainSceneDIContainer.swift in Sources */,
 				D0029C862F0E975300D50804 /* Popup2.swift in Sources */,
 				D0029D6B2F0F4B5200D50804 /* TableSectionHeader.swift in Sources */,
@@ -4234,13 +4368,18 @@
 				D0FF94E82F15CC07006146F8 /* LocationListDIContainer.swift in Sources */,
 				D0095D202ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
 				D0095CBE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
+				D061A8FC2F163F1F00C137EB /* CameraHelper.swift in Sources */,
+				D061A8FD2F163F1F00C137EB /* CameraMode.swift in Sources */,
+				D061A8FE2F163F1F00C137EB /* UIViewController+Camera.swift in Sources */,
 				D0029DC12F0F5DD000D50804 /* EcoNavigationBarView.swift in Sources */,
 				D0E6C3DF2F0E02AC00527962 /* TabBarController.swift in Sources */,
+				D0FF95F62F1637A5006146F8 /* CameraGestureHandler.swift in Sources */,
 				D06C3BAF2ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
 				D0E6C3932F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
 				D0029DB72F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */,
 				D00B91EC2F10A61C00AEE1B6 /* QRGenerator.swift in Sources */,
 				D00B91ED2F10A61C00AEE1B6 /* VTPSKWebView.swift in Sources */,
+				D0FF96552F163CB9006146F8 /* CameraAILabelService.swift in Sources */,
 				D0E6C3942F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
 				D0E6C3B52F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */,
 				D0FF94042F140173006146F8 /* LocationSearchModel.swift in Sources */,
@@ -4271,6 +4410,7 @@
 				D0029C8A2F0E975900D50804 /* Popup3.swift in Sources */,
 				D0FF94A02F14E923006146F8 /* GrocerysRequestDTO+Mapping.swift in Sources */,
 				D0095C3B2ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
+				D0FF95EB2F16376B006146F8 /* MotionManager.swift in Sources */,
 				D0FF95162F15FA49006146F8 /* Profile.swift in Sources */,
 				D0095C3C2ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
 				D0095C3D2ECB43DC00FCC7BC /* Alertable.swift in Sources */,
@@ -4300,6 +4440,7 @@
 				D0029B6B2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
 				D0FF94F42F15CFD9006146F8 /* LocationListQuery.swift in Sources */,
 				D00B923F2F10B1B300AEE1B6 /* User.swift in Sources */,
+				D0FF964F2F163BFE006146F8 /* MobileNetV2.mlmodel in Sources */,
 				D0FF95352F15FF63006146F8 /* EditProfileViewController.swift in Sources */,
 				D0029B6C2F0E742000D50804 /* EcoDivider.swift in Sources */,
 				D0029B6D2F0E742000D50804 /* Sizing.swift in Sources */,
@@ -4310,6 +4451,7 @@
 				D0FF94ED2F15CE2F006146F8 /* LocationListResponseDTO+Mapping.swift in Sources */,
 				D00B92CB2F10FA1F00AEE1B6 /* LoginHeaderView.swift in Sources */,
 				D0FF94162F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */,
+				D0FF95FD2F1637E6006146F8 /* UIImage+PixelBuffer.swift in Sources */,
 				D0FF94172F1404D3006146F8 /* AddressRequestDTO+Mapping.swift in Sources */,
 				D0029B6E2F0E742000D50804 /* EcoTick.swift in Sources */,
 				D00B925E2F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
@@ -4370,8 +4512,10 @@
 				D06C3BA92ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
 				D0029C872F0E975300D50804 /* Popup2.swift in Sources */,
 				D0095C062ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
+				D0FF96072F163939006146F8 /* CameraObservable.swift in Sources */,
 				D0095C072ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
 				D0095CC92ECB59DA00FCC7BC /* UIViewController+Parent.swift in Sources */,
+				D0FF95E92F16375A006146F8 /* ImageSimilarityService.swift in Sources */,
 				D0FF94B22F14E972006146F8 /* GrocerysResponseStorage.swift in Sources */,
 				D0E6C3E52F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */,
 				D0E6C3E62F0E0AF600527962 /* SegmentedControl.swift in Sources */,
@@ -4390,6 +4534,7 @@
 				D0FF95062F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
 				D0029CAE2F0E988D00D50804 /* CategoryMainItemModel.swift in Sources */,
 				D0095C092ECB43C500FCC7BC /* ProductsViewController.swift in Sources */,
+				D0FF95E32F16373D006146F8 /* AILabelServiceType.swift in Sources */,
 				D0095B8A2ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
 				D00B92162F10A6D100AEE1B6 /* EcoTextField.swift in Sources */,
 				D0029CCC2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */,
@@ -4413,10 +4558,12 @@
 				D0095BC32ECB42B100FCC7BC /* DataTransferService.swift in Sources */,
 				D0029C922F0E976400D50804 /* Popup5.swift in Sources */,
 				D0FF941D2F1404FF006146F8 /* AddressEndpoints.swift in Sources */,
+				D0FF95F02F16378C006146F8 /* ImageLabelModel.swift in Sources */,
 				D0095BC42ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
 				D00B92B22F10ED2000AEE1B6 /* OnboardSceneDIContainer.swift in Sources */,
 				D00B92522F10B38E00AEE1B6 /* AuthSceneDIContainer.swift in Sources */,
 				D06C3B9C2ECCA31200289D48 /* UIView+Gesture.swift in Sources */,
+				D0FF95C52F1635B2006146F8 /* CameraViewController.swift in Sources */,
 				D0095C962ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
 				D0095C972ECB579900FCC7BC /* ProductsController.swift in Sources */,
 				D0029D5F2F0F4B5200D50804 /* TableSectionHeader.swift in Sources */,
@@ -4510,6 +4657,7 @@
 				D0029C852F0E975300D50804 /* Popup2.swift in Sources */,
 				D0029CC62F0E9E3100D50804 /* GroceryController.swift in Sources */,
 				D0095D3F2ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
+				D0FF96512F163BFE006146F8 /* MobileNetV2.mlmodel in Sources */,
 				D0E6C3D22F0DFEC000527962 /* MainContainerViewController.swift in Sources */,
 				D00B92392F10AE2F00AEE1B6 /* SignUpCoordinatingController.swift in Sources */,
 				D0E6C3D32F0DFEC000527962 /* HomeViewController.swift in Sources */,
@@ -4523,11 +4671,15 @@
 				D0095B842ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095BAB2ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift in Sources */,
 				D00B92432F10B23800AEE1B6 /* AuthRepository.swift in Sources */,
+				D061A8FF2F163F1F00C137EB /* CameraHelper.swift in Sources */,
+				D061A9002F163F1F00C137EB /* CameraMode.swift in Sources */,
+				D061A9012F163F1F00C137EB /* UIViewController+Camera.swift in Sources */,
 				D06C3BAB2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0095D712ECC565200FCC7BC /* LocalAuthenticationContextExtensions.swift in Sources */,
 				D0095BAC2ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift in Sources */,
 				D0095B852ECB412200FCC7BC /* ProductQuery.swift in Sources */,
 				D0029C732F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
+				D0FF96532F163CB9006146F8 /* CameraAILabelService.swift in Sources */,
 				D0095D752ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
 				D0FF94F92F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */,
 				D00B91EE2F10A61C00AEE1B6 /* QRGenerator.swift in Sources */,
@@ -4574,6 +4726,7 @@
 				D0095BDC2ECB433B00FCC7BC /* AppFlowCoordinator.swift in Sources */,
 				D0029C572F0E742E00D50804 /* StringExtensions.swift in Sources */,
 				D0FF94A62F14E92C006146F8 /* GrocerysResponseDTO+Mapping.swift in Sources */,
+				D0FF95FE2F1637E6006146F8 /* UIImage+PixelBuffer.swift in Sources */,
 				D0FF95342F15FF63006146F8 /* EditProfileViewController.swift in Sources */,
 				D0029C582F0E742E00D50804 /* FloatExtensions.swift in Sources */,
 				D0029CCE2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */,
@@ -4585,6 +4738,7 @@
 				D0FF93A02F11F978006146F8 /* CardModel.swift in Sources */,
 				D0095D6B2ECC557500FCC7BC /* NSObjectExt.swift in Sources */,
 				D00B92C32F10FA1F00AEE1B6 /* LoginFooterView.swift in Sources */,
+				D0FF95ED2F16376B006146F8 /* MotionManager.swift in Sources */,
 				D00B92C42F10FA1F00AEE1B6 /* LoginFormView.swift in Sources */,
 				D0FF94C62F15CB1B006146F8 /* LocationListEndpoints.swift in Sources */,
 				D00B92C52F10FA1F00AEE1B6 /* LoginHeaderView.swift in Sources */,
@@ -4643,6 +4797,7 @@
 				D0FF94252F140529006146F8 /* AddressRepository.swift in Sources */,
 				D0FF93E92F13EDA3006146F8 /* MapController.swift in Sources */,
 				D0095C0E2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
+				D0FF95F22F16378C006146F8 /* ImageLabelModel.swift in Sources */,
 				D0095D4B2ECC506E00FCC7BC /* AttributedText.swift in Sources */,
 				D00B92622F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
 				D00B92632F10D39200AEE1B6 /* LoginResponseDTO+Mapping.swift in Sources */,
@@ -4657,6 +4812,7 @@
 				D00B929A2F10EA3100AEE1B6 /* GroceryEndpoints.swift in Sources */,
 				D00B929B2F10EA3100AEE1B6 /* AuthEndpoints.swift in Sources */,
 				D0E6C3A32F0D06AC00527962 /* ImageCache.swift in Sources */,
+				D0FF96052F163939006146F8 /* CameraObservable.swift in Sources */,
 				D0FF942D2F140552006146F8 /* AddressUseCase.swift in Sources */,
 				D0095D932ECC5B8C00FCC7BC /* AES.swift in Sources */,
 				D0FF94032F140173006146F8 /* LocationSearchModel.swift in Sources */,
@@ -4672,10 +4828,12 @@
 				D0095CFF2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
 				D0095C2F2ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
 				D0029C892F0E975900D50804 /* Popup3.swift in Sources */,
+				D0FF95E52F16373D006146F8 /* AILabelServiceType.swift in Sources */,
 				D0029C792F0E85E600D50804 /* IntExtensions.swift in Sources */,
 				D0FF93E22F13ED3C006146F8 /* MapViewController.swift in Sources */,
 				D0095C302ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
 				D0095C312ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
+				D0FF95F42F1637A5006146F8 /* CameraGestureHandler.swift in Sources */,
 				D0FF94272F14053B006146F8 /* Address.swift in Sources */,
 				D0095C322ECB43DC00FCC7BC /* Alertable.swift in Sources */,
 				D0095C332ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
@@ -4714,6 +4872,7 @@
 				D0095B992ECB41A900FCC7BC /* ProductsRepository.swift in Sources */,
 				D0FF95262F15FA90006146F8 /* ProfileEndpoints.swift in Sources */,
 				D0FF94F12F15CE55006146F8 /* LocationListUseCase.swift in Sources */,
+				D0FF95E72F16375A006146F8 /* ImageSimilarityService.swift in Sources */,
 				D0FF94F62F15CFD9006146F8 /* LocationListQuery.swift in Sources */,
 				D0E6C39D2F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
 				D0FF946F2F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */,
@@ -4736,6 +4895,7 @@
 				D0029C052F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
 				D0FF939C2F11F95B006146F8 /* CardController.swift in Sources */,
 				D0FF957B2F16163E006146F8 /* EditProfileController.swift in Sources */,
+				D0FF95C62F1635B2006146F8 /* CameraViewController.swift in Sources */,
 				D0029C062F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D00B91B42F109F9E00AEE1B6 /* CommonViewsLocalization.swift in Sources */,
 				D0029C072F0E742000D50804 /* EcoProgressView.swift in Sources */,
