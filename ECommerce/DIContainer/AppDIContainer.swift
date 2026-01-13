@@ -55,6 +55,13 @@ final class AppDIContainer {
         return AddressDIContainer(dependencies: dependencies)
     }
     
+    func makeLocationListDIContainer() -> LocationListDIContainer {
+        let dependencies = LocationListDIContainer.Dependencies(
+            apiDataTransferService: apiDataTransferService
+        )
+        return LocationListDIContainer(dependencies: dependencies)
+    }
+    
     // Shared instance to ensure same SideMenuController is used everywhere
     private lazy var sharedSideMenuSceneDIContainer: SideMenuSceneDIContainer = {
         let dependencies = SideMenuSceneDIContainer.Dependencies(

@@ -39,6 +39,9 @@ final class AddressViewController: EcoViewController {
         get { controller as? AddressController }
     }
     
+    // Store reference to CardViewController to prevent opening multiple times
+    private var cardViewController: CardViewController?
+    
     // Lưu tọa độ để dùng khi save
     private var selectedLatitude: String = ""
     private var selectedLongitude: String = ""
@@ -87,6 +90,13 @@ final class AddressViewController: EcoViewController {
                 navBarController.onLeftItemTap = { [weak self] in
                     self?.navigationController?.popViewController(animated: true)
                 }
+            }
+        }
+        
+        // Setup right bar button callback in controller - action from .icon() will call this
+        if let defaultController = addressController as? DefaultAddressController {
+            defaultController.onRightBarButtonTap = { [weak self] in
+                self?.showLocationList()
             }
         }
     }
@@ -499,6 +509,92 @@ final class AddressViewController: EcoViewController {
     @objc private func defaultAddressTapped() {
         isCheckboxSelected.toggle()
         updateCheckboxImage()
+    }
+    
+    // MARK: - Location List
+    
+    private func showLocationList() {
+        // Prevent opening multiple times - if card already exists and is visible, just show it
+        if let existingCard = cardViewController, existingCard.parent != nil {
+            existingCard.show()
+            return
+        }
+        
+        // If card exists but is not attached (was dismissed), clean it up first
+        if cardViewController != nil {
+            cardViewController?.detach()
+            cardViewController = nil
+        }
+        
+        // Create Card Configuration for deCommand mode (onDemand)
+        // Height: reduced by 100pt from full screen
+        let screenHeight = view.bounds.height
+        let cardHeight = screenHeight - 100
+        let cardConfig = CardConfiguration(
+            expandedHeight: cardHeight,
+            collapsedHeight: cardHeight,
+            presentationMode: .onDemand,
+            enableGesture: true
+        )
+        
+        // Create Card Controller
+        let cardController = DefaultCardController(configuration: cardConfig)
+        
+        // Create Card View Controller
+        let cardVC = CardViewController.create(with: cardController)
+        
+        // Attach to current view controller
+        cardVC.attach(to: self)
+        
+        // Store reference
+        cardViewController = cardVC
+        
+        // Create LocationListViewController as content
+        let appDIContainer = AppDIContainer()
+        let locationListDIContainer = appDIContainer.makeLocationListDIContainer()
+        let locationListVC = locationListDIContainer.makeLocationListViewController()
+        
+        // Setup callback when address is selected
+        if let locationListController = locationListVC.controller as? DefaultLocationListController {
+            locationListController.onAddressSelected = { [weak self, weak cardVC] address in
+                // Fill form with selected address
+                self?.contactPersonNameTextField.text = address.contactPersonName
+                self?.contactPersonNumberTextField.text = address.contactPersonNumber
+                self?.addressSearchTextField.text = address.address
+                self?.selectedLatitude = address.latitude
+                self?.selectedLongitude = address.longitude
+                self?.selectedAddressType = address.addressType
+                
+                // Update button text based on address type
+                let displayText: String
+                switch address.addressType {
+                case "shipping":
+                    displayText = "Shipping address"
+                case "shop":
+                    displayText = "Shop address"
+                case "other":
+                    displayText = "Other"
+                default:
+                    displayText = "Shipping address"
+                }
+                self?.updateAddressTypeButton(text: displayText, addressType: address.addressType)
+                
+                // Dismiss card
+                cardVC?.dismiss()
+                // Clear reference when dismissed
+                if cardVC === self?.cardViewController {
+                    self?.cardViewController = nil
+                }
+            }
+        }
+        
+        // Set LocationListViewController as content of CardViewController
+        cardVC.setContent(locationListVC)
+        
+        // Show card
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            cardVC.show()
+        }
     }
     
     // MARK: - Error Handler Override

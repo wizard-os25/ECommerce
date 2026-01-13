@@ -49,4 +49,9 @@ struct APIEndpoints {
     static func createAddress(with requestDTO: AddressRequestDTO) -> Endpoint<AddressResponseDTO> {
         return AddressEndpoints.createAddress(with: requestDTO)
     }
+    
+    /// Get addresses endpoint
+    static func getAddresses() -> Endpoint<LocationListResponseDTO> {
+        return LocationListEndpoints.getAddresses()
+    }
 }

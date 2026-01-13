@@ -50,6 +50,7 @@ final class DefaultAddressController: NSObject, AddressController {
     let successMessage: Observable<String?> = Observable(nil)
     let screenTitle = "Add a new address"
     var onCurrentLocationReceived: ((String, String, String) -> Void)? // (address, latitude, longitude)
+    var onRightBarButtonTap: (() -> Void)?
     
     // MARK: - EcoController Output (common to all controllers)
     
@@ -68,6 +69,18 @@ final class DefaultAddressController: NSObject, AddressController {
             self?.onNavigationBarLeftItemTap?()
         }
     }
+    
+    var navigationBarRightItems: [EcoNavItem] {
+        return [
+            EcoNavItem.icon(
+                UIImage(systemName: "list.bullet") ?? UIImage(),
+                action: { [weak self] in
+                    self?.onRightBarButtonTap?()
+                }
+            )
+        ]
+    }
+    
     
     var navigationBarBackground: EcoNavigationBackground {
         return .solid(.white)

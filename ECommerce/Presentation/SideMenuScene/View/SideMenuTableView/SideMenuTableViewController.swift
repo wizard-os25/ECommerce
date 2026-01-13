@@ -34,6 +34,7 @@ final class SideMenuTableViewController: UITableViewController, StoryboardInstan
         // TableView setup
         tableView.backgroundColor = #colorLiteral(red: 0, green: 0.3827145161, blue: 1, alpha: 1)
         tableView.separatorStyle = .none
+        tableView.allowsMultipleSelection = false // Default behavior: only one cell selected at a time
         
         // Register TableView Cell
         tableView.register(cell: SideMenuCell.self)
@@ -67,15 +68,21 @@ final class SideMenuTableViewController: UITableViewController, StoryboardInstan
         let items = section == 0 ? controller.firstSectionMenuItems.value : controller.secondSectionMenuItems.value
         guard index >= 0 && index < items.count else { return }
         
+        // Only update selection if it's different from current selection
+        let indexPath = IndexPath(row: index, section: section)
+        if let selectedIndexPaths = tableView.indexPathsForSelectedRows,
+           selectedIndexPaths.contains(indexPath) {
+            return // Already selected, no need to change
+        }
+        
         // Deselect all rows first to ensure only one item is selected
         if let selectedIndexPaths = tableView.indexPathsForSelectedRows {
-            for indexPath in selectedIndexPaths {
-                tableView.deselectRow(at: indexPath, animated: false)
+            for selectedIndexPath in selectedIndexPaths {
+                tableView.deselectRow(at: selectedIndexPath, animated: false)
             }
         }
         
         // Select the new row
-        let indexPath = IndexPath(row: index, section: section)
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
     }
 }
@@ -97,24 +104,22 @@ extension SideMenuTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("DEBUG: tableView didSelectRowAt - section: \(indexPath.section), row: \(indexPath.row)")
-        
         // Skip divider row
         if indexPath.section == 0 && indexPath.row == controller.firstSectionMenuItems.value.count {
-            print("DEBUG: Skipping divider row")
+            tableView.deselectRow(at: indexPath, animated: false)
             return
         }
         
         // Check if item should be selected
         guard controller.shouldSelectItem(at: indexPath.section, index: indexPath.row) else {
-            print("DEBUG: Item should not be selected")
+            tableView.deselectRow(at: indexPath, animated: false)
             return
         }
         
-        print("DEBUG: Calling controller.didSelectMenuItem")
+        // Let UITableView handle selection naturally, just update controller state
         controller.didSelectMenuItem(at: indexPath.section, index: indexPath.row)
         
-        // Deselect certain items if needed
+        // Deselect certain items if needed (e.g., logout)
         if controller.shouldDeselectItem(at: indexPath.section, index: indexPath.row) {
             tableView.deselectRow(at: indexPath, animated: true)
         }
