@@ -1,5 +1,5 @@
 import Foundation
 
-protocol Cancellable {
+public protocol Cancellable {
     func cancel()
 }

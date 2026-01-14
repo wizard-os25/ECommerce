@@ -11,6 +11,7 @@ final class SideMenuSceneDIContainer: SideMenuCoordinatingControllerDependencies
     
     struct Dependencies {
         let addressDIContainer: AddressDIContainer
+        let paymentCardDIContainer: PaymentCardDIContainer
     }
     
     private let dependencies: Dependencies
@@ -45,6 +46,16 @@ final class SideMenuSceneDIContainer: SideMenuCoordinatingControllerDependencies
     
     func makeAddressController() -> AddressController {
         dependencies.addressDIContainer.makeAddressController()
+    }
+    
+    // MARK: - Payment Card Scene
+    
+    func makePaymentCardViewController() -> PaymentCardViewController {
+        dependencies.paymentCardDIContainer.makePaymentCardViewController()
+    }
+    
+    func makePaymentCardController() -> PaymentCardController {
+        dependencies.paymentCardDIContainer.makePaymentCardController()
     }
     
     // MARK: - Flow Coordinators

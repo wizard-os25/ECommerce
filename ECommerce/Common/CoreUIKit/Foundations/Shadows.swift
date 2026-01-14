@@ -37,18 +37,18 @@ public enum Shadows {
                                                     offset: CGSize(width: 0, height: -Sizing.tokenSizing04),
                                                     opacity: Float(Opacity.tokenOpacity08),
                                                     spread: .zero)
-    public static let tokenShadowButtonLarge = Shadow(color: Colors.tokenViettelPayRed100,
-                                                      offset: CGSize(width: 0, height: Sizing.tokenSizing06),
-                                                      opacity: Float(Opacity.tokenOpacity25),
-                                                      spread: .zero)
-    public static let tokenShadowButtonMedium = Shadow(color: Colors.tokenViettelPayRed100,
-                                                       offset: CGSize(width: 0, height: Sizing.tokenSizing04),
-                                                       opacity: Float(Opacity.tokenOpacity25),
-                                                       spread: .zero)
-    public static let tokenShadowButtonSmall = Shadow(color: Colors.tokenViettelPayRed100,
-                                                      offset: CGSize(width: 0, height: Sizing.tokenSizing02),
-                                                      opacity: Float(Opacity.tokenOpacity25),
-                                                      spread: .zero)
+//    public static let tokenShadowButtonLarge = Shadow(color: Colors.tokenViettelPayRed100,
+//                                                      offset: CGSize(width: 0, height: Sizing.tokenSizing06),
+//                                                      opacity: Float(Opacity.tokenOpacity25),
+//                                                      spread: .zero)
+//    public static let tokenShadowButtonMedium = Shadow(color: Colors.tokenViettelPayRed100,
+//                                                       offset: CGSize(width: 0, height: Sizing.tokenSizing04),
+//                                                       opacity: Float(Opacity.tokenOpacity25),
+//                                                       spread: .zero)
+//    public static let tokenShadowButtonSmall = Shadow(color: Colors.tokenViettelPayRed100,
+//                                                      offset: CGSize(width: 0, height: Sizing.tokenSizing02),
+//                                                      opacity: Float(Opacity.tokenOpacity25),
+//                                                      spread: .zero)
     public static let tokenShadowDropDown = Shadow(color: Colors.tokenBlack,
                                                    offset: CGSize(width: 0, height: Sizing.tokenSizing04),
                                                    opacity: Float(Opacity.tokenOpacity08),

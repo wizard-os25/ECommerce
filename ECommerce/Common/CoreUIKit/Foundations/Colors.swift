@@ -1,15 +1,6 @@
 import UIKit
 
 public enum Colors {
-    // ViettelPay Red
-    public static let tokenViettelPayRed100 = UIColor(hex: "#EE0033")
-    public static let tokenViettelPayRed80 = UIColor(hex: "#F1335C")
-    public static let tokenViettelPayRed60 = UIColor(hex: "#F56685")
-    public static let tokenViettelPayRed40 = UIColor(hex: "#F899AD")
-    public static let tokenViettelPayRed20 = UIColor(hex: "#FCCCD6")
-    public static let tokenViettelPayRed10 = UIColor(hex: "#FDE5EB")
-    public static let tokenViettelPayRed05 = UIColor(hex: "#FEF2F5")
-    public static let tokenViettelPayRed02 = UIColor(hex: "#FFFAFB")
     
     // Scarlet Red
     public static let tokenScarletRed100 = UIColor(hex: "#DB4E3B")
@@ -101,7 +92,6 @@ public enum Colors {
     public static let tokenBlack = UIColor(hex: "#000000")
     public static let tokenWhite = UIColor(hex: "#FFFFFF")
     public static let tokenShadowsCardColor = tokenBlack.withAlphaComponent(Opacity.tokenOpacity08)
-    public static let tokenShadowsButtonColor = tokenViettelPayRed100.withAlphaComponent(Opacity.tokenOpacity25)
     
     public static let tokenCyan100 = #colorLiteral(red: 0.09019607843, green: 0.6784313725, blue: 0.6901960784, alpha: 1)
     public static let tokenCyan80 = #colorLiteral(red: 0.2705882353, green: 0.7411764706, blue: 0.7529411765, alpha: 1)

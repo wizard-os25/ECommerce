@@ -2,7 +2,7 @@ import UIKit
 
 public enum Border {
     // 1 - Border Color
-    public static let tokenBorderViettelPayRed100: CGColor = Colors.tokenViettelPayRed100.cgColor
+
     public static let tokenBorderDark10: CGColor = Colors.tokenDark10.cgColor
     public static let tokenBorderDark20: CGColor = Colors.tokenDark20.cgColor
     public static let tokenBorderDark40: CGColor = Colors.tokenDark40.cgColor

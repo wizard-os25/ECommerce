@@ -25,6 +25,7 @@ protocol SideMenuControllerOutput {
     var onLogout: (() -> Void)? { get set }
     var onNavigateToShippingAddress: (() -> Void)? { get set }
     var onNavigateToProfile: (() -> Void)? { get set }
+    var onNavigateToPayment: (() -> Void)? { get set }
 }
 
 typealias SideMenuController = SideMenuControllerInput & SideMenuControllerOutput
@@ -42,6 +43,7 @@ final class DefaultSideMenuController: SideMenuController {
     var onLogout: (() -> Void)?
     var onNavigateToShippingAddress: (() -> Void)?
     var onNavigateToProfile: (() -> Void)?
+    var onNavigateToPayment: (() -> Void)?
     
     // MARK: - Private
     
@@ -108,6 +110,10 @@ final class DefaultSideMenuController: SideMenuController {
             // Shipping Address - trigger navigation callback
             print("DEBUG: Shipping Address selected, onNavigateToShippingAddress: \(onNavigateToShippingAddress != nil ? "set" : "nil")")
             onNavigateToShippingAddress?()
+        } else if section == 0 && index == 5 {
+            // Payment - trigger navigation callback
+            print("DEBUG: Payment selected, onNavigateToPayment: \(onNavigateToPayment != nil ? "set" : "nil")")
+            onNavigateToPayment?()
         }
         // TODO: Handle other menu items
     }

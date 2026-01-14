@@ -69,7 +69,7 @@ extension ECoProgressView {
     private func setupLayer() {
         backgroundMask.lineWidth = ringWidth
         backgroundMask.fillColor = nil
-        backgroundMask.strokeColor = Colors.tokenViettelPayRed100.cgColor
+        backgroundMask.strokeColor = Colors.tokenRainbowRedEnd.cgColor
         layer.mask = backgroundMask
         layer.addSublayer(backgroundMask)
         

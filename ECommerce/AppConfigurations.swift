@@ -14,4 +14,11 @@ final class AppConfiguration {
         }
         return apiBaseURL
     }()
+    
+    lazy var stripePulishableKey: String = {
+        guard let stripePulishableKey = Bundle.main.object(forInfoDictionaryKey: "StripePulishableKey") as? String else {
+            fatalError("StripePulishableKey must not be empty in plist")
+        }
+        return stripePulishableKey
+    }()
 }

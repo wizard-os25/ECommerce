@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Stripe
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let appConfiguration = AppConfiguration()
     let appDIContainer = AppDIContainer()
     var appFlowCoordinator: AppFlowCoordinator?
     var window: UIWindow?
@@ -20,33 +22,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         
+        StripeAPI.defaultPublishableKey = self.appConfiguration.stripePulishableKey
         AppAppearance.setupAppearance()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
         // Set SplashViewController as entry point
-        let onboardSceneDIContainer = appDIContainer.makeOnboardSceneDIContainer()
-        splashCoordinatingController = onboardSceneDIContainer.makeSplashCoordinatingController(
+        let onboardSceneDIContainer = self.appDIContainer.makeOnboardSceneDIContainer()
+        self.splashCoordinatingController = onboardSceneDIContainer.makeSplashCoordinatingController(
             navigationController: nil,
             window: window
         )
-        splashCoordinatingController?.start()
+        self.splashCoordinatingController?.start()
         // Note: window.makeKeyAndVisible() is called inside start() method
     
         return true
-        
-        // MARK: - Old Flow (Commented)
-                // Old logic using AppFlowCoordinator with MainViewController
-                /*
-                let navigationController = UINavigationController()
-                window?.rootViewController = navigationController
-                appFlowCoordinator = AppFlowCoordinator(
-                    navigationController: navigationController,
-                    appDIContainer: appDIContainer
-                )
-                appFlowCoordinator?.start()
-                window?.makeKeyAndVisible()
-                */
     }
 
 //    func applicationDidEnterBackground(_ application: UIApplication) {

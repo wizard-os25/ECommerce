@@ -66,4 +66,41 @@ struct APIEndpoints {
     static func changePassword(with requestDTO: ChangePasswordRequestDTO) -> Endpoint<ChangePasswordResponseDTO> {
         return ProfileEndpoints.changePassword(with: requestDTO)
     }
+    
+    // MARK: - Payment Card Endpoints
+    
+    /// Create customer endpoint
+    static func createCustomer() -> Endpoint<CreateCustomerResponseDTO> {
+        return PaymentCardEndpoints.createCustomer()
+    }
+    
+    /// Get payment methods endpoint
+    static func getPaymentMethods() -> Endpoint<PaymentMethodsResponseDTO> {
+        return PaymentCardEndpoints.getPaymentMethods()
+    }
+    
+    /// Attach payment method endpoint
+    static func attachPaymentMethod(with requestDTO: AttachPaymentMethodRequestDTO) -> Endpoint<AttachPaymentMethodResponseDTO> {
+        return PaymentCardEndpoints.attachPaymentMethod(with: requestDTO)
+    }
+    
+    /// Delete payment method endpoint
+    static func deletePaymentMethod(id: String) -> Endpoint<DeletePaymentMethodResponseDTO> {
+        return PaymentCardEndpoints.deletePaymentMethod(id: id)
+    }
+    
+    /// Set default payment method endpoint
+    static func setDefaultPaymentMethod(with requestDTO: SetDefaultPaymentMethodRequestDTO) -> Endpoint<SetDefaultPaymentMethodResponseDTO> {
+        return PaymentCardEndpoints.setDefaultPaymentMethod(with: requestDTO)
+    }
+    
+    /// Create payment intent endpoint
+    static func createPaymentIntent(with requestDTO: CreatePaymentIntentRequestDTO) -> Endpoint<CreatePaymentIntentResponseDTO> {
+        return PaymentCardEndpoints.createPaymentIntent(with: requestDTO)
+    }
+    
+    /// Confirm payment endpoint
+    static func confirmPayment(with requestDTO: ConfirmPaymentRequestDTO) -> Endpoint<ConfirmPaymentResponseDTO> {
+        return PaymentCardEndpoints.confirmPayment(with: requestDTO)
+    }
 }

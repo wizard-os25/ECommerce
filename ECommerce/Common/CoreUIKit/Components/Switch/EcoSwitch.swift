@@ -26,7 +26,7 @@ public class ECoSwitch: UISwitch {
         addTarget(self, action: #selector(updateUI), for: UIControl.Event.valueChanged)
 
         // Set onTintColor : is necessary to make it colored
-        onTintColor = Colors.tokenViettelPayRed20
+        onTintColor = Colors.tokenSpaceBlue20
 
         // Setup to initial state
         updateUI()
@@ -43,8 +43,8 @@ public class ECoSwitch: UISwitch {
     func updateUI() {
         if #available(iOS 14, *) {
             if isOn {
-                thumbTintColor = Colors.tokenViettelPayRed100
-                backgroundColor = Colors.tokenViettelPayRed20
+                thumbTintColor = Colors.tokenSpaceBlue100
+                backgroundColor = Colors.tokenSpaceBlue20
             } else {
                 thumbTintColor = Colors.tokenWhite
                 backgroundColor = Colors.tokenDark40
@@ -52,8 +52,8 @@ public class ECoSwitch: UISwitch {
         } else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.15) {
                 if self.isOn {
-                    self.thumbTintColor = Colors.tokenViettelPayRed100
-                    self.backgroundColor = Colors.tokenViettelPayRed20
+                    self.thumbTintColor = Colors.tokenSpaceBlue100
+                    self.backgroundColor = Colors.tokenSpaceBlue20
                 } else {
                     self.thumbTintColor = Colors.tokenWhite
                     self.backgroundColor = Colors.tokenDark40
