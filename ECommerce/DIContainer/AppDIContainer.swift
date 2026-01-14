@@ -76,6 +76,18 @@ final class AppDIContainer {
         return PaymentCardDIContainer(dependencies: dependencies)
     }
     
+    func makeOrderDIContainer() -> OrderDIContainer {
+        let dependencies = OrderDIContainer.Dependencies(
+            orderDataTransferService: apiDataTransferService,
+            paymentCardDataTransferService: apiDataTransferService
+        )
+        return OrderDIContainer(dependencies: dependencies)
+    }
+    
+    func makeProductDetailDIContainer() -> ProductDetailDIContainer {
+        return ProductDetailDIContainer()
+    }
+    
     // Shared instance to ensure same SideMenuController is used everywhere
     private lazy var sharedSideMenuSceneDIContainer: SideMenuSceneDIContainer = {
         let dependencies = SideMenuSceneDIContainer.Dependencies(

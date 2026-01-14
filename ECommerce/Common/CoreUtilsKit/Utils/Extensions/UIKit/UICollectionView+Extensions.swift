@@ -5,10 +5,10 @@
 //  Created by wizard.os25 on 18/11/25.
 //
 
-import Foundation
+import UIKit
 
-extension UICollectionViewCell: NibLoadableView {}
-extension UICollectionReusableView: NibLoadableView {}
+extension UICollectionViewCell: NibLoadableView, ReusableView {}
+extension UICollectionReusableView: NibLoadableView, ReusableView {}
 
 
 // MARK: - UICollectionView Register Support

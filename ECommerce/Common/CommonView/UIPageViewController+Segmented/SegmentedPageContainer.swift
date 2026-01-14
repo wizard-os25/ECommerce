@@ -189,6 +189,17 @@ public final class SegmentedPageContainer: UIView {
             for subview in pageVC.view.subviews {
                 if let scrollView = subview as? UIScrollView {
                     scrollView.delegate = self
+                    
+                    // ✅ QUAN TRỌNG: Configure để tap gestures hoạt động tốt hơn
+                    // delaysContentTouches = false: Không delay touches, cho phép tap gesture nhận touch ngay
+                    // canCancelContentTouches = true: Cho phép scrollView cancel touches nếu cần
+                    scrollView.delaysContentTouches = false
+                    scrollView.canCancelContentTouches = true
+                    
+                    // Note: Cannot set delegate for UIScrollView's built-in pan gesture recognizer
+                    // It must have the scrollView as its delegate
+                    // Instead, we'll handle gesture conflicts through other means
+                    print("✅ [SegmentedPageContainer] Configured PageViewController scrollView: delaysContentTouches=false, canCancelContentTouches=true")
                     break
                 }
             }

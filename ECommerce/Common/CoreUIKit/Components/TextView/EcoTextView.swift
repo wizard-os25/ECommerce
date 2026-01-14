@@ -125,7 +125,7 @@ public class ECoTextView: UITextView {
         }
     }
     
-    private var type = ECoTextViewType.advanced
+    public var type = ECoTextViewType.advanced
     
     public var textFont: UIFont = Typography.fontRegular18 {
         didSet {

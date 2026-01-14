@@ -219,6 +219,48 @@ class Utilities: NSObject {
         print("   - User ID: \(defaults.integer(forKey: Constants.UserDefaultsKey.userId) > 0 ? "STILL EXISTS ❌" : "CLEARED ✅")")
         print("============================================")
     }
+    
+    // MARK: - Location Cache Management
+    
+    /// Save location to cache
+    func saveLocation(address: String, latitude: String, longitude: String) {
+        print("💾 [Utilities] Saving location to cache:")
+        print("   - Address: \(address)")
+        print("   - Latitude: \(latitude)")
+        print("   - Longitude: \(longitude)")
+        defaults.set(address, forKey: Constants.UserDefaultsKey.cachedAddress)
+        defaults.set(latitude, forKey: Constants.UserDefaultsKey.cachedLatitude)
+        defaults.set(longitude, forKey: Constants.UserDefaultsKey.cachedLongitude)
+    }
+    
+    /// Get cached address
+    func getCachedAddress() -> String? {
+        return defaults.string(forKey: Constants.UserDefaultsKey.cachedAddress)
+    }
+    
+    /// Get cached latitude
+    func getCachedLatitude() -> String? {
+        return defaults.string(forKey: Constants.UserDefaultsKey.cachedLatitude)
+    }
+    
+    /// Get cached longitude
+    func getCachedLongitude() -> String? {
+        return defaults.string(forKey: Constants.UserDefaultsKey.cachedLongitude)
+    }
+    
+    /// Check if location cache exists
+    func hasLocationCache() -> Bool {
+        return getCachedAddress() != nil && 
+               getCachedLatitude() != nil && 
+               getCachedLongitude() != nil
+    }
+    
+    /// Clear location cache
+    func clearLocationCache() {
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedAddress)
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedLatitude)
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedLongitude)
+    }
 }
 
 //@objc public static func shouldShowForceUpdate(minVersionSupport: String) -> Bool {

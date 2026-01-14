@@ -36,6 +36,11 @@ class MainContainerViewController: UIViewController {
     // Flag to track if AddressViewController or ProfileViewController is opened from side menu
     private var didOpenFromSideMenu: Bool = false
     
+    // ✅ QUAN TRỌNG: Flag để phân biệt khi push từ màn hình trong UIPageViewController
+    // Ví dụ: từ ProductViewController sang ProductDetailViewController
+    // Khi flag này được set, không cho phép sidebar gesture hoạt động
+    private var isPushedFromPageViewController: Bool = false
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -62,6 +67,9 @@ class MainContainerViewController: UIViewController {
                 }
             }
         }
+        
+        // ✅ QUAN TRỌNG: Cập nhật flag khi view appear
+        updatePushedFromPageViewControllerFlag()
     }
     
     // MARK: - Setup Methods
@@ -304,10 +312,47 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         }
     }
     
-    // Avoid intercepting taps that should go to SideMenu
+    // Avoid intercepting taps that should go to SideMenu hoặc UITableView (chỉ trong ProductsViewController)
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        // Convert touch point to root view coordinates and check if it's inside side menu view
         let pt = touch.location(in: self.view)
+        let touchedView = self.view.hitTest(pt, with: nil)
+        
+        // ✅ QUAN TRỌNG: Chỉ block UITableView trong ProductsViewController
+        // KHÔNG block UICollectionView trong ProductDetailViewController
+        // Kiểm tra xem có phải UICollectionView không - nếu có thì không block (cho phép scroll)
+        var isInCollectionView = false
+        var currentView: UIView? = touchedView
+        while currentView != nil {
+            if currentView is UICollectionView {
+                isInCollectionView = true
+                break
+            }
+            currentView = currentView?.superview
+        }
+        
+        // Nếu touch trong UICollectionView → không block (cho phép scroll trong ProductDetail)
+        if isInCollectionView {
+            return true // Cho phép gesture hoạt động, nhưng sẽ được filter trong gestureRecognizerShouldBegin
+        }
+        
+        // Chỉ kiểm tra UITableView
+        var isInTableView = false
+        currentView = touchedView
+        while currentView != nil {
+            if currentView is UITableView {
+                isInTableView = true
+                break
+            }
+            currentView = currentView?.superview
+        }
+        
+        // Nếu touch trong tableView và KHÔNG từ left edge → không intercept
+        if isInTableView && pt.x > 30 {
+            print("❌ [MainContainerViewController] Touch in UITableView and not from left edge (x: \(pt.x)) → Don't intercept")
+            return false
+        }
+        
+        // Convert touch point to root view coordinates and check if it's inside side menu view
         if let menuView = sideMenuViewController?.view,
            menuView.convert(menuView.bounds, to: self.view).contains(pt) {
             return false
@@ -322,7 +367,32 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
     
     // ✅ QUAN TRỌNG: Yêu cầu PageViewController scrollView gesture phải fail
     // khi ở page 0 (Home) và swipe right, để container gesture có thể xử lý
+    // HOẶC khi tap gesture được detect (để tap hoạt động)
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // ✅ QUAN TRỌNG: Nếu otherGestureRecognizer là tap gesture → yêu cầu PageViewController pan gesture fail
+        // Điều này đảm bảo tap gesture có priority và hoạt động ngay
+        if otherGestureRecognizer is UITapGestureRecognizer {
+            // Kiểm tra xem gestureRecognizer có phải là từ PageViewController scrollView không
+            guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer,
+                  let scrollView = panGesture.view as? UIScrollView else {
+                return false
+            }
+            
+            // Kiểm tra xem scrollView có phải từ PageViewController không
+            guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+                  let contentVC = nav.viewControllers.first(where: { $0 is ContentViewController }) as? ContentViewController else {
+                return false
+            }
+            
+            guard let pageViewController = contentVC.children.first(where: { $0 is UIPageViewController }) as? UIPageViewController,
+                  scrollView.isDescendant(of: pageViewController.view) else {
+                return false
+            }
+            
+            print("✅ [shouldBeRequiredToFailBy] Tap gesture detected → Require PageViewController pan gesture to FAIL")
+            return true
+        }
+        
         // Kiểm tra xem gesture khác có phải là từ PageViewController scrollView không
         guard let otherPan = otherGestureRecognizer as? UIPanGestureRecognizer,
               let scrollView = otherPan.view as? UIScrollView else {
@@ -365,6 +435,14 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
             return true
+        }
+        
+        // ✅ QUAN TRỌNG: Kiểm tra flag isPushedFromPageViewController
+        // Nếu được push từ UIPageViewController (ví dụ ProductDetailViewController), không cho phép sidebar gesture
+        updatePushedFromPageViewControllerFlag()
+        if isPushedFromPageViewController {
+            print("❌ [gestureRecognizerShouldBegin] isPushedFromPageViewController = true → Block sidebar gesture")
+            return false
         }
         
         // Use root view coords for location & velocity to keep checks consistent
@@ -434,7 +512,8 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             return result
         }()
         
-        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), isExpanded:\(isExpanded), isTopAddressViewController:\(isTopAddressViewController), isTopProfileViewController:\(isTopProfileViewController), isTopPaymentCardViewController:\(isTopPaymentCardViewController), hasViewControllersAfterSideMenuVC:\(hasViewControllersAfterSideMenuVC), didOpenFromSideMenu:\(didOpenFromSideMenu)")
+        let translation = panGesture.translation(in: self.view)
+        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), translation:\(translation), isExpanded:\(isExpanded), isTopAddressViewController:\(isTopAddressViewController), isTopProfileViewController:\(isTopProfileViewController), isTopPaymentCardViewController:\(isTopPaymentCardViewController), hasViewControllersAfterSideMenuVC:\(hasViewControllersAfterSideMenuVC), didOpenFromSideMenu:\(didOpenFromSideMenu)")
         
         // If menu is expanded, allow pan (to close)
         if isExpanded {
@@ -460,6 +539,45 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         // block side menu gesture to allow swipe back for all screens in that navigation flow
         if hasViewControllersAfterSideMenuVC {
             print("❌ [gestureRecognizerShouldBegin] View controller opened after side menu VC → Block side menu gesture (let swipe back handle)")
+            return false
+        }
+        
+        // ✅ QUAN TRỌNG: Chỉ block UITableView trong ProductsViewController
+        // KHÔNG block UICollectionView trong ProductDetailViewController
+        let touchedView = self.view.hitTest(locationInRoot, with: nil)
+        
+        // ✅ QUAN TRỌNG: Nếu touch trong UICollectionView → KHÔNG block để cho phép scroll
+        // UICollectionView trong ProductDetail cần scroll tự do
+        var isInCollectionView = false
+        var currentView: UIView? = touchedView
+        while currentView != nil {
+            if currentView is UICollectionView {
+                isInCollectionView = true
+                break
+            }
+            currentView = currentView?.superview
+        }
+        
+        // Nếu touch trong UICollectionView → không block (cho phép scroll trong ProductDetail)
+        if isInCollectionView {
+            print("✅ [gestureRecognizerShouldBegin] Touch in UICollectionView → Don't block (allow scroll)")
+            return false // Không block để cho phép UICollectionView scroll tự do
+        }
+        
+        // Chỉ kiểm tra UITableView
+        var isInTableView = false
+        currentView = touchedView
+        while currentView != nil {
+            if currentView is UITableView {
+                isInTableView = true
+                break
+            }
+            currentView = currentView?.superview
+        }
+        
+        // Nếu touch trong tableView và KHÔNG từ left edge → block để cho tableView xử lý
+        if isInTableView && locationInRoot.x > 30 {
+            print("❌ [gestureRecognizerShouldBegin] Touch in UITableView and not from left edge (x: \(locationInRoot.x)) → Block (let tableView handle)")
             return false
         }
         
@@ -510,15 +628,28 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                     let pageWidth = scrollView.frame.width
                     let atLeftEdge = scrollOffset <= pageWidth + 10 // Cho phép một chút tolerance
                     
-                    if atLeftEdge || vx > 0 {
-                        print("✅ [gestureRecognizerShouldBegin] Page 0 (Home) at left edge (offset: \(scrollOffset) <= \(pageWidth + 10)) + right swipe → Allow container")
+                    // ✅ QUAN TRỌNG: Chỉ allow khi thực sự là swipe (có velocity hoặc translation)
+                    // Không allow khi chỉ là tap (vx = 0 và translation nhỏ)
+                    let translation = panGesture.translation(in: self.view)
+                    let hasMovement = abs(vx) > 50 || abs(translation.x) > 10
+                    
+                    if atLeftEdge && hasMovement && vx > 0 {
+                        print("✅ [gestureRecognizerShouldBegin] Page 0 (Home) at left edge (offset: \(scrollOffset) <= \(pageWidth + 10)) + right swipe (vx: \(vx), translation: \(translation.x)) → Allow container")
                         return true
                     }
+                    
                     // If user is swiping left (to go to next page) → prefer inner scroll
-                    if vx < 0 {
+                    if vx < -50 {
                         print("❌ [gestureRecognizerShouldBegin] Page 0 (Home) + left swipe → Block (let PageViewController handle)")
                         return false
                     }
+                    
+                    // ✅ Nếu không có movement (tap), block để cho tap gesture hoạt động
+                    if !hasMovement {
+                        print("❌ [gestureRecognizerShouldBegin] Page 0 (Home) + tap (no movement) → Block (let tap gesture handle)")
+                        return false
+                    }
+                    
                     // ✅ Nếu ở page 0 và velocity > 0 (right swipe) nhưng không ở left edge
                     // Vẫn cho phép container xử lý nếu velocity đủ hoặc location từ cạnh trái
                     // (fallthrough to edge checks below)
@@ -527,9 +658,19 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             // If gesture didn't start in the scrollView's bounds, continue with edge/velocity checks below
         }
         
+        // ✅ QUAN TRỌNG: Kiểm tra movement để phân biệt tap và swipe
+        // Note: translation đã được khai báo ở dòng 462
+        let hasMovement = abs(vx) > 50 || abs(translation.x) > 10
+        
+        // Nếu không có movement (tap), block để cho tap gesture hoạt động
+        if !hasMovement {
+            print("❌ [gestureRecognizerShouldBegin] Tap detected (no movement, vx: \(vx), translation: \(translation.x)) → Block (let tap gesture handle)")
+            return false
+        }
+        
         // Allow right swipe from left edge (first 80 points)
         if locationInRoot.x < 80 && vx > 0 {
-            print("✅ [gestureRecognizerShouldBegin] Right swipe from left edge (x < 80) → Allow")
+            print("✅ [gestureRecognizerShouldBegin] Right swipe from left edge (x < 80, vx: \(vx)) → Allow")
             return true
         }
         
@@ -584,6 +725,34 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         let currentPageIndex = contentVC.currentPageIndex
         print("🟢 [findInnerScrollViewAndPageIndex] Found - currentPageIndex: \(currentPageIndex), scrollView.frame: \(scrollView.frame), contentSize: \(scrollView.contentSize), offset: \(scrollView.contentOffset)")
         return (scrollView, currentPageIndex)
+    }
+    
+    // ✅ QUAN TRỌNG: Cập nhật flag isPushedFromPageViewController
+    // Kiểm tra xem topViewController có phải ProductDetailViewController không
+    // và có phải được push từ ProductsViewController (trong UIPageViewController) không
+    private func updatePushedFromPageViewControllerFlag() {
+        guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+              let topVC = nav.topViewController else {
+            isPushedFromPageViewController = false
+            return
+        }
+        
+        // Kiểm tra xem topViewController có phải ProductDetailViewController không
+        let isProductDetail = topVC is ProductDetailViewController
+        
+        if isProductDetail {
+            // Kiểm tra xem có ProductsViewController trong navigation stack không
+            // Nếu có, nghĩa là được push từ ProductsViewController (trong UIPageViewController)
+            let hasProductsViewController = nav.viewControllers.contains { $0 is ProductsViewController }
+            isPushedFromPageViewController = hasProductsViewController
+            
+            if isPushedFromPageViewController {
+                print("✅ [updatePushedFromPageViewControllerFlag] ProductDetailViewController pushed from ProductsViewController → Set flag")
+            }
+        } else {
+            // Không phải ProductDetailViewController → reset flag
+            isPushedFromPageViewController = false
+        }
     }
     
     @objc private func handlePanGesture(sender: UIPanGestureRecognizer) {
@@ -929,6 +1098,9 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
 extension MainContainerViewController: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        // ✅ QUAN TRỌNG: Cập nhật flag isPushedFromPageViewController khi navigation thay đổi
+        updatePushedFromPageViewControllerFlag()
+        
         // Check if AddressViewController still exists in the navigation stack
         let hasAddressViewControllerInStack = navigationController.viewControllers.contains { $0 is AddressViewController }
         let isAddressViewController = viewController is AddressViewController

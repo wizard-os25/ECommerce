@@ -11,6 +11,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PricingCaculationPopup" customModule="ECommerce" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="ndg-Xw-Erk"/>
+                <outlet property="orderBreakdownLabel" destination="zQ7-sw-P3V" id="3rS-cP-ChX"/>
+                <outlet property="orderBreakdownValueLabel" destination="INH-qj-YjC" id="n65-xO-gBh"/>
+                <outlet property="shippingLabel" destination="kEg-ZX-PFw" id="o9s-ja-eYr"/>
+                <outlet property="shippingValueLabel" destination="HXd-Zc-Ba2" id="fZx-ig-tNC"/>
+                <outlet property="subTotalLabel" destination="gsA-pU-eG5" id="84Y-jW-rLW"/>
+                <outlet property="subTotalValue" destination="YfI-aj-60v" id="d8q-rS-I2X"/>
+                <outlet property="titlePricingLabel" destination="P9P-By-Rte" id="8Se-GL-NX0"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

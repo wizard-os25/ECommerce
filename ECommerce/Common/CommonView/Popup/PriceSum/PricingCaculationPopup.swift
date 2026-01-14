@@ -10,6 +10,14 @@ import UIKit
 class PricingCaculationPopup: UIView {
 
     @IBOutlet weak var contentView: UIView!
+    
+    @IBOutlet weak var titlePricingLabel: UILabel!
+    @IBOutlet weak var orderBreakdownLabel: UILabel!
+    @IBOutlet weak var orderBreakdownValueLabel: UILabel!
+    @IBOutlet weak var shippingLabel: UILabel!
+    @IBOutlet weak var shippingValueLabel: UILabel!
+    @IBOutlet weak var subTotalLabel: UILabel!
+    @IBOutlet weak var subTotalValue: UILabel!
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

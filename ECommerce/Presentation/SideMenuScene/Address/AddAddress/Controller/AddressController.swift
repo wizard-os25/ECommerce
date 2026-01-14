@@ -146,6 +146,13 @@ final class DefaultAddressController: NSObject, AddressController {
     }
     
     private func handleSaveSuccess(_ address: Address) {
+        // Save location to cache for use in Order screen
+        utilities.saveLocation(
+            address: address.address,
+            latitude: address.latitude,
+            longitude: address.longitude
+        )
+        
         isSaveSuccess.value = true
         successMessage.value = "Address saved successfully"
     }

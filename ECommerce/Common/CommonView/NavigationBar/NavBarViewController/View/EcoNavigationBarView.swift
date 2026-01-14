@@ -398,10 +398,23 @@ private extension EcoNavigationBarView {
         print("🔵 [EcoNavigationBarView] applyButtonTintColor - stack arrangedSubviews: \(stack.arrangedSubviews.count)")
         for (index, view) in stack.arrangedSubviews.enumerated() {
             if let button = view as? UIButton {
+                // Button trực tiếp trong stack
                 button.tintColor = color
                 print("   ✅ Applied tint color to button \(index), tintColor: \(button.tintColor?.description ?? "nil")")
             } else {
-                print("   ⚠️ View \(index) is not a UIButton: \(type(of: view))")
+                // ✅ QUAN TRỌNG: Nếu view là containerView (circular background), tìm button bên trong
+                if let containerView = view as? UIView {
+                    // Tìm button trong subviews của containerView
+                    for subview in containerView.subviews {
+                        if let button = subview as? UIButton {
+                            button.tintColor = color
+                            print("   ✅ Applied tint color to button inside containerView \(index), tintColor: \(button.tintColor?.description ?? "nil")")
+                            break
+                        }
+                    }
+                } else {
+                    print("   ⚠️ View \(index) is not a UIButton or containerView: \(type(of: view))")
+                }
             }
         }
     }
@@ -453,7 +466,9 @@ private extension EcoNavigationBarView {
                 // Create container view for circular background
                 let containerView = UIView()
                 containerView.translatesAutoresizingMaskIntoConstraints = false
-                containerView.backgroundColor = UIColor.black.withAlphaComponent(0.1) // Nền nhám
+                // ✅ QUAN TRỌNG: Tăng alpha để nổi bật hơn trên nền trong suốt
+                // Sử dụng màu đen với alpha cao hơn để tạo cảm giác nổi lên
+                containerView.backgroundColor = UIColor.black.withAlphaComponent(0.3) // Tăng từ 0.1 lên 0.3 để nổi bật hơn
                 containerView.layer.cornerRadius = 18 // Hình tròn (36/2)
                 containerView.isUserInteractionEnabled = false // Container không nhận touch, chỉ button nhận
                 
@@ -493,8 +508,9 @@ private extension EcoNavigationBarView {
                 containerView.isHidden = false
                 containerView.alpha = 1.0
                 
-                // Set default tint color to black (will be overridden by state.buttonTintColor if provided)
-                button.tintColor = Colors.tokenDark100
+                // Tint color sẽ được apply từ state.buttonTintColor sau
+                // Default là white để nổi bật trên nền trong suốt
+                button.tintColor = .white
                 
                 print("   ✅ [EcoNavigationBarView] Created back button with circular background:")
                 print("      - Container size: 36x36")
@@ -522,8 +538,9 @@ private extension EcoNavigationBarView {
                     button.heightAnchor.constraint(equalToConstant: 44)
                 ])
                 
-                // Set default tint color to black (will be overridden by state.buttonTintColor if provided)
-                button.tintColor = Colors.tokenDark100
+                // Tint color sẽ được apply từ state.buttonTintColor sau
+                // Default là white để nổi bật trên nền trong suốt
+                button.tintColor = .white
                 
                 print("   ✅ [EcoNavigationBarView] Created simple back button (no circular background)")
                 
@@ -541,8 +558,35 @@ private extension EcoNavigationBarView {
             button.setImage(image, for: .normal)
             button.imageView?.contentMode = .scaleAspectFit
             button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
-            button.widthAnchor.constraint(equalToConstant: 44).isActive = true
-            button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+            
+            // Nếu là right item, tạo circular background
+            if !isLeft {
+                let containerView = UIView()
+                containerView.translatesAutoresizingMaskIntoConstraints = false
+                containerView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+                containerView.layer.cornerRadius = 18
+                containerView.isUserInteractionEnabled = false
+                
+                containerView.addSubview(button)
+                button.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    button.widthAnchor.constraint(equalToConstant: 36),
+                    button.heightAnchor.constraint(equalToConstant: 36),
+                    button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+                    button.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+                ])
+                
+                NSLayoutConstraint.activate([
+                    containerView.widthAnchor.constraint(equalToConstant: 36),
+                    containerView.heightAnchor.constraint(equalToConstant: 36)
+                ])
+                
+                button.tintColor = Colors.tokenDark100
+                return containerView
+            } else {
+                button.widthAnchor.constraint(equalToConstant: 44).isActive = true
+                button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+            }
 
         case .text(let title, _):
             button.setTitle(title, for: .normal)
@@ -552,8 +596,37 @@ private extension EcoNavigationBarView {
             button.setImage(UIImage(systemName: "cart"), for: .normal)
             button.imageView?.contentMode = .scaleAspectFit
             button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
-            button.widthAnchor.constraint(equalToConstant: 44).isActive = true
-            button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+            
+            // Nếu là right item, tạo circular background
+            if !isLeft {
+                let containerView = UIView()
+                containerView.translatesAutoresizingMaskIntoConstraints = false
+                // ✅ QUAN TRỌNG: Tăng alpha để nổi bật hơn trên nền trong suốt
+                containerView.backgroundColor = UIColor.black.withAlphaComponent(0.3) // Tăng từ 0.1 lên 0.3
+                containerView.layer.cornerRadius = 18
+                containerView.isUserInteractionEnabled = false
+                
+                containerView.addSubview(button)
+                button.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    button.widthAnchor.constraint(equalToConstant: 36),
+                    button.heightAnchor.constraint(equalToConstant: 36),
+                    button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+                    button.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+                ])
+                
+                NSLayoutConstraint.activate([
+                    containerView.widthAnchor.constraint(equalToConstant: 36),
+                    containerView.heightAnchor.constraint(equalToConstant: 36)
+                ])
+                
+                // Tint color sẽ được apply từ state.buttonTintColor sau
+                button.tintColor = Colors.tokenDark100 // Default, sẽ được override
+                return containerView
+            } else {
+                button.widthAnchor.constraint(equalToConstant: 44).isActive = true
+                button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+            }
         }
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -648,54 +721,87 @@ public extension EcoNavigationBarView {
         titleLabel.alpha = 1.0 - progress
         titleLabel.isHidden = progress > 0.5
         
-        // Show search and update layout
-        if initialState.showsSearch {
-            // Show/hide search based on scroll progress
-            if progress > 0.1 {
-                searchTextField.isHidden = false
-                searchTextField.alpha = progress // Fade in as scroll progresses
-            } else {
-                searchTextField.isHidden = true
-                searchTextField.alpha = 0
+        // Update background: transparent -> white when scrolling
+        if progress > 0.1 {
+            // Change background to white when scrolling
+            if case .transparent = initialState.background {
+                backgroundView.backgroundColor = .white
+                blurView.isHidden = true
             }
-            
-            // Update search field constraints: center with padding 16 when scrolled
-            let searchPadding: CGFloat = 16
-            if progress > 0.5 {
-                // Center search with padding 16 on both sides
-                searchFieldLeadingConstraint?.isActive = false
-                searchFieldTrailingConstraint?.isActive = false
-                
-                if searchFieldCenterXConstraint?.isActive != true {
-                    searchFieldCenterXConstraint?.isActive = true
-                }
-                
-                // Create or update width constraint for search field when centered
-                if searchFieldWidthConstraint == nil {
-                    let searchWidth = searchTextField.widthAnchor.constraint(
-                        equalTo: widthAnchor,
-                        constant: -(searchPadding * 2)
-                    )
-                    searchWidth.priority = .required
-                    searchWidth.isActive = true
-                    searchFieldWidthConstraint = searchWidth
-                } else {
-                    searchFieldWidthConstraint?.isActive = true
-                }
-            } else {
-                // Normal layout between left and right stacks (when not scrolled)
-                searchFieldCenterXConstraint?.isActive = false
-                searchFieldWidthConstraint?.isActive = false
-                searchFieldLeadingConstraint?.isActive = true
-                searchFieldTrailingConstraint?.isActive = true
+        } else {
+            // Restore transparent background when at top
+            if case .transparent = initialState.background {
+                backgroundView.backgroundColor = .clear
+                blurView.isHidden = true
             }
         }
         
+        // Show search and update layout (even if initially hidden, show when scrolling)
+        let shouldShowSearch = progress > 0.1
+        if shouldShowSearch {
+            searchTextField.isHidden = false
+            searchTextField.alpha = progress // Fade in as scroll progresses
+        } else {
+            // Only hide if it was initially shown
+            if initialState.showsSearch {
+                searchTextField.isHidden = true
+                searchTextField.alpha = 0
+            }
+        }
+        
+        // Update search field constraints: center with padding 16 when scrolled
+        let searchPadding: CGFloat = 16
+        if progress > 0.5 {
+            // Center search with padding 16 on both sides
+            searchFieldLeadingConstraint?.isActive = false
+            searchFieldTrailingConstraint?.isActive = false
+            
+            if searchFieldCenterXConstraint?.isActive != true {
+                searchFieldCenterXConstraint?.isActive = true
+            }
+            
+            // Create or update width constraint for search field when centered
+            if searchFieldWidthConstraint == nil {
+                let searchWidth = searchTextField.widthAnchor.constraint(
+                    equalTo: widthAnchor,
+                    constant: -(searchPadding * 2)
+                )
+                searchWidth.priority = .required
+                searchWidth.isActive = true
+                searchFieldWidthConstraint = searchWidth
+            } else {
+                searchFieldWidthConstraint?.isActive = true
+            }
+        } else {
+            // Normal layout between left and right stacks (when not scrolled)
+            searchFieldCenterXConstraint?.isActive = false
+            searchFieldWidthConstraint?.isActive = false
+            searchFieldLeadingConstraint?.isActive = true
+            searchFieldTrailingConstraint?.isActive = true
+        }
+        
+        // Hide right stack search button when scrolling (but keep cart)
         // Hide left/right stacks when collapsed
         leftStack.alpha = 1.0 - progress
-        rightStack.alpha = 1.0 - progress
-        leftStack.isHidden = progress > 0.8
-        rightStack.isHidden = progress > 0.8
+        // Hide search button in right stack when scrolling, but keep other buttons visible longer
+        if progress > 0.5 {
+            // Hide search button specifically (first item in right stack)
+            if rightStack.arrangedSubviews.count > 0 {
+                rightStack.arrangedSubviews[0].alpha = 0
+                rightStack.arrangedSubviews[0].isHidden = true
+            }
+            // Keep other buttons visible
+            if rightStack.arrangedSubviews.count > 1 {
+                rightStack.arrangedSubviews[1].alpha = 1.0 - (progress * 0.5)
+            }
+        } else {
+            // Show all right items
+            rightStack.arrangedSubviews.forEach { view in
+                view.alpha = 1.0 - progress
+                view.isHidden = false
+            }
+        }
+        rightStack.isHidden = progress > 0.9
         
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseInOut]) {
             self.layoutIfNeeded()

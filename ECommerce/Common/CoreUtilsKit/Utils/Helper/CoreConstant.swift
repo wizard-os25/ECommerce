@@ -31,6 +31,11 @@ enum Constants {
         static let isPhoneVerified = "is_phone_verified"
         static let orderCount = "order_count"
         static let memberSinceDays = "member_since_days"
+        
+        // Location cache keys
+        static let cachedLatitude = "cached_latitude"
+        static let cachedLongitude = "cached_longitude"
+        static let cachedAddress = "cached_address"
     }
 
     // MARK: - Language

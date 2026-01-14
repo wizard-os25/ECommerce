@@ -40,8 +40,10 @@ final class ProductsTableViewController: UITableViewController, StoryboardInstan
         tableView.addGestureRecognizer(swipeRightGesture)
         
         // Add pan gesture to detect horizontal scroll for sidebar reveal
+        // Set requiresExclusiveTouchType to false to allow tap gestures to work
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         panGesture.delegate = self
+        panGesture.cancelsTouchesInView = false // Allow tap gestures to work
         tableView.addGestureRecognizer(panGesture)
     }
     
@@ -139,7 +141,11 @@ extension ProductsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.productsController.didSelectItem(at: indexPath.row)
+        // ✅ QUAN TRỌNG: Delegate đã được set từ ProductsViewController
+        // didSelectRowAt sẽ được xử lý bởi ProductsViewController
+        // Giữ lại method này để đảm bảo không có conflict, nhưng logic sẽ được xử lý ở view cha
+        print("🔵 [ProductsTableViewController] didSelectRowAt called - index: \(indexPath.row)")
+        print("   ℹ️ Delegate is set to ProductsViewController, will handle navigation there")
     }
 }
 
@@ -149,15 +155,56 @@ extension ProductsTableViewController: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         // Allow pan gesture to work simultaneously with table view scrolling
+        // But don't interfere with tap gestures
+        if otherGestureRecognizer is UITapGestureRecognizer {
+            return false // Don't interfere with tap
+        }
         return true
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         // Only handle pan gestures when table view is at the left edge
-        guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else { return true }
+        guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
+            // Allow other gestures (like tap) to work normally
+            return true
+        }
+        
         let location = touch.location(in: tableView)
         
-        // Only trigger if touch is near left edge (within 20 points)
+        // Only trigger pan gesture if touch is near left edge (within 20 points)
+        // This allows tap gestures in the middle of the screen to work normally
         return location.x <= 20
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Only allow pan gesture to begin if it's a horizontal swipe from left edge
+        guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
+            return true
+        }
+        
+        let location = panGesture.location(in: tableView)
+        let velocity = panGesture.velocity(in: tableView)
+        
+        // Only allow if:
+        // 1. Touch is near left edge (within 20 points)
+        // 2. Horizontal velocity is greater than vertical (swiping horizontally)
+        // 3. Swiping right (positive x velocity)
+        let isNearLeftEdge = location.x <= 20
+        let isHorizontalSwipe = abs(velocity.x) > abs(velocity.y)
+        let isRightSwipe = velocity.x > 0
+        
+        // If not a horizontal right swipe from left edge, don't begin
+        // This allows tap gestures to work normally
+        return isNearLeftEdge && isHorizontalSwipe && isRightSwipe
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Pan gesture should fail if tap gesture is recognized
+        // This ensures tap gestures have priority
+        if otherGestureRecognizer is UITapGestureRecognizer {
+            return true
+        }
+        
+        return false
     }
 }

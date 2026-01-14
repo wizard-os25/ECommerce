@@ -327,6 +327,7 @@ final class MainViewController: UIViewController, SidebarRevealable, StoryboardI
         panGesture.delegate = self
         panGesture.minimumNumberOfTouches = 1
         panGesture.maximumNumberOfTouches = 1
+        panGesture.cancelsTouchesInView = false // Don't cancel touches to allow tap gestures to work
         contentViewController.view.addGestureRecognizer(panGesture)
     }
     
@@ -425,12 +426,132 @@ extension MainViewController: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         // Allow pan gesture to work simultaneously with scroll gestures
+        // But don't interfere with tap gestures
+        if otherGestureRecognizer is UITapGestureRecognizer {
+            return false // Don't interfere with tap
+        }
         return true
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        // Allow gesture to receive touches
+        // Only handle pan gestures, allow tap gestures to pass through
+        guard gestureRecognizer is UIPanGestureRecognizer else {
+            return true
+        }
+        
+        // For pan gestures, check if touch is in a scrollable view (like UITableView)
+        // If so, let the scroll view handle it first
+        let touchLocation = touch.location(in: view)
+        let touchedView = view.hitTest(touchLocation, with: nil)
+        
+        // ✅ QUAN TRỌNG: Chỉ block UITableView trong ProductsViewController
+        // KHÔNG block UICollectionView trong ProductDetailViewController
+        // Kiểm tra xem có phải UICollectionView không - nếu có thì không block (cho phép scroll)
+        var isInCollectionView = false
+        var currentView: UIView? = touchedView
+        while currentView != nil {
+            if currentView is UICollectionView {
+                isInCollectionView = true
+                break
+            }
+            currentView = currentView?.superview
+        }
+        
+        // Nếu touch trong UICollectionView → không block (cho phép scroll trong ProductDetail)
+        if isInCollectionView {
+            return true // Cho phép gesture hoạt động
+        }
+        
+        // Chỉ kiểm tra UITableView
+        var isInTableView = false
+        currentView = touchedView
+        while currentView != nil {
+            if currentView is UITableView {
+                isInTableView = true
+                break
+            }
+            currentView = currentView?.superview
+        }
+        
+        // Nếu touch trong tableView và KHÔNG từ left edge → không intercept
+        if isInTableView && touchLocation.x > 30 {
+            return false
+        }
+        
+        // For pan gestures from left edge or outside tableView, allow intercept
         return true
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
+            return true
+        }
+        
+        let location = panGesture.location(in: view)
+        let velocity = panGesture.velocity(in: view)
+        
+        // Check if touch started in a scrollable view
+        let touchLocation = panGesture.location(in: view)
+        let touchedView = view.hitTest(touchLocation, with: nil)
+        
+        // ✅ QUAN TRỌNG: Nếu touch trong UICollectionView → KHÔNG block để cho phép scroll
+        // UICollectionView trong ProductDetail cần scroll tự do
+        var isInCollectionView = false
+        var currentView: UIView? = touchedView
+        while currentView != nil {
+            if currentView is UICollectionView {
+                isInCollectionView = true
+                break
+            }
+            currentView = currentView?.superview
+        }
+        
+        // Nếu touch trong UICollectionView → không block (cho phép scroll trong ProductDetail)
+        if isInCollectionView {
+            return false // Không block để cho phép UICollectionView scroll tự do
+        }
+        
+        // Chỉ kiểm tra UITableView
+        var isInTableView = false
+        currentView = touchedView
+        while currentView != nil {
+            if currentView is UITableView {
+                isInTableView = true
+                break
+            }
+            currentView = currentView?.superview
+        }
+        
+        // Nếu touch trong tableView và KHÔNG từ left edge → block để cho tableView xử lý
+        if isInTableView && location.x > 30 {
+            return false
+        }
+        
+        // Only allow pan gesture if it's a horizontal right swipe from left edge
+        // This ensures tap gestures work normally in the middle of the screen
+        let isNearLeftEdge = location.x < 80
+        let isHorizontalSwipe = abs(velocity.x) > abs(velocity.y)
+        let isRightSwipe = velocity.x > 0
+        
+        return isNearLeftEdge && isHorizontalSwipe && isRightSwipe
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Pan gesture should fail if tap gesture is recognized
+        // This ensures tap gestures have priority
+        if otherGestureRecognizer is UITapGestureRecognizer {
+            return true
+        }
+        
+        // Pan gesture should fail if gesture is from UITableView or UICollectionView
+        if let panGesture = otherGestureRecognizer as? UIPanGestureRecognizer,
+           let scrollView = panGesture.view as? UIScrollView {
+            if scrollView is UITableView || scrollView is UICollectionView {
+                return true
+            }
+        }
+        
+        return false
     }
 }
 

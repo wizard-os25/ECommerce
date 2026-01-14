@@ -103,4 +103,11 @@ struct APIEndpoints {
     static func confirmPayment(with requestDTO: ConfirmPaymentRequestDTO) -> Endpoint<ConfirmPaymentResponseDTO> {
         return PaymentCardEndpoints.confirmPayment(with: requestDTO)
     }
+    
+    // MARK: - Order Endpoints
+    
+    /// Place order endpoint
+    static func placeOrder(with requestDTO: PlaceOrderRequestDTO) -> Endpoint<PlaceOrderResponseDTO> {
+        return OrderEndpoints.placeOrder(with: requestDTO)
+    }
 }

@@ -26,6 +26,7 @@ protocol ProductsControllerOutput {
     
     // Callbacks
     var onOpenCard: (() -> Void)? { get set }
+    var onSelectProductItem: ((ProductItemModel) -> Void)? { get set }
 }
 
 typealias ProductsController = ProductsControllerInput & ProductsControllerOutput & EcoController
@@ -111,6 +112,9 @@ final class DefaultProductsController: ProductsController {
     
     // Callback for opening card
     var onOpenCard: (() -> Void)?
+    
+    // Callback for selecting product item
+    var onSelectProductItem: ((ProductItemModel) -> Void)?
     
     // MARK: - EcoController Output (common to all controllers)
     
@@ -219,7 +223,21 @@ extension DefaultProductsController {
     }
     
     func didSelectItem(at index: Int) {
-        // Handle item selection if needed
+        print("🔵 [ProductsController] didSelectItem called - index: \(index)")
+        guard index >= 0, index < items.value.count else {
+            print("⚠️ [ProductsController] Invalid index: \(index), items count: \(items.value.count)")
+            return
+        }
+        let productItem = items.value[index]
+        print("   📦 Product item: \(productItem.name) (ID: \(productItem.id))")
+        print("   🔗 Checking onSelectProductItem callback...")
+        if let callback = onSelectProductItem {
+            print("   ✅ onSelectProductItem callback exists, calling with product: \(productItem.name)")
+            callback(productItem)
+            print("   ✅ onSelectProductItem callback completed")
+        } else {
+            print("   ⚠️ onSelectProductItem callback is nil!")
+        }
     }
     
     func didTapOpenCard() {
