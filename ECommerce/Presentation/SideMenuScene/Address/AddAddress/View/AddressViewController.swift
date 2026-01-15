@@ -21,12 +21,24 @@ final class AddressViewController: EcoViewController {
     private let contactPersonNumberLabel = UILabel()
     private let contactPersonNumberTextField = EcoTextField()
     
-    private let addressLabel = UILabel()
-    private let addressSearchTextField = EcoSearchTextField()
-    private let useCurrentLocationStack = UIStackView()
-    private let useCurrentLocationIcon = UIImageView()
-    private let useCurrentLocationLabel = UILabel()
-    private let chooseOnMapButton = UIButton(type: .system) // Changed from UILabel to UIButton for UIMenu support
+    private let addressDetailLabel = UILabel()
+    private let addressDetailTextField = EcoTextField()
+    
+    // Location Pickers
+    private let countryLabel = UILabel()
+    private let countryPickerButton = UIButton(type: .system)
+    
+    private let provinceLabel = UILabel()
+    private let provincePickerButton = UIButton(type: .system)
+    
+    private let districtLabel = UILabel()
+    private let districtPickerButton = UIButton(type: .system)
+    
+    private let wardLabel = UILabel()
+    private let wardPickerButton = UIButton(type: .system)
+    
+    private let addressTypeLabel = UILabel()
+    private let addressTypeSegmentedControl = UISegmentedControl(items: ["Shipping", "Shop", "Other"])
     
     private let defaultAddressStack = UIStackView()
     private let defaultAddressCheckbox = UIImageView()
@@ -42,12 +54,14 @@ final class AddressViewController: EcoViewController {
     // Store reference to CardViewController to prevent opening multiple times
     private var cardViewController: CardViewController?
     
-    // Lưu tọa độ để dùng khi save
-    private var selectedLatitude: String = ""
-    private var selectedLongitude: String = ""
+    // Selected location IDs
+    private var selectedCountryId: Int = 1 // Default: Việt Nam
+    private var selectedProvinceId: Int = 2 // Default: Hà Nội
+    private var selectedDistrictId: Int = 0
+    private var selectedWardId: Int = 0
     
-    // Lưu address type từ MapViewController
-    private var selectedAddressType: String = "home" // Default: "home"
+    // Lưu address type
+    private var selectedAddressType: String = "shipping" // Default: "shipping"
     
     // MARK: - Lifecycle
     
@@ -104,26 +118,6 @@ final class AddressViewController: EcoViewController {
     // MARK: - Address-Specific Binding
     
     private func bindAddressSpecific() {
-        // Setup callback for current location
-        if let defaultController = addressController as? DefaultAddressController {
-            defaultController.onCurrentLocationReceived = { [weak self] address, latitude, longitude in
-                guard let self = self else { return }
-                
-                // Lưu tọa độ
-                self.selectedLatitude = latitude
-                self.selectedLongitude = longitude
-                
-                // Lưu address type mặc định là "shipping"
-                self.selectedAddressType = "shipping"
-                
-                // Điền vào addressSearchTextField
-                self.addressSearchTextField.text = address
-                
-                // Thay đổi button "Choose on Map" thành "Shipping address" và enable menu
-                self.updateAddressTypeButton(text: "Shipping address", addressType: "shipping")
-            }
-        }
-        
         addressController.isSaveSuccess.observe(on: self) { [weak self] isSuccess in
             if isSuccess {
                 // Success state is handled via successMessage Observable
@@ -143,6 +137,23 @@ final class AddressViewController: EcoViewController {
         addressController.loading.observe(on: self) { [weak self] isLoading in
             guard let self = self, let saveButton = self.saveButton else { return }
             saveButton.setLoading(isLoading)
+        }
+        
+        // Setup address type segmented control
+        addressTypeSegmentedControl.selectedSegmentIndex = 0 // Default: Shipping
+        addressTypeSegmentedControl.addTarget(self, action: #selector(addressTypeChanged), for: .valueChanged)
+    }
+    
+    @objc private func addressTypeChanged() {
+        switch addressTypeSegmentedControl.selectedSegmentIndex {
+        case 0:
+            selectedAddressType = "shipping"
+        case 1:
+            selectedAddressType = "shop"
+        case 2:
+            selectedAddressType = "other"
+        default:
+            selectedAddressType = "shipping"
         }
     }
     
@@ -207,20 +218,67 @@ final class AddressViewController: EcoViewController {
         contactPersonNumberTextField.placeholder = "Contact Person Number"
         contactPersonNumberTextField.keyboardType = .phonePad
         
-        // Address
-        addressLabel.text = "Address"
-        addressLabel.font = Typography.fontBold16
-        addressLabel.textColor = Colors.tokenDark100
-        addressLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(addressLabel)
+        // Address Detail
+        setupField(
+            label: addressDetailLabel,
+            textField: addressDetailTextField,
+            title: "Address Detail",
+            iconName: "mappin.circle.fill",
+            stackView: stackView
+        )
+        addressDetailTextField.placeholder = "Enter address detail (e.g., 123 Phố Hàng Trống)"
         
-        addressSearchTextField.isNavigationStyle = false
-        addressSearchTextField.placeholder = "Enter address"
-        addressSearchTextField.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(addressSearchTextField)
+        // Country Picker (disabled - cannot change)
+        setupLocationPicker(
+            label: countryLabel,
+            button: countryPickerButton,
+            title: "Country",
+            stackView: stackView,
+            isEnabled: false
+        )
+        updateCountryButton()
         
-        // Use Current Location
-        setupUseCurrentLocation(stackView: stackView)
+        // Province Picker (disabled - cannot change)
+        setupLocationPicker(
+            label: provinceLabel,
+            button: provincePickerButton,
+            title: "Province",
+            stackView: stackView,
+            isEnabled: false
+        )
+        updateProvinceButton()
+        
+        // District Picker
+        setupLocationPicker(
+            label: districtLabel,
+            button: districtPickerButton,
+            title: "District",
+            stackView: stackView,
+            isEnabled: true
+        )
+        updateDistrictButton()
+        districtPickerButton.addTarget(self, action: #selector(districtTapped), for: .touchUpInside)
+        
+        // Ward Picker
+        setupLocationPicker(
+            label: wardLabel,
+            button: wardPickerButton,
+            title: "Ward",
+            stackView: stackView,
+            isEnabled: true
+        )
+        updateWardButton()
+        wardPickerButton.addTarget(self, action: #selector(wardTapped), for: .touchUpInside)
+        
+        // Address Type
+        addressTypeLabel.text = "Address Type"
+        addressTypeLabel.font = Typography.fontBold16
+        addressTypeLabel.textColor = Colors.tokenDark100
+        addressTypeLabel.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(addressTypeLabel)
+        
+        addressTypeSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(addressTypeSegmentedControl)
         
         // Default Address Checkbox
         setupDefaultAddressCheckbox(stackView: stackView)
@@ -238,8 +296,12 @@ final class AddressViewController: EcoViewController {
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Spacing.tokenSpacing22),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Spacing.tokenSpacing40),
             
-            // Address Search TextField height
-            addressSearchTextField.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
+            // Location Picker Buttons height
+            countryPickerButton.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
+            provincePickerButton.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
+            districtPickerButton.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
+            wardPickerButton.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
+            addressTypeSegmentedControl.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing40),
             
             // Save Button height (same as Login)
             saveButton.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56)
@@ -280,56 +342,302 @@ final class AddressViewController: EcoViewController {
         ])
     }
     
-    private func setupUseCurrentLocation(stackView: UIStackView) {
-        useCurrentLocationStack.axis = .horizontal
-        useCurrentLocationStack.spacing = Spacing.tokenSpacing08
-        useCurrentLocationStack.alignment = .center
-        useCurrentLocationStack.distribution = .fill
-        useCurrentLocationStack.translatesAutoresizingMaskIntoConstraints = false
+    private func setupLocationPicker(
+        label: UILabel,
+        button: UIButton,
+        title: String,
+        stackView: UIStackView,
+        isEnabled: Bool = true
+    ) {
+        label.text = title
+        label.font = Typography.fontBold16
+        label.textColor = Colors.tokenDark100
+        label.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(label)
         
-        useCurrentLocationIcon.image = UIImage(systemName: "location.fill")
-        useCurrentLocationIcon.tintColor = Colors.tokenRainbowBlueEnd
-        useCurrentLocationIcon.contentMode = .scaleAspectFit
+        // Create container view for button content
+        let containerView = UIView()
+        containerView.backgroundColor = Colors.tokenDark02
+        containerView.layer.cornerRadius = BorderRadius.tokenBorderRadius12
+        containerView.layer.borderWidth = Sizing.tokenSizing01
+        containerView.layer.borderColor = Colors.tokenDark10.cgColor
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         
-        useCurrentLocationLabel.text = "Use my current location"
-        useCurrentLocationLabel.font = Typography.fontRegular14
-        useCurrentLocationLabel.textColor = Colors.tokenRainbowBlueEnd
+        // Create title label
+        let titleLabel = UILabel()
+        titleLabel.font = Typography.fontRegular16
+        titleLabel.textColor = isEnabled ? Colors.tokenDark100 : Colors.tokenDark60
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.tag = 999 // Tag to identify for updates
         
-        // Choose on Map button (can be tapped to open map, or long pressed to show address type menu)
-        chooseOnMapButton.setTitle("Choose on Map", for: .normal)
-        chooseOnMapButton.titleLabel?.font = UIFont.italicSystemFont(ofSize: 14) // Italic font
-        chooseOnMapButton.setTitleColor(Colors.tokenRainbowBlueEnd, for: .normal)
-        chooseOnMapButton.contentHorizontalAlignment = .right
+        // Create chevron image view
+        let chevronImageView = UIImageView()
+        chevronImageView.image = UIImage(systemName: "chevron.down")
+        chevronImageView.tintColor = isEnabled ? Colors.tokenDark60 : Colors.tokenDark40
+        chevronImageView.contentMode = .scaleAspectFit
+        chevronImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        // Add underline to title
-        let title = "Choose on Map"
-        let attributedTitle = NSMutableAttributedString(string: title)
-        attributedTitle.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: title.count))
-        chooseOnMapButton.setAttributedTitle(attributedTitle, for: .normal)
+        // Create horizontal stack view for content
+        let contentStackView = UIStackView(arrangedSubviews: [titleLabel, chevronImageView])
+        contentStackView.axis = .horizontal
+        contentStackView.alignment = .center
+        contentStackView.distribution = .fill
+        contentStackView.spacing = 8
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        // Setup menu for address type selection (shows on long press)
-        updateAddressTypeButtonMenu()
+        containerView.addSubview(contentStackView)
         
-        // Add tap gesture for "Choose on Map" (to open map)
-        let chooseOnMapTapGesture = UITapGestureRecognizer(target: self, action: #selector(chooseOnMapTapped))
-        chooseOnMapButton.addGestureRecognizer(chooseOnMapTapGesture)
+        // Configure button
+        button.backgroundColor = .clear
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = isEnabled
         
-        useCurrentLocationStack.addArrangedSubview(useCurrentLocationIcon)
-        useCurrentLocationStack.addArrangedSubview(useCurrentLocationLabel)
-        useCurrentLocationStack.addArrangedSubview(chooseOnMapButton)
+        // Add container view to button
+        button.addSubview(containerView)
         
-        // Add tap gesture for use current location (only on icon and label area)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(useCurrentLocationTapped))
-        useCurrentLocationStack.addGestureRecognizer(tapGesture)
-        useCurrentLocationStack.isUserInteractionEnabled = true
+        // Đảm bảo containerView không block touch events của button
+        // Button sẽ nhận touch events và trigger action
+        containerView.isUserInteractionEnabled = false
         
-        stackView.addArrangedSubview(useCurrentLocationStack)
-        
+        // Constraints
         NSLayoutConstraint.activate([
-            useCurrentLocationIcon.widthAnchor.constraint(equalToConstant: 20),
-            useCurrentLocationIcon.heightAnchor.constraint(equalToConstant: 20),
-            chooseOnMapButton.leadingAnchor.constraint(greaterThanOrEqualTo: useCurrentLocationLabel.trailingAnchor, constant: Spacing.tokenSpacing08)
+            containerView.topAnchor.constraint(equalTo: button.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: button.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: button.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: button.bottomAnchor),
+            
+            contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            contentStackView.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
+            
+            chevronImageView.widthAnchor.constraint(equalToConstant: 16),
+            chevronImageView.heightAnchor.constraint(equalToConstant: 16)
         ])
+        
+        // Đảm bảo button có thể nhận touch events
+        // Thêm tap gesture vào button để đảm bảo nó hoạt động
+        if isEnabled {
+            // Button đã có target action được add ở nơi khác (districtTapped, wardTapped)
+            // Chỉ cần đảm bảo button có thể nhận touch
+            button.isUserInteractionEnabled = true
+        }
+        
+        // Store reference to title label in button's associated object or use a custom property
+        // For simplicity, we'll update the title by finding the label with tag
+        button.setTitle(titleLabel.text ?? "", for: .normal) // Store initial text
+        
+        // Add overlay view for disabled state
+        if !isEnabled {
+            let overlayView = UIView()
+            overlayView.backgroundColor = UIColor.white.withAlphaComponent(0.6)
+            overlayView.layer.cornerRadius = BorderRadius.tokenBorderRadius12
+            overlayView.isUserInteractionEnabled = false
+            overlayView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.addSubview(overlayView)
+            
+            NSLayoutConstraint.activate([
+                overlayView.topAnchor.constraint(equalTo: containerView.topAnchor),
+                overlayView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+                overlayView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                overlayView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            ])
+        }
+        
+        stackView.addArrangedSubview(button)
+        
+        // Store title label reference for later updates
+        objc_setAssociatedObject(button, "titleLabel", titleLabel, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+    
+    private func getTitleLabel(from button: UIButton) -> UILabel? {
+        return objc_getAssociatedObject(button, "titleLabel") as? UILabel
+    }
+    
+    private func updateCountryButton() {
+        let country = LocationData.vietnam
+        if let titleLabel = getTitleLabel(from: countryPickerButton) {
+            titleLabel.text = country.name
+        }
+        selectedCountryId = country.id
+    }
+    
+    private func updateProvinceButton() {
+        let province = LocationData.haNoi
+        if let titleLabel = getTitleLabel(from: provincePickerButton) {
+            titleLabel.text = province.name
+        }
+        selectedProvinceId = province.id
+        // Reset district and ward when province changes
+        selectedDistrictId = 0
+        selectedWardId = 0
+        updateDistrictButton()
+        updateWardButton()
+    }
+    
+    private func updateDistrictButton() {
+        let text: String
+        if selectedDistrictId > 0, let district = LocationData.getDistrict(by: selectedDistrictId) {
+            text = district.name
+        } else {
+            text = "Select District"
+        }
+        
+        // Update title label - try multiple ways
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            // Method 1: Get from associated object
+            if let titleLabel = self.getTitleLabel(from: self.districtPickerButton) {
+                titleLabel.text = text
+                print("✅ [AddressViewController] Updated district button text to: \(text)")
+                return
+            }
+            
+            // Method 2: Find label in button's subviews
+            if let containerView = self.districtPickerButton.subviews.first,
+               let contentStackView = containerView.subviews.first as? UIStackView,
+               let titleLabel = contentStackView.arrangedSubviews.first as? UILabel {
+                titleLabel.text = text
+                print("✅ [AddressViewController] Updated district button text via fallback to: \(text)")
+                return
+            }
+            
+            // Method 3: Find by tag
+            if let titleLabel = self.districtPickerButton.viewWithTag(999) as? UILabel {
+                titleLabel.text = text
+                print("✅ [AddressViewController] Updated district button text via tag to: \(text)")
+                return
+            }
+            
+            print("⚠️ [AddressViewController] Could not find titleLabel for district button")
+        }
+        
+        // Reset ward when district changes
+        if selectedDistrictId == 0 {
+            selectedWardId = 0
+            updateWardButton()
+        }
+    }
+    
+    private func updateWardButton() {
+        let text: String
+        if selectedWardId > 0, let ward = LocationData.getWard(by: selectedWardId, in: selectedDistrictId) {
+            text = ward.name
+        } else {
+            text = "Select Ward"
+        }
+        
+        // Update title label - try multiple ways
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            // Method 1: Get from associated object
+            if let titleLabel = self.getTitleLabel(from: self.wardPickerButton) {
+                titleLabel.text = text
+                print("✅ [AddressViewController] Updated ward button text to: \(text)")
+                return
+            }
+            
+            // Method 2: Find label in button's subviews
+            if let containerView = self.wardPickerButton.subviews.first,
+               let contentStackView = containerView.subviews.first as? UIStackView,
+               let titleLabel = contentStackView.arrangedSubviews.first as? UILabel {
+                titleLabel.text = text
+                print("✅ [AddressViewController] Updated ward button text via fallback to: \(text)")
+                return
+            }
+            
+            // Method 3: Find by tag
+            if let titleLabel = self.wardPickerButton.viewWithTag(999) as? UILabel {
+                titleLabel.text = text
+                print("✅ [AddressViewController] Updated ward button text via tag to: \(text)")
+                return
+            }
+            
+            print("⚠️ [AddressViewController] Could not find titleLabel for ward button")
+        }
+    }
+    
+    @objc private func countryTapped() {
+        // Only Vietnam is available, so no action needed
+        // But we can show an alert if needed
+    }
+    
+    @objc private func provinceTapped() {
+        // Only Hà Nội is available, so no action needed
+        // But we can show an alert if needed
+    }
+    
+    @objc private func districtTapped() {
+        let districts = LocationData.districts
+        showLocationPicker(title: "Select District", items: districts) { [weak self] selectedItem in
+            guard let self = self else { return }
+            print("✅ [AddressViewController] District selected: \(selectedItem.name) (ID: \(selectedItem.id))")
+            self.selectedDistrictId = selectedItem.id
+            // Update UI on main thread
+            DispatchQueue.main.async {
+                self.updateDistrictButton()
+                self.updateWardButton()
+            }
+        }
+    }
+    
+    @objc private func wardTapped() {
+        guard selectedDistrictId > 0 else {
+            showAlert(title: "Error", message: "Please select a district first")
+            return
+        }
+        
+        let wards = LocationData.getWards(for: selectedDistrictId)
+        showLocationPicker(title: "Select Ward", items: wards) { [weak self] selectedItem in
+            guard let self = self else { return }
+            print("✅ [AddressViewController] Ward selected: \(selectedItem.name) (ID: \(selectedItem.id))")
+            self.selectedWardId = selectedItem.id
+            // Update UI on main thread
+            DispatchQueue.main.async {
+                self.updateWardButton()
+            }
+        }
+    }
+    
+    private func showLocationPicker(title: String, items: [LocationItem], completion: @escaping (LocationItem) -> Void) {
+        let alertController = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
+        
+        for item in items {
+            let action = UIAlertAction(title: item.name, style: .default) { [weak self] _ in
+                // Đảm bảo completion được gọi trên main thread
+                DispatchQueue.main.async {
+                    completion(item)
+                    // Force update UI
+                    self?.view.setNeedsLayout()
+                    self?.view.layoutIfNeeded()
+                }
+            }
+            alertController.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        // For iPad
+        if let popover = alertController.popoverPresentationController {
+            popover.sourceView = view
+            popover.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+            popover.permittedArrowDirections = []
+        }
+        
+        // Present từ view controller hiện tại
+        // Nếu đang trong CardViewController, cần present từ parent
+        var presentingVC: UIViewController = self
+        if let parentVC = parent {
+            presentingVC = parentVC
+        } else if let presenting = presentingViewController {
+            presentingVC = presenting
+        }
+        
+        presentingVC.present(alertController, animated: true)
     }
     
     private func setupDefaultAddressCheckbox(stackView: UIStackView) {
@@ -380,131 +688,6 @@ final class AddressViewController: EcoViewController {
     }
     
     // MARK: - Actions
-    
-    @objc private func useCurrentLocationTapped() {
-        addressController.didTapUseCurrentLocation()
-    }
-    
-    // MARK: - Address Type Menu
-    
-    private func updateAddressTypeButtonMenu() {
-        // Only show menu if location has been selected (has latitude/longitude)
-        guard !selectedLatitude.isEmpty && !selectedLongitude.isEmpty else {
-            if #available(iOS 14.0, *) {
-                chooseOnMapButton.menu = nil
-            } else {
-                // Fallback on earlier versions
-            }
-            return
-        }
-        
-        // Create menu items for address type selection
-        let shippingAction = UIAction(title: "Shipping address", handler: { [weak self] _ in
-            self?.didSelectAddressType("shipping", displayText: "Shipping address")
-        })
-        
-        let shopAction = UIAction(title: "Shop address", handler: { [weak self] _ in
-            self?.didSelectAddressType("shop", displayText: "Shop address")
-        })
-        
-        let otherAction = UIAction(title: "Other", handler: { [weak self] _ in
-            self?.didSelectAddressType("other", displayText: "Other")
-        })
-        
-        // Create menu
-        let menu = UIMenu(title: "", children: [shippingAction, shopAction, otherAction])
-        
-        // Set menu to button (shows on long press)
-        if #available(iOS 14.0, *) {
-            chooseOnMapButton.menu = menu
-        } else {
-            // Fallback on earlier versions
-        }
-        if #available(iOS 14.0, *) {
-            chooseOnMapButton.showsMenuAsPrimaryAction = false
-        } else {
-            // Fallback on earlier versions
-        } // Only show on long press, tap still works for opening map
-    }
-    
-    private func updateAddressTypeButton(text: String, addressType: String) {
-        // Update button title with underline
-        let attributedTitle = NSMutableAttributedString(string: text)
-        attributedTitle.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: text.count))
-        chooseOnMapButton.setAttributedTitle(attributedTitle, for: .normal)
-        
-        // Enable menu interaction (only show menu if location has been selected)
-        chooseOnMapButton.isEnabled = true
-        updateAddressTypeButtonMenu()
-    }
-    
-    private func didSelectAddressType(_ addressType: String, displayText: String) {
-        // Update selected address type
-        selectedAddressType = addressType
-        
-        // Update button text
-        updateAddressTypeButton(text: displayText, addressType: addressType)
-    }
-    
-    @objc private func chooseOnMapTapped() {
-        // Create MapController
-        let mapController = DefaultMapController()
-        
-        // Create MapViewController
-        let mapViewController = MapViewController.create(with: mapController)
-        
-        // Setup callback khi chọn vị trí (sẽ được gọi khi back về AddressViewController)
-        mapViewController.onLocationSelected = { [weak self] address, latitude, longitude, addressType in
-            guard let self = self else { return }
-            
-            // Lưu tọa độ
-            self.selectedLatitude = latitude
-            self.selectedLongitude = longitude
-            
-            // Lưu address type
-            self.selectedAddressType = addressType
-            
-            // Điền vào addressSearchTextField
-            self.addressSearchTextField.text = address
-            
-            // Update button text based on selected address type
-            let displayText: String
-            switch addressType {
-            case "shipping":
-                displayText = "Shipping address"
-            case "shop":
-                displayText = "Shop address"
-            case "other":
-                displayText = "Other"
-            default:
-                displayText = "Shipping address"
-            }
-            self.updateAddressTypeButton(text: displayText, addressType: addressType)
-        }
-        
-        // Debug: Log navigation stack before push
-        if let navController = navigationController {
-            let stackBefore = navController.viewControllers.map { String(describing: type(of: $0)) }.joined(separator: " -> ")
-            print("📍 [AddressViewController] Before push MapViewController")
-            print("   - Stack count: \(navController.viewControllers.count)")
-            print("   - Stack: \(stackBefore)")
-            print("   - Current VC: \(String(describing: type(of: self)))")
-        }
-        
-        // Push MapViewController
-        navigationController?.pushViewController(mapViewController, animated: true)
-        
-        // Debug: Log navigation stack after push (with delay to allow push to complete)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            if let navController = self?.navigationController {
-                let stackAfter = navController.viewControllers.map { String(describing: type(of: $0)) }.joined(separator: " -> ")
-                print("📍 [AddressViewController] After push MapViewController")
-                print("   - Stack count: \(navController.viewControllers.count)")
-                print("   - Stack: \(stackAfter)")
-                print("   - Top VC: \(String(describing: type(of: navController.topViewController ?? UIViewController())))")
-            }
-        }
-    }
     
     @objc private func defaultAddressTapped() {
         isCheckboxSelected.toggle()
@@ -560,24 +743,30 @@ final class AddressViewController: EcoViewController {
                 // Fill form with selected address
                 self?.contactPersonNameTextField.text = address.contactPersonName
                 self?.contactPersonNumberTextField.text = address.contactPersonNumber
-                self?.addressSearchTextField.text = address.address
-                self?.selectedLatitude = address.latitude
-                self?.selectedLongitude = address.longitude
+                self?.addressDetailTextField.text = address.addressDetail
+                self?.selectedCountryId = address.countryId
+                self?.selectedProvinceId = address.provinceId
+                self?.selectedDistrictId = address.districtId
+                self?.selectedWardId = address.wardId
                 self?.selectedAddressType = address.addressType
                 
-                // Update button text based on address type
-                let displayText: String
+                // Update location pickers
+                self?.updateCountryButton()
+                self?.updateProvinceButton()
+                self?.updateDistrictButton()
+                self?.updateWardButton()
+                
+                // Update address type segmented control
                 switch address.addressType {
                 case "shipping":
-                    displayText = "Shipping address"
+                    self?.addressTypeSegmentedControl.selectedSegmentIndex = 0
                 case "shop":
-                    displayText = "Shop address"
+                    self?.addressTypeSegmentedControl.selectedSegmentIndex = 1
                 case "other":
-                    displayText = "Other"
+                    self?.addressTypeSegmentedControl.selectedSegmentIndex = 2
                 default:
-                    displayText = "Shipping address"
+                    self?.addressTypeSegmentedControl.selectedSegmentIndex = 0
                 }
-                self?.updateAddressTypeButton(text: displayText, addressType: address.addressType)
                 
                 // Dismiss card
                 cardVC?.dismiss()
@@ -623,16 +812,15 @@ extension AddressViewController: EcoButtonDelegate {
     func buttonDidTap(_ button: EcoButton) {
         guard button == saveButton else { return }
         
-        // Use selectedAddressType from MapViewController, or default to "home" if not set
-        let addressType = selectedAddressType.isEmpty ? "home" : selectedAddressType
-        
         addressController.didTapSave(
             contactPersonName: contactPersonNameTextField.text ?? "",
             contactPersonNumber: contactPersonNumberTextField.text ?? "",
-            address: addressSearchTextField.text ?? "",
-            addressType: addressType,
-            longitude: selectedLongitude, // Tọa độ từ map selection
-            latitude: selectedLatitude, // Tọa độ từ map selection
+            addressDetail: addressDetailTextField.text ?? "",
+            countryId: selectedCountryId,
+            provinceId: selectedProvinceId,
+            districtId: selectedDistrictId,
+            wardId: selectedWardId,
+            addressType: selectedAddressType,
             isDefault: isCheckboxSelected
         )
     }

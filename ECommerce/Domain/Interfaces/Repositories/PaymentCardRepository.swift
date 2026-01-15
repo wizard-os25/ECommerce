@@ -24,10 +24,14 @@ protocol PaymentCardRepository {
 public struct PaymentIntent {
     public let clientSecret: String
     public let paymentIntentId: String
+    public let customerId: String?
+    public let ephemeralKey: String?
     
-    public init(clientSecret: String, paymentIntentId: String) {
+    public init(clientSecret: String, paymentIntentId: String, customerId: String? = nil, ephemeralKey: String? = nil) {
         self.clientSecret = clientSecret
         self.paymentIntentId = paymentIntentId
+        self.customerId = customerId
+        self.ephemeralKey = ephemeralKey
     }
 }
 

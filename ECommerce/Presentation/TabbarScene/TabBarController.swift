@@ -9,7 +9,6 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("🟢 TabBarController loaded thành công")
@@ -38,6 +37,12 @@ class TabBarController: UITabBarController {
         let navCart = UINavigationController(rootViewController: cartVC)
         let navAccount = UINavigationController(rootViewController: accountVC)
         
+        // Set delegates to track navigation
+        navTabContainer.delegate = self
+        navGrocery.delegate = self
+        navCart.delegate = self
+        navAccount.delegate = self
+        
         // Hide system navigation bar since we use custom EcoNavigationBar
         navTabContainer.isNavigationBarHidden = true
         navGrocery.isNavigationBarHidden = true
@@ -53,6 +58,69 @@ class TabBarController: UITabBarController {
         /// Set ViewController & Tabbar Item Color
         self.tabBar.tintColor = .black
         self.setViewControllers([navTabContainer, navGrocery, navCart, navAccount], animated: true)
+        
+        // Show TabBar initially (only on 4 main screens)
+        updateTabBarVisibility()
+    }
+    
+    // MARK: - TabBar Visibility Management
+    
+    func updateTabBarVisibility() {
+        guard let selectedNav = selectedViewController as? UINavigationController else {
+            tabBar.isHidden = false
+            return
+        }
+        
+        // Show TabBar only if we're at root view controller (one of 4 main screens)
+        let isAtRoot = selectedNav.viewControllers.count == 1
+        tabBar.isHidden = !isAtRoot
+        
+        // Also hide if sideMenu is open (check via MainContainerViewController)
+        if let mainContainer = findMainContainerViewController() {
+            // Check if sideMenu is expanded - this will be handled separately
+        }
+    }
+    
+    func hideTabBar() {
+        tabBar.isHidden = true
+    }
+    
+    func showTabBar() {
+        // Only show if at root of selected navigation controller
+        guard let selectedNav = selectedViewController as? UINavigationController else {
+            tabBar.isHidden = false
+            return
+        }
+        let isAtRoot = selectedNav.viewControllers.count == 1
+        tabBar.isHidden = !isAtRoot
+    }
+    
+    private func findMainContainerViewController() -> UIViewController? {
+        var responder: UIResponder? = self
+        while responder != nil {
+            responder = responder?.next
+            if let vc = responder as? UIViewController,
+               String(describing: type(of: vc)).contains("MainContainer") {
+                return vc
+            }
+        }
+        return nil
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+
+extension TabBarController: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        // Hide TabBar when pushing (not at root)
+        let isAtRoot = navigationController.viewControllers.count == 1
+        tabBar.isHidden = !isAtRoot
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        // Update TabBar visibility after navigation completes
+        updateTabBarVisibility()
     }
 }
 

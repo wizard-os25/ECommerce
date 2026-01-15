@@ -27,12 +27,18 @@ struct LocationListResponseDTOInternal: Decodable {
     let id: Int
     let addressType: String
     let contactPersonNumber: String
-    let address: String
-    let latitude: String
-    let zoneId: Int
-    let longitude: String
+    let address: String?
+    let addressDetail: String
+    let latitude: String?
+    let zoneId: Int?
+    let longitude: String?
     let userId: Int
     let contactPersonName: String
+    let countryId: Int
+    let provinceId: Int
+    let districtId: Int
+    let wardId: Int
+    let shippingFee: String?
     let createdAt: String
     let updatedAt: String
     let defaultShipping: Bool
@@ -42,14 +48,54 @@ struct LocationListResponseDTOInternal: Decodable {
         case addressType = "address_type"
         case contactPersonNumber = "contact_person_number"
         case address
+        case addressDetail = "address_detail"
         case latitude
         case zoneId = "zone_id"
         case longitude
         case userId = "user_id"
         case contactPersonName = "contact_person_name"
+        case countryId = "country_id"
+        case provinceId = "province_id"
+        case districtId = "district_id"
+        case wardId = "ward_id"
+        case shippingFee = "shipping_fee"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case defaultShipping = "default_shipping"
+    }
+    
+    // Custom decoder for shippingFee to handle both String and Number
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(Int.self, forKey: .id)
+        addressType = try container.decode(String.self, forKey: .addressType)
+        contactPersonNumber = try container.decode(String.self, forKey: .contactPersonNumber)
+        address = try container.decodeIfPresent(String.self, forKey: .address)
+        addressDetail = try container.decode(String.self, forKey: .addressDetail)
+        latitude = try container.decodeIfPresent(String.self, forKey: .latitude)
+        zoneId = try container.decodeIfPresent(Int.self, forKey: .zoneId)
+        longitude = try container.decodeIfPresent(String.self, forKey: .longitude)
+        userId = try container.decode(Int.self, forKey: .userId)
+        contactPersonName = try container.decode(String.self, forKey: .contactPersonName)
+        countryId = try container.decode(Int.self, forKey: .countryId)
+        provinceId = try container.decode(Int.self, forKey: .provinceId)
+        districtId = try container.decode(Int.self, forKey: .districtId)
+        wardId = try container.decode(Int.self, forKey: .wardId)
+        createdAt = try container.decode(String.self, forKey: .createdAt)
+        updatedAt = try container.decode(String.self, forKey: .updatedAt)
+        defaultShipping = try container.decode(Bool.self, forKey: .defaultShipping)
+        
+        // Handle shippingFee as either String or Number
+        if let shippingFeeString = try? container.decode(String.self, forKey: .shippingFee) {
+            shippingFee = shippingFeeString
+        } else if let shippingFeeDouble = try? container.decode(Double.self, forKey: .shippingFee) {
+            shippingFee = String(shippingFeeDouble)
+        } else if let shippingFeeInt = try? container.decode(Int.self, forKey: .shippingFee) {
+            shippingFee = String(shippingFeeInt)
+        } else {
+            shippingFee = nil
+        }
     }
 }
 
@@ -68,12 +114,18 @@ struct LocationListResponseDTO: Decodable {
                 id: internalDTO.id,
                 addressType: internalDTO.addressType,
                 contactPersonNumber: internalDTO.contactPersonNumber,
-                address: internalDTO.address,
+                address: internalDTO.address ?? internalDTO.addressDetail,
+                addressDetail: internalDTO.addressDetail,
                 latitude: internalDTO.latitude,
                 zoneId: internalDTO.zoneId,
                 longitude: internalDTO.longitude,
                 userId: internalDTO.userId,
                 contactPersonName: internalDTO.contactPersonName,
+                countryId: internalDTO.countryId,
+                provinceId: internalDTO.provinceId,
+                districtId: internalDTO.districtId,
+                wardId: internalDTO.wardId,
+                shippingFee: internalDTO.shippingFee,
                 createdAt: internalDTO.createdAt,
                 updatedAt: internalDTO.updatedAt,
                 defaultShipping: internalDTO.defaultShipping
@@ -94,11 +146,17 @@ struct LocationListAddressDTO: Decodable {
     let addressType: String
     let contactPersonNumber: String
     let address: String
-    let latitude: String
-    let zoneId: Int
-    let longitude: String
+    let addressDetail: String
+    let latitude: String?
+    let zoneId: Int?
+    let longitude: String?
     let userId: Int
     let contactPersonName: String
+    let countryId: Int
+    let provinceId: Int
+    let districtId: Int
+    let wardId: Int
+    let shippingFee: String?
     let createdAt: String
     let updatedAt: String
     let defaultShipping: Bool
@@ -117,9 +175,16 @@ extension LocationListAddressDTO {
             contactPersonName: contactPersonName,
             contactPersonNumber: contactPersonNumber,
             address: address,
+            addressDetail: addressDetail,
             addressType: addressType,
-            longitude: longitude,
-            latitude: latitude,
+            zoneId: zoneId,
+            countryId: countryId,
+            provinceId: provinceId,
+            districtId: districtId,
+            wardId: wardId,
+            longitude: longitude ?? "",
+            latitude: latitude ?? "",
+            shippingFee: shippingFee,
             createdAt: dateFormatter.date(from: createdAt),
             updatedAt: dateFormatter.date(from: updatedAt),
             isDefault: defaultShipping

@@ -9,14 +9,16 @@ import Foundation
 
 protocol OrderUseCase {
     func placeOrder(
-        orderAmount: Double,
         cart: [CartItem],
-        address: String,
-        longitude: String,
-        latitude: String,
-        contactPersonName: String,
-        contactPersonNumber: String,
         orderNote: String?,
+        deliveryAddressId: Int?,
+        addressDetail: String?,
+        countryId: Int?,
+        provinceId: Int?,
+        districtId: Int?,
+        wardId: Int?,
+        contactPersonName: String?,
+        contactPersonNumber: String?,
         completion: @escaping (Result<Order, Error>) -> Void
     ) -> Cancellable?
 }
@@ -30,25 +32,29 @@ final class DefaultOrderUseCase: OrderUseCase {
     }
     
     func placeOrder(
-        orderAmount: Double,
         cart: [CartItem],
-        address: String,
-        longitude: String,
-        latitude: String,
-        contactPersonName: String,
-        contactPersonNumber: String,
         orderNote: String?,
+        deliveryAddressId: Int?,
+        addressDetail: String?,
+        countryId: Int?,
+        provinceId: Int?,
+        districtId: Int?,
+        wardId: Int?,
+        contactPersonName: String?,
+        contactPersonNumber: String?,
         completion: @escaping (Result<Order, Error>) -> Void
     ) -> Cancellable? {
         return orderRepository.placeOrder(
-            orderAmount: orderAmount,
             cart: cart,
-            address: address,
-            longitude: longitude,
-            latitude: latitude,
+            orderNote: orderNote,
+            deliveryAddressId: deliveryAddressId,
+            addressDetail: addressDetail,
+            countryId: countryId,
+            provinceId: provinceId,
+            districtId: districtId,
+            wardId: wardId,
             contactPersonName: contactPersonName,
             contactPersonNumber: contactPersonNumber,
-            orderNote: orderNote,
             completion: completion
         )
     }

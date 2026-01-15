@@ -24,14 +24,16 @@ final class DefaultOrderRepository {
 extension DefaultOrderRepository: OrderRepository {
     
     func placeOrder(
-        orderAmount: Double,
         cart: [CartItem],
-        address: String,
-        longitude: String,
-        latitude: String,
-        contactPersonName: String,
-        contactPersonNumber: String,
         orderNote: String?,
+        deliveryAddressId: Int?,
+        addressDetail: String?,
+        countryId: Int?,
+        provinceId: Int?,
+        districtId: Int?,
+        wardId: Int?,
+        contactPersonName: String?,
+        contactPersonNumber: String?,
         completion: @escaping (Result<Order, Error>) -> Void
     ) -> Cancellable? {
         let task = RepositoryTask()
@@ -40,14 +42,16 @@ extension DefaultOrderRepository: OrderRepository {
         
         let cartDTOs = cart.map { CartItemDTO(id: $0.id, quantity: $0.quantity) }
         let requestDTO = PlaceOrderRequestDTO(
-            orderAmount: orderAmount,
             cart: cartDTOs,
-            address: address,
-            longitude: longitude,
-            latitude: latitude,
+            orderNote: orderNote,
+            deliveryAddressId: deliveryAddressId,
+            addressDetail: addressDetail,
+            countryId: countryId,
+            provinceId: provinceId,
+            districtId: districtId,
+            wardId: wardId,
             contactPersonName: contactPersonName,
-            contactPersonNumber: contactPersonNumber,
-            orderNote: orderNote
+            contactPersonNumber: contactPersonNumber
         )
         
         let endpoint = APIEndpoints.placeOrder(with: requestDTO)

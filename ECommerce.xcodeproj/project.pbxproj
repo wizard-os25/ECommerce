@@ -877,6 +877,78 @@
 		D05141C12F18156A00C7B963 /* OrderActionFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141B32F18156A00C7B963 /* OrderActionFlowCoordinator.swift */; };
 		D05141C22F18156A00C7B963 /* OrderActionViewExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141B52F18156A00C7B963 /* OrderActionViewExample.swift */; };
 		D05141C32F18156A00C7B963 /* OrderActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141B42F18156A00C7B963 /* OrderActionView.swift */; };
+		D05141C82F188C7700C7B963 /* OrderDeliverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141C42F188C7700C7B963 /* OrderDeliverCell.swift */; };
+		D05141C92F188C7700C7B963 /* OrderProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141C52F188C7700C7B963 /* OrderProductImageCell.swift */; };
+		D05141CA2F188C7700C7B963 /* OrderQuantityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141C62F188C7700C7B963 /* OrderQuantityCell.swift */; };
+		D05141CB2F188C7700C7B963 /* OrderDeliverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141C42F188C7700C7B963 /* OrderDeliverCell.swift */; };
+		D05141CC2F188C7700C7B963 /* OrderProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141C52F188C7700C7B963 /* OrderProductImageCell.swift */; };
+		D05141CD2F188C7700C7B963 /* OrderQuantityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141C62F188C7700C7B963 /* OrderQuantityCell.swift */; };
+		D05141CE2F188C7700C7B963 /* OrderDeliverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141C42F188C7700C7B963 /* OrderDeliverCell.swift */; };
+		D05141CF2F188C7700C7B963 /* OrderProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141C52F188C7700C7B963 /* OrderProductImageCell.swift */; };
+		D05141D02F188C7700C7B963 /* OrderQuantityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141C62F188C7700C7B963 /* OrderQuantityCell.swift */; };
+		D05141D32F189C7400C7B963 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141D22F189C7400C7B963 /* CheckoutViewController.swift */; };
+		D05141D42F189C7400C7B963 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141D22F189C7400C7B963 /* CheckoutViewController.swift */; };
+		D05141D52F189C7400C7B963 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141D22F189C7400C7B963 /* CheckoutViewController.swift */; };
+		D05141D72F189C7C00C7B963 /* CheckoutViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05141D62F189C7C00C7B963 /* CheckoutViewController.storyboard */; };
+		D05141D82F189C7C00C7B963 /* CheckoutViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05141D62F189C7C00C7B963 /* CheckoutViewController.storyboard */; };
+		D05141D92F189C7C00C7B963 /* CheckoutViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05141D62F189C7C00C7B963 /* CheckoutViewController.storyboard */; };
+		D05141DC2F18E5EE00C7B963 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141DA2F18E5EE00C7B963 /* LocationData.swift */; };
+		D05141DD2F18E5EE00C7B963 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141DA2F18E5EE00C7B963 /* LocationData.swift */; };
+		D05141DE2F18E5EE00C7B963 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141DA2F18E5EE00C7B963 /* LocationData.swift */; };
+		D05141E02F18E67600C7B963 /* AddressDeleteResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141DF2F18E67600C7B963 /* AddressDeleteResponseDTO.swift */; };
+		D05141E12F18E67600C7B963 /* AddressDeleteResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141DF2F18E67600C7B963 /* AddressDeleteResponseDTO.swift */; };
+		D05141E22F18E67600C7B963 /* AddressDeleteResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141DF2F18E67600C7B963 /* AddressDeleteResponseDTO.swift */; };
+		D05141F02F18F1CC00C7B963 /* CheckoutProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E92F18F1CC00C7B963 /* CheckoutProgressIndicator.swift */; };
+		D05141F12F18F1CC00C7B963 /* CheckoutNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E42F18F1CC00C7B963 /* CheckoutNoteCell.swift */; };
+		D05141F22F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E52F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift */; };
+		D05141F32F18F1CC00C7B963 /* CheckoutAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E32F18F1CC00C7B963 /* CheckoutAddressCell.swift */; };
+		D05141F42F18F1CC00C7B963 /* CheckoutProductsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E72F18F1CC00C7B963 /* CheckoutProductsCell.swift */; };
+		D05141F52F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E62F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift */; };
+		D05141F62F18F1CC00C7B963 /* NoteToSellerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141ED2F18F1CC00C7B963 /* NoteToSellerPopup.swift */; };
+		D05141F72F18F1CC00C7B963 /* CheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141EB2F18F1CC00C7B963 /* CheckoutController.swift */; };
+		D05141F82F18F1CC00C7B963 /* CheckoutProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E92F18F1CC00C7B963 /* CheckoutProgressIndicator.swift */; };
+		D05141F92F18F1CC00C7B963 /* CheckoutNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E42F18F1CC00C7B963 /* CheckoutNoteCell.swift */; };
+		D05141FA2F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E52F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift */; };
+		D05141FB2F18F1CC00C7B963 /* CheckoutAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E32F18F1CC00C7B963 /* CheckoutAddressCell.swift */; };
+		D05141FC2F18F1CC00C7B963 /* CheckoutProductsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E72F18F1CC00C7B963 /* CheckoutProductsCell.swift */; };
+		D05141FD2F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E62F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift */; };
+		D05141FE2F18F1CC00C7B963 /* NoteToSellerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141ED2F18F1CC00C7B963 /* NoteToSellerPopup.swift */; };
+		D05141FF2F18F1CC00C7B963 /* CheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141EB2F18F1CC00C7B963 /* CheckoutController.swift */; };
+		D05142002F18F1CC00C7B963 /* CheckoutProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E92F18F1CC00C7B963 /* CheckoutProgressIndicator.swift */; };
+		D05142012F18F1CC00C7B963 /* CheckoutNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E42F18F1CC00C7B963 /* CheckoutNoteCell.swift */; };
+		D05142022F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E52F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift */; };
+		D05142032F18F1CC00C7B963 /* CheckoutAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E32F18F1CC00C7B963 /* CheckoutAddressCell.swift */; };
+		D05142042F18F1CC00C7B963 /* CheckoutProductsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E72F18F1CC00C7B963 /* CheckoutProductsCell.swift */; };
+		D05142052F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141E62F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift */; };
+		D05142062F18F1CC00C7B963 /* NoteToSellerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141ED2F18F1CC00C7B963 /* NoteToSellerPopup.swift */; };
+		D05142072F18F1CC00C7B963 /* CheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141EB2F18F1CC00C7B963 /* CheckoutController.swift */; };
+		D05142092F18F36000C7B963 /* CheckoutCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142082F18F36000C7B963 /* CheckoutCoordinatingController.swift */; };
+		D051420A2F18F36000C7B963 /* CheckoutCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142082F18F36000C7B963 /* CheckoutCoordinatingController.swift */; };
+		D051420B2F18F36000C7B963 /* CheckoutCoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142082F18F36000C7B963 /* CheckoutCoordinatingController.swift */; };
+		D051420E2F18F36C00C7B963 /* CheckoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051420D2F18F36C00C7B963 /* CheckoutModel.swift */; };
+		D051420F2F18F36C00C7B963 /* CheckoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051420D2F18F36C00C7B963 /* CheckoutModel.swift */; };
+		D05142102F18F36C00C7B963 /* CheckoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051420D2F18F36C00C7B963 /* CheckoutModel.swift */; };
+		D05142172F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142162F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift */; };
+		D05142182F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142162F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift */; };
+		D05142192F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142162F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift */; };
+		D051421B2F18FB5C00C7B963 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051421A2F18FB5C00C7B963 /* SectionHeaderView.swift */; };
+		D051421C2F18FB5C00C7B963 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051421A2F18FB5C00C7B963 /* SectionHeaderView.swift */; };
+		D051421D2F18FB5C00C7B963 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051421A2F18FB5C00C7B963 /* SectionHeaderView.swift */; };
+		D051421F2F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md in Resources */ = {isa = PBXBuildFile; fileRef = D051421E2F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md */; };
+		D05142202F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md in Resources */ = {isa = PBXBuildFile; fileRef = D051421E2F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md */; };
+		D05142212F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md in Resources */ = {isa = PBXBuildFile; fileRef = D051421E2F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md */; };
+		D05142242F19010E00C7B963 /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142232F19010E00C7B963 /* PaymentMethodViewController.swift */; };
+		D05142252F19010E00C7B963 /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142232F19010E00C7B963 /* PaymentMethodViewController.swift */; };
+		D05142262F19010E00C7B963 /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142232F19010E00C7B963 /* PaymentMethodViewController.swift */; };
+		D05142282F19011600C7B963 /* PaymentMethodViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05142272F19011600C7B963 /* PaymentMethodViewController.storyboard */; };
+		D05142292F19011600C7B963 /* PaymentMethodViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05142272F19011600C7B963 /* PaymentMethodViewController.storyboard */; };
+		D051422A2F19011600C7B963 /* PaymentMethodViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05142272F19011600C7B963 /* PaymentMethodViewController.storyboard */; };
+		D051422F2F19016400C7B963 /* PaymentMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051422E2F19016400C7B963 /* PaymentMethodController.swift */; };
+		D05142302F19016400C7B963 /* PaymentMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051422E2F19016400C7B963 /* PaymentMethodController.swift */; };
+		D05142312F19016400C7B963 /* PaymentMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051422E2F19016400C7B963 /* PaymentMethodController.swift */; };
+		D05142332F19016F00C7B963 /* PaymentMethodCoordinationgController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142322F19016F00C7B963 /* PaymentMethodCoordinationgController.swift */; };
+		D05142342F19016F00C7B963 /* PaymentMethodCoordinationgController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142322F19016F00C7B963 /* PaymentMethodCoordinationgController.swift */; };
+		D05142352F19016F00C7B963 /* PaymentMethodCoordinationgController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05142322F19016F00C7B963 /* PaymentMethodCoordinationgController.swift */; };
 		D061A8F92F163F1F00C137EB /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F62F163F1F00C137EB /* CameraHelper.swift */; };
 		D061A8FA2F163F1F00C137EB /* CameraMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F72F163F1F00C137EB /* CameraMode.swift */; };
 		D061A8FB2F163F1F00C137EB /* UIViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = D061A8F82F163F1F00C137EB /* UIViewController+Camera.swift */; };
@@ -962,9 +1034,6 @@
 		D0724D8C2F1730F4004815FB /* PaymentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0724D8B2F1730F4004815FB /* PaymentCard.swift */; };
 		D0724D8D2F1730F4004815FB /* PaymentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0724D8B2F1730F4004815FB /* PaymentCard.swift */; };
 		D0724D8E2F1730F4004815FB /* PaymentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0724D8B2F1730F4004815FB /* PaymentCard.swift */; };
-		D0724D922F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md in Resources */ = {isa = PBXBuildFile; fileRef = D0724D902F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md */; };
-		D0724D942F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md in Resources */ = {isa = PBXBuildFile; fileRef = D0724D902F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md */; };
-		D0724D962F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md in Resources */ = {isa = PBXBuildFile; fileRef = D0724D902F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md */; };
 		D0724D982F1752EA004815FB /* PaymentCardDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0724D972F1752EA004815FB /* PaymentCardDTOs+Mapping.swift */; };
 		D0724D992F1752EA004815FB /* PaymentCardDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0724D972F1752EA004815FB /* PaymentCardDTOs+Mapping.swift */; };
 		D0724D9A2F1752EA004815FB /* PaymentCardDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0724D972F1752EA004815FB /* PaymentCardDTOs+Mapping.swift */; };
@@ -1616,6 +1685,30 @@
 		D05141B32F18156A00C7B963 /* OrderActionFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderActionFlowCoordinator.swift; sourceTree = "<group>"; };
 		D05141B42F18156A00C7B963 /* OrderActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderActionView.swift; sourceTree = "<group>"; };
 		D05141B52F18156A00C7B963 /* OrderActionViewExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderActionViewExample.swift; sourceTree = "<group>"; };
+		D05141C42F188C7700C7B963 /* OrderDeliverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliverCell.swift; sourceTree = "<group>"; };
+		D05141C52F188C7700C7B963 /* OrderProductImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProductImageCell.swift; sourceTree = "<group>"; };
+		D05141C62F188C7700C7B963 /* OrderQuantityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderQuantityCell.swift; sourceTree = "<group>"; };
+		D05141D22F189C7400C7B963 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		D05141D62F189C7C00C7B963 /* CheckoutViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CheckoutViewController.storyboard; sourceTree = "<group>"; };
+		D05141DA2F18E5EE00C7B963 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
+		D05141DF2F18E67600C7B963 /* AddressDeleteResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDeleteResponseDTO.swift; sourceTree = "<group>"; };
+		D05141E32F18F1CC00C7B963 /* CheckoutAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAddressCell.swift; sourceTree = "<group>"; };
+		D05141E42F18F1CC00C7B963 /* CheckoutNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutNoteCell.swift; sourceTree = "<group>"; };
+		D05141E52F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutOrderSummaryCell.swift; sourceTree = "<group>"; };
+		D05141E62F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutPaymentMethodCell.swift; sourceTree = "<group>"; };
+		D05141E72F18F1CC00C7B963 /* CheckoutProductsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutProductsCell.swift; sourceTree = "<group>"; };
+		D05141E92F18F1CC00C7B963 /* CheckoutProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutProgressIndicator.swift; sourceTree = "<group>"; };
+		D05141EB2F18F1CC00C7B963 /* CheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutController.swift; sourceTree = "<group>"; };
+		D05141ED2F18F1CC00C7B963 /* NoteToSellerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteToSellerPopup.swift; sourceTree = "<group>"; };
+		D05142082F18F36000C7B963 /* CheckoutCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCoordinatingController.swift; sourceTree = "<group>"; };
+		D051420D2F18F36C00C7B963 /* CheckoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutModel.swift; sourceTree = "<group>"; };
+		D05142162F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutSceneDIContainer.swift; sourceTree = "<group>"; };
+		D051421A2F18FB5C00C7B963 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		D051421E2F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "STRIPE_ALL_CURL_COMMANDS copy.md"; path = "/Users/macbookair/Desktop/STRIPE_ALL_CURL_COMMANDS copy.md"; sourceTree = "<absolute>"; };
+		D05142232F19010E00C7B963 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
+		D05142272F19011600C7B963 /* PaymentMethodViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PaymentMethodViewController.storyboard; sourceTree = "<group>"; };
+		D051422E2F19016400C7B963 /* PaymentMethodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodController.swift; sourceTree = "<group>"; };
+		D05142322F19016F00C7B963 /* PaymentMethodCoordinationgController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCoordinationgController.swift; sourceTree = "<group>"; };
 		D061A8F62F163F1F00C137EB /* CameraHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHelper.swift; sourceTree = "<group>"; };
 		D061A8F72F163F1F00C137EB /* CameraMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraMode.swift; sourceTree = "<group>"; };
 		D061A8F82F163F1F00C137EB /* UIViewController+Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Camera.swift"; sourceTree = "<group>"; };
@@ -1643,7 +1736,6 @@
 		D0724D832F1730CC004815FB /* PaymentCardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardRepository.swift; sourceTree = "<group>"; };
 		D0724D872F1730DB004815FB /* PaymentCardUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardUseCase.swift; sourceTree = "<group>"; };
 		D0724D8B2F1730F4004815FB /* PaymentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCard.swift; sourceTree = "<group>"; };
-		D0724D902F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = STRIPE_ALL_CURL_COMMANDS.md; sourceTree = "<group>"; };
 		D0724D972F1752EA004815FB /* PaymentCardDTOs+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentCardDTOs+Mapping.swift"; sourceTree = "<group>"; };
 		D0E6C3892F0D01EE00527962 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		D0E6C38C2F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsResponseEntity+Mapping.swift"; sourceTree = "<group>"; };
@@ -2497,8 +2589,8 @@
 				D0095BD62ECB432100FCC7BC /* AppConfigurations.swift */,
 				D0095BDA2ECB433B00FCC7BC /* AppFlowCoordinator.swift */,
 				D0095B0E2ECB0BA700FCC7BC /* Assets.xcassets */,
-				D0724D902F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md */,
 				D0FF964E2F163BFE006146F8 /* MobileNetV2.mlmodel */,
+				D051421E2F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md */,
 				D0095B0F2ECB0BA700FCC7BC /* ECommerce.xcdatamodeld */,
 				D0095B102ECB0BA700FCC7BC /* Info.plist */,
 				D0095B122ECB0BA700FCC7BC /* LaunchScreen.storyboard */,
@@ -2769,6 +2861,7 @@
 				D0FF947E2F14E874006146F8 /* GrocerySceneDIContainer.swift */,
 				D0FF94372F140911006146F8 /* AddressDIContainer.swift */,
 				D0FF94E72F15CC07006146F8 /* LocationListDIContainer.swift */,
+				D05142162F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -2776,6 +2869,7 @@
 		D0095BEB2ECB43A200FCC7BC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				D05141EF2F18F1CC00C7B963 /* CheckoutScene */,
 				D0029D182F0F465500D50804 /* OnboardScene */,
 				D0029D322F0F46FF00D50804 /* AuthScene */,
 				D0E6C3D52F0DFEF400527962 /* TabbarScene */,
@@ -3122,6 +3216,7 @@
 		D00B91B82F10A02900AEE1B6 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				D05141DB2F18E5EE00C7B963 /* LocationPicker */,
 				D0FF95CF2F1636B0006146F8 /* Camera & Image Similarity */,
 				D0029C982F0E977400D50804 /* Search */,
 				D00B91BB2F10A02C00AEE1B6 /* PasswordSetting */,
@@ -3364,6 +3459,7 @@
 		D05141802F17C04100C7B963 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D05141C72F188C7700C7B963 /* Cells */,
 				D05141862F17C06500C7B963 /* OrderViewController.swift */,
 				D051418A2F17C06A00C7B963 /* OrderViewController.storyboard */,
 			);
@@ -3389,11 +3485,141 @@
 		D05141B72F18156A00C7B963 /* OrderActionView */ = {
 			isa = PBXGroup;
 			children = (
+				D05141D12F189C6200C7B963 /* Order */,
 				D05141B32F18156A00C7B963 /* OrderActionFlowCoordinator.swift */,
 				D05141B42F18156A00C7B963 /* OrderActionView.swift */,
 				D05141B52F18156A00C7B963 /* OrderActionViewExample.swift */,
 			);
 			path = OrderActionView;
+			sourceTree = "<group>";
+		};
+		D05141C72F188C7700C7B963 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D05141C42F188C7700C7B963 /* OrderDeliverCell.swift */,
+				D05141C52F188C7700C7B963 /* OrderProductImageCell.swift */,
+				D05141C62F188C7700C7B963 /* OrderQuantityCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D05141D12F189C6200C7B963 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		D05141DB2F18E5EE00C7B963 /* LocationPicker */ = {
+			isa = PBXGroup;
+			children = (
+				D05141DA2F18E5EE00C7B963 /* LocationData.swift */,
+			);
+			path = LocationPicker;
+			sourceTree = "<group>";
+		};
+		D05141E82F18F1CC00C7B963 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D051421A2F18FB5C00C7B963 /* SectionHeaderView.swift */,
+				D05141E32F18F1CC00C7B963 /* CheckoutAddressCell.swift */,
+				D05141E42F18F1CC00C7B963 /* CheckoutNoteCell.swift */,
+				D05141E52F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift */,
+				D05141E62F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift */,
+				D05141E72F18F1CC00C7B963 /* CheckoutProductsCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D05141EA2F18F1CC00C7B963 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D05141E92F18F1CC00C7B963 /* CheckoutProgressIndicator.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		D05141EC2F18F1CC00C7B963 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D05141EB2F18F1CC00C7B963 /* CheckoutController.swift */,
+				D05142082F18F36000C7B963 /* CheckoutCoordinatingController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D05141EE2F18F1CC00C7B963 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				D05141ED2F18F1CC00C7B963 /* NoteToSellerPopup.swift */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		D05141EF2F18F1CC00C7B963 /* CheckoutScene */ = {
+			isa = PBXGroup;
+			children = (
+				D05142222F1900FD00C7B963 /* PaymentMethod */,
+				D051420C2F18F36500C7B963 /* Model */,
+				D05142152F18F3C800C7B963 /* View */,
+				D05141EC2F18F1CC00C7B963 /* Controller */,
+				D05141EE2F18F1CC00C7B963 /* Popup */,
+			);
+			path = CheckoutScene;
+			sourceTree = "<group>";
+		};
+		D051420C2F18F36500C7B963 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D051420D2F18F36C00C7B963 /* CheckoutModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D05142152F18F3C800C7B963 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D05141EA2F18F1CC00C7B963 /* Components */,
+				D05141E82F18F1CC00C7B963 /* Cells */,
+				D05141D22F189C7400C7B963 /* CheckoutViewController.swift */,
+				D05141D62F189C7C00C7B963 /* CheckoutViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D05142222F1900FD00C7B963 /* PaymentMethod */ = {
+			isa = PBXGroup;
+			children = (
+				D051422D2F19015200C7B963 /* Model */,
+				D051422C2F19014B00C7B963 /* View */,
+				D051422B2F19014600C7B963 /* Controller */,
+			);
+			path = PaymentMethod;
+			sourceTree = "<group>";
+		};
+		D051422B2F19014600C7B963 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D051422E2F19016400C7B963 /* PaymentMethodController.swift */,
+				D05142322F19016F00C7B963 /* PaymentMethodCoordinationgController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D051422C2F19014B00C7B963 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D05142232F19010E00C7B963 /* PaymentMethodViewController.swift */,
+				D05142272F19011600C7B963 /* PaymentMethodViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D051422D2F19015200C7B963 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D06C3B7A2ECC9A0A00289D48 /* Concurrency */ = {
@@ -3681,6 +3907,7 @@
 		D0FF94132F1404D3006146F8 /* Address */ = {
 			isa = PBXGroup;
 			children = (
+				D05141DF2F18E67600C7B963 /* AddressDeleteResponseDTO.swift */,
 				D0FF94112F1404D3006146F8 /* AddressRequestDTO+Mapping.swift */,
 				D0FF94122F1404D3006146F8 /* AddressResponseDTO+Mapping.swift */,
 			);
@@ -4111,6 +4338,7 @@
 				D0029D6A2F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */,
 				D0029BBB2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
 				D0029BBC2F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
+				D05141D72F189C7C00C7B963 /* CheckoutViewController.storyboard in Resources */,
 				D00B91B12F109F9E00AEE1B6 /* Images.xcassets in Resources */,
 				D00B91B22F109F9E00AEE1B6 /* CommonViews.strings in Resources */,
 				D0029BBD2F0E742000D50804 /* ic_vrbbank_56@3x.png in Resources */,
@@ -4135,7 +4363,6 @@
 				D0029BCB2F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */,
 				D0029BCC2F0E742000D50804 /* ic_vibbank_56.png in Resources */,
 				D0029BCD2F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */,
-				D0724D922F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md in Resources */,
 				D0029BCE2F0E742000D50804 /* ic_quoc_te_16.png in Resources */,
 				D0029BCF2F0E742000D50804 /* ic_viettelpay_40.png in Resources */,
 				D0029BD02F0E742000D50804 /* ic_uobbank_56.png in Resources */,
@@ -4144,12 +4371,14 @@
 				D0FF95762F161584006146F8 /* ProfileImagePickerPopup.xib in Resources */,
 				D0029BD32F0E742000D50804 /* ic_viettelpay_40@2x.png in Resources */,
 				D051415C2F17A4E500C7B963 /* ProductDetailCollectionViewController.storyboard in Resources */,
+				D051421F2F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md in Resources */,
 				D051415D2F17A4E500C7B963 /* ProductDetailViewController.storyboard in Resources */,
 				D0029BD42F0E742000D50804 /* ic_tpbank_56.png in Resources */,
 				D0029BD52F0E742000D50804 /* ic_vietinbank_56@2x.png in Resources */,
 				D0029BD62F0E742000D50804 /* ic_vietcombank_56.png in Resources */,
 				D0029BD72F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */,
 				D0029BD82F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */,
+				D05142292F19011600C7B963 /* PaymentMethodViewController.storyboard in Resources */,
 				D0029BD92F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */,
 				D0029BDA2F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */,
 				D0029BDB2F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */,
@@ -4189,6 +4418,7 @@
 				D0095C042ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
 				D0029D142F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0E6C3CC2F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
+				D05142282F19011600C7B963 /* PaymentMethodViewController.storyboard in Resources */,
 				D0FF95582F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */,
 				D0029B802F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
 				D0029C6D2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
@@ -4224,6 +4454,7 @@
 				D0029B972F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */,
 				D0029B982F0E742000D50804 /* ic_quoc_te_16.png in Resources */,
 				D0029B992F0E742000D50804 /* ic_viettelpay_40.png in Resources */,
+				D05141D92F189C7C00C7B963 /* CheckoutViewController.storyboard in Resources */,
 				D0029B9A2F0E742000D50804 /* ic_uobbank_56.png in Resources */,
 				D0029B9B2F0E742000D50804 /* ic_westernunionbank_56.png in Resources */,
 				D0029B9C2F0E742000D50804 /* ic_vietcapitalbank_56@2x.png in Resources */,
@@ -4278,13 +4509,13 @@
 				D0095B2A2ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095D682ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
 				D0FF94102F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */,
+				D05142202F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md in Resources */,
 				D0FF94E42F15CBCA006146F8 /* LocationListViewController.storyboard in Resources */,
 				D0FF94782F14E7BA006146F8 /* GroceryViewController.storyboard in Resources */,
 				D0029D1E2F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0095B2B2ECB0BA700FCC7BC /* Info.plist in Resources */,
 				D0095B2C2ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
 				D0029D5C2F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
-				D0724D962F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md in Resources */,
 				D0029D5D2F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
 				D051418D2F17C06A00C7B963 /* OrderViewController.storyboard in Resources */,
 				D0029D5E2F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */,
@@ -4299,6 +4530,7 @@
 				D0095C122ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
 				D0029D122F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0E6C3D42F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
+				D051422A2F19011600C7B963 /* PaymentMethodViewController.storyboard in Resources */,
 				D0FF95592F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */,
 				D0029C162F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
 				D0029C6F2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
@@ -4334,6 +4566,7 @@
 				D0029C2D2F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */,
 				D0029C2E2F0E742000D50804 /* ic_quoc_te_16.png in Resources */,
 				D0029C2F2F0E742000D50804 /* ic_viettelpay_40.png in Resources */,
+				D05141D82F189C7C00C7B963 /* CheckoutViewController.storyboard in Resources */,
 				D0029C302F0E742000D50804 /* ic_uobbank_56.png in Resources */,
 				D0029C312F0E742000D50804 /* ic_westernunionbank_56.png in Resources */,
 				D0029C322F0E742000D50804 /* ic_vietcapitalbank_56@2x.png in Resources */,
@@ -4388,13 +4621,13 @@
 				D0095B262ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095D662ECC54F300FCC7BC /* UICollectionView+Extensions.swift in Resources */,
 				D0FF940F2F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */,
+				D05142212F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md in Resources */,
 				D0FF94E62F15CBCA006146F8 /* LocationListViewController.storyboard in Resources */,
 				D0FF94772F14E7BA006146F8 /* GroceryViewController.storyboard in Resources */,
 				D0029D1C2F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0095B272ECB0BA700FCC7BC /* Info.plist in Resources */,
 				D0095B282ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
 				D0029D622F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
-				D0724D942F174C16004815FB /* STRIPE_ALL_CURL_COMMANDS.md in Resources */,
 				D0029D632F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
 				D051418B2F17C06A00C7B963 /* OrderViewController.storyboard in Resources */,
 				D0029D642F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */,
@@ -4432,6 +4665,7 @@
 				D0FF94BB2F15CAE3006146F8 /* FetchRecentLocationListQueriesUseCase.swift in Sources */,
 				D0029CA82F0E981600D50804 /* CategoryCodinatingController.swift in Sources */,
 				D06C3B982ECCA2E500289D48 /* UIView+CornerRadius.swift in Sources */,
+				D05141E12F18E67600C7B963 /* AddressDeleteResponseDTO.swift in Sources */,
 				D05141992F17C27900C7B963 /* OrderUseCase.swift in Sources */,
 				D0029CCB2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */,
 				D0029CDD2F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */,
@@ -4513,6 +4747,14 @@
 				D0095D8B2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
 				D0095B982ECB41A800FCC7BC /* ProductsRepository.swift in Sources */,
 				D0FF94742F14E7B5006146F8 /* GroceryViewController.swift in Sources */,
+				D05141F82F18F1CC00C7B963 /* CheckoutProgressIndicator.swift in Sources */,
+				D05141F92F18F1CC00C7B963 /* CheckoutNoteCell.swift in Sources */,
+				D05141FA2F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift in Sources */,
+				D05141FB2F18F1CC00C7B963 /* CheckoutAddressCell.swift in Sources */,
+				D05141FC2F18F1CC00C7B963 /* CheckoutProductsCell.swift in Sources */,
+				D05141FD2F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift in Sources */,
+				D05141FE2F18F1CC00C7B963 /* NoteToSellerPopup.swift in Sources */,
+				D05141FF2F18F1CC00C7B963 /* CheckoutController.swift in Sources */,
 				D0095BCD2ECB42D200FCC7BC /* Cancellable.swift in Sources */,
 				D0E6C3A52F0D06AC00527962 /* ImageCache.swift in Sources */,
 				D0FF94B82F15CAC3006146F8 /* LocationList.swift in Sources */,
@@ -4523,6 +4765,7 @@
 				D06C3B942ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
 				D0095BFD2ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
 				D0FF950A2F15FA05006146F8 /* ProfileController.swift in Sources */,
+				D051420B2F18F36000C7B963 /* CheckoutCoordinatingController.swift in Sources */,
 				D06C3B902ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
 				D0FF93E82F13EDA3006146F8 /* MapController.swift in Sources */,
 				D0095BFE2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
@@ -4556,15 +4799,18 @@
 				D0029CAC2F0E987900D50804 /* CategoryMenuItemModel.swift in Sources */,
 				D0FF94892F14E89D006146F8 /* GroceryQuery.swift in Sources */,
 				D00B91E72F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift in Sources */,
+				D05141D52F189C7400C7B963 /* CheckoutViewController.swift in Sources */,
 				D0029BEC2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
 				D0029BED2F0E742000D50804 /* EcoDivider.swift in Sources */,
 				D0029BEE2F0E742000D50804 /* Sizing.swift in Sources */,
 				D0029C832F0E974700D50804 /* LinkBankPopup.swift in Sources */,
+				D05142262F19010E00C7B963 /* PaymentMethodViewController.swift in Sources */,
 				D0FF94FA2F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */,
 				D0FF954B2F160793006146F8 /* ProfileDIContainer.swift in Sources */,
 				D0029C912F0E976400D50804 /* Popup5.swift in Sources */,
 				D0029BEF2F0E742000D50804 /* EcoTick.swift in Sources */,
 				D0029BF02F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
+				D05142342F19016F00C7B963 /* PaymentMethodCoordinationgController.swift in Sources */,
 				D0029BF12F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D0029BF22F0E742000D50804 /* EcoProgressView.swift in Sources */,
 				D0029BF32F0E742000D50804 /* Border.swift in Sources */,
@@ -4599,12 +4845,16 @@
 				D0029DF22F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */,
 				D00B92BA2F10FA1400AEE1B6 /* SignUpHeaderView.swift in Sources */,
 				D00B92BB2F10FA1400AEE1B6 /* SignUpFormView.swift in Sources */,
+				D05141DE2F18E5EE00C7B963 /* LocationData.swift in Sources */,
 				D0029CE32F0EA09400D50804 /* CartViewController.swift in Sources */,
 				D0029C002F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
 				D0095BCF2ECB42D200FCC7BC /* ConnectionError.swift in Sources */,
 				D00B923A2F10AE2F00AEE1B6 /* SignUpCoordinatingController.swift in Sources */,
 				D0E6C3BA2F0DFB0E00527962 /* MainController.swift in Sources */,
 				D0095D462ECC4FC100FCC7BC /* UIImage+Extensions.swift in Sources */,
+				D05141CB2F188C7700C7B963 /* OrderDeliverCell.swift in Sources */,
+				D05141CC2F188C7700C7B963 /* OrderProductImageCell.swift in Sources */,
+				D05141CD2F188C7700C7B963 /* OrderQuantityCell.swift in Sources */,
 				D0095D9E2ECC5BED00FCC7BC /* CommonUtil.swift in Sources */,
 				D0095D9F2ECC5BED00FCC7BC /* CoreConstant.swift in Sources */,
 				D0FF96032F163939006146F8 /* CameraObservable.swift in Sources */,
@@ -4629,6 +4879,7 @@
 				D0FF949C2F14E8FB006146F8 /* DefaultGrocerysQueriesRepository.swift in Sources */,
 				D0095D992ECC5BA300FCC7BC /* ImageCompressor.swift in Sources */,
 				D0095D7B2ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
+				D05142182F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift in Sources */,
 				D0095BB42ECB428800FCC7BC /* DefaultProductsRepository.swift in Sources */,
 				D0FF95042F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
 				D05141552F17A4B800C7B963 /* ProductDetailController.swift in Sources */,
@@ -4638,6 +4889,7 @@
 				D06C3B9F2ECCA33300289D48 /* UIView+Screen.swift in Sources */,
 				D00B92202F10A6D100AEE1B6 /* EcoTextField.swift in Sources */,
 				D05141A02F17C29400C7B963 /* OrderEndpoints.swift in Sources */,
+				D05142312F19016400C7B963 /* PaymentMethodController.swift in Sources */,
 				D0095D072ECC215100FCC7BC /* MainViewController.swift in Sources */,
 				D00B926B2F10DF5500AEE1B6 /* LoginUseCase.swift in Sources */,
 				D0095CCA2ECB59DA00FCC7BC /* UIViewController+Parent.swift in Sources */,
@@ -4686,10 +4938,12 @@
 				D0095CE82ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
 				D06C3BA82ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
 				D00B92372F10AE2300AEE1B6 /* SignUpController.swift in Sources */,
+				D051420E2F18F36C00C7B963 /* CheckoutModel.swift in Sources */,
 				D0FF951E2F15FA72006146F8 /* ProfileRepository.swift in Sources */,
 				D0FF947B2F14E7FC006146F8 /* GroceryTableViewController.swift in Sources */,
 				D0FF93A22F11F978006146F8 /* CardModel.swift in Sources */,
 				D0095D952ECC5B8C00FCC7BC /* AES.swift in Sources */,
+				D051421B2F18FB5C00C7B963 /* SectionHeaderView.swift in Sources */,
 				D0E6C3982F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
 				D00B92652F10D95400AEE1B6 /* Authentication.swift in Sources */,
 				D0E6C3992F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
@@ -4765,6 +5019,7 @@
 				D0FF94BC2F15CAE3006146F8 /* FetchRecentLocationListQueriesUseCase.swift in Sources */,
 				D0095D842ECC5ABD00FCC7BC /* Constant.swift in Sources */,
 				D0095D772ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
+				D05141E02F18E67600C7B963 /* AddressDeleteResponseDTO.swift in Sources */,
 				D05141982F17C27900C7B963 /* OrderUseCase.swift in Sources */,
 				D06C3B832ECCA16900289D48 /* UIView+Reusable.swift in Sources */,
 				D0095CBC2ECB57C100FCC7BC /* SideMenuModel.swift in Sources */,
@@ -4846,6 +5101,14 @@
 				D0029C522F0E742E00D50804 /* StringExtensions.swift in Sources */,
 				D0029C532F0E742E00D50804 /* FloatExtensions.swift in Sources */,
 				D0FF94732F14E7B5006146F8 /* GroceryViewController.swift in Sources */,
+				D05141F02F18F1CC00C7B963 /* CheckoutProgressIndicator.swift in Sources */,
+				D05141F12F18F1CC00C7B963 /* CheckoutNoteCell.swift in Sources */,
+				D05141F22F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift in Sources */,
+				D05141F32F18F1CC00C7B963 /* CheckoutAddressCell.swift in Sources */,
+				D05141F42F18F1CC00C7B963 /* CheckoutProductsCell.swift in Sources */,
+				D05141F52F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift in Sources */,
+				D05141F62F18F1CC00C7B963 /* NoteToSellerPopup.swift in Sources */,
+				D05141F72F18F1CC00C7B963 /* CheckoutController.swift in Sources */,
 				D0029C542F0E742E00D50804 /* DoubleExtensions.swift in Sources */,
 				D0029C9C2F0E97D200D50804 /* CategoryViewController.swift in Sources */,
 				D0FF94B62F15CAC3006146F8 /* LocationList.swift in Sources */,
@@ -4856,6 +5119,7 @@
 				D0095C422ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
 				D0E6C3B92F0DFB0E00527962 /* MainController.swift in Sources */,
 				D0FF95092F15FA05006146F8 /* ProfileController.swift in Sources */,
+				D051420A2F18F36000C7B963 /* CheckoutCoordinatingController.swift in Sources */,
 				D0095D942ECC5B8C00FCC7BC /* AES.swift in Sources */,
 				D0FF93EA2F13EDA3006146F8 /* MapController.swift in Sources */,
 				D0029B6B2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
@@ -4889,15 +5153,18 @@
 				D0029B702F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D0FF94872F14E89D006146F8 /* GroceryQuery.swift in Sources */,
 				D00B91E52F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift in Sources */,
+				D05141D42F189C7400C7B963 /* CheckoutViewController.swift in Sources */,
 				D0029B712F0E742000D50804 /* EcoProgressView.swift in Sources */,
 				D0029B722F0E742000D50804 /* Border.swift in Sources */,
 				D0029B732F0E742000D50804 /* Spacing.swift in Sources */,
 				D0029B742F0E742000D50804 /* EcoAvatarView.swift in Sources */,
+				D05142242F19010E00C7B963 /* PaymentMethodViewController.swift in Sources */,
 				D0FF94F82F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */,
 				D0FF954C2F160793006146F8 /* ProfileDIContainer.swift in Sources */,
 				D0029CC02F0E9E2300D50804 /* GroceryCoordinatingController.swift in Sources */,
 				D0029B752F0E742000D50804 /* SFFont.swift in Sources */,
 				D0029B762F0E742000D50804 /* Typography.swift in Sources */,
+				D05142332F19016F00C7B963 /* PaymentMethodCoordinationgController.swift in Sources */,
 				D0029B772F0E742000D50804 /* EcoRadioButton.swift in Sources */,
 				D0029B782F0E742000D50804 /* Shadows.swift in Sources */,
 				D0029B792F0E742000D50804 /* Opacity.swift in Sources */,
@@ -4932,12 +5199,16 @@
 				D0029DF32F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */,
 				D00B92BC2F10FA1400AEE1B6 /* SignUpHeaderView.swift in Sources */,
 				D00B92BD2F10FA1400AEE1B6 /* SignUpFormView.swift in Sources */,
+				D05141DC2F18E5EE00C7B963 /* LocationData.swift in Sources */,
 				D0029CED2F0EA11A00D50804 /* RecommendedItemCell.swift in Sources */,
 				D0029CEF2F0EA11A00D50804 /* CartItemCell.swift in Sources */,
 				D0029C972F0E976B00D50804 /* Popup6.swift in Sources */,
 				D00B923B2F10AE2F00AEE1B6 /* SignUpCoordinatingController.swift in Sources */,
 				D0095B2F2ECB0BA700FCC7BC /* ECommerce.xcdatamodeld in Sources */,
 				D06C3BA92ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
+				D05141CE2F188C7700C7B963 /* OrderDeliverCell.swift in Sources */,
+				D05141CF2F188C7700C7B963 /* OrderProductImageCell.swift in Sources */,
+				D05141D02F188C7700C7B963 /* OrderQuantityCell.swift in Sources */,
 				D0029C872F0E975300D50804 /* Popup2.swift in Sources */,
 				D0095C062ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
 				D0FF96072F163939006146F8 /* CameraObservable.swift in Sources */,
@@ -4962,6 +5233,7 @@
 				D0FF949D2F14E8FB006146F8 /* DefaultGrocerysQueriesRepository.swift in Sources */,
 				D0095D8C2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
 				D0095CE72ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
+				D05142192F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift in Sources */,
 				D0095C5F2ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
 				D0FF95062F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
 				D05141572F17A4B800C7B963 /* ProductDetailController.swift in Sources */,
@@ -4971,6 +5243,7 @@
 				D0095B8A2ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
 				D00B92162F10A6D100AEE1B6 /* EcoTextField.swift in Sources */,
 				D05141A12F17C29400C7B963 /* OrderEndpoints.swift in Sources */,
+				D05142302F19016400C7B963 /* PaymentMethodController.swift in Sources */,
 				D0029CCC2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */,
 				D00B92692F10DF5500AEE1B6 /* LoginUseCase.swift in Sources */,
 				D0095B732ECB1D7B00FCC7BC /* Localize.swift in Sources */,
@@ -5019,10 +5292,12 @@
 				D0095B922ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0095B972ECB41A800FCC7BC /* ProductsRepository.swift in Sources */,
 				D00B92362F10AE2300AEE1B6 /* SignUpController.swift in Sources */,
+				D051420F2F18F36C00C7B963 /* CheckoutModel.swift in Sources */,
 				D0FF951C2F15FA72006146F8 /* ProfileRepository.swift in Sources */,
 				D0FF947C2F14E7FC006146F8 /* GroceryTableViewController.swift in Sources */,
 				D0FF93A12F11F978006146F8 /* CardModel.swift in Sources */,
 				D0095B302ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
+				D051421C2F18FB5C00C7B963 /* SectionHeaderView.swift in Sources */,
 				D0095D4A2ECC506E00FCC7BC /* AttributedText.swift in Sources */,
 				D00B92672F10D95400AEE1B6 /* Authentication.swift in Sources */,
 				D0E6C3CD2F0DFEC000527962 /* MainContainerViewController.swift in Sources */,
@@ -5076,8 +5351,10 @@
 			files = (
 				D0E6C3E92F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */,
 				D0FF94832F14E893006146F8 /* Grocery.swift in Sources */,
+				D05142252F19010E00C7B963 /* PaymentMethodViewController.swift in Sources */,
 				D0E6C3EA2F0E0AF600527962 /* SegmentedControl.swift in Sources */,
 				D0FF955A2F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */,
+				D05141DD2F18E5EE00C7B963 /* LocationData.swift in Sources */,
 				D00B92B52F10F72500AEE1B6 /* EcoButton.swift in Sources */,
 				D0FF94A22F14E923006146F8 /* GrocerysRequestDTO+Mapping.swift in Sources */,
 				D0FF95782F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */,
@@ -5128,10 +5405,19 @@
 				D0095B852ECB412200FCC7BC /* ProductQuery.swift in Sources */,
 				D0029C732F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
 				D0FF96532F163CB9006146F8 /* CameraAILabelService.swift in Sources */,
+				D05142172F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift in Sources */,
 				D0095D752ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
 				D0FF94F92F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */,
 				D00B91EE2F10A61C00AEE1B6 /* QRGenerator.swift in Sources */,
 				D00B92662F10D95400AEE1B6 /* Authentication.swift in Sources */,
+				D05142002F18F1CC00C7B963 /* CheckoutProgressIndicator.swift in Sources */,
+				D05142012F18F1CC00C7B963 /* CheckoutNoteCell.swift in Sources */,
+				D05142022F18F1CC00C7B963 /* CheckoutOrderSummaryCell.swift in Sources */,
+				D05142032F18F1CC00C7B963 /* CheckoutAddressCell.swift in Sources */,
+				D05142042F18F1CC00C7B963 /* CheckoutProductsCell.swift in Sources */,
+				D05142052F18F1CC00C7B963 /* CheckoutPaymentMethodCell.swift in Sources */,
+				D05142062F18F1CC00C7B963 /* NoteToSellerPopup.swift in Sources */,
+				D05142072F18F1CC00C7B963 /* CheckoutController.swift in Sources */,
 				D0FF93DE2F13ECFB006146F8 /* MapModel.swift in Sources */,
 				D00B91EF2F10A61C00AEE1B6 /* VTPSKWebView.swift in Sources */,
 				D00B928A2F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
@@ -5158,10 +5444,12 @@
 				D05141712F17A4F000C7B963 /* ProductImageCell.swift in Sources */,
 				D0095BA42ECB426200FCC7BC /* APIEndpoints.swift in Sources */,
 				D0029D652F0F4B5200D50804 /* TableSectionHeader.swift in Sources */,
+				D051422F2F19016400C7B963 /* PaymentMethodController.swift in Sources */,
 				D0029D662F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */,
 				D0029D672F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
 				D0095BB52ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
 				D0029D462F0F46FF00D50804 /* SignUpViewController.swift in Sources */,
+				D05141D32F189C7400C7B963 /* CheckoutViewController.swift in Sources */,
 				D0029D472F0F46FF00D50804 /* RegisterViewController.swift in Sources */,
 				D0029D482F0F46FF00D50804 /* LoginModel.swift in Sources */,
 				D051417C2F17A5AF00C7B963 /* ProductDetailCoordinatingController.swift in Sources */,
@@ -5181,6 +5469,9 @@
 				D0095D052ECC215100FCC7BC /* MainViewController.swift in Sources */,
 				D0029CAB2F0E987900D50804 /* CategoryMenuItemModel.swift in Sources */,
 				D0095BDC2ECB433B00FCC7BC /* AppFlowCoordinator.swift in Sources */,
+				D05141C82F188C7700C7B963 /* OrderDeliverCell.swift in Sources */,
+				D05141C92F188C7700C7B963 /* OrderProductImageCell.swift in Sources */,
+				D05141CA2F188C7700C7B963 /* OrderQuantityCell.swift in Sources */,
 				D0029C572F0E742E00D50804 /* StringExtensions.swift in Sources */,
 				D0FF94A62F14E92C006146F8 /* GrocerysResponseDTO+Mapping.swift in Sources */,
 				D0FF95FE2F1637E6006146F8 /* UIImage+PixelBuffer.swift in Sources */,
@@ -5189,6 +5480,7 @@
 				D0029CCE2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */,
 				D0029C592F0E742E00D50804 /* DoubleExtensions.swift in Sources */,
 				D0029C5A2F0E742E00D50804 /* NSStringExtensions.swift in Sources */,
+				D05142092F18F36000C7B963 /* CheckoutCoordinatingController.swift in Sources */,
 				D0029C5B2F0E742E00D50804 /* EncodableExtensions.swift in Sources */,
 				D0FF94072F14017E006146F8 /* LocationSearchController.swift in Sources */,
 				D0029CA62F0E981600D50804 /* CategoryCodinatingController.swift in Sources */,
@@ -5239,6 +5531,7 @@
 				D0029C812F0E974700D50804 /* LinkBankPopup.swift in Sources */,
 				D0095D792ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
 				D06C3B972ECCA2E500289D48 /* UIView+CornerRadius.swift in Sources */,
+				D05142102F18F36C00C7B963 /* CheckoutModel.swift in Sources */,
 				D0095CAE2ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
 				D0FF94802F14E874006146F8 /* GrocerySceneDIContainer.swift in Sources */,
 				D0095CAF2ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */,
@@ -5320,6 +5613,7 @@
 				D0724D792F17302A004815FB /* PaymentCardDIContainer.swift in Sources */,
 				D0FF93F72F13F9C9006146F8 /* AddressController.swift in Sources */,
 				D00B92AE2F10ED0000AEE1B6 /* SplashViewController.swift in Sources */,
+				D051421D2F18FB5C00C7B963 /* SectionHeaderView.swift in Sources */,
 				D0FF950D2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */,
 				D00B92AF2F10ED0000AEE1B6 /* SplashController.swift in Sources */,
 				D0FF94AF2F14E967006146F8 /* CoreDataGrocerysResponseStorage.swift in Sources */,
@@ -5371,6 +5665,7 @@
 				D0FF939C2F11F95B006146F8 /* CardController.swift in Sources */,
 				D0FF957B2F16163E006146F8 /* EditProfileController.swift in Sources */,
 				D0FF95C62F1635B2006146F8 /* CameraViewController.swift in Sources */,
+				D05141E22F18E67600C7B963 /* AddressDeleteResponseDTO.swift in Sources */,
 				D0029C062F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D00B91B42F109F9E00AEE1B6 /* CommonViewsLocalization.swift in Sources */,
 				D0724D692F172FE7004815FB /* PaymentCardViewController.swift in Sources */,
@@ -5382,6 +5677,7 @@
 				D0FF93F42F13F997006146F8 /* AddressViewController.swift in Sources */,
 				D0029C0C2F0E742000D50804 /* Typography.swift in Sources */,
 				D0029C0D2F0E742000D50804 /* EcoRadioButton.swift in Sources */,
+				D05142352F19016F00C7B963 /* PaymentMethodCoordinationgController.swift in Sources */,
 				D0724D752F173014004815FB /* PaymentCardCoordinatingController.swift in Sources */,
 				D0029C0E2F0E742000D50804 /* Shadows.swift in Sources */,
 				D0029C0F2F0E742000D50804 /* Opacity.swift in Sources */,

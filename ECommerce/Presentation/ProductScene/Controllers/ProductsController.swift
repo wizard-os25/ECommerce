@@ -298,7 +298,7 @@ extension DefaultProductsController {
         )
         
         // Load initial products with default query
-        update(productQuery: ProductQuery(query: "13"))
+        update(productQuery: ProductQuery(query: "1"))
     }
     
     func onViewWillAppear() {

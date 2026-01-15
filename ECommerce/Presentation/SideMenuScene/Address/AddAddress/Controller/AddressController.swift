@@ -13,12 +13,27 @@ protocol AddressControllerInput {
     func didTapSave(
         contactPersonName: String,
         contactPersonNumber: String,
-        address: String,
+        addressDetail: String,
+        countryId: Int,
+        provinceId: Int,
+        districtId: Int,
+        wardId: Int,
         addressType: String,
-        longitude: String,
-        latitude: String,
         isDefault: Bool
     )
+    func didTapUpdate(
+        id: Int,
+        contactPersonName: String,
+        contactPersonNumber: String,
+        addressDetail: String,
+        countryId: Int,
+        provinceId: Int,
+        districtId: Int,
+        wardId: Int,
+        addressType: String,
+        isDefault: Bool
+    )
+    func didTapDelete(id: Int)
     func didTapUseCurrentLocation()
 }
 
@@ -27,6 +42,7 @@ protocol AddressControllerOutput {
     var successMessage: Observable<String?> { get }
     var screenTitle: String { get }
     var onCurrentLocationReceived: ((String, String, String) -> Void)? { get set } // (address, latitude, longitude)
+    var onAddressSaved: ((Address) -> Void)? { get set } // Callback when address is saved successfully
 }
 
 typealias AddressController = AddressControllerInput & AddressControllerOutput & EcoController
@@ -34,10 +50,14 @@ typealias AddressController = AddressControllerInput & AddressControllerOutput &
 final class DefaultAddressController: NSObject, AddressController {
     
     private let createAddressUseCase: CreateAddressUseCase
+    private let updateAddressUseCase: UpdateAddressUseCase
+    private let deleteAddressUseCase: DeleteAddressUseCase
     private let mainQueue: DispatchQueueType
     private let utilities: Utilities
     
     private var saveTask: Cancellable? { willSet { saveTask?.cancel() } }
+    private var updateTask: Cancellable? { willSet { updateTask?.cancel() } }
+    private var deleteTask: Cancellable? { willSet { deleteTask?.cancel() } }
     
     // MARK: - Location Services
     
@@ -50,6 +70,7 @@ final class DefaultAddressController: NSObject, AddressController {
     let successMessage: Observable<String?> = Observable(nil)
     let screenTitle = "Add a new address"
     var onCurrentLocationReceived: ((String, String, String) -> Void)? // (address, latitude, longitude)
+    var onAddressSaved: ((Address) -> Void)? // Callback when address is saved successfully
     var onRightBarButtonTap: (() -> Void)?
     
     // MARK: - EcoController Output (common to all controllers)
@@ -110,10 +131,14 @@ final class DefaultAddressController: NSObject, AddressController {
     
     init(
         createAddressUseCase: CreateAddressUseCase,
+        updateAddressUseCase: UpdateAddressUseCase,
+        deleteAddressUseCase: DeleteAddressUseCase,
         utilities: Utilities = Utilities(),
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
         self.createAddressUseCase = createAddressUseCase
+        self.updateAddressUseCase = updateAddressUseCase
+        self.deleteAddressUseCase = deleteAddressUseCase
         self.utilities = utilities
         self.mainQueue = mainQueue
         super.init()
@@ -155,6 +180,25 @@ final class DefaultAddressController: NSObject, AddressController {
         
         isSaveSuccess.value = true
         successMessage.value = "Address saved successfully"
+        
+        // Call callback if set
+        onAddressSaved?(address)
+    }
+    
+    private func handleUpdateSuccess(_ address: Address) {
+        utilities.saveLocation(
+            address: address.address,
+            latitude: address.latitude,
+            longitude: address.longitude
+        )
+        
+        isSaveSuccess.value = true
+        successMessage.value = "Address updated successfully"
+    }
+    
+    private func handleDeleteSuccess() {
+        isSaveSuccess.value = true
+        successMessage.value = "Address deleted successfully"
     }
 }
 
@@ -165,15 +209,21 @@ extension DefaultAddressController {
     func didTapSave(
         contactPersonName: String,
         contactPersonNumber: String,
-        address: String,
+        addressDetail: String,
+        countryId: Int,
+        provinceId: Int,
+        districtId: Int,
+        wardId: Int,
         addressType: String,
-        longitude: String,
-        latitude: String,
         isDefault: Bool
     ) {
         guard !contactPersonName.isEmpty,
               !contactPersonNumber.isEmpty,
-              !address.isEmpty else {
+              !addressDetail.isEmpty,
+              countryId > 0,
+              provinceId > 0,
+              districtId > 0,
+              wardId > 0 else {
             let error = NSError(
                 domain: "AddressError",
                 code: -1,
@@ -189,10 +239,12 @@ extension DefaultAddressController {
         saveTask = createAddressUseCase.execute(
             contactPersonName: contactPersonName,
             contactPersonNumber: contactPersonNumber,
-            address: address,
+            addressDetail: addressDetail,
+            countryId: countryId,
+            provinceId: provinceId,
+            districtId: districtId,
+            wardId: wardId,
             addressType: addressType,
-            longitude: longitude,
-            latitude: latitude,
             isDefault: isDefault
         ) { [weak self] result in
             self?.mainQueue.async {
@@ -201,6 +253,80 @@ extension DefaultAddressController {
                 switch result {
                 case .success(let address):
                     self?.handleSaveSuccess(address)
+                case .failure(let error):
+                    self?.handle(error: error)
+                }
+            }
+        }
+    }
+    
+    func didTapUpdate(
+        id: Int,
+        contactPersonName: String,
+        contactPersonNumber: String,
+        addressDetail: String,
+        countryId: Int,
+        provinceId: Int,
+        districtId: Int,
+        wardId: Int,
+        addressType: String,
+        isDefault: Bool
+    ) {
+        guard !contactPersonName.isEmpty,
+              !contactPersonNumber.isEmpty,
+              !addressDetail.isEmpty,
+              countryId > 0,
+              provinceId > 0,
+              districtId > 0,
+              wardId > 0 else {
+            let error = NSError(
+                domain: "AddressError",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "Please fill in all required fields"]
+            )
+            handle(error: error)
+            return
+        }
+        
+        loading.value = true
+        error.value = nil
+        
+        updateTask = updateAddressUseCase.execute(
+            id: id,
+            contactPersonName: contactPersonName,
+            contactPersonNumber: contactPersonNumber,
+            addressDetail: addressDetail,
+            countryId: countryId,
+            provinceId: provinceId,
+            districtId: districtId,
+            wardId: wardId,
+            addressType: addressType,
+            isDefault: isDefault
+        ) { [weak self] result in
+            self?.mainQueue.async {
+                self?.loading.value = false
+                
+                switch result {
+                case .success(let address):
+                    self?.handleUpdateSuccess(address)
+                case .failure(let error):
+                    self?.handle(error: error)
+                }
+            }
+        }
+    }
+    
+    func didTapDelete(id: Int) {
+        loading.value = true
+        error.value = nil
+        
+        deleteTask = deleteAddressUseCase.execute(id: id) { [weak self] result in
+            self?.mainQueue.async {
+                self?.loading.value = false
+                
+                switch result {
+                case .success:
+                    self?.handleDeleteSuccess()
                 case .failure(let error):
                     self?.handle(error: error)
                 }

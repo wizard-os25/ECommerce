@@ -189,6 +189,10 @@ open class EcoButton: UIButton {
         layer.cornerRadius = cornerRadius
         clipsToBounds = false
         
+        // Disable automatic tint adjustment when disabled to maintain colors during loading
+        adjustsImageWhenDisabled = false
+        adjustsImageWhenHighlighted = false
+        
         // Title styling
         titleLabel?.font = titleFont
         setTitleColor(normalTitleColor, for: .normal)
@@ -276,13 +280,17 @@ open class EcoButton: UIButton {
             backgroundColor = normalBackgroundColor
             setTitleColor(normalTitleColor, for: .normal)
             isEnabled = true
+            isUserInteractionEnabled = true
             hideAllIndicators()
             showTitle()
             
         case .loading:
             backgroundColor = normalBackgroundColor
             setTitleColor(normalTitleColor, for: .normal)
-            isEnabled = false
+            // Keep button enabled but prevent interaction through buttonTapped check
+            // This maintains the normal tintColor/appearance
+            isEnabled = true
+            isUserInteractionEnabled = false
             showLoadingIndicator()
             hideTitle()
             
@@ -290,6 +298,7 @@ open class EcoButton: UIButton {
             backgroundColor = disabledBackgroundColor
             setTitleColor(disabledTitleColor, for: .normal)
             isEnabled = false
+            isUserInteractionEnabled = false
             hideAllIndicators()
             showTitle()
             

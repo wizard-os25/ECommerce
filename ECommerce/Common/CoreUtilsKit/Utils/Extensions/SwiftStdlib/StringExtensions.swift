@@ -56,6 +56,42 @@ public extension String {
         let validImageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp"]
         return validImageExtensions.contains(url.pathExtension.lowercased())
     }
+    
+    /// Ghép URL image với baseURL từ AppConfiguration
+    /// Nếu urlString đã là full URL (bắt đầu bằng http/https) thì trả về nguyên bản
+    /// Nếu không, ghép với apiBaseURL từ AppConfiguration
+    /// - Returns: Full URL string hoặc nil nếu không thể tạo URL hợp lệ
+    func fullImageURL() -> String? {
+        // Nếu rỗng, trả về nil
+        guard !self.isEmpty else {
+            return nil
+        }
+        
+        // Nếu đã là full URL, trả về nguyên bản
+        if self.hasPrefix("http://") || self.hasPrefix("https://") {
+            return self
+        }
+        
+        // Lấy baseURL từ AppConfiguration
+        let appConfig = AppConfiguration()
+        var baseURL = appConfig.apiBaseURL
+        
+        // Loại bỏ trailing slash từ baseURL nếu có
+        baseURL = baseURL.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        
+        // Đảm bảo imagePath có leading slash
+        let imagePath = self.hasPrefix("/") ? self : "/\(self)"
+        
+        // Ghép lại
+        let fullURL = "\(baseURL)\(imagePath)"
+        
+        // Validate URL
+        guard URL(string: fullURL) != nil else {
+            return nil
+        }
+        
+        return fullURL
+    }
 }
 
 // MARK: - String money

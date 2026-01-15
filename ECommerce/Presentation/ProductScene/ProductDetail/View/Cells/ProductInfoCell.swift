@@ -50,11 +50,21 @@ final class ProductInfoCell: UICollectionViewCell {
         return label
     }()
     
-    // Quantity Controls
+    // Quantity Controls - giống OrderQuantityCell
+    private let quantityContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Colors.tokenDark02
+        view.layer.cornerRadius = BorderRadius.tokenBorderRadius12
+        view.layer.borderWidth = Sizing.tokenSizing01
+        view.layer.borderColor = Colors.tokenDark10.cgColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let quantityMinusButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("-", for: .normal)
-        button.titleLabel?.font = Typography.fontBold22
+        button.titleLabel?.font = Typography.fontBold18
         button.setTitleColor(Colors.tokenDark100, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -64,12 +74,12 @@ final class ProductInfoCell: UICollectionViewCell {
         let textField = UITextField()
         textField.text = "1"
         textField.textAlignment = .center
-        textField.font = Typography.fontMedium16
+        textField.font = Typography.fontMedium14
         textField.textColor = Colors.tokenDark100
         textField.keyboardType = .numberPad
         textField.borderStyle = .none
         textField.backgroundColor = Colors.tokenWhite
-        textField.layer.cornerRadius = BorderRadius.tokenBorderRadius12
+        textField.layer.cornerRadius = BorderRadius.tokenBorderRadius08
         textField.layer.masksToBounds = true
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -78,7 +88,7 @@ final class ProductInfoCell: UICollectionViewCell {
     private let quantityPlusButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("+", for: .normal)
-        button.titleLabel?.font = Typography.fontBold22
+        button.titleLabel?.font = Typography.fontBold18
         button.setTitleColor(Colors.tokenDark100, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -189,13 +199,36 @@ final class ProductInfoCell: UICollectionViewCell {
     // MARK: - Setup
     
     private func setupQuantityControls() {
-        priceView.addSubview(quantityMinusButton)
-        priceView.addSubview(quantityTextField)
-        priceView.addSubview(quantityPlusButton)
+        priceView.addSubview(quantityContainerView)
+        quantityContainerView.addSubview(quantityMinusButton)
+        quantityContainerView.addSubview(quantityTextField)
+        quantityContainerView.addSubview(quantityPlusButton)
         
         quantityMinusButton.addTarget(self, action: #selector(quantityMinusTapped), for: .touchUpInside)
         quantityPlusButton.addTarget(self, action: #selector(quantityPlusTapped), for: .touchUpInside)
         quantityTextField.delegate = self
+        
+        // Constraints giống OrderQuantityCell
+        NSLayoutConstraint.activate([
+            quantityContainerView.trailingAnchor.constraint(equalTo: priceView.trailingAnchor, constant: -Spacing.tokenSpacing16),
+            quantityContainerView.centerYAnchor.constraint(equalTo: priceView.centerYAnchor),
+            quantityContainerView.heightAnchor.constraint(equalToConstant: 40),
+            quantityContainerView.widthAnchor.constraint(equalToConstant: 120),
+            
+            quantityMinusButton.leadingAnchor.constraint(equalTo: quantityContainerView.leadingAnchor, constant: Spacing.tokenSpacing08),
+            quantityMinusButton.centerYAnchor.constraint(equalTo: quantityContainerView.centerYAnchor),
+            quantityMinusButton.widthAnchor.constraint(equalToConstant: 24),
+            quantityMinusButton.heightAnchor.constraint(equalToConstant: 24),
+            
+            quantityTextField.centerXAnchor.constraint(equalTo: quantityContainerView.centerXAnchor),
+            quantityTextField.centerYAnchor.constraint(equalTo: quantityContainerView.centerYAnchor),
+            quantityTextField.widthAnchor.constraint(equalToConstant: 40),
+            
+            quantityPlusButton.trailingAnchor.constraint(equalTo: quantityContainerView.trailingAnchor, constant: -Spacing.tokenSpacing08),
+            quantityPlusButton.centerYAnchor.constraint(equalTo: quantityContainerView.centerYAnchor),
+            quantityPlusButton.widthAnchor.constraint(equalToConstant: 24),
+            quantityPlusButton.heightAnchor.constraint(equalToConstant: 24)
+        ])
     }
     
     @objc private func quantityMinusTapped() {
@@ -276,20 +309,7 @@ final class ProductInfoCell: UICollectionViewCell {
             priceLabel.leadingAnchor.constraint(equalTo: priceView.leadingAnchor, constant: 16),
             priceLabel.centerYAnchor.constraint(equalTo: priceView.centerYAnchor),
             
-            // Quantity Controls - trailing trong priceView (từ phải sang trái: Plus -> TextField -> Minus)
-            quantityPlusButton.trailingAnchor.constraint(equalTo: priceView.trailingAnchor, constant: -16),
-            quantityPlusButton.centerYAnchor.constraint(equalTo: priceView.centerYAnchor),
-            quantityPlusButton.widthAnchor.constraint(equalToConstant: 32),
-            quantityPlusButton.heightAnchor.constraint(equalToConstant: 32),
-            
-            quantityTextField.trailingAnchor.constraint(equalTo: quantityPlusButton.leadingAnchor, constant: -8),
-            quantityTextField.centerYAnchor.constraint(equalTo: priceView.centerYAnchor),
-            quantityTextField.widthAnchor.constraint(equalToConstant: 60),
-            
-            quantityMinusButton.trailingAnchor.constraint(equalTo: quantityTextField.leadingAnchor, constant: -8),
-            quantityMinusButton.centerYAnchor.constraint(equalTo: priceView.centerYAnchor),
-            quantityMinusButton.widthAnchor.constraint(equalToConstant: 32),
-            quantityMinusButton.heightAnchor.constraint(equalToConstant: 32),
+            // Quantity Controls constraints are set in setupQuantityControls()
             
             // Description - leading, cách bottom view giá 16pt
             descriptionLabel.topAnchor.constraint(equalTo: priceView.bottomAnchor, constant: 16),

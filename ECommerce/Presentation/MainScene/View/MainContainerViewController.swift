@@ -226,6 +226,8 @@ class MainContainerViewController: UIViewController {
     private func sideMenuState(expanded: Bool, completion: ((Bool) -> Void)? = nil) {
         if expanded {
             // Open menu: Side menu moves to 0, TabBarController moves to sideMenuRevealWidth
+            // Hide TabBar when sideMenu opens
+            mainTabBarController.hideTabBar()
             animateSideMenu(targetPosition: revealSideMenuOnTop ? 0 : 0, tabBarPosition: revealSideMenuOnTop ? 0 : sideMenuRevealWidth) { finished in
                 self.isExpanded = true
                 completion?(finished)
@@ -235,8 +237,11 @@ class MainContainerViewController: UIViewController {
             }
         } else {
             // Close menu: Side menu moves to -sideMenuRevealWidth, TabBarController moves to 0
+            // Show TabBar when sideMenu closes (only if at root)
             animateSideMenu(targetPosition: revealSideMenuOnTop ? (-sideMenuRevealWidth - paddingForRotation) : -sideMenuRevealWidth, tabBarPosition: revealSideMenuOnTop ? 0 : 0) { finished in
                 self.isExpanded = false
+                // Show TabBar only if at root of selected navigation controller
+                self.mainTabBarController.showTabBar()
                 completion?(finished)
             }
             UIView.animate(withDuration: 0.5) {

@@ -84,6 +84,15 @@ final class AppDIContainer {
         return OrderDIContainer(dependencies: dependencies)
     }
     
+    func makeCheckoutSceneDIContainer() -> CheckoutSceneDIContainer {
+        let dependencies = CheckoutSceneDIContainer.Dependencies(
+            orderDataTransferService: apiDataTransferService,
+            paymentCardDataTransferService: apiDataTransferService,
+            addressDIContainer: makeAddressDIContainer()
+        )
+        return CheckoutSceneDIContainer(dependencies: dependencies)
+    }
+    
     func makeProductDetailDIContainer() -> ProductDetailDIContainer {
         return ProductDetailDIContainer()
     }

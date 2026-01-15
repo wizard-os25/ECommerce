@@ -60,16 +60,11 @@ final class ProductItemCell: UITableViewCell {
             productImageView.image = nil
         }
         
-        // Construct full URL
-        let baseURL = "http://127.0.0.1:8000"
-        let fullURLString: String
-        if urlString.hasPrefix("http") {
-            fullURLString = urlString
-        } else {
-            fullURLString = baseURL + urlString
+        // Sử dụng helper function để ghép URL
+        guard let fullURLString = urlString.fullImageURL(),
+              let url = URL(string: fullURLString) else {
+            return
         }
-        
-        guard let url = URL(string: fullURLString) else { return }
         
         // Load image using ImageCache service
         imageCache.loadImage(from: url) { [weak self] image in

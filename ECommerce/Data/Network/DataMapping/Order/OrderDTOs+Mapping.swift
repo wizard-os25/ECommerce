@@ -10,24 +10,56 @@ import Foundation
 // MARK: - Place Order Request
 
 struct PlaceOrderRequestDTO: Encodable {
-    let orderAmount: Double
     let cart: [CartItemDTO]
-    let address: String
-    let longitude: String
-    let latitude: String
-    let contactPersonName: String
-    let contactPersonNumber: String
     let orderNote: String?
     
+    // Option 1: Use saved address (delivery_address_id)
+    let deliveryAddressId: Int?
+    
+    // Option 2: Use new address details
+    let addressDetail: String?
+    let countryId: Int?
+    let provinceId: Int?
+    let districtId: Int?
+    let wardId: Int?
+    let contactPersonName: String?
+    let contactPersonNumber: String?
+    
+    init(
+        cart: [CartItemDTO],
+        orderNote: String?,
+        deliveryAddressId: Int? = nil,
+        addressDetail: String? = nil,
+        countryId: Int? = nil,
+        provinceId: Int? = nil,
+        districtId: Int? = nil,
+        wardId: Int? = nil,
+        contactPersonName: String? = nil,
+        contactPersonNumber: String? = nil
+    ) {
+        self.cart = cart
+        self.orderNote = orderNote
+        self.deliveryAddressId = deliveryAddressId
+        self.addressDetail = addressDetail
+        self.countryId = countryId
+        self.provinceId = provinceId
+        self.districtId = districtId
+        self.wardId = wardId
+        self.contactPersonName = contactPersonName
+        self.contactPersonNumber = contactPersonNumber
+    }
+    
     enum CodingKeys: String, CodingKey {
-        case orderAmount = "order_amount"
         case cart
-        case address
-        case longitude
-        case latitude
+        case orderNote = "order_note"
+        case deliveryAddressId = "delivery_address_id"
+        case addressDetail = "address_detail"
+        case countryId = "country_id"
+        case provinceId = "province_id"
+        case districtId = "district_id"
+        case wardId = "ward_id"
         case contactPersonName = "contact_person_name"
         case contactPersonNumber = "contact_person_number"
-        case orderNote = "order_note"
     }
 }
 
@@ -54,13 +86,15 @@ struct PlaceOrderResponseDTO: Decodable {
 
 struct PlaceOrderDataDTO: Decodable {
     let orderId: Int
+    let orderAmount: Double
+    let shippingFee: Double
     let totalAmount: Double
-    let taxAmount: Double
     
     enum CodingKeys: String, CodingKey {
         case orderId = "order_id"
+        case orderAmount = "order_amount"
+        case shippingFee = "shipping_fee"
         case totalAmount = "total_amount"
-        case taxAmount = "tax_amount"
     }
 }
 
@@ -70,8 +104,9 @@ extension PlaceOrderDataDTO {
     func toDomain() -> Order {
         return Order(
             orderId: orderId,
-            totalAmount: totalAmount,
-            taxAmount: taxAmount
+            orderAmount: orderAmount,
+            shippingFee: shippingFee,
+            totalAmount: totalAmount
         )
     }
 }

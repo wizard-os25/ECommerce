@@ -35,6 +35,18 @@ final class AddressDIContainer: AddressCoordinatingControllerDependencies {
         )
     }
     
+    func makeUpdateAddressUseCase() -> UpdateAddressUseCase {
+        DefaultUpdateAddressUseCase(
+            addressRepository: makeAddressRepository()
+        )
+    }
+    
+    func makeDeleteAddressUseCase() -> DeleteAddressUseCase {
+        DefaultDeleteAddressUseCase(
+            addressRepository: makeAddressRepository()
+        )
+    }
+    
     // MARK: - Address Scene
     
     func makeAddressViewController() -> AddressViewController {
@@ -45,7 +57,9 @@ final class AddressDIContainer: AddressCoordinatingControllerDependencies {
     
     func makeAddressController() -> AddressController {
         DefaultAddressController(
-            createAddressUseCase: makeCreateAddressUseCase()
+            createAddressUseCase: makeCreateAddressUseCase(),
+            updateAddressUseCase: makeUpdateAddressUseCase(),
+            deleteAddressUseCase: makeDeleteAddressUseCase()
         )
     }
     

@@ -87,6 +87,7 @@ extension DefaultPaymentCardRepository: PaymentCardRepository {
             
             switch result {
             case .success(let responseDTO):
+                // Trả về customerId và ephemeralKey nếu có
                 completion(.success(responseDTO.data.customerId))
             case .failure(let error):
                 completion(.failure(error))
@@ -275,7 +276,9 @@ extension DefaultPaymentCardRepository: PaymentCardRepository {
             case .success(let responseDTO):
                 let paymentIntent = PaymentIntent(
                     clientSecret: responseDTO.data.clientSecret,
-                    paymentIntentId: responseDTO.data.paymentIntentId
+                    paymentIntentId: responseDTO.data.paymentIntentId,
+                    customerId: responseDTO.data.customerId,
+                    ephemeralKey: responseDTO.data.ephemeralKey
                 )
                 completion(.success(paymentIntent))
             case .failure(let error):

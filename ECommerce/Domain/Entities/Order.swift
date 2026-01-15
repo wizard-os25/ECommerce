@@ -19,12 +19,14 @@ public struct CartItem {
 
 public struct Order {
     public let orderId: Int
+    public let orderAmount: Double
+    public let shippingFee: Double
     public let totalAmount: Double
-    public let taxAmount: Double
     
-    public init(orderId: Int, totalAmount: Double, taxAmount: Double) {
+    public init(orderId: Int, orderAmount: Double, shippingFee: Double, totalAmount: Double) {
         self.orderId = orderId
+        self.orderAmount = orderAmount
+        self.shippingFee = shippingFee
         self.totalAmount = totalAmount
-        self.taxAmount = taxAmount
     }
 }

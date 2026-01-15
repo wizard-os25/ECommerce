@@ -12,39 +12,14 @@ final class OrderViewController: EcoViewController {
     
     // MARK: - UI Components
     
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
-    
-    // Quantity Input
-    private let quantityLabel = UILabel()
-    private let quantityContainerView = UIView()
-    private let quantityMinusButton = UIButton(type: .system)
-    private let quantityTextField = UITextField()
-    private let quantityPlusButton = UIButton(type: .system)
-    
-    // Address Fields
-    private let addressLabel = UILabel()
-    private let addressTextField = EcoTextField()
-    
-    private let contactPersonNameLabel = UILabel()
-    private let contactPersonNameTextField = EcoTextField()
-    
-    private let contactPersonNumberLabel = UILabel()
-    private let contactPersonNumberTextField = EcoTextField()
-    
-    // Choose Location Saved Label
-    private let chooseLocationSavedLabel = UILabel()
-    
-    // Order Note
-    private let orderNoteLabel = UILabel()
-    private let orderNoteTextView = ECoTextView()
-    
-    // Payment Card Section
-    private let paymentCardLabel = UILabel()
-    private var addPaymentCardButton = EcoButton()
-    
-    // Place Order Button
-    private var placeOrderButton: EcoButton!
+    private let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .systemBackground
+        tableView.keyboardDismissMode = .onDrag
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
     
     private var orderController: OrderController! {
         get { controller as? OrderController }
@@ -56,6 +31,24 @@ final class OrderViewController: EcoViewController {
     
     // CardViewController for location list popup
     private var locationListCardViewController: CardViewController?
+    
+    // Reference to quantity cell
+    private var quantityCell: OrderQuantityCell?
+    
+    // Add to card mode
+    var isAddToCardMode: Bool = false {
+        didSet {
+            if isAddToCardMode {
+                setupAddToCardOrderActionView()
+            }
+        }
+    }
+    
+    // OrderActionView for add to card mode
+    private var addToCardOrderActionView: OrderActionView?
+    
+    // OrderActionView for start order flow (not add to card mode)
+    private var startOrderActionView: OrderActionView?
     
     // MARK: - Lifecycle
     
@@ -70,7 +63,11 @@ final class OrderViewController: EcoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        setupFormFields()
+        if isAddToCardMode {
+            setupAddToCardOrderActionView()
+        } else {
+            setupStartOrderActionView()
+        }
         bindOrderSpecific()
         loadInitialQuantity()
         orderController.didLoadView()
@@ -97,8 +94,15 @@ final class OrderViewController: EcoViewController {
     // MARK: - Order-Specific Binding
     
     private func bindOrderSpecific() {
-        orderController.selectedPaymentCard.observe(on: self) { [weak self] card in
-            self?.updatePaymentCardButton(card: card)
+        orderController.product.observe(on: self) { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                if self?.isAddToCardMode == true {
+                    self?.updateAddToCardOrderActionView()
+                } else {
+                    self?.updateStartOrderActionView()
+                }
+            }
         }
         
         orderController.isOrderPlaced.observe(on: self) { [weak self] isPlaced in
@@ -113,8 +117,12 @@ final class OrderViewController: EcoViewController {
         }
         
         orderController.loading.observe(on: self) { [weak self] isLoading in
-            guard let self = self, let placeOrderButton = self.placeOrderButton else { return }
-            placeOrderButton.setLoading(isLoading)
+            if let startOrderActionView = self?.startOrderActionView {
+                startOrderActionView.isLoading = isLoading
+            }
+            if let addToCardOrderActionView = self?.addToCardOrderActionView {
+                addToCardOrderActionView.isLoading = isLoading
+            }
         }
     }
     
@@ -123,237 +131,120 @@ final class OrderViewController: EcoViewController {
     private func setupViews() {
         view.backgroundColor = .systemBackground
         
-        // Scroll View
-        scrollView.keyboardDismissMode = .onDrag
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollView)
+        // Setup TableView
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(cell: OrderProductImageCell.self)
+        tableView.register(cell: OrderQuantityCell.self)
+        tableView.register(cell: OrderDeliverCell.self)
         
-        // Content View
-        contentView.backgroundColor = .clear
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(contentView)
+        view.addSubview(tableView)
         
-        // Constraints
+        // Always reserve space for OrderActionView at bottom
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100)
         ])
     }
     
-    private func setupFormFields() {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = Spacing.tokenSpacing16
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(stackView)
+    private func setupAddToCardOrderActionView() {
+        guard isAddToCardMode else { return }
         
-        // Quantity Label
-        quantityLabel.text = "Quantity"
-        quantityLabel.font = Typography.fontBold16
-        quantityLabel.textColor = Colors.tokenDark100
-        quantityLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(quantityLabel)
+        let orderActionView = OrderActionView()
+        orderActionView.delegate = self
+        orderActionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(orderActionView)
         
-        // Quantity Container
-        quantityContainerView.backgroundColor = Colors.tokenDark02
-        quantityContainerView.layer.cornerRadius = BorderRadius.tokenBorderRadius12
-        quantityContainerView.layer.borderWidth = Sizing.tokenSizing01
-        quantityContainerView.layer.borderColor = Colors.tokenDark10.cgColor
-        quantityContainerView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(quantityContainerView)
+        // Configure OrderActionView for add to card mode
+        orderActionView.topLeftLabelText = "Subtotal"
+        orderActionView.buttonTitle = "Add to card"
+        orderActionView.buttonCornerRadius = BorderRadius.tokenBorderRadius16
+        orderActionView.leftItemType = .none // No left item
         
-        // Quantity Input Setup
-        setupQuantityInput()
-        
-        // Address
-        setupField(
-            label: addressLabel,
-            textField: addressTextField,
-            title: "Address",
-            iconName: "location.fill",
-            stackView: stackView
-        )
-        addressTextField.placeholder = "Enter delivery address"
-        
-        // Contact Person Name
-        setupField(
-            label: contactPersonNameLabel,
-            textField: contactPersonNameTextField,
-            title: "Contact Person Name",
-            iconName: "person.fill",
-            stackView: stackView
-        )
-        contactPersonNameTextField.placeholder = "Contact Person Name"
-        
-        // Contact Person Number
-        setupField(
-            label: contactPersonNumberLabel,
-            textField: contactPersonNumberTextField,
-            title: "Contact Person Number",
-            iconName: "phone.fill",
-            stackView: stackView
-        )
-        contactPersonNumberTextField.placeholder = "Contact Person Number"
-        contactPersonNumberTextField.keyboardType = .phonePad
-        
-        // Choose Location Saved Label
-        chooseLocationSavedLabel.text = "Choose location saved"
-        chooseLocationSavedLabel.font = Typography.fontRegular14
-        chooseLocationSavedLabel.textColor = Colors.tokenGreen100
-        chooseLocationSavedLabel.isUserInteractionEnabled = true
-        chooseLocationSavedLabel.translatesAutoresizingMaskIntoConstraints = false
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(chooseLocationSavedTapped))
-        chooseLocationSavedLabel.addGestureRecognizer(tapGesture)
-        stackView.addArrangedSubview(chooseLocationSavedLabel)
-        
-        // Order Note
-        orderNoteLabel.text = "Order Note (Optional)"
-        orderNoteLabel.font = Typography.fontBold16
-        orderNoteLabel.textColor = Colors.tokenDark100
-        orderNoteLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(orderNoteLabel)
-        
-        orderNoteTextView.type = .advanced
-        orderNoteTextView.placeholder = "Add any special instructions..."
-        orderNoteTextView.isAllowNewLine = true
-        orderNoteTextView.maxLength = 500
-        orderNoteTextView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(orderNoteTextView)
-        
-        // Payment Card Section
-        paymentCardLabel.text = "Payment Method"
-        paymentCardLabel.font = Typography.fontBold16
-        paymentCardLabel.textColor = Colors.tokenDark100
-        paymentCardLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(paymentCardLabel)
-        
-        addPaymentCardButton = EcoButton.secondary(title: "Add New Card")
-        addPaymentCardButton.ecoDelegate = self
-        addPaymentCardButton.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(addPaymentCardButton)
-        
-        // Place Order Button
-        placeOrderButton = EcoButton.authButton(title: "Place Order")
-        placeOrderButton.ecoDelegate = self
-        placeOrderButton.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(placeOrderButton)
-        
-        // Stack View Constraints
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Spacing.tokenSpacing22),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Spacing.tokenSpacing22),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Spacing.tokenSpacing22),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Spacing.tokenSpacing40),
-            
-            // Quantity Container height
-            quantityContainerView.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
-            
-            // Text Field heights
-            addressTextField.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
-            contactPersonNameTextField.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
-            contactPersonNumberTextField.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
-            
-            // Order Note TextView height
-            orderNoteTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
-            
-            // Payment Card Button height
-            addPaymentCardButton.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56),
-            
-            // Place Order Button height
-            placeOrderButton.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56)
-        ])
-    }
-    
-    private func setupQuantityInput() {
-        // Minus Button
-        quantityMinusButton.setTitle("-", for: .normal)
-        quantityMinusButton.titleLabel?.font = Typography.fontBold22
-        quantityMinusButton.setTitleColor(Colors.tokenDark100, for: .normal)
-        quantityMinusButton.addTarget(self, action: #selector(quantityMinusTapped), for: .touchUpInside)
-        quantityMinusButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Text Field
-        quantityTextField.text = "1"
-        quantityTextField.textAlignment = .center
-        quantityTextField.font = Typography.fontMedium16
-        quantityTextField.textColor = Colors.tokenDark100
-        quantityTextField.keyboardType = .numberPad
-        quantityTextField.borderStyle = .none
-        quantityTextField.backgroundColor = .clear
-        quantityTextField.delegate = self
-        quantityTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Plus Button
-        quantityPlusButton.setTitle("+", for: .normal)
-        quantityPlusButton.titleLabel?.font = Typography.fontBold22
-        quantityPlusButton.setTitleColor(Colors.tokenDark100, for: .normal)
-        quantityPlusButton.addTarget(self, action: #selector(quantityPlusTapped), for: .touchUpInside)
-        quantityPlusButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        quantityContainerView.addSubview(quantityMinusButton)
-        quantityContainerView.addSubview(quantityTextField)
-        quantityContainerView.addSubview(quantityPlusButton)
+        // Update price
+        updateAddToCardOrderActionView()
         
         NSLayoutConstraint.activate([
-            quantityMinusButton.leadingAnchor.constraint(equalTo: quantityContainerView.leadingAnchor, constant: Spacing.tokenSpacing16),
-            quantityMinusButton.centerYAnchor.constraint(equalTo: quantityContainerView.centerYAnchor),
-            quantityMinusButton.widthAnchor.constraint(equalToConstant: 32),
-            quantityMinusButton.heightAnchor.constraint(equalToConstant: 32),
-            
-            quantityTextField.centerXAnchor.constraint(equalTo: quantityContainerView.centerXAnchor),
-            quantityTextField.centerYAnchor.constraint(equalTo: quantityContainerView.centerYAnchor),
-            quantityTextField.widthAnchor.constraint(equalToConstant: 60),
-            
-            quantityPlusButton.trailingAnchor.constraint(equalTo: quantityContainerView.trailingAnchor, constant: -Spacing.tokenSpacing16),
-            quantityPlusButton.centerYAnchor.constraint(equalTo: quantityContainerView.centerYAnchor),
-            quantityPlusButton.widthAnchor.constraint(equalToConstant: 32),
-            quantityPlusButton.heightAnchor.constraint(equalToConstant: 32)
+            orderActionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            orderActionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            orderActionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        addToCardOrderActionView = orderActionView
+        view.bringSubviewToFront(orderActionView)
     }
     
-    private func setupField(
-        label: UILabel,
-        textField: EcoTextField,
-        title: String,
-        iconName: String,
-        stackView: UIStackView
-    ) {
-        // Title Label
-        label.text = title
-        label.font = Typography.fontBold16
-        label.textColor = Colors.tokenDark100
-        label.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(label)
+    private func setupStartOrderActionView() {
+        let orderActionView = OrderActionView()
+        orderActionView.delegate = self
+        orderActionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(orderActionView)
         
-        // Text Field
-        textField.type = .baseline
-        textField.setLeftIcon(iconName, tintColor: Colors.tokenDark60)
-        textField.cornerRadius = BorderRadius.tokenBorderRadius12
-        textField.backgroundColorColor = Colors.tokenDark02
-        textField.borderColor = Colors.tokenDark10
-        textField.selectedBorderColor = Colors.tokenRainbowBlueEnd
-        textField.errorBorderColor = Colors.tokenRed100
-        textField.borderWidth = Sizing.tokenSizing01
-        textField.autocapitalizationType = .none
-        textField.autocorrectionType = .no
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(textField)
+        // Configure OrderActionView for start order flow
+        orderActionView.topLeftLabelText = "Subtotal"
+        orderActionView.buttonTitle = "Start order"
+        orderActionView.buttonCornerRadius = BorderRadius.tokenBorderRadius16
+        orderActionView.leftItemType = .icon(UIImage(systemName: "plus.circle")) // Add to card icon
+        
+        // Update price
+        updateStartOrderActionView()
+        
+        NSLayoutConstraint.activate([
+            orderActionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            orderActionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            orderActionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        startOrderActionView = orderActionView
+        view.bringSubviewToFront(orderActionView)
     }
+    
+    private func updateStartOrderActionView() {
+        guard let orderActionView = startOrderActionView,
+              let product = orderController.product.value else { return }
+        
+        let priceNumber = product.price.convertMoneyToNumber()
+        let totalPrice = priceNumber * Double(quantity)
+        
+        // Format totalPrice to currency string
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.groupingSeparator = "."
+        numberFormatter.decimalSeparator = ","
+        numberFormatter.locale = Locale(identifier: "en_US")
+        numberFormatter.maximumFractionDigits = 0
+        
+        let formattedPrice = numberFormatter.string(from: NSNumber(value: totalPrice)) ?? "0"
+        
+        orderActionView.topRightLabelText = "$ \(formattedPrice) ⋀"
+    }
+    
+    private func updateAddToCardOrderActionView() {
+        guard let orderActionView = addToCardOrderActionView,
+              let product = orderController.product.value else { return }
+        
+        let priceNumber = product.price.convertMoneyToNumber()
+        let totalPrice = priceNumber * Double(quantity)
+        
+        // Format totalPrice to currency string
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.groupingSeparator = "."
+        numberFormatter.decimalSeparator = ","
+        numberFormatter.locale = Locale(identifier: "en_US")
+        numberFormatter.maximumFractionDigits = 0
+        
+        let formattedPrice = numberFormatter.string(from: NSNumber(value: totalPrice)) ?? "0"
+        
+        orderActionView.topRightLabelText = "$ \(formattedPrice) ⋀"
+    }
+    
     
     private func loadInitialQuantity() {
         if let firstItem = orderController.cartItems.value.first {
             quantity = firstItem.quantity
-            quantityTextField.text = "\(quantity)"
-            updateCartItemsQuantity()
         }
     }
     
@@ -365,14 +256,6 @@ final class OrderViewController: EcoViewController {
     
     // MARK: - Helper Methods
     
-    private func updatePaymentCardButton(card: PaymentCard?) {
-        if let card = card {
-            addPaymentCardButton.setTitle("\(card.displayName) (Tap to change)", for: .normal)
-        } else {
-            addPaymentCardButton.setTitle("Add New Card", for: .normal)
-        }
-    }
-    
     private func handleOrderPlaced() {
         guard let order = orderController.orderResult.value else { return }
         showAlert(
@@ -381,130 +264,255 @@ final class OrderViewController: EcoViewController {
         )
     }
     
-    private func showPaymentSheet() {
-        // PaymentSheet will be shown here
-        // This requires payment intent client_secret which is created after order is placed
-        // For now, this is a placeholder
+}
+
+// MARK: - UITableViewDataSource
+
+extension OrderViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            // Product Image Cell
+            let cell: OrderProductImageCell = tableView.dequeueReusableCell(at: indexPath)
+            cell.configure(with: orderController.product.value)
+            return cell
+            
+        case 1:
+            // Quantity Cell
+            let cell: OrderQuantityCell = tableView.dequeueReusableCell(at: indexPath)
+            cell.configure(quantity: quantity)
+            cell.onQuantityChanged = { [weak self] newQuantity in
+                self?.quantity = newQuantity
+                self?.updateCartItemsQuantity()
+                if self?.isAddToCardMode == true {
+                    self?.updateAddToCardOrderActionView()
+                } else {
+                    self?.updateStartOrderActionView()
+                }
+            }
+            quantityCell = cell
+            return cell
+            
+        case 2:
+            // Deliver Cell
+            let cell: OrderDeliverCell = tableView.dequeueReusableCell(at: indexPath)
+            return cell
+            
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return nil
+        case 1:
+            return "Quantity"
+        case 2:
+            return "Deliver"
+        default:
+            return nil
+        }
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension OrderViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return UITableView.automaticDimension // Dynamic height for title and description
+        case 1:
+            return 60
+        case 2:
+            return UITableView.automaticDimension
+        default:
+            return 44
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return 100 // Estimated height
+        case 1:
+            return 60
+        case 2:
+            return 120
+        default:
+            return 44
+        }
+    }
+}
+
+// MARK: - OrderActionViewDelegate
+
+extension OrderViewController: OrderActionViewDelegate {
+    
+    func orderActionViewDidTapAction(_ view: OrderActionView) {
+        if isAddToCardMode {
+            // Save to cart: totalPrice, id, quantity
+            guard let product = orderController.product.value,
+                  let firstItem = orderController.cartItems.value.first else { return }
+            
+            let priceNumber = product.price.convertMoneyToNumber()
+            let totalPrice = priceNumber * Double(quantity)
+            let productId = product.id
+            
+            // TODO: Save to cart management screen
+            // For now, just print
+            print("✅ [OrderViewController] Add to card:")
+            print("   Product ID: \(productId)")
+            print("   Quantity: \(quantity)")
+            print("   Total Price: \(totalPrice)")
+            
+            // Show success message
+            showAlert(
+                title: "Success",
+                message: "Product added to cart successfully!"
+            )
+        } else {
+            // Start order flow - call API place order
+            placeOrder()
+        }
+    }
+    
+    func orderActionViewDidTapLeftItem(_ view: OrderActionView) {
+        // When left item (add to card icon) is tapped, save to cart
+        guard !isAddToCardMode else { return }
+        
+        guard let product = orderController.product.value,
+              let firstItem = orderController.cartItems.value.first else { return }
+        
+        let priceNumber = product.price.convertMoneyToNumber()
+        let totalPrice = priceNumber * Double(quantity)
+        let productId = product.id
+        
+        // TODO: Save to cart management screen
+        print("✅ [OrderViewController] Add to card via left icon:")
+        print("   Product ID: \(productId)")
+        print("   Quantity: \(quantity)")
+        print("   Total Price: \(totalPrice)")
+        
         showAlert(
-            title: "Add Payment Method",
-            message: "PaymentSheet integration will be implemented after order is placed"
+            title: "Success",
+            message: "Product added to cart successfully!"
         )
     }
     
-    @objc private func chooseLocationSavedTapped() {
-        showLocationListPopup()
+    func orderActionViewDidTapTopRightLabel(_ view: OrderActionView) {
+        // Show pricing calculation popup
+        guard let product = orderController.product.value else { return }
+        
+        let priceNumber = product.price.convertMoneyToNumber()
+        let totalPrice = priceNumber * Double(quantity)
+        
+        let popup = PricingCaculationPopup(frame: .zero)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.groupingSeparator = "."
+        numberFormatter.decimalSeparator = ","
+        numberFormatter.locale = Locale(identifier: "en_US")
+        numberFormatter.maximumFractionDigits = 0
+        let formattedPrice = numberFormatter.string(from: NSNumber(value: totalPrice)) ?? "0"
+        let currencyUnit = CoreUtilsKitLocalization.currency_unit.localized
+        
+        // Configure labels theo yêu cầu
+        popup.titlePricingLabel.text = "Price breakdown"
+        popup.orderBreakdownLabel.text = "\(product.name) • \(quantity) item"
+        popup.orderBreakdownValueLabel.text = "$ \(formattedPrice)"
+        
+        // Ẩn shipping nếu không có giá trị
+        let shippingValue: Double = 0 // TODO: Get from order or product
+        if shippingValue > 0 {
+            popup.shippingLabel.isHidden = false
+            popup.shippingValueLabel.isHidden = false
+            let formattedShipping = numberFormatter.string(from: NSNumber(value: shippingValue)) ?? "0"
+            popup.shippingValueLabel.text = "$ \(formattedShipping)"
+        } else {
+            popup.shippingLabel.isHidden = true
+            popup.shippingValueLabel.isHidden = true
+        }
+        
+        // Subtotal = totalPrice + shippingValue (nếu có)
+        let subTotal = totalPrice + shippingValue
+        let formattedSubTotal = numberFormatter.string(from: NSNumber(value: subTotal)) ?? "0"
+        popup.subTotalLabel.text = "Total price"
+        popup.subTotalValue.text = "$ \(formattedSubTotal)"
+        
+        popup.show(in: self.view)
     }
     
-    private func showLocationListPopup() {
-        // Prevent opening multiple times
-        if let existingCard = locationListCardViewController, existingCard.parent != nil {
-            existingCard.show()
+    private func placeOrder() {
+        // Get cached address
+        let utilities = Utilities()
+        let address = utilities.getCachedAddress() ?? ""
+        
+        // Call API place order through OrderController
+        // longitude and latitude are not used by backend anymore, but kept for compatibility
+        orderController.didTapPlaceOrder(
+            address: address,
+            longitude: "", // Not used by backend anymore
+            latitude: "", // Not used by backend anymore
+            contactPersonName: "", // TODO: Get from user profile or input field
+            contactPersonNumber: "", // TODO: Get from user profile or input field
+            orderNote: nil
+        )
+        
+        // Push CheckoutViewController ngay không chờ kết quả
+        pushCheckoutViewController()
+    }
+    
+    private func pushCheckoutViewController() {
+        // Load CheckoutViewController from storyboard
+        let storyboard = UIStoryboard(name: "CheckoutViewController", bundle: nil)
+        guard let checkoutVC = storyboard.instantiateViewController(withIdentifier: "CheckoutViewController") as? CheckoutViewController else {
+            print("⚠️ [OrderViewController] Failed to load CheckoutViewController from storyboard")
             return
         }
         
-        // Clean up if exists but not attached
-        if locationListCardViewController != nil {
-            locationListCardViewController?.detach()
-            locationListCardViewController = nil
+        // Find navigation controller
+        var navigationController: UINavigationController?
+        
+        // Try self.navigationController first
+        if let navController = self.navigationController {
+            navigationController = navController
+        }
+        // If embedded in CardViewController, try parent's navigation controller
+        else if let cardVC = parent as? CardViewController,
+                let parentNav = cardVC.parent?.navigationController {
+            navigationController = parentNav
+        }
+        // Try to find from view hierarchy
+        else if let parentVC = parent,
+                let navController = parentVC.navigationController {
+            navigationController = navController
         }
         
-        // Create Card Configuration
-        let screenHeight = view.bounds.height
-        let cardHeight = screenHeight - 120
-        let cardConfig = CardConfiguration(
-            expandedHeight: cardHeight,
-            collapsedHeight: cardHeight,
-            presentationMode: .onDemand,
-            enableGesture: true
-        )
+        guard let navController = navigationController else {
+            print("⚠️ [OrderViewController] No navigation controller found")
+            return
+        }
         
-        // Create Card Controller
-        let cardController = DefaultCardController(configuration: cardConfig)
-        
-        // Create Card View Controller
-        let cardVC = CardViewController.create(with: cardController)
-        cardVC.attach(to: self)
-        locationListCardViewController = cardVC
-        
-        // Create LocationListViewController
-        let appDIContainer = AppDIContainer()
-        let locationListDIContainer = appDIContainer.makeLocationListDIContainer()
-        let locationListVC = locationListDIContainer.makeLocationListViewController()
-        
-        // Setup callback when address is selected
-        if let locationListController = locationListVC.controller as? DefaultLocationListController {
-            locationListController.onAddressSelected = { [weak self, weak cardVC] address in
-                self?.selectedAddress = address
-                
-                // Fill form with selected address
-                self?.addressTextField.text = address.address
-                self?.contactPersonNameTextField.text = address.contactPersonName
-                self?.contactPersonNumberTextField.text = address.contactPersonNumber
-                
-                // Dismiss card
-                cardVC?.dismiss()
-                if cardVC === self?.locationListCardViewController {
-                    self?.locationListCardViewController = nil
-                }
+        // Dismiss CardViewController if exists
+        if let cardVC = parent as? CardViewController {
+            cardVC.dismiss(animated: false) {
+                navController.pushViewController(checkoutVC, animated: true)
             }
-        }
-        
-        // Set LocationListViewController as content
-        cardVC.setContent(locationListVC)
-        
-        // Show card
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            cardVC.show()
-        }
-    }
-    
-    @objc private func quantityMinusTapped() {
-        if quantity > 1 {
-            quantity -= 1
-            quantityTextField.text = "\(quantity)"
-            updateCartItemsQuantity()
-        }
-    }
-    
-    @objc private func quantityPlusTapped() {
-        quantity += 1
-        quantityTextField.text = "\(quantity)"
-        updateCartItemsQuantity()
-    }
-}
-
-// MARK: - EcoButtonDelegate
-
-extension OrderViewController: EcoButtonDelegate {
-    
-    func buttonDidTap(_ button: EcoButton) {
-        if button == addPaymentCardButton {
-            showPaymentSheet()
-        } else if button == placeOrderButton {
-            orderController.didTapPlaceOrder(
-                address: addressTextField.text ?? "",
-                longitude: selectedAddress?.longitude ?? "",
-                latitude: selectedAddress?.latitude ?? "",
-                contactPersonName: contactPersonNameTextField.text ?? "",
-                contactPersonNumber: contactPersonNumberTextField.text ?? "",
-                orderNote: orderNoteTextView.text.isEmpty ? nil : orderNoteTextView.text
-            )
-        }
-    }
-}
-
-// MARK: - UITextFieldDelegate
-
-extension OrderViewController: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == quantityTextField {
-            if let text = textField.text, let value = Int(text), value > 0 {
-                quantity = value
-                updateCartItemsQuantity()
-            } else {
-                quantityTextField.text = "\(quantity)"
-            }
+        } else {
+            navController.pushViewController(checkoutVC, animated: true)
         }
     }
 }

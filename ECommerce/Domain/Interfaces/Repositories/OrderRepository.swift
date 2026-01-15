@@ -9,14 +9,16 @@ import Foundation
 
 protocol OrderRepository {
     func placeOrder(
-        orderAmount: Double,
         cart: [CartItem],
-        address: String,
-        longitude: String,
-        latitude: String,
-        contactPersonName: String,
-        contactPersonNumber: String,
         orderNote: String?,
+        deliveryAddressId: Int?,
+        addressDetail: String?,
+        countryId: Int?,
+        provinceId: Int?,
+        districtId: Int?,
+        wardId: Int?,
+        contactPersonName: String?,
+        contactPersonNumber: String?,
         completion: @escaping (Result<Order, Error>) -> Void
     ) -> Cancellable?
 }

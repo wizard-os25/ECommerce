@@ -25,9 +25,11 @@ struct CreateCustomerResponseDTO: Decodable {
 
 struct CustomerDataDTO: Decodable {
     let customerId: String
+    let ephemeralKey: String? // Optional - có thể có hoặc không
     
     enum CodingKeys: String, CodingKey {
         case customerId = "customer_id"
+        case ephemeralKey = "ephemeral_key"
     }
 }
 
@@ -180,10 +182,14 @@ struct CreatePaymentIntentResponseDTO: Decodable {
 struct PaymentIntentDataDTO: Decodable {
     let clientSecret: String
     let paymentIntentId: String
+    let customerId: String? // Optional - có thể có hoặc không
+    let ephemeralKey: String? // Optional - có thể có hoặc không
     
     enum CodingKeys: String, CodingKey {
         case clientSecret = "client_secret"
         case paymentIntentId = "payment_intent_id"
+        case customerId = "customer_id"
+        case ephemeralKey = "ephemeral_key"
     }
 }
 

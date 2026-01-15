@@ -1,0 +1,517 @@
+//
+//  CheckoutViewController.swift
+//  ECommerce
+//
+//  Created by wizard.os25 on 15/1/26.
+//
+
+import UIKit
+import StripePaymentSheet
+
+final class CheckoutViewController: EcoViewController {
+    
+    // MARK: - UI Components
+    
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = .systemBackground
+        cv.showsVerticalScrollIndicator = false
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        return cv
+    }()
+    
+    private let progressIndicator = CheckoutProgressIndicator()
+    
+    private let orderActionView = OrderActionView()
+    
+    private var checkoutController: CheckoutController! {
+        get { controller as? CheckoutController }
+    }
+    
+    // CardViewController for address
+    private var addressCardViewController: CardViewController?
+    
+    // PaymentSheet
+    private var paymentSheet: PaymentSheet?
+    
+    // Flag để track khi nào cần auto-show PaymentSheet
+    private var shouldAutoShowPaymentSheet = false
+    
+    // MARK: - Lifecycle
+    
+    static func create(
+        with checkoutController: CheckoutController
+    ) -> CheckoutViewController {
+        let view = CheckoutViewController.instantiateViewController()
+        view.controller = checkoutController
+        return view
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        bindCheckoutSpecific()
+        checkoutController.didLoadView()
+    }
+    
+    // MARK: - Setup
+    
+    private func setupViews() {
+        view.backgroundColor = .systemBackground
+        
+        // Progress indicator
+        progressIndicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(progressIndicator)
+        
+        // Collection view
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(CheckoutAddressCell.self, forCellWithReuseIdentifier: "CheckoutAddressCell")
+        collectionView.register(CheckoutProductsCell.self, forCellWithReuseIdentifier: "CheckoutProductsCell")
+        collectionView.register(CheckoutNoteCell.self, forCellWithReuseIdentifier: "CheckoutNoteCell")
+        collectionView.register(CheckoutPaymentMethodCell.self, forCellWithReuseIdentifier: "CheckoutPaymentMethodCell")
+        collectionView.register(CheckoutOrderSummaryCell.self, forCellWithReuseIdentifier: "CheckoutOrderSummaryCell")
+        collectionView.register(SectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "SectionHeader")
+        view.addSubview(collectionView)
+        
+        // OrderActionView
+        orderActionView.delegate = self
+        orderActionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(orderActionView)
+        
+        NSLayoutConstraint.activate([
+            progressIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16 + 24), // Thêm 24pt padding
+            progressIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            collectionView.topAnchor.constraint(equalTo: progressIndicator.bottomAnchor, constant: 16),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: orderActionView.topAnchor),
+            
+            orderActionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            orderActionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            orderActionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        updateOrderActionView()
+    }
+    
+    // MARK: - Binding
+    
+    private func bindCheckoutSpecific() {
+        checkoutController.currentStep.observe(on: self) { [weak self] step in
+            self?.progressIndicator.updateProgress(to: CheckoutProgressIndicator.Step(rawValue: step.rawValue) ?? .placeOrder)
+            self?.updateOrderActionView()
+        }
+        
+        checkoutController.selectedAddress.observe(on: self) { [weak self] _ in
+            self?.updateOrderActionView()
+            self?.collectionView.reloadData()
+        }
+        
+        checkoutController.cartItems.observe(on: self) { [weak self] _ in
+            self?.collectionView.reloadData()
+        }
+        
+        checkoutController.orderSummary.observe(on: self) { [weak self] _ in
+            self?.updateOrderActionView()
+            self?.collectionView.reloadData()
+        }
+        
+        checkoutController.loading.observe(on: self) { [weak self] isLoading in
+            self?.orderActionView.isLoading = isLoading
+        }
+        
+        checkoutController.error.observe(on: self) { [weak self] error in
+            guard let error = error else { return }
+            self?.showAlert(title: "Error", message: error.localizedDescription)
+        }
+        
+        // Setup callback to navigate to PaymentMethodViewController
+        if let defaultController = checkoutController as? DefaultCheckoutController {
+            defaultController.onNavigateToPaymentMethod = { [weak self] order, clientSecret, paymentIntentId, customerId, ephemeralKey in
+                self?.navigateToPaymentMethod(
+                    order: order,
+                    clientSecret: clientSecret,
+                    paymentIntentId: paymentIntentId,
+                    customerId: customerId,
+                    ephemeralKey: ephemeralKey
+                )
+            }
+        }
+        
+        checkoutController.readyForPayment.observe(on: self) { [weak self] ready in
+            guard let self = self else { return }
+            // Khi ready, cập nhật UI
+            self.updateOrderActionView()
+            // Tự động hiển thị PaymentSheet nếu đang ở trạng thái chờ (sau khi tap Add new card hoặc Choose Card)
+            if ready && self.shouldAutoShowPaymentSheet {
+                self.shouldAutoShowPaymentSheet = false
+                self.showPaymentSheetIfReady()
+            }
+        }
+    }
+    
+    private func updateOrderActionView() {
+        let step = checkoutController.currentStep.value
+        let hasAddress = checkoutController.selectedAddress.value != nil
+        
+        if !hasAddress {
+            // No address - show "Add address" button
+            orderActionView.configureForAddAddress(
+                topLeftText: nil,
+                topRightText: nil,
+                buttonTitle: "Add address"
+            )
+            // Bỏ icon vị trí, không set leftItemType
+            orderActionView.leftItemType = .none
+            return
+        }
+        
+        switch step {
+        case .placeOrder:
+            if let summary = checkoutController.orderSummary.value {
+                orderActionView.configureForCheckout(
+                    topLeftText: "Total",
+                    topRightText: String(format: "$%.2f", summary.total), // Thay USD bằng $
+                    buttonTitle: "Order"
+                )
+                // Bỏ icon vị trí, thay bằng label $ (tổng giá)
+                orderActionView.leftItemType = .label(String(format: "$%.2f", summary.total))
+            }
+        case .createCustomer:
+            orderActionView.buttonTitle = "Processing..."
+            orderActionView.isButtonEnabled = false
+        case .createPayment:
+            orderActionView.buttonTitle = "Create Payment"
+            orderActionView.isButtonEnabled = false
+        case .complete:
+            // Khi ở step complete, nếu đã ready thì button sẽ trigger PaymentSheet
+            // Nếu chưa ready thì hiển thị "Processing..."
+            if checkoutController.readyForPayment.value {
+                orderActionView.buttonTitle = "Pay Now"
+                orderActionView.isButtonEnabled = true
+            } else {
+                orderActionView.buttonTitle = "Processing..."
+                orderActionView.isButtonEnabled = false
+            }
+        }
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension CheckoutViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3 // Address, Products, Summary
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch section {
+        case 0: return 1 // Address
+        case 1: return 1 // Products
+        case 2: return 1 // Order summary
+        default: return 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.section {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CheckoutAddressCell", for: indexPath) as! CheckoutAddressCell
+            cell.configure(
+                address: checkoutController.selectedAddress.value,
+                useDefault: checkoutController.useDefaultAddress.value,
+                onTap: { [weak self] in
+                    self?.checkoutController.didTapAddAddress()
+                    self?.showAddressCard()
+                },
+                onToggleDefault: { [weak self] isDefault in
+                    self?.checkoutController.didToggleUseDefaultAddress(isDefault)
+                }
+            )
+            return cell
+        case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CheckoutProductsCell", for: indexPath) as! CheckoutProductsCell
+            cell.configure(
+                items: checkoutController.cartItems.value,
+                note: checkoutController.noteToSeller.value,
+                shippingFee: checkoutController.orderSummary.value?.shippingFee,
+                onQuantityChanged: { [weak self] productId, quantity in
+                    self?.checkoutController.didUpdateCartItemQuantity(productId: productId, quantity: quantity)
+                },
+                onTapAddNote: { [weak self] in
+                    self?.showNotePopup()
+                }
+            )
+            return cell
+        case 2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CheckoutOrderSummaryCell", for: indexPath) as! CheckoutOrderSummaryCell
+            cell.configure(summary: checkoutController.orderSummary.value)
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension CheckoutViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width
+        switch indexPath.section {
+        case 0: return CGSize(width: width, height: 120) // Address + checkbox
+        case 1: return CGSize(width: width, height: 300) // Products scroll + note
+        case 2: return CGSize(width: width, height: 150) // Order summary
+        default: return CGSize(width: width, height: 100)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionHeaderView
+            switch indexPath.section {
+            case 0: header.title = nil // Không có title cho section 0
+            case 1: header.title = "Product"
+            case 2: header.title = "Order summary"
+            default: header.title = nil
+            }
+            return header
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if section == 0 {
+            return CGSize(width: collectionView.bounds.width, height: 1) // Divider nhỏ cho section 0
+        }
+        return CGSize(width: collectionView.bounds.width, height: 48) // Header với title lớn hơn
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8 // Giảm một nửa từ 16 xuống 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0) // Giảm một nửa từ 16 xuống 8
+    }
+}
+
+// MARK: - OrderActionViewDelegate
+
+extension CheckoutViewController: OrderActionViewDelegate {
+    
+    func orderActionViewDidTapAction(_ view: OrderActionView) {
+        let hasAddress = checkoutController.selectedAddress.value != nil
+        
+        if !hasAddress {
+            showAddressCard()
+            return
+        }
+        
+        let step = checkoutController.currentStep.value
+        switch step {
+        case .placeOrder:
+            checkoutController.didTapPlaceOrder()
+        case .complete:
+            // Hiển thị PaymentSheet khi user tap button
+            if checkoutController.readyForPayment.value {
+                showPaymentSheetIfReady()
+            }
+        default:
+            break
+        }
+    }
+    
+    func orderActionViewDidTapLeftItem(_ view: OrderActionView) {
+        // Khi tap vào label $ (tổng giá) thì mở popup PricingCaculationPopup
+        showPricingPopup()
+    }
+    
+    func orderActionViewDidTapTopRightLabel(_ view: OrderActionView) {
+        // Show pricing calculation popup
+        showPricingPopup()
+    }
+}
+
+// MARK: - Helper Methods
+
+extension CheckoutViewController {
+    
+    private func showAddressCard() {
+        // Create CardViewController with AddressViewController
+        let appDIContainer = AppDIContainer()
+        let addressDIContainer = appDIContainer.makeAddressDIContainer()
+        let addressVC = addressDIContainer.makeAddressViewController()
+        
+        let cardConfig = CardConfiguration(
+            expandedHeight: view.bounds.height - 100,
+            collapsedHeight: view.bounds.height - 100,
+            presentationMode: .onDemand,
+            enableGesture: true
+        )
+        
+        let cardController = DefaultCardController(configuration: cardConfig)
+        let cardVC = CardViewController.create(with: cardController)
+        cardVC.attach(to: self)
+        addressCardViewController = cardVC
+        cardVC.setContent(addressVC)
+        
+        // Setup callback when address is saved (after cardVC is created)
+        if let addressController = addressVC.controller as? DefaultAddressController {
+            addressController.onAddressSaved = { [weak self, weak cardVC] address in
+                self?.checkoutController.didSelectAddress(address)
+                cardVC?.dismiss()
+                if cardVC === self?.addressCardViewController {
+                    self?.addressCardViewController = nil
+                }
+            }
+        }
+        
+        // Also setup callback for LocationList if user selects from list
+        // This is handled inside AddressViewController when user taps the list icon
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            cardVC.show()
+        }
+    }
+    
+    private func showNotePopup() {
+        // Create and show note popup
+        let popup = NoteToSellerPopup()
+        popup.configure(
+            initialNote: checkoutController.noteToSeller.value,
+            onSave: { [weak self] note in
+                self?.checkoutController.didSaveNoteToSeller(note)
+                popup.dismiss()
+            },
+            onCancel: {
+                popup.dismiss()
+            }
+        )
+        popup.show(in: view)
+    }
+    
+    private func showPricingPopup() {
+        let popup = PricingCaculationPopup()
+        if let summary = checkoutController.orderSummary.value {
+            popup.orderBreakdownValueLabel.text = String(format: "USD %.2f", summary.subtotal)
+            popup.shippingValueLabel.text = String(format: "USD %.2f", summary.shippingFee)
+            popup.subTotalValue.text = String(format: "USD %.2f", summary.total)
+        }
+        popup.show(in: view)
+    }
+    
+    private func showPaymentSheetIfReady() {
+        // Lấy thông tin từ controller thông qua một cách an toàn
+        // Vì các properties là private, chúng ta cần thêm output observables hoặc methods
+        guard let defaultController = checkoutController as? DefaultCheckoutController else { return }
+        
+        // Kiểm tra xem đã có đủ thông tin chưa
+        guard defaultController.readyForPayment.value else {
+            print("⚠️ [CheckoutViewController] Not ready for payment yet")
+            return
+        }
+        
+        // Gọi method để lấy payment info
+        defaultController.getPaymentInfo { [weak self] clientSecret, customerId, ephemeralKey in
+            guard let self = self,
+                  let clientSecret = clientSecret,
+                  let customerId = customerId,
+                  let ephemeralKey = ephemeralKey else {
+                print("⚠️ [CheckoutViewController] Missing required payment information")
+                return
+            }
+            
+            self.preparePaymentSheet(clientSecret: clientSecret, customerId: customerId, ephemeralKey: ephemeralKey)
+        }
+    }
+    
+    private func showPaymentSheet() {
+        showPaymentSheetIfReady()
+    }
+    
+    private func preparePaymentSheet(clientSecret: String, customerId: String, ephemeralKey: String) {
+        var configuration = PaymentSheet.Configuration()
+        configuration.merchantDisplayName = "My Shop"
+        
+        configuration.customer = .init(
+            id: customerId,
+            ephemeralKeySecret: ephemeralKey
+        )
+        
+        configuration.allowsDelayedPaymentMethods = false
+        
+        paymentSheet = PaymentSheet(
+            paymentIntentClientSecret: clientSecret,
+            configuration: configuration
+        )
+        
+        paymentSheet?.present(from: self) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .completed:
+                print("✅ Payment success")
+                // Notify backend success
+                self.notifyBackendSuccess()
+                
+            case .canceled:
+                print("❌ User canceled")
+                // User canceled, không cần làm gì
+                
+            case .failed(let error):
+                print("⚠️ Payment failed:", error.localizedDescription)
+                self.showAlert(title: "Payment Failed", message: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func notifyBackendSuccess() {
+        guard let defaultController = checkoutController as? DefaultCheckoutController,
+              let paymentIntentId = defaultController.getPaymentIntentId() else {
+            return
+        }
+        
+        // Call confirm payment API
+        defaultController.confirmPayment(paymentIntentId: paymentIntentId) { [weak self] success in
+            if success {
+                // Navigate to success screen
+                print("✅ Payment confirmed successfully")
+                // TODO: Navigate to success screen
+            } else {
+                self?.showAlert(title: "Error", message: "Failed to confirm payment")
+            }
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    private func navigateToPaymentMethod(
+        order: Order,
+        clientSecret: String,
+        paymentIntentId: String,
+        customerId: String?,
+        ephemeralKey: String?
+    ) {
+        guard let navigationController = navigationController else { return }
+        
+        // Create DIContainer
+        let appDIContainer = AppDIContainer()
+        let checkoutDIContainer = appDIContainer.makeCheckoutSceneDIContainer()
+        let paymentMethodVC = checkoutDIContainer.makePaymentMethodViewController(
+            order: order,
+            clientSecret: clientSecret,
+            paymentIntentId: paymentIntentId,
+            customerId: customerId,
+            ephemeralKey: ephemeralKey
+        )
+        navigationController.pushViewController(paymentMethodVC, animated: true)
+    }
+}
+

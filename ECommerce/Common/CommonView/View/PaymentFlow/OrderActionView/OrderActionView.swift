@@ -158,9 +158,9 @@ public class OrderActionView: UIView {
     private let bottomRowStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.distribution = .fill
+        stack.distribution = .fill // Icon sẽ có fixed width, button sẽ expand
         stack.alignment = .center
-        stack.spacing = Spacing.tokenSpacing12
+        stack.spacing = Spacing.tokenSpacing12 // Spacing 12pt giữa icon và button
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -214,7 +214,14 @@ public class OrderActionView: UIView {
     // MARK: - Setup
     
     private func setupViews() {
-        backgroundColor = .clear
+        backgroundColor = Colors.tokenWhite
+        
+        // Setup shadow at top edge to separate from parent view
+        layer.shadowColor = Colors.tokenBlack.cgColor
+        layer.shadowOpacity = Float(Opacity.tokenOpacity08)
+        layer.shadowOffset = CGSize(width: 0, height: -Sizing.tokenSizing04)
+        layer.shadowRadius = 8
+        layer.masksToBounds = false
         
         // Add container stack view
         addSubview(containerStackView)
@@ -233,32 +240,37 @@ public class OrderActionView: UIView {
         
         // Setup constraints
         NSLayoutConstraint.activate([
-            // Container stack view
-            containerStackView.topAnchor.constraint(equalTo: topAnchor),
-            containerStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            containerStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            containerStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            // Container stack view - padding 12pt from leading and trailing
+            containerStackView.topAnchor.constraint(equalTo: topAnchor, constant: Spacing.tokenSpacing12),
+            containerStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Spacing.tokenSpacing12),
+            containerStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Spacing.tokenSpacing12),
+            containerStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Spacing.tokenSpacing12),
             
             // Top row labels
             topLeftLabel.heightAnchor.constraint(equalToConstant: 20),
             topRightLabel.heightAnchor.constraint(equalToConstant: 20),
             
-            // Left item container
+            // Left item container - nhỏ, fixed width
             leftItemContainer.heightAnchor.constraint(equalToConstant: 24),
+            leftItemContainer.widthAnchor.constraint(equalToConstant: 24),
             
-            // Left item icon
+            // Left item icon - nhỏ
             leftItemIconView.centerXAnchor.constraint(equalTo: leftItemContainer.centerXAnchor),
             leftItemIconView.centerYAnchor.constraint(equalTo: leftItemContainer.centerYAnchor),
-            leftItemIconView.widthAnchor.constraint(equalToConstant: 24),
-            leftItemIconView.heightAnchor.constraint(equalToConstant: 24),
+            leftItemIconView.widthAnchor.constraint(equalToConstant: 20), // Nhỏ hơn
+            leftItemIconView.heightAnchor.constraint(equalToConstant: 20),
             
             // Left item label
             leftItemLabel.centerXAnchor.constraint(equalTo: leftItemContainer.centerXAnchor),
             leftItemLabel.centerYAnchor.constraint(equalTo: leftItemContainer.centerYAnchor),
             
-            // Action button
+            // Action button - chiếm toàn bộ không gian còn lại
             actionButton.heightAnchor.constraint(equalToConstant: Sizing.tokenSizing56)
         ])
+        
+        // Button chiếm toàn bộ không gian còn lại (sau icon và spacing 12pt)
+        // bottomRowStackView đã có spacing = 12pt giữa leftItemContainer và actionButton
+        // actionButton sẽ tự động expand để fill không gian còn lại
         
         // Setup button width constraints
         setupButtonWidthConstraints()

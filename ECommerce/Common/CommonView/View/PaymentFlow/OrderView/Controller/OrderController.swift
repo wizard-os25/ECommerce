@@ -144,33 +144,23 @@ final class DefaultOrderController: OrderController {
             return
         }
         
-        // Calculate order_amount from product.price * quantity
-        guard let product = product.value else {
-            let error = NSError(
-                domain: "OrderError",
-                code: -1,
-                userInfo: [NSLocalizedDescriptionKey: "Product information is missing"]
-            )
-            self.error.value = error
-            return
-        }
-        
-        let quantity = model.cartItems.first?.quantity ?? 1
-        let priceNumber = product.price.convertMoneyToNumber()
-        let orderAmount = priceNumber * Double(quantity)
-        
         loading.value = true
         error.value = nil
         
+        // Determine if we should use delivery_address_id or address_detail
+        // For now, we'll use address_detail with empty location details since we don't have saved address
+        // TODO: Get address details from user's saved addresses if available
         placeOrderTask = orderUseCase.placeOrder(
-            orderAmount: orderAmount,
             cart: model.cartItems,
-            address: address,
-            longitude: longitude,
-            latitude: latitude,
+            orderNote: orderNote,
+            deliveryAddressId: nil,
+            addressDetail: address,
+            countryId: nil,
+            provinceId: nil,
+            districtId: nil,
+            wardId: nil,
             contactPersonName: contactPersonName,
-            contactPersonNumber: contactPersonNumber,
-            orderNote: orderNote
+            contactPersonNumber: contactPersonNumber
         ) { [weak self] result in
             guard let self = self else { return }
             self.mainQueue.async {

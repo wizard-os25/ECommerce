@@ -123,21 +123,23 @@ final class ProductDetailViewController: EcoViewController {
         view.addSubview(orderActionView)
         
         NSLayoutConstraint.activate([
-            orderActionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.tokenSpacing12),
-            orderActionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.tokenSpacing12),
-            orderActionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            orderActionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80)
+            orderActionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            orderActionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            orderActionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            orderActionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80 + 24) // Tăng thêm 24pt
         ])
         
         // Configure OrderActionView
         orderActionView.topLeftLabelText = "Subtotal"
         orderActionView.buttonTitle = "Start order"
         orderActionView.buttonCornerRadius = BorderRadius.tokenBorderRadius16
+        orderActionView.leftItemType = .icon(UIImage(systemName: "plus.circle")) // Thêm icon add to card
         
         // Update initial values
         updateOrderActionView()
         
-        // Ensure OrderActionView is above collection view
+        // Ensure z-order: Navigation bar > OrderActionView > Collection view
+        // OrderActionView should be below navbar but above collection view
         view.bringSubviewToFront(orderActionView)
     }
     
@@ -156,9 +158,8 @@ final class ProductDetailViewController: EcoViewController {
         numberFormatter.maximumFractionDigits = 0
         
         let formattedPrice = numberFormatter.string(from: NSNumber(value: totalPrice)) ?? "0"
-        let currencyUnit = CoreUtilsKitLocalization.currency_unit.localized
         
-        orderActionView.topRightLabelText = "$ /\(formattedPrice) \(currencyUnit) ⌃"
+        orderActionView.topRightLabelText = "$ \(formattedPrice) ⋀"
     }
     
     private func formatDoubleToCurrency(_ value: Double) -> String {
@@ -169,6 +170,64 @@ final class ProductDetailViewController: EcoViewController {
         numberFormatter.locale = Locale(identifier: "en_US")
         numberFormatter.maximumFractionDigits = 0
         return numberFormatter.string(from: NSNumber(value: value)) ?? "0"
+    }
+    
+    private func openAddToCardOrderCard() {
+        guard let product = productDetailController.product.value else {
+            print("⚠️ [ProductDetailViewController] Product is nil, cannot open add to card")
+            return
+        }
+        
+        print("🔵 [ProductDetailViewController] openAddToCardOrderCard called")
+        print("   📦 Product ID: \(product.id)")
+        
+        // Create Card Configuration - cách top 200pt
+        let screenHeight = view.bounds.height
+        let topPadding: CGFloat = 200
+        let cardConfig = CardConfiguration(
+            expandedHeight: screenHeight - topPadding,
+            collapsedHeight: screenHeight - topPadding,
+            presentationMode: .onDemand,
+            enableGesture: true
+        )
+        
+        // Create Card Controller
+        let cardController = DefaultCardController(configuration: cardConfig)
+        
+        // Create Card View Controller
+        let cardVC = CardViewController.create(with: cardController)
+        
+        // Attach to current view controller
+        cardVC.attach(to: self)
+        
+        // Create OrderViewController with cart items
+        let cartItems = [CartItem(id: product.id, quantity: itemQuantity)]
+        let appDIContainer = AppDIContainer()
+        let orderDIContainer = appDIContainer.makeOrderDIContainer()
+        let orderVC = orderDIContainer.makeOrderViewController(cartItems: cartItems, product: product, isAddToCardMode: true)
+        
+        // Set OrderViewController as content
+        cardVC.setContent(orderVC)
+        
+        // Store reference
+        cardViewController = cardVC
+        
+        // Ensure view is laid out and parent view height is set before showing
+        view.layoutIfNeeded()
+        
+        DispatchQueue.main.async { [weak cardVC, weak self] in
+            guard let cardVC = cardVC, let self = self else { return }
+            let height = self.view.bounds.height
+            if height > 0 {
+                cardVC.updateParentViewHeightIfNeeded()
+                cardVC.show()
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    cardVC.updateParentViewHeightIfNeeded()
+                    cardVC.show()
+                }
+            }
+        }
     }
     
     private func openOrderCard() {
@@ -196,9 +255,9 @@ final class ProductDetailViewController: EcoViewController {
         
         print("🔵 [ProductDetailViewController] Creating new card")
         
-        // Create Card Configuration
+        // Create Card Configuration - cách top 180pt
         let screenHeight = view.bounds.height
-        let topPadding: CGFloat = 12
+        let topPadding: CGFloat = 180
         let cardConfig = CardConfiguration(
             expandedHeight: screenHeight - topPadding,
             collapsedHeight: screenHeight - topPadding,
@@ -252,14 +311,8 @@ final class ProductDetailViewController: EcoViewController {
         guard let product = productDetailController.product.value else { return }
         guard let orderUseCase = orderUseCase else { return }
         
-        // Get cached location
+        // Get cached address
         let address = utilities.getCachedAddress() ?? ""
-        let latitude = utilities.getCachedLatitude() ?? ""
-        let longitude = utilities.getCachedLongitude() ?? ""
-        
-        // Calculate order amount
-        let priceNumber = product.price.convertMoneyToNumber()
-        let orderAmount = priceNumber * Double(itemQuantity)
         
         // Create cart items
         let cartItems = [CartItem(id: product.id, quantity: itemQuantity)]
@@ -268,15 +321,18 @@ final class ProductDetailViewController: EcoViewController {
         orderActionView.isLoading = true
         
         // Place order
+        // TODO: Get address details from user's saved addresses if available
         placeOrderTask = orderUseCase.placeOrder(
-            orderAmount: orderAmount,
             cart: cartItems,
-            address: address,
-            longitude: longitude,
-            latitude: latitude,
+            orderNote: nil,
+            deliveryAddressId: nil,
+            addressDetail: address,
+            countryId: nil,
+            provinceId: nil,
+            districtId: nil,
+            wardId: nil,
             contactPersonName: "", // TODO: Get from user profile
-            contactPersonNumber: "", // TODO: Get from user profile
-            orderNote: nil
+            contactPersonNumber: "" // TODO: Get from user profile
         ) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -313,14 +369,14 @@ final class ProductDetailViewController: EcoViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // ✅ QUAN TRỌNG: Đảm bảo navigation bar luôn nằm trên cùng khi view appear
+        // ✅ QUAN TRỌNG: Đảm bảo z-order đúng: Navigation bar > OrderActionView > Collection view
+        // Navigation bar ở trên cùng
         if let navBarView = navigationBarViewController?.view {
             view.bringSubviewToFront(navBarView)
             navBarView.isUserInteractionEnabled = true
-            print("✅ [ProductDetailViewController] viewDidAppear - Navigation bar brought to front")
         }
         
-        // Ensure OrderActionView is above collection view
+        // OrderActionView ở dưới navbar nhưng trên collection view
         view.bringSubviewToFront(orderActionView)
     }
 }
@@ -330,10 +386,40 @@ final class ProductDetailViewController: EcoViewController {
 extension ProductDetailViewController: OrderActionViewDelegate {
     
     func orderActionViewDidTapAction(_ view: OrderActionView) {
-        placeOrder()
+        // When "Start order" button is tapped, push CheckoutViewController
+        pushCheckoutViewController()
+    }
+    
+    func orderActionViewDidTapLeftItem(_ view: OrderActionView) {
+        // When left icon (add to card) is tapped, open CardView with OrderViewController
+        openAddToCardOrderCard()
     }
     
     func orderActionViewDidTapTopRightLabel(_ view: OrderActionView) {
         showPricingCalculationPopup()
+    }
+    
+    private func pushCheckoutViewController() {
+        // Get productDetailModel từ controller
+        guard let productDetailModel = productDetailController.product.value else {
+            print("⚠️ [ProductDetailViewController] Product is nil, cannot push checkout")
+            return
+        }
+        
+        // Find navigation controller
+        guard let navigationController = self.navigationController else {
+            print("⚠️ [ProductDetailViewController] No navigation controller found")
+            return
+        }
+        
+        // Create cart items from product
+        let cartItems = [CartItem(id: productDetailModel.id, quantity: itemQuantity)]
+        
+        // Use CheckoutSceneDIContainer to create CheckoutViewController with proper controller injection
+        let appDIContainer = AppDIContainer()
+        let checkoutSceneDIContainer = appDIContainer.makeCheckoutSceneDIContainer()
+        let checkoutVC = checkoutSceneDIContainer.makeCheckoutViewController(cartItems: cartItems, product: productDetailModel)
+        
+        navigationController.pushViewController(checkoutVC, animated: true)
     }
 }

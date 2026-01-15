@@ -50,10 +50,12 @@ final class OrderDIContainer {
     
     // MARK: - Order Scene
     
-    func makeOrderViewController(cartItems: [CartItem], product: ProductDetailModel?) -> OrderViewController {
-        OrderViewController.create(
+    func makeOrderViewController(cartItems: [CartItem], product: ProductDetailModel?, isAddToCardMode: Bool = false) -> OrderViewController {
+        let orderVC = OrderViewController.create(
             with: makeOrderController(cartItems: cartItems, product: product)
         )
+        orderVC.isAddToCardMode = isAddToCardMode
+        return orderVC
     }
     
     func makeOrderController(cartItems: [CartItem], product: ProductDetailModel?) -> OrderController {
