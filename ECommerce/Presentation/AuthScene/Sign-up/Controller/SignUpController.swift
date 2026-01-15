@@ -113,6 +113,9 @@ final class DefaultSignUpController: SignUpController {
         print("✅ Sign up data saved successfully")
         print("================================================")
         
+        // Send device token to server after successful signup
+        AppDelegate.sendDeviceTokenToServerIfLoggedIn()
+        
         // Update success state
         isSignUpSuccess.value = true
         

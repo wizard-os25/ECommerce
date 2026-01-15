@@ -8,8 +8,14 @@ final class AppDIContainer {
     lazy var apiDataTransferService: DataTransferService = {
         // Keep api_key in query parameters for existing working cases
         // Bearer token will be added to Authorization header when available (for authenticated endpoints)
+        let baseURLString = appConfiguration.apiBaseURL
+        guard let baseURL = URL(string: baseURLString) else {
+            fatalError("Invalid API Base URL: \(baseURLString)")
+        }
+        print("🔧 [DIContainer] Creating API DataTransferService with baseURL: \(baseURL.absoluteString)")
+        
         let config = ApiDataNetworkConfig(
-            baseURL: URL(string: appConfiguration.apiBaseURL)!,
+            baseURL: baseURL,
             queryParameters: [
                 "api_key": appConfiguration.apiKey,
                 "language": NSLocale.preferredLanguages.first ?? "en"
@@ -21,8 +27,14 @@ final class AppDIContainer {
     }()
 
     lazy var productsDataTransferService: DataTransferService = {
+        let baseURLString = appConfiguration.apiBaseURL
+        guard let baseURL = URL(string: baseURLString) else {
+            fatalError("Invalid API Base URL: \(baseURLString)")
+        }
+        print("🔧 [DIContainer] Creating Products DataTransferService with baseURL: \(baseURL.absoluteString)")
+        
         let config = ApiDataNetworkConfig(
-            baseURL: URL(string: appConfiguration.apiBaseURL)!,
+            baseURL: baseURL,
             headers: [
                 "X_API_KEY": appConfiguration.apiKey
             ]

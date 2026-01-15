@@ -12,6 +12,8 @@ final class AppConfiguration {
         guard let apiBaseURL = Bundle.main.object(forInfoDictionaryKey: "ApiBaseURL") as? String else {
             fatalError("ApiBaseURL must not be empty in plist")
         }
+        // Log để debug trên thiết bị thật
+        print("🔧 [AppConfig] API Base URL: \(apiBaseURL)")
         return apiBaseURL
     }()
     

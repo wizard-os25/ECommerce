@@ -36,6 +36,12 @@ enum Constants {
         static let cachedLatitude = "cached_latitude"
         static let cachedLongitude = "cached_longitude"
         static let cachedAddress = "cached_address"
+        
+        // Device token key
+        static let deviceToken = "device_token"
+        
+        // Push notification permission requested key
+        static let pushNotificationPermissionRequested = "push_notification_permission_requested"
     }
 
     // MARK: - Language

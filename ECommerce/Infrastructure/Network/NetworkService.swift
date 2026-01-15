@@ -56,7 +56,10 @@ final class DefaultNetworkService {
         completion: @escaping CompletionHandler
     ) -> NetworkCancellable {
         
+        let startTime = Date()
         let sessionDataTask = sessionManager.request(request) { data, response, requestError in
+            let elapsedTime = Date().timeIntervalSince(startTime)
+            printIfDebug("⏱️ Request completed in \(String(format: "%.2f", elapsedTime))s - \(request.url?.absoluteString ?? "unknown")")
             
             // Check for URLSession errors (network errors like no connection, timeout)
             if let requestError = requestError {
@@ -101,11 +104,39 @@ final class DefaultNetworkService {
     }
     
     private func resolve(error: Error) -> NetworkError {
-        let code = URLError.Code(rawValue: (error as NSError).code)
+        let nsError = error as NSError
+        let code = URLError.Code(rawValue: nsError.code)
+        
+        // Enhanced error logging for debugging
+        printIfDebug("🔴 Network Error: \(nsError.localizedDescription)")
+        printIfDebug("   Error Code: \(nsError.code)")
+        printIfDebug("   Error Domain: \(nsError.domain)")
+        if let url = nsError.userInfo[NSURLErrorFailingURLErrorKey] as? URL {
+            printIfDebug("   Failed URL: \(url.absoluteString)")
+        }
+        
         switch code {
-        case .notConnectedToInternet: return .notConnected
-        case .cancelled: return .cancelled
-        default: return .generic(error)
+        case .notConnectedToInternet: 
+            printIfDebug("   Error Type: Not Connected to Internet")
+            return .notConnected
+        case .cancelled: 
+            printIfDebug("   Error Type: Request Cancelled")
+            return .cancelled
+        case .timedOut:
+            printIfDebug("   Error Type: Request Timed Out")
+            return .generic(error)
+        case .cannotConnectToHost:
+            printIfDebug("   Error Type: Cannot Connect to Host")
+            return .generic(error)
+        case .networkConnectionLost:
+            printIfDebug("   Error Type: Network Connection Lost")
+            return .generic(error)
+        case .cannotFindHost:
+            printIfDebug("   Error Type: Cannot Find Host")
+            return .generic(error)
+        default: 
+            printIfDebug("   Error Type: Generic Error")
+            return .generic(error)
         }
     }
 }
@@ -132,11 +163,50 @@ extension DefaultNetworkService: NetworkService {
 // And it can be injected into NetworkService instead of default one.
 
 final class DefaultNetworkSessionManager: NetworkSessionManager {
+    
+    private lazy var session: URLSession = {
+        let configuration = URLSessionConfiguration.default
+        configuration.allowsCellularAccess = true
+        // Bỏ waitsForConnectivity để tránh đợi quá lâu khi mạng không ổn định
+        // Nếu set true, app sẽ đợi vài phút khi mạng yếu, làm loading lâu
+        configuration.waitsForConnectivity = false
+        
+        // Timeout ngắn hơn cho local network (web nhanh nên app cũng nên nhanh)
+        // timeoutIntervalForRequest: thời gian đợi response từ server (10s đủ cho local network)
+        configuration.timeoutIntervalForRequest = 10
+        
+        // timeoutIntervalForResource: tổng thời gian cho toàn bộ request (20s đủ cho local network)
+        configuration.timeoutIntervalForResource = 20
+        
+        // Tăng số kết nối đồng thời để tăng tốc độ
+        configuration.httpMaximumConnectionsPerHost = 6
+        
+        // Cache configuration
+        configuration.urlCache = URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 50 * 1024 * 1024, diskPath: nil)
+        configuration.requestCachePolicy = .useProtocolCachePolicy
+        
+        // Thêm các header mặc định để đảm bảo compatibility
+        configuration.httpAdditionalHeaders = [
+            "Accept": "application/json",
+            "Accept-Language": NSLocale.preferredLanguages.first ?? "en"
+        ]
+        
+        // Log configuration để debug
+        print("🔧 [URLSession] Configuration:")
+        print("   Allows Cellular: \(configuration.allowsCellularAccess)")
+        print("   Waits For Connectivity: \(configuration.waitsForConnectivity)")
+        print("   Request Timeout: \(configuration.timeoutIntervalForRequest)s")
+        print("   Resource Timeout: \(configuration.timeoutIntervalForResource)s")
+        print("   Max Connections Per Host: \(configuration.httpMaximumConnectionsPerHost)")
+        
+        return URLSession(configuration: configuration)
+    }()
+    
     func request(
         _ request: URLRequest,
         completion: @escaping CompletionHandler
     ) -> NetworkCancellable {
-        let task = URLSession.shared.dataTask(with: request, completionHandler: completion)
+        let task = session.dataTask(with: request, completionHandler: completion)
         task.resume()
         return task
     }
@@ -149,9 +219,15 @@ final class DefaultNetworkErrorLogger: NetworkErrorLogger {
 
     func log(request: URLRequest) {
         print("-------------")
-        print("request: \(request.url!)")
-        print("headers: \(request.allHTTPHeaderFields ?? [:])")
-        print("method: \(request.httpMethod ?? "UNKNOWN")")
+        print("🌐 [Network] Starting Request")
+        print("   URL: \(request.url?.absoluteString ?? "nil")")
+        print("   Method: \(request.httpMethod ?? "UNKNOWN")")
+        print("   Headers: \(request.allHTTPHeaderFields ?? [:])")
+        if let url = request.url {
+            print("   Host: \(url.host ?? "nil")")
+            print("   Port: \(url.port?.description ?? "default")")
+            print("   Scheme: \(url.scheme ?? "nil")")
+        }
         if let httpBody = request.httpBody {
             // Try to parse as JSON first
             if let jsonObject = try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: Any] {
@@ -167,7 +243,12 @@ final class DefaultNetworkErrorLogger: NetworkErrorLogger {
     func log(responseData data: Data?, response: URLResponse?) {
         guard let _ = data else { return }
         if let httpResponse = response as? HTTPURLResponse {
-            printIfDebug("statusCode: \(httpResponse.statusCode)")
+            print("✅ [Network] Response Success")
+            print("   Status Code: \(httpResponse.statusCode)")
+            print("   URL: \(httpResponse.url?.absoluteString ?? "nil")")
+            if let data = data {
+                print("   Data Size: \(data.count) bytes")
+            }
         }
 //        if let dataDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
 //            printIfDebug("responseData: \(String(describing: dataDict))")
@@ -175,14 +256,27 @@ final class DefaultNetworkErrorLogger: NetworkErrorLogger {
     }
 
     func log(error: Error) {
-        printIfDebug("\(error)")
+        print("❌ [Network] Request Failed")
+        print("   Error: \(error.localizedDescription)")
+        
         // Log HTTP error details for debugging
         if let networkError = error as? NetworkError,
            case .error(let statusCode, let data) = networkError {
-            printIfDebug("HTTP Error Status Code: \(statusCode)")
+            print("   HTTP Status Code: \(statusCode)")
             if let data = data,
                let errorDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                printIfDebug("Error Response Body: \(String(describing: errorDict))")
+                print("   Error Response Body: \(String(describing: errorDict))")
+            }
+        } else {
+            // Log NSError details
+            let nsError = error as NSError
+            print("   Error Domain: \(nsError.domain)")
+            print("   Error Code: \(nsError.code)")
+            if let url = nsError.userInfo[NSURLErrorFailingURLErrorKey] as? URL {
+                print("   Failed URL: \(url.absoluteString)")
+            }
+            if let description = nsError.userInfo[NSLocalizedDescriptionKey] as? String {
+                print("   Description: \(description)")
             }
         }
     }

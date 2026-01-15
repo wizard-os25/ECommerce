@@ -72,6 +72,32 @@ class MainContainerViewController: UIViewController {
         updatePushedFromPageViewControllerFlag()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Request push notification permission on first time entering main screen
+        requestPushNotificationPermissionIfNeeded()
+    }
+    
+    /// Request push notification permission only on first time
+    private func requestPushNotificationPermissionIfNeeded() {
+        let defaults = UserDefaults.standard
+        let hasRequestedBefore = defaults.bool(forKey: Constants.UserDefaultsKey.pushNotificationPermissionRequested)
+        
+        // Only request if haven't requested before
+        if !hasRequestedBefore {
+            print("🔔 [MainContainerViewController] First time entering main screen - requesting push notification permission")
+            
+            // Mark as requested
+            defaults.set(true, forKey: Constants.UserDefaultsKey.pushNotificationPermissionRequested)
+            
+            // Request permission with a small delay to ensure UI is ready
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                AppDelegate.requestPushNotificationPermission()
+            }
+        }
+    }
+    
     // MARK: - Setup Methods
     
     private func setupView() {

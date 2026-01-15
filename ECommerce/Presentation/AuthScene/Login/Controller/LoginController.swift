@@ -105,6 +105,9 @@ final class DefaultLoginController: LoginController {
         print("✅ Login data saved successfully")
         print("================================================")
         
+        // Send device token to server after successful login
+        AppDelegate.sendDeviceTokenToServerIfLoggedIn()
+        
         // Update success state
         isLoginSuccess.value = true
         

@@ -1658,6 +1658,7 @@
 		D00B92C12F10FA1F00AEE1B6 /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
 		D00B92C22F10FA1F00AEE1B6 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		D00B92CE2F11054F00AEE1B6 /* APIErrorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorParser.swift; sourceTree = "<group>"; };
+		D03ACF082F193B6600F8DD43 /* ECommerceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ECommerceDebug.entitlements; sourceTree = "<group>"; };
 		D05141342F179DE500C7B963 /* UltravisualLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltravisualLayout.swift; sourceTree = "<group>"; };
 		D05141442F179E8400C7B963 /* ProductDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailModel.swift; sourceTree = "<group>"; };
 		D05141502F179F2000C7B963 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -2578,6 +2579,7 @@
 		D0095B172ECB0BA700FCC7BC /* ECommerce */ = {
 			isa = PBXGroup;
 			children = (
+				D03ACF082F193B6600F8DD43 /* ECommerceDebug.entitlements */,
 				D0095B7C2ECB411500FCC7BC /* Domain */,
 				D0095B9E2ECB41FF00FCC7BC /* Data */,
 				D0095BB72ECB429A00FCC7BC /* Infrastructure */,
@@ -5772,17 +5774,25 @@
 		D0095B032ECB0B8400FCC7BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_BASE_URL = "http://127.0.0.1:8000";
+				API_BASE_URL = "http://192.168.1.8:8000";
 				API_KEY = sk_WBLmK71qE7FT8qK7SkohLshssLbUTbbAtVdDzlMyYGjY0MPPWiTClo2Gm4Fa;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = ECommerce/ECommerceDebug.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 48S84T7Z5G;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WXAFGJMT2X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ECommerce/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = undefine;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Ứng dụng cần truy cập camera để chụp ảnh sản phẩm và tìm kiếm bằng hình ảnh";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Ứng dụng cần truy cập mạng local để kết nối với server phát triển";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ứng dụng cần vị trí của bạn để hiển thị bản đồ và đường đi";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Ứng dụng cần quyền lưu ảnh vào thư viện ảnh của bạn";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ứng dụng cần truy cập thư viện ảnh để chọn ảnh sản phẩm và tìm kiếm bằng hình ảnh";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -5796,8 +5806,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.wizard.architect.ECommerce;
+				PRODUCT_BUNDLE_IDENTIFIER = co.wizard.architect.ECommerce.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Economy;
 				STRIPE_PUBLISHABLE_KEY = pk_test_51Sp9RlKhii7V8xwUH0KhYEYsBt85POTao2Sw5mRMfdnhhajA7t95TSn357QOMIaHsJzcUazJCT7nCzI46z4Ru6ej00Xe3oNrem;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -5812,17 +5824,24 @@
 		D0095B042ECB0B8400FCC7BC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_BASE_URL = "http://127.0.0.1:8000";
+				API_BASE_URL = "http://192.168.1.8:8000";
 				API_KEY = sk_WBLmK71qE7FT8qK7SkohLshssLbUTbbAtVdDzlMyYGjY0MPPWiTClo2Gm4Fa;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 48S84T7Z5G;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WXAFGJMT2X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ECommerce/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = undefine;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Ứng dụng cần truy cập camera để chụp ảnh sản phẩm và tìm kiếm bằng hình ảnh";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Ứng dụng cần truy cập mạng local để kết nối với server phát triển";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ứng dụng cần vị trí của bạn để hiển thị bản đồ và đường đi";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Ứng dụng cần quyền lưu ảnh vào thư viện ảnh của bạn";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ứng dụng cần truy cập thư viện ảnh để chọn ảnh sản phẩm và tìm kiếm bằng hình ảnh";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -5836,8 +5855,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.wizard.architect.ECommerce;
+				PRODUCT_BUNDLE_IDENTIFIER = co.wizard.architect.ECommerce.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Economy;
 				STRIPE_PUBLISHABLE_KEY = pk_test_51Sp9RlKhii7V8xwUH0KhYEYsBt85POTao2Sw5mRMfdnhhajA7t95TSn357QOMIaHsJzcUazJCT7nCzI46z4Ru6ej00Xe3oNrem;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
