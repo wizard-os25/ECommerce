@@ -12,9 +12,8 @@ class CheckoutProgressIndicator: UIView {
     
     enum Step: Int {
         case placeOrder = 0
-        case createCustomer = 1
-        case createPayment = 2
-        case complete = 3
+        case confirmPayment = 1
+        case success = 2
     }
     
     private let stackView: UIStackView = {
@@ -28,8 +27,9 @@ class CheckoutProgressIndicator: UIView {
     }()
     
     private var stepViews: [StepView] = []
+    private var connectorViews: [UIView] = []
     
-    private let stepTitles = ["Place Order", "Create Customer", "Create Payment", "Complete"]
+    private let stepTitles = ["Place Order", "Confirm Payment", "Success"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,6 +56,7 @@ class CheckoutProgressIndicator: UIView {
                 let connector = UIView()
                 connector.backgroundColor = Colors.tokenDark20
                 connector.translatesAutoresizingMaskIntoConstraints = false
+                connectorViews.append(connector)
                 stackView.addArrangedSubview(connector)
                 
                 NSLayoutConstraint.activate([
@@ -83,6 +84,17 @@ class CheckoutProgressIndicator: UIView {
                 stepView.setCompleted(true)
             } else {
                 stepView.setCompleted(false)
+            }
+        }
+        
+        // Update connector lines: đổi màu đường nối từ bước đã hoàn thành
+        for (index, connector) in connectorViews.enumerated() {
+            if index < step.rawValue {
+                // Đường nối từ bước đã hoàn thành sang bước tiếp theo
+                connector.backgroundColor = Colors.tokenRainbowBlueEnd
+            } else {
+                // Đường nối chưa hoàn thành
+                connector.backgroundColor = Colors.tokenDark20
             }
         }
     }

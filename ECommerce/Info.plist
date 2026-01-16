@@ -52,16 +52,17 @@
 		</dict>
 	</dict>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Ứng dụng cần vị trí của bạn để hiển thị bản đồ và đường đi</string>
+    <string>Ứng dụng cần vị trí của bạn để hiển thị bản đồ và đường đi.</string>
     <key>NSCameraUsageDescription</key>
-    <string>Ứng dụng cần truy cập camera để chụp ảnh sản phẩm và tìm kiếm bằng hình ảnh</string>
+    <string>Ứng dụng cần truy cập camera để chụp ảnh sản phẩm và tìm kiếm bằng hình ảnh.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Ứng dụng cần truy cập thư viện ảnh để chọn ảnh sản phẩm và tìm kiếm bằng hình ảnh</string>
+    <string>Ứng dụng cần truy cập thư viện ảnh để chọn ảnh sản phẩm và tìm kiếm bằng hình ảnh.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Ứng dụng cần quyền lưu ảnh vào thư viện ảnh của bạn</string>
-
+    <string>Ứng dụng cần quyền lưu ảnh vào thư viện ảnh của bạn.</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>Ứng dụng cần quyền truy cập Face ID để xác thực thanh toán.</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Ứng dụng cần truy cập mạng local để kết nối với server phát triển</string>
+	<string>Ứng dụng cần truy cập mạng local để kết nối với server phát triển.</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_http._tcp</string>

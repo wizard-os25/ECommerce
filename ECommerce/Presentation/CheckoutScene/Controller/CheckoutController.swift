@@ -306,7 +306,7 @@ extension DefaultCheckoutController {
         loading.value = true
         
         // Convert total amount to cents
-        let amountInCents = Int(order.totalAmount * 100)
+        let amountInCents = Int(order.totalAmount)
         
         createPaymentIntentTask = paymentCardUseCase.createPaymentIntent(
             orderId: order.orderId,

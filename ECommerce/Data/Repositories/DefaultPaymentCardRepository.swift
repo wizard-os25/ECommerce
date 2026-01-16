@@ -264,6 +264,12 @@ extension DefaultPaymentCardRepository: PaymentCardRepository {
         
         guard !task.isCancelled else { return nil }
         
+        print("📤 [DefaultPaymentCardRepository] Creating payment intent request")
+        print("   - orderId: \(orderId)")
+        print("   - amount (Int): \(amount)")
+        print("   - paymentMethodId: \(paymentMethodId ?? "nil")")
+        print("   - ⚠️ VND: amount trực tiếp, KHÔNG nhân 100")
+        
         let requestDTO = CreatePaymentIntentRequestDTO(orderId: orderId, amount: amount, paymentMethodId: paymentMethodId)
         let endpoint = APIEndpoints.createPaymentIntent(with: requestDTO)
         task.networkTask = dataTransferService.request(

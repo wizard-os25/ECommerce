@@ -7,13 +7,48 @@
 
 import UIKit
 import StripePaymentSheet
+import Stripe
+import StripePayments
+import LocalAuthentication
 
-final class PaymentMethodViewController: EcoViewController {
+final class PaymentMethodViewController: EcoViewController, STPAuthenticationContext {
+    
+    // MARK: - STPAuthenticationContext
+    
+    /// Trả về view controller để Stripe present authentication UI (3D Secure, Face ID, OTP, etc.)
+    /// 
+    /// **Cách hoạt động:**
+    /// 1. Khi `STPPaymentHandler.confirmPayment()` được gọi, Stripe SDK sẽ:
+    ///    - Confirm payment với Stripe API
+    ///    - Nếu payment cần 3D Secure authentication, Stripe sẽ trả về `requires_action`
+    ///    - Stripe SDK tự động gọi `authenticationPresentingViewController()` để lấy view controller
+    ///    - Stripe SDK tự động present authentication UI (modal/webview) trên view controller này
+    ///    - User hoàn tất authentication (nhập OTP, Face ID, etc.)
+    ///    - Stripe SDK tự động xử lý và gọi completion callback với kết quả
+    ///
+    /// 2. **3D Secure Flow:**
+    ///    - Stripe SDK sẽ hiển thị webview với authentication form từ bank
+    ///    - User nhập OTP hoặc thực hiện authentication
+    ///    - Sau khi authentication thành công, payment sẽ được confirm
+    ///    - Completion callback sẽ được gọi với status `.succeeded`
+    ///
+    /// 3. **Face ID / Touch ID:**
+    ///    - Nếu bank yêu cầu biometric authentication, Stripe SDK sẽ tự động hiển thị
+    ///    - User xác thực bằng Face ID/Touch ID
+    ///    - Sau khi xác thực thành công, payment sẽ được confirm
+    ///
+    /// **Lưu ý:** View controller này phải đang visible (trong view hierarchy) để Stripe có thể present UI
+    func authenticationPresentingViewController() -> UIViewController {
+        print("🔐 [STPAuthenticationContext] Stripe requesting view controller for authentication UI")
+        return self
+    }
     
     // MARK: - UI Components
     
+    private let progressIndicator = CheckoutProgressIndicator()
+    
     private let tableView: UITableView = {
-        let tv = UITableView(frame: .zero, style: .plain)
+        let tv = UITableView(frame: .zero, style: .grouped)
         tv.backgroundColor = .systemBackground
         tv.separatorStyle = .singleLine
         tv.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -22,6 +57,9 @@ final class PaymentMethodViewController: EcoViewController {
     }()
     
     private let orderActionView = OrderActionView()
+    
+    // Checkbox để set default card
+    private var shouldSetDefaultCard: Bool = false
     
     private var paymentMethodController: PaymentMethodController! {
         get { controller as? PaymentMethodController }
@@ -59,16 +97,27 @@ final class PaymentMethodViewController: EcoViewController {
         paymentMethodController.onViewWillAppear()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Không trigger Face ID ở đây nữa
+        // Face ID sẽ được gọi khi user bấm "Pay" trong PaymentSheet
+    }
+    
     // MARK: - Setup
     
     private func setupViews() {
         view.backgroundColor = .systemBackground
+        
+        // Progress Indicator
+        progressIndicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(progressIndicator)
         
         // Setup TableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PaymentCardCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AddCardCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SetDefaultCardCell")
         
         view.addSubview(tableView)
         view.addSubview(orderActionView)
@@ -82,20 +131,29 @@ final class PaymentMethodViewController: EcoViewController {
         orderActionView.leftItemType = .none
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            // Progress Indicator
+            progressIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16 + 24),
+            progressIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            // TableView
+            tableView.topAnchor.constraint(equalTo: progressIndicator.bottomAnchor, constant: 16),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: orderActionView.topAnchor),
             
+            // OrderActionView
             orderActionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             orderActionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             orderActionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            // Chiều cao cố định 52pt cho button view
             orderActionView.heightAnchor.constraint(equalToConstant: 52)
         ])
         
         // Điều chỉnh OrderActionView để hiển thị đẹp với chiều cao 52pt
         adjustOrderActionViewForCompactHeight()
+        
+        // Set progress indicator ở bước 2 "Confirm Payment"
+        progressIndicator.updateProgress(to: .confirmPayment)
         
         updateOrderActionView()
     }
@@ -164,6 +222,7 @@ final class PaymentMethodViewController: EcoViewController {
         paymentMethodController.selectedCard.observe(on: self) { [weak self] _ in
             self?.tableView.reloadData()
             self?.updateOrderActionView()
+            self?.reloadSetDefaultCardCell()
         }
         
         paymentMethodController.loading.observe(on: self) { [weak self] isLoading in
@@ -174,8 +233,6 @@ final class PaymentMethodViewController: EcoViewController {
             guard let error = error else { return }
             self?.showAlert(title: "Error", message: error.localizedDescription)
         }
-        
-        // PaymentSheet sẽ được hiển thị tự động trong viewDidLoad vì đã có clientSecret
     }
     
     private func updateOrderActionView() {
@@ -185,23 +242,29 @@ final class PaymentMethodViewController: EcoViewController {
         orderActionView.leftItemType = .none
     }
     
-    // MARK: - Payment Sheet
+    private func reloadSetDefaultCardCell() {
+        let cards = paymentMethodController.paymentCards.value
+        if cards.count > 0 {
+            let indexPath = IndexPath(row: cards.count, section: 0)
+            tableView.reloadRows(at: [indexPath], with: .none)
+        }
+    }
+    
+    // MARK: - Payment Sheet (chỉ dùng cho Add new card)
     
     private func showPaymentSheetIfReady() {
         guard let defaultController = paymentMethodController as? DefaultPaymentMethodController else { return }
         
-        defaultController.getPaymentInfo { [weak self] clientSecret, customerId, ephemeralKey in
-            guard let self = self,
-                  let clientSecret = clientSecret else {
-                print("⚠️ [PaymentMethodViewController] Missing client secret")
-                return
-            }
+        // Lấy customerId và ephemeralKey để setup configuration
+        defaultController.getPaymentInfo { [weak self] _, customerId, ephemeralKey in
+            guard let self = self else { return }
             
-            self.preparePaymentSheet(clientSecret: clientSecret, customerId: customerId, ephemeralKey: ephemeralKey)
+            // Chỉ dùng PaymentSheet cho Add new card
+            self.preparePaymentSheetForAddCard(customerId: customerId, ephemeralKey: ephemeralKey)
         }
     }
     
-    private func preparePaymentSheet(clientSecret: String, customerId: String?, ephemeralKey: String?) {
+    private func preparePaymentSheetForAddCard(customerId: String?, ephemeralKey: String?) {
         var configuration = PaymentSheet.Configuration()
         configuration.merchantDisplayName = "My Shop"
         
@@ -215,14 +278,46 @@ final class PaymentMethodViewController: EcoViewController {
         
         configuration.allowsDelayedPaymentMethods = false
         
+        // Thêm returnURL
+        if let bundleId = Bundle.main.bundleIdentifier {
+            configuration.returnURL = "\(bundleId)://stripe-redirect"
+        }
+        
+        // Lấy order từ controller để lấy amount
+        guard let defaultController = paymentMethodController as? DefaultPaymentMethodController else {
+            return
+        }
+        
+        let totalAmount = defaultController.getOrderTotalAmount()
+        let amount = Int(totalAmount)  // VND: amount trực tiếp
+        
+        // Tạo IntentConfiguration cho Add new card
+        let intentConfig = PaymentSheet.IntentConfiguration(
+            mode: .payment(
+                amount: amount,
+                currency: "vnd"
+            )
+        ) { [weak self] paymentMethod, shouldSavePaymentMethod, completion in
+            guard let self = self else {
+                completion(.failure(NSError(domain: "PaymentMethodViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "ViewController deallocated"])))
+                return
+            }
+            
+            // Add new card: Face ID → Backend → Stripe
+            self.handleConfirmForAddCard(
+                paymentMethod: paymentMethod,
+                shouldSavePaymentMethod: shouldSavePaymentMethod,
+                completion: completion
+            )
+        }
+        
         paymentSheet = PaymentSheet(
-            paymentIntentClientSecret: clientSecret,
+            intentConfiguration: intentConfig,
             configuration: configuration
         )
         
         paymentSheet?.present(from: self) { [weak self] result in
             guard let self = self else { return }
-            
             self.handlePaymentSheetResult(result)
         }
     }
@@ -230,34 +325,114 @@ final class PaymentMethodViewController: EcoViewController {
     private func handlePaymentSheetResult(_ result: PaymentSheetResult) {
         switch result {
         case .completed:
-            // Payment completed successfully
-            print("✅ Payment completed successfully")
-            // Confirm payment with backend
+            // Payment completed successfully (cho Add new card)
+            print("✅ [PaymentSheet] Payment completed successfully")
+            // Confirm payment với backend
             confirmPaymentWithBackend()
+            
         case .canceled:
             // User canceled
-            print("❌ User canceled payment")
+            print("❌ [PaymentSheet] User canceled payment")
+            
         case .failed(let error):
             // Payment failed
-            print("⚠️ Payment failed: \(error.localizedDescription)")
-            showAlert(title: "Payment Failed", message: error.localizedDescription)
+            print("⚠️ [PaymentSheet] Payment failed")
+            print("   Error domain: \((error as NSError).domain)")
+            print("   Error code: \((error as NSError).code)")
+            print("   Error description: \(error.localizedDescription)")
+            if let underlyingError = (error as NSError).userInfo[NSUnderlyingErrorKey] as? NSError {
+                print("   Underlying error: \(underlyingError.localizedDescription)")
+            }
+            
+            let errorMessage = error.localizedDescription.isEmpty ? 
+                "There was an unexpected error. Please try again." : 
+                error.localizedDescription
+            showAlert(title: "Payment Failed", message: errorMessage)
         }
     }
     
-    private func confirmPaymentWithBackend() {
-        guard let defaultController = paymentMethodController as? DefaultPaymentMethodController,
-              let paymentIntentId = defaultController.getPaymentIntentId() else {
-            showAlert(title: "Error", message: "Payment intent ID not found")
+    private func handleConfirmForAddCard(
+        paymentMethod: STPPaymentMethod,
+        shouldSavePaymentMethod: Bool,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) {
+        // Face ID → Backend → Stripe (cho Add new card)
+        authenticateBeforePayment { [weak self] success in
+            guard let self = self else {
+                completion(.failure(NSError(domain: "PaymentAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "ViewController deallocated"])))
+                return
+            }
+            
+            guard success else {
+                completion(.failure(NSError(domain: "PaymentAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "Authentication failed or cancelled"])))
+                return
+            }
+            
+            // ⚠️ QUAN TRỌNG: Khi add thẻ mới, KHÔNG gửi payment_method_id
+            // Vì payment method mới chưa được attach vào customer
+            // Backend sẽ tạo payment intent không có payment_method_id
+            // PaymentSheet sẽ tự động attach payment method vào customer khi confirm
+            self.createPaymentIntentForNewCard(
+                shouldSavePaymentMethod: shouldSavePaymentMethod,
+                completion: completion
+            )
+        }
+    }
+    
+    /// Tạo payment intent cho thẻ mới (KHÔNG có payment_method_id)
+    private func createPaymentIntentForNewCard(
+        shouldSavePaymentMethod: Bool,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) {
+        guard let defaultController = paymentMethodController as? DefaultPaymentMethodController else {
+            completion(.failure(NSError(domain: "PaymentMethod", code: -1, userInfo: [NSLocalizedDescriptionKey: "Controller not found"])))
             return
         }
         
-        // Call confirm payment API
-        defaultController.confirmPayment(paymentIntentId: paymentIntentId) { [weak self] success in
-            if success {
-                // Show success message
-                self?.showSuccessAlert()
-            } else {
-                self?.showAlert(title: "Error", message: "Failed to confirm payment")
+        // Tạo payment intent KHÔNG có payment_method_id
+        defaultController.createPaymentIntentWithoutMethod { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let paymentIntent):
+                print("✅ [Add New Card] Payment intent created (without payment_method_id)")
+                print("   - clientSecret: \(paymentIntent.clientSecret.prefix(20))...")
+                print("   - PaymentSheet will automatically attach payment method to customer")
+                completion(.success(paymentIntent.clientSecret))
+                
+            case .failure(let error):
+                print("⚠️ [Add New Card] Failed to create payment intent: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    /// Tạo payment intent với saved payment method (có payment_method_id)
+    private func createAndConfirmPaymentIntent(
+        paymentMethodId: String,
+        shouldSavePaymentMethod: Bool,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) {
+        guard let defaultController = paymentMethodController as? DefaultPaymentMethodController else {
+            completion(.failure(NSError(domain: "PaymentMethod", code: -1, userInfo: [NSLocalizedDescriptionKey: "Controller not found"])))
+            return
+        }
+        
+        defaultController.createPaymentIntentWithMethod(
+            paymentMethodId: paymentMethodId
+        ) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let paymentIntent):
+                print("✅ [Saved Card] Payment intent created with payment_method_id")
+                print("   - clientSecret: \(paymentIntent.clientSecret.prefix(20))...")
+                print("   - paymentMethodId: \(paymentMethodId)")
+                completion(.success(paymentIntent.clientSecret))
+                
+            case .failure(let error):
+                print("⚠️ [Saved Card] Failed to create payment intent: \(error.localizedDescription)")
+                completion(.failure(error))
             }
         }
     }
@@ -292,32 +467,173 @@ final class PaymentMethodViewController: EcoViewController {
         print("✅ Payment completed successfully")
         // TODO: Navigate to success screen
     }
+    
+    // MARK: - Biometric Authentication with Passcode Fallback
+    
+    /// Trigger xin quyền Face ID ngay khi màn hình xuất hiện
+    /// Điều này giúp app xin quyền sớm, không cần đợi đến khi user nhấn Pay
+    private func requestFaceIDPermissionIfNeeded() {
+        let context = LAContext()
+        var error: NSError?
+        
+        // Kiểm tra xem thiết bị có hỗ trợ authentication không
+        guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
+            if let error = error {
+                print("⚠️ [FaceID] Device authentication not available: \(error.localizedDescription)")
+            }
+            return
+        }
+        
+        // Xác định loại sinh trắc học
+        let biometricType = context.biometricType
+        let reason: String
+        
+        switch biometricType {
+        case .faceID:
+            reason = "Xác thực Face ID để bảo mật thanh toán"
+        case .touchID:
+            reason = "Xác thực Touch ID để bảo mật thanh toán"
+        case .none:
+            // Không có Face ID/Touch ID, sẽ dùng Passcode
+            reason = "Xác thực để bảo mật thanh toán"
+        }
+        
+        // Trigger xin quyền bằng cách gọi evaluatePolicy
+        // Lần đầu tiên sẽ hiển thị alert xin quyền
+        context.evaluatePolicy(
+            .deviceOwnerAuthentication,
+            localizedReason: reason
+        ) { [weak self] success, error in
+            DispatchQueue.main.async {
+                if success {
+                    print("✅ [FaceID] Permission granted and authentication succeeded")
+                } else {
+                    if let error = error {
+                        if let laError = error as? LAError {
+                            switch laError.code {
+                            case .userCancel:
+                                print("⚠️ [FaceID] User cancelled authentication")
+                            case .userFallback:
+                                print("⚠️ [FaceID] User chose fallback")
+                            case .biometryNotAvailable:
+                                print("⚠️ [FaceID] Biometry not available")
+                            case .biometryNotEnrolled:
+                                print("⚠️ [FaceID] Biometry not enrolled")
+                            case .biometryLockout:
+                                print("⚠️ [FaceID] Biometry locked out")
+                            default:
+                                print("⚠️ [FaceID] Authentication failed: \(error.localizedDescription)")
+                            }
+                        } else {
+                            print("⚠️ [FaceID] Authentication error: \(error.localizedDescription)")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func authenticateBeforePayment(completion: @escaping (Bool) -> Void) {
+        let context = LAContext()
+        var error: NSError?
+        
+        // Sử dụng .deviceOwnerAuthentication để tự động fallback sang Passcode
+        // Nếu thiết bị có Face ID/Touch ID, sẽ hiển thị Face ID/Touch ID trước
+        // Nếu Face ID/Touch ID thất bại hoặc không có, sẽ tự động hiển thị Passcode (giống unlock thiết bị)
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            showAuthenticationPrompt(context: context, completion: completion)
+        } else {
+            // Thiết bị không hỗ trợ authentication (rất hiếm)
+            print("⚠️ Device authentication not available")
+            if let error = error {
+                print("   Error: \(error.localizedDescription)")
+            }
+            completion(false)
+        }
+    }
+    
+    private func showAuthenticationPrompt(context: LAContext, completion: @escaping (Bool) -> Void) {
+        // Xác định loại sinh trắc học để hiển thị message phù hợp
+        let biometricType = context.biometricType
+        let reason: String
+        
+        switch biometricType {
+        case .faceID:
+            reason = "Xác nhận danh tính để hoàn tất thanh toán"
+        case .touchID:
+            reason = "Xác nhận danh tính để hoàn tất thanh toán"
+        case .none:
+            reason = "Xác nhận danh tính để hoàn tất thanh toán"
+        }
+        
+        // Sử dụng .deviceOwnerAuthentication thay vì .deviceOwnerAuthenticationWithBiometrics
+        // Điều này cho phép tự động fallback sang Passcode nếu Face ID/Touch ID thất bại
+        context.evaluatePolicy(
+            .deviceOwnerAuthentication,
+            localizedReason: reason
+        ) { success, error in
+            DispatchQueue.main.async {
+                if success {
+                    print("✅ Authentication succeeded (Face ID/Touch ID or Passcode)")
+                    completion(true)
+                } else {
+                    if let error = error {
+                        print("⚠️ Authentication failed: \(error.localizedDescription)")
+                        // Kiểm tra nếu user cancel
+                        if let laError = error as? LAError {
+                            switch laError.code {
+                            case .userCancel:
+                                print("   User cancelled authentication")
+                            case .userFallback:
+                                print("   User chose fallback")
+                            default:
+                                break
+                            }
+                        }
+                    }
+                    completion(false)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
 
 extension PaymentMethodViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2 // Section 0: Recent Card, Section 1: Add new card
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return paymentMethodController.paymentCards.value.count + 1 // +1 for "Add new card" row
+        switch section {
+        case 0:
+            // Section 0: Recent Card + Set default checkbox
+            let cardCount = paymentMethodController.paymentCards.value.count
+            return cardCount > 0 ? cardCount + 1 : 0 // +1 for "Set default" checkbox
+        case 1:
+            // Section 1: Add new card
+            return 1
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cards = paymentMethodController.paymentCards.value
-        
-        if indexPath.row < cards.count {
-            // Saved card cell
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentCardCell", for: indexPath)
-            let card = cards[indexPath.row]
-            let isSelected = paymentMethodController.selectedCard.value?.id == card.id
+        switch indexPath.section {
+        case 0:
+            let cards = paymentMethodController.paymentCards.value
             
-            cell.textLabel?.text = card.displayName
-            cell.textLabel?.font = Typography.fontRegular16
-            cell.accessoryType = isSelected ? .checkmark : .none
-            cell.selectionStyle = .default
+            if indexPath.row < cards.count {
+                // Saved card cell
+                return createSavedCardCell(for: tableView, at: indexPath, card: cards[indexPath.row])
+            } else {
+                // Set default card checkbox cell
+                return createSetDefaultCardCell(for: tableView, at: indexPath)
+            }
             
-            return cell
-        } else {
+        case 1:
             // Add new card cell
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddCardCell", for: indexPath)
             cell.textLabel?.text = "Add new card"
@@ -325,9 +641,155 @@ extension PaymentMethodViewController: UITableViewDataSource {
             cell.textLabel?.textColor = Colors.tokenBrown
             cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .default
-            
             return cell
+            
+        default:
+            return UITableViewCell()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Recent Card"
+        case 1:
+            return "Add new card"
+        default:
+            return nil
+        }
+    }
+    
+    private func createSavedCardCell(for tableView: UITableView, at indexPath: IndexPath, card: PaymentCard) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentCardCell", for: indexPath)
+        cell.selectionStyle = .none
+        cell.backgroundColor = .systemBackground
+        
+        // Remove existing subviews
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+        
+        let isSelected = paymentMethodController.selectedCard.value?.id == card.id
+        
+        // Create container stack view
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 12
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Card icon image view
+        let cardIconImageView = UIImageView()
+        cardIconImageView.image = UIImage(named: card.cardIconName)
+        cardIconImageView.contentMode = .scaleAspectFit
+        cardIconImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cardIconImageView.widthAnchor.constraint(equalToConstant: 40),
+            cardIconImageView.heightAnchor.constraint(equalToConstant: 24)
+        ])
+        
+        // Card info label
+        let cardInfoLabel = UILabel()
+        let cardText = card.displayName
+        if card.isDefault {
+            // Thêm "default" in nghiêng
+            let attributedText = NSMutableAttributedString(string: cardText)
+            let defaultText = NSMutableAttributedString(string: " (default)", attributes: [
+                .font: UIFont.italicSystemFont(ofSize: 14),
+                .foregroundColor: Colors.tokenDark60
+            ])
+            attributedText.append(defaultText)
+            cardInfoLabel.attributedText = attributedText
+        } else {
+            cardInfoLabel.text = cardText
+        }
+        cardInfoLabel.font = Typography.fontRegular16
+        cardInfoLabel.textColor = .label
+        
+        // Checkmark icon (nếu selected)
+        let checkmarkImageView = UIImageView()
+        if isSelected {
+            checkmarkImageView.image = UIImage(systemName: "checkmark.circle.fill")
+            checkmarkImageView.tintColor = Colors.tokenRainbowBlueEnd
+        } else {
+            checkmarkImageView.image = UIImage(systemName: "circle")
+            checkmarkImageView.tintColor = Colors.tokenDark20
+        }
+        checkmarkImageView.contentMode = .scaleAspectFit
+        checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            checkmarkImageView.widthAnchor.constraint(equalToConstant: 24),
+            checkmarkImageView.heightAnchor.constraint(equalToConstant: 24)
+        ])
+        
+        // Add to stack view
+        stackView.addArrangedSubview(cardIconImageView)
+        stackView.addArrangedSubview(cardInfoLabel)
+        stackView.addArrangedSubview(UIView()) // Spacer
+        stackView.addArrangedSubview(checkmarkImageView)
+        
+        // Add stack view to cell
+        cell.contentView.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -16),
+            stackView.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 12),
+            stackView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -12)
+        ])
+        
+        return cell
+    }
+    
+    private func createSetDefaultCardCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SetDefaultCardCell", for: indexPath)
+        cell.selectionStyle = .none
+        cell.backgroundColor = .systemBackground
+        
+        // Remove existing subviews
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+        
+        // Create checkbox với label
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let checkbox = UIButton(type: .system)
+        checkbox.setImage(UIImage(systemName: shouldSetDefaultCard ? "checkmark.square.fill" : "square"), for: .normal)
+        checkbox.tintColor = shouldSetDefaultCard ? Colors.tokenRainbowBlueEnd : Colors.tokenDark60
+        checkbox.addTarget(self, action: #selector(toggleSetDefaultCard), for: .touchUpInside)
+        checkbox.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            checkbox.widthAnchor.constraint(equalToConstant: 24),
+            checkbox.heightAnchor.constraint(equalToConstant: 24)
+        ])
+        
+        let label = UILabel()
+        label.text = "Set default card for pay later"
+        label.font = Typography.fontRegular14
+        label.textColor = Colors.tokenDark100
+        
+        stackView.addArrangedSubview(checkbox)
+        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(UIView()) // Spacer
+        
+        cell.contentView.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -16),
+            stackView.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 8),
+            stackView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -8)
+        ])
+        
+        return cell
+    }
+    
+    @objc private func toggleSetDefaultCard(_ sender: UIButton) {
+        shouldSetDefaultCard.toggle()
+        sender.setImage(UIImage(systemName: shouldSetDefaultCard ? "checkmark.square.fill" : "square"), for: .normal)
+        sender.tintColor = shouldSetDefaultCard ? Colors.tokenRainbowBlueEnd : Colors.tokenDark60
     }
 }
 
@@ -338,15 +800,41 @@ extension PaymentMethodViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let cards = paymentMethodController.paymentCards.value
-        
-        if indexPath.row < cards.count {
-            // Select card
-            let card = cards[indexPath.row]
-            paymentMethodController.didSelectCard(card)
-        } else {
+        switch indexPath.section {
+        case 0:
+            let cards = paymentMethodController.paymentCards.value
+            if indexPath.row < cards.count {
+                // Select card
+                let card = cards[indexPath.row]
+                paymentMethodController.didSelectCard(card)
+            } else {
+                // Toggle set default checkbox
+                shouldSetDefaultCard.toggle()
+                tableView.reloadRows(at: [indexPath], with: .none)
+            }
+            
+        case 1:
             // Add new card - show PaymentSheet
             showAddCardPaymentSheet()
+            
+        default:
+            break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            let cards = paymentMethodController.paymentCards.value
+            if indexPath.row < cards.count {
+                return 60 // Card cell
+            } else {
+                return 44 // Set default checkbox cell
+            }
+        case 1:
+            return 44 // Add new card cell
+        default:
+            return 44
         }
     }
 }
@@ -356,10 +844,170 @@ extension PaymentMethodViewController: UITableViewDelegate {
 extension PaymentMethodViewController: OrderActionViewDelegate {
     
     func orderActionViewDidTapAction(_ view: OrderActionView) {
-        paymentMethodController.didTapPay()
+        // Kiểm tra user đã chọn thẻ chưa
+        guard let selectedCard = paymentMethodController.selectedCard.value else {
+            showAlert(title: "Error", message: "Please select a payment method")
+            return
+        }
+        
+        // Bước 1: Verify Face ID/Touch ID với fallback Passcode
+        authenticateBeforePayment { [weak self] success in
+            guard let self = self else { return }
+            
+            guard success else {
+                // Xác thực thất bại hoặc user cancel
+                print("⚠️ Authentication failed or cancelled")
+                return
+            }
+            
+            // Bước 2: Xác thực thành công, xử lý thanh toán
+            self.processPayment(with: selectedCard)
+        }
     }
+    
+    private func processPayment(with card: PaymentCard) {
+        guard let defaultController = paymentMethodController as? DefaultPaymentMethodController else {
+            showAlert(title: "Error", message: "Controller not found")
+            return
+        }
+        
+        // Set default card song song (nếu user chọn)
+        if shouldSetDefaultCard {
+            defaultController.setDefaultCard(paymentMethodId: card.id) { [weak self] success in
+                if success {
+                    print("✅ Default card set successfully (silent)")
+                } else {
+                    print("⚠️ Failed to set default card (non-blocking)")
+                }
+            }
+        }
+        
+        // Gọi API create-payment-intent với payment_method_id
+        defaultController.createPaymentIntentWithMethod(
+            paymentMethodId: card.id
+        ) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let paymentIntent):
+                // Backend đã tạo payment intent thành công
+                // Dùng STPPaymentHandler để confirm payment (lần DUY NHẤT dùng StripeSDK)
+                // Pass cả paymentMethodId để Stripe SDK biết dùng payment method nào
+                self.confirmPaymentWithStripeHandler(
+                    clientSecret: paymentIntent.clientSecret,
+                    paymentMethodId: card.id
+                )
+                
+            case .failure(let error):
+                print("⚠️ Failed to create payment intent: \(error.localizedDescription)")
+                // Kiểm tra nếu có modal đang present thì đợi dismiss
+                if self.presentedViewController != nil {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.showAlert(title: "Error", message: "Failed to create payment intent: \(error.localizedDescription)")
+                    }
+                } else {
+                    self.showAlert(title: "Error", message: "Failed to create payment intent: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    private func confirmPaymentWithStripeHandler(clientSecret: String, paymentMethodId: String) {
+        // Đây là lần DUY NHẤT dùng StripeSDK
+        let paymentIntentParams = STPPaymentIntentParams(clientSecret: clientSecret)
+        
+        // ⚠️ QUAN TRỌNG: Set paymentMethodId vào params để Stripe SDK biết dùng saved payment method nào
+        // Mặc dù backend đã tạo payment intent với payment_method_id, nhưng Stripe SDK cần biết
+        // payment method ID khi confirm để xử lý đúng (đặc biệt là 3D Secure)
+        paymentIntentParams.paymentMethodId = paymentMethodId
+        
+        print("🔐 [STPPaymentHandler] Confirming payment with saved payment method")
+        print("   - clientSecret: \(clientSecret.prefix(20))...")
+        print("   - paymentMethodId: \(paymentMethodId)")
+        
+        // STPPaymentHandler sẽ tự động xử lý:
+        // 1. Confirm payment với Stripe API
+        // 2. Nếu cần 3D Secure, sẽ present authentication UI tự động qua STPAuthenticationContext
+        // 3. Gọi completion callback với kết quả
+        print("🚀 [STPPaymentHandler] Starting payment confirmation...")
+        STPPaymentHandler.shared().confirmPayment(
+            paymentIntentParams,
+            with: self  // self conforms STPAuthenticationContext để Stripe present 3D Secure UI
+        ) { [weak self] status, paymentIntent, error in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                switch status {
+                case .succeeded:
+                    print("✅ [STPPaymentHandler] Payment confirmed successfully")
+                    // Stripe SDK đã confirm payment thành công (có thể đã xử lý 3D Secure nếu cần)
+                    // Bây giờ confirm với backend để cập nhật order status
+                    self.confirmPaymentWithBackend()
+                    
+                case .failed:
+                    print("❌ [STPPaymentHandler] Payment failed")
+                    print("   Error: \(error?.localizedDescription ?? "Unknown error")")
+                    if let error = error {
+                        let nsError = error as NSError
+                        print("   Error domain: \(nsError.domain)")
+                        print("   Error code: \(nsError.code)")
+                        if let userInfo = nsError.userInfo as? [String: Any] {
+                            print("   Error userInfo: \(userInfo)")
+                            
+                            // Kiểm tra nếu là lỗi confirmation_method: manual
+                            if let errorMessage = userInfo["com.stripe.lib:ErrorMessageKey"] as? String {
+                                if errorMessage.contains("confirmation_method") && errorMessage.contains("manual") {
+                                    print("   ⚠️ VẤN ĐỀ: Backend đang tạo PaymentIntent với confirmation_method: manual")
+                                    print("   ⚠️ GIẢI PHÁP: Backend cần set confirmation_method: automatic")
+                                    print("   ⚠️ Stripe SDK không thể confirm payment intent với confirmation_method: manual từ client")
+                                }
+                            }
+                        }
+                    }
+                    // Đợi một chút để Stripe dismiss modal trước khi hiển thị alert
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        var errorMessage = error?.localizedDescription ?? "Payment failed"
+                        // Thêm thông tin chi tiết nếu là lỗi confirmation_method
+                        if let nsError = error as? NSError,
+                           let userInfo = nsError.userInfo as? [String: Any],
+                           let stripeError = userInfo["com.stripe.lib:ErrorMessageKey"] as? String,
+                           stripeError.contains("confirmation_method") {
+                            errorMessage = "Backend configuration error: PaymentIntent must use 'automatic' confirmation_method. Please contact support."
+                        }
+                        self.showAlert(title: "Payment Failed", message: errorMessage)
+                    }
+                    
+                case .canceled:
+                    print("⚠️ [STPPaymentHandler] User canceled payment")
+                    
+                @unknown default:
+                    print("⚠️ [STPPaymentHandler] Unknown status: \(status)")
+                    break
+                }
+            }
+        }
+    }
+    
+    private func confirmPaymentWithBackend() {
+        guard let defaultController = paymentMethodController as? DefaultPaymentMethodController,
+              let paymentIntentId = defaultController.getPaymentIntentId() else {
+            showAlert(title: "Error", message: "Payment intent ID not found")
+            return
+        }
+        
+        // Call confirm payment API
+        defaultController.confirmPayment(paymentIntentId: paymentIntentId) { [weak self] success in
+            if success {
+                // Show success message
+                self?.showSuccessAlert()
+            } else {
+                self?.showAlert(title: "Error", message: "Failed to confirm payment")
+            }
+        }
+    }
+}
     
     func orderActionViewDidTapLeftItem(_ view: OrderActionView) {
         // No action needed
     }
-}
+

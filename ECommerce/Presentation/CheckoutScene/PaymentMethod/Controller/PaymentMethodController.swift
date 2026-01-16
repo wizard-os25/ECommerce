@@ -15,6 +15,8 @@ protocol PaymentMethodControllerInput {
     func didTapPay()
     func handlePaymentSheetResult(_ result: PaymentSheetResult, paymentMethodId: String?)
     func confirmPayment(paymentIntentId: String, completion: @escaping (Bool) -> Void)
+    func setDefaultCard(paymentMethodId: String, completion: @escaping (Bool) -> Void)
+    func createPaymentIntentWithoutMethod(completion: @escaping (Result<PaymentIntent, Error>) -> Void)
 }
 
 protocol PaymentMethodControllerOutput {
@@ -39,6 +41,7 @@ final class DefaultPaymentMethodController: PaymentMethodController {
     private var loadPaymentCardsTask: Cancellable? { willSet { loadPaymentCardsTask?.cancel() } }
     private var attachPaymentMethodTask: Cancellable? { willSet { attachPaymentMethodTask?.cancel() } }
     private var createPaymentIntentTask: Cancellable? { willSet { createPaymentIntentTask?.cancel() } }
+    private var setDefaultPaymentMethodTask: Cancellable? { willSet { setDefaultPaymentMethodTask?.cancel() } }
     
     private var paymentIntentClientSecret: String?
     private var paymentIntentId: String?
@@ -213,9 +216,23 @@ extension DefaultPaymentMethodController {
     }
     
     func didTapPay() {
-        // Payment intent đã được tạo ở CheckoutViewController
-        // Hiển thị PaymentSheet với payment intent đã có
-        onShowPaymentSheet?()
+        // Flow mới: Chọn thẻ đã lưu → Face ID → API create-payment-intent → STPPaymentHandler
+        // Không gọi onShowPaymentSheet nữa, xử lý trong ViewController
+        // ViewController sẽ gọi processPayment() trực tiếp
+    }
+    
+    func setDefaultCard(paymentMethodId: String, completion: @escaping (Bool) -> Void) {
+        setDefaultPaymentMethodTask = paymentCardUseCase.setDefaultPaymentMethod(paymentMethodId: paymentMethodId) { [weak self] result in
+            guard let self = self else { return }
+            self.mainQueue.async {
+                switch result {
+                case .success:
+                    completion(true)
+                case .failure:
+                    completion(false)
+                }
+            }
+        }
     }
     
     func handlePaymentSheetResult(_ result: PaymentSheetResult, paymentMethodId: String?) {
@@ -296,7 +313,7 @@ extension DefaultPaymentMethodController {
         loading.value = true
         
         // Convert total amount to cents
-        let amountInCents = Int(order.totalAmount * 100)
+        let amountInCents = Int(order.totalAmount)
         
         createPaymentIntentTask = paymentCardUseCase.createPaymentIntent(
             orderId: order.orderId,
@@ -332,6 +349,99 @@ extension DefaultPaymentMethodController {
     
     func getPaymentIntentId() -> String? {
         return paymentIntentId
+    }
+    
+    func getOrderTotalAmount() -> Double {
+        return order.totalAmount
+    }
+    
+    /// Tạo payment intent với paymentMethodId (cho saved card - đã lưu)
+    func createPaymentIntentWithMethod(
+        paymentMethodId: String,
+        completion: @escaping (Result<PaymentIntent, Error>) -> Void
+    ) {
+        loading.value = true
+        
+        // VND không dùng cents - amount trực tiếp (ví dụ: 13348 = 13,348 VND)
+        // Backend trả về totalAmount dưới dạng VND trực tiếp (13348.0 = 13,348 VND)
+        // KHÔNG nhân 100, KHÔNG chia 100 - dùng trực tiếp
+        let totalAmount = order.totalAmount
+        let amount = Int(totalAmount)  // VND: amount trực tiếp
+        
+        print("💰 [PaymentMethodController] Creating payment intent with saved payment method")
+        print("   - order.totalAmount (Double): \(totalAmount)")
+        print("   - amount (Int, VND trực tiếp): \(amount)")
+        print("   - paymentMethodId: \(paymentMethodId)")
+        print("   - 📤 Sending to backend: amount = \(amount), payment_method_id = \(paymentMethodId)")
+        
+        createPaymentIntentTask = paymentCardUseCase.createPaymentIntent(
+            orderId: order.orderId,
+            amount: amount,  // VND: amount trực tiếp, không nhân 100
+            paymentMethodId: paymentMethodId
+        ) { [weak self] result in
+            guard let self = self else { return }
+            self.mainQueue.async {
+                self.loading.value = false
+                
+                switch result {
+                case .success(let paymentIntent):
+                    // Lưu thông tin payment intent
+                    self.paymentIntentClientSecret = paymentIntent.clientSecret
+                    self.paymentIntentId = paymentIntent.paymentIntentId
+                    if let ephemeralKey = paymentIntent.ephemeralKey {
+                        self.ephemeralKey = ephemeralKey
+                    }
+                    completion(.success(paymentIntent))
+                    
+                case .failure(let error):
+                    self.error.value = error
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    /// Tạo payment intent KHÔNG có paymentMethodId (cho thẻ mới - chưa attach vào customer)
+    func createPaymentIntentWithoutMethod(
+        completion: @escaping (Result<PaymentIntent, Error>) -> Void
+    ) {
+        loading.value = true
+        
+        // VND không dùng cents - amount trực tiếp
+        let totalAmount = order.totalAmount
+        let amount = Int(totalAmount)  // VND: amount trực tiếp
+        
+        print("💰 [PaymentMethodController] Creating payment intent for NEW card (without payment_method_id)")
+        print("   - order.totalAmount (Double): \(totalAmount)")
+        print("   - amount (Int, VND trực tiếp): \(amount)")
+        print("   - ⚠️ KHÔNG gửi payment_method_id vì thẻ mới chưa attach vào customer")
+        print("   - 📤 Sending to backend: amount = \(amount), payment_method_id = nil")
+        
+        createPaymentIntentTask = paymentCardUseCase.createPaymentIntent(
+            orderId: order.orderId,
+            amount: amount,  // VND: amount trực tiếp, không nhân 100
+            paymentMethodId: nil  // ⚠️ QUAN TRỌNG: nil cho thẻ mới
+        ) { [weak self] result in
+            guard let self = self else { return }
+            self.mainQueue.async {
+                self.loading.value = false
+                
+                switch result {
+                case .success(let paymentIntent):
+                    // Lưu thông tin payment intent
+                    self.paymentIntentClientSecret = paymentIntent.clientSecret
+                    self.paymentIntentId = paymentIntent.paymentIntentId
+                    if let ephemeralKey = paymentIntent.ephemeralKey {
+                        self.ephemeralKey = ephemeralKey
+                    }
+                    completion(.success(paymentIntent))
+                    
+                case .failure(let error):
+                    self.error.value = error
+                    completion(.failure(error))
+                }
+            }
+        }
     }
 }
 
