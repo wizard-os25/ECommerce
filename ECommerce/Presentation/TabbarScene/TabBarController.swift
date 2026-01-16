@@ -49,11 +49,11 @@ class TabBarController: UITabBarController {
         navCart.isNavigationBarHidden = true
         navAccount.isNavigationBarHidden = true
         
-        /// Set TabBar item
-        contentVC.tabBarItem = UITabBarItem(title: "Bazaar", image: UIImage(systemName: "house"), tag: 0)
-        groceryVC.tabBarItem = UITabBarItem(title: "Grocery", image: UIImage(systemName: "cart.fill"), tag: 1)
+        /// Set TabBar item - Home, Search, Cart, Notification
+        contentVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
+        groceryVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 1)
         cartVC.tabBarItem = UITabBarItem(title: "Cart", image: UIImage(systemName: "cart"), tag: 2)
-        accountVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(systemName: "person"), tag: 3)
+        accountVC.tabBarItem = UITabBarItem(title: "Notification", image: UIImage(systemName: "bell"), tag: 3)
         
         /// Set ViewController & Tabbar Item Color
         self.tabBar.tintColor = .black

@@ -79,7 +79,7 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isSwipeBackEnabled = true
+        isSwipeBackEnabled = true // Cho phép swipe back
         setupViews()
         bindObservables()
         paymentMethodController.didLoadView()
@@ -132,7 +132,7 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         
         NSLayoutConstraint.activate([
             // Progress Indicator
-            progressIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16 + 24),
+            progressIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 144),
             progressIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             progressIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
@@ -232,6 +232,21 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         paymentMethodController.error.observe(on: self) { [weak self] error in
             guard let error = error else { return }
             self?.showAlert(title: "Error", message: error.localizedDescription)
+        }
+    }
+    
+    override func applyNavigation(_ state: EcoNavigationState) {
+        super.applyNavigation(state)
+        // Override left item tap callback để pop back về trước
+        // Lưu ý: Cần theo dõi flag openFromSideMenu trong MainContainerViewController
+        // để không kích hoạt mở sidemenu khi swipeBack
+        DispatchQueue.main.async { [weak self] in
+            if let navBarController = self?.navigationBarViewController?.controller as? DefaultEcoNavigationBarController {
+                navBarController.onLeftItemTap = { [weak self] in
+                    print("🔵 [PaymentMethodViewController] Back button tapped")
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            }
         }
     }
     
@@ -687,15 +702,15 @@ extension PaymentMethodViewController: UITableViewDataSource {
             cardIconImageView.heightAnchor.constraint(equalToConstant: 24)
         ])
         
-        // Card info label
+        // Card info label với "default" in nghiêng nếu isDefault
         let cardInfoLabel = UILabel()
         let cardText = card.displayName
         if card.isDefault {
-            // Thêm "default" in nghiêng
+            // Thêm "default" in nghiêng với màu giống chữ delete
             let attributedText = NSMutableAttributedString(string: cardText)
-            let defaultText = NSMutableAttributedString(string: " (default)", attributes: [
+            let defaultText = NSMutableAttributedString(string: " default", attributes: [
                 .font: UIFont.italicSystemFont(ofSize: 14),
-                .foregroundColor: Colors.tokenDark60
+                .foregroundColor: Colors.tokenRainbowBlueEnd // Màu giống chữ delete
             ])
             attributedText.append(defaultText)
             cardInfoLabel.attributedText = attributedText

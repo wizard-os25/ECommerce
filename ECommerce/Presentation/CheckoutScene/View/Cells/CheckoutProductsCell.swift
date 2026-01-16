@@ -9,21 +9,10 @@ import UIKit
 
 final class CheckoutProductsCell: UICollectionViewCell {
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Product"
-        label.font = Typography.fontBold18 // Chữ lớn hơn một chút
-        label.textColor = Colors.tokenDark100
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     private let shippingFeeLabel: UILabel = {
         let label = UILabel()
         label.font = Typography.fontRegular14
         label.textColor = Colors.tokenDark60
-        label.text = "" // Ẩn đi, chỉ hiện khi có shipping fee
-        label.isHidden = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -33,17 +22,6 @@ final class CheckoutProductsCell: UICollectionViewCell {
         label.font = Typography.fontRegular14
         label.textColor = Colors.tokenDark100
         label.text = "22 items in total"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let viewOrEditLabel: UILabel = {
-        let label = UILabel()
-        label.font = Typography.fontRegular14
-        label.textColor = Colors.tokenRainbowBlueEnd
-        label.text = "View or edit"
-        label.textAlignment = .right
-        label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -87,10 +65,8 @@ final class CheckoutProductsCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        contentView.addSubview(titleLabel)
         contentView.addSubview(shippingFeeLabel)
         contentView.addSubview(itemsCountLabel)
-        contentView.addSubview(viewOrEditLabel)
         contentView.addSubview(productsCollectionView)
         contentView.addSubview(addNoteLabel)
         
@@ -99,17 +75,11 @@ final class CheckoutProductsCell: UICollectionViewCell {
         productsCollectionView.register(ProductItemCheckoutCell.self, forCellWithReuseIdentifier: "ProductItemCheckoutCell")
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
-            shippingFeeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            shippingFeeLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            shippingFeeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            shippingFeeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
             itemsCountLabel.topAnchor.constraint(equalTo: shippingFeeLabel.bottomAnchor, constant: 16),
             itemsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
-            viewOrEditLabel.centerYAnchor.constraint(equalTo: itemsCountLabel.centerYAnchor),
-            viewOrEditLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
             productsCollectionView.topAnchor.constraint(equalTo: itemsCountLabel.bottomAnchor, constant: 12),
             productsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -139,12 +109,16 @@ final class CheckoutProductsCell: UICollectionViewCell {
         let totalItems = items.reduce(0) { $0 + $1.quantity }
         itemsCountLabel.text = "\(totalItems) items in total"
         
-        // Hiển thị shipping fee nếu có
+        // Hiển thị shipping fee - "Calculate by address" nếu chưa có giá trị
         if let shippingFee = shippingFee, shippingFee > 0 {
-            shippingFeeLabel.text = String(format: "Shipping fee: $%.2f", shippingFee)
-            shippingFeeLabel.isHidden = false
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .decimal
+            numberFormatter.groupingSeparator = "."
+            numberFormatter.maximumFractionDigits = 0
+            let shippingFormatted = numberFormatter.string(from: NSNumber(value: shippingFee)) ?? "0"
+            shippingFeeLabel.text = "\(shippingFormatted) vnd"
         } else {
-            shippingFeeLabel.isHidden = true
+            shippingFeeLabel.text = "Calculate by address"
         }
         
         productsCollectionView.reloadData()

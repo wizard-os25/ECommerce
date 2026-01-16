@@ -85,11 +85,57 @@ public final class CameraHelper {
     }
     
     /// Present AI Search camera (with image recognition)
+    /// - Parameters:
+    ///   - from: ViewController to present from
+    ///   - onImageCaptured: Callback when image is captured (optional)
+    ///   - onLabelsDetected: Callback when labels are detected (optional)
+    ///   - onDismiss: Callback when camera is dismissed (optional)
     public static func presentAISearchCamera(
         from viewController: UIViewController,
         onImageCaptured: ((UIImage) -> Void)? = nil,
+        onLabelsDetected: (([(String, Double)]) -> Void)? = nil,
         onDismiss: (() -> Void)? = nil
     ) {
         presentCamera(mode: .aiSearch, from: viewController, onImageCaptured: onImageCaptured, onDismiss: onDismiss)
+        
+        // Setup labels observer if callback provided
+        if let onLabelsDetected = onLabelsDetected {
+            // Get cameraVC from presented view controller after a short delay to ensure it's ready
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                if let cameraVC = viewController.presentedViewController as? CameraViewController,
+                   let viewModel = cameraVC.imViewModel {
+                    print("📷 [CameraHelper] ✅ Setting up topLabels observer")
+                    
+                    // Flag để tránh gọi callback nhiều lần
+                    var hasCalledCallback = false
+                    
+                    let disposable = viewModel.topLabels.observeOnMain(on: cameraVC) { labels in
+                        // Chỉ gọi callback một lần
+                        guard !hasCalledCallback else {
+                            print("⚠️ [CameraHelper] Labels callback already called, skipping duplicate")
+                            return
+                        }
+                        
+                        guard !labels.isEmpty else {
+                            print("⚠️ [CameraHelper] Empty labels, skipping")
+                            return
+                        }
+                        
+                        hasCalledCallback = true
+                        print("📷 [CameraHelper] 🏷️ Labels detected: \(labels.count) labels")
+                        for (index, (label, confidence)) in labels.enumerated() {
+                            print("📷 [CameraHelper]   \(index + 1). \(label): \(String(format: "%.2f", confidence * 100))%")
+                        }
+                        onLabelsDetected(labels)
+                    }
+                    // Keep disposable alive
+                    cameraVC.disposalBag.add {
+                        disposable.dispose()
+                    }
+                } else {
+                    print("⚠️ [CameraHelper] CameraViewController or ViewModel not found")
+                }
+            }
+        }
     }
 }

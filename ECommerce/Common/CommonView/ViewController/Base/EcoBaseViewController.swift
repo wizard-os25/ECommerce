@@ -207,6 +207,12 @@ public extension EcoBaseViewController {
                 controller.onLeftItemTap = onLeftItemTap
                 controller.onRightItemTap = onRightItemTap
                 controller.onCameraTap = onCameraTap
+                print("📷 [EcoBaseViewController] attachNavigationBar - onCameraTap callback set: \(onCameraTap != nil ? "EXISTS" : "nil")")
+                
+                // Re-setup search field bindings sau khi callback được set
+                // Đảm bảo closure capture callback mới nhất
+                navBarVC.updateSearchFieldBindings()
+                print("📷 [EcoBaseViewController] attachNavigationBar - Search field bindings updated")
             }
 
             addChild(navBarVC)
@@ -267,6 +273,13 @@ public extension EcoBaseViewController {
                 controller.onLeftItemTap = onLeftItemTap
                 controller.onRightItemTap = onRightItemTap
                 controller.onCameraTap = onCameraTap
+                print("📷 [EcoBaseViewController] attachNavigationBar (update) - onCameraTap callback set: \(onCameraTap != nil ? "EXISTS" : "nil")")
+                
+                // Re-setup search field bindings sau khi callback được update
+                if let navBarVC = navigationBarViewController {
+                    navBarVC.updateSearchFieldBindings()
+                    print("📷 [EcoBaseViewController] attachNavigationBar (update) - Search field bindings updated")
+                }
             }
         }
 

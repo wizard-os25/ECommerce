@@ -316,9 +316,20 @@ extension PaymentCardViewController: UITableViewDataSource {
             cardIconImageView.heightAnchor.constraint(equalToConstant: 24)
         ])
         
-        // Card info label
+        // Card info label với "default" in nghiêng nếu isDefault
         let cardInfoLabel = UILabel()
-        cardInfoLabel.text = paymentCard.displayName
+        if paymentCard.isDefault {
+            // Thêm "default" in nghiêng
+            let attributedText = NSMutableAttributedString(string: paymentCard.displayName)
+            let defaultText = NSMutableAttributedString(string: " default", attributes: [
+                .font: UIFont.italicSystemFont(ofSize: 14),
+                .foregroundColor: Colors.tokenRainbowBlueEnd // Màu giống chữ delete
+            ])
+            attributedText.append(defaultText)
+            cardInfoLabel.attributedText = attributedText
+        } else {
+            cardInfoLabel.text = paymentCard.displayName
+        }
         cardInfoLabel.font = UIFont.systemFont(ofSize: 16)
         cardInfoLabel.textColor = .label
         

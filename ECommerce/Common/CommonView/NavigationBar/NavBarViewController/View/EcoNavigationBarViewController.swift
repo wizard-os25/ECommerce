@@ -13,7 +13,7 @@ public final class EcoNavigationBarViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var navigationBarController: EcoNavigationBarController!
+    var navigationBarController: EcoNavigationBarController!
     private let navigationBarView: EcoNavigationBarView
     
     // MARK: - Init
@@ -69,6 +69,21 @@ public final class EcoNavigationBarViewController: UIViewController {
         setupSearchFieldBindings()
     }
     
+    /// Re-setup search field bindings (useful when callbacks are updated)
+    func updateSearchFieldBindings() {
+        print("📷 [EcoNavigationBarViewController] updateSearchFieldBindings called")
+        // Verify callback exists before re-setting up bindings
+        if let controller = navigationBarController as? DefaultEcoNavigationBarController {
+            print("📷 [EcoNavigationBarViewController] onCameraTap callback before re-setup: \(controller.onCameraTap != nil ? "EXISTS" : "nil")")
+        }
+        setupSearchFieldBindings()
+        // Verify callback exists after re-setting up bindings
+        if let controller = navigationBarController as? DefaultEcoNavigationBarController {
+            print("📷 [EcoNavigationBarViewController] onCameraTap callback after re-setup: \(controller.onCameraTap != nil ? "EXISTS" : "nil")")
+        }
+        print("📷 [EcoNavigationBarViewController] Search field bindings re-setup completed")
+    }
+    
     private func unbind() {
         navigationBarController.state.remove(observer: self)
         navigationBarController.statusBarStyle.remove(observer: self)
@@ -89,9 +104,21 @@ public final class EcoNavigationBarViewController: UIViewController {
             self?.navigationBarController.didSearchClear()
         }
         
+        // Setup camera tap handler - truy cập callback trực tiếp khi được gọi
         searchField.onCameraTap = { [weak self] in
-            if let controller = self?.navigationBarController as? DefaultEcoNavigationBarController {
+            print("📷 [EcoNavigationBarViewController] Search field camera tap received")
+            guard let self = self else {
+                print("⚠️ [EcoNavigationBarViewController] self is nil")
+                return
+            }
+            
+            // Truy cập controller.onCameraTap trực tiếp khi được gọi, không capture
+            if let controller = self.navigationBarController as? DefaultEcoNavigationBarController {
+                print("📷 [EcoNavigationBarViewController] Controller found, onCameraTap: \(controller.onCameraTap != nil ? "EXISTS" : "nil")")
+                // Gọi callback trực tiếp
                 controller.onCameraTap?()
+            } else {
+                print("⚠️ [EcoNavigationBarViewController] Controller is not DefaultEcoNavigationBarController")
             }
         }
         
@@ -132,7 +159,62 @@ public extension EcoNavigationBarViewController {
     /// Handle scroll updates
     func handleScroll(offset: CGFloat) {
         navigationBarController.didScrollUpdate(progress: offset)
+        
+        // Track previous scroll state để detect khi search field vừa được hiển thị
+        let previousOffset = navigationBarView.scrollOffset
         navigationBarView.updateScroll(progress: offset)
+        
+        // Khi search field được hiển thị sau khi collapse (progress > 0.1)
+        // Đảm bảo bindings được setup lại để camera button hoạt động
+        guard let currentState = navigationBarView.currentState else { return }
+        
+        if currentState.scrollBehavior == .collapseWithSearch {
+            let threshold: CGFloat = 50
+            let maxOffset: CGFloat = 100
+            let previousProgress = min(max((previousOffset - threshold) / (maxOffset - threshold), 0), 1)
+            let currentProgress = min(max((offset - threshold) / (maxOffset - threshold), 0), 1)
+            let shouldShowSearch = currentProgress > 0.1
+            let previousShouldShow = previousProgress > 0.1
+            
+            // Nếu search field vừa được hiển thị (từ hidden -> visible)
+            if shouldShowSearch && !previousShouldShow {
+                print("📷 [EcoNavigationBarViewController] Search field just became visible after collapse")
+                // Verify callback exists before re-setting up bindings
+                if let controller = navigationBarController as? DefaultEcoNavigationBarController {
+                    print("📷 [EcoNavigationBarViewController] onCameraTap callback when search field appears: \(controller.onCameraTap != nil ? "EXISTS" : "nil")")
+                    if controller.onCameraTap == nil {
+                        print("⚠️ [EcoNavigationBarViewController] onCameraTap is nil - attempting to re-setup from parent")
+                        // Try to get callback from parent view controller (EcoBaseViewController/EcoViewController)
+                        // Find parent and request to re-setup callbacks
+                        if let parentVC = findParentEcoViewController() {
+                            print("📷 [EcoNavigationBarViewController] Found parent EcoViewController, requesting callback re-setup")
+                            // Get callback directly from controller and set it
+                            let cameraCallback = parentVC.controller.onNavigationBarCameraTap
+                            print("📷 [EcoNavigationBarViewController] Camera callback from parent: \(cameraCallback != nil ? "EXISTS" : "nil")")
+                            controller.onCameraTap = cameraCallback
+                            print("📷 [EcoNavigationBarViewController] onCameraTap callback after re-setup: \(controller.onCameraTap != nil ? "EXISTS" : "nil")")
+                        } else {
+                            print("⚠️ [EcoNavigationBarViewController] Parent EcoViewController not found")
+                        }
+                    }
+                }
+                // Re-setup bindings để đảm bảo camera button callback hoạt động
+                // Note: Closure sẽ truy cập controller.onCameraTap trực tiếp khi được gọi, không capture
+                updateSearchFieldBindings()
+            }
+        }
+    }
+    
+    /// Find parent EcoViewController để có thể re-setup callbacks
+    func findParentEcoViewController() -> EcoViewController? {
+        var responder: UIResponder? = self
+        while responder != nil {
+            responder = responder?.next
+            if let ecoVC = responder as? EcoViewController {
+                return ecoVC
+            }
+        }
+        return nil
     }
     
     /// Set callback for height changes during scroll

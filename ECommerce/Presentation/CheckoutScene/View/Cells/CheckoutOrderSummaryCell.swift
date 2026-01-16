@@ -9,15 +9,6 @@ import UIKit
 
 final class CheckoutOrderSummaryCell: UICollectionViewCell {
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Order summary"
-        label.font = Typography.fontBold16
-        label.textColor = Colors.tokenDark100
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     private let subtotalLabel: UILabel = {
         let label = UILabel()
         label.text = "Subtotal"
@@ -83,7 +74,6 @@ final class CheckoutOrderSummaryCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        contentView.addSubview(titleLabel)
         contentView.addSubview(subtotalLabel)
         contentView.addSubview(subtotalValueLabel)
         contentView.addSubview(shippingLabel)
@@ -92,10 +82,7 @@ final class CheckoutOrderSummaryCell: UICollectionViewCell {
         contentView.addSubview(totalValueLabel)
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
-            subtotalLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            subtotalLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             subtotalLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
             subtotalValueLabel.centerYAnchor.constraint(equalTo: subtotalLabel.centerYAnchor),
@@ -116,11 +103,42 @@ final class CheckoutOrderSummaryCell: UICollectionViewCell {
         ])
     }
     
-    func configure(summary: OrderSummary?) {
+    func configure(summary: OrderSummary?, shippingFeeFromAddress: String? = nil) {
         guard let summary = summary else { return }
         
-        subtotalValueLabel.text = String(format: "USD %.2f", summary.subtotal)
-        shippingValueLabel.text = String(format: "USD %.2f", summary.shippingFee)
-        totalValueLabel.text = String(format: "USD %.2f", summary.total)
+        // Format giá với "vnd" đằng sau
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.groupingSeparator = "."
+        numberFormatter.maximumFractionDigits = 0
+        
+        // Subtotal - format với "vnd"
+        let subtotalFormatted = numberFormatter.string(from: NSNumber(value: summary.subtotal)) ?? "0"
+        subtotalLabel.text = "Subtotal \(subtotalFormatted) vnd"
+        subtotalValueLabel.text = "\(subtotalFormatted) vnd"
+        
+        // Shipping - hiển thị "Calculate by address" nếu chưa có giá trị từ address
+        // Tính tổng shippingFee từ các product (nếu có) hoặc từ address
+        if let shippingFeeString = shippingFeeFromAddress, !shippingFeeString.isEmpty {
+            // Convert String to Double
+            if let shippingFee = Double(shippingFeeString), shippingFee > 0 {
+                let shippingFormatted = numberFormatter.string(from: NSNumber(value: shippingFee)) ?? "0"
+                shippingLabel.text = "Shipping \(shippingFormatted) vnd"
+                shippingValueLabel.text = "\(shippingFormatted) vnd"
+                shippingValueLabel.textColor = Colors.tokenDark100
+            } else {
+                shippingLabel.text = "Shipping"
+                shippingValueLabel.text = "Calculate by address"
+                shippingValueLabel.textColor = Colors.tokenDark60
+            }
+        } else {
+            shippingLabel.text = "Shipping"
+            shippingValueLabel.text = "Calculate by address"
+            shippingValueLabel.textColor = Colors.tokenDark60
+        }
+        
+        // Total
+        let totalFormatted = numberFormatter.string(from: NSNumber(value: summary.total)) ?? "0"
+        totalValueLabel.text = "\(totalFormatted) vnd"
     }
 }

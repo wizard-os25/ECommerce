@@ -126,21 +126,57 @@ final class ProductDetailViewController: EcoViewController {
             orderActionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             orderActionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             orderActionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            orderActionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80 + 24) // Tăng thêm 24pt
+            orderActionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80 + 12) // Giảm padding một nửa (từ 24 xuống 12)
         ])
         
         // Configure OrderActionView
+        // Padding giảm một nửa - sẽ được xử lý trong OrderActionView
         orderActionView.topLeftLabelText = "Subtotal"
         orderActionView.buttonTitle = "Start order"
         orderActionView.buttonCornerRadius = BorderRadius.tokenBorderRadius16
-        orderActionView.leftItemType = .icon(UIImage(systemName: "plus.circle")) // Thêm icon add to card
+        // Icon cart với dấu + (cart.badge.plus hoặc cart.fill.badge.plus)
+        orderActionView.leftItemType = .icon(UIImage(systemName: "cart.badge.plus") ?? UIImage(systemName: "cart.fill.badge.plus"))
         
         // Update initial values
         updateOrderActionView()
         
+        // Giảm padding một nửa cho ProductDetail
+        adjustOrderActionViewPadding()
+        
         // Ensure z-order: Navigation bar > OrderActionView > Collection view
         // OrderActionView should be below navbar but above collection view
         view.bringSubviewToFront(orderActionView)
+    }
+    
+    private func adjustOrderActionViewPadding() {
+        // Tìm containerStackView trong OrderActionView và giảm padding một nửa
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            // Tìm containerStackView trong OrderActionView
+            for subview in self.orderActionView.subviews {
+                if let stackView = subview as? UIStackView {
+                    // Điều chỉnh constraints của stackView - giảm padding một nửa
+                    for constraint in self.orderActionView.constraints {
+                        if (constraint.firstItem === stackView || constraint.secondItem === stackView) {
+                            // Giảm top padding từ 12pt xuống 6pt
+                            if constraint.firstAttribute == .top && constraint.constant == Spacing.tokenSpacing12 {
+                                constraint.constant = Spacing.tokenSpacing12 / 2
+                            }
+                            // Giảm bottom padding từ -12pt xuống -6pt
+                            if constraint.firstAttribute == .bottom && constraint.constant == -Spacing.tokenSpacing12 {
+                                constraint.constant = -Spacing.tokenSpacing12 / 2
+                            }
+                            // Giảm leading/trailing padding từ 12pt xuống 6pt
+                            if (constraint.firstAttribute == .leading || constraint.firstAttribute == .trailing) && 
+                               abs(constraint.constant) == Spacing.tokenSpacing12 {
+                                constraint.constant = constraint.constant > 0 ? Spacing.tokenSpacing12 / 2 : -Spacing.tokenSpacing12 / 2
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     private func updateOrderActionView() {
@@ -159,7 +195,10 @@ final class ProductDetailViewController: EcoViewController {
         
         let formattedPrice = numberFormatter.string(from: NSNumber(value: totalPrice)) ?? "0"
         
-        orderActionView.topRightLabelText = "$ \(formattedPrice) ⋀"
+        // Format: "mũi tên hướng lên (chevron.up) 600000 vnd"
+        // Sử dụng SF Symbol chevron.up hoặc Unicode ↑
+        let chevronUp = "↑" // Unicode arrow up
+        orderActionView.topRightLabelText = "\(chevronUp) \(formattedPrice) vnd"
     }
     
     private func formatDoubleToCurrency(_ value: Double) -> String {

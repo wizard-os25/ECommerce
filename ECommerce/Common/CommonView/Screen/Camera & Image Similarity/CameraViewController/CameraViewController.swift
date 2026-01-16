@@ -41,7 +41,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate,
     let pixelBufferStream = CameraEventStream<CVPixelBuffer>()
     
     // MARK: - AI Search Mode Only
-    private var imViewModel: ImageProcessingViewModel?
+    var imViewModel: ImageProcessingViewModel?
     
     // MARK: - Camera Components
     private(set) var previewLayer: AVCaptureVideoPreviewLayer!
@@ -77,7 +77,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate,
     // Store original library button color
     private var originalLibraryButtonTintColor: UIColor?
 
-    private let disposalBag = CameraDisposalBag()
+    let disposalBag = CameraDisposalBag()
     
     // MARK: - Initialization
     

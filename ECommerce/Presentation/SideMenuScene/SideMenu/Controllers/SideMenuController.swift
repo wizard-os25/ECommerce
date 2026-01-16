@@ -51,10 +51,8 @@ final class DefaultSideMenuController: SideMenuController {
         SideMenuModel(icon: UIImage(systemName: "person")!, title: "Profile"),
         SideMenuModel(icon: UIImage(systemName: "bag")!, title: "My Order"),
         SideMenuModel(icon: UIImage(systemName: "clock")!, title: "Browsing History"),
-        SideMenuModel(icon: UIImage(systemName: "heart")!, title: "Favorites"),
         SideMenuModel(icon: UIImage(systemName: "mappin.circle")!, title: "Shipping Address"),
-        SideMenuModel(icon: UIImage(systemName: "creditcard")!, title: "Payment"),
-        SideMenuModel(icon: UIImage(systemName: "tag")!, title: "Selling")
+        SideMenuModel(icon: UIImage(systemName: "creditcard")!, title: "Payment")
     ]
     
     private let secondSectionMenuItemsData: [SideMenuModel] = [
@@ -106,12 +104,12 @@ final class DefaultSideMenuController: SideMenuController {
             // Profile - trigger navigation callback
             print("DEBUG: Profile selected, onNavigateToProfile: \(onNavigateToProfile != nil ? "set" : "nil")")
             onNavigateToProfile?()
-        } else if section == 0 && index == 4 {
-            // Shipping Address - trigger navigation callback
+        } else if section == 0 && index == 3 {
+            // Shipping Address - trigger navigation callback (index changed from 4 to 3 after removing Favorites)
             print("DEBUG: Shipping Address selected, onNavigateToShippingAddress: \(onNavigateToShippingAddress != nil ? "set" : "nil")")
             onNavigateToShippingAddress?()
-        } else if section == 0 && index == 5 {
-            // Payment - trigger navigation callback
+        } else if section == 0 && index == 4 {
+            // Payment - trigger navigation callback (index changed from 5 to 4 after removing Favorites and Selling)
             print("DEBUG: Payment selected, onNavigateToPayment: \(onNavigateToPayment != nil ? "set" : "nil")")
             onNavigateToPayment?()
         }

@@ -33,6 +33,9 @@ class MainContainerViewController: UIViewController {
     private var draggingIsEnabled: Bool = false
     private var panBaseLocation: CGFloat = 0.0
     
+    // Store original gesture recognizer states to restore later
+    private var originalGestureStates: [UIGestureRecognizer: Bool] = [:]
+    
     // Flag to track if AddressViewController or ProfileViewController is opened from side menu
     private var didOpenFromSideMenu: Bool = false
     
@@ -502,6 +505,20 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             return topVC is PaymentCardViewController
         }()
         
+        // Check if current top view controller is CheckoutViewController or PaymentMethodViewController
+        // Các màn hình này cần cho phép swipe back nhưng không kích hoạt side menu
+        let isTopCheckoutViewController = {
+            guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+                  let topVC = nav.topViewController else { return false }
+            return topVC is CheckoutViewController
+        }()
+        
+        let isTopPaymentMethodViewController = {
+            guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+                  let topVC = nav.topViewController else { return false }
+            return topVC is PaymentMethodViewController
+        }()
+        
         // Check if any view controller in the navigation stack was opened after AddressViewController, ProfileViewController or PaymentCardViewController (when flag is set)
         // This includes MapViewController, EditProfileViewController and any other screens pushed after them
         let hasViewControllersAfterSideMenuVC = {
@@ -564,6 +581,13 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                 print("✅ [gestureRecognizerShouldBegin] \(vcName) NOT opened from side menu → Allow side menu gesture")
                 // Continue with normal side menu gesture logic below
             }
+        }
+        
+        // CheckoutViewController và PaymentMethodViewController: luôn block side menu gesture để cho phép swipe back
+        if isTopCheckoutViewController || isTopPaymentMethodViewController {
+            let vcName = isTopCheckoutViewController ? "CheckoutViewController" : "PaymentMethodViewController"
+            print("❌ [gestureRecognizerShouldBegin] \(vcName) → Block side menu gesture (let swipe back handle)")
+            return false
         }
         
         // If any view controller was pushed after AddressViewController or ProfileViewController (when flag is set),
@@ -786,12 +810,73 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         }
     }
     
+    /// Disable tất cả các gesture khác khi đang vuốt trái mở side menu
+    private func disableOtherGestures() {
+        guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+              let topVC = nav.topViewController else { return }
+        
+        // Tìm tất cả gesture recognizers trong view hierarchy
+        let allGestures = findAllGestureRecognizers(in: topVC.view)
+        
+        // Lưu trạng thái hiện tại và disable
+        for gesture in allGestures {
+            // Bỏ qua pan gesture của side menu
+            if gesture.view == mainTabBarController?.view || gesture.view == sideMenuViewController?.view {
+                continue
+            }
+            
+            originalGestureStates[gesture] = gesture.isEnabled
+            gesture.isEnabled = false
+        }
+        
+        print("🔴 [disableOtherGestures] Disabled \(allGestures.count) gesture recognizers")
+    }
+    
+    /// Enable lại tất cả các gesture đã disable
+    private func enableOtherGestures() {
+        // Restore original states
+        for (gesture, wasEnabled) in originalGestureStates {
+            gesture.isEnabled = wasEnabled
+        }
+        originalGestureStates.removeAll()
+        
+        print("🟢 [enableOtherGestures] Re-enabled gesture recognizers")
+    }
+    
+    /// Recursively find all gesture recognizers in a view hierarchy
+    private func findAllGestureRecognizers(in view: UIView) -> [UIGestureRecognizer] {
+        var gestures: [UIGestureRecognizer] = []
+        
+        // Add gestures from current view
+        gestures.append(contentsOf: view.gestureRecognizers ?? [])
+        
+        // Recursively find in subviews
+        for subview in view.subviews {
+            gestures.append(contentsOf: findAllGestureRecognizers(in: subview))
+        }
+        
+        return gestures
+    }
+    
     @objc private func handlePanGesture(sender: UIPanGestureRecognizer) {
         let gestureView = sender.view ?? self.view
         let position: CGFloat = sender.translation(in: gestureView).x
         let velocity: CGFloat = sender.velocity(in: gestureView).x
         
         print("🟣 [handlePanGesture] State: \(sender.state.rawValue), position: \(position), velocity: \(velocity)")
+        
+        switch sender.state {
+        case .began:
+            // Khi bắt đầu vuốt trái mở side menu, disable tất cả các gesture khác
+            disableOtherGestures()
+            
+        case .ended, .cancelled, .failed:
+            // Khi kết thúc gesture, enable lại các gesture khác
+            enableOtherGestures()
+            
+        default:
+            break
+        }
         
         switch sender.state {
         case .began:

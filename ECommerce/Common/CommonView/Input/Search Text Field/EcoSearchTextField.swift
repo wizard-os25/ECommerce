@@ -108,9 +108,9 @@ private extension EcoSearchTextField {
         cameraButton.contentMode = .scaleAspectFit
         cameraButton.addTarget(self, action: #selector(cameraTapped), for: .touchUpInside)
         
-        // Tăng kích thước camera button
+        // Tăng kích thước camera button - width thêm 4pt (từ 28 lên 32)
         cameraButton.translatesAutoresizingMaskIntoConstraints = false
-        cameraButtonWidthConstraint = cameraButton.widthAnchor.constraint(equalToConstant: 28)
+        cameraButtonWidthConstraint = cameraButton.widthAnchor.constraint(equalToConstant: 32) // Tăng từ 28 lên 32
         cameraButtonHeightConstraint = cameraButton.heightAnchor.constraint(equalToConstant: 28)
         cameraButtonWidthConstraint?.isActive = true
         cameraButtonHeightConstraint?.isActive = true
@@ -286,7 +286,14 @@ private extension EcoSearchTextField {
     }
     
     @objc func cameraTapped() {
-        onCameraTap?()
+        print("📷 [EcoSearchTextField] Camera button tapped")
+        print("📷 [EcoSearchTextField] onCameraTap callback: \(onCameraTap != nil ? "EXISTS" : "nil")")
+        if let onCameraTap = onCameraTap {
+            print("📷 [EcoSearchTextField] Calling onCameraTap callback")
+            onCameraTap()
+        } else {
+            print("⚠️ [EcoSearchTextField] onCameraTap callback is nil - camera will not open")
+        }
     }
 }
 

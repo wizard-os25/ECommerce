@@ -37,21 +37,21 @@ public class OrderActionView: UIView {
     
     public weak var delegate: OrderActionViewDelegate?
     
-    /// Top left label text
+    /// Top left label text (DEPRECATED - Always hidden in Checkout)
     public var topLeftLabelText: String? {
         get { topLeftLabel.text }
         set { 
             topLeftLabel.text = newValue
-            topLeftLabel.isHidden = newValue == nil || newValue?.isEmpty == true
+            topLeftLabel.isHidden = true // Always hidden
         }
     }
     
-    /// Top right label text
+    /// Top right label text (DEPRECATED - Always hidden in Checkout)
     public var topRightLabelText: String? {
         get { topRightLabel.text }
         set { 
             topRightLabel.text = newValue
-            topRightLabel.isHidden = newValue == nil || newValue?.isEmpty == true
+            topRightLabel.isHidden = true // Always hidden
         }
     }
     
@@ -226,9 +226,10 @@ public class OrderActionView: UIView {
         // Add container stack view
         addSubview(containerStackView)
         
-        // Setup top row
+        // Setup top row (hidden by default for Checkout)
         topRowStackView.addArrangedSubview(topLeftLabel)
         topRowStackView.addArrangedSubview(topRightLabel)
+        topRowStackView.isHidden = true // Hide top row for Checkout
         containerStackView.addArrangedSubview(topRowStackView)
         
         // Setup bottom row

@@ -51,9 +51,23 @@ final class CheckoutViewController: EcoViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isSwipeBackEnabled = true // Cho phép swipe back
         setupViews()
         bindCheckoutSpecific()
         checkoutController.didLoadView()
+    }
+    
+    override func applyNavigation(_ state: EcoNavigationState) {
+        super.applyNavigation(state)
+        // Override left item tap callback để pop back về trước
+        DispatchQueue.main.async { [weak self] in
+            if let navBarController = self?.navigationBarViewController?.controller as? DefaultEcoNavigationBarController {
+                navBarController.onLeftItemTap = { [weak self] in
+                    print("🔵 [CheckoutViewController] Back button tapped")
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
     }
     
     // MARK: - Setup
@@ -82,7 +96,7 @@ final class CheckoutViewController: EcoViewController {
         view.addSubview(orderActionView)
         
         NSLayoutConstraint.activate([
-            progressIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16 + 24), // Thêm 24pt padding
+            progressIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 144),
             progressIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             progressIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
@@ -159,29 +173,23 @@ final class CheckoutViewController: EcoViewController {
         let step = checkoutController.currentStep.value
         let hasAddress = checkoutController.selectedAddress.value != nil
         
+        // Bỏ topLeftLabelText và topRightLabelText
+        orderActionView.topLeftLabelText = nil
+        orderActionView.topRightLabelText = nil
+        
         if !hasAddress {
             // No address - show "Add address" button
-            orderActionView.configureForAddAddress(
-                topLeftText: nil,
-                topRightText: nil,
-                buttonTitle: "Add address"
-            )
-            // Bỏ icon vị trí, không set leftItemType
+            orderActionView.buttonTitle = "Add address"
             orderActionView.leftItemType = .none
+            orderActionView.isButtonEnabled = true
             return
         }
         
         switch step {
         case .placeOrder:
-            if let summary = checkoutController.orderSummary.value {
-                orderActionView.configureForCheckout(
-                    topLeftText: "Total",
-                    topRightText: String(format: "$%.2f", summary.total), // Thay USD bằng $
-                    buttonTitle: "Order"
-                )
-                // Bỏ icon vị trí, thay bằng label $ (tổng giá)
-                orderActionView.leftItemType = .label(String(format: "$%.2f", summary.total))
-            }
+            orderActionView.buttonTitle = "Order"
+            orderActionView.leftItemType = .none
+            orderActionView.isButtonEnabled = true
         case .createCustomer:
             orderActionView.buttonTitle = "Processing..."
             orderActionView.isButtonEnabled = false
@@ -251,7 +259,9 @@ extension CheckoutViewController: UICollectionViewDataSource {
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CheckoutOrderSummaryCell", for: indexPath) as! CheckoutOrderSummaryCell
-            cell.configure(summary: checkoutController.orderSummary.value)
+            // Pass shippingFee từ address nếu có (String?)
+            let shippingFeeFromAddress = checkoutController.selectedAddress.value?.shippingFee
+            cell.configure(summary: checkoutController.orderSummary.value, shippingFeeFromAddress: shippingFeeFromAddress)
             return cell
         default:
             return UICollectionViewCell()

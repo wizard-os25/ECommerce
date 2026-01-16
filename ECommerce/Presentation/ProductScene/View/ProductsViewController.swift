@@ -32,13 +32,15 @@ final class ProductsViewController: EcoViewController {
     }
     
     override func viewDidLoad() {
+        // Setup callbacks TRƯỚC super.viewDidLoad() để đảm bảo callback được setup trước khi navigation bar được setup
+        setupCardButton()
+        setupProductSelection()
+        
         super.viewDidLoad()
         setupViews()
         bindProductsSpecific()
         setupChildViewController()
         setupSidebarGesture()
-        setupCardButton()
-        setupProductSelection()
         // viewDidLoad will be called on mediatingController by ProductsTableViewController
     }
     
@@ -126,7 +128,32 @@ final class ProductsViewController: EcoViewController {
         if let tableView = tableViewController.tableView {
             tableView.delegate = self
             bindNavigationBar(to: tableView)
+            // Bind scroll để thay đổi alpha của tabBar
+            bindTabBarScroll(to: tableView)
         }
+    }
+    
+    /// Bind scroll để thay đổi alpha của tabBar khi scroll
+    private func bindTabBarScroll(to scrollView: UIScrollView) {
+        // TabBar alpha sẽ được update trong scrollViewDidScroll override
+        // Store reference để sử dụng sau
+    }
+    
+    /// Reference đến TabBar để update alpha
+    private var tabBarReference: UITabBar? {
+        return findTabBarController()?.tabBar
+    }
+    
+    /// Find TabBarController từ parent hierarchy
+    private func findTabBarController() -> UITabBarController? {
+        var responder: UIResponder? = self
+        while responder != nil {
+            responder = responder?.next
+            if let tabBarController = responder as? UITabBarController {
+                return tabBarController
+            }
+        }
+        return nil
     }
     
     private func updateItems() {
@@ -141,6 +168,106 @@ final class ProductsViewController: EcoViewController {
             defaultProductsController.onOpenCard = { [weak self] in
                 self?.openCardViewController()
             }
+            // Setup callback for camera button tap
+            defaultProductsController.onOpenCamera = { [weak self] in
+                print("📷 [ProductsViewController] onOpenCamera callback triggered")
+                self?.openAISearchCamera()
+            }
+            print("✅ [ProductsViewController] Camera callback setup completed")
+        } else {
+            print("⚠️ [ProductsViewController] productsController is not DefaultProductsController")
+        }
+    }
+    
+    // Flag để tránh dismiss nhiều lần
+    private var isDismissingCamera = false
+    // Flag để tránh present camera nhiều lần
+    private var isPresentingCamera = false
+    
+    private func openAISearchCamera() {
+        print("📷 [ProductsViewController] Opening AI Search camera")
+        
+        // Kiểm tra xem đã có camera đang được present chưa
+        if presentedViewController != nil {
+            print("⚠️ [ProductsViewController] Camera already presented, skipping")
+            return
+        }
+        
+        // Kiểm tra flag để tránh present nhiều lần
+        guard !isPresentingCamera else {
+            print("⚠️ [ProductsViewController] Camera is already being presented, skipping")
+            return
+        }
+        
+        isPresentingCamera = true
+        // Reset flag
+        isDismissingCamera = false
+        
+        // Mở camera với chế độ .aiSearch
+        presentAISearchCamera(
+            onImageCaptured: { [weak self] image in
+                print("📷 [ProductsViewController] Image captured from AI Search camera - size: \(image.size)")
+                // Image captured - labels will be handled separately
+            },
+            onLabelsDetected: { [weak self] labels in
+                print("🔍 [ProductsViewController] Labels detected from AI Search: \(labels.count) labels")
+                guard let self = self else { return }
+                
+                // Tránh dismiss nhiều lần
+                guard !self.isDismissingCamera else {
+                    print("⚠️ [ProductsViewController] Already dismissing camera, skipping")
+                    return
+                }
+                
+                self.isDismissingCamera = true
+                
+                // Filter items trước, sau đó mới dismiss camera
+                print("🔍 [ProductsViewController] Filtering items first...")
+                self.handleAISearchLabels(labels)
+                
+                // Đợi một chút để đảm bảo filter đã hoàn thành, sau đó dismiss camera
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    // Dismiss camera sau khi filter xong
+                    if let presentedVC = self.presentedViewController {
+                        print("📷 [ProductsViewController] Dismissing camera after filter completed...")
+                        presentedVC.dismiss(animated: true) {
+                            print("📷 [ProductsViewController] Camera dismissed after filter completed")
+                            self.isDismissingCamera = false
+                        }
+                    } else {
+                        print("⚠️ [ProductsViewController] No presented VC found")
+                        self.isDismissingCamera = false
+                    }
+                }
+            },
+            onDismiss: { [weak self] in
+                print("📷 [ProductsViewController] AI Search camera dismissed")
+                // Reset flag khi camera dismissed
+                self?.isPresentingCamera = false
+            }
+        )
+        
+        // Reset flag sau một khoảng thời gian để tránh stuck
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.isPresentingCamera = false
+        }
+    }
+    
+    private func handleAISearchLabels(_ labels: [(String, Double)]) {
+        print("🔍 [ProductsViewController] Handling AI Search labels - filtering items")
+        // Filter items dựa trên labels từ camera model
+        if let defaultProductsController = productsController as? DefaultProductsController {
+            defaultProductsController.filterItemsByLabels(labels)
+            
+            // Reload tableView sau khi filter
+            DispatchQueue.main.async { [weak self] in
+                self?.productsTableViewController?.reload()
+                print("✅ [ProductsViewController] TableView reloaded after AI Search filter")
+            }
+        } else {
+            print("⚠️ [ProductsViewController] productsController is not DefaultProductsController")
         }
     }
     
@@ -297,6 +424,35 @@ extension ProductsViewController: UITableViewDelegate {
         print("   🚀 Navigating to ProductDetail directly from ProductsViewController...")
         
         navigateToProductDetail(productItem: productItem)
+    }
+}
+
+// MARK: - UIScrollViewDelegate Override
+
+extension ProductsViewController {
+    
+    // Override scrollViewDidScroll từ EcoBaseViewController để thêm logic cho tabBar alpha
+    public override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Gọi super để xử lý navigation bar scroll
+        super.scrollViewDidScroll(scrollView)
+        
+        // Update tabBar alpha dựa trên scroll offset
+        let scrollOffset = scrollView.contentOffset.y
+        let threshold: CGFloat = 50 // Ngưỡng để bắt đầu thay đổi alpha
+        
+        if let tabBar = tabBarReference {
+            if scrollOffset > threshold {
+                // Scroll xuống: alpha = 0.66
+                UIView.animate(withDuration: 0.2) {
+                    tabBar.alpha = 0.66
+                }
+            } else {
+                // Scroll lên hoặc ở đầu: alpha = 1.0
+                UIView.animate(withDuration: 0.2) {
+                    tabBar.alpha = 1.0
+                }
+            }
+        }
     }
 }
 

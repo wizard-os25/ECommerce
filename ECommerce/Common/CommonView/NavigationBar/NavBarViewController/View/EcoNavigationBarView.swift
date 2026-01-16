@@ -34,9 +34,9 @@ public final class EcoNavigationBarView: UIView, EcoNavigationBarViewType {
     
     // MARK: - Scroll Behavior State
     
-    private var scrollOffset: CGFloat = 0
+    var scrollOffset: CGFloat = 0 // Made internal để có thể access từ EcoNavigationBarViewController
     private var isCollapsed: Bool = false
-    private var currentState: EcoNavigationState?
+    var currentState: EcoNavigationState? // Made internal để có thể access từ EcoNavigationBarViewController
     
     // MARK: - Constraints for Scroll Behavior
     
@@ -741,6 +741,10 @@ public extension EcoNavigationBarView {
         if shouldShowSearch {
             searchTextField.isHidden = false
             searchTextField.alpha = progress // Fade in as scroll progresses
+            // Đảm bảo search field có thể tương tác khi hiển thị
+            searchTextField.isUserInteractionEnabled = true
+            // Re-setup bindings khi search field được hiển thị để đảm bảo camera button hoạt động
+            // Note: Bindings sẽ được re-setup thông qua EcoNavigationBarViewController
         } else {
             // Only hide if it was initially shown
             if initialState.showsSearch {

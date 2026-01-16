@@ -96,9 +96,11 @@ open class EcoViewController: EcoBaseViewController,
             onRightItemTap: controller.onNavigationBarRightItemTap,
             onCameraTap: controller.onNavigationBarCameraTap
         )
+        print("📷 [EcoViewController] applyNavigation - onCameraTap callback: \(callbacks.onCameraTap != nil ? "EXISTS" : "nil")")
         
         if navigationBarViewController == nil {
             print("🔵 [EcoViewController] Attaching navigation bar for the first time")
+            print("📷 [EcoViewController] onCameraTap callback before attach: \(callbacks.onCameraTap != nil ? "EXISTS" : "nil")")
             attachNavigationBar(
                 initialState: state,
                 onSearchTextChange: callbacks.onSearchTextChange,
@@ -109,17 +111,30 @@ open class EcoViewController: EcoBaseViewController,
                 onCameraTap: callbacks.onCameraTap
             )
             print("✅ [EcoViewController] Navigation bar attached")
+            // Verify callback was set
+            if let navBarController = navigationBarViewController?.controller as? DefaultEcoNavigationBarController {
+                print("📷 [EcoViewController] onCameraTap callback after attach: \(navBarController.onCameraTap != nil ? "EXISTS" : "nil")")
+            }
         } else {
             print("🔵 [EcoViewController] Updating existing navigation bar")
             updateNavigationBar(state, animated: true)
             // Update callbacks after navigation bar is updated
             if let navBarController = navigationBarViewController?.controller as? DefaultEcoNavigationBarController {
+                print("📷 [EcoViewController] onCameraTap callback before update: \(navBarController.onCameraTap != nil ? "EXISTS" : "nil")")
                 navBarController.onSearchTextChange = callbacks.onSearchTextChange
                 navBarController.onSearchSubmit = callbacks.onSearchSubmit
                 navBarController.onSearchClear = callbacks.onSearchClear
                 navBarController.onLeftItemTap = callbacks.onLeftItemTap
                 navBarController.onRightItemTap = callbacks.onRightItemTap
                 navBarController.onCameraTap = callbacks.onCameraTap
+                print("📷 [EcoViewController] onCameraTap callback after update: \(navBarController.onCameraTap != nil ? "EXISTS" : "nil")")
+                
+                // Re-setup search field bindings sau khi callback được update
+                if let navBarVC = navigationBarViewController {
+                    navBarVC.updateSearchFieldBindings()
+                    print("📷 [EcoViewController] Search field bindings updated after callback change")
+                }
+                
                 print("✅ [EcoViewController] Navigation bar callbacks updated")
             }
         }

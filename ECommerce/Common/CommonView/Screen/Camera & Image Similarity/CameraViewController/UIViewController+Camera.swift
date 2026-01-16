@@ -19,14 +19,17 @@ extension UIViewController {
     /// Mở camera với AI Search (tìm kiếm bằng hình ảnh)
     /// - Parameters:
     ///   - onImageCaptured: Callback khi có ảnh được chụp (optional)
+    ///   - onLabelsDetected: Callback khi labels được detect (optional)
     ///   - onDismiss: Callback khi camera dismiss (optional)
     func presentAISearchCamera(
         onImageCaptured: ((UIImage) -> Void)? = nil,
+        onLabelsDetected: (([(String, Double)]) -> Void)? = nil,
         onDismiss: (() -> Void)? = nil
     ) {
         CameraHelper.presentAISearchCamera(
             from: self,
             onImageCaptured: onImageCaptured,
+            onLabelsDetected: onLabelsDetected,
             onDismiss: onDismiss
         )
     }
