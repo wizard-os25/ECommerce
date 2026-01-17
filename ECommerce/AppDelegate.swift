@@ -30,6 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         StripeAPI.defaultPublishableKey = self.appConfiguration.stripePulishableKey
         AppAppearance.setupAppearance()
         
+        // Setup TokenRefreshService with AuthRepository for auto-refresh
+        let authSceneDIContainer = self.appDIContainer.makeAuthSceneDIContainer()
+        let authRepository = authSceneDIContainer.makeAuthRepository()
+        TokenRefreshService.shared.setAuthRepository(authRepository)
+        print("✅ [AppDelegate] TokenRefreshService configured for auto-refresh")
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         
         // Set SplashViewController as entry point

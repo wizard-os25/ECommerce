@@ -36,6 +36,15 @@ enum Constants {
         static let cachedLatitude = "cached_latitude"
         static let cachedLongitude = "cached_longitude"
         static let cachedAddress = "cached_address"
+        static let cachedAddressDetail = "cached_address_detail"
+        static let cachedProvinceId = "cached_province_id"
+        static let cachedDistrictId = "cached_district_id"
+        static let cachedWardId = "cached_ward_id"
+        static let cachedCountryId = "cached_country_id"
+        static let cachedContactPersonName = "cached_contact_person_name"
+        static let cachedContactPersonNumber = "cached_contact_person_number"
+        static let cachedAddressType = "cached_address_type"
+        static let cachedAddressId = "cached_address_id"
         
         // Device token key
         static let deviceToken = "device_token"

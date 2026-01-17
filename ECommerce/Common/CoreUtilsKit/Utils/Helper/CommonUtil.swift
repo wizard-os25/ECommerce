@@ -29,44 +29,75 @@ class Utilities: NSObject {
         return defaults.bool(forKey: Constants.UserDefaultsKey.isUserLoggedIn)
     }
     
-    // MARK: - Session Management
+    // MARK: - Session Management (Keychain Only)
     
-    /// Save session info (accessToken, refreshToken, expiresAt)
+    /// Save session info (accessToken, refreshToken, expiresAt) to Keychain
+    /// Note: Tokens are ONLY stored in Keychain, not in UserDefaults
     func saveSession(accessToken: String, refreshToken: String, expiresAt: Date) {
-        print("💾 [Utilities] Saving session to UserDefaults:")
+        print("💾 [Utilities] Saving session to Keychain:")
         print("   - Access Token Key: \(Constants.UserDefaultsKey.accessToken)")
         print("   - Refresh Token Key: \(Constants.UserDefaultsKey.refreshToken)")
         print("   - Expires At Key: \(Constants.UserDefaultsKey.expiresAt)")
         print("   - Expires At Value: \(expiresAt)")
         
-        defaults.set(accessToken, forKey: Constants.UserDefaultsKey.accessToken)
-        defaults.set(refreshToken, forKey: Constants.UserDefaultsKey.refreshToken)
-        defaults.set(expiresAt, forKey: Constants.UserDefaultsKey.expiresAt)
-        
-        // Verify saved values
-        let savedAccessToken = defaults.string(forKey: Constants.UserDefaultsKey.accessToken)
-        let savedRefreshToken = defaults.string(forKey: Constants.UserDefaultsKey.refreshToken)
-        let savedExpiresAt = defaults.object(forKey: Constants.UserDefaultsKey.expiresAt) as? Date
-        
-        print("✅ [Utilities] Session saved - Verification:")
-        print("   - Access Token saved: \(savedAccessToken != nil ? "YES (\(savedAccessToken!.prefix(20))...)" : "NO")")
-        print("   - Refresh Token saved: \(savedRefreshToken != nil ? "YES (\(savedRefreshToken!.prefix(20))...)" : "NO")")
-        print("   - Expires At saved: \(savedExpiresAt != nil ? "YES (\(savedExpiresAt!))" : "NO")")
+        do {
+            // Save tokens to Keychain
+            try KeychainHelper.save(accessToken, forKey: Constants.UserDefaultsKey.accessToken)
+            try KeychainHelper.save(refreshToken, forKey: Constants.UserDefaultsKey.refreshToken)
+            try KeychainHelper.saveDate(expiresAt, forKey: Constants.UserDefaultsKey.expiresAt)
+            
+            print("✅ [Utilities] Session saved to Keychain successfully")
+            
+            // Verify saved values
+            let savedAccessToken = try KeychainHelper.get(Constants.UserDefaultsKey.accessToken)
+            let savedRefreshToken = try KeychainHelper.get(Constants.UserDefaultsKey.refreshToken)
+            let savedExpiresAt = try KeychainHelper.getDate(Constants.UserDefaultsKey.expiresAt)
+            
+            print("✅ [Utilities] Session saved - Verification:")
+            print("   - Access Token saved: \(savedAccessToken != nil ? "YES (\(savedAccessToken!.prefix(20))...)" : "NO")")
+            print("   - Refresh Token saved: \(savedRefreshToken != nil ? "YES (\(savedRefreshToken!.prefix(20))...)" : "NO")")
+            print("   - Expires At saved: \(savedExpiresAt != nil ? "YES (\(savedExpiresAt!))" : "NO")")
+        } catch {
+            print("❌ [Utilities] Failed to save session to Keychain:")
+            print("   - Error: \(error.localizedDescription)")
+            assertionFailure("Failed to save session to Keychain: \(error.localizedDescription)")
+        }
     }
     
-    /// Get access token
+    /// Get access token from Keychain
+    /// Note: Tokens are ONLY read from Keychain, not from UserDefaults
     func getAccessToken() -> String? {
-        return defaults.string(forKey: Constants.UserDefaultsKey.accessToken)
+        do {
+            return try KeychainHelper.get(Constants.UserDefaultsKey.accessToken)
+        } catch {
+            print("❌ [Utilities] Failed to get access token from Keychain:")
+            print("   - Error: \(error.localizedDescription)")
+            return nil
+        }
     }
     
-    /// Get refresh token
+    /// Get refresh token from Keychain
+    /// Note: Tokens are ONLY read from Keychain, not from UserDefaults
     func getRefreshToken() -> String? {
-        return defaults.string(forKey: Constants.UserDefaultsKey.refreshToken)
+        do {
+            return try KeychainHelper.get(Constants.UserDefaultsKey.refreshToken)
+        } catch {
+            print("❌ [Utilities] Failed to get refresh token from Keychain:")
+            print("   - Error: \(error.localizedDescription)")
+            return nil
+        }
     }
     
-    /// Get expires at date
+    /// Get expires at date from Keychain
+    /// Note: Tokens are ONLY read from Keychain, not from UserDefaults
     func getExpiresAt() -> Date? {
-        return defaults.object(forKey: Constants.UserDefaultsKey.expiresAt) as? Date
+        do {
+            return try KeychainHelper.getDate(Constants.UserDefaultsKey.expiresAt)
+        } catch {
+            print("❌ [Utilities] Failed to get expires at from Keychain:")
+            print("   - Error: \(error.localizedDescription)")
+            return nil
+        }
     }
     
     /// Check if session is expired
@@ -74,7 +105,30 @@ class Utilities: NSObject {
         guard let expiresAt = getExpiresAt() else {
             return true
         }
-        return Date() >= expiresAt
+        let now = Date()
+        let isExpired = now >= expiresAt
+        
+        if isExpired {
+            print("⚠️ [Utilities] Session is expired:")
+            print("   - Current time: \(now)")
+            print("   - Expires at: \(expiresAt)")
+        }
+        
+        return isExpired
+    }
+    
+    /// Clear session data from Keychain (for logout or refresh)
+    func clearSession() {
+        print("🗑️ [Utilities] Clearing session from Keychain...")
+        
+        let accessTokenDeleted = KeychainHelper.delete(Constants.UserDefaultsKey.accessToken)
+        let refreshTokenDeleted = KeychainHelper.delete(Constants.UserDefaultsKey.refreshToken)
+        let expiresAtDeleted = KeychainHelper.delete(Constants.UserDefaultsKey.expiresAt)
+        
+        print("✅ [Utilities] Session cleared from Keychain:")
+        print("   - Access Token deleted: \(accessTokenDeleted ? "YES" : "NO")")
+        print("   - Refresh Token deleted: \(refreshTokenDeleted ? "YES" : "NO")")
+        print("   - Expires At deleted: \(expiresAtDeleted ? "YES" : "NO")")
     }
     
     // MARK: - User Info Management
@@ -177,9 +231,14 @@ class Utilities: NSObject {
         // Log current values before clearing
         print("📋 Current stored data before logout:")
         print("   - Is Logged In: \(defaults.bool(forKey: Constants.UserDefaultsKey.isUserLoggedIn))")
-        print("   - Access Token: \(defaults.string(forKey: Constants.UserDefaultsKey.accessToken) != nil ? "EXISTS" : "nil")")
-        print("   - Refresh Token: \(defaults.string(forKey: Constants.UserDefaultsKey.refreshToken) != nil ? "EXISTS" : "nil")")
-        print("   - Expires At: \(defaults.object(forKey: Constants.UserDefaultsKey.expiresAt) != nil ? "EXISTS" : "nil")")
+        
+        // Check Keychain tokens
+        let accessTokenExists = (try? KeychainHelper.get(Constants.UserDefaultsKey.accessToken)) != nil
+        let refreshTokenExists = (try? KeychainHelper.get(Constants.UserDefaultsKey.refreshToken)) != nil
+        let expiresAtExists = (try? KeychainHelper.getDate(Constants.UserDefaultsKey.expiresAt)) != nil
+        print("   - Access Token (Keychain): \(accessTokenExists ? "EXISTS" : "nil")")
+        print("   - Refresh Token (Keychain): \(refreshTokenExists ? "EXISTS" : "nil")")
+        print("   - Expires At (Keychain): \(expiresAtExists ? "EXISTS" : "nil")")
         print("   - User ID: \(defaults.integer(forKey: Constants.UserDefaultsKey.userId))")
         print("   - User Name: \(defaults.string(forKey: Constants.UserDefaultsKey.userName) ?? "nil")")
         print("   - User Email: \(defaults.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "nil")")
@@ -189,12 +248,8 @@ class Utilities: NSObject {
         print("🗑️ Clearing login state...")
         saveLogging(false)
         
-        // Clear session
-        print("🗑️ Clearing session data...")
-        defaults.removeObject(forKey: Constants.UserDefaultsKey.accessToken)
-        defaults.removeObject(forKey: Constants.UserDefaultsKey.refreshToken)
-        defaults.removeObject(forKey: Constants.UserDefaultsKey.expiresAt)
-        print("   ✅ Removed: accessToken, refreshToken, expiresAt")
+        // Clear session from Keychain
+        clearSession()
         
         // Clear user info
         print("🗑️ Clearing user info...")
@@ -214,17 +269,56 @@ class Utilities: NSObject {
         // Verify all cleared
         print("✅ Logout completed - Verification:")
         print("   - Is Logged In: \(defaults.bool(forKey: Constants.UserDefaultsKey.isUserLoggedIn))")
-        print("   - Access Token: \(defaults.string(forKey: Constants.UserDefaultsKey.accessToken) != nil ? "STILL EXISTS ❌" : "CLEARED ✅")")
-        print("   - Refresh Token: \(defaults.string(forKey: Constants.UserDefaultsKey.refreshToken) != nil ? "STILL EXISTS ❌" : "CLEARED ✅")")
+        
+        // Verify Keychain tokens are cleared
+        let accessTokenStillExists = (try? KeychainHelper.get(Constants.UserDefaultsKey.accessToken)) != nil
+        let refreshTokenStillExists = (try? KeychainHelper.get(Constants.UserDefaultsKey.refreshToken)) != nil
+        print("   - Access Token (Keychain): \(accessTokenStillExists ? "STILL EXISTS ❌" : "CLEARED ✅")")
+        print("   - Refresh Token (Keychain): \(refreshTokenStillExists ? "STILL EXISTS ❌" : "CLEARED ✅")")
         print("   - User ID: \(defaults.integer(forKey: Constants.UserDefaultsKey.userId) > 0 ? "STILL EXISTS ❌" : "CLEARED ✅")")
         print("============================================")
     }
     
     // MARK: - Location Cache Management
     
-    /// Save location to cache
-    func saveLocation(address: String, latitude: String, longitude: String) {
+    /// Save full location/address information to cache
+    /// Note: Uses addressDetail as primary address field (more accurate than address)
+    func saveLocation(address: Address) {
         print("💾 [Utilities] Saving location to cache:")
+        print("   - Address ID: \(address.id)")
+        print("   - Address Detail: \(address.addressDetail)")
+        print("   - Full Address: \(address.address)")
+        print("   - Province ID: \(address.provinceId)")
+        print("   - District ID: \(address.districtId)")
+        print("   - Ward ID: \(address.wardId)")
+        print("   - Country ID: \(address.countryId)")
+        print("   - Contact Person: \(address.contactPersonName)")
+        print("   - Contact Number: \(address.contactPersonNumber)")
+        print("   - Address Type: \(address.addressType)")
+        print("   - Latitude: \(address.latitude)")
+        print("   - Longitude: \(address.longitude)")
+        
+        // Save all address information
+        defaults.set(address.id, forKey: Constants.UserDefaultsKey.cachedAddressId)
+        defaults.set(address.addressDetail, forKey: Constants.UserDefaultsKey.cachedAddressDetail)
+        defaults.set(address.address, forKey: Constants.UserDefaultsKey.cachedAddress)
+        defaults.set(address.provinceId, forKey: Constants.UserDefaultsKey.cachedProvinceId)
+        defaults.set(address.districtId, forKey: Constants.UserDefaultsKey.cachedDistrictId)
+        defaults.set(address.wardId, forKey: Constants.UserDefaultsKey.cachedWardId)
+        defaults.set(address.countryId, forKey: Constants.UserDefaultsKey.cachedCountryId)
+        defaults.set(address.contactPersonName, forKey: Constants.UserDefaultsKey.cachedContactPersonName)
+        defaults.set(address.contactPersonNumber, forKey: Constants.UserDefaultsKey.cachedContactPersonNumber)
+        defaults.set(address.addressType, forKey: Constants.UserDefaultsKey.cachedAddressType)
+        defaults.set(address.latitude, forKey: Constants.UserDefaultsKey.cachedLatitude)
+        defaults.set(address.longitude, forKey: Constants.UserDefaultsKey.cachedLongitude)
+        
+        print("✅ [Utilities] Location cache saved successfully")
+    }
+    
+    /// Legacy method: Save location with simple parameters (for backward compatibility)
+    /// Note: Use saveLocation(address: Address) for full information
+    func saveLocation(address: String, latitude: String, longitude: String) {
+        print("💾 [Utilities] Saving location to cache (legacy method):")
         print("   - Address: \(address)")
         print("   - Latitude: \(latitude)")
         print("   - Longitude: \(longitude)")
@@ -233,9 +327,59 @@ class Utilities: NSObject {
         defaults.set(longitude, forKey: Constants.UserDefaultsKey.cachedLongitude)
     }
     
-    /// Get cached address
+    /// Get cached address ID
+    func getCachedAddressId() -> Int? {
+        let id = defaults.integer(forKey: Constants.UserDefaultsKey.cachedAddressId)
+        return id > 0 ? id : nil
+    }
+    
+    /// Get cached address detail (primary address field)
+    func getCachedAddressDetail() -> String? {
+        return defaults.string(forKey: Constants.UserDefaultsKey.cachedAddressDetail)
+    }
+    
+    /// Get cached address (legacy - full address string)
     func getCachedAddress() -> String? {
         return defaults.string(forKey: Constants.UserDefaultsKey.cachedAddress)
+    }
+    
+    /// Get cached province ID
+    func getCachedProvinceId() -> Int? {
+        let id = defaults.integer(forKey: Constants.UserDefaultsKey.cachedProvinceId)
+        return id > 0 ? id : nil
+    }
+    
+    /// Get cached district ID
+    func getCachedDistrictId() -> Int? {
+        let id = defaults.integer(forKey: Constants.UserDefaultsKey.cachedDistrictId)
+        return id > 0 ? id : nil
+    }
+    
+    /// Get cached ward ID
+    func getCachedWardId() -> Int? {
+        let id = defaults.integer(forKey: Constants.UserDefaultsKey.cachedWardId)
+        return id > 0 ? id : nil
+    }
+    
+    /// Get cached country ID
+    func getCachedCountryId() -> Int? {
+        let id = defaults.integer(forKey: Constants.UserDefaultsKey.cachedCountryId)
+        return id > 0 ? id : nil
+    }
+    
+    /// Get cached contact person name
+    func getCachedContactPersonName() -> String? {
+        return defaults.string(forKey: Constants.UserDefaultsKey.cachedContactPersonName)
+    }
+    
+    /// Get cached contact person number
+    func getCachedContactPersonNumber() -> String? {
+        return defaults.string(forKey: Constants.UserDefaultsKey.cachedContactPersonNumber)
+    }
+    
+    /// Get cached address type
+    func getCachedAddressType() -> String? {
+        return defaults.string(forKey: Constants.UserDefaultsKey.cachedAddressType)
     }
     
     /// Get cached latitude
@@ -248,18 +392,34 @@ class Utilities: NSObject {
         return defaults.string(forKey: Constants.UserDefaultsKey.cachedLongitude)
     }
     
-    /// Check if location cache exists
+    /// Check if location cache exists (with full information)
     func hasLocationCache() -> Bool {
-        return getCachedAddress() != nil && 
-               getCachedLatitude() != nil && 
-               getCachedLongitude() != nil
+        // Check for essential fields: addressDetail or address, and location IDs
+        let hasAddress = (getCachedAddressDetail() != nil && !getCachedAddressDetail()!.isEmpty) ||
+                         (getCachedAddress() != nil && !getCachedAddress()!.isEmpty)
+        let hasLocationIds = getCachedProvinceId() != nil && 
+                            getCachedDistrictId() != nil && 
+                            getCachedWardId() != nil
+        
+        return hasAddress && hasLocationIds
     }
     
-    /// Clear location cache
+    /// Clear location cache (all fields)
     func clearLocationCache() {
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedAddressId)
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedAddressDetail)
         defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedAddress)
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedProvinceId)
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedDistrictId)
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedWardId)
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedCountryId)
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedContactPersonName)
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedContactPersonNumber)
+        defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedAddressType)
         defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedLatitude)
         defaults.removeObject(forKey: Constants.UserDefaultsKey.cachedLongitude)
+        
+        print("🗑️ [Utilities] Location cache cleared")
     }
 }
 

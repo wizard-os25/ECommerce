@@ -84,7 +84,9 @@ extension DefaultDataTransferService: DataTransferService {
         completion: @escaping CompletionHandler<T>
     ) -> NetworkCancellable? where E.Response == T {
 
-        networkService.request(endpoint: endpoint) { result in
+        networkService.request(endpoint: endpoint) { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let data):
                 let result: Result<T, DataTransferError> = self.decode(
@@ -94,6 +96,52 @@ extension DefaultDataTransferService: DataTransferService {
                 queue.asyncExecute { completion(result) }
             case .failure(let error):
                 self.errorLogger.log(error: error)
+                
+                // Handle 401 Unauthorized - token expired, try auto-refresh
+                if case .networkFailure(let networkError) = self.resolve(networkError: error),
+                   case .error(let statusCode, _) = networkError,
+                   statusCode == 401 {
+                    
+                    print("🔄 [DataTransferService] Received 401 Unauthorized, attempting auto-refresh token...")
+                    
+                    // Try to refresh token
+                    let refreshResult = TokenRefreshService.shared.refreshTokenIfNeeded { refreshResult in
+                        switch refreshResult {
+                        case .success(let newSession):
+                            print("✅ [DataTransferService] Token refreshed successfully, retrying original request...")
+                            // Retry original request with new token
+                            self.networkService.request(endpoint: endpoint) { retryResult in
+                                switch retryResult {
+                                case .success(let data):
+                                    let result: Result<T, DataTransferError> = self.decode(
+                                        data: data,
+                                        decoder: endpoint.responseDecoder
+                                    )
+                                    queue.asyncExecute { completion(result) }
+                                case .failure(let retryError):
+                                    self.errorLogger.log(error: retryError)
+                                    let error = self.resolve(networkError: retryError)
+                                    queue.asyncExecute { completion(.failure(error)) }
+                                }
+                            }
+                            
+                        case .failure(let refreshError):
+                            print("❌ [DataTransferService] Token refresh failed: \(refreshError.localizedDescription)")
+                            let error = self.resolve(networkError: error)
+                            queue.asyncExecute { completion(.failure(error)) }
+                        }
+                    }
+                    
+                    // If refresh was not needed (token still valid but 401 received), return original error
+                    if !refreshResult {
+                        let error = self.resolve(networkError: error)
+                        queue.asyncExecute { completion(.failure(error)) }
+                    }
+                    
+                    return
+                }
+                
+                // Other errors - return as is
                 let error = self.resolve(networkError: error)
                 queue.asyncExecute { completion(.failure(error)) }
             }

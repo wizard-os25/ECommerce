@@ -124,9 +124,22 @@ extension Requestable {
         // Only add if not already present (to allow override)
         if allHeaders["Authorization"] == nil {
             let utilities = Utilities()
+            
+            // Check if token is expired before using it
+            // Note: Auto-refresh will be handled in DataTransferService if 401 is returned
+            if utilities.isSessionExpired() {
+                print("⚠️ [Endpoint] Access token is expired, will attempt refresh if 401 is returned")
+            }
+            
             if let accessToken = utilities.getAccessToken(), !accessToken.isEmpty {
                 allHeaders["Authorization"] = "Bearer \(accessToken)"
                 print("🔐 [Endpoint] Added Bearer token to Authorization header")
+                print("   - Token prefix: \(accessToken.prefix(20))...")
+                if utilities.isSessionExpired() {
+                    print("   - ⚠️ Token is expired, request may fail with 401")
+                }
+            } else {
+                print("⚠️ [Endpoint] No access token found, request will be unauthenticated")
             }
         }
 

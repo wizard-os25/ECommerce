@@ -844,6 +844,12 @@
 		D01C32C12F1AA4EE00B9D520 /* OrderDetailProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32BC2F1AA4EE00B9D520 /* OrderDetailProductCell.swift */; };
 		D01C32C22F1AA4EE00B9D520 /* OrderDetailProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32BC2F1AA4EE00B9D520 /* OrderDetailProductCell.swift */; };
 		D01C32C32F1AA4EE00B9D520 /* OrderDetailProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01C32BD2F1AA4EE00B9D520 /* OrderDetailProductCell.xib */; };
+		D01C32C72F1C062200B9D520 /* TokenRefreshService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32C62F1C062200B9D520 /* TokenRefreshService.swift */; };
+		D01C32C82F1C062200B9D520 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32C52F1C062200B9D520 /* KeychainHelper.swift */; };
+		D01C32C92F1C062200B9D520 /* TokenRefreshService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32C62F1C062200B9D520 /* TokenRefreshService.swift */; };
+		D01C32CA2F1C062200B9D520 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32C52F1C062200B9D520 /* KeychainHelper.swift */; };
+		D01C32CB2F1C062200B9D520 /* TokenRefreshService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32C62F1C062200B9D520 /* TokenRefreshService.swift */; };
+		D01C32CC2F1C062200B9D520 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32C52F1C062200B9D520 /* KeychainHelper.swift */; };
 		D03ACF542F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */; };
 		D03ACF552F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */; };
 		D03ACF562F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */; };
@@ -1827,6 +1833,8 @@
 		D01C32B52F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OrderDetailOtherInfoCell.xib; path = ECommerce/Presentation/OrderManageScene/OrderDetail/View/Cells/OrderDetailOtherInfoCell.xib; sourceTree = SOURCE_ROOT; };
 		D01C32BC2F1AA4EE00B9D520 /* OrderDetailProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderDetailProductCell.swift; path = ECommerce/Presentation/OrderManageScene/OrderDetail/View/Cells/OrderDetailProductCell.swift; sourceTree = SOURCE_ROOT; };
 		D01C32BD2F1AA4EE00B9D520 /* OrderDetailProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OrderDetailProductCell.xib; path = ECommerce/Presentation/OrderManageScene/OrderDetail/View/Cells/OrderDetailProductCell.xib; sourceTree = SOURCE_ROOT; };
+		D01C32C52F1C062200B9D520 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		D01C32C62F1C062200B9D520 /* TokenRefreshService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshService.swift; sourceTree = "<group>"; };
 		D03ACF082F193B6600F8DD43 /* ECommerceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ECommerceDebug.entitlements; sourceTree = "<group>"; };
 		D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderContainerViewController.swift; sourceTree = "<group>"; };
 		D03ACF672F1A7F7800F8DD43 /* OrderManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderManage.swift; sourceTree = "<group>"; };
@@ -2763,6 +2771,7 @@
 		D0095ACD2ECB0B8300FCC7BC = {
 			isa = PBXGroup;
 			children = (
+				D01C32C42F1B3EA200B9D520 /* DATN_materisl_client_ios */,
 				D0095B172ECB0BA700FCC7BC /* ECommerce */,
 				D0095B442ECB0C0B00FCC7BC /* ECommerceUITests */,
 				D0095B402ECB0BFD00FCC7BC /* ECommerceTests */,
@@ -3385,6 +3394,8 @@
 		D0095D732ECC56D200FCC7BC /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				D01C32C52F1C062200B9D520 /* KeychainHelper.swift */,
+				D01C32C62F1C062200B9D520 /* TokenRefreshService.swift */,
 				D0095D742ECC56F300FCC7BC /* HelperFunction.swift */,
 				D0095D822ECC5ABD00FCC7BC /* Constant.swift */,
 				D0095D862ECC5B2B00FCC7BC /* PhoneNumber.swift */,
@@ -3652,6 +3663,13 @@
 				D01C32BD2F1AA4EE00B9D520 /* OrderDetailProductCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		D01C32C42F1B3EA200B9D520 /* DATN_materisl_client_ios */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DATN_materisl_client_ios;
 			sourceTree = "<group>";
 		};
 		D03ACF4E2F1A76CB00F8DD43 /* OrderManageScene */ = {
@@ -5245,6 +5263,8 @@
 				D0095CB82ECB57C100FCC7BC /* SideMenuCell.swift in Sources */,
 				D0FF94A12F14E923006146F8 /* GrocerysRequestDTO+Mapping.swift in Sources */,
 				D0095CC62ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
+				D01C32CB2F1C062200B9D520 /* TokenRefreshService.swift in Sources */,
+				D01C32CC2F1C062200B9D520 /* KeychainHelper.swift in Sources */,
 				D0FF95EC2F16376B006146F8 /* MotionManager.swift in Sources */,
 				D03ACF702F1A7F9F00F8DD43 /* OrderManageRepository.swift in Sources */,
 				D0FF95142F15FA49006146F8 /* Profile.swift in Sources */,
@@ -5641,6 +5661,8 @@
 				D0029C8A2F0E975900D50804 /* Popup3.swift in Sources */,
 				D0FF94A02F14E923006146F8 /* GrocerysRequestDTO+Mapping.swift in Sources */,
 				D0095C3B2ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
+				D01C32C92F1C062200B9D520 /* TokenRefreshService.swift in Sources */,
+				D01C32CA2F1C062200B9D520 /* KeychainHelper.swift in Sources */,
 				D0FF95EB2F16376B006146F8 /* MotionManager.swift in Sources */,
 				D03ACF712F1A7F9F00F8DD43 /* OrderManageRepository.swift in Sources */,
 				D0FF95162F15FA49006146F8 /* Profile.swift in Sources */,
@@ -6181,6 +6203,8 @@
 				D0FF95F22F16378C006146F8 /* ImageLabelModel.swift in Sources */,
 				D01C32B12F1AA48200B9D520 /* OrderDetailAddressCell.swift in Sources */,
 				D0095D4B2ECC506E00FCC7BC /* AttributedText.swift in Sources */,
+				D01C32C72F1C062200B9D520 /* TokenRefreshService.swift in Sources */,
+				D01C32C82F1C062200B9D520 /* KeychainHelper.swift in Sources */,
 				D00B92622F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
 				D00B92632F10D39200AEE1B6 /* LoginResponseDTO+Mapping.swift in Sources */,
 				D0FF951D2F15FA72006146F8 /* ProfileRepository.swift in Sources */,

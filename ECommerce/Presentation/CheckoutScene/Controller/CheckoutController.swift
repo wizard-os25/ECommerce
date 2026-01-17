@@ -374,12 +374,8 @@ extension DefaultCheckoutController {
     func didSelectAddress(_ address: Address) {
         selectedAddress.value = address
         
-        // Save to cache for use in Order screen
-        utilities.saveLocation(
-            address: address.address,
-            latitude: address.latitude,
-            longitude: address.longitude
-        )
+        // Save full location information to cache for use in Order screen
+        utilities.saveLocation(address: address)
     }
     
     func confirmPayment(paymentIntentId: String, completion: @escaping (Bool) -> Void) {
