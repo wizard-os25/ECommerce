@@ -131,6 +131,11 @@ class MainContainerViewController: UIViewController {
             self?.handleNavigateToPayment()
         }
         
+        // Set navigate to order callback
+        sideMenuController.onNavigateToOrder = { [weak self] in
+            self?.handleNavigateToOrder()
+        }
+        
         // Create SideMenuViewController with controller using factory method
         sideMenuViewController = SideMenuViewController.create(with: sideMenuController)
         
@@ -505,6 +510,13 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             return topVC is PaymentCardViewController
         }()
         
+        // Check if current top view controller is OrderContainerViewController
+        let isTopOrderContainerViewController = {
+            guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+                  let topVC = nav.topViewController else { return false }
+            return topVC is OrderContainerViewController
+        }()
+        
         // Check if current top view controller is CheckoutViewController or PaymentMethodViewController
         // Các màn hình này cần cho phép swipe back nhưng không kích hoạt side menu
         let isTopCheckoutViewController = {
@@ -526,14 +538,15 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                   let nav = mainTabBarController?.selectedViewController as? UINavigationController,
                   nav.viewControllers.count >= 2 else { return false }
             
-            // Find AddressViewController, ProfileViewController or PaymentCardViewController index in the stack
+            // Find AddressViewController, ProfileViewController, PaymentCardViewController or OrderContainerViewController index in the stack
             let addressVCIndex = nav.viewControllers.firstIndex(where: { $0 is AddressViewController })
             let profileVCIndex = nav.viewControllers.firstIndex(where: { $0 is ProfileViewController })
             let paymentCardVCIndex = nav.viewControllers.firstIndex(where: { $0 is PaymentCardViewController })
+            let orderContainerVCIndex = nav.viewControllers.firstIndex(where: { $0 is OrderContainerViewController })
             
             // Get the minimum index (the one that was opened first)
             let sideMenuVCIndex: Int?
-            let indices = [addressVCIndex, profileVCIndex, paymentCardVCIndex].compactMap { $0 }
+            let indices = [addressVCIndex, profileVCIndex, paymentCardVCIndex, orderContainerVCIndex].compactMap { $0 }
             if !indices.isEmpty {
                 sideMenuVCIndex = indices.min()
             } else {
@@ -561,23 +574,41 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         }()
         
         let translation = panGesture.translation(in: self.view)
-        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), translation:\(translation), isExpanded:\(isExpanded), isTopAddressViewController:\(isTopAddressViewController), isTopProfileViewController:\(isTopProfileViewController), isTopPaymentCardViewController:\(isTopPaymentCardViewController), hasViewControllersAfterSideMenuVC:\(hasViewControllersAfterSideMenuVC), didOpenFromSideMenu:\(didOpenFromSideMenu)")
+        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), translation:\(translation), isExpanded:\(isExpanded), isTopAddressViewController:\(isTopAddressViewController), isTopProfileViewController:\(isTopProfileViewController), isTopPaymentCardViewController:\(isTopPaymentCardViewController), isTopOrderContainerViewController:\(isTopOrderContainerViewController), hasViewControllersAfterSideMenuVC:\(hasViewControllersAfterSideMenuVC), didOpenFromSideMenu:\(didOpenFromSideMenu)")
         
         // If menu is expanded, allow pan (to close)
         if isExpanded {
             return true
         }
         
-        // If AddressViewController, ProfileViewController or PaymentCardViewController is on top, check flag to decide behavior
-        if isTopAddressViewController || isTopProfileViewController || isTopPaymentCardViewController {
+        // If AddressViewController, ProfileViewController, PaymentCardViewController or OrderContainerViewController is on top, check flag to decide behavior
+        if isTopAddressViewController || isTopProfileViewController || isTopPaymentCardViewController || isTopOrderContainerViewController {
             if didOpenFromSideMenu {
                 // Opened from side menu: block side menu gesture (let swipe back handle)
-                let vcName = isTopAddressViewController ? "AddressViewController" : (isTopProfileViewController ? "ProfileViewController" : "PaymentCardViewController")
+                let vcName: String
+                if isTopAddressViewController {
+                    vcName = "AddressViewController"
+                } else if isTopProfileViewController {
+                    vcName = "ProfileViewController"
+                } else if isTopPaymentCardViewController {
+                    vcName = "PaymentCardViewController"
+                } else {
+                    vcName = "OrderContainerViewController"
+                }
                 print("❌ [gestureRecognizerShouldBegin] \(vcName) opened from side menu → Block side menu gesture (let swipe back handle)")
                 return false
             } else {
                 // NOT opened from side menu: allow side menu gesture (drag from left edge opens side menu)
-                let vcName = isTopAddressViewController ? "AddressViewController" : (isTopProfileViewController ? "ProfileViewController" : "PaymentCardViewController")
+                let vcName: String
+                if isTopAddressViewController {
+                    vcName = "AddressViewController"
+                } else if isTopProfileViewController {
+                    vcName = "ProfileViewController"
+                } else if isTopPaymentCardViewController {
+                    vcName = "PaymentCardViewController"
+                } else {
+                    vcName = "OrderContainerViewController"
+                }
                 print("✅ [gestureRecognizerShouldBegin] \(vcName) NOT opened from side menu → Allow side menu gesture")
                 // Continue with normal side menu gesture logic below
             }
@@ -1129,6 +1160,38 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         navigateToPayment()
     }
     
+    private func handleNavigateToOrder() {
+        navigateToOrder()
+    }
+    
+    private func navigateToOrder() {
+        print("2️⃣ Navigating to Order Container screen...")
+        // Get navigation controller from current tab
+        guard let navController = mainTabBarController.selectedViewController as? UINavigationController else {
+            print("DEBUG: selectedViewController is not a UINavigationController")
+            return
+        }
+        
+        // Set navigation controller delegate to detect when back
+        navController.delegate = self
+        
+        // Mark that OrderContainerViewController is opened from side menu
+        didOpenFromSideMenu = true
+        
+        // Create OrderContainerViewController and push
+        let appDIContainer = AppDIContainer()
+        let orderContainerDIContainer = appDIContainer.makeOrderContainerDIContainer()
+        let orderContainerViewController = orderContainerDIContainer.makeOrderContainerViewController()
+        
+        // Push OrderContainerViewController
+        navController.pushViewController(orderContainerViewController, animated: true)
+        
+        // Close side menu after push
+        sideMenuState(expanded: false)
+        
+        print("=========================================================")
+    }
+    
     private func navigateToPayment() {
         print("2️⃣ Navigating to Payment Card screen...")
         // Get navigation controller from current tab
@@ -1229,6 +1292,10 @@ extension MainContainerViewController: UINavigationControllerDelegate {
         let hasPaymentCardViewControllerInStack = navigationController.viewControllers.contains { $0 is PaymentCardViewController }
         let isPaymentCardViewController = viewController is PaymentCardViewController
         
+        // Check if OrderContainerViewController still exists in the navigation stack
+        let hasOrderContainerViewControllerInStack = navigationController.viewControllers.contains { $0 is OrderContainerViewController }
+        let isOrderContainerViewController = viewController is OrderContainerViewController
+        
         // Debug: Print all view controllers in stack
         let stackDescription = navigationController.viewControllers.map { vc in
             let className = String(describing: type(of: vc))
@@ -1247,8 +1314,8 @@ extension MainContainerViewController: UINavigationControllerDelegate {
         print("   - didOpenFromSideMenu: \(didOpenFromSideMenu)")
         
         if didOpenFromSideMenu {
-            // If AddressViewController, ProfileViewController and PaymentCardViewController are no longer in the stack, we've fully popped back
-            if !hasAddressViewControllerInStack && !hasProfileViewControllerInStack && !hasPaymentCardViewControllerInStack {
+            // If AddressViewController, ProfileViewController, PaymentCardViewController and OrderContainerViewController are no longer in the stack, we've fully popped back
+            if !hasAddressViewControllerInStack && !hasProfileViewControllerInStack && !hasPaymentCardViewControllerInStack && !hasOrderContainerViewControllerInStack {
                 // User has completely popped back from side menu flow
                 // Reset flag
                 didOpenFromSideMenu = false

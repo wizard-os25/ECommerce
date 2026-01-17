@@ -796,6 +796,159 @@
 		D00B92CF2F11054F00AEE1B6 /* APIErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B92CE2F11054F00AEE1B6 /* APIErrorParser.swift */; };
 		D00B92D02F11054F00AEE1B6 /* APIErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B92CE2F11054F00AEE1B6 /* APIErrorParser.swift */; };
 		D00B92D12F11054F00AEE1B6 /* APIErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B92CE2F11054F00AEE1B6 /* APIErrorParser.swift */; };
+		D01C32772F1A9BC400B9D520 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32762F1A9BC400B9D520 /* OrderDetailViewController.swift */; };
+		D01C32782F1A9BC400B9D520 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32762F1A9BC400B9D520 /* OrderDetailViewController.swift */; };
+		D01C32792F1A9BC400B9D520 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32762F1A9BC400B9D520 /* OrderDetailViewController.swift */; };
+		D01C327B2F1A9BC900B9D520 /* OrderDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C327A2F1A9BC900B9D520 /* OrderDetailViewController.storyboard */; };
+		D01C327C2F1A9BC900B9D520 /* OrderDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C327A2F1A9BC900B9D520 /* OrderDetailViewController.storyboard */; };
+		D01C327D2F1A9BC900B9D520 /* OrderDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C327A2F1A9BC900B9D520 /* OrderDetailViewController.storyboard */; };
+		D01C327F2F1A9FCA00B9D520 /* OrderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C327E2F1A9FCA00B9D520 /* OrderDetail.swift */; };
+		D01C32802F1A9FCA00B9D520 /* OrderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C327E2F1A9FCA00B9D520 /* OrderDetail.swift */; };
+		D01C32812F1A9FCA00B9D520 /* OrderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C327E2F1A9FCA00B9D520 /* OrderDetail.swift */; };
+		D01C32832F1AA01600B9D520 /* OrderDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32822F1AA01600B9D520 /* OrderDetailUseCase.swift */; };
+		D01C32842F1AA01600B9D520 /* OrderDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32822F1AA01600B9D520 /* OrderDetailUseCase.swift */; };
+		D01C32852F1AA01600B9D520 /* OrderDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32822F1AA01600B9D520 /* OrderDetailUseCase.swift */; };
+		D01C32872F1AA03400B9D520 /* OrderDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32862F1AA03400B9D520 /* OrderDetailRepository.swift */; };
+		D01C32882F1AA03400B9D520 /* OrderDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32862F1AA03400B9D520 /* OrderDetailRepository.swift */; };
+		D01C32892F1AA03400B9D520 /* OrderDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32862F1AA03400B9D520 /* OrderDetailRepository.swift */; };
+		D01C328B2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C328A2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift */; };
+		D01C328C2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C328A2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift */; };
+		D01C328D2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C328A2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift */; };
+		D01C328F2F1AA06300B9D520 /* OrderDetailEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C328E2F1AA06300B9D520 /* OrderDetailEndpoints.swift */; };
+		D01C32902F1AA06300B9D520 /* OrderDetailEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C328E2F1AA06300B9D520 /* OrderDetailEndpoints.swift */; };
+		D01C32912F1AA06300B9D520 /* OrderDetailEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C328E2F1AA06300B9D520 /* OrderDetailEndpoints.swift */; };
+		D01C32942F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32922F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift */; };
+		D01C32952F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32922F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift */; };
+		D01C32962F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32922F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift */; };
+		D01C32982F1AA17900B9D520 /* OrderDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32972F1AA17900B9D520 /* OrderDetailController.swift */; };
+		D01C32992F1AA17900B9D520 /* OrderDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32972F1AA17900B9D520 /* OrderDetailController.swift */; };
+		D01C329A2F1AA17900B9D520 /* OrderDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32972F1AA17900B9D520 /* OrderDetailController.swift */; };
+		D01C32A92F1AA1AD00B9D520 /* OrderDetailDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32A82F1AA1AD00B9D520 /* OrderDetailDIContainer.swift */; };
+		D01C32AA2F1AA1AD00B9D520 /* OrderDetailDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32A82F1AA1AD00B9D520 /* OrderDetailDIContainer.swift */; };
+		D01C32AB2F1AA1AD00B9D520 /* OrderDetailDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32A82F1AA1AD00B9D520 /* OrderDetailDIContainer.swift */; };
+		D01C32AE2F1AA48200B9D520 /* OrderDetailAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01C32AD2F1AA48200B9D520 /* OrderDetailAddressCell.xib */; };
+		D01C32AF2F1AA48200B9D520 /* OrderDetailAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32AC2F1AA48200B9D520 /* OrderDetailAddressCell.swift */; };
+		D01C32B02F1AA48200B9D520 /* OrderDetailAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01C32AD2F1AA48200B9D520 /* OrderDetailAddressCell.xib */; };
+		D01C32B12F1AA48200B9D520 /* OrderDetailAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32AC2F1AA48200B9D520 /* OrderDetailAddressCell.swift */; };
+		D01C32B22F1AA48200B9D520 /* OrderDetailAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32AC2F1AA48200B9D520 /* OrderDetailAddressCell.swift */; };
+		D01C32B32F1AA48200B9D520 /* OrderDetailAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01C32AD2F1AA48200B9D520 /* OrderDetailAddressCell.xib */; };
+		D01C32B62F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01C32B52F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib */; };
+		D01C32B72F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32B42F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift */; };
+		D01C32B82F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01C32B52F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib */; };
+		D01C32B92F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32B42F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift */; };
+		D01C32BA2F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32B42F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift */; };
+		D01C32BB2F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01C32B52F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib */; };
+		D01C32BE2F1AA4EE00B9D520 /* OrderDetailProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01C32BD2F1AA4EE00B9D520 /* OrderDetailProductCell.xib */; };
+		D01C32BF2F1AA4EE00B9D520 /* OrderDetailProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32BC2F1AA4EE00B9D520 /* OrderDetailProductCell.swift */; };
+		D01C32C02F1AA4EE00B9D520 /* OrderDetailProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01C32BD2F1AA4EE00B9D520 /* OrderDetailProductCell.xib */; };
+		D01C32C12F1AA4EE00B9D520 /* OrderDetailProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32BC2F1AA4EE00B9D520 /* OrderDetailProductCell.swift */; };
+		D01C32C22F1AA4EE00B9D520 /* OrderDetailProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C32BC2F1AA4EE00B9D520 /* OrderDetailProductCell.swift */; };
+		D01C32C32F1AA4EE00B9D520 /* OrderDetailProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01C32BD2F1AA4EE00B9D520 /* OrderDetailProductCell.xib */; };
+		D03ACF542F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */; };
+		D03ACF552F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */; };
+		D03ACF562F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */; };
+		D03ACF682F1A7F7800F8DD43 /* OrderManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF672F1A7F7800F8DD43 /* OrderManage.swift */; };
+		D03ACF692F1A7F7800F8DD43 /* OrderManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF672F1A7F7800F8DD43 /* OrderManage.swift */; };
+		D03ACF6A2F1A7F7800F8DD43 /* OrderManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF672F1A7F7800F8DD43 /* OrderManage.swift */; };
+		D03ACF6C2F1A7F8F00F8DD43 /* OrderManageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF6B2F1A7F8F00F8DD43 /* OrderManageUseCase.swift */; };
+		D03ACF6D2F1A7F8F00F8DD43 /* OrderManageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF6B2F1A7F8F00F8DD43 /* OrderManageUseCase.swift */; };
+		D03ACF6E2F1A7F8F00F8DD43 /* OrderManageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF6B2F1A7F8F00F8DD43 /* OrderManageUseCase.swift */; };
+		D03ACF702F1A7F9F00F8DD43 /* OrderManageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF6F2F1A7F9F00F8DD43 /* OrderManageRepository.swift */; };
+		D03ACF712F1A7F9F00F8DD43 /* OrderManageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF6F2F1A7F9F00F8DD43 /* OrderManageRepository.swift */; };
+		D03ACF722F1A7F9F00F8DD43 /* OrderManageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF6F2F1A7F9F00F8DD43 /* OrderManageRepository.swift */; };
+		D03ACF742F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF732F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift */; };
+		D03ACF752F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF732F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift */; };
+		D03ACF762F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF732F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift */; };
+		D03ACF782F1A7FC600F8DD43 /* OrderManageEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF772F1A7FC600F8DD43 /* OrderManageEndpoints.swift */; };
+		D03ACF792F1A7FC600F8DD43 /* OrderManageEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF772F1A7FC600F8DD43 /* OrderManageEndpoints.swift */; };
+		D03ACF7A2F1A7FC600F8DD43 /* OrderManageEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF772F1A7FC600F8DD43 /* OrderManageEndpoints.swift */; };
+		D03ACF7D2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF7C2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift */; };
+		D03ACF7E2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF7C2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift */; };
+		D03ACF7F2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF7C2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift */; };
+		D03ACF812F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF802F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift */; };
+		D03ACF822F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF802F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift */; };
+		D03ACF832F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF802F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift */; };
+		D03ACF852F1A804300F8DD43 /* OrderCancelDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF842F1A804300F8DD43 /* OrderCancelDIContainer.swift */; };
+		D03ACF862F1A804300F8DD43 /* OrderCancelDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF842F1A804300F8DD43 /* OrderCancelDIContainer.swift */; };
+		D03ACF872F1A804300F8DD43 /* OrderCancelDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF842F1A804300F8DD43 /* OrderCancelDIContainer.swift */; };
+		D03ACF892F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF882F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift */; };
+		D03ACF8A2F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF882F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift */; };
+		D03ACF8B2F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF882F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift */; };
+		D03ACF8D2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF8C2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift */; };
+		D03ACF8E2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF8C2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift */; };
+		D03ACF8F2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF8C2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift */; };
+		D03ACF912F1A807700F8DD43 /* OrderPendingDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF902F1A807700F8DD43 /* OrderPendingDIContainer.swift */; };
+		D03ACF922F1A807700F8DD43 /* OrderPendingDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF902F1A807700F8DD43 /* OrderPendingDIContainer.swift */; };
+		D03ACF932F1A807700F8DD43 /* OrderPendingDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF902F1A807700F8DD43 /* OrderPendingDIContainer.swift */; };
+		D03ACF952F1A827500F8DD43 /* OrderCancelViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACF942F1A827500F8DD43 /* OrderCancelViewController.storyboard */; };
+		D03ACF962F1A827500F8DD43 /* OrderCancelViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACF942F1A827500F8DD43 /* OrderCancelViewController.storyboard */; };
+		D03ACF972F1A827500F8DD43 /* OrderCancelViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACF942F1A827500F8DD43 /* OrderCancelViewController.storyboard */; };
+		D03ACF992F1A840800F8DD43 /* OrderDeliveredViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACF982F1A840800F8DD43 /* OrderDeliveredViewController.storyboard */; };
+		D03ACF9A2F1A840800F8DD43 /* OrderDeliveredViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACF982F1A840800F8DD43 /* OrderDeliveredViewController.storyboard */; };
+		D03ACF9B2F1A840800F8DD43 /* OrderDeliveredViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACF982F1A840800F8DD43 /* OrderDeliveredViewController.storyboard */; };
+		D03ACF9D2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACF9C2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard */; };
+		D03ACF9E2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACF9C2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard */; };
+		D03ACF9F2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACF9C2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard */; };
+		D03ACFA12F1A840D00F8DD43 /* OrderPendingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACFA02F1A840D00F8DD43 /* OrderPendingViewController.storyboard */; };
+		D03ACFA22F1A840D00F8DD43 /* OrderPendingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACFA02F1A840D00F8DD43 /* OrderPendingViewController.storyboard */; };
+		D03ACFA32F1A840D00F8DD43 /* OrderPendingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACFA02F1A840D00F8DD43 /* OrderPendingViewController.storyboard */; };
+		D03ACFA52F1A844200F8DD43 /* OrderCancelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFA42F1A844200F8DD43 /* OrderCancelViewController.swift */; };
+		D03ACFA62F1A844200F8DD43 /* OrderCancelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFA42F1A844200F8DD43 /* OrderCancelViewController.swift */; };
+		D03ACFA72F1A844200F8DD43 /* OrderCancelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFA42F1A844200F8DD43 /* OrderCancelViewController.swift */; };
+		D03ACFA92F1A845E00F8DD43 /* OrderDeliveredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFA82F1A845E00F8DD43 /* OrderDeliveredViewController.swift */; };
+		D03ACFAA2F1A845E00F8DD43 /* OrderDeliveredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFA82F1A845E00F8DD43 /* OrderDeliveredViewController.swift */; };
+		D03ACFAB2F1A845E00F8DD43 /* OrderDeliveredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFA82F1A845E00F8DD43 /* OrderDeliveredViewController.swift */; };
+		D03ACFAD2F1A846F00F8DD43 /* OrderDeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFAC2F1A846F00F8DD43 /* OrderDeliveryViewController.swift */; };
+		D03ACFAE2F1A846F00F8DD43 /* OrderDeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFAC2F1A846F00F8DD43 /* OrderDeliveryViewController.swift */; };
+		D03ACFAF2F1A846F00F8DD43 /* OrderDeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFAC2F1A846F00F8DD43 /* OrderDeliveryViewController.swift */; };
+		D03ACFB12F1A848100F8DD43 /* OrderPendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFB02F1A848100F8DD43 /* OrderPendingViewController.swift */; };
+		D03ACFB22F1A848100F8DD43 /* OrderPendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFB02F1A848100F8DD43 /* OrderPendingViewController.swift */; };
+		D03ACFB32F1A848100F8DD43 /* OrderPendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFB02F1A848100F8DD43 /* OrderPendingViewController.swift */; };
+		D03ACFB52F1A863800F8DD43 /* OrderCancelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFB42F1A863800F8DD43 /* OrderCancelCell.swift */; };
+		D03ACFB62F1A863800F8DD43 /* OrderCancelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFB42F1A863800F8DD43 /* OrderCancelCell.swift */; };
+		D03ACFB72F1A863800F8DD43 /* OrderCancelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFB42F1A863800F8DD43 /* OrderCancelCell.swift */; };
+		D03ACFB92F1A86A900F8DD43 /* OrderDeliveredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFB82F1A86A900F8DD43 /* OrderDeliveredCell.swift */; };
+		D03ACFBA2F1A86A900F8DD43 /* OrderDeliveredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFB82F1A86A900F8DD43 /* OrderDeliveredCell.swift */; };
+		D03ACFBB2F1A86A900F8DD43 /* OrderDeliveredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFB82F1A86A900F8DD43 /* OrderDeliveredCell.swift */; };
+		D03ACFBD2F1A874F00F8DD43 /* OrderDeliveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFBC2F1A874F00F8DD43 /* OrderDeliveryCell.swift */; };
+		D03ACFBE2F1A874F00F8DD43 /* OrderDeliveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFBC2F1A874F00F8DD43 /* OrderDeliveryCell.swift */; };
+		D03ACFBF2F1A874F00F8DD43 /* OrderDeliveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFBC2F1A874F00F8DD43 /* OrderDeliveryCell.swift */; };
+		D03ACFC12F1A877300F8DD43 /* OrderPendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFC02F1A877300F8DD43 /* OrderPendingCell.swift */; };
+		D03ACFC22F1A877300F8DD43 /* OrderPendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFC02F1A877300F8DD43 /* OrderPendingCell.swift */; };
+		D03ACFC32F1A877300F8DD43 /* OrderPendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFC02F1A877300F8DD43 /* OrderPendingCell.swift */; };
+		D03ACFC92F1A896B00F8DD43 /* OrderContainerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACFC82F1A896B00F8DD43 /* OrderContainerViewController.storyboard */; };
+		D03ACFCA2F1A896B00F8DD43 /* OrderContainerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACFC82F1A896B00F8DD43 /* OrderContainerViewController.storyboard */; };
+		D03ACFCB2F1A896B00F8DD43 /* OrderContainerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03ACFC82F1A896B00F8DD43 /* OrderContainerViewController.storyboard */; };
+		D03ACFCD2F1A8BE100F8DD43 /* OrderPendingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFCC2F1A8BE100F8DD43 /* OrderPendingItemModel.swift */; };
+		D03ACFCE2F1A8BE100F8DD43 /* OrderPendingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFCC2F1A8BE100F8DD43 /* OrderPendingItemModel.swift */; };
+		D03ACFCF2F1A8BE100F8DD43 /* OrderPendingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFCC2F1A8BE100F8DD43 /* OrderPendingItemModel.swift */; };
+		D03ACFD12F1A8C0600F8DD43 /* OrderCancelItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFD02F1A8C0600F8DD43 /* OrderCancelItemModel.swift */; };
+		D03ACFD22F1A8C0600F8DD43 /* OrderCancelItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFD02F1A8C0600F8DD43 /* OrderCancelItemModel.swift */; };
+		D03ACFD32F1A8C0600F8DD43 /* OrderCancelItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFD02F1A8C0600F8DD43 /* OrderCancelItemModel.swift */; };
+		D03ACFD52F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFD42F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift */; };
+		D03ACFD62F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFD42F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift */; };
+		D03ACFD72F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFD42F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift */; };
+		D03ACFD92F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFD82F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift */; };
+		D03ACFDA2F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFD82F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift */; };
+		D03ACFDB2F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFD82F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift */; };
+		D03ACFDD2F1A8C3900F8DD43 /* OrderDeliveryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFDC2F1A8C3900F8DD43 /* OrderDeliveryController.swift */; };
+		D03ACFDE2F1A8C3900F8DD43 /* OrderDeliveryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFDC2F1A8C3900F8DD43 /* OrderDeliveryController.swift */; };
+		D03ACFDF2F1A8C3900F8DD43 /* OrderDeliveryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFDC2F1A8C3900F8DD43 /* OrderDeliveryController.swift */; };
+		D03ACFE12F1A8C4300F8DD43 /* OrderPendingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFE02F1A8C4300F8DD43 /* OrderPendingController.swift */; };
+		D03ACFE22F1A8C4300F8DD43 /* OrderPendingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFE02F1A8C4300F8DD43 /* OrderPendingController.swift */; };
+		D03ACFE32F1A8C4300F8DD43 /* OrderPendingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFE02F1A8C4300F8DD43 /* OrderPendingController.swift */; };
+		D03ACFE52F1A8C4900F8DD43 /* OrderDeliveredController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFE42F1A8C4900F8DD43 /* OrderDeliveredController.swift */; };
+		D03ACFE62F1A8C4900F8DD43 /* OrderDeliveredController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFE42F1A8C4900F8DD43 /* OrderDeliveredController.swift */; };
+		D03ACFE72F1A8C4900F8DD43 /* OrderDeliveredController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFE42F1A8C4900F8DD43 /* OrderDeliveredController.swift */; };
+		D03ACFE92F1A8C5000F8DD43 /* OrderCancelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFE82F1A8C5000F8DD43 /* OrderCancelController.swift */; };
+		D03ACFEA2F1A8C5000F8DD43 /* OrderCancelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFE82F1A8C5000F8DD43 /* OrderCancelController.swift */; };
+		D03ACFEB2F1A8C5000F8DD43 /* OrderCancelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFE82F1A8C5000F8DD43 /* OrderCancelController.swift */; };
+		D03ACFED2F1A8C6900F8DD43 /* OrderContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFEC2F1A8C6900F8DD43 /* OrderContainerController.swift */; };
+		D03ACFEE2F1A8C6900F8DD43 /* OrderContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFEC2F1A8C6900F8DD43 /* OrderContainerController.swift */; };
+		D03ACFEF2F1A8C6900F8DD43 /* OrderContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFEC2F1A8C6900F8DD43 /* OrderContainerController.swift */; };
+		D03ACFF12F1A8C8300F8DD43 /* OrderContainerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFF02F1A8C8300F8DD43 /* OrderContainerDIContainer.swift */; };
+		D03ACFF22F1A8C8300F8DD43 /* OrderContainerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFF02F1A8C8300F8DD43 /* OrderContainerDIContainer.swift */; };
+		D03ACFF32F1A8C8300F8DD43 /* OrderContainerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACFF02F1A8C8300F8DD43 /* OrderContainerDIContainer.swift */; };
 		D05141352F179DE500C7B963 /* UltravisualLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141342F179DE500C7B963 /* UltravisualLayout.swift */; };
 		D05141362F179DE500C7B963 /* UltravisualLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141342F179DE500C7B963 /* UltravisualLayout.swift */; };
 		D05141372F179DE500C7B963 /* UltravisualLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05141342F179DE500C7B963 /* UltravisualLayout.swift */; };
@@ -1658,7 +1811,58 @@
 		D00B92C12F10FA1F00AEE1B6 /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
 		D00B92C22F10FA1F00AEE1B6 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		D00B92CE2F11054F00AEE1B6 /* APIErrorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorParser.swift; sourceTree = "<group>"; };
+		D01C32762F1A9BC400B9D520 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
+		D01C327A2F1A9BC900B9D520 /* OrderDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OrderDetailViewController.storyboard; sourceTree = "<group>"; };
+		D01C327E2F1A9FCA00B9D520 /* OrderDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetail.swift; sourceTree = "<group>"; };
+		D01C32822F1AA01600B9D520 /* OrderDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailUseCase.swift; sourceTree = "<group>"; };
+		D01C32862F1AA03400B9D520 /* OrderDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailRepository.swift; sourceTree = "<group>"; };
+		D01C328A2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultOrderDetailRepository.swift; sourceTree = "<group>"; };
+		D01C328E2F1AA06300B9D520 /* OrderDetailEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailEndpoints.swift; sourceTree = "<group>"; };
+		D01C32922F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrderDetailResponseDTOs+Mapping.swift"; sourceTree = "<group>"; };
+		D01C32972F1AA17900B9D520 /* OrderDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailController.swift; sourceTree = "<group>"; };
+		D01C32A82F1AA1AD00B9D520 /* OrderDetailDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailDIContainer.swift; sourceTree = "<group>"; };
+		D01C32AC2F1AA48200B9D520 /* OrderDetailAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderDetailAddressCell.swift; path = ECommerce/Presentation/OrderManageScene/OrderDetail/View/Cells/OrderDetailAddressCell.swift; sourceTree = SOURCE_ROOT; };
+		D01C32AD2F1AA48200B9D520 /* OrderDetailAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OrderDetailAddressCell.xib; path = ECommerce/Presentation/OrderManageScene/OrderDetail/View/Cells/OrderDetailAddressCell.xib; sourceTree = SOURCE_ROOT; };
+		D01C32B42F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderDetailOtherInfoCell.swift; path = ECommerce/Presentation/OrderManageScene/OrderDetail/View/Cells/OrderDetailOtherInfoCell.swift; sourceTree = SOURCE_ROOT; };
+		D01C32B52F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OrderDetailOtherInfoCell.xib; path = ECommerce/Presentation/OrderManageScene/OrderDetail/View/Cells/OrderDetailOtherInfoCell.xib; sourceTree = SOURCE_ROOT; };
+		D01C32BC2F1AA4EE00B9D520 /* OrderDetailProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderDetailProductCell.swift; path = ECommerce/Presentation/OrderManageScene/OrderDetail/View/Cells/OrderDetailProductCell.swift; sourceTree = SOURCE_ROOT; };
+		D01C32BD2F1AA4EE00B9D520 /* OrderDetailProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OrderDetailProductCell.xib; path = ECommerce/Presentation/OrderManageScene/OrderDetail/View/Cells/OrderDetailProductCell.xib; sourceTree = SOURCE_ROOT; };
 		D03ACF082F193B6600F8DD43 /* ECommerceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ECommerceDebug.entitlements; sourceTree = "<group>"; };
+		D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderContainerViewController.swift; sourceTree = "<group>"; };
+		D03ACF672F1A7F7800F8DD43 /* OrderManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderManage.swift; sourceTree = "<group>"; };
+		D03ACF6B2F1A7F8F00F8DD43 /* OrderManageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderManageUseCase.swift; sourceTree = "<group>"; };
+		D03ACF6F2F1A7F9F00F8DD43 /* OrderManageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderManageRepository.swift; sourceTree = "<group>"; };
+		D03ACF732F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultOrderManageRepository.swift; sourceTree = "<group>"; };
+		D03ACF772F1A7FC600F8DD43 /* OrderManageEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderManageEndpoints.swift; sourceTree = "<group>"; };
+		D03ACF7C2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrderManageRequestDTOs+Mapping.swift"; sourceTree = "<group>"; };
+		D03ACF802F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrderManageResponseDTOs+Mapping.swift"; sourceTree = "<group>"; };
+		D03ACF842F1A804300F8DD43 /* OrderCancelDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCancelDIContainer.swift; sourceTree = "<group>"; };
+		D03ACF882F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveredDIContainer.swift; sourceTree = "<group>"; };
+		D03ACF8C2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryDIContainer.swift; sourceTree = "<group>"; };
+		D03ACF902F1A807700F8DD43 /* OrderPendingDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPendingDIContainer.swift; sourceTree = "<group>"; };
+		D03ACF942F1A827500F8DD43 /* OrderCancelViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OrderCancelViewController.storyboard; sourceTree = "<group>"; };
+		D03ACF982F1A840800F8DD43 /* OrderDeliveredViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OrderDeliveredViewController.storyboard; sourceTree = "<group>"; };
+		D03ACF9C2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OrderDeliveryViewController.storyboard; sourceTree = "<group>"; };
+		D03ACFA02F1A840D00F8DD43 /* OrderPendingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OrderPendingViewController.storyboard; sourceTree = "<group>"; };
+		D03ACFA42F1A844200F8DD43 /* OrderCancelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCancelViewController.swift; sourceTree = "<group>"; };
+		D03ACFA82F1A845E00F8DD43 /* OrderDeliveredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveredViewController.swift; sourceTree = "<group>"; };
+		D03ACFAC2F1A846F00F8DD43 /* OrderDeliveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryViewController.swift; sourceTree = "<group>"; };
+		D03ACFB02F1A848100F8DD43 /* OrderPendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPendingViewController.swift; sourceTree = "<group>"; };
+		D03ACFB42F1A863800F8DD43 /* OrderCancelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCancelCell.swift; sourceTree = "<group>"; };
+		D03ACFB82F1A86A900F8DD43 /* OrderDeliveredCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveredCell.swift; sourceTree = "<group>"; };
+		D03ACFBC2F1A874F00F8DD43 /* OrderDeliveryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryCell.swift; sourceTree = "<group>"; };
+		D03ACFC02F1A877300F8DD43 /* OrderPendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPendingCell.swift; sourceTree = "<group>"; };
+		D03ACFC82F1A896B00F8DD43 /* OrderContainerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OrderContainerViewController.storyboard; sourceTree = "<group>"; };
+		D03ACFCC2F1A8BE100F8DD43 /* OrderPendingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPendingItemModel.swift; sourceTree = "<group>"; };
+		D03ACFD02F1A8C0600F8DD43 /* OrderCancelItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCancelItemModel.swift; sourceTree = "<group>"; };
+		D03ACFD42F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveredItemModel.swift; sourceTree = "<group>"; };
+		D03ACFD82F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryItemModel.swift; sourceTree = "<group>"; };
+		D03ACFDC2F1A8C3900F8DD43 /* OrderDeliveryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryController.swift; sourceTree = "<group>"; };
+		D03ACFE02F1A8C4300F8DD43 /* OrderPendingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPendingController.swift; sourceTree = "<group>"; };
+		D03ACFE42F1A8C4900F8DD43 /* OrderDeliveredController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveredController.swift; sourceTree = "<group>"; };
+		D03ACFE82F1A8C5000F8DD43 /* OrderCancelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCancelController.swift; sourceTree = "<group>"; };
+		D03ACFEC2F1A8C6900F8DD43 /* OrderContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderContainerController.swift; sourceTree = "<group>"; };
+		D03ACFF02F1A8C8300F8DD43 /* OrderContainerDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderContainerDIContainer.swift; sourceTree = "<group>"; };
 		D05141342F179DE500C7B963 /* UltravisualLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltravisualLayout.swift; sourceTree = "<group>"; };
 		D05141442F179E8400C7B963 /* ProductDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailModel.swift; sourceTree = "<group>"; };
 		D05141502F179F2000C7B963 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -2691,6 +2895,7 @@
 		D0095B7D2ECB411B00FCC7BC /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D01C327E2F1A9FCA00B9D520 /* OrderDetail.swift */,
 				D05141922F17C26D00C7B963 /* Order.swift */,
 				D00B923C2F10B1B300AEE1B6 /* User.swift */,
 				D00B92642F10D95400AEE1B6 /* Authentication.swift */,
@@ -2703,6 +2908,7 @@
 				D0FF94262F14053B006146F8 /* Address.swift */,
 				D0FF94B52F15CAC3006146F8 /* LocationList.swift */,
 				D0FF94F32F15CFD9006146F8 /* LocationListQuery.swift */,
+				D03ACF672F1A7F7800F8DD43 /* OrderManage.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2710,7 +2916,7 @@
 		D0095B862ECB412800FCC7BC /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				D05141962F17C27900C7B963 /* OrderUseCase.swift */,
+				D01C32822F1AA01600B9D520 /* OrderDetailUseCase.swift */,
 				D0095B8B2ECB413D00FCC7BC /* protocol */,
 				D0095B872ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift */,
 				D0FF948A2F14E8AE006146F8 /* FetchRecentGroceryQueriesUseCase.swift */,
@@ -2718,6 +2924,8 @@
 				D00B92682F10DF5500AEE1B6 /* LoginUseCase.swift */,
 				D00B926C2F10DF5D00AEE1B6 /* SignUpUseCase.swift */,
 				D0FF95172F15FA66006146F8 /* ProfileUseCase.swift */,
+				D05141962F17C27900C7B963 /* OrderUseCase.swift */,
+				D03ACF6B2F1A7F8F00F8DD43 /* OrderManageUseCase.swift */,
 				D0724D872F1730DB004815FB /* PaymentCardUseCase.swift */,
 				D0FF942A2F140552006146F8 /* AddressUseCase.swift */,
 				D0FF94EF2F15CE55006146F8 /* LocationListUseCase.swift */,
@@ -2744,7 +2952,9 @@
 		D0095B952ECB417B00FCC7BC /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				D01C32862F1AA03400B9D520 /* OrderDetailRepository.swift */,
 				D051419A2F17C28000C7B963 /* OrderRepository.swift */,
+				D03ACF6F2F1A7F9F00F8DD43 /* OrderManageRepository.swift */,
 				D0FF94F72F15CFF1006146F8 /* LocationListQueriesRepository.swift */,
 				D00B92402F10B23800AEE1B6 /* AuthRepository.swift */,
 				D0FF951B2F15FA72006146F8 /* ProfileRepository.swift */,
@@ -2782,6 +2992,7 @@
 		D0095BA12ECB422000FCC7BC /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				D01C328A2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift */,
 				D0095C5D2ECB4C1600FCC7BC /* Utils */,
 				D00B924C2F10B2C500AEE1B6 /* DefaultAuthRepository.swift */,
 				D0FF951F2F15FA81006146F8 /* DefaultProfileRepository.swift */,
@@ -2791,6 +3002,7 @@
 				D0FF94962F14E8DE006146F8 /* DefaultGrocerysRepository.swift */,
 				D0FF949A2F14E8FB006146F8 /* DefaultGrocerysQueriesRepository.swift */,
 				D05141A72F17C2C900C7B963 /* DefaultOrderRepository.swift */,
+				D03ACF732F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift */,
 				D0FF941E2F140514006146F8 /* DefaultAddressRepository.swift */,
 				D0FF94C12F15CB0C006146F8 /* DefaultLocationListRepository.swift */,
 			);
@@ -2800,7 +3012,9 @@
 		D0095BA62ECB426400FCC7BC /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
+				D01C32932F1AA08F00B9D520 /* OrderDetail */,
 				D05141A32F17C2A400C7B963 /* Order */,
+				D03ACF7B2F1A7FCD00F8DD43 /* OrderManage */,
 				D00B92902F10E32E00AEE1B6 /* Authentication */,
 				D0FF95272F15FA9B006146F8 /* Profile */,
 				D0724D7A2F17308A004815FB /* PaymentCard */,
@@ -2850,7 +3064,13 @@
 		D0095BE22ECB435300FCC7BC /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
+				D01C32A82F1AA1AD00B9D520 /* OrderDetailDIContainer.swift */,
+				D03ACFF02F1A8C8300F8DD43 /* OrderContainerDIContainer.swift */,
 				D05141AF2F17C7C900C7B963 /* OrderDIContainer.swift */,
+				D03ACF842F1A804300F8DD43 /* OrderCancelDIContainer.swift */,
+				D03ACF882F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift */,
+				D03ACF8C2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift */,
+				D03ACF902F1A807700F8DD43 /* OrderPendingDIContainer.swift */,
 				D05141752F17A58F00C7B963 /* ProductDetailDIContainer.swift */,
 				D0095BE42ECB436700FCC7BC /* AppDIContainer.swift */,
 				D00B92B02F10ED2000AEE1B6 /* OnboardSceneDIContainer.swift */,
@@ -2871,6 +3091,7 @@
 		D0095BEB2ECB43A200FCC7BC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				D03ACF4E2F1A76CB00F8DD43 /* OrderManageScene */,
 				D05141EF2F18F1CC00C7B963 /* CheckoutScene */,
 				D0029D182F0F465500D50804 /* OnboardScene */,
 				D0029D322F0F46FF00D50804 /* AuthScene */,
@@ -3326,7 +3547,9 @@
 		D00B92982F10EA3100AEE1B6 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
+				D01C328E2F1AA06300B9D520 /* OrderDetailEndpoints.swift */,
 				D051419E2F17C29400C7B963 /* OrderEndpoints.swift */,
+				D03ACF772F1A7FC600F8DD43 /* OrderManageEndpoints.swift */,
 				D00B92952F10EA3100AEE1B6 /* AuthEndpoints.swift */,
 				D0FF95232F15FA90006146F8 /* ProfileEndpoints.swift */,
 				D0724D7B2F1730A3004815FB /* PaymentCardEndpoints.swift */,
@@ -3373,6 +3596,262 @@
 				D00B92B92F10FA1400AEE1B6 /* SignUpHeaderView.swift */,
 			);
 			path = SignUpCommonView;
+			sourceTree = "<group>";
+		};
+		D01C32722F1A9B9300B9D520 /* OrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D01C32752F1A9BA800B9D520 /* Model */,
+				D01C32742F1A9BA300B9D520 /* View */,
+				D01C32732F1A9B9F00B9D520 /* Controller */,
+			);
+			path = OrderDetail;
+			sourceTree = "<group>";
+		};
+		D01C32732F1A9B9F00B9D520 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D01C32972F1AA17900B9D520 /* OrderDetailController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D01C32742F1A9BA300B9D520 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D01C329E2F1AA18E00B9D520 /* Cells */,
+				D01C32762F1A9BC400B9D520 /* OrderDetailViewController.swift */,
+				D01C327A2F1A9BC900B9D520 /* OrderDetailViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D01C32752F1A9BA800B9D520 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D01C32932F1AA08F00B9D520 /* OrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D01C32922F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift */,
+			);
+			path = OrderDetail;
+			sourceTree = "<group>";
+		};
+		D01C329E2F1AA18E00B9D520 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D01C32AC2F1AA48200B9D520 /* OrderDetailAddressCell.swift */,
+				D01C32AD2F1AA48200B9D520 /* OrderDetailAddressCell.xib */,
+				D01C32B42F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift */,
+				D01C32B52F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib */,
+				D01C32BC2F1AA4EE00B9D520 /* OrderDetailProductCell.swift */,
+				D01C32BD2F1AA4EE00B9D520 /* OrderDetailProductCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D03ACF4E2F1A76CB00F8DD43 /* OrderManageScene */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFC42F1A893900F8DD43 /* OrderContainer */,
+				D03ACF522F1A771B00F8DD43 /* OrderCancel */,
+				D03ACF512F1A770C00F8DD43 /* OrderDelivered */,
+				D03ACF502F1A76FA00F8DD43 /* OrderDelivery */,
+				D03ACF4F2F1A76E600F8DD43 /* OrderPending */,
+				D01C32722F1A9B9300B9D520 /* OrderDetail */,
+			);
+			path = OrderManageScene;
+			sourceTree = "<group>";
+		};
+		D03ACF4F2F1A76E600F8DD43 /* OrderPending */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACF662F1A780500F8DD43 /* Model */,
+				D03ACF652F1A780000F8DD43 /* View */,
+				D03ACF642F1A77FB00F8DD43 /* Controller */,
+			);
+			path = OrderPending;
+			sourceTree = "<group>";
+		};
+		D03ACF502F1A76FA00F8DD43 /* OrderDelivery */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACF632F1A77F700F8DD43 /* Model */,
+				D03ACF622F1A77F200F8DD43 /* View */,
+				D03ACF612F1A77E600F8DD43 /* Controller */,
+			);
+			path = OrderDelivery;
+			sourceTree = "<group>";
+		};
+		D03ACF512F1A770C00F8DD43 /* OrderDelivered */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACF602F1A77DF00F8DD43 /* Model */,
+				D03ACF5F2F1A77DA00F8DD43 /* View */,
+				D03ACF5E2F1A77D400F8DD43 /* Controller */,
+			);
+			path = OrderDelivered;
+			sourceTree = "<group>";
+		};
+		D03ACF522F1A771B00F8DD43 /* OrderCancel */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACF5D2F1A77D000F8DD43 /* Model */,
+				D03ACF5C2F1A77CC00F8DD43 /* View */,
+				D03ACF5B2F1A77C700F8DD43 /* Controller */,
+			);
+			path = OrderCancel;
+			sourceTree = "<group>";
+		};
+		D03ACF5B2F1A77C700F8DD43 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFE82F1A8C5000F8DD43 /* OrderCancelController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D03ACF5C2F1A77CC00F8DD43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACF942F1A827500F8DD43 /* OrderCancelViewController.storyboard */,
+				D03ACFA42F1A844200F8DD43 /* OrderCancelViewController.swift */,
+				D03ACFB42F1A863800F8DD43 /* OrderCancelCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D03ACF5D2F1A77D000F8DD43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFD02F1A8C0600F8DD43 /* OrderCancelItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D03ACF5E2F1A77D400F8DD43 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFE42F1A8C4900F8DD43 /* OrderDeliveredController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D03ACF5F2F1A77DA00F8DD43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFB82F1A86A900F8DD43 /* OrderDeliveredCell.swift */,
+				D03ACF982F1A840800F8DD43 /* OrderDeliveredViewController.storyboard */,
+				D03ACFA82F1A845E00F8DD43 /* OrderDeliveredViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D03ACF602F1A77DF00F8DD43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFD42F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D03ACF612F1A77E600F8DD43 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFDC2F1A8C3900F8DD43 /* OrderDeliveryController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D03ACF622F1A77F200F8DD43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFBC2F1A874F00F8DD43 /* OrderDeliveryCell.swift */,
+				D03ACF9C2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard */,
+				D03ACFAC2F1A846F00F8DD43 /* OrderDeliveryViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D03ACF632F1A77F700F8DD43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFD82F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D03ACF642F1A77FB00F8DD43 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFE02F1A8C4300F8DD43 /* OrderPendingController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D03ACF652F1A780000F8DD43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFC02F1A877300F8DD43 /* OrderPendingCell.swift */,
+				D03ACFA02F1A840D00F8DD43 /* OrderPendingViewController.storyboard */,
+				D03ACFB02F1A848100F8DD43 /* OrderPendingViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D03ACF662F1A780500F8DD43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFCC2F1A8BE100F8DD43 /* OrderPendingItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D03ACF7B2F1A7FCD00F8DD43 /* OrderManage */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACF7C2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift */,
+				D03ACF802F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift */,
+			);
+			path = OrderManage;
+			sourceTree = "<group>";
+		};
+		D03ACFC42F1A893900F8DD43 /* OrderContainer */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFC72F1A895B00F8DD43 /* Model */,
+				D03ACFC62F1A895700F8DD43 /* View */,
+				D03ACFC52F1A895100F8DD43 /* Controller */,
+			);
+			path = OrderContainer;
+			sourceTree = "<group>";
+		};
+		D03ACFC52F1A895100F8DD43 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACFEC2F1A8C6900F8DD43 /* OrderContainerController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D03ACFC62F1A895700F8DD43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */,
+				D03ACFC82F1A896B00F8DD43 /* OrderContainerViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D03ACFC72F1A895B00F8DD43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D05141332F179DD600C7B963 /* Ultravisual Scroll Effect */ = {
@@ -4306,18 +4785,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0095B692ECB1D3800FCC7BC /* Localizable.strings in Resources */,
+				D03ACF9F2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard in Resources */,
 				D0095D7E2ECC58F200FCC7BC /* accounts.json in Resources */,
 				D0029D202F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0FF95562F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */,
 				D0029D012F0EA4F600D50804 /* GroceryItemCell.xib in Resources */,
 				D0FF940E2F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */,
 				D0095B702ECB1D4100FCC7BC /* Localizable.strings in Resources */,
+				D03ACFC92F1A896B00F8DD43 /* OrderContainerViewController.storyboard in Resources */,
 				D0095B3B2ECB0BA700FCC7BC /* Main.storyboard in Resources */,
+				D01C32BB2F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib in Resources */,
 				D051418C2F17C06A00C7B963 /* OrderViewController.storyboard in Resources */,
 				D0095C022ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
 				D0095C032ECB43C500FCC7BC /* ProductsViewController.storyboard in Resources */,
 				D0095B3C2ECB0BA700FCC7BC /* LaunchScreen.storyboard in Resources */,
 				D0095CB32ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
+				D01C32BE2F1AA4EE00B9D520 /* OrderDetailProductCell.xib in Resources */,
 				D0FF94E52F15CBCA006146F8 /* LocationListViewController.storyboard in Resources */,
 				D0FF95502F16092C006146F8 /* EditProfileViewController.storyboard in Resources */,
 				D0095CB42ECB57C100FCC7BC /* SideMenuCell.xib in Resources */,
@@ -4361,6 +4844,7 @@
 				D0029BC72F0E742000D50804 /* ic_atm_noi_dia_16.png in Resources */,
 				D0029BC82F0E742000D50804 /* ic_vietbank_56.png in Resources */,
 				D0029BC92F0E742000D50804 /* ic_wooribank_56@3x.png in Resources */,
+				D03ACF972F1A827500F8DD43 /* OrderCancelViewController.storyboard in Resources */,
 				D0029BCA2F0E742000D50804 /* CoreUIKitImages.xcassets in Resources */,
 				D0029BCB2F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */,
 				D0029BCC2F0E742000D50804 /* ic_vibbank_56.png in Resources */,
@@ -4371,6 +4855,7 @@
 				D0029BD12F0E742000D50804 /* ic_westernunionbank_56.png in Resources */,
 				D0029BD22F0E742000D50804 /* ic_vietcapitalbank_56@2x.png in Resources */,
 				D0FF95762F161584006146F8 /* ProfileImagePickerPopup.xib in Resources */,
+				D03ACFA32F1A840D00F8DD43 /* OrderPendingViewController.storyboard in Resources */,
 				D0029BD32F0E742000D50804 /* ic_viettelpay_40@2x.png in Resources */,
 				D051415C2F17A4E500C7B963 /* ProductDetailCollectionViewController.storyboard in Resources */,
 				D051421F2F18FBE200C7B963 /* STRIPE_ALL_CURL_COMMANDS copy.md in Resources */,
@@ -4381,15 +4866,18 @@
 				D0029BD72F0E742000D50804 /* ic_vietcapitalbank_56.png in Resources */,
 				D0029BD82F0E742000D50804 /* ic_vibbank_56@2x.png in Resources */,
 				D05142292F19011600C7B963 /* PaymentMethodViewController.storyboard in Resources */,
+				D01C32AE2F1AA48200B9D520 /* OrderDetailAddressCell.xib in Resources */,
 				D0029BD92F0E742000D50804 /* ic_westernunionbank_56@2x.png in Resources */,
 				D0029BDA2F0E742000D50804 /* ic_quoc_te_16@3x.png in Resources */,
 				D0029BDB2F0E742000D50804 /* ic_wooribank_56@2x.png in Resources */,
 				D0029BDC2F0E742000D50804 /* ic_techcombank_56@3x.png in Resources */,
 				D0029BDD2F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */,
+				D01C327C2F1A9BC900B9D520 /* OrderDetailViewController.storyboard in Resources */,
 				D0029BDE2F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */,
 				D0029BDF2F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
 				D0029BE02F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
 				D0029BE12F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
+				D03ACF9B2F1A840800F8DD43 /* OrderDeliveredViewController.storyboard in Resources */,
 				D0029BE22F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
 				D0724D6C2F172FEC004815FB /* PaymentCardViewController.storyboard in Resources */,
 				D0029BE32F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */,
@@ -4417,6 +4905,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0095B6A2ECB1D3800FCC7BC /* Localizable.strings in Resources */,
+				D03ACF9A2F1A840800F8DD43 /* OrderDeliveredViewController.storyboard in Resources */,
 				D0095C042ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
 				D0029D142F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0E6C3CC2F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
@@ -4433,6 +4922,7 @@
 				D0029B832F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
 				D0029B842F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
 				D0029B852F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
+				D03ACFCB2F1A896B00F8DD43 /* OrderContainerViewController.storyboard in Resources */,
 				D0029B862F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
 				D0FF93FC2F13F9D3006146F8 /* AddressViewController.storyboard in Resources */,
 				D0029CDF2F0EA08000D50804 /* CartViewController.storyboard in Resources */,
@@ -4449,8 +4939,11 @@
 				D0029B902F0E742000D50804 /* ic_vrbbank_56@2x.png in Resources */,
 				D0029B912F0E742000D50804 /* ic_atm_noi_dia_16.png in Resources */,
 				D0029B922F0E742000D50804 /* ic_vietbank_56.png in Resources */,
+				D01C32C32F1AA4EE00B9D520 /* OrderDetailProductCell.xib in Resources */,
 				D0029B932F0E742000D50804 /* ic_wooribank_56@3x.png in Resources */,
+				D01C327D2F1A9BC900B9D520 /* OrderDetailViewController.storyboard in Resources */,
 				D0029B942F0E742000D50804 /* CoreUIKitImages.xcassets in Resources */,
+				D03ACFA12F1A840D00F8DD43 /* OrderPendingViewController.storyboard in Resources */,
 				D0029B952F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */,
 				D0029B962F0E742000D50804 /* ic_vibbank_56.png in Resources */,
 				D0029B972F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */,
@@ -4476,6 +4969,7 @@
 				D0029BA82F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */,
 				D0724D6B2F172FEC004815FB /* PaymentCardViewController.storyboard in Resources */,
 				D0029BA92F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
+				D01C32B32F1AA48200B9D520 /* OrderDetailAddressCell.xib in Resources */,
 				D0029BAA2F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
 				D0029BAB2F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
 				D0029CF12F0EA11A00D50804 /* CartItemCell.xib in Resources */,
@@ -4483,6 +4977,7 @@
 				D05141512F179F2000C7B963 /* README.md in Resources */,
 				D0029BAC2F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
 				D0FF94322F140614006146F8 /* DividerCell.xib in Resources */,
+				D03ACF9E2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard in Resources */,
 				D0FF93D82F11FEB0006146F8 /* CardViewController.storyboard in Resources */,
 				D0029BAD2F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */,
 				D0029BAE2F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */,
@@ -4502,6 +4997,7 @@
 				D0095CC12ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
 				D0095CC22ECB57C100FCC7BC /* SideMenuCell.xib in Resources */,
 				D0095B292ECB0BA700FCC7BC /* Main.storyboard in Resources */,
+				D03ACF952F1A827500F8DD43 /* OrderCancelViewController.storyboard in Resources */,
 				D0095D7D2ECC58F200FCC7BC /* accounts.json in Resources */,
 				D0FF95742F161584006146F8 /* ProfileImagePickerPopup.xib in Resources */,
 				D0095B6F2ECB1D4100FCC7BC /* Localizable.strings in Resources */,
@@ -4519,6 +5015,7 @@
 				D0095B2C2ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
 				D0029D5C2F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
 				D0029D5D2F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
+				D01C32B82F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib in Resources */,
 				D051418D2F17C06A00C7B963 /* OrderViewController.storyboard in Resources */,
 				D0029D5E2F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */,
 			);
@@ -4529,6 +5026,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0095B682ECB1D3800FCC7BC /* Localizable.strings in Resources */,
+				D03ACF992F1A840800F8DD43 /* OrderDeliveredViewController.storyboard in Resources */,
 				D0095C122ECB43C500FCC7BC /* ProductsTableViewController.storyboard in Resources */,
 				D0029D122F0F456600D50804 /* GuaranteedHeaderView.xib in Resources */,
 				D0E6C3D42F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
@@ -4545,6 +5043,7 @@
 				D0029C192F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
 				D0029C1A2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
 				D0029C1B2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
+				D03ACFCA2F1A896B00F8DD43 /* OrderContainerViewController.storyboard in Resources */,
 				D0029C1C2F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
 				D0FF93FA2F13F9D3006146F8 /* AddressViewController.storyboard in Resources */,
 				D0029CE12F0EA08000D50804 /* CartViewController.storyboard in Resources */,
@@ -4561,8 +5060,11 @@
 				D0029C262F0E742000D50804 /* ic_vrbbank_56@2x.png in Resources */,
 				D0029C272F0E742000D50804 /* ic_atm_noi_dia_16.png in Resources */,
 				D0029C282F0E742000D50804 /* ic_vietbank_56.png in Resources */,
+				D01C32C02F1AA4EE00B9D520 /* OrderDetailProductCell.xib in Resources */,
 				D0029C292F0E742000D50804 /* ic_wooribank_56@3x.png in Resources */,
+				D01C327B2F1A9BC900B9D520 /* OrderDetailViewController.storyboard in Resources */,
 				D0029C2A2F0E742000D50804 /* CoreUIKitImages.xcassets in Resources */,
+				D03ACFA22F1A840D00F8DD43 /* OrderPendingViewController.storyboard in Resources */,
 				D0029C2B2F0E742000D50804 /* ic_vietabank_56@2x.png in Resources */,
 				D0029C2C2F0E742000D50804 /* ic_vibbank_56.png in Resources */,
 				D0029C2D2F0E742000D50804 /* ic_vietcombank_56@3x.png in Resources */,
@@ -4588,6 +5090,7 @@
 				D0029C3E2F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */,
 				D0724D6D2F172FEC004815FB /* PaymentCardViewController.storyboard in Resources */,
 				D0029C3F2F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
+				D01C32B02F1AA48200B9D520 /* OrderDetailAddressCell.xib in Resources */,
 				D0029C402F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
 				D0029C412F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
 				D0029CFD2F0EA11A00D50804 /* CartItemCell.xib in Resources */,
@@ -4595,6 +5098,7 @@
 				D05141522F179F2000C7B963 /* README.md in Resources */,
 				D0029C422F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
 				D0FF94302F140614006146F8 /* DividerCell.xib in Resources */,
+				D03ACF9D2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard in Resources */,
 				D0FF93D92F11FEB0006146F8 /* CardViewController.storyboard in Resources */,
 				D0029C432F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */,
 				D0029C442F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */,
@@ -4614,6 +5118,7 @@
 				D0095CB12ECB57C100FCC7BC /* SideMenuViewController.storyboard in Resources */,
 				D0095CB22ECB57C100FCC7BC /* SideMenuCell.xib in Resources */,
 				D0095B252ECB0BA700FCC7BC /* Main.storyboard in Resources */,
+				D03ACF962F1A827500F8DD43 /* OrderCancelViewController.storyboard in Resources */,
 				D0095D7F2ECC58F200FCC7BC /* accounts.json in Resources */,
 				D0FF95772F161584006146F8 /* ProfileImagePickerPopup.xib in Resources */,
 				D0095B6E2ECB1D4100FCC7BC /* Localizable.strings in Resources */,
@@ -4631,6 +5136,7 @@
 				D0095B282ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
 				D0029D622F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
 				D0029D632F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
+				D01C32B62F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib in Resources */,
 				D051418B2F17C06A00C7B963 /* OrderViewController.storyboard in Resources */,
 				D0029D642F0F4B5200D50804 /* CollectionDescripSectionHeader.xib in Resources */,
 			);
@@ -4673,6 +5179,7 @@
 				D0029CDD2F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */,
 				D0FF946E2F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */,
 				D0095D1A2ECC2FFF00FCC7BC /* SideMenuAnimator.swift in Sources */,
+				D03ACF7D2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift in Sources */,
 				D0FF95242F15FA90006146F8 /* ProfileEndpoints.swift in Sources */,
 				D0FF94E22F15CBB7006146F8 /* LocationListController.swift in Sources */,
 				D05141BC2F18156A00C7B963 /* OrderActionFlowCoordinator.swift in Sources */,
@@ -4682,6 +5189,7 @@
 				D00B92862F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
 				D0724D802F1730BA004815FB /* DefaultPaymentCardRepository.swift in Sources */,
 				D00B92872F10E2FB00AEE1B6 /* UserDTO+Mapping.swift in Sources */,
+				D03ACF752F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift in Sources */,
 				D0FF940A2F140189006146F8 /* LocationSearchViewController.swift in Sources */,
 				D00B92882F10E2FB00AEE1B6 /* RefreshTokenResponseDTO+Mapping.swift in Sources */,
 				D00B92892F10E2FB00AEE1B6 /* UserInfoResponseDTO+Mapping.swift in Sources */,
@@ -4698,6 +5206,7 @@
 				D0FF95F52F1637A5006146F8 /* CameraGestureHandler.swift in Sources */,
 				D0095CD32ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
 				D0095C242ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
+				D03ACFF22F1A8C8300F8DD43 /* OrderContainerDIContainer.swift in Sources */,
 				D0029DB92F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */,
 				D00B91EA2F10A61C00AEE1B6 /* QRGenerator.swift in Sources */,
 				D00B91EB2F10A61C00AEE1B6 /* VTPSKWebView.swift in Sources */,
@@ -4705,6 +5214,7 @@
 				D0095D402ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
 				D0095C252ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
 				D0FF94022F140173006146F8 /* LocationSearchModel.swift in Sources */,
+				D03ACFB92F1A86A900F8DD43 /* OrderDeliveredCell.swift in Sources */,
 				D00B92552F10B8F100AEE1B6 /* LoginController.swift in Sources */,
 				D0095CCD2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095C262ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
@@ -4716,6 +5226,8 @@
 				D06C3BAD2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
 				D0095D3B2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095C272ECB43DC00FCC7BC /* Alertable.swift in Sources */,
+				D03ACF8B2F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift in Sources */,
+				D01C32BA2F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift in Sources */,
 				D0FF94D92F15CBA0006146F8 /* LocationListModel.swift in Sources */,
 				D0FF94602F1487D9006146F8 /* EcoController.swift in Sources */,
 				D0FF94612F1487D9006146F8 /* EcoBaseViewController.swift in Sources */,
@@ -4734,6 +5246,7 @@
 				D0FF94A12F14E923006146F8 /* GrocerysRequestDTO+Mapping.swift in Sources */,
 				D0095CC62ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
 				D0FF95EC2F16376B006146F8 /* MotionManager.swift in Sources */,
+				D03ACF702F1A7F9F00F8DD43 /* OrderManageRepository.swift in Sources */,
 				D0FF95142F15FA49006146F8 /* Profile.swift in Sources */,
 				D0E6C3CF2F0DFEC000527962 /* MainContainerViewController.swift in Sources */,
 				D0E6C3D02F0DFEC000527962 /* HomeViewController.swift in Sources */,
@@ -4742,6 +5255,7 @@
 				D0095C2A2ECB43DC00FCC7BC /* Observable.swift in Sources */,
 				D0029DD22F0F645F00D50804 /* EcoSearchTextField.swift in Sources */,
 				D0FF94232F140529006146F8 /* AddressRepository.swift in Sources */,
+				D01C32912F1AA06300B9D520 /* OrderDetailEndpoints.swift in Sources */,
 				D0FF93E12F13ED3C006146F8 /* MapViewController.swift in Sources */,
 				D0095C2B2ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
 				D0095C2C2ECB43DC00FCC7BC /* UIViewController+AddBehaviors.swift in Sources */,
@@ -4773,6 +5287,7 @@
 				D0095BFE2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D0FF94F52F15CFD9006146F8 /* LocationListQuery.swift in Sources */,
 				D00B923D2F10B1B300AEE1B6 /* User.swift in Sources */,
+				D03ACF792F1A7FC600F8DD43 /* OrderManageEndpoints.swift in Sources */,
 				D0FF96502F163BFE006146F8 /* MobileNetV2.mlmodel in Sources */,
 				D0FF95332F15FF63006146F8 /* EditProfileViewController.swift in Sources */,
 				D0029C8E2F0E976000D50804 /* Popup4.swift in Sources */,
@@ -4785,8 +5300,11 @@
 				D00B92C72F10FA1F00AEE1B6 /* LoginFormView.swift in Sources */,
 				D0FF94EC2F15CE2F006146F8 /* LocationListResponseDTO+Mapping.swift in Sources */,
 				D00B92C82F10FA1F00AEE1B6 /* LoginHeaderView.swift in Sources */,
+				D03ACFAD2F1A846F00F8DD43 /* OrderDeliveryViewController.swift in Sources */,
 				D0FF94182F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */,
 				D0FF95FC2F1637E6006146F8 /* UIImage+PixelBuffer.swift in Sources */,
+				D03ACFCE2F1A8BE100F8DD43 /* OrderPendingItemModel.swift in Sources */,
+				D03ACFB52F1A863800F8DD43 /* OrderCancelCell.swift in Sources */,
 				D0FF94192F1404D3006146F8 /* AddressRequestDTO+Mapping.swift in Sources */,
 				D0029CC52F0E9E3100D50804 /* GroceryController.swift in Sources */,
 				D0724D682F172FE7004815FB /* PaymentCardViewController.swift in Sources */,
@@ -4795,13 +5313,17 @@
 				D00B92612F10D39200AEE1B6 /* LoginResponseDTO+Mapping.swift in Sources */,
 				D0095D762ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
 				D00B92482F10B26100AEE1B6 /* SignUpRequestDTO+Mapping.swift in Sources */,
+				D01C32882F1AA03400B9D520 /* OrderDetailRepository.swift in Sources */,
 				D00B92492F10B26100AEE1B6 /* SignUpResponseDTO+Mapping.swift in Sources */,
+				D03ACFDB2F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift in Sources */,
+				D01C32AF2F1AA48200B9D520 /* OrderDetailAddressCell.swift in Sources */,
 				D0724D8A2F1730DB004815FB /* PaymentCardUseCase.swift in Sources */,
 				D0FF957C2F16163E006146F8 /* EditProfileController.swift in Sources */,
 				D0029CAC2F0E987900D50804 /* CategoryMenuItemModel.swift in Sources */,
 				D0FF94892F14E89D006146F8 /* GroceryQuery.swift in Sources */,
 				D00B91E72F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift in Sources */,
 				D05141D52F189C7400C7B963 /* CheckoutViewController.swift in Sources */,
+				D01C32AB2F1AA1AD00B9D520 /* OrderDetailDIContainer.swift in Sources */,
 				D0029BEC2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
 				D0029BED2F0E742000D50804 /* EcoDivider.swift in Sources */,
 				D0029BEE2F0E742000D50804 /* Sizing.swift in Sources */,
@@ -4810,6 +5332,7 @@
 				D0FF94FA2F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */,
 				D0FF954B2F160793006146F8 /* ProfileDIContainer.swift in Sources */,
 				D0029C912F0E976400D50804 /* Popup5.swift in Sources */,
+				D03ACFE72F1A8C4900F8DD43 /* OrderDeliveredController.swift in Sources */,
 				D0029BEF2F0E742000D50804 /* EcoTick.swift in Sources */,
 				D0029BF02F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
 				D05142342F19016F00C7B963 /* PaymentMethodCoordinationgController.swift in Sources */,
@@ -4817,6 +5340,7 @@
 				D0029BF22F0E742000D50804 /* EcoProgressView.swift in Sources */,
 				D0029BF32F0E742000D50804 /* Border.swift in Sources */,
 				D0FF94212F140514006146F8 /* DefaultAddressRepository.swift in Sources */,
+				D03ACF8F2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift in Sources */,
 				D0FF94082F14017E006146F8 /* LocationSearchController.swift in Sources */,
 				D0FF94992F14E8DE006146F8 /* DefaultGrocerysRepository.swift in Sources */,
 				D05141A42F17C2A400C7B963 /* OrderDTOs+Mapping.swift in Sources */,
@@ -4827,6 +5351,7 @@
 				D0FF953D2F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */,
 				D0029BF42F0E742000D50804 /* Spacing.swift in Sources */,
 				D0029C952F0E976B00D50804 /* Popup6.swift in Sources */,
+				D03ACFBD2F1A874F00F8DD43 /* OrderDeliveryCell.swift in Sources */,
 				D0029BF52F0E742000D50804 /* EcoAvatarView.swift in Sources */,
 				D0029BF62F0E742000D50804 /* SFFont.swift in Sources */,
 				D0FF93EF2F13F993006146F8 /* AddressModel.swift in Sources */,
@@ -4834,13 +5359,16 @@
 				D05141AA2F17C2C900C7B963 /* DefaultOrderRepository.swift in Sources */,
 				D0029BF72F0E742000D50804 /* Typography.swift in Sources */,
 				D0029BF82F0E742000D50804 /* EcoRadioButton.swift in Sources */,
+				D01C32962F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift in Sources */,
 				D0029C712F0E74BF00D50804 /* PinterestCell.swift in Sources */,
 				D0029BF92F0E742000D50804 /* Shadows.swift in Sources */,
 				D0029BFA2F0E742000D50804 /* Opacity.swift in Sources */,
+				D03ACFEA2F1A8C5000F8DD43 /* OrderCancelController.swift in Sources */,
 				D0FF94F22F15CE55006146F8 /* LocationListUseCase.swift in Sources */,
 				D0FF943C2F1416DD006146F8 /* AddressCoordinatingController.swift in Sources */,
 				D0029BFB2F0E742000D50804 /* BorderRadius.swift in Sources */,
 				D0029BFC2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */,
+				D03ACFC12F1A877300F8DD43 /* OrderPendingCell.swift in Sources */,
 				D0029BFD2F0E742000D50804 /* Colors.swift in Sources */,
 				D0029BFE2F0E742000D50804 /* EcoTextView.swift in Sources */,
 				D0029BFF2F0E742000D50804 /* EcoSwitch.swift in Sources */,
@@ -4849,7 +5377,9 @@
 				D00B92BB2F10FA1400AEE1B6 /* SignUpFormView.swift in Sources */,
 				D05141DE2F18E5EE00C7B963 /* LocationData.swift in Sources */,
 				D0029CE32F0EA09400D50804 /* CartViewController.swift in Sources */,
+				D03ACF922F1A807700F8DD43 /* OrderPendingDIContainer.swift in Sources */,
 				D0029C002F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
+				D03ACF542F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */,
 				D0095BCF2ECB42D200FCC7BC /* ConnectionError.swift in Sources */,
 				D00B923A2F10AE2F00AEE1B6 /* SignUpCoordinatingController.swift in Sources */,
 				D0E6C3BA2F0DFB0E00527962 /* MainController.swift in Sources */,
@@ -4862,6 +5392,8 @@
 				D0FF96032F163939006146F8 /* CameraObservable.swift in Sources */,
 				D0095D4E2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
 				D0724D8E2F1730F4004815FB /* PaymentCard.swift in Sources */,
+				D01C327F2F1A9FCA00B9D520 /* OrderDetail.swift in Sources */,
+				D03ACFEF2F1A8C6900F8DD43 /* OrderContainerController.swift in Sources */,
 				D06C3B842ECCA16900289D48 /* UIView+Reusable.swift in Sources */,
 				D0724D992F1752EA004815FB /* PaymentCardDTOs+Mapping.swift in Sources */,
 				D0FF95E82F16375A006146F8 /* ImageSimilarityService.swift in Sources */,
@@ -4873,14 +5405,17 @@
 				D0095BB32ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
 				D0FF94352F140614006146F8 /* DividerCell.swift in Sources */,
 				D0029CBE2F0E9DFF00D50804 /* GroceryItemModel.swift in Sources */,
+				D01C328D2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift in Sources */,
 				D0FF95752F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */,
 				D00B92AA2F10ED0000AEE1B6 /* SplashCoordinatingController.swift in Sources */,
 				D05141872F17C06500C7B963 /* OrderViewController.swift in Sources */,
+				D01C32792F1A9BC400B9D520 /* OrderDetailViewController.swift in Sources */,
 				D00B92AB2F10ED0000AEE1B6 /* SplashViewController.swift in Sources */,
 				D00B92AC2F10ED0000AEE1B6 /* SplashController.swift in Sources */,
 				D0FF949C2F14E8FB006146F8 /* DefaultGrocerysQueriesRepository.swift in Sources */,
 				D0095D992ECC5BA300FCC7BC /* ImageCompressor.swift in Sources */,
 				D0095D7B2ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
+				D01C32852F1AA01600B9D520 /* OrderDetailUseCase.swift in Sources */,
 				D05142182F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift in Sources */,
 				D0095BB42ECB428800FCC7BC /* DefaultProductsRepository.swift in Sources */,
 				D0FF95042F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
@@ -4901,6 +5436,7 @@
 				D0029C8B2F0E975900D50804 /* Popup3.swift in Sources */,
 				D0095BC72ECB42B100FCC7BC /* DataTransferService.swift in Sources */,
 				D0095BE92ECB436700FCC7BC /* ProductsSceneDIContainer.swift in Sources */,
+				D03ACFB12F1A848100F8DD43 /* OrderPendingViewController.swift in Sources */,
 				D0029C9E2F0E97D200D50804 /* CategoryViewController.swift in Sources */,
 				D0095BEA2ECB436700FCC7BC /* AppDIContainer.swift in Sources */,
 				D0FF951A2F15FA66006146F8 /* ProfileUseCase.swift in Sources */,
@@ -4911,6 +5447,7 @@
 				D0095BDD2ECB433B00FCC7BC /* AppFlowCoordinator.swift in Sources */,
 				D0095D532ECC50AE00FCC7BC /* UILabel+Extensions.swift in Sources */,
 				D00B91B32F109F9E00AEE1B6 /* CommonViewsLocalization.swift in Sources */,
+				D03ACFDF2F1A8C3900F8DD43 /* OrderDeliveryController.swift in Sources */,
 				D0095B802ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095BAD2ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift in Sources */,
 				D0FF941B2F1404FF006146F8 /* AddressEndpoints.swift in Sources */,
@@ -4918,8 +5455,11 @@
 				D0095BE12ECB434200FCC7BC /* AppAppearance.swift in Sources */,
 				D051416C2F17A4F000C7B963 /* ProductInfoCell.swift in Sources */,
 				D051416D2F17A4F000C7B963 /* ProductGuaranteedCell.swift in Sources */,
+				D03ACFA72F1A844200F8DD43 /* OrderCancelViewController.swift in Sources */,
+				D03ACFE32F1A8C4300F8DD43 /* OrderPendingController.swift in Sources */,
 				D051416E2F17A4F000C7B963 /* ProductImageCell.swift in Sources */,
 				D00B92B12F10ED2000AEE1B6 /* OnboardSceneDIContainer.swift in Sources */,
+				D03ACFD22F1A8C0600F8DD43 /* OrderCancelItemModel.swift in Sources */,
 				D00B92532F10B38E00AEE1B6 /* AuthSceneDIContainer.swift in Sources */,
 				D0095BAE2ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift in Sources */,
 				D0FF95C42F1635B2006146F8 /* CameraViewController.swift in Sources */,
@@ -4930,15 +5470,19 @@
 				D0FF93992F11F953006146F8 /* CardViewController.swift in Sources */,
 				D0029D6C2F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */,
 				D0029D6D2F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
+				D03ACFD52F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift in Sources */,
 				D0029CC12F0E9E2300D50804 /* GroceryCoordinatingController.swift in Sources */,
 				D0FF947F2F14E874006146F8 /* GrocerySceneDIContainer.swift in Sources */,
 				D0FF950E2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */,
 				D0FF94BE2F15CAF5006146F8 /* LocationListRepository.swift in Sources */,
 				D0FF95552F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */,
+				D03ACFA92F1A845E00F8DD43 /* OrderDeliveredViewController.swift in Sources */,
+				D01C32BF2F1AA4EE00B9D520 /* OrderDetailProductCell.swift in Sources */,
 				D0FF94C22F15CB0C006146F8 /* DefaultLocationListRepository.swift in Sources */,
 				D00B92B62F10F72500AEE1B6 /* EcoButton.swift in Sources */,
 				D0095CE82ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
 				D06C3BA82ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
+				D03ACF6E2F1A7F8F00F8DD43 /* OrderManageUseCase.swift in Sources */,
 				D00B92372F10AE2300AEE1B6 /* SignUpController.swift in Sources */,
 				D051420E2F18F36C00C7B963 /* CheckoutModel.swift in Sources */,
 				D0FF951E2F15FA72006146F8 /* ProfileRepository.swift in Sources */,
@@ -4962,6 +5506,7 @@
 				D0095C602ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
 				D00B924F2F10B2C500AEE1B6 /* DefaultAuthRepository.swift in Sources */,
 				D0029C742F0E852E00D50804 /* ArrayExtensions.swift in Sources */,
+				D03ACF852F1A804300F8DD43 /* OrderCancelDIContainer.swift in Sources */,
 				D00B926E2F10DF5D00AEE1B6 /* SignUpUseCase.swift in Sources */,
 				D06C3BA32ECCA3A800289D48 /* UIViewController+AddChild.swift in Sources */,
 				D0029C5C2F0E742E00D50804 /* StringExtensions.swift in Sources */,
@@ -4973,7 +5518,9 @@
 				D05141912F17C07600C7B963 /* OrderController.swift in Sources */,
 				D0095D0E2ECC235800FCC7BC /* ViewController.swift in Sources */,
 				D0E6C3E02F0E02AC00527962 /* TabBarController.swift in Sources */,
+				D03ACF832F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift in Sources */,
 				D06C3B8B2ECCA25D00289D48 /* UIView+Shadow.swift in Sources */,
+				D03ACF682F1A7F7800F8DD43 /* OrderManage.swift in Sources */,
 				D00B927C2F10DFE000AEE1B6 /* UserResponseStorage.swift in Sources */,
 				D0095B812ECB412200FCC7BC /* ProductQuery.swift in Sources */,
 				D0095D1E2ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
@@ -4986,6 +5533,7 @@
 				D0095B372ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
 				D00B925A2F10B8FE00AEE1B6 /* LoginCoordinatingController.swift in Sources */,
 				D0E6C3E72F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */,
+				D01C32982F1AA17900B9D520 /* OrderDetailController.swift in Sources */,
 				D0E6C3E82F0E0AF600527962 /* SegmentedControl.swift in Sources */,
 				D0095B892ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
 				D0095D492ECC506E00FCC7BC /* AttributedText.swift in Sources */,
@@ -5027,6 +5575,7 @@
 				D0095CBC2ECB57C100FCC7BC /* SideMenuModel.swift in Sources */,
 				D0FF94702F14B8D2006146F8 /* MapSearchHistoryStore.swift in Sources */,
 				D06C3B882ECCA21800289D48 /* UIView+Layout.swift in Sources */,
+				D03ACF7F2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift in Sources */,
 				D0FF95252F15FA90006146F8 /* ProfileEndpoints.swift in Sources */,
 				D0FF94E12F15CBB7006146F8 /* LocationListController.swift in Sources */,
 				D05141C12F18156A00C7B963 /* OrderActionFlowCoordinator.swift in Sources */,
@@ -5036,6 +5585,7 @@
 				D00B92822F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
 				D0724D812F1730BA004815FB /* DefaultPaymentCardRepository.swift in Sources */,
 				D00B92832F10E2FB00AEE1B6 /* UserDTO+Mapping.swift in Sources */,
+				D03ACF762F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift in Sources */,
 				D0FF940B2F140189006146F8 /* LocationSearchViewController.swift in Sources */,
 				D00B92842F10E2FB00AEE1B6 /* RefreshTokenResponseDTO+Mapping.swift in Sources */,
 				D00B92852F10E2FB00AEE1B6 /* UserInfoResponseDTO+Mapping.swift in Sources */,
@@ -5052,6 +5602,7 @@
 				D0FF95F62F1637A5006146F8 /* CameraGestureHandler.swift in Sources */,
 				D06C3BAF2ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
 				D0E6C3932F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
+				D03ACFF12F1A8C8300F8DD43 /* OrderContainerDIContainer.swift in Sources */,
 				D0029DB72F0F5D6D00D50804 /* EcoNavigationModel.swift in Sources */,
 				D00B91EC2F10A61C00AEE1B6 /* QRGenerator.swift in Sources */,
 				D00B91ED2F10A61C00AEE1B6 /* VTPSKWebView.swift in Sources */,
@@ -5059,6 +5610,7 @@
 				D0E6C3942F0D01EE00527962 /* CoreDataProductsResponseStorage.swift in Sources */,
 				D0E6C3B52F0DFAF700527962 /* SideMenuCoordinatingController.swift in Sources */,
 				D0FF94042F140173006146F8 /* LocationSearchModel.swift in Sources */,
+				D03ACFBB2F1A86A900F8DD43 /* OrderDeliveredCell.swift in Sources */,
 				D00B92572F10B8F100AEE1B6 /* LoginController.swift in Sources */,
 				D0E6C3B62F0DFAF700527962 /* SideMenuController.swift in Sources */,
 				D0E6C3952F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
@@ -5070,6 +5622,8 @@
 				D0029CDA2F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */,
 				D0029CBD2F0E9DFF00D50804 /* GroceryItemModel.swift in Sources */,
 				D0095D172ECC2FFF00FCC7BC /* SideMenuAnimator.swift in Sources */,
+				D03ACF8A2F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift in Sources */,
+				D01C32B92F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift in Sources */,
 				D0FF94D82F15CBA0006146F8 /* LocationListModel.swift in Sources */,
 				D0FF94662F1487D9006146F8 /* EcoController.swift in Sources */,
 				D0FF94672F1487D9006146F8 /* EcoBaseViewController.swift in Sources */,
@@ -5088,6 +5642,7 @@
 				D0FF94A02F14E923006146F8 /* GrocerysRequestDTO+Mapping.swift in Sources */,
 				D0095C3B2ECB43DC00FCC7BC /* AccessibilityIdentifier.swift in Sources */,
 				D0FF95EB2F16376B006146F8 /* MotionManager.swift in Sources */,
+				D03ACF712F1A7F9F00F8DD43 /* OrderManageRepository.swift in Sources */,
 				D0FF95162F15FA49006146F8 /* Profile.swift in Sources */,
 				D0095C3C2ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
 				D0095C3D2ECB43DC00FCC7BC /* Alertable.swift in Sources */,
@@ -5096,6 +5651,7 @@
 				D0095D3D2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095D572ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift in Sources */,
 				D0FF94242F140529006146F8 /* AddressRepository.swift in Sources */,
+				D01C32902F1AA06300B9D520 /* OrderDetailEndpoints.swift in Sources */,
 				D0FF93E02F13ED3C006146F8 /* MapViewController.swift in Sources */,
 				D0095C402ECB43DC00FCC7BC /* Observable.swift in Sources */,
 				D0095C412ECB43DC00FCC7BC /* UITableViewView+Extensions.swift in Sources */,
@@ -5127,6 +5683,7 @@
 				D0029B6B2F0E742000D50804 /* NSMutableAttributedString+Extension.swift in Sources */,
 				D0FF94F42F15CFD9006146F8 /* LocationListQuery.swift in Sources */,
 				D00B923F2F10B1B300AEE1B6 /* User.swift in Sources */,
+				D03ACF782F1A7FC600F8DD43 /* OrderManageEndpoints.swift in Sources */,
 				D0FF964F2F163BFE006146F8 /* MobileNetV2.mlmodel in Sources */,
 				D0FF95352F15FF63006146F8 /* EditProfileViewController.swift in Sources */,
 				D0029B6C2F0E742000D50804 /* EcoDivider.swift in Sources */,
@@ -5139,8 +5696,11 @@
 				D00B92CA2F10FA1F00AEE1B6 /* LoginFormView.swift in Sources */,
 				D0FF94ED2F15CE2F006146F8 /* LocationListResponseDTO+Mapping.swift in Sources */,
 				D00B92CB2F10FA1F00AEE1B6 /* LoginHeaderView.swift in Sources */,
+				D03ACFAE2F1A846F00F8DD43 /* OrderDeliveryViewController.swift in Sources */,
 				D0FF94162F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */,
 				D0FF95FD2F1637E6006146F8 /* UIImage+PixelBuffer.swift in Sources */,
+				D03ACFCF2F1A8BE100F8DD43 /* OrderPendingItemModel.swift in Sources */,
+				D03ACFB72F1A863800F8DD43 /* OrderCancelCell.swift in Sources */,
 				D0FF94172F1404D3006146F8 /* AddressRequestDTO+Mapping.swift in Sources */,
 				D0029B6E2F0E742000D50804 /* EcoTick.swift in Sources */,
 				D0724D672F172FE7004815FB /* PaymentCardViewController.swift in Sources */,
@@ -5149,13 +5709,17 @@
 				D00B925F2F10D39200AEE1B6 /* LoginResponseDTO+Mapping.swift in Sources */,
 				D0029B6F2F0E742000D50804 /* CoreUIKitLocalization.swift in Sources */,
 				D00B92462F10B26100AEE1B6 /* SignUpRequestDTO+Mapping.swift in Sources */,
+				D01C32872F1AA03400B9D520 /* OrderDetailRepository.swift in Sources */,
 				D00B92472F10B26100AEE1B6 /* SignUpResponseDTO+Mapping.swift in Sources */,
+				D03ACFDA2F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift in Sources */,
+				D01C32B22F1AA48200B9D520 /* OrderDetailAddressCell.swift in Sources */,
 				D0724D892F1730DB004815FB /* PaymentCardUseCase.swift in Sources */,
 				D0FF957A2F16163E006146F8 /* EditProfileController.swift in Sources */,
 				D0029B702F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D0FF94872F14E89D006146F8 /* GroceryQuery.swift in Sources */,
 				D00B91E52F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift in Sources */,
 				D05141D42F189C7400C7B963 /* CheckoutViewController.swift in Sources */,
+				D01C32AA2F1AA1AD00B9D520 /* OrderDetailDIContainer.swift in Sources */,
 				D0029B712F0E742000D50804 /* EcoProgressView.swift in Sources */,
 				D0029B722F0E742000D50804 /* Border.swift in Sources */,
 				D0029B732F0E742000D50804 /* Spacing.swift in Sources */,
@@ -5164,6 +5728,7 @@
 				D0FF94F82F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */,
 				D0FF954C2F160793006146F8 /* ProfileDIContainer.swift in Sources */,
 				D0029CC02F0E9E2300D50804 /* GroceryCoordinatingController.swift in Sources */,
+				D03ACFE62F1A8C4900F8DD43 /* OrderDeliveredController.swift in Sources */,
 				D0029B752F0E742000D50804 /* SFFont.swift in Sources */,
 				D0029B762F0E742000D50804 /* Typography.swift in Sources */,
 				D05142332F19016F00C7B963 /* PaymentMethodCoordinationgController.swift in Sources */,
@@ -5171,6 +5736,7 @@
 				D0029B782F0E742000D50804 /* Shadows.swift in Sources */,
 				D0029B792F0E742000D50804 /* Opacity.swift in Sources */,
 				D0FF94202F140514006146F8 /* DefaultAddressRepository.swift in Sources */,
+				D03ACF8E2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift in Sources */,
 				D0FF94062F14017E006146F8 /* LocationSearchController.swift in Sources */,
 				D0FF94982F14E8DE006146F8 /* DefaultGrocerysRepository.swift in Sources */,
 				D05141A52F17C2A400C7B963 /* OrderDTOs+Mapping.swift in Sources */,
@@ -5181,6 +5747,7 @@
 				D0FF95452F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */,
 				D0029B7A2F0E742000D50804 /* BorderRadius.swift in Sources */,
 				D0029B7B2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */,
+				D03ACFBE2F1A874F00F8DD43 /* OrderDeliveryCell.swift in Sources */,
 				D0029B7C2F0E742000D50804 /* Colors.swift in Sources */,
 				D0029B7D2F0E742000D50804 /* EcoTextView.swift in Sources */,
 				D0FF93F02F13F993006146F8 /* AddressModel.swift in Sources */,
@@ -5188,13 +5755,16 @@
 				D05141A82F17C2C900C7B963 /* DefaultOrderRepository.swift in Sources */,
 				D0029B7E2F0E742000D50804 /* EcoSwitch.swift in Sources */,
 				D0029B7F2F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
+				D01C32952F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift in Sources */,
 				D0095B822ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095B832ECB412200FCC7BC /* ProductQuery.swift in Sources */,
 				D0029C782F0E85E600D50804 /* IntExtensions.swift in Sources */,
+				D03ACFEB2F1A8C5000F8DD43 /* OrderCancelController.swift in Sources */,
 				D0FF94F02F15CE55006146F8 /* LocationListUseCase.swift in Sources */,
 				D0FF943D2F1416DD006146F8 /* AddressCoordinatingController.swift in Sources */,
 				D0095BE02ECB434200FCC7BC /* AppAppearance.swift in Sources */,
 				D0095BB12ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
+				D03ACFC22F1A877300F8DD43 /* OrderPendingCell.swift in Sources */,
 				D06C3B912ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
 				D0095BB22ECB428800FCC7BC /* DefaultProductsRepository.swift in Sources */,
 				D0095BA32ECB426200FCC7BC /* APIEndpoints.swift in Sources */,
@@ -5203,7 +5773,9 @@
 				D00B92BD2F10FA1400AEE1B6 /* SignUpFormView.swift in Sources */,
 				D05141DC2F18E5EE00C7B963 /* LocationData.swift in Sources */,
 				D0029CED2F0EA11A00D50804 /* RecommendedItemCell.swift in Sources */,
+				D03ACF932F1A807700F8DD43 /* OrderPendingDIContainer.swift in Sources */,
 				D0029CEF2F0EA11A00D50804 /* CartItemCell.swift in Sources */,
+				D03ACF552F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */,
 				D0029C972F0E976B00D50804 /* Popup6.swift in Sources */,
 				D00B923B2F10AE2F00AEE1B6 /* SignUpCoordinatingController.swift in Sources */,
 				D0095B2F2ECB0BA700FCC7BC /* ECommerce.xcdatamodeld in Sources */,
@@ -5216,6 +5788,8 @@
 				D0FF96072F163939006146F8 /* CameraObservable.swift in Sources */,
 				D0095C072ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
 				D0724D8D2F1730F4004815FB /* PaymentCard.swift in Sources */,
+				D01C32812F1A9FCA00B9D520 /* OrderDetail.swift in Sources */,
+				D03ACFED2F1A8C6900F8DD43 /* OrderContainerController.swift in Sources */,
 				D0095CC92ECB59DA00FCC7BC /* UIViewController+Parent.swift in Sources */,
 				D0724D9A2F1752EA004815FB /* PaymentCardDTOs+Mapping.swift in Sources */,
 				D0FF95E92F16375A006146F8 /* ImageSimilarityService.swift in Sources */,
@@ -5227,14 +5801,17 @@
 				D0095CFD2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
 				D0FF94332F140614006146F8 /* DividerCell.swift in Sources */,
 				D0029CA72F0E981600D50804 /* CategoryCodinatingController.swift in Sources */,
+				D01C328C2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift in Sources */,
 				D0FF95732F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */,
 				D00B92A72F10ED0000AEE1B6 /* SplashCoordinatingController.swift in Sources */,
 				D05141892F17C06500C7B963 /* OrderViewController.swift in Sources */,
+				D01C32782F1A9BC400B9D520 /* OrderDetailViewController.swift in Sources */,
 				D00B92A82F10ED0000AEE1B6 /* SplashViewController.swift in Sources */,
 				D00B92A92F10ED0000AEE1B6 /* SplashController.swift in Sources */,
 				D0FF949D2F14E8FB006146F8 /* DefaultGrocerysQueriesRepository.swift in Sources */,
 				D0095D8C2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
 				D0095CE72ECC153900FCC7BC /* SideMenuTableViewController.swift in Sources */,
+				D01C32832F1AA01600B9D520 /* OrderDetailUseCase.swift in Sources */,
 				D05142192F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift in Sources */,
 				D0095C5F2ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
 				D0FF95062F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
@@ -5255,6 +5832,7 @@
 				D0095D4F2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
 				D0095D0A2ECC21A000FCC7BC /* MainSceneDIContainer.swift in Sources */,
 				D06C3B932ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
+				D03ACFB32F1A848100F8DD43 /* OrderPendingViewController.swift in Sources */,
 				D0095D722ECC565200FCC7BC /* LocalAuthenticationContextExtensions.swift in Sources */,
 				D0095CD12ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
 				D0FF95182F15FA66006146F8 /* ProfileUseCase.swift in Sources */,
@@ -5265,6 +5843,7 @@
 				D0E6C3A42F0D06AC00527962 /* ImageCache.swift in Sources */,
 				D0095BC22ECB42B100FCC7BC /* Endpoint.swift in Sources */,
 				D00B91AC2F109F9E00AEE1B6 /* CommonViewsLocalization.swift in Sources */,
+				D03ACFDE2F1A8C3900F8DD43 /* OrderDeliveryController.swift in Sources */,
 				D0095BC32ECB42B100FCC7BC /* DataTransferService.swift in Sources */,
 				D0029C922F0E976400D50804 /* Popup5.swift in Sources */,
 				D0FF941D2F1404FF006146F8 /* AddressEndpoints.swift in Sources */,
@@ -5272,8 +5851,11 @@
 				D0095BC42ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
 				D05141722F17A4F000C7B963 /* ProductInfoCell.swift in Sources */,
 				D05141732F17A4F000C7B963 /* ProductGuaranteedCell.swift in Sources */,
+				D03ACFA62F1A844200F8DD43 /* OrderCancelViewController.swift in Sources */,
+				D03ACFE12F1A8C4300F8DD43 /* OrderPendingController.swift in Sources */,
 				D05141742F17A4F000C7B963 /* ProductImageCell.swift in Sources */,
 				D00B92B22F10ED2000AEE1B6 /* OnboardSceneDIContainer.swift in Sources */,
+				D03ACFD12F1A8C0600F8DD43 /* OrderCancelItemModel.swift in Sources */,
 				D00B92522F10B38E00AEE1B6 /* AuthSceneDIContainer.swift in Sources */,
 				D06C3B9C2ECCA31200289D48 /* UIView+Gesture.swift in Sources */,
 				D0FF95C52F1635B2006146F8 /* CameraViewController.swift in Sources */,
@@ -5284,15 +5866,19 @@
 				D0FF93982F11F953006146F8 /* CardViewController.swift in Sources */,
 				D0029D602F0F4B5200D50804 /* CollectionDescripSectionHeader.swift in Sources */,
 				D0029D612F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
+				D03ACFD72F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift in Sources */,
 				D0029C822F0E974700D50804 /* LinkBankPopup.swift in Sources */,
 				D0FF94812F14E874006146F8 /* GrocerySceneDIContainer.swift in Sources */,
 				D0FF950C2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */,
 				D0FF94C02F15CAF5006146F8 /* LocationListRepository.swift in Sources */,
 				D0FF95572F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */,
+				D03ACFAA2F1A845E00F8DD43 /* OrderDeliveredViewController.swift in Sources */,
+				D01C32C22F1AA4EE00B9D520 /* OrderDetailProductCell.swift in Sources */,
 				D0FF94C42F15CB0C006146F8 /* DefaultLocationListRepository.swift in Sources */,
 				D00B92B72F10F72500AEE1B6 /* EcoButton.swift in Sources */,
 				D0095B922ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0095B972ECB41A800FCC7BC /* ProductsRepository.swift in Sources */,
+				D03ACF6D2F1A7F8F00F8DD43 /* OrderManageUseCase.swift in Sources */,
 				D00B92362F10AE2300AEE1B6 /* SignUpController.swift in Sources */,
 				D051420F2F18F36C00C7B963 /* CheckoutModel.swift in Sources */,
 				D0FF951C2F15FA72006146F8 /* ProfileRepository.swift in Sources */,
@@ -5316,6 +5902,7 @@
 				D0095BA92ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift in Sources */,
 				D00B924E2F10B2C500AEE1B6 /* DefaultAuthRepository.swift in Sources */,
 				D0095BDB2ECB433B00FCC7BC /* AppFlowCoordinator.swift in Sources */,
+				D03ACF862F1A804300F8DD43 /* OrderCancelDIContainer.swift in Sources */,
 				D00B926D2F10DF5D00AEE1B6 /* SignUpUseCase.swift in Sources */,
 				D0095D5D2ECC52A400FCC7BC /* UIWindow+Extensions.swift in Sources */,
 				D0095BAA2ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift in Sources */,
@@ -5327,7 +5914,9 @@
 				D05141902F17C07600C7B963 /* OrderController.swift in Sources */,
 				D0095D412ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
 				D06C3BB42ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */,
+				D03ACF812F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift in Sources */,
 				D0095BD32ECB42D200FCC7BC /* Cancellable.swift in Sources */,
+				D03ACF692F1A7F7800F8DD43 /* OrderManage.swift in Sources */,
 				D00B927B2F10DFE000AEE1B6 /* UserResponseStorage.swift in Sources */,
 				D0029C652F0E744D00D50804 /* UIColorExtensions.swift in Sources */,
 				D0029C662F0E744D00D50804 /* UIImageExtensions.swift in Sources */,
@@ -5340,6 +5929,7 @@
 				D0095BD42ECB42D200FCC7BC /* DispatchQueueType.swift in Sources */,
 				D00B92592F10B8FE00AEE1B6 /* LoginCoordinatingController.swift in Sources */,
 				D0095BD52ECB42D200FCC7BC /* ConnectionError.swift in Sources */,
+				D01C32992F1AA17900B9D520 /* OrderDetailController.swift in Sources */,
 				D0095BD92ECB432100FCC7BC /* AppConfigurations.swift in Sources */,
 				D06C3B8D2ECCA25D00289D48 /* UIView+Shadow.swift in Sources */,
 				D0095B9B2ECB41C500FCC7BC /* ProductsQueriesRepository.swift in Sources */,
@@ -5352,6 +5942,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0E6C3E92F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */,
+				D03ACF6C2F1A7F8F00F8DD43 /* OrderManageUseCase.swift in Sources */,
 				D0FF94832F14E893006146F8 /* Grocery.swift in Sources */,
 				D05142252F19010E00C7B963 /* PaymentMethodViewController.swift in Sources */,
 				D0E6C3EA2F0E0AF600527962 /* SegmentedControl.swift in Sources */,
@@ -5363,11 +5954,13 @@
 				D0095B882ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
 				D0FF95052F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
 				D0095B752ECB1D7B00FCC7BC /* Localize.swift in Sources */,
+				D03ACF6A2F1A7F7800F8DD43 /* OrderManage.swift in Sources */,
 				D0095DA02ECC5BED00FCC7BC /* CommonUtil.swift in Sources */,
 				D0095DA12ECC5BED00FCC7BC /* CoreConstant.swift in Sources */,
 				D05141562F17A4B800C7B963 /* ProductDetailController.swift in Sources */,
 				D0029DBF2F0F5DD000D50804 /* EcoNavigationBarView.swift in Sources */,
 				D0095CCB2ECB59DA00FCC7BC /* UIViewController+Parent.swift in Sources */,
+				D01C32B72F1AA4C500B9D520 /* OrderDetailOtherInfoCell.swift in Sources */,
 				D0095CC52ECB59BE00FCC7BC /* SidebarRevealBehavior.swift in Sources */,
 				D0FF94BF2F15CAF5006146F8 /* LocationListRepository.swift in Sources */,
 				D05141AD2F17C30100C7B963 /* OrderModel.swift in Sources */,
@@ -5377,17 +5970,20 @@
 				D00B92562F10B8F100AEE1B6 /* LoginController.swift in Sources */,
 				D05141772F17A58F00C7B963 /* ProductDetailDIContainer.swift in Sources */,
 				D0FF94E92F15CC07006146F8 /* LocationListDIContainer.swift in Sources */,
+				D03ACF822F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift in Sources */,
 				D0FF95152F15FA49006146F8 /* Profile.swift in Sources */,
 				D0029C8D2F0E976000D50804 /* Popup4.swift in Sources */,
 				D00B924A2F10B26100AEE1B6 /* SignUpRequestDTO+Mapping.swift in Sources */,
 				D00B924B2F10B26100AEE1B6 /* SignUpResponseDTO+Mapping.swift in Sources */,
 				D0029C852F0E975300D50804 /* Popup2.swift in Sources */,
+				D03ACFC32F1A877300F8DD43 /* OrderPendingCell.swift in Sources */,
 				D0029CC62F0E9E3100D50804 /* GroceryController.swift in Sources */,
 				D0095D3F2ECC4F3700FCC7BC /* UIApplication+Extensions.swift in Sources */,
 				D0FF96512F163BFE006146F8 /* MobileNetV2.mlmodel in Sources */,
 				D0E6C3D22F0DFEC000527962 /* MainContainerViewController.swift in Sources */,
 				D00B92392F10AE2F00AEE1B6 /* SignUpCoordinatingController.swift in Sources */,
 				D0E6C3D32F0DFEC000527962 /* HomeViewController.swift in Sources */,
+				D03ACF872F1A804300F8DD43 /* OrderCancelDIContainer.swift in Sources */,
 				D00B920A2F10A6D100AEE1B6 /* EcoTextField.swift in Sources */,
 				D0FF941C2F1404FF006146F8 /* AddressEndpoints.swift in Sources */,
 				D0095B462ECB0C0B00FCC7BC /* ECommerceUITestsLaunchTests.swift in Sources */,
@@ -5409,8 +6005,10 @@
 				D0FF96532F163CB9006146F8 /* CameraAILabelService.swift in Sources */,
 				D05142172F18F4FE00C7B963 /* CheckoutSceneDIContainer.swift in Sources */,
 				D0095D752ECC56F300FCC7BC /* HelperFunction.swift in Sources */,
+				D03ACFBA2F1A86A900F8DD43 /* OrderDeliveredCell.swift in Sources */,
 				D0FF94F92F15CFF1006146F8 /* LocationListQueriesRepository.swift in Sources */,
 				D00B91EE2F10A61C00AEE1B6 /* QRGenerator.swift in Sources */,
+				D03ACFB62F1A863800F8DD43 /* OrderCancelCell.swift in Sources */,
 				D00B92662F10D95400AEE1B6 /* Authentication.swift in Sources */,
 				D05142002F18F1CC00C7B963 /* CheckoutProgressIndicator.swift in Sources */,
 				D05142012F18F1CC00C7B963 /* CheckoutNoteCell.swift in Sources */,
@@ -5431,7 +6029,9 @@
 				D0FF95402F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift in Sources */,
 				D0FF95412F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */,
 				D0029CE42F0EA09400D50804 /* CartViewController.swift in Sources */,
+				D03ACFBF2F1A874F00F8DD43 /* OrderDeliveryCell.swift in Sources */,
 				D00B924D2F10B2C500AEE1B6 /* DefaultAuthRepository.swift in Sources */,
+				D03ACFD32F1A8C0600F8DD43 /* OrderCancelItemModel.swift in Sources */,
 				D0FF94382F140911006146F8 /* AddressDIContainer.swift in Sources */,
 				D0029CA42F0E980A00D50804 /* CategoryController.swift in Sources */,
 				D0095D852ECC5ABD00FCC7BC /* Constant.swift in Sources */,
@@ -5453,26 +6053,35 @@
 				D0029D462F0F46FF00D50804 /* SignUpViewController.swift in Sources */,
 				D05141D32F189C7400C7B963 /* CheckoutViewController.swift in Sources */,
 				D0029D472F0F46FF00D50804 /* RegisterViewController.swift in Sources */,
+				D03ACFD92F1A8C1D00F8DD43 /* OrderDeliveryItemModel.swift in Sources */,
 				D0029D482F0F46FF00D50804 /* LoginModel.swift in Sources */,
 				D051417C2F17A5AF00C7B963 /* ProductDetailCoordinatingController.swift in Sources */,
 				D0029D492F0F46FF00D50804 /* LoginViewController.swift in Sources */,
+				D01C32802F1A9FCA00B9D520 /* OrderDetail.swift in Sources */,
 				D0FF947D2F14E7FC006146F8 /* GroceryTableViewController.swift in Sources */,
 				D0029D4A2F0F46FF00D50804 /* SignUpModel.swift in Sources */,
 				D0029CD82F0E9FBC00D50804 /* PricingCaculationPopup.swift in Sources */,
 				D0029C632F0E744D00D50804 /* UIColorExtensions.swift in Sources */,
+				D01C328F2F1AA06300B9D520 /* OrderDetailEndpoints.swift in Sources */,
+				D03ACF722F1A7F9F00F8DD43 /* OrderManageRepository.swift in Sources */,
 				D0029C642F0E744D00D50804 /* UIImageExtensions.swift in Sources */,
 				D0095BBD2ECB42B100FCC7BC /* NetworkService.swift in Sources */,
+				D03ACFCD2F1A8BE100F8DD43 /* OrderPendingItemModel.swift in Sources */,
 				D0095D8D2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
 				D0095BBE2ECB42B100FCC7BC /* Endpoint.swift in Sources */,
 				D0FF94DC2F15CBAD006146F8 /* LocationListViewController.swift in Sources */,
 				D05141B82F18156A00C7B963 /* OrderActionFlowCoordinator.swift in Sources */,
+				D01C32A92F1AA1AD00B9D520 /* OrderDetailDIContainer.swift in Sources */,
 				D05141B92F18156A00C7B963 /* OrderActionViewExample.swift in Sources */,
 				D05141BA2F18156A00C7B963 /* OrderActionView.swift in Sources */,
 				D0095D052ECC215100FCC7BC /* MainViewController.swift in Sources */,
 				D0029CAB2F0E987900D50804 /* CategoryMenuItemModel.swift in Sources */,
+				D03ACF7A2F1A7FC600F8DD43 /* OrderManageEndpoints.swift in Sources */,
+				D03ACFE92F1A8C5000F8DD43 /* OrderCancelController.swift in Sources */,
 				D0095BDC2ECB433B00FCC7BC /* AppFlowCoordinator.swift in Sources */,
 				D05141C82F188C7700C7B963 /* OrderDeliverCell.swift in Sources */,
 				D05141C92F188C7700C7B963 /* OrderProductImageCell.swift in Sources */,
+				D03ACFAF2F1A846F00F8DD43 /* OrderDeliveryViewController.swift in Sources */,
 				D05141CA2F188C7700C7B963 /* OrderQuantityCell.swift in Sources */,
 				D0029C572F0E742E00D50804 /* StringExtensions.swift in Sources */,
 				D0FF94A62F14E92C006146F8 /* GrocerysResponseDTO+Mapping.swift in Sources */,
@@ -5498,15 +6107,18 @@
 				D00B925B2F10B8FE00AEE1B6 /* LoginCoordinatingController.swift in Sources */,
 				D0FF94B72F15CAC3006146F8 /* LocationList.swift in Sources */,
 				D0095BBF2ECB42B100FCC7BC /* DataTransferService.swift in Sources */,
+				D03ACF562F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */,
 				D0724D7C2F1730A3004815FB /* PaymentCardEndpoints.swift in Sources */,
 				D0095BD02ECB42D200FCC7BC /* Cancellable.swift in Sources */,
 				D0095BD12ECB42D200FCC7BC /* DispatchQueueType.swift in Sources */,
 				D0095BD22ECB42D200FCC7BC /* ConnectionError.swift in Sources */,
 				D0724D882F1730DB004815FB /* PaymentCardUseCase.swift in Sources */,
+				D01C32892F1AA03400B9D520 /* OrderDetailRepository.swift in Sources */,
 				D0095BD82ECB432100FCC7BC /* AppConfigurations.swift in Sources */,
 				D0095D892ECC5B2B00FCC7BC /* PhoneNumber.swift in Sources */,
 				D0029CC22F0E9E2300D50804 /* GroceryCoordinatingController.swift in Sources */,
 				D0095D982ECC5BA300FCC7BC /* ImageCompressor.swift in Sources */,
+				D01C329A2F1AA17900B9D520 /* OrderDetailController.swift in Sources */,
 				D0095BC02ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
 				D0FF94912F14E8C0006146F8 /* GrocerysRepository.swift in Sources */,
 				D0724D982F1752EA004815FB /* PaymentCardDTOs+Mapping.swift in Sources */,
@@ -5514,6 +6126,7 @@
 				D05141612F17A4E500C7B963 /* ProductDetailViewController.swift in Sources */,
 				D0095C982ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
 				D00B92752F10DFBE00AEE1B6 /* UserResponseEntity+Mapping.swift in Sources */,
+				D03ACF892F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift in Sources */,
 				D0029CBC2F0E9DFF00D50804 /* GroceryItemModel.swift in Sources */,
 				D0095D1F2ECC30E900FCC7BC /* SideMenuPanGestureProcessor.swift in Sources */,
 				D0FF94BA2F15CAE3006146F8 /* FetchRecentLocationListQueriesUseCase.swift in Sources */,
@@ -5523,6 +6136,7 @@
 				D00B91E62F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift in Sources */,
 				D0095C992ECB579900FCC7BC /* ProductsController.swift in Sources */,
 				D0095BB62ECB428800FCC7BC /* DefaultProductsRepository.swift in Sources */,
+				D03ACFDD2F1A8C3900F8DD43 /* OrderDeliveryController.swift in Sources */,
 				D0FF95012F15F9EA006146F8 /* ProfileModel.swift in Sources */,
 				D0FF94722F14E7B5006146F8 /* GroceryViewController.swift in Sources */,
 				D06C3B872ECCA21800289D48 /* UIView+Layout.swift in Sources */,
@@ -5538,13 +6152,17 @@
 				D0FF94802F14E874006146F8 /* GrocerySceneDIContainer.swift in Sources */,
 				D0095CAF2ECB57C100FCC7BC /* SideMenuViewController.swift in Sources */,
 				D0095BE52ECB436700FCC7BC /* ProductsSceneDIContainer.swift in Sources */,
+				D03ACFA52F1A844200F8DD43 /* OrderCancelViewController.swift in Sources */,
 				D0095BE62ECB436700FCC7BC /* AppDIContainer.swift in Sources */,
 				D0095C0C2ECB43C500FCC7BC /* ProductItemModel.swift in Sources */,
 				D0095C0D2ECB43C500FCC7BC /* ProductItemCell.swift in Sources */,
+				D01C32C12F1AA4EE00B9D520 /* OrderDetailProductCell.swift in Sources */,
 				D0029DF12F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */,
 				D0E6C3E12F0E02AC00527962 /* TabBarController.swift in Sources */,
 				D0029C932F0E976400D50804 /* Popup5.swift in Sources */,
+				D01C32772F1A9BC400B9D520 /* OrderDetailViewController.swift in Sources */,
 				D0FF94632F1487D9006146F8 /* EcoController.swift in Sources */,
+				D03ACFD62F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift in Sources */,
 				D051419D2F17C28000C7B963 /* OrderRepository.swift in Sources */,
 				D0FF94642F1487D9006146F8 /* EcoBaseViewController.swift in Sources */,
 				D0FF94652F1487D9006146F8 /* EcoViewController.swift in Sources */,
@@ -5553,12 +6171,15 @@
 				D0095C5E2ECB4C1600FCC7BC /* RepositoryTask.swift in Sources */,
 				D0724D6F2F173004004815FB /* PaymentCardController.swift in Sources */,
 				D0FF943E2F1416DD006146F8 /* AddressCoordinatingController.swift in Sources */,
+				D01C328B2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift in Sources */,
 				D0095D0F2ECC235800FCC7BC /* ViewController.swift in Sources */,
 				D06C3B8F2ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
 				D0FF94252F140529006146F8 /* AddressRepository.swift in Sources */,
 				D0FF93E92F13EDA3006146F8 /* MapController.swift in Sources */,
+				D03ACFE52F1A8C4900F8DD43 /* OrderDeliveredController.swift in Sources */,
 				D0095C0E2ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D0FF95F22F16378C006146F8 /* ImageLabelModel.swift in Sources */,
+				D01C32B12F1AA48200B9D520 /* OrderDetailAddressCell.swift in Sources */,
 				D0095D4B2ECC506E00FCC7BC /* AttributedText.swift in Sources */,
 				D00B92622F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
 				D00B92632F10D39200AEE1B6 /* LoginResponseDTO+Mapping.swift in Sources */,
@@ -5567,6 +6188,7 @@
 				D0095D3C2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095CCF2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095D4D2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
+				D03ACFB22F1A848100F8DD43 /* OrderPendingViewController.swift in Sources */,
 				D0029C962F0E976B00D50804 /* Popup6.swift in Sources */,
 				D0FF94C32F15CB0C006146F8 /* DefaultLocationListRepository.swift in Sources */,
 				D00B92992F10EA3100AEE1B6 /* ProductsEndpoints.swift in Sources */,
@@ -5576,22 +6198,27 @@
 				D0FF96052F163939006146F8 /* CameraObservable.swift in Sources */,
 				D0724D862F1730CC004815FB /* PaymentCardRepository.swift in Sources */,
 				D0FF942D2F140552006146F8 /* AddressUseCase.swift in Sources */,
+				D03ACFEE2F1A8C6900F8DD43 /* OrderContainerController.swift in Sources */,
 				D0095D932ECC5B8C00FCC7BC /* AES.swift in Sources */,
 				D0724D632F172FB6004815FB /* PaymentCardModel.swift in Sources */,
 				D0FF94032F140173006146F8 /* LocationSearchModel.swift in Sources */,
+				D01C32942F1AA08F00B9D520 /* OrderDetailResponseDTOs+Mapping.swift in Sources */,
 				D05141972F17C27900C7B963 /* OrderUseCase.swift in Sources */,
 				D0029DC42F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */,
 				D0095D512ECC50AE00FCC7BC /* UILabel+Extensions.swift in Sources */,
 				D06C3BA72ECCA3EC00289D48 /* UIViewController+Navigation.swift in Sources */,
 				D06C3BB12ECCA45300289D48 /* UIViewController+Window.swift in Sources */,
 				D0095D442ECC4FC100FCC7BC /* UIImage+Extensions.swift in Sources */,
+				D03ACF8D2F1A806A00F8DD43 /* OrderDeliveryDIContainer.swift in Sources */,
 				D00B92D12F11054F00AEE1B6 /* APIErrorParser.swift in Sources */,
 				D0095C0F2ECB43C500FCC7BC /* ProductsViewController.swift in Sources */,
 				D0095B9C2ECB41C500FCC7BC /* ProductsQueriesRepository.swift in Sources */,
 				D0095B202ECB0BA700FCC7BC /* ECommerce.xcdatamodeld in Sources */,
+				D03ACF742F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift in Sources */,
 				D0095CFF2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
 				D0095C2F2ECB43DC00FCC7BC /* StoryboardInstantiable.swift in Sources */,
 				D0029C892F0E975900D50804 /* Popup3.swift in Sources */,
+				D01C32842F1AA01600B9D520 /* OrderDetailUseCase.swift in Sources */,
 				D0FF95E52F16373D006146F8 /* AILabelServiceType.swift in Sources */,
 				D0029C792F0E85E600D50804 /* IntExtensions.swift in Sources */,
 				D0FF93E22F13ED3C006146F8 /* MapViewController.swift in Sources */,
@@ -5616,6 +6243,7 @@
 				D0FF93F72F13F9C9006146F8 /* AddressController.swift in Sources */,
 				D00B92AE2F10ED0000AEE1B6 /* SplashViewController.swift in Sources */,
 				D051421D2F18FB5C00C7B963 /* SectionHeaderView.swift in Sources */,
+				D03ACFAB2F1A845E00F8DD43 /* OrderDeliveredViewController.swift in Sources */,
 				D0FF950D2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */,
 				D00B92AF2F10ED0000AEE1B6 /* SplashController.swift in Sources */,
 				D0FF94AF2F14E967006146F8 /* CoreDataGrocerysResponseStorage.swift in Sources */,
@@ -5678,6 +6306,7 @@
 				D0029C0B2F0E742000D50804 /* SFFont.swift in Sources */,
 				D0FF93F42F13F997006146F8 /* AddressViewController.swift in Sources */,
 				D0029C0C2F0E742000D50804 /* Typography.swift in Sources */,
+				D03ACFF32F1A8C8300F8DD43 /* OrderContainerDIContainer.swift in Sources */,
 				D0029C0D2F0E742000D50804 /* EcoRadioButton.swift in Sources */,
 				D05142352F19016F00C7B963 /* PaymentMethodCoordinationgController.swift in Sources */,
 				D0724D752F173014004815FB /* PaymentCardCoordinatingController.swift in Sources */,
@@ -5690,9 +6319,12 @@
 				D05141352F179DE500C7B963 /* UltravisualLayout.swift in Sources */,
 				D0029C122F0E742000D50804 /* Colors.swift in Sources */,
 				D0029C132F0E742000D50804 /* EcoTextView.swift in Sources */,
+				D03ACF7E2F1A7FE600F8DD43 /* OrderManageRequestDTOs+Mapping.swift in Sources */,
 				D0FF94E02F15CBB7006146F8 /* LocationListController.swift in Sources */,
+				D03ACFE22F1A8C4300F8DD43 /* OrderPendingController.swift in Sources */,
 				D0029C142F0E742000D50804 /* EcoSwitch.swift in Sources */,
 				D0029C152F0E742000D50804 /* UIStackView+Subview.swift in Sources */,
+				D03ACF912F1A807700F8DD43 /* OrderPendingDIContainer.swift in Sources */,
 				D051419F2F17C29400C7B963 /* OrderEndpoints.swift in Sources */,
 				D0E6C3A12F0D01EE00527962 /* CoreDataStorage.swift in Sources */,
 				D0FF94142F1404D3006146F8 /* AddressResponseDTO+Mapping.swift in Sources */,
@@ -5774,7 +6406,7 @@
 		D0095B032ECB0B8400FCC7BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_BASE_URL = "http://192.168.1.8:8000";
+				API_BASE_URL = "http://127.0.0.1:8000";
 				API_KEY = sk_WBLmK71qE7FT8qK7SkohLshssLbUTbbAtVdDzlMyYGjY0MPPWiTClo2Gm4Fa;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -5824,7 +6456,7 @@
 		D0095B042ECB0B8400FCC7BC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_BASE_URL = "http://192.168.1.8:8000";
+				API_BASE_URL = "http://127.0.0.1:8000";
 				API_KEY = sk_WBLmK71qE7FT8qK7SkohLshssLbUTbbAtVdDzlMyYGjY0MPPWiTClo2Gm4Fa;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

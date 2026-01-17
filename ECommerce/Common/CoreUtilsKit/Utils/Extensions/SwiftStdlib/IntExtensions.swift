@@ -20,4 +20,12 @@ extension Int {
         let max = Int(pow(Double(10), Double(digits))) - 1
         return Int(Range(uncheckedBounds: (min, max)))
     }
+    
+    var formattedWithSeparator: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = ","
+        formatter.usesGroupingSeparator = true
+        return formatter.string(from: NSNumber(value: self)) ?? "\(self)"
+    }
 }

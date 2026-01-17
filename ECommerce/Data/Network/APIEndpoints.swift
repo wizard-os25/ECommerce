@@ -110,4 +110,18 @@ struct APIEndpoints {
     static func placeOrder(with requestDTO: PlaceOrderRequestDTO) -> Endpoint<PlaceOrderResponseDTO> {
         return OrderEndpoints.placeOrder(with: requestDTO)
     }
+    
+    // MARK: - Order Manage Endpoints
+    
+    /// Get orders endpoint
+    static func getOrders() -> Endpoint<OrderManageResponseDTO> {
+        return OrderManageEndpoints.getOrders()
+    }
+    
+    // MARK: - Order Detail Endpoints
+    
+    /// Get order detail endpoint
+    static func getOrderDetail(orderId: Int) -> Endpoint<OrderDetailResponseDTO> {
+        return OrderDetailEndpoints.getOrderDetail(orderId: orderId)
+    }
 }

@@ -137,4 +137,33 @@ final class AppDIContainer {
         )
         return OnboardSceneDIContainer(dependencies: dependencies)
     }
+    
+    func makeOrderContainerDIContainer() -> OrderContainerDIContainer {
+        let dependencies = OrderContainerDIContainer.Dependencies(
+            orderDataTransferService: apiDataTransferService
+        )
+        return OrderContainerDIContainer(dependencies: dependencies)
+    }
+    
+    func makeOrderDetailDIContainer() -> OrderDetailDIContainer {
+        let dependencies = OrderDetailDIContainer.Dependencies(
+            orderDetailUseCase: makeOrderDetailUseCase()
+        )
+        return OrderDetailDIContainer(dependencies: dependencies)
+    }
+    
+    // MARK: - Use Cases
+    
+    private func makeOrderDetailUseCase() -> OrderDetailUseCase {
+        let repository = makeOrderDetailRepository()
+        return DefaultOrderDetailUseCase(orderDetailRepository: repository)
+    }
+    
+    // MARK: - Repositories
+    
+    private func makeOrderDetailRepository() -> OrderDetailRepository {
+        return DefaultOrderDetailRepository(
+            dataTransferService: apiDataTransferService
+        )
+    }
 }

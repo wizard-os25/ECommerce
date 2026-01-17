@@ -26,6 +26,7 @@ protocol SideMenuControllerOutput {
     var onNavigateToShippingAddress: (() -> Void)? { get set }
     var onNavigateToProfile: (() -> Void)? { get set }
     var onNavigateToPayment: (() -> Void)? { get set }
+    var onNavigateToOrder: (() -> Void)? { get set }
 }
 
 typealias SideMenuController = SideMenuControllerInput & SideMenuControllerOutput
@@ -44,6 +45,7 @@ final class DefaultSideMenuController: SideMenuController {
     var onNavigateToShippingAddress: (() -> Void)?
     var onNavigateToProfile: (() -> Void)?
     var onNavigateToPayment: (() -> Void)?
+    var onNavigateToOrder: (() -> Void)?
     
     // MARK: - Private
     
@@ -104,6 +106,10 @@ final class DefaultSideMenuController: SideMenuController {
             // Profile - trigger navigation callback
             print("DEBUG: Profile selected, onNavigateToProfile: \(onNavigateToProfile != nil ? "set" : "nil")")
             onNavigateToProfile?()
+        } else if section == 0 && index == 1 {
+            // My Order - trigger navigation callback
+            print("DEBUG: My Order selected, onNavigateToOrder: \(onNavigateToOrder != nil ? "set" : "nil")")
+            onNavigateToOrder?()
         } else if section == 0 && index == 3 {
             // Shipping Address - trigger navigation callback (index changed from 4 to 3 after removing Favorites)
             print("DEBUG: Shipping Address selected, onNavigateToShippingAddress: \(onNavigateToShippingAddress != nil ? "set" : "nil")")
