@@ -30,7 +30,7 @@ final class OrderDetailProductCell: UITableViewCell {
     
     func fill(with detailItem: OrderDetailItem) {
         // Order ID
-        orderIdLabel?.text = "Order #\(detailItem.orderId)"
+        orderIdLabel?.text = String(format: "order_number".localized(), detailItem.orderId)
         
         // Price
         let priceValue = Double(detailItem.foodDetails.price) ?? 0.0
@@ -43,7 +43,7 @@ final class OrderDetailProductCell: UITableViewCell {
         descriptionLabel?.text = detailItem.foodDetails.description
         
         // Quantity
-        quantityLabel?.text = "Quantity: \(detailItem.quantity)"
+        quantityLabel?.text = String(format: "quantity_label".localized(), detailItem.quantity)
         
         // Load image
         if let imgUrl = detailItem.foodDetails.img {

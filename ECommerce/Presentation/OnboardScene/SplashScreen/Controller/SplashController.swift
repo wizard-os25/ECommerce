@@ -32,7 +32,7 @@ final class DefaultSplashController: SplashController {
     let shouldNavigateToMain: Observable<Bool> = Observable(false)
     let shouldNavigateToLogin: Observable<Bool> = Observable(false)
     let isAnimating: Observable<Bool> = Observable(true)
-    let screenTitle = NSLocalizedString("Splash", comment: "")
+    var screenTitle: String { "splash".localized() }
     
     // MARK: - EcoController Output (common to all controllers)
     

@@ -288,8 +288,8 @@ extension CheckoutViewController: UICollectionViewDelegateFlowLayout {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionHeaderView
             switch indexPath.section {
             case 0: header.title = nil // Không có title cho section 0
-            case 1: header.title = "Product"
-            case 2: header.title = "Order summary"
+            case 1: header.title = "product".localized()
+            case 2: header.title = "order_summary".localized()
             default: header.title = nil
             }
             return header
@@ -495,7 +495,7 @@ extension CheckoutViewController {
                 print("✅ Payment confirmed successfully")
                 // TODO: Navigate to success screen
             } else {
-                self?.showAlert(title: "Error", message: "Failed to confirm payment")
+                self?.showAlert(title: "error".localized(), message: "failed_to_confirm_payment".localized())
             }
         }
     }

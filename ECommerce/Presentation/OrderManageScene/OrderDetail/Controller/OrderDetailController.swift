@@ -32,8 +32,8 @@ final class DefaultOrderDetailController: OrderDetailController {
     
     let orderDetail: Observable<OrderDetail?> = Observable(nil)
     var isEmpty: Bool { return orderDetail.value == nil }
-    let screenTitle = "Order Detail"
-    let errorTitle = "Error"
+    var screenTitle: String { "order_detail".localized() }
+    var errorTitle: String { "error".localized() }
     
     // MARK: - EcoController Output
     

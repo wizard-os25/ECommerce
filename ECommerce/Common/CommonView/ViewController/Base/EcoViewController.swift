@@ -78,7 +78,7 @@ open class EcoViewController: EcoBaseViewController,
 
     open func handleError(_ error: Error?) {
         guard let error else { return }
-        showAlert(title: "error", message: error.localizedDescription)
+        showAlert(title: "error".localized(), message: error.localizedDescription)
     }
 
     open func applyNavigation(_ state: EcoNavigationState) {

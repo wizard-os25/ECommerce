@@ -26,7 +26,7 @@ final class NoteToSellerPopup: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Note to the seller"
+        label.text = "note_to_seller".localized()
         label.font = Typography.fontBold18
         label.textColor = Colors.tokenDark100
         label.textAlignment = .center
@@ -47,7 +47,7 @@ final class NoteToSellerPopup: UIView {
     
     private let submitButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Submit", for: .normal)
+        button.setTitle("submit".localized(), for: .normal)
         button.titleLabel?.font = Typography.fontBold16
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = Colors.tokenRainbowBlueEnd
@@ -58,7 +58,7 @@ final class NoteToSellerPopup: UIView {
     
     private let cancelButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Cancel", for: .normal)
+        button.setTitle("cancel".localized(), for: .normal)
         button.titleLabel?.font = Typography.fontRegular16
         button.setTitleColor(Colors.tokenDark60, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false

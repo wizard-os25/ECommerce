@@ -49,17 +49,17 @@ final class DefaultSideMenuController: SideMenuController {
     
     // MARK: - Private
     
-    private let firstSectionMenuItemsData: [SideMenuModel] = [
-        SideMenuModel(icon: UIImage(systemName: "person")!, title: "Profile"),
-        SideMenuModel(icon: UIImage(systemName: "bag")!, title: "My Order"),
-        SideMenuModel(icon: UIImage(systemName: "clock")!, title: "Browsing History"),
-        SideMenuModel(icon: UIImage(systemName: "mappin.circle")!, title: "Shipping Address"),
-        SideMenuModel(icon: UIImage(systemName: "creditcard")!, title: "Payment")
+    private lazy var firstSectionMenuItemsData: [SideMenuModel] = [
+        SideMenuModel(icon: UIImage(systemName: "person")!, title: "profile".localized()),
+        SideMenuModel(icon: UIImage(systemName: "bag")!, title: "my_order".localized()),
+        SideMenuModel(icon: UIImage(systemName: "clock")!, title: "browsing_history".localized()),
+        SideMenuModel(icon: UIImage(systemName: "mappin.circle")!, title: "shipping_address".localized()),
+        SideMenuModel(icon: UIImage(systemName: "creditcard")!, title: "payment".localized())
     ]
     
-    private let secondSectionMenuItemsData: [SideMenuModel] = [
-        SideMenuModel(icon: UIImage(systemName: "gearshape")!, title: "Settings and Privacy"),
-        SideMenuModel(icon: UIImage(systemName: "questionmark.circle")!, title: "Help Center"),
+    private lazy var secondSectionMenuItemsData: [SideMenuModel] = [
+        SideMenuModel(icon: UIImage(systemName: "gearshape")!, title: "settings_and_privacy".localized()),
+        SideMenuModel(icon: UIImage(systemName: "questionmark.circle")!, title: "help_center".localized()),
         SideMenuModel(icon: UIImage(systemName: "rectangle.portrait.and.arrow.right")!, title: "logout".localized())
     ]
     

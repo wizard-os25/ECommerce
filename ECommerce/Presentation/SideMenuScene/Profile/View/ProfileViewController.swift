@@ -302,23 +302,18 @@ final class ProfileViewController: EcoViewController {
         print("[Profile] 📸 Image captured: \(image.size)")
         // Here you can add logic to upload the image
         // For now, just show success message
-        showAlert(title: "Success", message: "Image captured successfully")
+        showAlert(title: "success".localized(), message: "image_captured_success".localized())
     }
     
     // MARK: - Helper Methods
     
     private func getAccountInfoCellTitle(for row: Int) -> String {
         switch row {
-        case 0:
-            return "Full name"
-        case 1:
-            return "Email"
-        case 2:
-            return "Phone number"
-        case 3:
-            return "Change password"
-        default:
-            return ""
+        case 0: return "full_name".localized()
+        case 1: return "email".localized()
+        case 2: return "phone_number".localized()
+        case 3: return "change_password".localized()
+        default: return ""
         }
     }
     
@@ -333,7 +328,7 @@ final class ProfileViewController: EcoViewController {
         case 1:
             return user.email
         case 2:
-            return user.phone.isEmpty ? "Incomplete" : user.phone
+            return user.phone.isEmpty ? "incomplete".localized() : user.phone
         case 3:
             return "" // Change password has no subtitle
         default:
@@ -373,12 +368,9 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0:
-            return "Account information"
-        case 1:
-            return "Business information"
-        default:
-            return nil
+        case 0: return "account_information".localized()
+        case 1: return "business_information".localized()
+        default: return nil
         }
     }
 }

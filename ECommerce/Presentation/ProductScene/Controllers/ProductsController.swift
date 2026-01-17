@@ -54,9 +54,9 @@ final class DefaultProductsController: ProductsController {
     let items: Observable<[ProductItemModel]> = Observable([])
     let query: Observable<String> = Observable("")
     var isEmpty: Bool { return items.value.isEmpty }
-    let screenTitle = NSLocalizedString("Products", comment: "")
-    let emptyDataTitle = NSLocalizedString("No products found", comment: "")
-    let errorTitle = NSLocalizedString("Error", comment: "")
+    var screenTitle: String { "products".localized() }
+    var emptyDataTitle: String { "no_items".localized() }
+    var errorTitle: String { "error".localized() }
     
     // AI Search mode flag
     var isAISearchMode: Bool = false

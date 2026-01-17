@@ -32,7 +32,7 @@ final class DefaultLoginController: LoginController {
     
     let isLoginSuccess: Observable<Bool> = Observable(false)
     let successMessage: Observable<String?> = Observable(nil)
-    let screenTitle = NSLocalizedString("Login", comment: "")
+    var screenTitle: String { "login".localized() }
     
     // MARK: - EcoController Output (common to all controllers)
     
@@ -47,9 +47,12 @@ final class DefaultLoginController: LoginController {
     }
     
     var navigationBarLeftItem: EcoNavItem? {
-        return EcoNavItem.back { [weak self] in
-            self?.onNavigationBarLeftItemTap?()
-        }
+        return nil // Hide left button bar on Login screen
+    }
+
+    /// Right bar: language switcher (EN/VI) for Login and Sign-up.
+    var navigationBarRightItems: [EcoNavItem] {
+        [.text(LanguageSwitcher.barButtonTitle(), action: { LanguageSwitcher.presentAndApply() })]
     }
     
     // MARK: - Init
@@ -112,7 +115,7 @@ final class DefaultLoginController: LoginController {
         isLoginSuccess.value = true
         
         // Trigger success message - View will observe and show alert using default alertable
-        successMessage.value = "Login successful!"
+        successMessage.value = "login_success".localized()
     }
 }
 
@@ -123,17 +126,17 @@ extension DefaultLoginController {
     func didTapLogin(phone: String, password: String) {
         // Validation errors
         if phone.isEmpty || password.isEmpty {
-            error.value = NSError(domain: "LoginValidation", code: 1, userInfo: [NSLocalizedDescriptionKey: "Please fill in all fields"])
+            error.value = NSError(domain: "LoginValidation", code: 1, userInfo: [NSLocalizedDescriptionKey: "validation_fill_all".localized()])
             return
         }
         
         if !isValidPhone(phone) {
-            error.value = NSError(domain: "LoginValidation", code: 2, userInfo: [NSLocalizedDescriptionKey: "Please enter a valid phone number"])
+            error.value = NSError(domain: "LoginValidation", code: 2, userInfo: [NSLocalizedDescriptionKey: "validation_valid_phone".localized()])
             return
         }
         
         if password.count < 6 {
-            error.value = NSError(domain: "LoginValidation", code: 3, userInfo: [NSLocalizedDescriptionKey: "Password must be at least 6 characters"])
+            error.value = NSError(domain: "LoginValidation", code: 3, userInfo: [NSLocalizedDescriptionKey: "validation_password_min".localized()])
             return
         }
         

@@ -35,7 +35,7 @@ final class SignUpHeaderView: EcoBaseViewController {
         view.addSubview(logoImageView)
         
         // Title
-        titleLabel.text = "Create Account"
+        titleLabel.text = "create_account".localized()
         titleLabel.font = Typography.fontBold32
         titleLabel.textColor = Colors.tokenDark100
         titleLabel.textAlignment = .center
@@ -44,7 +44,7 @@ final class SignUpHeaderView: EcoBaseViewController {
         view.addSubview(titleLabel)
         
         // Subtitle
-        subtitleLabel.text = "Sign up to start shopping"
+        subtitleLabel.text = "sign_up_to_shop".localized()
         subtitleLabel.font = Typography.fontRegular16
         subtitleLabel.textColor = Colors.tokenDark60
         subtitleLabel.textAlignment = .center

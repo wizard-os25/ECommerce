@@ -24,17 +24,18 @@ extension Notification.Name {
 // MARK: - Language Setting Functions
 open class Localize: NSObject {
     
+    /// Supported app languages. Ensured so that en/vi are always available even if not in Bundle.
+    private static let supportedLanguages = ["en", "vi"]
+
     /// List available languages
-    /// - Returns: Array of available languages
+    /// - Returns: Array of available languages (en, vi and any from Bundle.main)
     open class func availableLanguages(_ excludeBase: Bool = false) -> [String] {
-        var availableLanguages = Bundle.main.localizations
-        
-        // If excludeBase = true, don't include "Base" in available languages
-        if let indexOfBase = availableLanguages.firstIndex(of: "Base"), excludeBase == true {
-            availableLanguages.remove(at: indexOfBase)
+        var list = Bundle.main.localizations
+        for lang in supportedLanguages where !list.contains(lang) {
+            list.append(lang)
         }
-        
-        return availableLanguages
+        if let i = list.firstIndex(of: "Base"), excludeBase { list.remove(at: i) }
+        return list
     }
     
     /// Current language
@@ -50,10 +51,19 @@ open class Localize: NSObject {
     /// - Parameter language: Desired language
     open class func setCurrentLanguage(_ language: String) {
         let selectedLanguage = availableLanguages().contains(language) ? language : self.defaultLanguage()
-        if selectedLanguage != currentLanguage() {
+        let currentLang = currentLanguage()
+        print("🌐 [Localize] setCurrentLanguage called: \(language) -> \(selectedLanguage) (current: \(currentLang))")
+        if selectedLanguage != currentLang {
             UserDefaults.standard.set(selectedLanguage, forKey: CurrentLanguageKey)
             UserDefaults.standard.synchronize()
-            NotificationCenter.default.post(name: .LanguageChangeNotification, object: nil)
+            print("🌐 [Localize] Language saved to UserDefaults: \(selectedLanguage)")
+            // Post notification on main queue to ensure UI updates happen on main thread
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .LanguageChangeNotification, object: nil)
+                print("🌐 [Localize] LanguageChangeNotification posted")
+            }
+        } else {
+            print("🌐 [Localize] Language unchanged, skipping notification")
         }
     }
     

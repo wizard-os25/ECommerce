@@ -80,7 +80,7 @@ final class PaymentCardViewController: EcoViewController {
         
         paymentCardController.error.observe(on: self) { [weak self] error in
             guard let self = self, let error = error else { return }
-            self.showAlert(title: "Error", message: error.localizedDescription)
+            self.showAlert(title: "error".localized(), message: error.localizedDescription)
         }
     }
     
@@ -99,7 +99,7 @@ final class PaymentCardViewController: EcoViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SavedCardCell")
         
         // Setup Add Card Button
-        addCardButton.setTitle("Add new card", for: .normal)
+        addCardButton.setTitle("add_new_card".localized(), for: .normal)
         addCardButton.ecoDelegate = self
         addCardButton.translatesAutoresizingMaskIntoConstraints = false
         addCardButton.setEnabled(true) // Always enabled (single state)
@@ -176,12 +176,12 @@ final class PaymentCardViewController: EcoViewController {
             
             DispatchQueue.main.async {
                 if let error = error {
-                    self.showAlert(title: "Error", message: error.localizedDescription)
+                    self.showAlert(title: "error".localized(), message: error.localizedDescription)
                     return
                 }
                 
                 guard let paymentMethod = paymentMethod else {
-                    self.showAlert(title: "Error", message: "Failed to create payment method")
+                    self.showAlert(title: "error".localized(), message: "failed_to_create_payment_method".localized())
                     return
                 }
                 
@@ -199,13 +199,13 @@ final class PaymentCardViewController: EcoViewController {
     
     private func handleDeleteCard(at index: Int) {
         let alert = UIAlertController(
-            title: "Delete Card",
-            message: "Are you sure you want to delete this card?",
+            title: "delete_card".localized(),
+            message: "delete_card_confirm".localized(),
             preferredStyle: .alert
         )
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "OK", style: .destructive) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: "cancel".localized(), style: .cancel))
+        alert.addAction(UIAlertAction(title: "ok".localized(), style: .destructive) { [weak self] _ in
             self?.paymentCardController.didTapDeleteCard(at: index)
         })
         
@@ -215,7 +215,7 @@ final class PaymentCardViewController: EcoViewController {
     private func showSuccessAlert(message: String) {
         paymentCardController.successMessage.value = nil
         showAlert(
-            title: "Success",
+            title: "success".localized(),
             message: message
         )
     }
@@ -335,7 +335,7 @@ extension PaymentCardViewController: UITableViewDataSource {
         
         // Delete label with tap gesture
         let deleteLabel = UILabel()
-        deleteLabel.text = "delete"
+        deleteLabel.text = "delete".localized()
         deleteLabel.font = UIFont.italicSystemFont(ofSize: 14)
         deleteLabel.textColor = Colors.tokenRainbowBlueEnd
         deleteLabel.isUserInteractionEnabled = true

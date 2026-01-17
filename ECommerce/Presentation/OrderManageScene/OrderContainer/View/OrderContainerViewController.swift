@@ -66,7 +66,7 @@ class OrderContainerViewController: UIViewController {
         ])
         
         segmentedPageContainer.configUI(
-            titles: ["Pending", "Cancel", "Delivery", "Delivered"],
+            titles: ["order_status_pending".localized(), "order_status_cancel".localized(), "order_status_delivery".localized(), "order_status_delivered".localized()],
             viewControllers: [
                 pendingViewController,
                 cancelViewController,

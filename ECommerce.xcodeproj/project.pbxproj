@@ -430,6 +430,9 @@
 		D0095B732ECB1D7B00FCC7BC /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095B712ECB1D7B00FCC7BC /* Localize.swift */; };
 		D0095B742ECB1D7B00FCC7BC /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095B712ECB1D7B00FCC7BC /* Localize.swift */; };
 		D0095B752ECB1D7B00FCC7BC /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095B712ECB1D7B00FCC7BC /* Localize.swift */; };
+		D0095E022ECB1D7B00FCC7BC /* LanguageSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095E012ECB1D7B00FCC7BC /* LanguageSwitcher.swift */; };
+		D0095E032ECB1D7B00FCC7BC /* LanguageSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095E012ECB1D7B00FCC7BC /* LanguageSwitcher.swift */; };
+		D0095E042ECB1D7B00FCC7BC /* LanguageSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095E012ECB1D7B00FCC7BC /* LanguageSwitcher.swift */; };
 		D0095B802ECB412200FCC7BC /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095B7E2ECB412200FCC7BC /* Product.swift */; };
 		D0095B812ECB412200FCC7BC /* ProductQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095B7F2ECB412200FCC7BC /* ProductQuery.swift */; };
 		D0095B822ECB412200FCC7BC /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0095B7E2ECB412200FCC7BC /* Product.swift */; };
@@ -1694,6 +1697,7 @@
 		D0095B652ECB1D3800FCC7BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		D0095B6B2ECB1D4100FCC7BC /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = Localizable.strings; sourceTree = "<group>"; };
 		D0095B712ECB1D7B00FCC7BC /* Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localize.swift; sourceTree = "<group>"; };
+		D0095E012ECB1D7B00FCC7BC /* LanguageSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSwitcher.swift; sourceTree = "<group>"; };
 		D0095B7E2ECB412200FCC7BC /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		D0095B7F2ECB412200FCC7BC /* ProductQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductQuery.swift; sourceTree = "<group>"; };
 		D0095B872ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentProductQueriesUseCase.swift; sourceTree = "<group>"; };
@@ -2868,6 +2872,7 @@
 				D0095B672ECB1D3800FCC7BC /* en.lproj */,
 				D0095B6D2ECB1D4100FCC7BC /* vi.lproj */,
 				D0095D782ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift */,
+				D0095E012ECB1D7B00FCC7BC /* LanguageSwitcher.swift */,
 				D0095B712ECB1D7B00FCC7BC /* Localize.swift */,
 			);
 			path = Localize;
@@ -5421,6 +5426,7 @@
 				D0FF94B32F14E972006146F8 /* GrocerysResponseStorage.swift in Sources */,
 				D0095D832ECC5ABD00FCC7BC /* Constant.swift in Sources */,
 				D0095B742ECB1D7B00FCC7BC /* Localize.swift in Sources */,
+				D0095E032ECB1D7B00FCC7BC /* LanguageSwitcher.swift in Sources */,
 				D0095B932ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0095BB32ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
 				D0FF94352F140614006146F8 /* DividerCell.swift in Sources */,
@@ -5848,6 +5854,7 @@
 				D0029CCC2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */,
 				D00B92692F10DF5500AEE1B6 /* LoginUseCase.swift in Sources */,
 				D0095B732ECB1D7B00FCC7BC /* Localize.swift in Sources */,
+				D0095E022ECB1D7B00FCC7BC /* LanguageSwitcher.swift in Sources */,
 				D0095BE72ECB436700FCC7BC /* ProductsSceneDIContainer.swift in Sources */,
 				D0FF93F22F13F997006146F8 /* AddressViewController.swift in Sources */,
 				D05141362F179DE500C7B963 /* UltravisualLayout.swift in Sources */,
@@ -5976,6 +5983,7 @@
 				D0095B882ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
 				D0FF95052F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
 				D0095B752ECB1D7B00FCC7BC /* Localize.swift in Sources */,
+				D0095E042ECB1D7B00FCC7BC /* LanguageSwitcher.swift in Sources */,
 				D03ACF6A2F1A7F7800F8DD43 /* OrderManage.swift in Sources */,
 				D0095DA02ECC5BED00FCC7BC /* CommonUtil.swift in Sources */,
 				D0095DA12ECC5BED00FCC7BC /* CoreConstant.swift in Sources */,

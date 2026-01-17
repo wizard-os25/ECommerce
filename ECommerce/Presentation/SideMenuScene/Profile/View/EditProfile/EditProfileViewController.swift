@@ -131,7 +131,7 @@ final class EditProfileViewController: EcoViewController {
         }
         
         // Save Button
-        saveButton = EcoButton.authButton(title: "Save")
+        saveButton = EcoButton.authButton(title: "save".localized())
         saveButton.ecoDelegate = self
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(saveButton)
@@ -191,7 +191,7 @@ final class EditProfileViewController: EcoViewController {
     private func setupPasswordFields(stackView: UIStackView) {
         // Current Password
         currentPasswordTextField.type = .secure
-        currentPasswordTextField.placeholder = "Current password"
+        currentPasswordTextField.placeholder = "current_password".localized()
         currentPasswordTextField.setLeftIcon("lock.fill", tintColor: Colors.tokenDark60)
         currentPasswordTextField.cornerRadius = BorderRadius.tokenBorderRadius12
         currentPasswordTextField.backgroundColorColor = Colors.tokenDark02
@@ -206,7 +206,7 @@ final class EditProfileViewController: EcoViewController {
         
         // New Password
         newPasswordTextField.type = .secure
-        newPasswordTextField.placeholder = "New password"
+        newPasswordTextField.placeholder = "new_password".localized()
         newPasswordTextField.setLeftIcon("lock.fill", tintColor: Colors.tokenDark60)
         newPasswordTextField.cornerRadius = BorderRadius.tokenBorderRadius12
         newPasswordTextField.backgroundColorColor = Colors.tokenDark02
@@ -221,7 +221,7 @@ final class EditProfileViewController: EcoViewController {
         
         // Confirm Password
         confirmPasswordTextField.type = .secure
-        confirmPasswordTextField.placeholder = "Confirm new password"
+        confirmPasswordTextField.placeholder = "confirm_password".localized()
         confirmPasswordTextField.setLeftIcon("lock.fill", tintColor: Colors.tokenDark60)
         confirmPasswordTextField.cornerRadius = BorderRadius.tokenBorderRadius12
         confirmPasswordTextField.backgroundColorColor = Colors.tokenDark02
@@ -244,12 +244,12 @@ final class EditProfileViewController: EcoViewController {
             let confirmPassword = confirmPasswordTextField.text ?? ""
             
             guard !currentPassword.isEmpty, !newPassword.isEmpty, !confirmPassword.isEmpty else {
-                showAlert(title: "Error", message: "Please fill in all password fields")
+                showAlert(title: "error".localized(), message: "please_fill_all_password_fields".localized())
                 return
             }
             
             guard newPassword == confirmPassword else {
-                showAlert(title: "Error", message: "New password and confirmation do not match")
+                showAlert(title: "error".localized(), message: "password_mismatch".localized())
                 return
             }
             
@@ -270,7 +270,7 @@ final class EditProfileViewController: EcoViewController {
         // Show success alert
         // Card dismiss and data refresh will be handled by ProfileViewController
         showAlert(
-            title: "Success",
+            title: "success".localized(),
             message: message
         )
     }

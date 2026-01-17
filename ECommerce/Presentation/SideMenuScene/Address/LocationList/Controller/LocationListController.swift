@@ -31,7 +31,7 @@ final class DefaultLocationListController: LocationListController {
     // MARK: - OUTPUT
     
     let addresses: Observable<[Address]> = Observable([])
-    let screenTitle = "Address"
+    var screenTitle: String { "address".localized() }
     var onAddressSelected: ((Address) -> Void)?
     
     // MARK: - EcoController Output

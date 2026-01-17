@@ -30,7 +30,7 @@ final class DefaultLocationSearchController: LocationSearchController {
     
     let searchSuggestions: Observable<[LocationSearchKeyword]> = Observable([])
     let recentSearches: Observable<[LocationSearchKeyword]> = Observable([])
-    let screenTitle = "Search Location"
+    var screenTitle: String { "search_location".localized() }
     var onLocationSelected: ((LocationSearchKeyword) -> Void)? // Callback khi chọn vị trí
     
     // MARK: - EcoController Output

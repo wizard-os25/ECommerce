@@ -68,7 +68,7 @@ final class DefaultAddressController: NSObject, AddressController {
     
     let isSaveSuccess: Observable<Bool> = Observable(false)
     let successMessage: Observable<String?> = Observable(nil)
-    let screenTitle = "Add a new address"
+    var screenTitle: String { "add_new_address".localized() }
     var onCurrentLocationReceived: ((String, String, String) -> Void)? // (address, latitude, longitude)
     var onAddressSaved: ((Address) -> Void)? // Callback when address is saved successfully
     var onRightBarButtonTap: (() -> Void)?

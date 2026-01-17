@@ -21,14 +21,14 @@ final class OrderDetailOtherInfoCell: UITableViewCell {
     
     func fill(with orderDetail: OrderDetail) {
         // Shipping Fee
-        shippingFeeLabel?.text = "Shipping Fee: \(Int(orderDetail.shippingFee).formattedWithSeparator) VND"
+        shippingFeeLabel?.text = String(format: "shipping_fee".localized(), "\(Int(orderDetail.shippingFee).formattedWithSeparator) VND")
         
         // Payment Method
-        paymentMethodLabel?.text = "Payment Method: \(orderDetail.formattedPaymentMethod)"
+        paymentMethodLabel?.text = String(format: "payment_method".localized(), orderDetail.formattedPaymentMethod)
         
         // Confirmed
         if let confirmed = orderDetail.confirmed {
-            confirmedLabel?.text = "Confirmed: \(orderDetail.formatDate(confirmed))"
+            confirmedLabel?.text = String(format: "confirmed".localized(), orderDetail.formatDate(confirmed))
             confirmedLabel?.isHidden = false
         } else {
             confirmedLabel?.isHidden = true
@@ -36,7 +36,7 @@ final class OrderDetailOtherInfoCell: UITableViewCell {
         
         // Order Note
         if let orderNote = orderDetail.orderNote, !orderNote.isEmpty {
-            orderNoteLabel?.text = "Order Note: \(orderNote)"
+            orderNoteLabel?.text = String(format: "order_note".localized(), orderNote)
             orderNoteLabel?.isHidden = false
         } else {
             orderNoteLabel?.isHidden = true

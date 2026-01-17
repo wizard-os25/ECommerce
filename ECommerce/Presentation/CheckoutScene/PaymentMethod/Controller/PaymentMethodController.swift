@@ -54,7 +54,7 @@ final class DefaultPaymentMethodController: PaymentMethodController {
     let selectedCard: Observable<PaymentCard?> = Observable(nil)
     let loading: Observable<Bool> = Observable(false)
     let error: Observable<Error?> = Observable(nil)
-    let screenTitle = "Confirm Payment"
+    var screenTitle: String { "confirm_payment".localized() }
     
     var onShowPaymentSheet: (() -> Void)?
     var onPaymentSuccess: (() -> Void)?

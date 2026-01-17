@@ -46,7 +46,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         self.splashCoordinatingController?.start()
         // Note: window.makeKeyAndVisible() is called inside start() method
-        
+
+        // Reload app when user changes language (Login/Sign-up right bar: EN/VI)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reloadAppForLanguageChange),
+            name: .LanguageChangeNotification,
+            object: nil
+        )
+
         // Setup notification delegate (but don't request permission yet)
         // Permission will be requested when you call AppDelegate.requestPushNotificationPermission()
         self.setupNotificationDelegate()
@@ -237,6 +245,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         task.resume()
         print("📤 [AppDelegate] Sending device token to server: \(token.prefix(20))...")
+    }
+
+    @objc private func reloadAppForLanguageChange() {
+        print("🌐 [AppDelegate] Language change detected, reloading app...")
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            print("🌐 [AppDelegate] Current language: \(Localize.currentLanguage())")
+            // Reload app by restarting from splash screen
+            // This will recreate all view controllers with new language
+            self.splashCoordinatingController?.start()
+            print("🌐 [AppDelegate] App reloaded with new language")
+        }
     }
 }
 

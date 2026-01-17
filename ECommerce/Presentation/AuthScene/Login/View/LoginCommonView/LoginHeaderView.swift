@@ -35,7 +35,7 @@ final class LoginHeaderView: EcoBaseViewController {
         view.addSubview(logoImageView)
         
         // Title
-        titleLabel.text = "Welcome Back"
+        titleLabel.text = "welcome_back".localized()
         titleLabel.font = Typography.fontBold32
         titleLabel.textColor = Colors.tokenDark100
         titleLabel.textAlignment = .center
@@ -44,7 +44,7 @@ final class LoginHeaderView: EcoBaseViewController {
         view.addSubview(titleLabel)
         
         // Subtitle
-        subtitleLabel.text = "Sign in to continue shopping"
+        subtitleLabel.text = "sign_in_to_continue".localized()
         subtitleLabel.font = Typography.fontRegular16
         subtitleLabel.textColor = Colors.tokenDark60
         subtitleLabel.textAlignment = .center

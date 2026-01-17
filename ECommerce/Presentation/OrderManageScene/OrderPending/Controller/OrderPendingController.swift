@@ -36,9 +36,9 @@ final class DefaultOrderPendingController: OrderPendingController {
     
     let items: Observable<[OrderPendingItemModel]> = Observable([])
     var isEmpty: Bool { return items.value.isEmpty }
-    let screenTitle = "Pending"
+    var screenTitle: String { "pending".localized() }
     let emptyDataTitle = "No pending orders"
-    let errorTitle = "Error"
+    var errorTitle: String { "error".localized() }
     
     var onSelectOrderItem: ((OrderPendingItemModel) -> Void)?
     

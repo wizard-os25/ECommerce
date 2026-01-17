@@ -121,7 +121,7 @@ public extension EcoController {
     var navigationBarSearchState: EcoSearchState {
         return EcoSearchState(
             text: "",
-            placeholder: "Search..",
+            placeholder: "search_placeholder".localized(),
             isEditing: false,
             showsClearButton: true,
             showsCameraButton: true,

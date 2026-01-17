@@ -63,7 +63,7 @@ final class OrderDetailViewController: EcoViewController {
         orderDetailTableView.rowHeight = UITableView.automaticDimension
         
         // Setup cancel button
-        cancelOrderButton.setTitle("Cancel order", for: .normal)
+        cancelOrderButton.setTitle("cancel_order".localized(), for: .normal)
         cancelOrderButton.addTarget(self, action: #selector(cancelOrderTapped), for: .touchUpInside)
     }
     

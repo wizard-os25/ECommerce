@@ -55,7 +55,7 @@ final class DefaultOrderController: OrderController {
     let selectedPaymentCard: Observable<PaymentCard?> = Observable(nil)
     let isOrderPlaced: Observable<Bool> = Observable(false)
     let orderResult: Observable<Order?> = Observable(nil)
-    let screenTitle = "Place Order"
+    var screenTitle: String { "place_order".localized() }
     
     // MARK: - EcoController Output (common to all controllers)
     

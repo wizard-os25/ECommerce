@@ -59,7 +59,7 @@ final class SignUpFormView: EcoBaseViewController {
         
         // Full Name Text Field
         fullNameTextField.type = .baseline
-        fullNameTextField.placeholder = "Full Name"
+        fullNameTextField.placeholder = "full_name".localized()
         fullNameTextField.setLeftIcon("person.fill", tintColor: Colors.tokenDark60)
         fullNameTextField.autocapitalizationType = .words
         fullNameTextField.autocorrectionType = .no
@@ -75,7 +75,7 @@ final class SignUpFormView: EcoBaseViewController {
         
         // Email Text Field
         emailTextField.type = .baseline
-        emailTextField.placeholder = "Email"
+        emailTextField.placeholder = "email".localized()
         emailTextField.setLeftIcon("envelope.fill", tintColor: Colors.tokenDark60)
         emailTextField.keyboardType = .emailAddress
         emailTextField.autocapitalizationType = .none
@@ -92,7 +92,7 @@ final class SignUpFormView: EcoBaseViewController {
         
         // Phone Text Field
         phoneTextField.type = .baseline
-        phoneTextField.placeholder = "Phone Number"
+        phoneTextField.placeholder = "phone_number".localized()
         phoneTextField.setLeftIcon("phone.fill", tintColor: Colors.tokenDark60)
         phoneTextField.keyboardType = .phonePad
         phoneTextField.autocapitalizationType = .none
@@ -109,7 +109,7 @@ final class SignUpFormView: EcoBaseViewController {
         
         // Password Text Field
         passwordTextField.type = .secure
-        passwordTextField.placeholder = "Password"
+        passwordTextField.placeholder = "password".localized()
         passwordTextField.setLeftIcon("lock.fill", tintColor: Colors.tokenDark60)
         passwordTextField.autocapitalizationType = .none
         passwordTextField.autocorrectionType = .no
@@ -133,7 +133,7 @@ final class SignUpFormView: EcoBaseViewController {
         view.addSubview(errorLabel)
         
         // Sign Up Button - Use authButton convenience method
-        signUpButton = EcoButton.authButton(title: "Sign Up")
+        signUpButton = EcoButton.authButton(title: "sign_up".localized())
         signUpButton.ecoDelegate = self
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(signUpButton)
@@ -274,7 +274,7 @@ extension SignUpFormView: EcoButtonDelegate {
               !email.isEmpty,
               !phone.isEmpty,
               !password.isEmpty else {
-            errorMessage = "Please fill in all fields"
+            errorMessage = "validation_fill_all".localized()
             return
         }
         

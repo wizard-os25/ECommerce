@@ -44,7 +44,7 @@ public final class DefaultMapController: NSObject, MapController {
     public let locations: Observable<[MapLocationModel]> = Observable([])
     public let currentLocation: Observable<CLLocationCoordinate2D?> = Observable(nil)
     public let isLocationEnabled: Observable<Bool> = Observable(false)
-    public let screenTitle = NSLocalizedString("Map", comment: "")
+    public var screenTitle: String { "map".localized() }
     
     // MARK: - EcoController Output (common to all controllers)
     

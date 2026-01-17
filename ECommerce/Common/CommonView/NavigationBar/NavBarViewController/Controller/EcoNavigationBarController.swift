@@ -152,27 +152,16 @@ extension DefaultEcoNavigationBarController {
     }
     
     public func didLeftItemTap() {
-        guard let leftItem = _currentState.leftItem else { return }
-        
-        switch leftItem {
-        case .back(let action), .close(let action), .icon(_, let action), 
-             .text(_, let action), .cart(_, let action):
-            action()
-        }
-        
+        guard _currentState.leftItem != nil else { return }
+        // Note: Action from state is already executed in ButtonActionWrapper
+        // Only call the callback here, not the action again
         onLeftItemTap?()
     }
     
     public func didRightItemTap(at index: Int) {
         guard index < _currentState.rightItems.count else { return }
-        let item = _currentState.rightItems[index]
-        
-        switch item {
-        case .back(let action), .close(let action), .icon(_, let action), 
-             .text(_, let action), .cart(_, let action):
-            action()
-        }
-        
+        // Note: Action from state is already executed in ButtonActionWrapper
+        // Only call the callback here, not the action again
         onRightItemTap?(index)
     }
     

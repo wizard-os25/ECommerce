@@ -51,7 +51,7 @@ final class LoginFormView: EcoBaseViewController {
         
         // Phone Text Field
         phoneTextField.type = .baseline
-        phoneTextField.placeholder = "Phone Number"
+        phoneTextField.placeholder = "phone_number".localized()
         phoneTextField.setLeftIcon("phone.fill", tintColor: Colors.tokenDark60)
         phoneTextField.keyboardType = .phonePad
         phoneTextField.autocapitalizationType = .none
@@ -68,7 +68,7 @@ final class LoginFormView: EcoBaseViewController {
         
         // Password Text Field
         passwordTextField.type = .secure
-        passwordTextField.placeholder = "Password"
+        passwordTextField.placeholder = "password".localized()
         passwordTextField.setLeftIcon("lock.fill", tintColor: Colors.tokenDark60)
         passwordTextField.autocapitalizationType = .none
         passwordTextField.autocorrectionType = .no
@@ -92,7 +92,7 @@ final class LoginFormView: EcoBaseViewController {
         view.addSubview(errorLabel)
         
         // Login Button - Use authButton convenience method
-        loginButton = EcoButton.authButton(title: "Login")
+        loginButton = EcoButton.authButton(title: "login".localized())
         loginButton.ecoDelegate = self
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginButton)
@@ -208,7 +208,7 @@ extension LoginFormView: EcoButtonDelegate {
               let password = passwordTextField.text,
               !phone.isEmpty,
               !password.isEmpty else {
-            errorMessage = "Please fill in all fields"
+            errorMessage = "validation_fill_all".localized()
             return
         }
         

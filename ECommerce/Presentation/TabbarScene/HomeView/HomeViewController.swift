@@ -65,7 +65,7 @@ class ContentViewController: UIViewController {
             groceryVC.view.backgroundColor = .systemPurple
             
             segmentedPageContainer.configUI(
-                titles: ["Products", "Grocery"],
+                titles: ["products".localized(), "grocery".localized()],
                 viewControllers: [productsVC, groceryVC],
                 parent: self,
                 defaultIndex: 0
@@ -80,7 +80,7 @@ class ContentViewController: UIViewController {
         // Create simple GroceryViewController
         let groceryViewController = UIViewController()
         groceryViewController.view.backgroundColor = .systemPurple
-        groceryViewController.title = "Grocery"
+        groceryViewController.title = "grocery".localized()
         
         // Configure SegmentedPageContainer
         segmentedPageContainer.configUI(

@@ -38,7 +38,7 @@ final class DefaultProfileController: ProfileController {
     // MARK: - OUTPUT
     
     let user: Observable<User?> = Observable(nil)
-    let screenTitle = "My profile"
+    var screenTitle: String { "my_profile".localized() }
     var onEditField: ((ProfileFieldType) -> Void)?
     
     // MARK: - EcoController Output

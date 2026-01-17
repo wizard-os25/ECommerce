@@ -29,7 +29,7 @@ class CheckoutProgressIndicator: UIView {
     private var stepViews: [StepView] = []
     private var connectorViews: [UIView] = []
     
-    private let stepTitles = ["Place Order", "Confirm Payment", "Success"]
+    private lazy var stepTitles: [String] = ["step_place_order".localized(), "step_confirm_payment".localized(), "step_success".localized()]
     
     override init(frame: CGRect) {
         super.init(frame: frame)

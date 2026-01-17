@@ -231,7 +231,7 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         
         paymentMethodController.error.observe(on: self) { [weak self] error in
             guard let error = error else { return }
-            self?.showAlert(title: "Error", message: error.localizedDescription)
+            self?.showAlert(title: "error".localized(), message: error.localizedDescription)
         }
     }
     
@@ -252,7 +252,7 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
     
     private func updateOrderActionView() {
         let hasSelectedCard = paymentMethodController.selectedCard.value != nil
-        orderActionView.buttonTitle = "Pay"
+        orderActionView.buttonTitle = "pay".localized()
         orderActionView.isButtonEnabled = hasSelectedCard
         orderActionView.leftItemType = .none
     }
@@ -454,11 +454,11 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
     
     private func showSuccessAlert() {
         let alert = UIAlertController(
-            title: "Success",
-            message: "Payment completed successfully!",
+            title: "success".localized(),
+            message: "payment_completed_success".localized(),
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: "ok".localized(), style: .default) { [weak self] _ in
             // Navigate back or to success screen
             self?.navigationController?.popToRootViewController(animated: true)
         })
@@ -861,7 +861,7 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
     func orderActionViewDidTapAction(_ view: OrderActionView) {
         // Kiểm tra user đã chọn thẻ chưa
         guard let selectedCard = paymentMethodController.selectedCard.value else {
-            showAlert(title: "Error", message: "Please select a payment method")
+            showAlert(title: "error".localized(), message: "please_select_payment_method".localized())
             return
         }
         
@@ -882,7 +882,7 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
     
     private func processPayment(with card: PaymentCard) {
         guard let defaultController = paymentMethodController as? DefaultPaymentMethodController else {
-            showAlert(title: "Error", message: "Controller not found")
+            showAlert(title: "error".localized(), message: "controller_not_found".localized())
             return
         }
         
@@ -918,10 +918,10 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
                 // Kiểm tra nếu có modal đang present thì đợi dismiss
                 if self.presentedViewController != nil {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self.showAlert(title: "Error", message: "Failed to create payment intent: \(error.localizedDescription)")
+                        self.showAlert(title: "error".localized(), message: "failed_to_create_payment_intent".localized() + ": \(error.localizedDescription)")
                     }
                 } else {
-                    self.showAlert(title: "Error", message: "Failed to create payment intent: \(error.localizedDescription)")
+                    self.showAlert(title: "error".localized(), message: "failed_to_create_payment_intent".localized() + ": \(error.localizedDescription)")
                 }
             }
         }
@@ -989,7 +989,7 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
                            stripeError.contains("confirmation_method") {
                             errorMessage = "Backend configuration error: PaymentIntent must use 'automatic' confirmation_method. Please contact support."
                         }
-                        self.showAlert(title: "Payment Failed", message: errorMessage)
+                        self.showAlert(title: "payment_failed".localized(), message: errorMessage)
                     }
                     
                 case .canceled:
@@ -1006,7 +1006,7 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
     private func confirmPaymentWithBackend() {
         guard let defaultController = paymentMethodController as? DefaultPaymentMethodController,
               let paymentIntentId = defaultController.getPaymentIntentId() else {
-            showAlert(title: "Error", message: "Payment intent ID not found")
+            showAlert(title: "error".localized(), message: "payment_intent_id_not_found".localized())
             return
         }
         
@@ -1016,7 +1016,7 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
                 // Show success message
                 self?.showSuccessAlert()
             } else {
-                self?.showAlert(title: "Error", message: "Failed to confirm payment")
+                self?.showAlert(title: "error".localized(), message: "failed_to_confirm_payment".localized())
             }
         }
     }

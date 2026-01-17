@@ -19,17 +19,17 @@ class TabBarController: UITabBarController {
         // Tab 1: Grocery - Simple view controller
         let groceryVC = UIViewController()
         groceryVC.view.backgroundColor = .systemPurple
-        groceryVC.title = "Grocery"
+        groceryVC.title = "grocery".localized()
         
         // Tab 2: Cart - Simple view controller
         let cartVC = UIViewController()
         cartVC.view.backgroundColor = .systemOrange
-        cartVC.title = "Cart"
+        cartVC.title = "cart".localized()
         
         // Tab 3: Account - Simple view controller
         let accountVC = UIViewController()
         accountVC.view.backgroundColor = .systemGreen
-        accountVC.title = "Account"
+        accountVC.title = "account".localized()
         
         // Wrap in Navigation Controllers
         let navTabContainer = UINavigationController(rootViewController: contentVC)
@@ -50,10 +50,10 @@ class TabBarController: UITabBarController {
         navAccount.isNavigationBarHidden = true
         
         /// Set TabBar item - Home, Search, Cart, Notification
-        contentVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
-        groceryVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 1)
-        cartVC.tabBarItem = UITabBarItem(title: "Cart", image: UIImage(systemName: "cart"), tag: 2)
-        accountVC.tabBarItem = UITabBarItem(title: "Notification", image: UIImage(systemName: "bell"), tag: 3)
+        contentVC.tabBarItem = UITabBarItem(title: "home".localized(), image: UIImage(systemName: "house"), tag: 0)
+        groceryVC.tabBarItem = UITabBarItem(title: "search".localized(), image: UIImage(systemName: "magnifyingglass"), tag: 1)
+        cartVC.tabBarItem = UITabBarItem(title: "cart".localized(), image: UIImage(systemName: "cart"), tag: 2)
+        accountVC.tabBarItem = UITabBarItem(title: "notification".localized(), image: UIImage(systemName: "bell"), tag: 3)
         
         /// Set ViewController & Tabbar Item Color
         self.tabBar.tintColor = .black

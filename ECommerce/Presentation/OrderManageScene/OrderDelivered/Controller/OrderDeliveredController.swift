@@ -36,9 +36,9 @@ final class DefaultOrderDeliveredController: OrderDeliveredController {
     
     let items: Observable<[OrderDeliveredItemModel]> = Observable([])
     var isEmpty: Bool { return items.value.isEmpty }
-    let screenTitle = "Delivered"
+    var screenTitle: String { "delivered".localized() }
     let emptyDataTitle = "No delivered orders"
-    let errorTitle = "Error"
+    var errorTitle: String { "error".localized() }
     
     var onSelectOrderItem: ((OrderDeliveredItemModel) -> Void)?
     

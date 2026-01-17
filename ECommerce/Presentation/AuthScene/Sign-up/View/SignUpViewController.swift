@@ -184,7 +184,7 @@ final class SignUpViewController: EcoViewController {
     override func handleError(_ error: Error?) {
         guard let error else { return }
         // Use default error handling from EcoViewController
-        showAlert(title: "Error", message: error.localizedDescription)
+        showAlert(title: "error".localized(), message: error.localizedDescription)
     }
     
     // MARK: - Private Helpers
@@ -195,7 +195,7 @@ final class SignUpViewController: EcoViewController {
         
         // Use default alertable from EcoViewController
         showAlert(
-            title: "Success",
+            title: "success".localized(),
             message: message,
             completion: { [weak self] in
                 // Navigate back or to next screen after alert dismissal

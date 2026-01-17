@@ -30,8 +30,8 @@ final class OrderDeliveryCell: UITableViewCell {
             return
         }
         
-        orderIdLabel.text = "Order #\(item.id)"
-        paymentMethodLabel.text = "Payment: \(item.formattedPaymentMethod)"
+        orderIdLabel.text = String(format: "order_number".localized(), "\(item.id)")
+        paymentMethodLabel.text = String(format: "payment_label".localized(), item.formattedPaymentMethod)
         totalAmountLabel.text = item.formattedTotalAmount
         createdAtLabel.text = item.formattedDate
     }

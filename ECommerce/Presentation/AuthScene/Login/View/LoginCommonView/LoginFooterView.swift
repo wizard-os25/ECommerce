@@ -41,7 +41,7 @@ final class LoginFooterView: EcoBaseViewController {
         view.addSubview(containerView)
         
         // Prompt Label
-        promptLabel.text = "Don't have an account?"
+        promptLabel.text = "dont_have_account".localized()
         promptLabel.font = Typography.fontRegular16
         promptLabel.textColor = Colors.tokenDark60
         promptLabel.textAlignment = .center
@@ -49,7 +49,7 @@ final class LoginFooterView: EcoBaseViewController {
         containerView.addSubview(promptLabel)
         
         // Sign Up Button
-        signUpButton.setTitle("Sign Up", for: .normal)
+        signUpButton.setTitle("sign_up".localized(), for: .normal)
         signUpButton.titleLabel?.font = Typography.fontMedium16
         signUpButton.setTitleColor(Colors.tokenRainbowBlueEnd, for: .normal)
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)

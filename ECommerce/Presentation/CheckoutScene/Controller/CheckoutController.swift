@@ -74,7 +74,7 @@ final class DefaultCheckoutController: CheckoutController {
     let orderSummary: Observable<OrderSummary?> = Observable(nil)
     let noteToSeller: Observable<String?> = Observable(nil)
     let currentStep: Observable<CheckoutStep> = Observable(.placeOrder)
-    let screenTitle = "Checkout"
+    var screenTitle: String { "checkout".localized() }
     
     var onNavigateToPaymentMethod: ((Order, String, String, String?, String?) -> Void)?
     

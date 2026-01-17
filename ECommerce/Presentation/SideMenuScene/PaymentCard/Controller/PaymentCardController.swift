@@ -42,7 +42,7 @@ final class DefaultPaymentCardController: PaymentCardController {
     let paymentCards: Observable<[PaymentCard]> = Observable([])
     let isAddingNewCard: Observable<Bool> = Observable(false)
     let isCardInputEnabled: Observable<Bool> = Observable(false)
-    let screenTitle: Observable<String> = Observable("Payment Card")
+    let screenTitle: Observable<String> = Observable("payment_card".localized())
     let successMessage: Observable<String?> = Observable(nil)
     
     // MARK: - EcoController Output (common to all controllers)
@@ -107,7 +107,7 @@ final class DefaultPaymentCardController: PaymentCardController {
         model.isCardInputEnabled = true
         isAddingNewCard.value = true
         isCardInputEnabled.value = true
-        screenTitle.value = "Save"
+        screenTitle.value = "save".localized()
     }
     
     func didTapSaveCard() {
@@ -133,7 +133,7 @@ final class DefaultPaymentCardController: PaymentCardController {
                     self.model.isCardInputEnabled = false
                     self.isAddingNewCard.value = false
                     self.isCardInputEnabled.value = false
-                    self.screenTitle.value = "Payment Card"
+                    self.screenTitle.value = "payment_card".localized()
                     // Show success message
                     self.successMessage.value = backendMessage
                 case .failure(let error):

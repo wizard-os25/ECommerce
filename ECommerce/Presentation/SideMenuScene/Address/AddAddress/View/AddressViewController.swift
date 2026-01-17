@@ -201,38 +201,38 @@ final class AddressViewController: EcoViewController {
         setupField(
             label: contactPersonNameLabel,
             textField: contactPersonNameTextField,
-            title: "Contact Person Name",
+            title: "contact_person_name".localized(),
             iconName: "person.fill",
             stackView: stackView
         )
-        contactPersonNameTextField.placeholder = "Contact Person Name"
+        contactPersonNameTextField.placeholder = "contact_person_name".localized()
         
         // Contact Person Number
         setupField(
             label: contactPersonNumberLabel,
             textField: contactPersonNumberTextField,
-            title: "Contact Person Number",
+            title: "contact_person_number".localized(),
             iconName: "phone.fill",
             stackView: stackView
         )
-        contactPersonNumberTextField.placeholder = "Contact Person Number"
+        contactPersonNumberTextField.placeholder = "contact_person_number".localized()
         contactPersonNumberTextField.keyboardType = .phonePad
         
         // Address Detail
         setupField(
             label: addressDetailLabel,
             textField: addressDetailTextField,
-            title: "Address Detail",
+            title: "address_detail".localized(),
             iconName: "mappin.circle.fill",
             stackView: stackView
         )
-        addressDetailTextField.placeholder = "Enter address detail (e.g., 123 Phố Hàng Trống)"
+        addressDetailTextField.placeholder = "address_detail_placeholder".localized()
         
         // Country Picker (disabled - cannot change)
         setupLocationPicker(
             label: countryLabel,
             button: countryPickerButton,
-            title: "Country",
+            title: "country".localized(),
             stackView: stackView,
             isEnabled: false
         )
@@ -242,7 +242,7 @@ final class AddressViewController: EcoViewController {
         setupLocationPicker(
             label: provinceLabel,
             button: provincePickerButton,
-            title: "Province",
+            title: "province".localized(),
             stackView: stackView,
             isEnabled: false
         )
@@ -252,7 +252,7 @@ final class AddressViewController: EcoViewController {
         setupLocationPicker(
             label: districtLabel,
             button: districtPickerButton,
-            title: "District",
+            title: "district".localized(),
             stackView: stackView,
             isEnabled: true
         )
@@ -263,7 +263,7 @@ final class AddressViewController: EcoViewController {
         setupLocationPicker(
             label: wardLabel,
             button: wardPickerButton,
-            title: "Ward",
+            title: "ward".localized(),
             stackView: stackView,
             isEnabled: true
         )
@@ -271,7 +271,7 @@ final class AddressViewController: EcoViewController {
         wardPickerButton.addTarget(self, action: #selector(wardTapped), for: .touchUpInside)
         
         // Address Type
-        addressTypeLabel.text = "Address Type"
+        addressTypeLabel.text = "address_type".localized()
         addressTypeLabel.font = Typography.fontBold16
         addressTypeLabel.textColor = Colors.tokenDark100
         addressTypeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -284,7 +284,7 @@ final class AddressViewController: EcoViewController {
         setupDefaultAddressCheckbox(stackView: stackView)
         
         // Save Button - Use authButton style like Login
-        saveButton = EcoButton.authButton(title: "Save")
+        saveButton = EcoButton.authButton(title: "save".localized())
         saveButton.ecoDelegate = self
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(saveButton)
@@ -481,7 +481,7 @@ final class AddressViewController: EcoViewController {
         if selectedDistrictId > 0, let district = LocationData.getDistrict(by: selectedDistrictId) {
             text = district.name
         } else {
-            text = "Select District"
+            text = "select_district".localized()
         }
         
         // Update title label - try multiple ways
@@ -526,7 +526,7 @@ final class AddressViewController: EcoViewController {
         if selectedWardId > 0, let ward = LocationData.getWard(by: selectedWardId, in: selectedDistrictId) {
             text = ward.name
         } else {
-            text = "Select Ward"
+            text = "select_ward".localized()
         }
         
         // Update title label - try multiple ways
@@ -572,7 +572,7 @@ final class AddressViewController: EcoViewController {
     
     @objc private func districtTapped() {
         let districts = LocationData.districts
-        showLocationPicker(title: "Select District", items: districts) { [weak self] selectedItem in
+        showLocationPicker(title: "select_district".localized(), items: districts) { [weak self] selectedItem in
             guard let self = self else { return }
             print("✅ [AddressViewController] District selected: \(selectedItem.name) (ID: \(selectedItem.id))")
             self.selectedDistrictId = selectedItem.id
@@ -586,12 +586,12 @@ final class AddressViewController: EcoViewController {
     
     @objc private func wardTapped() {
         guard selectedDistrictId > 0 else {
-            showAlert(title: "Error", message: "Please select a district first")
+            showAlert(title: "error".localized(), message: "please_select_district_first".localized())
             return
         }
         
         let wards = LocationData.getWards(for: selectedDistrictId)
-        showLocationPicker(title: "Select Ward", items: wards) { [weak self] selectedItem in
+        showLocationPicker(title: "select_ward".localized(), items: wards) { [weak self] selectedItem in
             guard let self = self else { return }
             print("✅ [AddressViewController] Ward selected: \(selectedItem.name) (ID: \(selectedItem.id))")
             self.selectedWardId = selectedItem.id
@@ -618,7 +618,7 @@ final class AddressViewController: EcoViewController {
             alertController.addAction(action)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "cancel".localized(), style: .cancel)
         alertController.addAction(cancelAction)
         
         // For iPad
@@ -654,7 +654,7 @@ final class AddressViewController: EcoViewController {
         defaultAddressCheckbox.translatesAutoresizingMaskIntoConstraints = false
         
         // Label with italic font
-        defaultAddressLabel.text = "Set as default shipping address"
+        defaultAddressLabel.text = "set_as_default_shipping".localized()
         defaultAddressLabel.font = UIFont.italicSystemFont(ofSize: 14) // Italic font
         defaultAddressLabel.textColor = Colors.tokenDark100
         defaultAddressLabel.translatesAutoresizingMaskIntoConstraints = false

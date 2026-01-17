@@ -32,7 +32,7 @@ final class DefaultSignUpController: SignUpController {
     
     let isSignUpSuccess: Observable<Bool> = Observable(false)
     let successMessage: Observable<String?> = Observable(nil)
-    let screenTitle = NSLocalizedString("Sign Up", comment: "")
+    var screenTitle: String { "sign_up".localized() }
     
     // MARK: - EcoController Output (common to all controllers)
     
@@ -47,17 +47,17 @@ final class DefaultSignUpController: SignUpController {
     }
     
     var navigationBarLeftItem: EcoNavItem? {
-        // Always return back button for SignUp screen
-        return EcoNavItem.back { [weak self] in
-            print("🔵 [SignUpController] Back button action called from EcoNavItem.back closure")
-            // Action will be handled by SignUpViewController's applyNavigation override
-            self?.onNavigationBarLeftItemTap?()
-        }
+        return nil // Hide left button bar on Sign-up screen
     }
     
     /// Override button tint color to black for back button
     var navigationBarButtonTintColor: UIColor? {
         return Colors.tokenDark100
+    }
+
+    /// Right bar: language switcher (EN/VI) for Login and Sign-up.
+    var navigationBarRightItems: [EcoNavItem] {
+        [.text(LanguageSwitcher.barButtonTitle(), action: { LanguageSwitcher.presentAndApply() })]
     }
     
     // MARK: - Init
@@ -120,7 +120,7 @@ final class DefaultSignUpController: SignUpController {
         isSignUpSuccess.value = true
         
         // Trigger success message - View will observe and show alert using default alertable
-        successMessage.value = "Registration successful!"
+        successMessage.value = "sign_up_success".localized()
     }
 }
 
@@ -131,22 +131,22 @@ extension DefaultSignUpController {
     func didTapSignUp(fullName: String, email: String, phone: String, password: String) {
         // Validation errors
         if fullName.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty {
-            error.value = NSError(domain: "SignUpValidation", code: 1, userInfo: [NSLocalizedDescriptionKey: "Please fill in all fields"])
+            error.value = NSError(domain: "SignUpValidation", code: 1, userInfo: [NSLocalizedDescriptionKey: "validation_fill_all".localized()])
             return
         }
         
         if !isValidEmail(email) {
-            error.value = NSError(domain: "SignUpValidation", code: 2, userInfo: [NSLocalizedDescriptionKey: "Please enter a valid email address"])
+            error.value = NSError(domain: "SignUpValidation", code: 2, userInfo: [NSLocalizedDescriptionKey: "validation_valid_email".localized()])
             return
         }
         
         if !isValidPhone(phone) {
-            error.value = NSError(domain: "SignUpValidation", code: 3, userInfo: [NSLocalizedDescriptionKey: "Please enter a valid phone number"])
+            error.value = NSError(domain: "SignUpValidation", code: 3, userInfo: [NSLocalizedDescriptionKey: "validation_valid_phone".localized()])
             return
         }
         
         if password.count < 6 {
-            error.value = NSError(domain: "SignUpValidation", code: 4, userInfo: [NSLocalizedDescriptionKey: "Password must be at least 6 characters"])
+            error.value = NSError(domain: "SignUpValidation", code: 4, userInfo: [NSLocalizedDescriptionKey: "validation_password_min".localized()])
             return
         }
         

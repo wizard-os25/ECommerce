@@ -36,9 +36,9 @@ final class DefaultOrderCancelController: OrderCancelController {
     
     let items: Observable<[OrderCancelItemModel]> = Observable([])
     var isEmpty: Bool { return items.value.isEmpty }
-    let screenTitle = "Cancel"
+    var screenTitle: String { "order_cancel".localized() }
     let emptyDataTitle = "No canceled orders"
-    let errorTitle = "Error"
+    var errorTitle: String { "error".localized() }
     
     var onSelectOrderItem: ((OrderCancelItemModel) -> Void)?
     
