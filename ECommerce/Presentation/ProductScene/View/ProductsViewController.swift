@@ -441,13 +441,16 @@ extension ProductsViewController {
         let threshold: CGFloat = 50 // Ngưỡng để bắt đầu thay đổi alpha
         
         if let tabBar = tabBarReference {
+            // When scrolling down, make background alpha but keep icons visible
+            // Use a lighter alpha (0.8) so icons remain visible
             if scrollOffset > threshold {
-                // Scroll xuống: alpha = 0.66
                 UIView.animate(withDuration: 0.2) {
-                    tabBar.alpha = 0.66
+                    // Adjust background opacity while keeping icons visible
+                    // Set tabBar's overall alpha to a value that makes background semi-transparent but icons still clear
+                    tabBar.alpha = 0.85
                 }
             } else {
-                // Scroll lên hoặc ở đầu: alpha = 1.0
+                // Scroll up or at top: full alpha
                 UIView.animate(withDuration: 0.2) {
                     tabBar.alpha = 1.0
                 }

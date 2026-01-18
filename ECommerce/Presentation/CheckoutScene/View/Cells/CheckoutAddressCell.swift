@@ -98,7 +98,7 @@ final class CheckoutAddressCell: UICollectionViewCell {
         defaultAddressStack.addArrangedSubview(defaultAddressLabel)
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 56), // Increased from 8 to 56 (48pt more)
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),

@@ -30,7 +30,7 @@ final class ProductInfoCell: UICollectionViewCell {
     private let productInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "Product Information"
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 22) // Increased from 20 to 22
         label.textColor = .black
         return label
     }()

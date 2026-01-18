@@ -559,30 +559,40 @@ private extension EcoNavigationBarView {
             button.imageView?.contentMode = .scaleAspectFit
             button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
             
-            // Nếu là right item, tạo circular background
+            // Nếu là right item, check backButtonStyle để quyết định circular hay simple
             if !isLeft {
-                let containerView = UIView()
-                containerView.translatesAutoresizingMaskIntoConstraints = false
-                containerView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
-                containerView.layer.cornerRadius = 18
-                containerView.isUserInteractionEnabled = false
+                let backButtonStyle = currentState?.backButtonStyle ?? .circular
                 
-                containerView.addSubview(button)
-                button.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    button.widthAnchor.constraint(equalToConstant: 36),
-                    button.heightAnchor.constraint(equalToConstant: 36),
-                    button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-                    button.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
-                ])
-                
-                NSLayoutConstraint.activate([
-                    containerView.widthAnchor.constraint(equalToConstant: 36),
-                    containerView.heightAnchor.constraint(equalToConstant: 36)
-                ])
-                
-                button.tintColor = Colors.tokenDark100
-                return containerView
+                // Nếu backButtonStyle là simple, right items cũng dùng simple style (không có circular background)
+                if backButtonStyle == .simple {
+                    button.widthAnchor.constraint(equalToConstant: 44).isActive = true
+                    button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+                    button.tintColor = Colors.tokenDark100
+                } else {
+                    // Circular style - tạo circular background
+                    let containerView = UIView()
+                    containerView.translatesAutoresizingMaskIntoConstraints = false
+                    containerView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+                    containerView.layer.cornerRadius = 18
+                    containerView.isUserInteractionEnabled = false
+                    
+                    containerView.addSubview(button)
+                    button.translatesAutoresizingMaskIntoConstraints = false
+                    NSLayoutConstraint.activate([
+                        button.widthAnchor.constraint(equalToConstant: 36),
+                        button.heightAnchor.constraint(equalToConstant: 36),
+                        button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+                        button.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+                    ])
+                    
+                    NSLayoutConstraint.activate([
+                        containerView.widthAnchor.constraint(equalToConstant: 36),
+                        containerView.heightAnchor.constraint(equalToConstant: 36)
+                    ])
+                    
+                    button.tintColor = Colors.tokenDark100
+                    return containerView
+                }
             } else {
                 button.widthAnchor.constraint(equalToConstant: 44).isActive = true
                 button.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -597,32 +607,42 @@ private extension EcoNavigationBarView {
             button.imageView?.contentMode = .scaleAspectFit
             button.addTarget(actionWrapper, action: #selector(ButtonActionWrapper.execute), for: .touchUpInside)
             
-            // Nếu là right item, tạo circular background
+            // Nếu là right item, check backButtonStyle để quyết định circular hay simple
             if !isLeft {
-                let containerView = UIView()
-                containerView.translatesAutoresizingMaskIntoConstraints = false
-                // ✅ QUAN TRỌNG: Tăng alpha để nổi bật hơn trên nền trong suốt
-                containerView.backgroundColor = UIColor.black.withAlphaComponent(0.3) // Tăng từ 0.1 lên 0.3
-                containerView.layer.cornerRadius = 18
-                containerView.isUserInteractionEnabled = false
+                let backButtonStyle = currentState?.backButtonStyle ?? .circular
                 
-                containerView.addSubview(button)
-                button.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    button.widthAnchor.constraint(equalToConstant: 36),
-                    button.heightAnchor.constraint(equalToConstant: 36),
-                    button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-                    button.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
-                ])
-                
-                NSLayoutConstraint.activate([
-                    containerView.widthAnchor.constraint(equalToConstant: 36),
-                    containerView.heightAnchor.constraint(equalToConstant: 36)
-                ])
-                
-                // Tint color sẽ được apply từ state.buttonTintColor sau
-                button.tintColor = Colors.tokenDark100 // Default, sẽ được override
-                return containerView
+                // Nếu backButtonStyle là simple, right items cũng dùng simple style (không có circular background)
+                if backButtonStyle == .simple {
+                    button.widthAnchor.constraint(equalToConstant: 44).isActive = true
+                    button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+                    button.tintColor = Colors.tokenDark100
+                } else {
+                    // Circular style - tạo circular background
+                    let containerView = UIView()
+                    containerView.translatesAutoresizingMaskIntoConstraints = false
+                    // ✅ QUAN TRỌNG: Tăng alpha để nổi bật hơn trên nền trong suốt
+                    containerView.backgroundColor = UIColor.black.withAlphaComponent(0.3) // Tăng từ 0.1 lên 0.3
+                    containerView.layer.cornerRadius = 18
+                    containerView.isUserInteractionEnabled = false
+                    
+                    containerView.addSubview(button)
+                    button.translatesAutoresizingMaskIntoConstraints = false
+                    NSLayoutConstraint.activate([
+                        button.widthAnchor.constraint(equalToConstant: 36),
+                        button.heightAnchor.constraint(equalToConstant: 36),
+                        button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+                        button.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+                    ])
+                    
+                    NSLayoutConstraint.activate([
+                        containerView.widthAnchor.constraint(equalToConstant: 36),
+                        containerView.heightAnchor.constraint(equalToConstant: 36)
+                    ])
+                    
+                    // Tint color sẽ được apply từ state.buttonTintColor sau
+                    button.tintColor = Colors.tokenDark100 // Default, sẽ được override
+                    return containerView
+                }
             } else {
                 button.widthAnchor.constraint(equalToConstant: 44).isActive = true
                 button.heightAnchor.constraint(equalToConstant: 44).isActive = true

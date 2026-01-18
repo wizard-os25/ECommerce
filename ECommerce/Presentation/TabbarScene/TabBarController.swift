@@ -49,14 +49,21 @@ class TabBarController: UITabBarController {
         navCart.isNavigationBarHidden = true
         navAccount.isNavigationBarHidden = true
         
-        /// Set TabBar item - Home, Search, Cart, Notification
-        contentVC.tabBarItem = UITabBarItem(title: "home".localized(), image: UIImage(systemName: "house"), tag: 0)
+        /// Set TabBar item - Home (Trang chủ), Search, Cart, Notification
+        contentVC.tabBarItem = UITabBarItem(title: "Trang chủ", image: UIImage(systemName: "house"), tag: 0)
         groceryVC.tabBarItem = UITabBarItem(title: "search".localized(), image: UIImage(systemName: "magnifyingglass"), tag: 1)
         cartVC.tabBarItem = UITabBarItem(title: "cart".localized(), image: UIImage(systemName: "cart"), tag: 2)
         accountVC.tabBarItem = UITabBarItem(title: "notification".localized(), image: UIImage(systemName: "bell"), tag: 3)
         
         /// Set ViewController & Tabbar Item Color
         self.tabBar.tintColor = .black
+        
+        // Add shadow to tabBar
+        self.tabBar.layer.shadowColor = UIColor.black.cgColor
+        self.tabBar.layer.shadowOffset = CGSize(width: 0, height: -2)
+        self.tabBar.layer.shadowRadius = 4
+        self.tabBar.layer.shadowOpacity = 0.1
+        
         self.setViewControllers([navTabContainer, navGrocery, navCart, navAccount], animated: true)
         
         // Show TabBar initially (only on 4 main screens)

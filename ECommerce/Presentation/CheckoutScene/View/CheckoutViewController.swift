@@ -276,9 +276,9 @@ extension CheckoutViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width
         switch indexPath.section {
-        case 0: return CGSize(width: width, height: 120) // Address + checkbox
-        case 1: return CGSize(width: width, height: 300) // Products scroll + note
-        case 2: return CGSize(width: width, height: 150) // Order summary
+        case 0: return CGSize(width: width, height: 144) // Address + checkbox (120 + 24)
+        case 1: return CGSize(width: width, height: 324) // Products scroll + note (300 + 24)
+        case 2: return CGSize(width: width, height: 174) // Order summary (150 + 24)
         default: return CGSize(width: width, height: 100)
         }
     }

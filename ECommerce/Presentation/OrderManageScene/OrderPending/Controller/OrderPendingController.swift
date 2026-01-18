@@ -81,7 +81,17 @@ final class DefaultOrderPendingController: OrderPendingController {
     }
     
     var navigationBarInitialHeight: CGFloat {
-        return 140
+        return 93 // Reduced by 1/3 from 140 (140 * 2/3 ≈ 93)
+    }
+    
+    var navigationBarLeftItem: EcoNavItem? {
+        return EcoNavItem.back { [weak self] in
+            // Back action will be handled by view controller
+        }
+    }
+    
+    var navigationBarTitleFont: UIFont? {
+        return UIFont.boldSystemFont(ofSize: 19) // Slightly larger title
     }
     
     var navigationBarButtonTintColor: UIColor? {
@@ -143,11 +153,14 @@ final class DefaultOrderPendingController: OrderPendingController {
     private func updateNavigationState() {
         var state = EcoNavigationState()
         state.title = screenTitle
+        state.titleFont = navigationBarTitleFont
         state.background = navigationBarBackground
         state.backgroundColor = navigationBarBackgroundColor
         state.titleColor = navigationBarTitleColor
         state.height = navigationBarInitialHeight
         state.buttonTintColor = navigationBarButtonTintColor
+        state.leftItem = navigationBarLeftItem
+        state.backButtonStyle = .simple
         navigationState.value = state
     }
 }

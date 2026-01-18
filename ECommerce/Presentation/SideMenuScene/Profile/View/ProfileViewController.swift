@@ -342,36 +342,26 @@ final class ProfileViewController: EcoViewController {
 extension ProfileViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2 // Account Info, Shop Info
+        return 1 // Only Account Info, removed Shop Info section
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 4 // Full name, Email, Phone number, Change password
-        } else {
-            return 0 // Shop Info - to be implemented later
-        }
+        return 4 // Full name, Email, Phone number, Change password
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ProfileTableViewCell = tableView.dequeueReusableCell(at: indexPath)
         
-        if indexPath.section == 0 {
-            let title = getAccountInfoCellTitle(for: indexPath.row)
-            let subtitle = getAccountInfoCellSubtitle(for: indexPath.row)
-            
-            cell.fill(with: title, subtitle: subtitle.isEmpty ? nil : subtitle)
-        }
+        let title = getAccountInfoCellTitle(for: indexPath.row)
+        let subtitle = getAccountInfoCellSubtitle(for: indexPath.row)
+        
+        cell.fill(with: title, subtitle: subtitle.isEmpty ? nil : subtitle)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0: return "account_information".localized()
-        case 1: return "business_information".localized()
-        default: return nil
-        }
+        return "account_information".localized()
     }
 }
 
@@ -381,7 +371,7 @@ extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        profileController.didSelectCell(at: indexPath.section, row: indexPath.row)
+        profileController.didSelectCell(at: 0, row: indexPath.row) // Always use section 0 now
     }
 }
 

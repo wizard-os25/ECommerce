@@ -411,11 +411,12 @@ extension DefaultProductsController {
             buttonTintColor: navigationBarButtonTintColor,
             height: navigationBarInitialHeight,
             collapsedHeight: navigationBarCollapsedHeight,
+            backButtonStyle: .simple, // Use simple style for rightBarItem
             scrollBehavior: navigationBarScrollBehavior
         )
         
         // Load initial products with default query
-        update(productQuery: ProductQuery(query: "3"))
+        update(productQuery: ProductQuery(query: ""))
     }
     
     func onViewWillAppear() {

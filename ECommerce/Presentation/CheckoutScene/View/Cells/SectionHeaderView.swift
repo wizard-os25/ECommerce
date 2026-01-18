@@ -11,7 +11,7 @@ final class SectionHeaderView: UICollectionReusableView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = Typography.fontBold18 // Chữ lớn hơn một chút
+        label.font = UIFont.boldSystemFont(ofSize: 20) // Larger and bold
         label.textColor = Colors.tokenDark100
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

@@ -21,6 +21,12 @@ final class ProductItemCell: UITableViewCell {
     private var items: ProductItemModel?
     private let imageCache = DefaultImageCacheService.shared
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        descriptionLabel.numberOfLines = 5
+        descriptionLabel.lineBreakMode = .byTruncatingTail
+    }
+    
     func fill(with items: ProductItemModel) {
         self.items = items
         

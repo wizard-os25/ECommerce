@@ -43,4 +43,13 @@ final class OrderDeliveryCell: UITableViewCell {
         totalAmountLabel?.text = nil
         createdAtLabel?.text = nil
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // Alternate cell background colors - even rows white, odd rows systemGray6
+        if let tableView = superview as? UITableView,
+           let indexPath = tableView.indexPath(for: self) {
+            backgroundColor = (indexPath.row % 2 == 0) ? .white : .systemGray6
+        }
+    }
 }

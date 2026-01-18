@@ -110,8 +110,8 @@ private class PaymentMethodView: UIView {
     
     private let defaultCardLabel: UILabel = {
         let label = UILabel()
-        label.font = Typography.fontRegular14
-        label.textColor = Colors.tokenDark60
+        label.font = UIFont.italicSystemFont(ofSize: 14)
+        label.textColor = Colors.tokenRainbowBlueEnd // Match button color below
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

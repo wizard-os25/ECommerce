@@ -116,11 +116,13 @@ final class DefaultProductDetailController: ProductDetailController {
     }
     
     private func didTapSearch() {
-        // Handle search action
+        print("🔍 [ProductDetailController] Search button tapped - will open Search screen")
+        // TODO: Implement navigation to Search screen
     }
     
     private func didTapCart() {
-        // Handle cart action
+        print("🛒 [ProductDetailController] Cart button tapped - will open Cart screen")
+        // TODO: Implement navigation to Cart screen
     }
 }
 

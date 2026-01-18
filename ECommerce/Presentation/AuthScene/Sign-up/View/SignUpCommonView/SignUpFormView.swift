@@ -113,6 +113,7 @@ final class SignUpFormView: EcoBaseViewController {
         passwordTextField.setLeftIcon("lock.fill", tintColor: Colors.tokenDark60)
         passwordTextField.autocapitalizationType = .none
         passwordTextField.autocorrectionType = .no
+        passwordTextField.showsClearButton = true // Enable clear button for password field
         passwordTextField.cornerRadius = BorderRadius.tokenBorderRadius12
         passwordTextField.backgroundColorColor = Colors.tokenDark02
         passwordTextField.borderColor = Colors.tokenDark10
@@ -189,10 +190,7 @@ final class SignUpFormView: EcoBaseViewController {
         if let errorMessage = errorMessage, !errorMessage.isEmpty {
             errorLabel.text = errorMessage
             errorLabel.isHidden = false
-            fullNameTextField.setError(errorMessage)
-            emailTextField.setError(errorMessage)
-            phoneTextField.setError(errorMessage)
-            passwordTextField.setError(errorMessage)
+            // Only show error on errorLabel, not on text fields to avoid duplicate red lines
         } else {
             errorLabel.isHidden = true
             fullNameTextField.clearError()

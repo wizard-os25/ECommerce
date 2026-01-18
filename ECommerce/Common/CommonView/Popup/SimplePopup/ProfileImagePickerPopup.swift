@@ -67,6 +67,37 @@ final class ProfileImagePickerPopup: UIView {
         cancelLabel.textColor = .systemRed
         cancelLabel.textAlignment = .center
         
+        // Add separator lines between cells programmatically
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            // Add separator line below chooseFromPhotosLabel
+            let separator1 = UIView()
+            separator1.backgroundColor = Colors.tokenDark10
+            separator1.translatesAutoresizingMaskIntoConstraints = false
+            self.contentView.addSubview(separator1)
+            
+            // Add separator line below openCameraLabel
+            let separator2 = UIView()
+            separator2.backgroundColor = Colors.tokenDark10
+            separator2.translatesAutoresizingMaskIntoConstraints = false
+            self.contentView.addSubview(separator2)
+            
+            NSLayoutConstraint.activate([
+                // Separator 1: between chooseFromPhotos and openCamera
+                separator1.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+                separator1.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+                separator1.topAnchor.constraint(equalTo: self.chooseFromPhotosLabel.bottomAnchor),
+                separator1.heightAnchor.constraint(equalToConstant: 1),
+                
+                // Separator 2: between openCamera and cancel
+                separator2.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+                separator2.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+                separator2.topAnchor.constraint(equalTo: self.openCameraLabel.bottomAnchor),
+                separator2.heightAnchor.constraint(equalToConstant: 1)
+            ])
+        }
+        
         // Setup tap gestures
         let chooseFromPhotosTap = UITapGestureRecognizer(target: self, action: #selector(handleChooseFromPhotos))
         chooseFromPhotosLabel.isUserInteractionEnabled = true
