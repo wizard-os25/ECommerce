@@ -20,8 +20,9 @@ final class OrderDetailOtherInfoCell: UITableViewCell {
     }
     
     func fill(with orderDetail: OrderDetail) {
-        // Shipping Fee
-        shippingFeeLabel?.text = String(format: "shipping_fee".localized(), "\(Int(orderDetail.shippingFee).formattedWithSeparator) VND")
+        // Shipping Fee - Format bỏ .00 khi không cần
+        let formattedShippingFee = orderDetail.shippingFee.formattedWithSeparatorWithoutTrailingZeros
+        shippingFeeLabel?.text = String(format: "shipping_fee".localized(), "\(formattedShippingFee) VND")
         
         // Payment Method
         paymentMethodLabel?.text = String(format: "payment_method".localized(), orderDetail.formattedPaymentMethod)

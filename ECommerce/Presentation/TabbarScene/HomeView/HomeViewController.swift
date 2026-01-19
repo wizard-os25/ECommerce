@@ -55,18 +55,19 @@ class ContentViewController: UIViewController {
 
         // Create view controllers for SegmentedPageContainer
         // Tab 0: ProductsViewController
+        // Tab 1: CategoryViewController
         guard let appDIContainer = getAppDIContainer() else {
             print("⚠️ AppDIContainer not found, creating simple view controllers")
             // Fallback: Create simple view controllers
             let productsVC = UIViewController()
             productsVC.view.backgroundColor = .systemBlue
             
-            let groceryVC = UIViewController()
-            groceryVC.view.backgroundColor = .systemPurple
+            let categoryVC = UIViewController()
+            categoryVC.view.backgroundColor = .systemPurple
             
             segmentedPageContainer.configUI(
-                titles: ["products".localized(), "grocery".localized()],
-                viewControllers: [productsVC, groceryVC],
+                titles: ["products".localized(), "Category"],
+                viewControllers: [productsVC, categoryVC],
                 parent: self,
                 defaultIndex: 0
             )
@@ -77,15 +78,14 @@ class ContentViewController: UIViewController {
         let productsSceneDIContainer = appDIContainer.makeProductsSceneDIContainer()
         let productsViewController = productsSceneDIContainer.makeProductsViewController()
         
-        // Create simple GroceryViewController
-        let groceryViewController = UIViewController()
-        groceryViewController.view.backgroundColor = .systemPurple
-        groceryViewController.title = "grocery".localized()
+        // Use DI Container to create CategoryViewController
+        let categorySceneDIContainer = appDIContainer.makeCategorySceneDIContainer()
+        let categoryViewController = categorySceneDIContainer.makeCategoryViewController()
         
         // Configure SegmentedPageContainer
         segmentedPageContainer.configUI(
-            titles: ["Products", "Grocery"],
-            viewControllers: [productsViewController, groceryViewController],
+            titles: ["Products", "Category"],
+            viewControllers: [productsViewController, categoryViewController],
             parent: self,
             defaultIndex: 0
         )

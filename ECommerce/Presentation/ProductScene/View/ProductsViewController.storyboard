@@ -53,6 +53,7 @@
                     </view>
                     <connections>
                         <outlet property="emptyDataLabel" destination="f6J-2l-iab" id="7eT-UL-qzF"/>
+                        <outlet property="productListConstraint" destination="qDC-ON-LYl" id="3xs-f3-Zck"/>
                         <outlet property="productsListContainer" destination="dgg-tT-8fn" id="RcZ-CD-wCq"/>
                     </connections>
                 </viewController>

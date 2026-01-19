@@ -22,6 +22,14 @@ enum ProductsEndpoints {
         )
     }
     
+    static func searchProducts(query: String) -> Endpoint<ProductsResponseDTO> {
+        return Endpoint(
+            path: "api/v1/products/search",
+            method: .get,
+            queryParametersEncodable: ProductsSearchQueryDTO(q: query)
+        )
+    }
+    
     // MARK: - Private Helpers
     
     private struct ProductsQueryDTO: Encodable {
@@ -31,6 +39,14 @@ enum ProductsEndpoints {
         enum CodingKeys: String, CodingKey {
             case page
             case pageSize
+        }
+    }
+    
+    private struct ProductsSearchQueryDTO: Encodable {
+        let q: String
+        
+        enum CodingKeys: String, CodingKey {
+            case q
         }
     }
 }

@@ -16,4 +16,12 @@ protocol ProductsRepository {
         cached: @escaping (ProductPage) -> Void,
         completion: @escaping (Result<ProductPage, Error>) -> Void
     ) -> Cancellable?
+    
+    @discardableResult
+    func searchProducts(
+        query: ProductQuery,
+        page: Int,
+        pageSize: Int,
+        completion: @escaping (Result<ProductPage, Error>) -> Void
+    ) -> Cancellable?
 }

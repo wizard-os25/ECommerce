@@ -12,6 +12,8 @@ final class ProductsViewController: EcoViewController {
     @IBOutlet private var productsListContainer: UIView!
     @IBOutlet private var emptyDataLabel: UILabel!
     
+    @IBOutlet weak var productListConstraint: NSLayoutConstraint!
+    
     private var productsController: ProductsController! {
         get { controller as? ProductsController }
     }
@@ -32,6 +34,7 @@ final class ProductsViewController: EcoViewController {
     }
     
     override func viewDidLoad() {
+        print("🟢 [ProductsViewController] viewDidLoad - Starting initialization")
         // Setup callbacks TRƯỚC super.viewDidLoad() để đảm bảo callback được setup trước khi navigation bar được setup
         setupCardButton()
         setupProductSelection()
@@ -41,6 +44,7 @@ final class ProductsViewController: EcoViewController {
         bindProductsSpecific()
         setupChildViewController()
         setupSidebarGesture()
+        print("✅ [ProductsViewController] viewDidLoad - Initialization completed")
         // viewDidLoad will be called on mediatingController by ProductsTableViewController
     }
     
@@ -54,7 +58,8 @@ final class ProductsViewController: EcoViewController {
     // MARK: - Products-Specific Binding
     
     private func bindProductsSpecific() {
-        productsController.items.observe(on: self) { [weak self] _ in
+        productsController.items.observe(on: self) { [weak self] items in
+            print("📦 [ProductsViewController] Items updated - Count: \(items.count)")
             self?.updateItems()
         }
     }
@@ -111,14 +116,17 @@ final class ProductsViewController: EcoViewController {
         
         // Get navigation bar height for top padding
         let navBarHeight = productsController.navigationBarInitialHeight
+        let navBarCollap = self.productsController.navigationBarCollapsedHeight
+        
+        self.productListConstraint.constant = navBarHeight
         
         // Setup constraints with top padding equal to navbar height
-        NSLayoutConstraint.activate([
-            tableViewController.view.topAnchor.constraint(equalTo: productsListContainer.topAnchor, constant: navBarHeight),
-            tableViewController.view.leadingAnchor.constraint(equalTo: productsListContainer.leadingAnchor),
-            tableViewController.view.trailingAnchor.constraint(equalTo: productsListContainer.trailingAnchor),
-            tableViewController.view.bottomAnchor.constraint(equalTo: productsListContainer.bottomAnchor)
-        ])
+//        NSLayoutConstraint.activate([
+//            tableViewController.view.topAnchor.constraint(equalTo: productsListContainer.topAnchor, constant: navBarHeight),
+//            tableViewController.view.leadingAnchor.constraint(equalTo: productsListContainer.leadingAnchor),
+//            tableViewController.view.trailingAnchor.constraint(equalTo: productsListContainer.trailingAnchor),
+//            tableViewController.view.bottomAnchor.constraint(equalTo: productsListContainer.bottomAnchor)
+//        ])
         
         tableViewController.didMove(toParent: self)
         productsTableViewController = tableViewController
@@ -137,6 +145,35 @@ final class ProductsViewController: EcoViewController {
     private func bindTabBarScroll(to scrollView: UIScrollView) {
         // TabBar alpha sẽ được update trong scrollViewDidScroll override
         // Store reference để sử dụng sau
+    }
+    
+    // Track previous scroll offset để detect scroll direction
+    private var previousScrollOffset: CGFloat = 0
+    
+    /// Khôi phục TabBar appearance ban đầu (không trong suốt)
+    private func restoreTabBarAppearance(tabBar: UITabBar) {
+        UIView.animate(withDuration: 0.2) {
+            if #available(iOS 13.0, *) {
+                let appearance = UITabBarAppearance()
+                appearance.configureWithOpaqueBackground()
+                appearance.backgroundColor = UIColor.white
+                appearance.stackedLayoutAppearance.selected.iconColor = UIColor.black
+                appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+                    .foregroundColor: UIColor.black
+                ]
+                appearance.stackedLayoutAppearance.normal.iconColor = UIColor.gray
+                appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+                    .foregroundColor: UIColor.gray
+                ]
+                tabBar.standardAppearance = appearance
+                if #available(iOS 15.0, *) {
+                    tabBar.scrollEdgeAppearance = appearance
+                }
+            } else {
+                tabBar.barTintColor = UIColor.white
+                tabBar.isTranslucent = false
+            }
+        }
     }
     
     /// Reference đến TabBar để update alpha
@@ -172,6 +209,10 @@ final class ProductsViewController: EcoViewController {
             defaultProductsController.onOpenCamera = { [weak self] in
                 print("📷 [ProductsViewController] onOpenCamera callback triggered")
                 self?.openAISearchCamera()
+            }
+            // Setup callback for back button tap (khi được push từ màn khác)
+            defaultProductsController.onBack = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }
             print("✅ [ProductsViewController] Camera callback setup completed")
         } else {
@@ -436,25 +477,84 @@ extension ProductsViewController {
         // Gọi super để xử lý navigation bar scroll
         super.scrollViewDidScroll(scrollView)
         
-        // Update tabBar alpha dựa trên scroll offset
-        let scrollOffset = scrollView.contentOffset.y
+        // Update productListConstraint based on scroll progress
+        updateProductListConstraint(for: scrollView)
+        
+        // Update tabBar alpha dựa trên scroll direction
+        let currentOffset = scrollView.contentOffset.y
         let threshold: CGFloat = 50 // Ngưỡng để bắt đầu thay đổi alpha
         
         if let tabBar = tabBarReference {
-            // When scrolling down, make background alpha but keep icons visible
-            // Use a lighter alpha (0.8) so icons remain visible
-            if scrollOffset > threshold {
-                UIView.animate(withDuration: 0.2) {
-                    // Adjust background opacity while keeping icons visible
-                    // Set tabBar's overall alpha to a value that makes background semi-transparent but icons still clear
-                    tabBar.alpha = 0.85
+            // Detect scroll direction
+            let isScrollingDown = currentOffset > previousScrollOffset
+            let isScrollingUp = currentOffset < previousScrollOffset
+            
+            if currentOffset > threshold {
+                if isScrollingDown {
+                    // Scroll xuống: Làm TabBar trong suốt để nhìn thấy nội dung phía sau
+                    UIView.animate(withDuration: 0.2) {
+                        if #available(iOS 13.0, *) {
+                            // Tạo appearance mới với transparent background
+                            let appearance = UITabBarAppearance()
+                            appearance.configureWithTransparentBackground()
+                            appearance.backgroundColor = UIColor.white.withAlphaComponent(0.6)
+                            
+                            // Giữ nguyên icon và text colors
+                            appearance.stackedLayoutAppearance.selected.iconColor = UIColor.black
+                            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+                                .foregroundColor: UIColor.black
+                            ]
+                            appearance.stackedLayoutAppearance.normal.iconColor = UIColor.gray
+                            appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+                                .foregroundColor: UIColor.gray
+                            ]
+                            
+                            tabBar.standardAppearance = appearance
+                            if #available(iOS 15.0, *) {
+                                tabBar.scrollEdgeAppearance = appearance
+                            }
+                        } else {
+                            // iOS 12 và trước: set barTintColor với alpha
+                            tabBar.barTintColor = UIColor.white.withAlphaComponent(0.6)
+                            tabBar.isTranslucent = true
+                        }
+                    }
+                } else if isScrollingUp {
+                    // Scroll lên: Khôi phục TabBar không trong suốt
+                    restoreTabBarAppearance(tabBar: tabBar)
                 }
             } else {
-                // Scroll up or at top: full alpha
-                UIView.animate(withDuration: 0.2) {
-                    tabBar.alpha = 1.0
-                }
+                // Ở đầu trang: Khôi phục TabBar không trong suốt
+                restoreTabBarAppearance(tabBar: tabBar)
             }
+        }
+        
+        // Update previous offset
+        previousScrollOffset = currentOffset
+    }
+    
+    /// Update productListConstraint based on scroll progress
+    /// Constraint sẽ giảm từ navBarHeight xuống navBarCollapsedHeight khi scroll
+    private func updateProductListConstraint(for scrollView: UIScrollView) {
+        guard let productsController = productsController else { return }
+        
+        let navBarHeight = productsController.navigationBarInitialHeight
+        let navBarCollapsed = productsController.navigationBarCollapsedHeight
+        
+        // Tính progress tương tự như trong EcoNavigationBarView.handleCollapseWithSearch
+        let threshold: CGFloat = 50
+        let maxOffset: CGFloat = 100
+        let currentOffset = scrollView.contentOffset.y
+        let progress = min(max((currentOffset - threshold) / (maxOffset - threshold), 0), 1)
+        
+        // Tính target constant: từ navBarHeight giảm dần xuống navBarCollapsed
+        let heightDifference = navBarHeight - navBarCollapsed
+        let targetConstant = navBarHeight - (heightDifference * progress)
+        
+        // Update constraint với animation mượt
+        if abs(productListConstraint.constant - targetConstant) > 0.1 {
+            productListConstraint.constant = targetConstant
+            view.layoutIfNeeded()
         }
     }
 }

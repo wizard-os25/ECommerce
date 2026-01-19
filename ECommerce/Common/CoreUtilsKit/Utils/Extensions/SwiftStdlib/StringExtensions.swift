@@ -421,12 +421,35 @@ public extension String {
     }
     
     func convertMoneyToNumber() -> Double {
-        let number = components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
-        let numberFormat = NumberFormatter()
-        numberFormat.numberStyle = .decimal
-        numberFormat.usesGroupingSeparator = false
-        let output = "\(numberFormat.string(from: NSNumber(value: Double(number) ?? 0.0)) ?? "")".replacingOccurrences(of: ",", with: "").replacingOccurrences(of: ".", with: "")
-        return Double(output) ?? 0.0
+        // Xử lý cả format mới (số nguyên như "100000") và format cũ (có thể có dấu phẩy, dấu chấm)
+        // Loại bỏ tất cả ký tự không phải số và dấu chấm thập phân
+        let cleanedString = self.replacingOccurrences(of: ",", with: "")
+            .replacingOccurrences(of: " ", with: "")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Nếu là số nguyên (không có dấu chấm), convert trực tiếp
+        if !cleanedString.contains(".") {
+            // Lấy tất cả chữ số
+            let digits = cleanedString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
+            return Double(digits) ?? 0.0
+        }
+        
+        // Nếu có dấu chấm thập phân, xử lý như số thập phân
+        return Double(cleanedString) ?? 0.0
+    }
+    
+    /// Format giá từ string bỏ .00 khi không cần thiết
+    /// "100.00" → "100"
+    /// "100.50" → "100.5"
+    /// "27000000.00" → "27000000"
+    func formatPriceWithoutTrailingZeros() -> String {
+        // Convert string sang Double
+        guard let doubleValue = Double(self) else {
+            return self // Trả về nguyên bản nếu không parse được
+        }
+        
+        // Sử dụng extension của Double
+        return doubleValue.formattedWithoutTrailingZeros
     }
     
     func convertMoneyToNumberAsLong() -> Int64 {

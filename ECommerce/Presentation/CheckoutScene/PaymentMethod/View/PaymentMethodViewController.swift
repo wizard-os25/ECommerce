@@ -79,6 +79,8 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Ẩn TabBar ngay từ viewDidLoad để đảm bảo ẩn khi mở lần đầu
+        self.tabBarController?.tabBar.isHidden = true
         isSwipeBackEnabled = true // Cho phép swipe back
         setupViews()
         bindObservables()
@@ -94,7 +96,15 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Ẩn TabBar khi vào màn hình PaymentMethod (đảm bảo ẩn khi quay lại)
+        self.tabBarController?.tabBar.isHidden = true
         paymentMethodController.onViewWillAppear()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Hiện TabBar khi rời màn hình PaymentMethod
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -132,7 +142,7 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         
         NSLayoutConstraint.activate([
             // Progress Indicator
-            progressIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 144),
+            progressIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 88),
             progressIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             progressIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
@@ -146,7 +156,7 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
             orderActionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             orderActionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             orderActionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            orderActionView.heightAnchor.constraint(equalToConstant: 52)
+            orderActionView.heightAnchor.constraint(equalToConstant: 116) // Increased by 64pt (52 + 64 = 116)
         ])
         
         // Điều chỉnh OrderActionView để hiển thị đẹp với chiều cao 52pt
@@ -705,21 +715,29 @@ extension PaymentMethodViewController: UITableViewDataSource {
         // Card info label với "default" in nghiêng nếu isDefault
         let cardInfoLabel = UILabel()
         let cardText = card.displayName
+
+        let baseAttributes: [NSAttributedString.Key: Any] = [
+            .font: Typography.fontRegular16,
+            .foregroundColor: UIColor.label
+        ]
+
+        let attributedText = NSMutableAttributedString(
+            string: cardText,
+            attributes: baseAttributes
+        )
+
         if card.isDefault {
-            // Thêm "default" in nghiêng với màu giống chữ delete
-            let attributedText = NSMutableAttributedString(string: cardText)
-            let defaultText = NSMutableAttributedString(string: " default", attributes: [
-                .font: UIFont.italicSystemFont(ofSize: 14),
-                .foregroundColor: Colors.tokenRainbowBlueEnd // Màu giống chữ delete
-            ])
+            let defaultText = NSAttributedString(
+                string: " default",
+                attributes: [
+                    .font: UIFont.italicSystemFont(ofSize: 14),
+                    .foregroundColor: Colors.tokenRainbowBlueEnd
+                ]
+            )
             attributedText.append(defaultText)
-            cardInfoLabel.attributedText = attributedText
-        } else {
-            cardInfoLabel.text = cardText
         }
-        cardInfoLabel.font = Typography.fontRegular16
-        cardInfoLabel.textColor = .label
-        
+
+        cardInfoLabel.attributedText = attributedText
         // Checkmark icon (nếu selected)
         let checkmarkImageView = UIImageView()
         if isSelected {

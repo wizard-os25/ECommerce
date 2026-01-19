@@ -49,13 +49,9 @@ extension OrderDeliveredItemModel {
         return method.capitalized
     }
     
-    // Format total amount to currency string
+    // Format total amount to currency string - bỏ .00 khi không cần
     var formattedTotalAmount: String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencyCode = "VND"
-        formatter.currencySymbol = ""
-        formatter.maximumFractionDigits = 0
-        return "\(formatter.string(from: NSNumber(value: totalAmount)) ?? "\(Int(totalAmount))") VND"
+        let formatted = totalAmount.formattedWithSeparatorWithoutTrailingZeros
+        return "\(formatted) VND"
     }
 }

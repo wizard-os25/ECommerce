@@ -188,11 +188,23 @@ final class DefaultCheckoutController: CheckoutController {
     }
     
     private func calculateOrderSummary() {
+        // Calculate subtotal: tổng price của các sản phẩm
         let subtotal = cartItems.value.reduce(0.0) { total, item in
-            let price = item.price.convertMoneyToNumberCheckout()
+            let price = item.price.convertMoneyToNumber()
             return total + (price * Double(item.quantity))
         }
-        let shippingFee = 5.48 // Default shipping fee
+        
+        // Calculate shipping fee: số lượng sản phẩm * shipping_fee từ address
+        let totalQuantity = cartItems.value.reduce(0) { $0 + $1.quantity }
+        var shippingFee: Double = 0.0
+        
+        if let address = selectedAddress.value,
+           let shippingFeeString = address.shippingFee,
+           !shippingFeeString.isEmpty,
+           let shippingFeePerItem = Double(shippingFeeString) {
+            shippingFee = shippingFeePerItem * Double(totalQuantity)
+        }
+        
         let total = subtotal + shippingFee
         
         orderSummary.value = OrderSummary(
@@ -364,7 +376,8 @@ extension DefaultCheckoutController {
     }
     
     func didSaveNoteToSeller(_ note: String) {
-        noteToSeller.value = note
+        // Allow empty note (optional field) - convert empty string to nil
+        noteToSeller.value = note.isEmpty ? nil : note
     }
     
     func didToggleUseDefaultAddress(_ isDefault: Bool) {
@@ -376,6 +389,9 @@ extension DefaultCheckoutController {
         
         // Save full location information to cache for use in Order screen
         utilities.saveLocation(address: address)
+        
+        // Recalculate order summary with new address shipping fee
+        calculateOrderSummary()
     }
     
     func confirmPayment(paymentIntentId: String, completion: @escaping (Bool) -> Void) {
@@ -527,16 +543,3 @@ extension DefaultCheckoutController {
     func onViewDidDisappear() {}
 }
 
-// MARK: - Helper Extension
-
-extension String {
-    func convertMoneyToNumberCheckout() -> Double {
-        // Remove currency symbols and spaces
-        let cleaned = self.replacingOccurrences(of: "$", with: "")
-            .replacingOccurrences(of: "USD", with: "")
-            .replacingOccurrences(of: " ", with: "")
-            .trimmingCharacters(in: .whitespaces)
-        
-        return Double(cleaned) ?? 0.0
-    }
-}

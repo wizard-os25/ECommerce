@@ -10,6 +10,7 @@ import UIKit
 
 protocol OrderContainerControllerInput {
     func didLoad()
+    func removeOrder(orderId: Int)
 }
 
 protocol OrderContainerControllerOutput {
@@ -53,6 +54,12 @@ final class DefaultOrderContainerController: OrderContainerController {
     
     func didLoad() {
         loadOrders()
+    }
+    
+    func removeOrder(orderId: Int) {
+        var currentOrders = orders.value
+        currentOrders.removeAll { $0.id == orderId }
+        orders.value = currentOrders
     }
     
     // MARK: - Private

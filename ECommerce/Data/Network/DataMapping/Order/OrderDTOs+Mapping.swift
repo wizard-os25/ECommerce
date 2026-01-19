@@ -61,6 +61,28 @@ struct PlaceOrderRequestDTO: Encodable {
         case contactPersonName = "contact_person_name"
         case contactPersonNumber = "contact_person_number"
     }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        // Always encode cart and orderNote
+        try container.encode(cart, forKey: .cart)
+        try container.encodeIfPresent(orderNote, forKey: .orderNote)
+        
+        // If deliveryAddressId is provided, only encode it (saved address)
+        if let deliveryAddressId = deliveryAddressId {
+            try container.encode(deliveryAddressId, forKey: .deliveryAddressId)
+        } else {
+            // Otherwise, encode address detail fields (new address)
+            try container.encodeIfPresent(addressDetail, forKey: .addressDetail)
+            try container.encodeIfPresent(countryId, forKey: .countryId)
+            try container.encodeIfPresent(provinceId, forKey: .provinceId)
+            try container.encodeIfPresent(districtId, forKey: .districtId)
+            try container.encodeIfPresent(wardId, forKey: .wardId)
+            try container.encodeIfPresent(contactPersonName, forKey: .contactPersonName)
+            try container.encodeIfPresent(contactPersonNumber, forKey: .contactPersonNumber)
+        }
+    }
 }
 
 struct CartItemDTO: Encodable {

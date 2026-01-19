@@ -207,8 +207,60 @@ final class DefaultDataTransferErrorLogger: DataTransferErrorLogger {
     init() { }
     
     func log(error: Error) {
-        printIfDebug("-------------")
-        printIfDebug("\(error)")
+        print("-------------")
+        print("❌ [DataTransferService] Error occurred:")
+        print("   Error: \(error)")
+        print("   Localized Description: \(error.localizedDescription)")
+        
+        // Log chi tiết cho DataTransferError
+        if let dataTransferError = error as? DataTransferError {
+            switch dataTransferError {
+            case .noResponse:
+                print("   Type: No Response")
+            case .parsing(let parsingError):
+                print("   Type: Parsing Error")
+                print("   Parsing Error: \(parsingError.localizedDescription)")
+                if let decodingError = parsingError as? DecodingError {
+                    print("   Decoding Error Details: \(decodingError)")
+                }
+            case .networkFailure(let networkError):
+                print("   Type: Network Failure")
+                switch networkError {
+                case .error(let statusCode, let data):
+                    print("   HTTP Status Code: \(statusCode)")
+                    if let data = data, let errorDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        print("   Error Response: \(errorDict)")
+                    } else if let data = data, let errorString = String(data: data, encoding: .utf8) {
+                        print("   Error Response: \(errorString)")
+                    }
+                case .notConnected:
+                    print("   Type: Not Connected to Internet")
+                case .cancelled:
+                    print("   Type: Request Cancelled")
+                case .generic(let genericError):
+                    print("   Type: Generic Network Error")
+                    print("   Generic Error: \(genericError.localizedDescription)")
+                    if let nsError = genericError as? NSError {
+                        print("   NSError Code: \(nsError.code)")
+                        print("   NSError Domain: \(nsError.domain)")
+                    }
+                case .urlGeneration:
+                    print("   Type: URL Generation Error")
+                }
+            case .resolvedNetworkFailure(let resolvedError):
+                print("   Type: Resolved Network Failure")
+                print("   Resolved Error: \(resolvedError.localizedDescription)")
+                if let nsError = resolvedError as? NSError {
+                    print("   NSError Code: \(nsError.code)")
+                    print("   NSError Domain: \(nsError.domain)")
+                }
+            }
+        } else if let nsError = error as? NSError {
+            print("   NSError Code: \(nsError.code)")
+            print("   NSError Domain: \(nsError.domain)")
+            print("   User Info: \(nsError.userInfo)")
+        }
+        print("-------------")
     }
 }
 

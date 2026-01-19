@@ -13,4 +13,10 @@ protocol OrderDetailRepository {
         orderId: Int,
         completion: @escaping (Result<OrderDetail, Error>) -> Void
     ) -> Cancellable?
+    
+    @discardableResult
+    func cancelOrder(
+        orderId: Int,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) -> Cancellable?
 }

@@ -43,6 +43,8 @@ final class ProductDetailViewController: EcoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("🔵 [ProductDetailViewController] viewDidLoad called")
+        // Ẩn TabBar ngay từ viewDidLoad để đảm bảo ẩn khi mở lần đầu
+        self.tabBarController?.tabBar.isHidden = true
         setupViews()
         setupChildViewController()
         setupOrderActionView()
@@ -53,6 +55,18 @@ final class ProductDetailViewController: EcoViewController {
         productDetailController.onViewDidLoad()
         
         print("   ✅ ProductDetailViewController setup completed")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Ẩn TabBar khi vào màn hình ProductDetail (đảm bảo ẩn khi quay lại)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Hiện TabBar khi rời màn hình ProductDetail
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Setup
@@ -90,7 +104,7 @@ final class ProductDetailViewController: EcoViewController {
             collectionVC.view.topAnchor.constraint(equalTo: view.topAnchor),
             collectionVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100) // Reserve space for button
+            collectionVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -124) // Reserve space for button (100 + 24pt)
         ])
         
         collectionVC.didMove(toParent: self)
@@ -185,15 +199,8 @@ final class ProductDetailViewController: EcoViewController {
         let priceNumber = product.price.convertMoneyToNumber()
         let totalPrice = priceNumber * Double(itemQuantity)
         
-        // Format totalPrice to currency string
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.groupingSeparator = "."
-        numberFormatter.decimalSeparator = ","
-        numberFormatter.locale = Locale(identifier: "en_US")
-        numberFormatter.maximumFractionDigits = 0
-        
-        let formattedPrice = numberFormatter.string(from: NSNumber(value: totalPrice)) ?? "0"
+        // Format totalPrice bỏ .00 khi không cần, có separator
+        let formattedPrice = totalPrice.formattedWithSeparatorWithoutTrailingZeros
         
         // Format: "mũi tên hướng lên (chevron.up) 600000 vnd"
         // Sử dụng SF Symbol chevron.up hoặc Unicode ↑
@@ -202,13 +209,8 @@ final class ProductDetailViewController: EcoViewController {
     }
     
     private func formatDoubleToCurrency(_ value: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.groupingSeparator = "."
-        numberFormatter.decimalSeparator = ","
-        numberFormatter.locale = Locale(identifier: "en_US")
-        numberFormatter.maximumFractionDigits = 0
-        return numberFormatter.string(from: NSNumber(value: value)) ?? "0"
+        // Format bỏ .00 khi không cần
+        return value.formattedWithSeparatorWithoutTrailingZeros
     }
     
     private func openAddToCardOrderCard() {

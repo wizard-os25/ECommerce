@@ -33,6 +33,9 @@ final class CheckoutViewController: EcoViewController {
     // CardViewController for address
     private var addressCardViewController: CardViewController?
     
+    // CardViewController for location list
+    private var locationListCardViewController: CardViewController?
+    
     // PaymentSheet
     private var paymentSheet: PaymentSheet?
     
@@ -51,10 +54,24 @@ final class CheckoutViewController: EcoViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Ẩn TabBar ngay từ viewDidLoad để đảm bảo ẩn khi mở lần đầu
+        self.tabBarController?.tabBar.isHidden = true
         isSwipeBackEnabled = true // Cho phép swipe back
         setupViews()
         bindCheckoutSpecific()
         checkoutController.didLoadView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Ẩn TabBar khi vào màn hình Checkout (đảm bảo ẩn khi quay lại)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Hiện TabBar khi rời màn hình Checkout
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func applyNavigation(_ state: EcoNavigationState) {
@@ -96,11 +113,11 @@ final class CheckoutViewController: EcoViewController {
         view.addSubview(orderActionView)
         
         NSLayoutConstraint.activate([
-            progressIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 144),
+            progressIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 88),
             progressIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             progressIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            collectionView.topAnchor.constraint(equalTo: progressIndicator.bottomAnchor, constant: 16),
+            collectionView.topAnchor.constraint(equalTo: progressIndicator.bottomAnchor, constant: 4),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: orderActionView.topAnchor),
@@ -240,15 +257,20 @@ extension CheckoutViewController: UICollectionViewDataSource {
                 },
                 onToggleDefault: { [weak self] isDefault in
                     self?.checkoutController.didToggleUseDefaultAddress(isDefault)
+                },
+                onTapUseSavedLocation: { [weak self] in
+                    self?.showLocationListCard()
                 }
             )
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CheckoutProductsCell", for: indexPath) as! CheckoutProductsCell
+            // Pass shippingFeePerItem từ address (String?)
+            let shippingFeePerItem = checkoutController.selectedAddress.value?.shippingFee
             cell.configure(
                 items: checkoutController.cartItems.value,
                 note: checkoutController.noteToSeller.value,
-                shippingFee: checkoutController.orderSummary.value?.shippingFee,
+                shippingFeePerItem: shippingFeePerItem,
                 onQuantityChanged: { [weak self] productId, quantity in
                     self?.checkoutController.didUpdateCartItemQuantity(productId: productId, quantity: quantity)
                 },
@@ -259,9 +281,13 @@ extension CheckoutViewController: UICollectionViewDataSource {
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CheckoutOrderSummaryCell", for: indexPath) as! CheckoutOrderSummaryCell
-            // Pass shippingFee từ address nếu có (String?)
+            // Pass shippingFee từ address nếu có (String?) và items để tính số lượng
             let shippingFeeFromAddress = checkoutController.selectedAddress.value?.shippingFee
-            cell.configure(summary: checkoutController.orderSummary.value, shippingFeeFromAddress: shippingFeeFromAddress)
+            cell.configure(
+                summary: checkoutController.orderSummary.value,
+                shippingFeeFromAddress: shippingFeeFromAddress,
+                items: checkoutController.cartItems.value
+            )
             return cell
         default:
             return UICollectionViewCell()
@@ -276,9 +302,9 @@ extension CheckoutViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width
         switch indexPath.section {
-        case 0: return CGSize(width: width, height: 144) // Address + checkbox (120 + 24)
-        case 1: return CGSize(width: width, height: 324) // Products scroll + note (300 + 24)
-        case 2: return CGSize(width: width, height: 174) // Order summary (150 + 24)
+        case 0: return CGSize(width: width, height: 100) // Address (reduced from 120 - removed checkbox)
+        case 1: return CGSize(width: width, height: 260) // Products scroll + note (reduced from 280)
+        case 2: return CGSize(width: width, height: 120) // Order summary (reduced from 140)
         default: return CGSize(width: width, height: 100)
         }
     }
@@ -301,15 +327,15 @@ extension CheckoutViewController: UICollectionViewDelegateFlowLayout {
         if section == 0 {
             return CGSize(width: collectionView.bounds.width, height: 1) // Divider nhỏ cho section 0
         }
-        return CGSize(width: collectionView.bounds.width, height: 48) // Header với title lớn hơn
+        return CGSize(width: collectionView.bounds.width, height: 12) // Header với title (reduced from 24)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8 // Giảm một nửa từ 16 xuống 8
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0) // Giảm một nửa từ 16 xuống 8
+        return UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0) // Reduced from 8
     }
 }
 
@@ -392,13 +418,128 @@ extension CheckoutViewController {
         }
     }
     
+    private func showLocationListCard() {
+        // Prevent opening multiple times
+        if let existingCard = locationListCardViewController, existingCard.parent != nil {
+            existingCard.show()
+            return
+        }
+        
+        // If card exists but is not attached, clean it up first
+        if locationListCardViewController != nil {
+            locationListCardViewController?.detach()
+            locationListCardViewController = nil
+        }
+        
+        // Check cache first
+        let utilities = Utilities()
+        var cachedAddress: Address? = nil
+        
+        if utilities.hasLocationCache() {
+            // Create Address from cache
+            if let addressId = utilities.getCachedAddressId(),
+               let addressDetail = utilities.getCachedAddressDetail(),
+               let provinceId = utilities.getCachedProvinceId(),
+               let districtId = utilities.getCachedDistrictId(),
+               let wardId = utilities.getCachedWardId(),
+               let countryId = utilities.getCachedCountryId() {
+                cachedAddress = Address(
+                    id: addressId,
+                    userId: 0,
+                    contactPersonName: utilities.getCachedContactPersonName() ?? "",
+                    contactPersonNumber: utilities.getCachedContactPersonNumber() ?? "",
+                    address: utilities.getCachedAddress() ?? addressDetail,
+                    addressDetail: addressDetail,
+                    addressType: utilities.getCachedAddressType() ?? "shipping",
+                    zoneId: nil,
+                    countryId: countryId,
+                    provinceId: provinceId,
+                    districtId: districtId,
+                    wardId: wardId,
+                    longitude: utilities.getCachedLongitude() ?? "",
+                    latitude: utilities.getCachedLatitude() ?? "",
+                    shippingFee: nil,
+                    isDefault: true
+                )
+            }
+        }
+        
+        // Create Card Configuration
+        let screenHeight = view.bounds.height
+        let cardHeight = screenHeight - 120
+        let cardConfig = CardConfiguration(
+            expandedHeight: cardHeight,
+            collapsedHeight: cardHeight,
+            presentationMode: .onDemand,
+            enableGesture: true
+        )
+        
+        // Create Card Controller
+        let cardController = DefaultCardController(configuration: cardConfig)
+        
+        // Create Card View Controller
+        let cardVC = CardViewController.create(with: cardController)
+        
+        // Attach to current view controller
+        cardVC.attach(to: self)
+        
+        // Store reference
+        locationListCardViewController = cardVC
+        
+        // Create LocationListViewController as content
+        let appDIContainer = AppDIContainer()
+        let locationListDIContainer = appDIContainer.makeLocationListDIContainer()
+        let locationListVC = locationListDIContainer.makeLocationListViewController()
+        
+        // Setup callback when address is selected
+        if let locationListController = locationListVC.controller as? DefaultLocationListController {
+            // If we have cached address, add it to the list first
+            if let cached = cachedAddress {
+                locationListController.addresses.value = [cached]
+            }
+            
+            // Fetch from API (will replace or append to list)
+            locationListController.viewDidLoad()
+            
+            // Observe addresses to merge cache with API results
+            locationListController.addresses.observe(on: self) { [weak self] addresses in
+                guard let self = self, let cached = cachedAddress else { return }
+                // If API returned addresses and we have cached address, ensure cached is in the list
+                if !addresses.contains(where: { $0.id == cached.id }) {
+                    var updatedAddresses = addresses
+                    updatedAddresses.insert(cached, at: 0) // Add cached address at the beginning
+                    locationListController.addresses.value = updatedAddresses
+                }
+            }
+            
+            locationListController.onAddressSelected = { [weak self, weak cardVC] address in
+                // Select address in checkout
+                self?.checkoutController.didSelectAddress(address)
+                cardVC?.dismiss()
+                // Clear reference when dismissed
+                if cardVC === self?.locationListCardViewController {
+                    self?.locationListCardViewController = nil
+                }
+            }
+        }
+        
+        // Set LocationListViewController as content of CardViewController
+        cardVC.setContent(locationListVC)
+        
+        // Show card
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            cardVC.show()
+        }
+    }
+    
     private func showNotePopup() {
         // Create and show note popup
         let popup = NoteToSellerPopup()
         popup.configure(
             initialNote: checkoutController.noteToSeller.value,
             onSave: { [weak self] note in
-                self?.checkoutController.didSaveNoteToSeller(note)
+                // Note is now optional, can be nil if empty
+                self?.checkoutController.didSaveNoteToSeller(note ?? "")
                 popup.dismiss()
             },
             onCancel: {

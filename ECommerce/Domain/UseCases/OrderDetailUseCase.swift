@@ -13,6 +13,12 @@ protocol OrderDetailUseCase {
         orderId: Int,
         completion: @escaping (Result<OrderDetail, Error>) -> Void
     ) -> Cancellable?
+    
+    @discardableResult
+    func cancelOrder(
+        orderId: Int,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) -> Cancellable?
 }
 
 final class DefaultOrderDetailUseCase: OrderDetailUseCase {
@@ -28,5 +34,12 @@ final class DefaultOrderDetailUseCase: OrderDetailUseCase {
         completion: @escaping (Result<OrderDetail, Error>) -> Void
     ) -> Cancellable? {
         return orderDetailRepository.fetchOrderDetail(orderId: orderId, completion: completion)
+    }
+    
+    func cancelOrder(
+        orderId: Int,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) -> Cancellable? {
+        return orderDetailRepository.cancelOrder(orderId: orderId, completion: completion)
     }
 }

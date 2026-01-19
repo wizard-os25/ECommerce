@@ -12,7 +12,7 @@ class OrderContainerViewController: UIViewController {
     // MARK: - Properties
     
     private var segmentedPageContainer: SegmentedPageContainer!
-    private var orderContainerController: OrderContainerController!
+    var orderContainerController: OrderContainerController!
     
     // View Controllers for each tab
     private var pendingViewController: OrderPendingViewController!

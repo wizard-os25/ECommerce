@@ -318,20 +318,29 @@ extension PaymentCardViewController: UITableViewDataSource {
         
         // Card info label với "default" in nghiêng nếu isDefault
         let cardInfoLabel = UILabel()
+
+        let baseAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 16),
+            .foregroundColor: UIColor.label
+        ]
+
+        let attributedText = NSMutableAttributedString(
+            string: paymentCard.displayName,
+            attributes: baseAttributes
+        )
+
         if paymentCard.isDefault {
-            // Thêm "default" in nghiêng
-            let attributedText = NSMutableAttributedString(string: paymentCard.displayName)
-            let defaultText = NSMutableAttributedString(string: " default", attributes: [
-                .font: UIFont.italicSystemFont(ofSize: 14),
-                .foregroundColor: Colors.tokenRainbowBlueEnd // Màu giống chữ delete
-            ])
+            let defaultText = NSAttributedString(
+                string: " default",
+                attributes: [
+                    .font: UIFont.italicSystemFont(ofSize: 14),
+                    .foregroundColor: Colors.tokenRainbowBlueEnd
+                ]
+            )
             attributedText.append(defaultText)
-            cardInfoLabel.attributedText = attributedText
-        } else {
-            cardInfoLabel.text = paymentCard.displayName
         }
-        cardInfoLabel.font = UIFont.systemFont(ofSize: 16)
-        cardInfoLabel.textColor = .label
+
+        cardInfoLabel.attributedText = attributedText
         
         // Delete label with tap gesture
         let deleteLabel = UILabel()

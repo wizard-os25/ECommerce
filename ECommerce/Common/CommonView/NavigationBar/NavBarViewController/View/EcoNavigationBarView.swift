@@ -763,13 +763,51 @@ public extension EcoNavigationBarView {
             searchTextField.alpha = progress // Fade in as scroll progresses
             // Đảm bảo search field có thể tương tác khi hiển thị
             searchTextField.isUserInteractionEnabled = true
-            // Re-setup bindings khi search field được hiển thị để đảm bảo camera button hoạt động
-            // Note: Bindings sẽ được re-setup thông qua EcoNavigationBarViewController
+            
+            // Update search state khi collapse: bỏ camera button, chỉ giữ clear button
+            // Chỉ cập nhật khi collapse đủ (progress > 0.1) để tránh flickering
+            if let currentSearchState = initialState.searchState, currentSearchState.showsCameraButton {
+                // Kiểm tra xem đã cập nhật state chưa để tránh apply nhiều lần
+                if searchTextField.searchState.showsCameraButton {
+                    // Tạo search state mới với camera button disabled và clear button enabled
+                    let collapsedSearchState = EcoSearchState(
+                        text: searchTextField.searchState.text, // Giữ text hiện tại
+                        placeholder: currentSearchState.placeholder,
+                        isEditing: searchTextField.searchState.isEditing, // Giữ editing state
+                        showsClearButton: true,
+                        showsCameraButton: false, // Bỏ camera button khi collapse
+                        height: currentSearchState.height,
+                        backgroundColor: currentSearchState.backgroundColor,
+                        borderWidth: currentSearchState.borderWidth,
+                        borderColor: currentSearchState.borderColor
+                    )
+                    searchTextField.apply(state: collapsedSearchState)
+                }
+            }
         } else {
             // Only hide if it was initially shown
             if initialState.showsSearch {
                 searchTextField.isHidden = true
                 searchTextField.alpha = 0
+            }
+            
+            // Restore original search state khi scroll về đầu (progress <= 0.1)
+            if let originalSearchState = initialState.searchState {
+                // Chỉ restore nếu state đã bị thay đổi (camera button đã bị ẩn)
+                if !searchTextField.searchState.showsCameraButton && originalSearchState.showsCameraButton {
+                    let restoredSearchState = EcoSearchState(
+                        text: searchTextField.searchState.text, // Giữ text hiện tại
+                        placeholder: originalSearchState.placeholder,
+                        isEditing: searchTextField.searchState.isEditing, // Giữ editing state
+                        showsClearButton: originalSearchState.showsClearButton,
+                        showsCameraButton: originalSearchState.showsCameraButton, // Restore camera button
+                        height: originalSearchState.height,
+                        backgroundColor: originalSearchState.backgroundColor,
+                        borderWidth: originalSearchState.borderWidth,
+                        borderColor: originalSearchState.borderColor
+                    )
+                    searchTextField.apply(state: restoredSearchState)
+                }
             }
         }
         

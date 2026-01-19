@@ -51,10 +51,10 @@ final class SectionHeaderView: UICollectionReusableView {
             dividerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             dividerView.heightAnchor.constraint(equalToConstant: 1),
             
-            titleLabel.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: 12),
+            titleLabel.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 12)
         ])
     }
 }

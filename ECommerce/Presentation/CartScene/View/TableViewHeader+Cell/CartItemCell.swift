@@ -9,6 +9,14 @@ import UIKit
 
 class CartItemCell: UITableViewCell {
     
+    @IBOutlet weak var onChooseButton: UIButton!
+    @IBOutlet weak var cartItemImageView: UIImageView!
+    @IBOutlet weak var cartItemTitleLabel: UILabel!
+    @IBOutlet weak var cartItemDescLabel: UILabel!
+    @IBOutlet weak var cartItemAmountLabel: UILabel!
+    
+    @IBOutlet weak var cartItemDeleteButton: UIButton!
+    @IBOutlet weak var cartItemTextField: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

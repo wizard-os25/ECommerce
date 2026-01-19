@@ -65,7 +65,7 @@ final class NoteToSellerPopup: UIView {
         return button
     }()
     
-    private var onSave: ((String) -> Void)?
+    private var onSave: ((String?) -> Void)? // Changed to optional String
     private var onCancel: (() -> Void)?
     
     override init(frame: CGRect) {
@@ -126,7 +126,7 @@ final class NoteToSellerPopup: UIView {
     
     func configure(
         initialNote: String?,
-        onSave: @escaping (String) -> Void,
+        onSave: @escaping (String?) -> Void, // Changed to optional String
         onCancel: @escaping () -> Void
     ) {
         self.onSave = onSave
@@ -168,7 +168,9 @@ final class NoteToSellerPopup: UIView {
     }
     
     @objc private func submitTapped() {
-        onSave?(textView.text)
+        // Allow empty note (optional field)
+        let note = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        onSave?(note.isEmpty ? nil : note)
     }
     
     @objc private func cancelTapped() {

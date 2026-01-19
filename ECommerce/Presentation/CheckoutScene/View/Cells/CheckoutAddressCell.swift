@@ -44,37 +44,19 @@ final class CheckoutAddressCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let defaultAddressStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 8
-        stack.alignment = .center
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    private let defaultAddressCheckbox: UIImageView = {
-        let imageView = UIImageView()
-        let bundle = Bundle(for: ECoTick.self)
-        imageView.image = HelperFunction.getImage(named: "ic_checkbox_uncheck_24", in: bundle)
-        imageView.contentMode = .scaleAspectFit
-        imageView.isUserInteractionEnabled = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
     private let defaultAddressLabel: UILabel = {
         let label = UILabel()
-        label.text = "Set as default shipping address"
+        label.text = "Use saved location"
         label.font = UIFont.italicSystemFont(ofSize: 14)
-        label.textColor = Colors.tokenDark100
+        label.textColor = Colors.tokenRainbowBlueEnd
+        label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private var isCheckboxSelected = false
     private var onTap: (() -> Void)?
     private var onToggleDefault: ((Bool) -> Void)?
+    private var onTapUseSavedLocation: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,19 +74,16 @@ final class CheckoutAddressCell: UICollectionViewCell {
         containerView.addSubview(locationIcon)
         containerView.addSubview(addressLabel)
         containerView.addSubview(chevronIcon)
-        containerView.addSubview(defaultAddressStack)
-        
-        defaultAddressStack.addArrangedSubview(defaultAddressCheckbox)
-        defaultAddressStack.addArrangedSubview(defaultAddressLabel)
+        containerView.addSubview(defaultAddressLabel)
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 56), // Increased from 8 to 56 (48pt more)
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
             
             locationIcon.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            locationIcon.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
+            locationIcon.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12),
             locationIcon.widthAnchor.constraint(equalToConstant: 24),
             locationIcon.heightAnchor.constraint(equalToConstant: 24),
             
@@ -117,12 +96,9 @@ final class CheckoutAddressCell: UICollectionViewCell {
             chevronIcon.widthAnchor.constraint(equalToConstant: 16),
             chevronIcon.heightAnchor.constraint(equalToConstant: 16),
             
-            defaultAddressStack.leadingAnchor.constraint(equalTo: locationIcon.leadingAnchor),
-            defaultAddressStack.topAnchor.constraint(equalTo: locationIcon.bottomAnchor, constant: 12),
-            defaultAddressStack.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16),
-            
-            defaultAddressCheckbox.widthAnchor.constraint(equalToConstant: 24),
-            defaultAddressCheckbox.heightAnchor.constraint(equalToConstant: 24)
+            defaultAddressLabel.leadingAnchor.constraint(equalTo: locationIcon.leadingAnchor),
+            defaultAddressLabel.topAnchor.constraint(equalTo: locationIcon.bottomAnchor, constant: 4),
+            defaultAddressLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -12)
         ])
         
         // Tap gesture for address
@@ -130,47 +106,35 @@ final class CheckoutAddressCell: UICollectionViewCell {
         containerView.addGestureRecognizer(tapGesture)
         containerView.isUserInteractionEnabled = true
         
-        // Tap gesture for checkbox
-        let checkboxTap = UITapGestureRecognizer(target: self, action: #selector(checkboxTapped))
-        defaultAddressStack.addGestureRecognizer(checkboxTap)
-        defaultAddressStack.isUserInteractionEnabled = true
+        // Tap gesture for "Use saved location" - opens location list
+        let useSavedLocationTap = UITapGestureRecognizer(target: self, action: #selector(useSavedLocationTapped))
+        defaultAddressLabel.addGestureRecognizer(useSavedLocationTap)
     }
     
     func configure(
         address: Address?,
         useDefault: Bool,
         onTap: @escaping () -> Void,
-        onToggleDefault: @escaping (Bool) -> Void
+        onToggleDefault: @escaping (Bool) -> Void,
+        onTapUseSavedLocation: @escaping () -> Void
     ) {
         self.onTap = onTap
         self.onToggleDefault = onToggleDefault
-        self.isCheckboxSelected = useDefault
+        self.onTapUseSavedLocation = onTapUseSavedLocation
         
         if let address = address {
             addressLabel.text = address.address
         } else {
             addressLabel.text = "Add address"
         }
-        
-        updateCheckboxImage()
     }
     
     @objc private func addressTapped() {
         onTap?()
     }
     
-    @objc private func checkboxTapped() {
-        isCheckboxSelected.toggle()
-        updateCheckboxImage()
-        onToggleDefault?(isCheckboxSelected)
-    }
-    
-    private func updateCheckboxImage() {
-        let bundle = Bundle(for: ECoTick.self)
-        if isCheckboxSelected {
-            defaultAddressCheckbox.image = HelperFunction.getImage(named: "ic_right_check_16_green", in: bundle)
-        } else {
-            defaultAddressCheckbox.image = HelperFunction.getImage(named: "ic_checkbox_uncheck_24", in: bundle)
-        }
+    @objc private func useSavedLocationTapped() {
+        // Open location list
+        onTapUseSavedLocation?()
     }
 }

@@ -36,7 +36,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeA-yy-sWx">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeA-yy-sWx">
                                             <rect key="frame" x="16" y="63" width="87.5" height="22.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.52941176470588236" green="0.52941176470588236" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,7 +64,6 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yeA-yy-sWx" secondAttribute="bottom" constant="11" id="CBD-py-SWw"/>
                                         <constraint firstItem="4Z1-DO-pfb" firstAttribute="leading" secondItem="we8-9y-ZfZ" secondAttribute="leading" id="DeM-eN-2gT"/>
                                         <constraint firstItem="gc0-V9-HRA" firstAttribute="top" secondItem="OzQ-03-uhC" secondAttribute="topMargin" id="Ei4-8m-USb"/>
                                         <constraint firstItem="gc0-V9-HRA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4Z1-DO-pfb" secondAttribute="trailing" constant="8" id="If5-B2-yDd"/>
@@ -73,12 +72,13 @@
                                         <constraint firstItem="4Z1-DO-pfb" firstAttribute="top" secondItem="we8-9y-ZfZ" secondAttribute="bottom" constant="3.5" id="Uf3-N1-G6V"/>
                                         <constraint firstItem="yeA-yy-sWx" firstAttribute="leading" secondItem="we8-9y-ZfZ" secondAttribute="leading" id="V7H-mQ-iCw"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="gc0-V9-HRA" secondAttribute="bottom" priority="999" constant="9" id="X2Z-FY-fjL"/>
-                                        <constraint firstItem="gc0-V9-HRA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yeA-yy-sWx" secondAttribute="trailing" constant="8" id="cbP-rC-azG"/>
+                                        <constraint firstItem="gc0-V9-HRA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yeA-yy-sWx" secondAttribute="trailing" constant="12" id="cbP-rC-azG"/>
                                         <constraint firstItem="we8-9y-ZfZ" firstAttribute="leading" secondItem="OzQ-03-uhC" secondAttribute="leadingMargin" id="dmO-KZ-qcT"/>
                                         <constraint firstItem="loc-label" firstAttribute="leading" secondItem="we8-9y-ZfZ" secondAttribute="leading" id="loc-leading"/>
                                         <constraint firstItem="loc-label" firstAttribute="top" secondItem="yeA-yy-sWx" secondAttribute="bottom" constant="6" id="loc-top"/>
                                         <constraint firstItem="stars-label" firstAttribute="leading" secondItem="we8-9y-ZfZ" secondAttribute="leading" id="stars-leading"/>
                                         <constraint firstItem="stars-label" firstAttribute="top" secondItem="loc-label" secondAttribute="bottom" constant="4" id="stars-top"/>
+                                        <constraint firstAttribute="bottom" secondItem="stars-label" secondAttribute="bottom" constant="11.5" id="tcn-ju-IwC"/>
                                         <constraint firstItem="we8-9y-ZfZ" firstAttribute="top" secondItem="OzQ-03-uhC" secondAttribute="top" constant="11" id="vBj-AF-CTE"/>
                                         <constraint firstItem="yeA-yy-sWx" firstAttribute="top" secondItem="4Z1-DO-pfb" secondAttribute="bottom" constant="6" id="wvj-a3-OK7"/>
                                     </constraints>

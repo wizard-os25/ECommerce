@@ -31,7 +31,16 @@ final class OrderDetailViewController: EcoViewController {
         setupViews()
         bindOrderDetailSpecific()
         setupCancelButton()
+        setupBackNavigation()
         orderDetailController.didLoad()
+    }
+    
+    private func setupBackNavigation() {
+        if let defaultController = orderDetailController as? DefaultOrderDetailController {
+            defaultController.onBack = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     // MARK: - Common Binding Override
@@ -46,6 +55,39 @@ final class OrderDetailViewController: EcoViewController {
     private func bindOrderDetailSpecific() {
         orderDetailController.orderDetail.observe(on: self) { [weak self] _ in
             self?.orderDetailTableView.reloadData()
+        }
+        
+        // Observe message và check success state trong cùng observer
+        orderDetailController.cancelOrderMessage.observe(on: self) { [weak self] message in
+            guard let self = self, let message = message, !message.isEmpty else { return }
+            
+            // Reset message ngay để tránh hiển thị lại
+            self.orderDetailController.cancelOrderMessage.value = nil
+            
+            // Check success state - đảm bảo đã được set trước khi message được set
+            let isSuccess = self.orderDetailController.cancelOrderSuccess.value
+            
+            if isSuccess {
+                // Success message
+                self.showAlert(
+                    title: "success".localized(),
+                    message: message,
+                    completion: { [weak self] in
+                        // Pop back after showing success message
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                )
+            } else {
+                // Error message
+                self.showAlert(
+                    title: self.orderDetailController.errorTitle,
+                    message: message,
+                    completion: { [weak self] in
+                        // Pop back after showing error message
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                )
+            }
         }
     }
     

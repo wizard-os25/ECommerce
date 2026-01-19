@@ -29,12 +29,13 @@ final class OrderDetailProductCell: UITableViewCell {
     }
     
     func fill(with detailItem: OrderDetailItem) {
-        // Order ID
-        orderIdLabel?.text = String(format: "order_number".localized(), detailItem.orderId)
+        // Order ID - Convert Int to String để tránh crash
+        orderIdLabel?.text = String(format: "order_number".localized(), "\(detailItem.orderId)")
         
-        // Price
+        // Price - Format bỏ .00 khi không cần
         let priceValue = Double(detailItem.foodDetails.price) ?? 0.0
-        priceLabel?.text = "\(Int(priceValue).formattedWithSeparator) VND"
+        let formattedPrice = priceValue.formattedWithSeparatorWithoutTrailingZeros
+        priceLabel?.text = "\(formattedPrice) VND"
         
         // Name
         nameLabel?.text = detailItem.foodDetails.name
@@ -42,8 +43,8 @@ final class OrderDetailProductCell: UITableViewCell {
         // Description (max 3 lines)
         descriptionLabel?.text = detailItem.foodDetails.description
         
-        // Quantity
-        quantityLabel?.text = String(format: "quantity_label".localized(), detailItem.quantity)
+        // Quantity - Convert Int to String để tránh crash
+        quantityLabel?.text = String(format: "quantity_label".localized(), "\(detailItem.quantity)")
         
         // Load image
         if let imgUrl = detailItem.foodDetails.img {

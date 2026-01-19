@@ -17,4 +17,14 @@ enum OrderDetailEndpoints {
             method: .get
         )
     }
+    
+    // MARK: - Cancel Order
+    
+    static func cancelOrder(orderId: Int) -> Endpoint<CancelOrderResponseDTO> {
+        return Endpoint(
+            path: "api/v1/orders/\(orderId)/cancel",
+            method: .post,
+            headerParameters: [:] // Bearer token will be added by DataTransferService
+        )
+    }
 }

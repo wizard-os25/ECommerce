@@ -61,6 +61,9 @@ final class DefaultProductsController: ProductsController {
     // AI Search mode flag
     var isAISearchMode: Bool = false
     
+    // Flag để đánh dấu khi được push từ màn khác (search hoặc category)
+    var isPushedFromOtherScreen: Bool = false
+    
     // MARK: - Navigation Bar Configuration
     
     /// Navigation bar title (override default to use screenTitle)
@@ -95,17 +98,27 @@ final class DefaultProductsController: ProductsController {
     
     /// Initial height of navigation bar for Products scene
     var navigationBarInitialHeight: CGFloat {
-        return 120
+        // Tăng thêm 48pt khi được push từ màn khác
+        return isPushedFromOtherScreen ? 148 : 100
     }
     
     /// Collapsed height of navigation bar when scrolling
-//    var navigationBarCollapsedHeight: CGFloat {
-//        return 80
-//    }
+    var navigationBarCollapsedHeight: CGFloat {
+        // Use default collapsed height (44pt) - standard navigation bar height
+        return 80.0
+    }
     
     /// Navigation bar button tint color (set to black for right bar items)
     var navigationBarButtonTintColor: UIColor? {
         return .black
+    }
+    
+    /// Navigation bar left item (back button khi được push từ màn khác)
+    var navigationBarLeftItem: EcoNavItem? {
+        guard isPushedFromOtherScreen else { return nil }
+        return EcoNavItem.back { [weak self] in
+            self?.didTapBack()
+        }
     }
     
     /// Navigation bar right items (camera button for AI Search)
@@ -127,6 +140,9 @@ final class DefaultProductsController: ProductsController {
     // Callback for opening camera
     var onOpenCamera: (() -> Void)?
     
+    // Callback for back button
+    var onBack: (() -> Void)?
+    
     // MARK: - EcoController Output (common to all controllers)
     
     let loading: Observable<Bool> = Observable(false)
@@ -146,6 +162,7 @@ final class DefaultProductsController: ProductsController {
     // MARK: - Private
     
     private func appendPage(_ productPage: ProductPage) {
+        print("📄 [ProductsController] Appending page - Page: \(productPage.page), Items: \(productPage.contents.count), TotalElements: \(productPage.totalElements)")
         currentPage = productPage.page
         totalElements = productPage.totalElements
         hasMorePages = productPage.hasMore
@@ -156,9 +173,22 @@ final class DefaultProductsController: ProductsController {
         
         allItems = pages.flatMap { $0.contents }.map(ProductItemModel.init)
         items.value = allItems
+        print("📄 [ProductsController] Page appended - Total items in list: \(items.value.count)")
+    }
+    
+    /// Load products from ProductPage directly (used for search results)
+    func loadProductsFromPage(_ productPage: ProductPage, query: String) {
+        print("📥 [ProductsController] Loading products from page - Query: '\(query)', Items: \(productPage.contents.count)")
+        productsLoadTask?.cancel()
+        resetPages()
+        self.query.value = query
+        appendPage(productPage)
+        loading.value = false
+        print("📥 [ProductsController] Products loaded from page - Total items: \(items.value.count)")
     }
     
     private func resetPages() {
+        print("🔄 [ProductsController] Resetting pages - Clearing \(pages.count) pages, \(allItems.count) items")
         currentPage = 0
         totalElements = 0
         hasMorePages = false
@@ -171,10 +201,6 @@ final class DefaultProductsController: ProductsController {
     /// Bước 1: Chuẩn hóa và token hóa labels để tạo tập từ khóa
     /// Bước 2: Dùng logic tương tự NSPredicate để filter products
     func filterItemsByLabels(_ labels: [(String, Double)]) {
-        print("🔍 [ProductsController] ========================================")
-        print("🔍 [ProductsController] 🎯 FILTERING ITEMS BY LABELS (NSPredicate-like)")
-        print("🔍 [ProductsController] ========================================")
-        print("🔍 [ProductsController] 📊 Total labels received: \(labels.count)")
         
         // Log all labels with confidence
         for (index, (label, confidence)) in labels.enumerated() {
@@ -210,13 +236,6 @@ final class DefaultProductsController: ProductsController {
             }
         }
         
-        print("🔍 [ProductsController] ========================================")
-        print("🔍 [ProductsController] 📊 FILTER RESULTS:")
-        print("🔍 [ProductsController]   - Total items before: \(allItems.count)")
-        print("🔍 [ProductsController]   - Total items after: \(filteredItems.count)")
-        print("🔍 [ProductsController]   - Items filtered out: \(allItems.count - filteredItems.count)")
-        print("🔍 [ProductsController] ========================================")
-        
         // Log first few matched items for verification
         if !filteredItems.isEmpty {
             print("🔍 [ProductsController] 📋 Sample matched items (first 5):")
@@ -230,7 +249,6 @@ final class DefaultProductsController: ProductsController {
             print("⚠️ [ProductsController] ⚠️ No items matched the keywords")
         }
         
-        print("🔍 [ProductsController] ✅ Filtering complete, updating items.value")
         items.value = filteredItems
         print("🔍 [ProductsController] ========================================")
     }
@@ -263,6 +281,7 @@ final class DefaultProductsController: ProductsController {
     }
     
     private func load(productQuery: ProductQuery, loading: Bool) {
+        print("🟢 [ProductsController] Starting load - Query: '\(productQuery.query)', Page: \(nextPage), PageSize: \(pageSize)")
         self.loading.value = loading
         query.value = productQuery.query
         
@@ -271,6 +290,7 @@ final class DefaultProductsController: ProductsController {
             page: nextPage,
             pageSize: pageSize,
             cached: { [weak self] page in
+                print("📦 [ProductsController] Cache hit - Received \(page.contents.count) items from cache")
                 self?.mainQueue.async {
                     self?.appendPage(page)
                 }
@@ -279,11 +299,14 @@ final class DefaultProductsController: ProductsController {
                 self?.mainQueue.async {
                     switch result {
                     case .success(let page):
+                        print("✅ [ProductsController] Network success - Received \(page.contents.count) items, Total: \(page.totalElements), HasMore: \(page.hasMore)")
                         self?.appendPage(page)
                     case .failure(let error):
+                        print("❌ [ProductsController] Network error - \(error.localizedDescription)")
                         self?.handle(error: error)
                     }
                     self?.loading.value = false
+                    print("🟢 [ProductsController] Load completed - Total items: \(self?.items.value.count ?? 0)")
                 }
             }
         )
@@ -294,6 +317,9 @@ final class DefaultProductsController: ProductsController {
     }
     
     private func update(productQuery: ProductQuery) {
+        print("🔄 [ProductsController] Updating query - Old query: '\(query.value)', New query: '\(productQuery.query)'")
+        // Cancel any existing task first to prevent cache from different query being loaded
+        productsLoadTask?.cancel()
         resetPages()
         load(productQuery: productQuery, loading: true)
     }
@@ -311,16 +337,26 @@ final class DefaultProductsController: ProductsController {
 extension DefaultProductsController {
     
     func didLoadNextPage() {
-        guard hasMorePages, !loading.value else { return }
+        print("📄 [ProductsController] didLoadNextPage called - Current page: \(currentPage), HasMore: \(hasMorePages), Loading: \(loading.value)")
+        guard hasMorePages, !loading.value else {
+            print("⚠️ [ProductsController] Cannot load next page - HasMore: \(hasMorePages), Loading: \(loading.value)")
+            return
+        }
+        print("📄 [ProductsController] Loading next page: \(nextPage)")
         load(productQuery: ProductQuery(query: query.value), loading: false)
     }
     
     func didSearch(query: String) {
-        guard !query.isEmpty else { return }
+        print("🔍 [ProductsController] didSearch called - Query: '\(query)'")
+        guard !query.isEmpty else {
+            print("⚠️ [ProductsController] Empty query, ignoring search")
+            return
+        }
         update(productQuery: ProductQuery(query: query))
     }
     
     func didCancelSearch() {
+        print("🛑 [ProductsController] didCancelSearch called - Cancelling ongoing task")
         productsLoadTask?.cancel()
     }
     
@@ -357,6 +393,27 @@ extension DefaultProductsController {
     
     func didTapOpenCard() {
         onOpenCard?()
+    }
+    
+    /// Method để set flag khi được push từ màn khác
+    func setPushedFromOtherScreen(_ pushed: Bool) {
+        isPushedFromOtherScreen = pushed
+        // Update navigation state để reflect changes
+        updateNavigationState()
+    }
+    
+    /// Update navigation state với các thay đổi mới nhất
+    private func updateNavigationState() {
+        var currentState = navigationState.value
+        currentState.leftItem = navigationBarLeftItem
+        currentState.height = navigationBarInitialHeight
+        navigationState.value = currentState
+    }
+    
+    /// Handle back button tap
+    private func didTapBack() {
+        // Callback để pop navigation controller
+        onBack?()
     }
 }
 
@@ -398,6 +455,13 @@ extension DefaultProductsController {
     func onViewDidLoad() {
         // Initialize navigation state using customizable properties
         // All navigation bar properties can be customized by overriding the computed properties above
+        updateNavigationStateOnViewDidLoad()
+        
+        // Load initial products with default query
+        update(productQuery: ProductQuery(query: ""))
+    }
+    
+    private func updateNavigationStateOnViewDidLoad() {
         navigationState.value = EcoNavigationState(
             title: navigationBarTitle,
             titleFont: navigationBarTitleFont,
@@ -414,9 +478,6 @@ extension DefaultProductsController {
             backButtonStyle: .simple, // Use simple style for rightBarItem
             scrollBehavior: navigationBarScrollBehavior
         )
-        
-        // Load initial products with default query
-        update(productQuery: ProductQuery(query: ""))
     }
     
     func onViewWillAppear() {

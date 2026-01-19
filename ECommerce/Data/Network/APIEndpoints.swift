@@ -36,6 +36,18 @@ struct APIEndpoints {
         return ProductsEndpoints.getProducts(with: requestDTO)
     }
     
+    /// Search products endpoint
+    static func searchProducts(query: String) -> Endpoint<ProductsResponseDTO> {
+        return ProductsEndpoints.searchProducts(query: query)
+    }
+    
+    // MARK: - Categories Endpoints
+    
+    /// Get categories endpoint
+    static func getCategories() -> Endpoint<CategoriesResponseDTO> {
+        return CategoriesEndpoints.getCategories()
+    }
+    
     // MARK: - Grocery Endpoints
     // Add grocery endpoints here when needed
     // Example:
@@ -123,5 +135,10 @@ struct APIEndpoints {
     /// Get order detail endpoint
     static func getOrderDetail(orderId: Int) -> Endpoint<OrderDetailResponseDTO> {
         return OrderDetailEndpoints.getOrderDetail(orderId: orderId)
+    }
+    
+    /// Cancel order endpoint
+    static func cancelOrder(orderId: Int) -> Endpoint<CancelOrderResponseDTO> {
+        return OrderDetailEndpoints.cancelOrder(orderId: orderId)
     }
 }

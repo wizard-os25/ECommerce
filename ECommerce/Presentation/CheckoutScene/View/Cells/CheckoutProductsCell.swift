@@ -75,20 +75,20 @@ final class CheckoutProductsCell: UICollectionViewCell {
         productsCollectionView.register(ProductItemCheckoutCell.self, forCellWithReuseIdentifier: "ProductItemCheckoutCell")
         
         NSLayoutConstraint.activate([
-            shippingFeeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            shippingFeeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             shippingFeeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            itemsCountLabel.topAnchor.constraint(equalTo: shippingFeeLabel.bottomAnchor, constant: 16),
+            itemsCountLabel.topAnchor.constraint(equalTo: shippingFeeLabel.bottomAnchor, constant: 2),
             itemsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            productsCollectionView.topAnchor.constraint(equalTo: itemsCountLabel.bottomAnchor, constant: 12),
+            productsCollectionView.topAnchor.constraint(equalTo: itemsCountLabel.bottomAnchor, constant: 3),
             productsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             productsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             productsCollectionView.heightAnchor.constraint(equalToConstant: 150),
             
-            addNoteLabel.topAnchor.constraint(equalTo: productsCollectionView.bottomAnchor, constant: 12),
+            addNoteLabel.topAnchor.constraint(equalTo: productsCollectionView.bottomAnchor, constant: 3),
             addNoteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            addNoteLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            addNoteLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
         
         let noteTap = UITapGestureRecognizer(target: self, action: #selector(addNoteTapped))
@@ -98,7 +98,7 @@ final class CheckoutProductsCell: UICollectionViewCell {
     func configure(
         items: [CheckoutCartItem],
         note: String?,
-        shippingFee: Double?,
+        shippingFeePerItem: String?,
         onQuantityChanged: @escaping (Int, Int) -> Void,
         onTapAddNote: @escaping () -> Void
     ) {
@@ -109,13 +109,13 @@ final class CheckoutProductsCell: UICollectionViewCell {
         let totalItems = items.reduce(0) { $0 + $1.quantity }
         itemsCountLabel.text = "\(totalItems) items in total"
         
-        // Hiển thị shipping fee - "Calculate by address" nếu chưa có giá trị
-        if let shippingFee = shippingFee, shippingFee > 0 {
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .decimal
-            numberFormatter.groupingSeparator = "."
-            numberFormatter.maximumFractionDigits = 0
-            let shippingFormatted = numberFormatter.string(from: NSNumber(value: shippingFee)) ?? "0"
+        // Tính shipping fee: số lượng sản phẩm * shipping_fee từ address
+        if let shippingFeeString = shippingFeePerItem,
+           !shippingFeeString.isEmpty,
+           let shippingFeePerItemValue = Double(shippingFeeString),
+           shippingFeePerItemValue > 0 {
+            let totalShippingFee = shippingFeePerItemValue * Double(totalItems)
+            let shippingFormatted = totalShippingFee.formattedWithSeparatorWithoutTrailingZeros
             shippingFeeLabel.text = "\(shippingFormatted) vnd"
         } else {
             shippingFeeLabel.text = "Calculate by address"

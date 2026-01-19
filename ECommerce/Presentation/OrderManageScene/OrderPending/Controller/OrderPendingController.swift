@@ -86,9 +86,13 @@ final class DefaultOrderPendingController: OrderPendingController {
     
     var navigationBarLeftItem: EcoNavItem? {
         return EcoNavItem.back { [weak self] in
-            // Back action will be handled by view controller
+            self?.onBack?()
         }
     }
+    
+    // MARK: - Callbacks
+    
+    var onBack: (() -> Void)?
     
     var navigationBarTitleFont: UIFont? {
         return UIFont.boldSystemFont(ofSize: 19) // Slightly larger title

@@ -31,7 +31,7 @@ final class ProductItemCell: UITableViewCell {
         self.items = items
         
         nameLabel.text = items.name
-        priceLabel.text = items.price
+        priceLabel.text = "\(items.price) vnd"
         locationLabel.text = items.location
         descriptionLabel.text = items.description
         

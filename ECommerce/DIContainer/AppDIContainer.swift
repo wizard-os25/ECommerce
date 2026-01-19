@@ -52,6 +52,20 @@ final class AppDIContainer {
         return ProductsSceneDIContainer(dependencies: dependencies)
     }
     
+    func makeCategorySceneDIContainer() -> CategorySceneDIContainer {
+        let dependencies = CategorySceneDIContainer.Dependencies(
+            productsDataTransferService: productsDataTransferService
+        )
+        return CategorySceneDIContainer(dependencies: dependencies)
+    }
+    
+    func makeSearchSceneDIContainer() -> SearchSceneDIContainer {
+        let dependencies = SearchSceneDIContainer.Dependencies(
+            apiDataTransferService: productsDataTransferService
+        )
+        return SearchSceneDIContainer(dependencies: dependencies)
+    }
+    
     func makeAuthSceneDIContainer() -> AuthSceneDIContainer {
         let dependencies = AuthSceneDIContainer.Dependencies(
             apiDataTransferService: apiDataTransferService,

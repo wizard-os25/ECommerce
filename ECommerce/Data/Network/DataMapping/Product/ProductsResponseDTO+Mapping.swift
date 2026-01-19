@@ -18,6 +18,78 @@ struct ProductDTO: Decodable {
     let stars: Int?
     let location: String?
     let image: ProductImageDTO
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case description
+        case price
+        case stars
+        case location
+        case image
+    }
+    
+    // Custom decoder for price to handle both String and Number
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(Int.self, forKey: .id)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        stars = try container.decodeIfPresent(Int.self, forKey: .stars)
+        location = try container.decodeIfPresent(String.self, forKey: .location)
+        image = try container.decode(ProductImageDTO.self, forKey: .image)
+        
+        // Handle price as either String or Number (Int/Double)
+        if let priceString = try? container.decode(String.self, forKey: .price) {
+            price = priceString
+        } else if let priceDouble = try? container.decode(Double.self, forKey: .price) {
+            // Convert Double to String, removing trailing .00 if not needed
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.groupingSeparator = ","
+            formatter.usesGroupingSeparator = true
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 2
+            formatter.decimalSeparator = "."
+            
+            var formatted = formatter.string(from: NSNumber(value: priceDouble)) ?? String(priceDouble)
+            // Remove trailing .00 if not needed
+            if formatted.contains(".") {
+                while formatted.hasSuffix("0") && formatted.contains(".") {
+                    formatted = String(formatted.dropLast())
+                }
+                if formatted.hasSuffix(".") {
+                    formatted = String(formatted.dropLast())
+                }
+            }
+            price = formatted
+        } else if let priceInt = try? container.decode(Int.self, forKey: .price) {
+            // Convert Int to String
+            price = String(priceInt)
+        } else {
+            price = nil
+        }
+    }
+    
+    // Manual initializer for creating ProductDTO from code (e.g., from CoreData entity)
+    init(
+        id: Int,
+        name: String?,
+        description: String?,
+        price: String?,
+        stars: Int?,
+        location: String?,
+        image: ProductImageDTO
+    ) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.price = price
+        self.stars = stars
+        self.location = location
+        self.image = image
+    }
 }
 
 struct ProductImageDTO: Decodable {

@@ -55,6 +55,9 @@ final class OrderDeliveredViewController: EcoViewController {
             controller.onSelectOrderItem = { [weak self] item in
                 self?.navigateToOrderDetail(orderId: item.id)
             }
+            controller.onBack = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
@@ -63,7 +66,29 @@ final class OrderDeliveredViewController: EcoViewController {
         let appDIContainer = AppDIContainer()
         let orderDetailDIContainer = appDIContainer.makeOrderDetailDIContainer()
         let orderDetailVC = orderDetailDIContainer.makeOrderDetailViewController(orderId: orderId)
+        
+        // Setup cancel order success callback to remove from container
+        if let orderDetailController = orderDetailVC.controller as? DefaultOrderDetailController,
+           let orderContainerVC = findOrderContainerViewController() {
+            orderDetailController.onCancelOrderSuccess = { [weak orderContainerVC] canceledOrderId in
+                if let containerController = orderContainerVC?.orderContainerController as? DefaultOrderContainerController {
+                    containerController.removeOrder(orderId: canceledOrderId)
+                }
+            }
+        }
+        
         navigationController.pushViewController(orderDetailVC, animated: true)
+    }
+    
+    private func findOrderContainerViewController() -> OrderContainerViewController? {
+        var responder: UIResponder? = self
+        while responder != nil {
+            responder = responder?.next
+            if let orderContainerVC = responder as? OrderContainerViewController {
+                return orderContainerVC
+            }
+        }
+        return nil
     }
     
     // MARK: - Setup

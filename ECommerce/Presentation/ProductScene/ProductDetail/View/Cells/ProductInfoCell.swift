@@ -338,7 +338,7 @@ final class ProductInfoCell: UICollectionViewCell {
     
     func configure(with product: ProductDetailModel) {
         // Price
-        priceLabel.text = product.price
+        priceLabel.text = "\(product.price) vnd"
         
         // Description
         descriptionLabel.text = product.description
