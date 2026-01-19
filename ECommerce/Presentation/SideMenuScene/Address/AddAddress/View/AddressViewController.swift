@@ -175,7 +175,7 @@ final class AddressViewController: EcoViewController {
         scrollView.addSubview(contentView)
         
         // Constraints
-        let navBarHeight = addressController.navigationBarInitialHeight
+        let navBarHeight = addressController.navigationBarInitialHeight - 52
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

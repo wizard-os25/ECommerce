@@ -61,7 +61,7 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
     // Checkbox để set default card
     private var shouldSetDefaultCard: Bool = false
     
-    private var paymentMethodController: PaymentMethodController! {
+    var paymentMethodController: PaymentMethodController! {
         get { controller as? PaymentMethodController }
     }
     
@@ -90,6 +90,11 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         if let defaultController = paymentMethodController as? DefaultPaymentMethodController {
             defaultController.onShowPaymentSheet = { [weak self] in
                 self?.showPaymentSheetIfReady()
+            }
+            
+            // Setup callback to remove items from cart after successful payment
+            defaultController.onPaymentSuccess = { [weak self] in
+                self?.handlePaymentSuccess()
             }
         }
     }
@@ -458,6 +463,23 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
             case .failure(let error):
                 print("⚠️ [Saved Card] Failed to create payment intent: \(error.localizedDescription)")
                 completion(.failure(error))
+            }
+        }
+    }
+    
+    private func handlePaymentSuccess() {
+        // Update progress indicator to show success
+        progressIndicator.setSuccessStepCompleted()
+        
+        // Remove purchased items from cart
+        if let defaultController = paymentMethodController as? DefaultPaymentMethodController {
+            let productIds = defaultController.getPurchasedProductIds()
+            if !productIds.isEmpty {
+                let appDIContainer = AppDIContainer.shared
+                let cartDIContainer = appDIContainer.makeCartSceneDIContainer()
+                let cartController = cartDIContainer.makeCartController()
+                cartController.didDeleteItems(productIds: productIds)
+                print("🛒 [PaymentMethodViewController] Removed \(productIds.count) items from cart after successful payment")
             }
         }
     }
@@ -1031,6 +1053,8 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
         // Call confirm payment API
         defaultController.confirmPayment(paymentIntentId: paymentIntentId) { [weak self] success in
             if success {
+                // Handle payment success (remove items from cart)
+                self?.handlePaymentSuccess()
                 // Show success message
                 self?.showSuccessAlert()
             } else {

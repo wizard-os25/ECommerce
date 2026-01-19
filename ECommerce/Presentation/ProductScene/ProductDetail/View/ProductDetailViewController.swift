@@ -77,7 +77,35 @@ final class ProductDetailViewController: EcoViewController {
             defaultProductDetailController.onBack = { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             }
+            
+            defaultProductDetailController.onTapCart = { [weak self] in
+                self?.navigateToCart()
+            }
+            
+            defaultProductDetailController.onTapSearch = { [weak self] in
+                self?.navigateToSearch()
+            }
         }
+    }
+    
+    private func navigateToSearch() {
+        guard let navigationController = navigationController else { return }
+        
+        let appDIContainer = AppDIContainer.shared
+        let searchSceneDIContainer = appDIContainer.makeSearchSceneDIContainer()
+        let searchVC = searchSceneDIContainer.makeSearchViewController()
+        
+        navigationController.pushViewController(searchVC, animated: true)
+    }
+    
+    private func navigateToCart() {
+        guard let navigationController = navigationController else { return }
+        
+        let appDIContainer = AppDIContainer.shared
+        let cartSceneDIContainer = appDIContainer.makeCartSceneDIContainer()
+        let cartCoordinatingController = cartSceneDIContainer.makeCartCoordinatingController(navigationController: navigationController)
+        
+        cartCoordinatingController.start()
     }
     
     // MARK: - Setup
@@ -125,7 +153,7 @@ final class ProductDetailViewController: EcoViewController {
     }
     
     private func setupOrderUseCase() {
-        let appDIContainer = AppDIContainer()
+        let appDIContainer = AppDIContainer.shared
         let orderDIContainer = appDIContainer.makeOrderDIContainer()
         orderUseCase = orderDIContainer.makeOrderUseCase()
     }
@@ -243,7 +271,7 @@ final class ProductDetailViewController: EcoViewController {
         
         // Create OrderViewController with cart items
         let cartItems = [CartItem(id: product.id, quantity: itemQuantity)]
-        let appDIContainer = AppDIContainer()
+        let appDIContainer = AppDIContainer.shared
         let orderDIContainer = appDIContainer.makeOrderDIContainer()
         let orderVC = orderDIContainer.makeOrderViewController(cartItems: cartItems, product: product, isAddToCardMode: true)
         
@@ -317,7 +345,7 @@ final class ProductDetailViewController: EcoViewController {
         
         // Create OrderViewController with cart items
         let cartItems = [CartItem(id: product.id, quantity: itemQuantity)]
-        let appDIContainer = AppDIContainer()
+        let appDIContainer = AppDIContainer.shared
         let orderDIContainer = appDIContainer.makeOrderDIContainer()
         let orderVC = orderDIContainer.makeOrderViewController(cartItems: cartItems, product: product)
         
@@ -420,6 +448,41 @@ final class ProductDetailViewController: EcoViewController {
         // OrderActionView ở dưới navbar nhưng trên collection view
         view.bringSubviewToFront(orderActionView)
     }
+    
+    // MARK: - Navigation Override
+    
+    override func applyNavigation(_ state: EcoNavigationState) {
+        super.applyNavigation(state)
+        
+        // Setup searchTextField để disable input và navigate khi tap
+        DispatchQueue.main.async { [weak self] in
+            self?.setupSearchTextField()
+        }
+    }
+    
+    private func setupSearchTextField() {
+        guard let navBarView = navigationBarViewController?.view as? EcoNavigationBarView else { return }
+        let searchTextField = navBarView.searchField
+        
+        // Remove existing tap gestures
+        if let gestures = searchTextField.gestureRecognizers {
+            for gesture in gestures {
+                searchTextField.removeGestureRecognizer(gesture)
+            }
+        }
+        
+        // Disable user input vào searchTextField (không cho user type)
+        searchTextField.isEnabled = false
+        
+        // Add tap gesture để navigate to SearchViewController khi tap vào searchTextField
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(searchTextFieldTapped))
+        searchTextField.addGestureRecognizer(tapGesture)
+        searchTextField.isUserInteractionEnabled = true // Enable để nhận tap gesture
+    }
+    
+    @objc private func searchTextFieldTapped() {
+        navigateToSearch()
+    }
 }
 
 // MARK: - OrderActionViewDelegate
@@ -457,7 +520,7 @@ extension ProductDetailViewController: OrderActionViewDelegate {
         let cartItems = [CartItem(id: productDetailModel.id, quantity: itemQuantity)]
         
         // Use CheckoutSceneDIContainer to create CheckoutViewController with proper controller injection
-        let appDIContainer = AppDIContainer()
+        let appDIContainer = AppDIContainer.shared
         let checkoutSceneDIContainer = appDIContainer.makeCheckoutSceneDIContainer()
         let checkoutVC = checkoutSceneDIContainer.makeCheckoutViewController(cartItems: cartItems, product: productDetailModel)
         

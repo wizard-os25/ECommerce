@@ -108,6 +108,8 @@ final class DefaultProductDetailController: ProductDetailController {
     // MARK: - Callbacks
     
     var onBack: (() -> Void)?
+    var onTapCart: (() -> Void)?
+    var onTapSearch: (() -> Void)?
     
     // MARK: - Private Methods
     
@@ -117,12 +119,12 @@ final class DefaultProductDetailController: ProductDetailController {
     
     private func didTapSearch() {
         print("🔍 [ProductDetailController] Search button tapped - will open Search screen")
-        // TODO: Implement navigation to Search screen
+        onTapSearch?()
     }
     
     private func didTapCart() {
         print("🛒 [ProductDetailController] Cart button tapped - will open Cart screen")
-        // TODO: Implement navigation to Cart screen
+        onTapCart?()
     }
 }
 

@@ -119,6 +119,7 @@ final class DefaultCheckoutController: CheckoutController {
         paymentCardUseCase: PaymentCardUseCase,
         cartItems: [CartItem],
         product: ProductDetailModel?,
+        productMap: [Int: ProductDetailModel]? = nil, // Map productId -> ProductDetailModel for multiple items
         utilities: Utilities = Utilities(),
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
@@ -128,8 +129,24 @@ final class DefaultCheckoutController: CheckoutController {
         self.mainQueue = mainQueue
         
         // Convert CartItem to CheckoutCartItem với product details
-        if let product = product {
-            // Nếu có product details, sử dụng thông tin từ đó
+        // Priority: productMap > product > fallback
+        if let productMap = productMap {
+            // Nếu có productMap, sử dụng thông tin riêng cho từng item
+            self.cartItems.value = cartItems.compactMap { item in
+                guard let product = productMap[item.id] else {
+                    print("⚠️ [CheckoutController] No product info found for productId: \(item.id)")
+                    return nil
+                }
+                return CheckoutCartItem(
+                    productId: item.id,
+                    productName: product.name,
+                    productImageUrl: product.imageUrl,
+                    price: product.price,
+                    quantity: item.quantity
+                )
+            }
+        } else if let product = product {
+            // Nếu có single product details, sử dụng thông tin từ đó (backward compatibility)
             self.cartItems.value = cartItems.map { item in
                 CheckoutCartItem(
                     productId: item.id,
@@ -154,6 +171,17 @@ final class DefaultCheckoutController: CheckoutController {
         
         // Check if address exists
         checkAddressStatus()
+    }
+    
+    // Store product IDs for removal after successful payment
+    private var purchasedProductIds: [Int] = []
+    
+    func setPurchasedProductIds(_ productIds: [Int]) {
+        purchasedProductIds = productIds
+    }
+    
+    func getPurchasedProductIds() -> [Int] {
+        return purchasedProductIds
     }
     
     // MARK: - Private

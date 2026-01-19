@@ -86,7 +86,7 @@ final class CheckoutProductsCell: UICollectionViewCell {
             productsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             productsCollectionView.heightAnchor.constraint(equalToConstant: 150),
             
-            addNoteLabel.topAnchor.constraint(equalTo: productsCollectionView.bottomAnchor, constant: 3),
+            addNoteLabel.topAnchor.constraint(equalTo: productsCollectionView.bottomAnchor, constant: 8),
             addNoteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             addNoteLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
@@ -144,7 +144,7 @@ extension CheckoutProductsCell: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 120, height: 150)
+        return CGSize(width: 120, height: 172)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -158,11 +158,12 @@ private class ProductItemCheckoutCell: UICollectionViewCell {
     
     private let imageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFit // Đổi sang fit để ảnh vừa vặn trong khung
+        iv.clipsToBounds = true // Clip để image không tràn
         iv.layer.cornerRadius = 8
         iv.backgroundColor = .systemGray5
         iv.translatesAutoresizingMaskIntoConstraints = false
+        
         return iv
     }()
     
@@ -170,7 +171,7 @@ private class ProductItemCheckoutCell: UICollectionViewCell {
         let label = UILabel()
         label.font = Typography.fontRegular12
         label.textColor = Colors.tokenDark100
-        label.numberOfLines = 2
+        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -252,17 +253,23 @@ private class ProductItemCheckoutCell: UICollectionViewCell {
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 80),
             
+            // Căn chỉnh nameLabel center với imageView
             nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 4),
-            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            nameLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            nameLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor),
+            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor),
             
+            // Căn chỉnh priceLabel center với imageView
             priceLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4),
-            priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            priceLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            priceLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor),
+            priceLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor),
             
-            quantityStack.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
-            quantityStack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            // Căn chỉnh quantityStack center với imageView
+            quantityStack.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 6),
+            quantityStack.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             quantityStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            quantityStack.widthAnchor.constraint(equalToConstant: 90), // 0.75 của 120 = 90
+            quantityStack.widthAnchor.constraint(equalToConstant: 90),
             quantityStack.heightAnchor.constraint(equalToConstant: 32),
             
             minusButton.widthAnchor.constraint(equalToConstant: 30),
@@ -279,7 +286,7 @@ private class ProductItemCheckoutCell: UICollectionViewCell {
         self.onQuantityChanged = onQuantityChanged
         
         nameLabel.text = item.productName
-        priceLabel.text = item.price
+        priceLabel.text = "\(item.price) vnd"
         quantityLabel.text = "\(item.quantity)"
         
         // Load product image

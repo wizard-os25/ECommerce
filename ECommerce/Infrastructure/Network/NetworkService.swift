@@ -171,12 +171,12 @@ final class DefaultNetworkSessionManager: NetworkSessionManager {
         // Nếu set true, app sẽ đợi vài phút khi mạng yếu, làm loading lâu
         configuration.waitsForConnectivity = false
         
-        // Timeout ngắn hơn cho local network (web nhanh nên app cũng nên nhanh)
-        // timeoutIntervalForRequest: thời gian đợi response từ server (10s đủ cho local network)
-        configuration.timeoutIntervalForRequest = 10
+        // Timeout tăng lên 60s để xử lý các request chậm hoặc network không ổn định
+        // timeoutIntervalForRequest: thời gian đợi response từ server (60s)
+        configuration.timeoutIntervalForRequest = 60
         
-        // timeoutIntervalForResource: tổng thời gian cho toàn bộ request (20s đủ cho local network)
-        configuration.timeoutIntervalForResource = 20
+        // timeoutIntervalForResource: tổng thời gian cho toàn bộ request (120s)
+        configuration.timeoutIntervalForResource = 120
         
         // Tăng số kết nối đồng thời để tăng tốc độ
         configuration.httpMaximumConnectionsPerHost = 6

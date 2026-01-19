@@ -82,7 +82,7 @@ final class CheckoutOrderSummaryCell: UICollectionViewCell {
         contentView.addSubview(totalValueLabel)
         
         NSLayoutConstraint.activate([
-            subtotalLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            subtotalLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             subtotalLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
             subtotalValueLabel.centerYAnchor.constraint(equalTo: subtotalLabel.centerYAnchor),

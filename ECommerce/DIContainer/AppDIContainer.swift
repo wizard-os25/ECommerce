@@ -2,6 +2,12 @@ import Foundation
 
 final class AppDIContainer {
     
+    // Shared singleton instance
+    static let shared: AppDIContainer = {
+        print("🛒 [AppDIContainer] Creating shared singleton instance")
+        return AppDIContainer()
+    }()
+    
     lazy var appConfiguration = AppConfiguration()
     
     // MARK: - Network
@@ -136,6 +142,14 @@ final class AppDIContainer {
         return sharedSideMenuSceneDIContainer
     }
     
+    // Shared instance to ensure same CartController is used everywhere
+    private lazy var sharedCartSceneDIContainer: CartSceneDIContainer = {
+        print("🛒 [AppDIContainer] Creating shared CartSceneDIContainer (lazy initialization)")
+        let container = CartSceneDIContainer()
+        print("   Container instance ID: \(ObjectIdentifier(container))")
+        return container
+    }()
+    
     func makeMainSceneDIContainer() -> MainSceneDIContainer {
         let dependencies = MainSceneDIContainer.Dependencies(
             sideMenuSceneDIContainer: makeSideMenuSceneDIContainer(),
@@ -150,6 +164,12 @@ final class AppDIContainer {
             mainSceneDIContainer: makeMainSceneDIContainer()
         )
         return OnboardSceneDIContainer(dependencies: dependencies)
+    }
+    
+    func makeCartSceneDIContainer() -> CartSceneDIContainer {
+        print("🛒 [AppDIContainer] makeCartSceneDIContainer called")
+        print("   Returning sharedCartSceneDIContainer instance ID: \(ObjectIdentifier(sharedCartSceneDIContainer))")
+        return sharedCartSceneDIContainer
     }
     
     func makeOrderContainerDIContainer() -> OrderContainerDIContainer {

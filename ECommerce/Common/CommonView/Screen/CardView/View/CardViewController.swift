@@ -37,10 +37,6 @@ public final class CardViewController: EcoViewController {
     // Visual effects - blur effect view
     private var visualEffectView: UIVisualEffectView?
     
-    // Custom navigation bar for OrderViewController
-    private var customNavBarView: UIView?
-    private var customNavBarTitleLabel: UILabel?
-    
     // MARK: - Lifecycle
     
     public static func create(
@@ -220,70 +216,19 @@ public final class CardViewController: EcoViewController {
             child.removeFromParent()
         }
         
-        // Remove custom navbar if exists
-        customNavBarView?.removeFromSuperview()
-        customNavBarView = nil
-        customNavBarTitleLabel = nil
-        
-        // Check if content is OrderViewController - add custom navbar
-        if contentViewController is OrderViewController {
-            setupCustomNavBar()
-        }
-        
         // Add new content
         addChild(contentViewController)
         contentContainerView.addSubview(contentViewController.view)
         contentViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
-        if customNavBarView != nil {
-            // If custom navbar exists, content should be below it
-            NSLayoutConstraint.activate([
-                contentViewController.view.topAnchor.constraint(equalTo: customNavBarView!.bottomAnchor),
-                contentViewController.view.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor),
-                contentViewController.view.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor),
-                contentViewController.view.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor)
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-                contentViewController.view.topAnchor.constraint(equalTo: contentContainerView.topAnchor),
-                contentViewController.view.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor),
-                contentViewController.view.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor),
-                contentViewController.view.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor)
-            ])
-        }
-        
-        contentViewController.didMove(toParent: self)
-    }
-    
-    private func setupCustomNavBar() {
-        // Create custom navbar view
-        let navBarView = UIView()
-        navBarView.backgroundColor = .white
-        navBarView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(navBarView)
-        
-        // Create title label
-        let titleLabel = UILabel()
-        titleLabel.text = "Order"
-        titleLabel.font = Typography.fontBold18
-        titleLabel.textColor = Colors.tokenDark100
-        titleLabel.textAlignment = .center
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        navBarView.addSubview(titleLabel)
-        
         NSLayoutConstraint.activate([
-            navBarView.topAnchor.constraint(equalTo: view.topAnchor),
-            navBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            navBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            navBarView.heightAnchor.constraint(equalToConstant: 56), // Giảm từ 80 xuống 56 để lộ drag indicator
-            
-            titleLabel.centerXAnchor.constraint(equalTo: navBarView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: navBarView.centerYAnchor, constant: 8) // Giảm offset
+            contentViewController.view.topAnchor.constraint(equalTo: contentContainerView.topAnchor),
+            contentViewController.view.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor),
+            contentViewController.view.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor),
+            contentViewController.view.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor)
         ])
         
-        customNavBarView = navBarView
-        customNavBarTitleLabel = titleLabel
-        view.bringSubviewToFront(navBarView)
+        contentViewController.didMove(toParent: self)
     }
     
     /// Set content view into content container

@@ -27,6 +27,8 @@ protocol PaymentMethodControllerOutput {
     var screenTitle: String { get }
     var onShowPaymentSheet: (() -> Void)? { get set } // Callback to show PaymentSheet
     var onPaymentSuccess: (() -> Void)? { get set } // Callback when payment is confirmed
+    func setPurchasedProductIds(_ productIds: [Int])
+    func getPurchasedProductIds() -> [Int]
 }
 
 typealias PaymentMethodController = PaymentMethodControllerInput & PaymentMethodControllerOutput & EcoController
@@ -58,6 +60,18 @@ final class DefaultPaymentMethodController: PaymentMethodController {
     
     var onShowPaymentSheet: (() -> Void)?
     var onPaymentSuccess: (() -> Void)?
+    
+    // Store product IDs for removal after successful payment
+    private var purchasedProductIds: [Int] = []
+    
+    func setPurchasedProductIds(_ productIds: [Int]) {
+        purchasedProductIds = productIds
+        print("🛒 [PaymentMethodController] Set purchased product IDs: \(productIds)")
+    }
+    
+    func getPurchasedProductIds() -> [Int] {
+        return purchasedProductIds
+    }
     
     // MARK: - EcoController Output
     

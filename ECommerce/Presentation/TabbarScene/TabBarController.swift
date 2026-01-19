@@ -17,17 +17,16 @@ class TabBarController: UITabBarController {
         let contentVC = ContentViewController()
         
         // Tab 1: Search - SearchViewController
-        let appDIContainer = AppDIContainer()
+        let appDIContainer = AppDIContainer.shared
         let searchSceneDIContainer = appDIContainer.makeSearchSceneDIContainer()
         let searchVC = searchSceneDIContainer.makeSearchViewController()
         
         // Setup search callbacks để navigate đến ProductsViewController
         setupSearchCallbacks(searchVC, searchSceneDIContainer: searchSceneDIContainer)
         
-        // Tab 2: Cart - Simple view controller
-        let cartVC = UIViewController()
-        cartVC.view.backgroundColor = .systemOrange
-        cartVC.title = "cart".localized()
+        // Tab 2: Cart - CartViewController
+        let cartSceneDIContainer = appDIContainer.makeCartSceneDIContainer()
+        let cartVC = cartSceneDIContainer.makeCartViewController()
         
         // Tab 3: Account - Simple view controller
         let accountVC = UIViewController()

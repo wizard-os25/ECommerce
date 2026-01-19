@@ -98,6 +98,22 @@ class CheckoutProgressIndicator: UIView {
             }
         }
     }
+    
+    /// Mark success step as completed with red color to indicate payment completion
+    func setSuccessStepCompleted() {
+        // Update to success step
+        updateProgress(to: .success)
+        
+        // Set success step (last step) to red color
+        if let successStepView = stepViews.last {
+            successStepView.setSuccessCompleted()
+        }
+        
+        // Ensure connector between confirmPayment and success is filled
+        if connectorViews.count >= 1 {
+            connectorViews[1].backgroundColor = Colors.tokenRainbowBlueEnd // Tô đầy connector cuối cùng
+        }
+    }
 }
 
 private class StepView: UIView {
@@ -163,5 +179,14 @@ private class StepView: UIView {
             iconImageView.image = HelperFunction.getImage(named: "ic_new_tick_not_select", in: bundle)
             titleLabel.textColor = Colors.tokenDark60
         }
+    }
+    
+    /// Mark as success completed with red color (for payment success step)
+    func setSuccessCompleted() {
+        let bundle = Bundle.main
+        // Use ic_radio_check for completed steps
+        iconImageView.image = HelperFunction.getImage(named: "ic_radio_check", in: bundle)
+        // Use red color to indicate payment completion
+        titleLabel.textColor = Colors.tokenRed100
     }
 }

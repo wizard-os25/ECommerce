@@ -653,7 +653,7 @@ extension CheckoutViewController {
         guard let navigationController = navigationController else { return }
         
         // Create DIContainer
-        let appDIContainer = AppDIContainer()
+        let appDIContainer = AppDIContainer.shared
         let checkoutDIContainer = appDIContainer.makeCheckoutSceneDIContainer()
         let paymentMethodVC = checkoutDIContainer.makePaymentMethodViewController(
             order: order,
@@ -662,6 +662,15 @@ extension CheckoutViewController {
             customerId: customerId,
             ephemeralKey: ephemeralKey
         )
+        
+        // Pass purchased product IDs to PaymentMethodController for removal after payment success
+        if let defaultCheckoutController = checkoutController as? DefaultCheckoutController {
+            let productIds = defaultCheckoutController.getPurchasedProductIds()
+            if let defaultPaymentController = paymentMethodVC.paymentMethodController as? DefaultPaymentMethodController {
+                defaultPaymentController.setPurchasedProductIds(productIds)
+            }
+        }
+        
         navigationController.pushViewController(paymentMethodVC, animated: true)
     }
 }

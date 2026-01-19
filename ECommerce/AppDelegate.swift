@@ -14,7 +14,9 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let appConfiguration = AppConfiguration()
-    let appDIContainer = AppDIContainer()
+    var appDIContainer: AppDIContainer {
+        return AppDIContainer.shared
+    }
     var appFlowCoordinator: AppFlowCoordinator?
     var window: UIWindow?
     var splashCoordinatingController: SplashCoordinatingController? // Keep strong reference

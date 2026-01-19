@@ -367,16 +367,43 @@ extension OrderViewController: OrderActionViewDelegate {
             guard let product = orderController.product.value,
                   let firstItem = orderController.cartItems.value.first else { return }
             
-            let priceNumber = product.price.convertMoneyToNumber()
-            let totalPrice = priceNumber * Double(quantity)
-            let productId = product.id
-            
-            // TODO: Save to cart management screen
-            // For now, just print
-            print("✅ [OrderViewController] Add to card:")
-            print("   Product ID: \(productId)")
+            print("🛒 [OrderViewController] ========================================")
+            print("🛒 [OrderViewController] orderActionViewDidTapAction - Add to card mode")
+            print("   Product ID: \(product.id)")
+            print("   Product Name: \(product.name)")
             print("   Quantity: \(quantity)")
-            print("   Total Price: \(totalPrice)")
+            print("   Price: \(product.price)")
+            
+            // Get shared cart controller
+            let appDIContainer = AppDIContainer.shared
+            print("   ✅ AppDIContainer.shared retrieved")
+            
+            let cartDIContainer = appDIContainer.makeCartSceneDIContainer()
+            print("   ✅ CartSceneDIContainer retrieved (shared instance)")
+            
+            let cartController = cartDIContainer.makeCartController()
+            print("   ✅ CartController retrieved. Type: \(type(of: cartController))")
+            if let defaultController = cartController as? DefaultCartController {
+                print("   ✅ CartController instance ID: \(ObjectIdentifier(defaultController))")
+            }
+            
+            // Add item to cart
+            print("   📦 Calling cartController.didAddItem...")
+            cartController.didAddItem(
+                productId: product.id,
+                productName: product.name,
+                productDescription: product.description,
+                productImageUrl: product.imageUrl,
+                price: product.price,
+                quantity: quantity
+            )
+            print("   ✅ cartController.didAddItem completed")
+            print("🛒 [OrderViewController] ========================================")
+            
+            // Dismiss card if exists
+            if let cardVC = parent as? CardViewController {
+                cardVC.dismiss(animated: true)
+            }
             
             // Show success message
             showAlert(
@@ -396,16 +423,26 @@ extension OrderViewController: OrderActionViewDelegate {
         guard let product = orderController.product.value,
               let firstItem = orderController.cartItems.value.first else { return }
         
-        let priceNumber = product.price.convertMoneyToNumber()
-        let totalPrice = priceNumber * Double(quantity)
-        let productId = product.id
+        // Get shared cart controller
+        let appDIContainer = AppDIContainer.shared
+        let cartDIContainer = appDIContainer.makeCartSceneDIContainer()
+        let cartController = cartDIContainer.makeCartController()
         
-        // TODO: Save to cart management screen
+        // Add item to cart
+        cartController.didAddItem(
+            productId: product.id,
+            productName: product.name,
+            productDescription: product.description,
+            productImageUrl: product.imageUrl,
+            price: product.price,
+            quantity: quantity
+        )
+        
         print("✅ [OrderViewController] Add to card via left icon:")
-        print("   Product ID: \(productId)")
+        print("   Product ID: \(product.id)")
         print("   Quantity: \(quantity)")
-        print("   Total Price: \(totalPrice)")
         
+        // Show success message
         showAlert(
             title: "Success",
             message: "Product added to cart successfully!"

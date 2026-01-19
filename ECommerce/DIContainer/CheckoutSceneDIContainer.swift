@@ -57,12 +57,19 @@ final class CheckoutSceneDIContainer: CheckoutCoordinatingControllerDependencies
         )
     }
     
-    func makeCheckoutController(cartItems: [CartItem], product: ProductDetailModel?) -> CheckoutController {
+    func makeCheckoutViewController(cartItems: [CartItem], productMap: [Int: ProductDetailModel]) -> CheckoutViewController {
+        CheckoutViewController.create(
+            with: makeCheckoutController(cartItems: cartItems, product: nil, productMap: productMap)
+        )
+    }
+    
+    func makeCheckoutController(cartItems: [CartItem], product: ProductDetailModel?, productMap: [Int: ProductDetailModel]? = nil) -> CheckoutController {
         DefaultCheckoutController(
             orderUseCase: makeOrderUseCase(),
             paymentCardUseCase: makePaymentCardUseCase(),
             cartItems: cartItems,
-            product: product
+            product: product,
+            productMap: productMap
         )
     }
     
