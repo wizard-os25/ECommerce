@@ -66,7 +66,6 @@ final class DefaultPaymentMethodController: PaymentMethodController {
     
     func setPurchasedProductIds(_ productIds: [Int]) {
         purchasedProductIds = productIds
-        print("🛒 [PaymentMethodController] Set purchased product IDs: \(productIds)")
     }
     
     func getPurchasedProductIds() -> [Int] {
@@ -292,7 +291,6 @@ extension DefaultPaymentMethodController {
                 switch result {
                 case .success:
                     // Payment confirmed successfully
-                    print("✅ Payment confirmed successfully")
                     completion(true)
                 case .failure(let error):
                     self.error.value = error
@@ -382,11 +380,6 @@ extension DefaultPaymentMethodController {
         let totalAmount = order.totalAmount
         let amount = Int(totalAmount)  // VND: amount trực tiếp
         
-        print("💰 [PaymentMethodController] Creating payment intent with saved payment method")
-        print("   - order.totalAmount (Double): \(totalAmount)")
-        print("   - amount (Int, VND trực tiếp): \(amount)")
-        print("   - paymentMethodId: \(paymentMethodId)")
-        print("   - 📤 Sending to backend: amount = \(amount), payment_method_id = \(paymentMethodId)")
         
         createPaymentIntentTask = paymentCardUseCase.createPaymentIntent(
             orderId: order.orderId,
@@ -425,11 +418,6 @@ extension DefaultPaymentMethodController {
         let totalAmount = order.totalAmount
         let amount = Int(totalAmount)  // VND: amount trực tiếp
         
-        print("💰 [PaymentMethodController] Creating payment intent for NEW card (without payment_method_id)")
-        print("   - order.totalAmount (Double): \(totalAmount)")
-        print("   - amount (Int, VND trực tiếp): \(amount)")
-        print("   - ⚠️ KHÔNG gửi payment_method_id vì thẻ mới chưa attach vào customer")
-        print("   - 📤 Sending to backend: amount = \(amount), payment_method_id = nil")
         
         createPaymentIntentTask = paymentCardUseCase.createPaymentIntent(
             orderId: order.orderId,

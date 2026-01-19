@@ -19,6 +19,7 @@ public struct User: Identifiable {
     public let orderCount: Int
     public let memberSinceDays: Int
     public let createdAt: Date?
+    public let isEmailVerified: Bool
     
     public init(
         id: Identifier,
@@ -29,7 +30,8 @@ public struct User: Identifiable {
         bankAccount: [String] = [],
         orderCount: Int = 0,
         memberSinceDays: Int = 0,
-        createdAt: Date? = nil
+        createdAt: Date? = nil,
+        isEmailVerified: Bool = false
     ) {
         self.id = id
         self.fullName = fullName
@@ -40,6 +42,7 @@ public struct User: Identifiable {
         self.orderCount = orderCount
         self.memberSinceDays = memberSinceDays
         self.createdAt = createdAt
+        self.isEmailVerified = isEmailVerified
     }
 }
 

@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(reloadAppForLanguageChange),
-            name: .LanguageChangeNotification,
+            name: Foundation.Notification.Name.LanguageChangeNotification,
             object: nil
         )
 
@@ -342,6 +342,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print("   Title: \(notification.request.content.title)")
         print("   Body: \(notification.request.content.body)")
         print("   UserInfo: \(userInfo)")
+        
+        // Notify that a new push notification has arrived
+        // This will trigger refresh in NotificationViewController if it's currently visible
+        // Post on main thread to ensure UI updates happen correctly
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .newPushNotificationReceived, object: nil)
+        }
         
         // Show notification as banner, sound, and badge even when app is active
         if #available(iOS 14.0, *) {

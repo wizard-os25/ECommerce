@@ -29,6 +29,11 @@ struct APIEndpoints {
         return AuthEndpoints.getUserInfo()
     }
     
+    /// Resend email verification endpoint
+    static func resendEmailVerification() -> Endpoint<Void> {
+        return AuthEndpoints.resendEmailVerification()
+    }
+    
     // MARK: - Products Endpoints
     
     /// Get products endpoint

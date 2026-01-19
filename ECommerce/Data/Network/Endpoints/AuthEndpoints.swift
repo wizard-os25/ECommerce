@@ -47,4 +47,13 @@ enum AuthEndpoints {
             method: .get
         )
     }
+    
+    // MARK: - Email Verification
+    
+    static func resendEmailVerification() -> Endpoint<Void> {
+        return Endpoint(
+            path: "api/v1/auth/email/verify/resend",
+            method: .post
+        )
+    }
 }

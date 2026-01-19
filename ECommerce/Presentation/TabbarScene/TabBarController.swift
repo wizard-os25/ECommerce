@@ -11,7 +11,6 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("🟢 TabBarController loaded thành công")
         
         // Tab 0: Home (ContentViewController với SegmentedPageContainer)
         let contentVC = ContentViewController()
@@ -28,43 +27,42 @@ class TabBarController: UITabBarController {
         let cartSceneDIContainer = appDIContainer.makeCartSceneDIContainer()
         let cartVC = cartSceneDIContainer.makeCartViewController()
         
-        // Tab 3: Account - Simple view controller
-        let accountVC = UIViewController()
-        accountVC.view.backgroundColor = .systemGreen
-        accountVC.title = "account".localized()
+        // Tab 3: Notification - NotificationViewController
+        let notificationSceneDIContainer = appDIContainer.makeNotificationSceneDIContainer()
+        let notificationVC = notificationSceneDIContainer.makeNotificationViewController()
         
         // Wrap in Navigation Controllers
         let navTabContainer = UINavigationController(rootViewController: contentVC)
         let navSearch = UINavigationController(rootViewController: searchVC)
         let navCart = UINavigationController(rootViewController: cartVC)
-        let navAccount = UINavigationController(rootViewController: accountVC)
+        let navNotification = UINavigationController(rootViewController: notificationVC)
         
         // Set delegates to track navigation
         navTabContainer.delegate = self
         navSearch.delegate = self
         navCart.delegate = self
-        navAccount.delegate = self
+        navNotification.delegate = self
         
         // Hide system navigation bar since we use custom EcoNavigationBar
         navTabContainer.isNavigationBarHidden = true
         navSearch.isNavigationBarHidden = true
         navCart.isNavigationBarHidden = true
-        navAccount.isNavigationBarHidden = true
+        navNotification.isNavigationBarHidden = true
         
         /// Set TabBar item - Home (Trang chủ), Search, Cart, Notification
         contentVC.tabBarItem = UITabBarItem(title: "Trang chủ", image: UIImage(systemName: "house"), tag: 0)
         searchVC.tabBarItem = UITabBarItem(title: "search".localized(), image: UIImage(systemName: "magnifyingglass"), tag: 1)
         cartVC.tabBarItem = UITabBarItem(title: "cart".localized(), image: UIImage(systemName: "cart"), tag: 2)
-        accountVC.tabBarItem = UITabBarItem(title: "notification".localized(), image: UIImage(systemName: "bell"), tag: 3)
+        notificationVC.tabBarItem = UITabBarItem(title: "notification".localized(), image: UIImage(systemName: "bell"), tag: 3)
         
         // Set ViewControllers
-        self.setViewControllers([navTabContainer, navSearch, navCart, navAccount], animated: true)
+        self.setViewControllers([navTabContainer, navSearch, navCart, navNotification], animated: true)
         
         // Add child view controllers (QUAN TRỌNG - theo best practice)
         self.addChild(navTabContainer)
         self.addChild(navSearch)
         self.addChild(navCart)
-        self.addChild(navAccount)
+        self.addChild(navNotification)
         
         // Configure TabBar appearance
         configureTabBarAppearance()
@@ -146,7 +144,6 @@ class TabBarController: UITabBarController {
             
             // Tìm navigation controller của Search tab
             guard let navSearch = self.viewControllers?[1] as? UINavigationController else {
-                print("⚠️ [TabBarController] Cannot find Search navigation controller")
                 return
             }
             

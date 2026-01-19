@@ -126,26 +126,15 @@ extension DefaultCartController {
     }
     
     func didAddItem(productId: Int, productName: String, productDescription: String, productImageUrl: String?, price: String, quantity: Int) {
-        print("🛒 [CartController] ========================================")
-        print("🛒 [CartController] didAddItem called")
-        print("   Product ID: \(productId)")
-        print("   Product Name: \(productName)")
-        print("   Quantity: \(quantity)")
-        print("   Price: \(price)")
-        print("   Current cart items count BEFORE: \(cartItems.value.count)")
         
         var items = cartItems.value
         
         // Check if item already exists
         if let index = items.firstIndex(where: { $0.productId == productId }) {
             // Update quantity if exists
-            print("   ✅ Item already exists at index \(index), updating quantity")
-            print("   Old quantity: \(items[index].quantity)")
             items[index].quantity += quantity
-            print("   New quantity: \(items[index].quantity)")
         } else {
             // Add new item
-            print("   ✅ Adding new item to cart")
             let newItem = CartItemModel(
                 productId: productId,
                 productName: productName,
@@ -156,23 +145,13 @@ extension DefaultCartController {
                 isSelected: true
             )
             items.append(newItem)
-            print("   ✅ New item added. Item details:")
-            print("      - ID: \(newItem.productId)")
-            print("      - Name: \(newItem.productName)")
-            print("      - Quantity: \(newItem.quantity)")
-            print("      - Price: \(newItem.price)")
         }
         
-        print("   Current cart items count AFTER: \(items.count)")
         cartItems.value = items
-        print("   ✅ cartItems.value updated. Current count: \(cartItems.value.count)")
         
         updateSelectedItemsCount()
         updateTotalPrice()
         
-        print("   Selected items count: \(selectedItemsCount.value)")
-        print("   Total price: \(totalPrice.value)")
-        print("🛒 [CartController] ========================================")
     }
     
     func didUpdateItemQuantity(productId: Int, quantity: Int) {
@@ -222,17 +201,11 @@ extension DefaultCartController {
     }
     
     func didDeleteItems(productIds: [Int]) {
-        print("🛒 [CartController] ========================================")
-        print("🛒 [CartController] didDeleteItems called")
-        print("   Product IDs to delete: \(productIds)")
-        print("   Current cart items count BEFORE: \(cartItems.value.count)")
         
         var items = cartItems.value
         items.removeAll { productIds.contains($0.productId) }
         cartItems.value = items
         
-        print("   Current cart items count AFTER: \(items.count)")
-        print("🛒 [CartController] ========================================")
         
         updateSelectedItemsCount()
         updateTotalPrice()

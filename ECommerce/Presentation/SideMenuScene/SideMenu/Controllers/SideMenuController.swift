@@ -83,7 +83,6 @@ final class DefaultSideMenuController: SideMenuController {
     }
     
     func didSelectMenuItem(at section: Int, index: Int) {
-        print("DEBUG: didSelectMenuItem - section: \(section), index: \(index)")
         guard section >= 0 && section <= 1 else { return }
         
         let items = section == 0 ? firstSectionMenuItems.value : secondSectionMenuItems.value
@@ -92,7 +91,6 @@ final class DefaultSideMenuController: SideMenuController {
         // Check if logout item was selected (section 1, last item)
         if section == 1 && index == items.count - 1 {
             // Handle logout
-            print("DEBUG: Logout selected")
             onLogout?()
             return
         }
@@ -104,19 +102,15 @@ final class DefaultSideMenuController: SideMenuController {
         // Handle navigation based on section and index
         if section == 0 && index == 0 {
             // Profile - trigger navigation callback
-            print("DEBUG: Profile selected, onNavigateToProfile: \(onNavigateToProfile != nil ? "set" : "nil")")
             onNavigateToProfile?()
         } else if section == 0 && index == 1 {
             // My Order - trigger navigation callback
-            print("DEBUG: My Order selected, onNavigateToOrder: \(onNavigateToOrder != nil ? "set" : "nil")")
             onNavigateToOrder?()
         } else if section == 0 && index == 3 {
             // Shipping Address - trigger navigation callback (index changed from 4 to 3 after removing Favorites)
-            print("DEBUG: Shipping Address selected, onNavigateToShippingAddress: \(onNavigateToShippingAddress != nil ? "set" : "nil")")
             onNavigateToShippingAddress?()
         } else if section == 0 && index == 4 {
             // Payment - trigger navigation callback (index changed from 5 to 4 after removing Favorites and Selling)
-            print("DEBUG: Payment selected, onNavigateToPayment: \(onNavigateToPayment != nil ? "set" : "nil")")
             onNavigateToPayment?()
         }
         // TODO: Handle other menu items

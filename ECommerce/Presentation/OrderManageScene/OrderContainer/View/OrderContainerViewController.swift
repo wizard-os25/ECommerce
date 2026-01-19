@@ -16,6 +16,8 @@ class OrderContainerViewController: UIViewController {
     
     // View Controllers for each tab
     private var pendingViewController: OrderPendingViewController!
+    private var processingViewController: OrderProcessingViewController!
+    private var confirmedViewController: OrderConfirmedViewController!
     private var cancelViewController: OrderCancelViewController!
     private var deliveryViewController: OrderDeliveryViewController!
     private var deliveredViewController: OrderDeliveredViewController!
@@ -32,6 +34,8 @@ class OrderContainerViewController: UIViewController {
     func configure(
         with orderContainerController: OrderContainerController,
         pendingController: OrderPendingController,
+        processingController: OrderProcessingController,
+        confirmedController: OrderConfirmedController,
         cancelController: OrderCancelController,
         deliveryController: OrderDeliveryController,
         deliveredController: OrderDeliveredController
@@ -40,6 +44,8 @@ class OrderContainerViewController: UIViewController {
         
         // Create view controllers
         pendingViewController = OrderPendingViewController.create(with: pendingController)
+        processingViewController = OrderProcessingViewController.create(with: processingController)
+        confirmedViewController = OrderConfirmedViewController.create(with: confirmedController)
         cancelViewController = OrderCancelViewController.create(with: cancelController)
         deliveryViewController = OrderDeliveryViewController.create(with: deliveryController)
         deliveredViewController = OrderDeliveredViewController.create(with: deliveredController)
@@ -66,12 +72,14 @@ class OrderContainerViewController: UIViewController {
         ])
         
         segmentedPageContainer.configUI(
-            titles: ["order_status_pending".localized(), "order_status_cancel".localized(), "order_status_delivery".localized(), "order_status_delivered".localized()],
+            titles: ["order_status_pending".localized(), "order_status_processing".localized(), "order_status_confirmed".localized(), "order_status_delivery".localized(), "order_status_delivered".localized(), "order_status_cancel".localized()],
             viewControllers: [
                 pendingViewController,
-                cancelViewController,
+                processingViewController,
+                confirmedViewController,
                 deliveryViewController,
-                deliveredViewController
+                deliveredViewController,
+                cancelViewController
             ],
             parent: self,
             defaultIndex: 0
@@ -85,6 +93,12 @@ class OrderContainerViewController: UIViewController {
             // Update orders to each controller
             if let pendingController = self.pendingViewController.controller as? DefaultOrderPendingController {
                 pendingController.updateOrders(orders)
+            }
+            if let processingController = self.processingViewController.controller as? DefaultOrderProcessingController {
+                processingController.updateOrders(orders)
+            }
+            if let confirmedController = self.confirmedViewController.controller as? DefaultOrderConfirmedController {
+                confirmedController.updateOrders(orders)
             }
             if let cancelController = self.cancelViewController.controller as? DefaultOrderCancelController {
                 cancelController.updateOrders(orders)

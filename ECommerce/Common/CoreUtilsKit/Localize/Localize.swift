@@ -17,8 +17,8 @@ private let DefaultLanguage = "vi"
 let BaseBundle = "Base"
 
 /// Name for language change notification
-extension Notification.Name {
-    static let LanguageChangeNotification = Notification.Name(rawValue: "LanguageChangeNotification")
+extension Foundation.Notification.Name {
+    static let LanguageChangeNotification = Foundation.Notification.Name(rawValue: "LanguageChangeNotification")
 }
 
 // MARK: - Language Setting Functions
@@ -59,7 +59,7 @@ open class Localize: NSObject {
             print("🌐 [Localize] Language saved to UserDefaults: \(selectedLanguage)")
             // Post notification on main queue to ensure UI updates happen on main thread
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .LanguageChangeNotification, object: nil)
+                NotificationCenter.default.post(name: Foundation.Notification.Name.LanguageChangeNotification, object: nil)
                 print("🌐 [Localize] LanguageChangeNotification posted")
             }
         } else {

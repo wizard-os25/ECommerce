@@ -118,12 +118,10 @@ final class DefaultProductDetailController: ProductDetailController {
     }
     
     private func didTapSearch() {
-        print("🔍 [ProductDetailController] Search button tapped - will open Search screen")
         onTapSearch?()
     }
     
     private func didTapCart() {
-        print("🛒 [ProductDetailController] Cart button tapped - will open Cart screen")
         onTapCart?()
     }
 }

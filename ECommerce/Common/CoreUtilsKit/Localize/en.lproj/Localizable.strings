@@ -140,6 +140,8 @@
 
 /* Order Status Tabs */
 "order_status_pending" = "Pending";
+"order_status_processing" = "Processing";
+"order_status_confirmed" = "Confirmed";
 "order_status_cancel" = "Cancel";
 "order_status_delivery" = "Delivery";
 "order_status_delivered" = "Delivered";

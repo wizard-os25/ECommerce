@@ -109,6 +109,8 @@
 
 /* Order Status Tabs */
 "order_status_pending" = "Chờ xử lý";
+"order_status_processing" = "Đang xử lý";
+"order_status_confirmed" = "Đã xác nhận";
 "order_status_cancel" = "Đã hủy";
 "order_status_delivery" = "Đang giao";
 "order_status_delivered" = "Đã giao";

@@ -17,11 +17,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JEv-Jz-dGw">
-                                <rect key="frame" x="0.0" y="98" width="393" height="664"/>
+                                <rect key="frame" x="0.0" y="127" width="393" height="635"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="664" id="wgO-8p-9zF"/>
-                                </constraints>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIb-Dw-NWP">
                                 <rect key="frame" x="16" y="766" width="361" height="52"/>
@@ -41,7 +38,7 @@
                             <constraint firstItem="JEv-Jz-dGw" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="eOE-Dd-AGJ"/>
                             <constraint firstItem="uIb-Dw-NWP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="f2w-tv-iXH"/>
                             <constraint firstItem="JEv-Jz-dGw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="j8p-BP-Uo4"/>
-                            <constraint firstItem="JEv-Jz-dGw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="39" id="kbG-9u-amV"/>
+                            <constraint firstItem="JEv-Jz-dGw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="68" id="kbG-9u-amV"/>
                             <constraint firstItem="uIb-Dw-NWP" firstAttribute="top" secondItem="JEv-Jz-dGw" secondAttribute="bottom" constant="4" id="koR-is-GAq"/>
                         </constraints>
                     </view>

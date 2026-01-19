@@ -26,7 +26,6 @@ final class OrderPendingCell: UITableViewCell {
               let paymentMethodLabel = paymentMethodLabel,
               let totalAmountLabel = totalAmountLabel,
               let createdAtLabel = createdAtLabel else {
-            print("⚠️ [OrderPendingCell] Outlets chưa được kết nối trong Storyboard. Vui lòng kiểm tra lại.")
             return
         }
         

@@ -230,7 +230,6 @@ final class DefaultPaymentCardController: PaymentCardController {
         createCustomerTask = paymentCardUseCase.createCustomer { [weak self] result in
             // Customer creation is handled by backend, we just ensure it exists
             if case .failure(let error) = result {
-                print("⚠️ [PaymentCardController] Failed to create customer: \(error.localizedDescription)")
             }
         }
     }

@@ -145,7 +145,7 @@ final class DefaultOrderCancelController: OrderCancelController {
     }
     
     private func filterCancelOrders() {
-        let cancelOrders = allOrders.filter { $0.orderStatus == "cancel" }
+        let cancelOrders = allOrders.filter { $0.orderStatus == "canceled" }
         items.value = cancelOrders.map { OrderCancelItemModel(orderManage: $0) }
     }
     

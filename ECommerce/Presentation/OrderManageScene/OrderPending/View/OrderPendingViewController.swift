@@ -115,7 +115,6 @@ extension OrderPendingViewController: UITableViewDataSource {
         
         // Guard để đảm bảo có data
         guard indexPath.row < orderPendingController.items.value.count else {
-            print("⚠️ [OrderPendingViewController] Index out of range: \(indexPath.row)")
             return cell
         }
         

@@ -55,9 +55,6 @@ final class LoginViewController: EcoViewController {
         if let navBarView = navigationBarViewController?.view {
             view.bringSubviewToFront(navBarView)
             navBarView.isUserInteractionEnabled = true
-            print("🔵 [LoginViewController] viewDidAppear - Navigation bar brought to front")
-            print("   - navBarView.isUserInteractionEnabled: \(navBarView.isUserInteractionEnabled)")
-            print("   - navBarView.frame: \(navBarView.frame)")
         }
     }
     
@@ -197,7 +194,6 @@ final class LoginViewController: EcoViewController {
     
     private func navigateToMain() {
         guard let coordinatingController = coordinatingController else {
-            print("Warning: coordinatingController is nil. Cannot navigate to Main.")
             return
         }
         coordinatingController.navigateToMain()
@@ -232,7 +228,6 @@ extension LoginViewController: LoginFooterViewDelegate {
     
     func loginFooterViewDidTapSignUp(_ view: LoginFooterView) {
         guard let coordinatingController = coordinatingController else {
-            print("Warning: coordinatingController is nil. Cannot navigate to SignUp.")
             return
         }
         coordinatingController.navigateToSignUp()

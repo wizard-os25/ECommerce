@@ -39,7 +39,6 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
     ///
     /// **Lưu ý:** View controller này phải đang visible (trong view hierarchy) để Stripe có thể present UI
     func authenticationPresentingViewController() -> UIViewController {
-        print("🔐 [STPAuthenticationContext] Stripe requesting view controller for authentication UI")
         return self
     }
     
@@ -258,7 +257,6 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         DispatchQueue.main.async { [weak self] in
             if let navBarController = self?.navigationBarViewController?.controller as? DefaultEcoNavigationBarController {
                 navBarController.onLeftItemTap = { [weak self] in
-                    print("🔵 [PaymentMethodViewController] Back button tapped")
                     self?.navigationController?.popViewController(animated: true)
                 }
             }
@@ -356,22 +354,15 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         switch result {
         case .completed:
             // Payment completed successfully (cho Add new card)
-            print("✅ [PaymentSheet] Payment completed successfully")
             // Confirm payment với backend
             confirmPaymentWithBackend()
             
-        case .canceled:
+        case .canceled: break
             // User canceled
-            print("❌ [PaymentSheet] User canceled payment")
             
         case .failed(let error):
             // Payment failed
-            print("⚠️ [PaymentSheet] Payment failed")
-            print("   Error domain: \((error as NSError).domain)")
-            print("   Error code: \((error as NSError).code)")
-            print("   Error description: \(error.localizedDescription)")
             if let underlyingError = (error as NSError).userInfo[NSUnderlyingErrorKey] as? NSError {
-                print("   Underlying error: \(underlyingError.localizedDescription)")
             }
             
             let errorMessage = error.localizedDescription.isEmpty ? 
@@ -425,13 +416,9 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
             
             switch result {
             case .success(let paymentIntent):
-                print("✅ [Add New Card] Payment intent created (without payment_method_id)")
-                print("   - clientSecret: \(paymentIntent.clientSecret.prefix(20))...")
-                print("   - PaymentSheet will automatically attach payment method to customer")
                 completion(.success(paymentIntent.clientSecret))
                 
             case .failure(let error):
-                print("⚠️ [Add New Card] Failed to create payment intent: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
@@ -455,13 +442,9 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
             
             switch result {
             case .success(let paymentIntent):
-                print("✅ [Saved Card] Payment intent created with payment_method_id")
-                print("   - clientSecret: \(paymentIntent.clientSecret.prefix(20))...")
-                print("   - paymentMethodId: \(paymentMethodId)")
                 completion(.success(paymentIntent.clientSecret))
                 
             case .failure(let error):
-                print("⚠️ [Saved Card] Failed to create payment intent: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
@@ -479,7 +462,6 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
                 let cartDIContainer = appDIContainer.makeCartSceneDIContainer()
                 let cartController = cartDIContainer.makeCartController()
                 cartController.didDeleteItems(productIds: productIds)
-                print("🛒 [PaymentMethodViewController] Removed \(productIds.count) items from cart after successful payment")
             }
         }
     }
@@ -511,7 +493,6 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         
         // Payment is already confirmed by Stripe SDK
         // Navigate to success screen
-        print("✅ Payment completed successfully")
         // TODO: Navigate to success screen
     }
     
@@ -526,7 +507,6 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         // Kiểm tra xem thiết bị có hỗ trợ authentication không
         guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
             if let error = error {
-                print("⚠️ [FaceID] Device authentication not available: \(error.localizedDescription)")
             }
             return
         }
@@ -553,26 +533,18 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         ) { [weak self] success, error in
             DispatchQueue.main.async {
                 if success {
-                    print("✅ [FaceID] Permission granted and authentication succeeded")
                 } else {
                     if let error = error {
                         if let laError = error as? LAError {
                             switch laError.code {
-                            case .userCancel:
-                                print("⚠️ [FaceID] User cancelled authentication")
-                            case .userFallback:
-                                print("⚠️ [FaceID] User chose fallback")
-                            case .biometryNotAvailable:
-                                print("⚠️ [FaceID] Biometry not available")
-                            case .biometryNotEnrolled:
-                                print("⚠️ [FaceID] Biometry not enrolled")
-                            case .biometryLockout:
-                                print("⚠️ [FaceID] Biometry locked out")
-                            default:
-                                print("⚠️ [FaceID] Authentication failed: \(error.localizedDescription)")
+//                            case .userCancel:
+//                            case .userFallback:
+//                            case .biometryNotAvailable:
+//                            case .biometryNotEnrolled:
+//                            case .biometryLockout:
+                            default: break
                             }
                         } else {
-                            print("⚠️ [FaceID] Authentication error: \(error.localizedDescription)")
                         }
                     }
                 }
@@ -591,9 +563,7 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
             showAuthenticationPrompt(context: context, completion: completion)
         } else {
             // Thiết bị không hỗ trợ authentication (rất hiếm)
-            print("⚠️ Device authentication not available")
             if let error = error {
-                print("   Error: \(error.localizedDescription)")
             }
             completion(false)
         }
@@ -621,18 +591,14 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         ) { success, error in
             DispatchQueue.main.async {
                 if success {
-                    print("✅ Authentication succeeded (Face ID/Touch ID or Passcode)")
                     completion(true)
                 } else {
                     if let error = error {
-                        print("⚠️ Authentication failed: \(error.localizedDescription)")
                         // Kiểm tra nếu user cancel
                         if let laError = error as? LAError {
                             switch laError.code {
-                            case .userCancel:
-                                print("   User cancelled authentication")
-                            case .userFallback:
-                                print("   User chose fallback")
+                            case .userCancel: break
+                            case .userFallback: break
                             default:
                                 break
                             }
@@ -911,7 +877,6 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
             
             guard success else {
                 // Xác thực thất bại hoặc user cancel
-                print("⚠️ Authentication failed or cancelled")
                 return
             }
             
@@ -930,9 +895,7 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
         if shouldSetDefaultCard {
             defaultController.setDefaultCard(paymentMethodId: card.id) { [weak self] success in
                 if success {
-                    print("✅ Default card set successfully (silent)")
                 } else {
-                    print("⚠️ Failed to set default card (non-blocking)")
                 }
             }
         }
@@ -954,7 +917,6 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
                 )
                 
             case .failure(let error):
-                print("⚠️ Failed to create payment intent: \(error.localizedDescription)")
                 // Kiểm tra nếu có modal đang present thì đợi dismiss
                 if self.presentedViewController != nil {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -976,15 +938,11 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
         // payment method ID khi confirm để xử lý đúng (đặc biệt là 3D Secure)
         paymentIntentParams.paymentMethodId = paymentMethodId
         
-        print("🔐 [STPPaymentHandler] Confirming payment with saved payment method")
-        print("   - clientSecret: \(clientSecret.prefix(20))...")
-        print("   - paymentMethodId: \(paymentMethodId)")
         
         // STPPaymentHandler sẽ tự động xử lý:
         // 1. Confirm payment với Stripe API
         // 2. Nếu cần 3D Secure, sẽ present authentication UI tự động qua STPAuthenticationContext
         // 3. Gọi completion callback với kết quả
-        print("🚀 [STPPaymentHandler] Starting payment confirmation...")
         STPPaymentHandler.shared().confirmPayment(
             paymentIntentParams,
             with: self  // self conforms STPAuthenticationContext để Stripe present 3D Secure UI
@@ -994,27 +952,18 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
             DispatchQueue.main.async {
                 switch status {
                 case .succeeded:
-                    print("✅ [STPPaymentHandler] Payment confirmed successfully")
                     // Stripe SDK đã confirm payment thành công (có thể đã xử lý 3D Secure nếu cần)
                     // Bây giờ confirm với backend để cập nhật order status
                     self.confirmPaymentWithBackend()
                     
                 case .failed:
-                    print("❌ [STPPaymentHandler] Payment failed")
-                    print("   Error: \(error?.localizedDescription ?? "Unknown error")")
                     if let error = error {
                         let nsError = error as NSError
-                        print("   Error domain: \(nsError.domain)")
-                        print("   Error code: \(nsError.code)")
                         if let userInfo = nsError.userInfo as? [String: Any] {
-                            print("   Error userInfo: \(userInfo)")
                             
                             // Kiểm tra nếu là lỗi confirmation_method: manual
                             if let errorMessage = userInfo["com.stripe.lib:ErrorMessageKey"] as? String {
                                 if errorMessage.contains("confirmation_method") && errorMessage.contains("manual") {
-                                    print("   ⚠️ VẤN ĐỀ: Backend đang tạo PaymentIntent với confirmation_method: manual")
-                                    print("   ⚠️ GIẢI PHÁP: Backend cần set confirmation_method: automatic")
-                                    print("   ⚠️ Stripe SDK không thể confirm payment intent với confirmation_method: manual từ client")
                                 }
                             }
                         }
@@ -1032,11 +981,9 @@ extension PaymentMethodViewController: OrderActionViewDelegate {
                         self.showAlert(title: "payment_failed".localized(), message: errorMessage)
                     }
                     
-                case .canceled:
-                    print("⚠️ [STPPaymentHandler] User canceled payment")
+                case .canceled: break
                     
                 @unknown default:
-                    print("⚠️ [STPPaymentHandler] Unknown status: \(status)")
                     break
                 }
             }

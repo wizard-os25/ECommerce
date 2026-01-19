@@ -57,7 +57,6 @@ class ContentViewController: UIViewController {
         // Tab 0: ProductsViewController
         // Tab 1: CategoryViewController
         guard let appDIContainer = getAppDIContainer() else {
-            print("⚠️ AppDIContainer not found, creating simple view controllers")
             // Fallback: Create simple view controllers
             let productsVC = UIViewController()
             productsVC.view.backgroundColor = .systemBlue
@@ -92,7 +91,6 @@ class ContentViewController: UIViewController {
 
         // Optional: Handle tab change callback
         segmentedPageContainer.onTabChanged = { [weak self] index in
-            print("Tab changed to index: \(index)")
         }
     }
 }

@@ -125,7 +125,6 @@ final class DefaultProductsController: ProductsController {
     var navigationBarRightItems: [EcoNavItem] {
         return [
             EcoNavItem.icon(UIImage(systemName: "camera") ?? UIImage(), action: { [weak self] in
-                print("📷 [ProductsController] Right item camera button tapped")
                 self?.openCamera()
             })
         ]
@@ -162,7 +161,6 @@ final class DefaultProductsController: ProductsController {
     // MARK: - Private
     
     private func appendPage(_ productPage: ProductPage) {
-        print("📄 [ProductsController] Appending page - Page: \(productPage.page), Items: \(productPage.contents.count), TotalElements: \(productPage.totalElements)")
         currentPage = productPage.page
         totalElements = productPage.totalElements
         hasMorePages = productPage.hasMore
@@ -173,22 +171,18 @@ final class DefaultProductsController: ProductsController {
         
         allItems = pages.flatMap { $0.contents }.map(ProductItemModel.init)
         items.value = allItems
-        print("📄 [ProductsController] Page appended - Total items in list: \(items.value.count)")
     }
     
     /// Load products from ProductPage directly (used for search results)
     func loadProductsFromPage(_ productPage: ProductPage, query: String) {
-        print("📥 [ProductsController] Loading products from page - Query: '\(query)', Items: \(productPage.contents.count)")
         productsLoadTask?.cancel()
         resetPages()
         self.query.value = query
         appendPage(productPage)
         loading.value = false
-        print("📥 [ProductsController] Products loaded from page - Total items: \(items.value.count)")
     }
     
     private func resetPages() {
-        print("🔄 [ProductsController] Resetting pages - Clearing \(pages.count) pages, \(allItems.count) items")
         currentPage = 0
         totalElements = 0
         hasMorePages = false
@@ -204,29 +198,22 @@ final class DefaultProductsController: ProductsController {
         
         // Log all labels with confidence
         for (index, (label, confidence)) in labels.enumerated() {
-            print("🔍 [ProductsController]   Label \(index + 1): '\(label)' (confidence: \(String(format: "%.2f", confidence * 100))%)")
         }
         
-        print("🔍 [ProductsController] 📦 Total items before filter: \(allItems.count)")
         
         guard !labels.isEmpty else {
-            print("⚠️ [ProductsController] No labels provided, showing all items")
             items.value = allItems
             return
         }
         
         // BƯỚC 1: Chuẩn hóa và token hóa labels để tạo tập từ khóa
-        print("🔍 [ProductsController] 🔄 BƯỚC 1: Chuẩn hóa và token hóa labels...")
         let searchKeywords = normalizeAndTokenizeLabels(labels)
-        print("🔍 [ProductsController] ✅ Tạo được \(searchKeywords.count) từ khóa tìm kiếm:")
         for (index, keyword) in searchKeywords.enumerated() {
-            print("🔍 [ProductsController]   \(index + 1). '\(keyword)'")
         }
         
         // BƯỚC 2: Filter items với logic tương tự NSPredicate
         // Mỗi keyword phải xuất hiện trong name HOẶC description (OR)
         // Item match nếu có ít nhất một keyword xuất hiện (OR giữa các keywords)
-        print("🔍 [ProductsController] 🔄 BƯỚC 2: Filtering items với logic NSPredicate...")
         let filteredItems = allItems.filter { item in
             // Kiểm tra từng keyword: keyword xuất hiện trong name HOẶC description
             return searchKeywords.contains { keyword in
@@ -238,19 +225,14 @@ final class DefaultProductsController: ProductsController {
         
         // Log first few matched items for verification
         if !filteredItems.isEmpty {
-            print("🔍 [ProductsController] 📋 Sample matched items (first 5):")
             for (index, item) in filteredItems.prefix(5).enumerated() {
-                print("🔍 [ProductsController]   \(index + 1). '\(item.name)' (ID: \(item.id))")
             }
             if filteredItems.count > 5 {
-                print("🔍 [ProductsController]   ... and \(filteredItems.count - 5) more items")
             }
         } else {
-            print("⚠️ [ProductsController] ⚠️ No items matched the keywords")
         }
         
         items.value = filteredItems
-        print("🔍 [ProductsController] ========================================")
     }
     
     /// Bước 1: Chuẩn hóa và token hóa labels để tạo tập từ khóa
@@ -281,7 +263,6 @@ final class DefaultProductsController: ProductsController {
     }
     
     private func load(productQuery: ProductQuery, loading: Bool) {
-        print("🟢 [ProductsController] Starting load - Query: '\(productQuery.query)', Page: \(nextPage), PageSize: \(pageSize)")
         self.loading.value = loading
         query.value = productQuery.query
         
@@ -290,7 +271,6 @@ final class DefaultProductsController: ProductsController {
             page: nextPage,
             pageSize: pageSize,
             cached: { [weak self] page in
-                print("📦 [ProductsController] Cache hit - Received \(page.contents.count) items from cache")
                 self?.mainQueue.async {
                     self?.appendPage(page)
                 }
@@ -299,14 +279,11 @@ final class DefaultProductsController: ProductsController {
                 self?.mainQueue.async {
                     switch result {
                     case .success(let page):
-                        print("✅ [ProductsController] Network success - Received \(page.contents.count) items, Total: \(page.totalElements), HasMore: \(page.hasMore)")
                         self?.appendPage(page)
                     case .failure(let error):
-                        print("❌ [ProductsController] Network error - \(error.localizedDescription)")
                         self?.handle(error: error)
                     }
                     self?.loading.value = false
-                    print("🟢 [ProductsController] Load completed - Total items: \(self?.items.value.count ?? 0)")
                 }
             }
         )
@@ -317,7 +294,6 @@ final class DefaultProductsController: ProductsController {
     }
     
     private func update(productQuery: ProductQuery) {
-        print("🔄 [ProductsController] Updating query - Old query: '\(query.value)', New query: '\(productQuery.query)'")
         // Cancel any existing task first to prevent cache from different query being loaded
         productsLoadTask?.cancel()
         resetPages()
@@ -337,57 +313,40 @@ final class DefaultProductsController: ProductsController {
 extension DefaultProductsController {
     
     func didLoadNextPage() {
-        print("📄 [ProductsController] didLoadNextPage called - Current page: \(currentPage), HasMore: \(hasMorePages), Loading: \(loading.value)")
         guard hasMorePages, !loading.value else {
-            print("⚠️ [ProductsController] Cannot load next page - HasMore: \(hasMorePages), Loading: \(loading.value)")
             return
         }
-        print("📄 [ProductsController] Loading next page: \(nextPage)")
         load(productQuery: ProductQuery(query: query.value), loading: false)
     }
     
     func didSearch(query: String) {
-        print("🔍 [ProductsController] didSearch called - Query: '\(query)'")
         guard !query.isEmpty else {
-            print("⚠️ [ProductsController] Empty query, ignoring search")
             return
         }
         update(productQuery: ProductQuery(query: query))
     }
     
     func didCancelSearch() {
-        print("🛑 [ProductsController] didCancelSearch called - Cancelling ongoing task")
         productsLoadTask?.cancel()
     }
     
     func openCamera() {
         // Mở camera với chế độ .aiSearch
-        print("📷 [ProductsController] Camera button tapped - opening AI Search camera")
-        print("📷 [ProductsController] onOpenCamera callback: \(onOpenCamera != nil ? "EXISTS" : "nil")")
         // Camera sẽ được mở từ ProductsViewController thông qua callback
         if let onOpenCamera = onOpenCamera {
-            print("📷 [ProductsController] Calling onOpenCamera callback")
             onOpenCamera()
         } else {
-            print("⚠️ [ProductsController] onOpenCamera callback is nil - camera will not open")
         }
     }
     
     func didSelectItem(at index: Int) {
-        print("🔵 [ProductsController] didSelectItem called - index: \(index)")
         guard index >= 0, index < items.value.count else {
-            print("⚠️ [ProductsController] Invalid index: \(index), items count: \(items.value.count)")
             return
         }
         let productItem = items.value[index]
-        print("   📦 Product item: \(productItem.name) (ID: \(productItem.id))")
-        print("   🔗 Checking onSelectProductItem callback...")
         if let callback = onSelectProductItem {
-            print("   ✅ onSelectProductItem callback exists, calling with product: \(productItem.name)")
             callback(productItem)
-            print("   ✅ onSelectProductItem callback completed")
         } else {
-            print("   ⚠️ onSelectProductItem callback is nil!")
         }
     }
     
@@ -446,8 +405,6 @@ extension DefaultProductsController {
     
     var onNavigationBarCameraTap: (() -> Void)? {
         { [weak self] in
-            print("📷 [ProductsController] onNavigationBarCameraTap callback triggered")
-            print("📷 [ProductsController] self: \(self != nil ? "EXISTS" : "nil")")
             self?.openCamera()
         }
     }

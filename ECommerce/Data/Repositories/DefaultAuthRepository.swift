@@ -135,4 +135,28 @@ extension DefaultAuthRepository: AuthRepository {
         }
         return task
     }
+    
+    func resendEmailVerification(
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) -> Cancellable? {
+        let task = RepositoryTask()
+        
+        guard !task.isCancelled else { return nil }
+        
+        let endpoint = APIEndpoints.resendEmailVerification()
+        task.networkTask = dataTransferService.request(
+            with: endpoint,
+            on: backgroundQueue
+        ) { result in
+            guard !task.isCancelled else { return }
+            
+            switch result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        return task
+    }
 }

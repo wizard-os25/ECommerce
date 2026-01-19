@@ -54,23 +54,18 @@ final class DefaultSplashController: SplashController {
     
     func checkAuthenticationStatus() {
         let isLoggedIn = utilities.isLoggedIn()
-        print("SplashController: checkAuthenticationStatus - isLoggedIn = \(isLoggedIn)")
         
         // Wait for splash animation to complete before navigating
         mainQueue.asyncAfter(delay: 0.5) { [weak self] in
             guard let self = self else {
-                print("SplashController: self is nil in asyncAfter")
                 return
             }
-            print("SplashController: asyncAfter executed, finishing animation")
             self.finishSplashAnimation()
             
             // Trigger navigation based on login state
             if isLoggedIn {
-                print("SplashController: Setting shouldNavigateToMain = true")
                 self.shouldNavigateToMain.value = true
             } else {
-                print("SplashController: Setting shouldNavigateToLogin = true")
                 self.shouldNavigateToLogin.value = true
             }
         }

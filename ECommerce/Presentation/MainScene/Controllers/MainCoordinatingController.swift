@@ -71,10 +71,8 @@ final class MainCoordinatingController {
     /// Setup side menu coordinating controller
     /// This is called automatically in start() and makeMainViewController()
     func setupSideMenuCoordinatingController() {
-        print("DEBUG: setupSideMenuCoordinatingController called")
         // Get side menu DI container from dependencies
         guard let mainSceneDIContainer = dependencies as? MainSceneDIContainer else {
-            print("DEBUG: mainSceneDIContainer is nil in setupSideMenuCoordinatingController")
             return
         }
         let sideMenuDIContainer = mainSceneDIContainer.makeSideMenuSceneDIContainer()

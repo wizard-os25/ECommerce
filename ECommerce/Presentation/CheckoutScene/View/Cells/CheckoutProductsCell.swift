@@ -268,7 +268,7 @@ private class ProductItemCheckoutCell: UICollectionViewCell {
             // Căn chỉnh quantityStack center với imageView
             quantityStack.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 6),
             quantityStack.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
-            quantityStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            quantityStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
             quantityStack.widthAnchor.constraint(equalToConstant: 90),
             quantityStack.heightAnchor.constraint(equalToConstant: 32),
             

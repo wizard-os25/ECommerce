@@ -80,7 +80,6 @@ final class CheckoutViewController: EcoViewController {
         DispatchQueue.main.async { [weak self] in
             if let navBarController = self?.navigationBarViewController?.controller as? DefaultEcoNavigationBarController {
                 navBarController.onLeftItemTap = { [weak self] in
-                    print("🔵 [CheckoutViewController] Back button tapped")
                     self?.navigationController?.popViewController(animated: true)
                 }
             }
@@ -566,7 +565,6 @@ extension CheckoutViewController {
         
         // Kiểm tra xem đã có đủ thông tin chưa
         guard defaultController.readyForPayment.value else {
-            print("⚠️ [CheckoutViewController] Not ready for payment yet")
             return
         }
         
@@ -576,7 +574,6 @@ extension CheckoutViewController {
                   let clientSecret = clientSecret,
                   let customerId = customerId,
                   let ephemeralKey = ephemeralKey else {
-                print("⚠️ [CheckoutViewController] Missing required payment information")
                 return
             }
             
@@ -608,16 +605,13 @@ extension CheckoutViewController {
             guard let self = self else { return }
             switch result {
             case .completed:
-                print("✅ Payment success")
                 // Notify backend success
                 self.notifyBackendSuccess()
                 
-            case .canceled:
-                print("❌ User canceled")
+            case .canceled: break
                 // User canceled, không cần làm gì
                 
             case .failed(let error):
-                print("⚠️ Payment failed:", error.localizedDescription)
                 self.showAlert(title: "Payment Failed", message: error.localizedDescription)
             }
         }
@@ -633,7 +627,6 @@ extension CheckoutViewController {
         defaultController.confirmPayment(paymentIntentId: paymentIntentId) { [weak self] success in
             if success {
                 // Navigate to success screen
-                print("✅ Payment confirmed successfully")
                 // TODO: Navigate to success screen
             } else {
                 self?.showAlert(title: "error".localized(), message: "failed_to_confirm_payment".localized())

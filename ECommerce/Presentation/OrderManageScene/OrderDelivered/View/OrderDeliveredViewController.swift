@@ -115,7 +115,6 @@ extension OrderDeliveredViewController: UITableViewDataSource {
         
         // Guard để đảm bảo có data
         guard indexPath.row < orderDeliveredController.items.value.count else {
-            print("⚠️ [OrderDeliveredViewController] Index out of range: \(indexPath.row)")
             return cell
         }
         

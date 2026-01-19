@@ -89,7 +89,6 @@ class MainContainerViewController: UIViewController {
         
         // Only request if haven't requested before
         if !hasRequestedBefore {
-            print("🔔 [MainContainerViewController] First time entering main screen - requesting push notification permission")
             
             // Mark as requested
             defaults.set(true, forKey: Constants.UserDefaultsKey.pushNotificationPermissionRequested)
@@ -387,7 +386,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         
         // Nếu touch trong tableView và KHÔNG từ left edge → không intercept
         if isInTableView && pt.x > 30 {
-            print("❌ [MainContainerViewController] Touch in UITableView and not from left edge (x: \(pt.x)) → Don't intercept")
             return false
         }
         
@@ -401,6 +399,21 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
     
     // We generally don't want simultaneous recognition for this design
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // ✅ QUAN TRỌNG: Nếu otherGestureRecognizer là interactivePopGestureRecognizer (swipe back),
+        // không cho phép simultaneous recognition để ưu tiên swipe back
+        if let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+           otherGestureRecognizer === nav.interactivePopGestureRecognizer {
+            return false
+        }
+        
+        // Allow side menu pan to work with scroll views
+        if gestureRecognizer is UIPanGestureRecognizer {
+            if otherGestureRecognizer is UIPanGestureRecognizer,
+               let otherPan = otherGestureRecognizer as? UIPanGestureRecognizer,
+               let scrollView = otherPan.view as? UIScrollView {
+                return true
+            }
+        }
         return false
     }
     
@@ -408,6 +421,17 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
     // khi ở page 0 (Home) và swipe right, để container gesture có thể xử lý
     // HOẶC khi tap gesture được detect (để tap hoạt động)
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // ✅ QUAN TRỌNG: SideMenu pan gesture phải FAIL khi interactivePopGestureRecognizer (swipe back) cần hoạt động
+        // Điều này đảm bảo swipe back gesture luôn được ưu tiên khi có màn hình được push
+        if gestureRecognizer is UIPanGestureRecognizer,
+           let nav = mainTabBarController?.selectedViewController as? UINavigationController,
+           otherGestureRecognizer === nav.interactivePopGestureRecognizer {
+            // Kiểm tra xem có màn hình nào được push không (viewControllers.count > 1)
+            if nav.viewControllers.count > 1 {
+                return true
+            }
+        }
+        
         // ✅ QUAN TRỌNG: Nếu otherGestureRecognizer là tap gesture → yêu cầu PageViewController pan gesture fail
         // Điều này đảm bảo tap gesture có priority và hoạt động ngay
         if otherGestureRecognizer is UITapGestureRecognizer {
@@ -428,7 +452,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                 return false
             }
             
-            print("✅ [shouldBeRequiredToFailBy] Tap gesture detected → Require PageViewController pan gesture to FAIL")
             return true
         }
         
@@ -462,7 +485,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             let location = otherPan.location(in: self.view)
             // Nếu swipe từ cạnh trái (x < 100) → Yêu cầu scrollView gesture FAIL
             if location.x < 100 {
-                print("✅ [shouldBeRequiredToFailBy] Page 0 + swipe from left edge (x: \(location.x)) → Require scrollView gesture to FAIL")
                 return true
             }
         }
@@ -480,7 +502,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         // Nếu được push từ UIPageViewController (ví dụ ProductDetailViewController), không cho phép sidebar gesture
         updatePushedFromPageViewControllerFlag()
         if isPushedFromPageViewController {
-            print("❌ [gestureRecognizerShouldBegin] isPushedFromPageViewController = true → Block sidebar gesture")
             return false
         }
         
@@ -488,6 +509,10 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         let locationInRoot = panGesture.location(in: self.view)
         let velocityInRoot = panGesture.velocity(in: self.view)
         let vx = velocityInRoot.x
+        
+        // ✅ GIẢI PHÁP CHÍNH: Kiểm tra tabbar visibility
+        // Nếu tabbar đang ẩn (isHidden = true) → đã push vào màn hình khác → chỉ cho phép swipe back, không cho mở SideMenu
+        let isTabBarVisible = !(mainTabBarController?.tabBar.isHidden ?? true)
         
         // Check if current top view controller is AddressViewController
         let isTopAddressViewController = {
@@ -515,20 +540,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
                   let topVC = nav.topViewController else { return false }
             return topVC is OrderContainerViewController
-        }()
-        
-        // Check if current top view controller is CheckoutViewController or PaymentMethodViewController
-        // Các màn hình này cần cho phép swipe back nhưng không kích hoạt side menu
-        let isTopCheckoutViewController = {
-            guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
-                  let topVC = nav.topViewController else { return false }
-            return topVC is CheckoutViewController
-        }()
-        
-        let isTopPaymentMethodViewController = {
-            guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
-                  let topVC = nav.topViewController else { return false }
-            return topVC is PaymentMethodViewController
         }()
         
         // Check if any view controller in the navigation stack was opened after AddressViewController, ProfileViewController or PaymentCardViewController (when flag is set)
@@ -565,23 +576,25 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             // Debug logging
             if result {
                 let stackDescription = nav.viewControllers.map { String(describing: type(of: $0)) }.joined(separator: " -> ")
-                print("🔵 [gestureRecognizerShouldBegin] Found view controllers after side menu VC")
-                print("   - Side menu VC index: \(vcIndex), TopVC index: \(topVCIndex)")
-                print("   - Stack: \(stackDescription)")
             }
             
             return result
         }()
         
         let translation = panGesture.translation(in: self.view)
-        print("🔵 [gestureRecognizerShouldBegin] vx:\(vx), x:\(locationInRoot.x), translation:\(translation), isExpanded:\(isExpanded), isTopAddressViewController:\(isTopAddressViewController), isTopProfileViewController:\(isTopProfileViewController), isTopPaymentCardViewController:\(isTopPaymentCardViewController), isTopOrderContainerViewController:\(isTopOrderContainerViewController), hasViewControllersAfterSideMenuVC:\(hasViewControllersAfterSideMenuVC), didOpenFromSideMenu:\(didOpenFromSideMenu)")
         
         // If menu is expanded, allow pan (to close)
         if isExpanded {
             return true
         }
         
-        // If AddressViewController, ProfileViewController, PaymentCardViewController or OrderContainerViewController is on top, check flag to decide behavior
+        // ✅ GIẢI PHÁP CHÍNH: Nếu tabbar đang ẩn → đã push vào màn hình khác → block SideMenu gesture, chỉ cho phép swipe back
+        if !isTabBarVisible {
+            return false
+        }
+        
+        // ✅ Nếu tabbar visible và đang ở các màn hình đặc biệt (Address, Profile, PaymentCard, OrderContainer)
+        // Kiểm tra didOpenFromSideMenu để quyết định behavior
         if isTopAddressViewController || isTopProfileViewController || isTopPaymentCardViewController || isTopOrderContainerViewController {
             if didOpenFromSideMenu {
                 // Opened from side menu: block side menu gesture (let swipe back handle)
@@ -595,7 +608,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                 } else {
                     vcName = "OrderContainerViewController"
                 }
-                print("❌ [gestureRecognizerShouldBegin] \(vcName) opened from side menu → Block side menu gesture (let swipe back handle)")
                 return false
             } else {
                 // NOT opened from side menu: allow side menu gesture (drag from left edge opens side menu)
@@ -609,22 +621,13 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                 } else {
                     vcName = "OrderContainerViewController"
                 }
-                print("✅ [gestureRecognizerShouldBegin] \(vcName) NOT opened from side menu → Allow side menu gesture")
                 // Continue with normal side menu gesture logic below
             }
-        }
-        
-        // CheckoutViewController và PaymentMethodViewController: luôn block side menu gesture để cho phép swipe back
-        if isTopCheckoutViewController || isTopPaymentMethodViewController {
-            let vcName = isTopCheckoutViewController ? "CheckoutViewController" : "PaymentMethodViewController"
-            print("❌ [gestureRecognizerShouldBegin] \(vcName) → Block side menu gesture (let swipe back handle)")
-            return false
         }
         
         // If any view controller was pushed after AddressViewController or ProfileViewController (when flag is set),
         // block side menu gesture to allow swipe back for all screens in that navigation flow
         if hasViewControllersAfterSideMenuVC {
-            print("❌ [gestureRecognizerShouldBegin] View controller opened after side menu VC → Block side menu gesture (let swipe back handle)")
             return false
         }
         
@@ -646,7 +649,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         
         // Nếu touch trong UICollectionView → không block (cho phép scroll trong ProductDetail)
         if isInCollectionView {
-            print("✅ [gestureRecognizerShouldBegin] Touch in UICollectionView → Don't block (allow scroll)")
             return false // Không block để cho phép UICollectionView scroll tự do
         }
         
@@ -663,7 +665,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         
         // Nếu touch trong tableView và KHÔNG từ left edge → block để cho tableView xử lý
         if isInTableView && locationInRoot.x > 30 {
-            print("❌ [gestureRecognizerShouldBegin] Touch in UITableView and not from left edge (x: \(locationInRoot.x)) → Block (let tableView handle)")
             return false
         }
         
@@ -675,7 +676,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         
         // Find inner page scroll view (if exists) and current page index (via ContentViewController API)
         if let (scrollView, currentPageIndex) = findInnerScrollViewAndPageIndex(from: panGesture) {
-            print("📄 [gestureRecognizerShouldBegin] Found PageViewController - currentPageIndex: \(currentPageIndex)")
             
             // If the gesture started inside the page scrollView bounds, consider letting inner scroll handle it
             let gestureStartedInScroll = {
@@ -684,16 +684,13 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                 return scrollView.bounds.contains(local)
             }()
             
-            print("📄 [gestureRecognizerShouldBegin] gestureStartedInScroll: \(gestureStartedInScroll)")
             
             if gestureStartedInScroll {
                 // If inner scroll cannot scroll horizontally (single page) — let container handle
                 let canScrollHorizontally = scrollView.contentSize.width > scrollView.frame.width + 0.5
                 let scrollOffset = scrollView.contentOffset.x
-                print("📄 [gestureRecognizerShouldBegin] canScrollHorizontally: \(canScrollHorizontally), scrollOffset: \(scrollOffset)")
                 
                 if !canScrollHorizontally {
-                    print("✅ [gestureRecognizerShouldBegin] Cannot scroll horizontally → Allow container")
                     return true
                 }
                 
@@ -702,10 +699,8 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                     // However, if the inner scroll is at its left edge and user swipes right, allow container takeover
                     let atLeftEdge = scrollOffset <= 0.5
                     if atLeftEdge || vx > 0 {
-                        print("✅ [gestureRecognizerShouldBegin] Page \(currentPageIndex) at left edge + right swipe → Allow container")
                         return true
                     }
-                    print("❌ [gestureRecognizerShouldBegin] Page \(currentPageIndex) → Block (let PageViewController handle)")
                     return false // inner page handles it
                 } else {
                     // currentPageIndex == 0 (Home)
@@ -720,19 +715,16 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                     let hasMovement = abs(vx) > 50 || abs(translation.x) > 10
                     
                     if atLeftEdge && hasMovement && vx > 0 {
-                        print("✅ [gestureRecognizerShouldBegin] Page 0 (Home) at left edge (offset: \(scrollOffset) <= \(pageWidth + 10)) + right swipe (vx: \(vx), translation: \(translation.x)) → Allow container")
                         return true
                     }
                     
                     // If user is swiping left (to go to next page) → prefer inner scroll
                     if vx < -50 {
-                        print("❌ [gestureRecognizerShouldBegin] Page 0 (Home) + left swipe → Block (let PageViewController handle)")
                         return false
                     }
                     
                     // ✅ Nếu không có movement (tap), block để cho tap gesture hoạt động
                     if !hasMovement {
-                        print("❌ [gestureRecognizerShouldBegin] Page 0 (Home) + tap (no movement) → Block (let tap gesture handle)")
                         return false
                     }
                     
@@ -750,31 +742,26 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         
         // Nếu không có movement (tap), block để cho tap gesture hoạt động
         if !hasMovement {
-            print("❌ [gestureRecognizerShouldBegin] Tap detected (no movement, vx: \(vx), translation: \(translation.x)) → Block (let tap gesture handle)")
             return false
         }
         
         // Allow right swipe from left edge (first 80 points)
         if locationInRoot.x < 80 && vx > 0 {
-            print("✅ [gestureRecognizerShouldBegin] Right swipe from left edge (x < 80, vx: \(vx)) → Allow")
             return true
         }
         
         // ✅ Nếu đang ở page 0, cho phép right swipe với velocity thấp hơn
         if let (_, currentPageIndex) = findInnerScrollViewAndPageIndex(from: panGesture), currentPageIndex == 0 {
             if vx > 0 && vx > 30 { // Lower threshold for page 0
-                print("✅ [gestureRecognizerShouldBegin] Page 0 + right swipe (vx: \(vx) > 30) → Allow")
                 return true
             }
         }
         
         // Allow sufficiently fast right swipes anywhere
         if vx > 200 {
-            print("✅ [gestureRecognizerShouldBegin] Fast right swipe (vx > 200) → Allow")
             return true
         }
         
-        print("❌ [gestureRecognizerShouldBegin] Default → Block")
         return false
     }
     
@@ -787,7 +774,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
               let contentVC = nav.viewControllers.first(where: { $0 is ContentViewController }) as? ContentViewController
         else {
-            print("🟡 [findInnerScrollViewAndPageIndex] No ContentViewController found")
             return nil
         }
         
@@ -795,21 +781,18 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         // (Trong SegmentedPageContainer.setupPageViewController(), gọi parent.addChild(pageViewController))
         // Vậy UIPageViewController sẽ là child của ContentViewController
         guard let pageVC = contentVC.children.first(where: { $0 is UIPageViewController }) as? UIPageViewController else {
-            print("🟡 [findInnerScrollViewAndPageIndex] No UIPageViewController found")
             return nil
         }
         
         // 3. Find UIScrollView inside pageVC.view.subviews
         // UIPageViewController có internal UIScrollView để scroll giữa các pages
         guard let scrollView = pageVC.view.subviews.first(where: { $0 is UIScrollView }) as? UIScrollView else {
-            print("🟡 [findInnerScrollViewAndPageIndex] No UIScrollView found")
             return nil
         }
         
         // 4. Obtain current page index via ContentViewController API
         // ContentViewController.currentPageIndex lấy từ SegmentedPageContainer.currentIndex
         let currentPageIndex = contentVC.currentPageIndex
-        print("🟢 [findInnerScrollViewAndPageIndex] Found - currentPageIndex: \(currentPageIndex), scrollView.frame: \(scrollView.frame), contentSize: \(scrollView.contentSize), offset: \(scrollView.contentOffset)")
         return (scrollView, currentPageIndex)
     }
     
@@ -833,7 +816,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             isPushedFromPageViewController = hasProductsViewController
             
             if isPushedFromPageViewController {
-                print("✅ [updatePushedFromPageViewControllerFlag] ProductDetailViewController pushed from ProductsViewController → Set flag")
             }
         } else {
             // Không phải ProductDetailViewController → reset flag
@@ -860,7 +842,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             gesture.isEnabled = false
         }
         
-        print("🔴 [disableOtherGestures] Disabled \(allGestures.count) gesture recognizers")
     }
     
     /// Enable lại tất cả các gesture đã disable
@@ -871,7 +852,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         }
         originalGestureStates.removeAll()
         
-        print("🟢 [enableOtherGestures] Re-enabled gesture recognizers")
     }
     
     /// Recursively find all gesture recognizers in a view hierarchy
@@ -894,7 +874,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         let position: CGFloat = sender.translation(in: gestureView).x
         let velocity: CGFloat = sender.velocity(in: gestureView).x
         
-        print("🟣 [handlePanGesture] State: \(sender.state.rawValue), position: \(position), velocity: \(velocity)")
         
         switch sender.state {
         case .began:
@@ -911,22 +890,17 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         
         switch sender.state {
         case .began:
-            print("🟣 [handlePanGesture] .began - Checking if gesture from PageViewController...")
             // If gesture originates from an inner page scroll view that should handle it, skip container drag
             let isInsidePageScroll = isGestureInsidePageScrollView(sender)
-            print("🟣 [handlePanGesture] .began - isGestureInsidePageScrollView: \(isInsidePageScroll)")
             
             if isInsidePageScroll {
-                print("❌ [handlePanGesture] .began - Gesture from PageViewController → Skip container drag")
                 draggingIsEnabled = false
                 return
             }
             
-            print("✅ [handlePanGesture] .began - Gesture NOT from PageViewController → Continue")
             
             // If user tries to expand while already expanded and swipes right, cancel (no extra expand)
             if velocity > 0, isExpanded {
-                print("❌ [handlePanGesture] .began - Already expanded + right swipe → Cancel")
                 sender.state = .cancelled
                 return
             }
@@ -934,24 +908,20 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             // Enable dragging when swiping right to open (and not expanded) OR swiping left to close (when expanded)
             if velocity > 0, !isExpanded {
                 draggingIsEnabled = true
-                print("✅ [handlePanGesture] .began - Right swipe + not expanded → Enable dragging")
             } else if velocity < 0, isExpanded {
                 draggingIsEnabled = true
-                print("✅ [handlePanGesture] .began - Left swipe + expanded → Enable dragging")
             }
             
             if draggingIsEnabled {
                 // If swipe is sufficiently fast, complete toggle immediately
                 let velocityThreshold: CGFloat = 550
                 if abs(velocity) > velocityThreshold {
-                    print("⚡ [handlePanGesture] .began - Fast swipe (velocity > \(velocityThreshold)) → Toggle immediately")
                     sideMenuState(expanded: isExpanded ? false : true)
                     draggingIsEnabled = false
                     return
                 }
                 
                 panBaseLocation = isExpanded ? sideMenuRevealWidth : 0.0
-                print("✅ [handlePanGesture] .began - Dragging enabled, panBaseLocation: \(panBaseLocation)")
             }
             
         case .changed:
@@ -1011,27 +981,23 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         guard let nav = mainTabBarController?.selectedViewController as? UINavigationController,
               let contentVC = nav.viewControllers.first(where: { $0 is ContentViewController }) as? ContentViewController
         else {
-            print("🟡 [isGestureInsidePageScrollView] No ContentViewController found → false")
             return false
         }
         
         // 2. SegmentedPageContainer addChild UIPageViewController vào ContentViewController
         // Tìm UIPageViewController trong children của ContentViewController
         guard let pageVC = contentVC.children.first(where: { $0 is UIPageViewController }) as? UIPageViewController else {
-            print("🟡 [isGestureInsidePageScrollView] No UIPageViewController found → false")
             return false
         }
         
         // 3. Get internal UIScrollView
         guard let scrollView = pageVC.view.subviews.first(where: { $0 is UIScrollView }) as? UIScrollView else {
-            print("🟡 [isGestureInsidePageScrollView] No UIScrollView found → false")
             return false
         }
         
         // 4. If gesture's start point is inside that scrollView's bounds, and the inner page should handle => return true
         let startPointInScroll = gesture.location(in: scrollView)
         if scrollView.bounds.contains(startPointInScroll) {
-            print("🟢 [isGestureInsidePageScrollView] Gesture is inside PageViewController scrollView")
             
             // If inner cannot scroll horizontally -> treat as container opportunity
             let canScrollHorizontally = scrollView.contentSize.width > scrollView.frame.width + 0.5
@@ -1039,17 +1005,14 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             let vx = gesture.velocity(in: scrollView).x
             let currentIndex = contentVC.currentPageIndex
             
-            print("🟢 [isGestureInsidePageScrollView] canScrollHorizontally: \(canScrollHorizontally), scrollOffset: \(scrollOffset), velocityX: \(vx), currentIndex: \(currentIndex)")
             
             if !canScrollHorizontally {
-                print("✅ [isGestureInsidePageScrollView] Cannot scroll horizontally → Return false (let container handle)")
                 return false
             }
             
             // Use ContentViewController.currentPageIndex as truth
             // If we're not on page 0 -> inner should handle horizontal swipes
             if currentIndex != 0 {
-                print("❌ [isGestureInsidePageScrollView] Page \(currentIndex) → Return true (let PageViewController handle)")
                 return true
             }
             
@@ -1059,27 +1022,21 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
             let pageWidth = scrollView.frame.width
             let atLeftEdge = scrollOffset <= pageWidth + 10 // Cho phép một chút tolerance
             
-            print("🟢 [isGestureInsidePageScrollView] Page 0 check - scrollOffset: \(scrollOffset), pageWidth: \(pageWidth), atLeftEdge: \(atLeftEdge), vx: \(vx)")
             
             if atLeftEdge || vx > 0 {
-                print("✅ [isGestureInsidePageScrollView] Page 0 at left edge (offset: \(scrollOffset) <= \(pageWidth + 10)) + right swipe → Return false (let container handle)")
                 return false
             }
             
             // Otherwise allow inner to handle (e.g. swipe left to change page)
-            print("❌ [isGestureInsidePageScrollView] Page 0 → Return true (let PageViewController handle) - atLeftEdge: \(atLeftEdge), vx: \(vx)")
             return true
         }
         
-        print("🟡 [isGestureInsidePageScrollView] Gesture NOT inside PageViewController scrollView → false")
         return false
     }
     
     // MARK: - Navigation Handlers
     
     private func handleNavigateToShippingAddress() {
-        print("========== HANDLE NAVIGATE TO SHIPPING ADDRESS ==========")
-        print("1️⃣ Navigating to Shipping Address (push immediately)...")
         // Push immediately without closing side menu first
         navigateToShippingAddress()
     }
@@ -1087,20 +1044,15 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
     // MARK: - Logout Handling
     
     private func handleLogout() {
-        print("========== HANDLE LOGOUT ==========")
-        print("1️⃣ Closing side menu...")
         // Close side menu first
         sideMenuState(expanded: false)
         
-        print("2️⃣ Clearing session and user data...")
         // Clear session and user data
         let utilities = Utilities()
         utilities.logout()
         
-        print("3️⃣ Navigating to Login screen...")
         // Navigate to Login screen
         navigateToLogin()
-        print("===================================")
     }
     
     private func navigateToLogin() {
@@ -1122,11 +1074,9 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
     }
     
     private func navigateToShippingAddress() {
-        print("2️⃣ Navigating to Shipping Address screen...")
         // Get navigation controller from current tab
         // selectedViewController is already a UINavigationController (see TabBarController.swift)
         guard let navController = mainTabBarController.selectedViewController as? UINavigationController else {
-            print("DEBUG: selectedViewController is not a UINavigationController")
             return
         }
         
@@ -1149,7 +1099,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         // Close side menu after push
         sideMenuState(expanded: false)
         
-        print("=========================================================")
     }
     
     private func handleNavigateToProfile() {
@@ -1165,10 +1114,8 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
     }
     
     private func navigateToOrder() {
-        print("2️⃣ Navigating to Order Container screen...")
         // Get navigation controller from current tab
         guard let navController = mainTabBarController.selectedViewController as? UINavigationController else {
-            print("DEBUG: selectedViewController is not a UINavigationController")
             return
         }
         
@@ -1189,14 +1136,11 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         // Close side menu after push
         sideMenuState(expanded: false)
         
-        print("=========================================================")
     }
     
     private func navigateToPayment() {
-        print("2️⃣ Navigating to Payment Card screen...")
         // Get navigation controller from current tab
         guard let navController = mainTabBarController.selectedViewController as? UINavigationController else {
-            print("DEBUG: selectedViewController is not a UINavigationController")
             return
         }
         
@@ -1219,14 +1163,11 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         // Close side menu after push
         sideMenuState(expanded: false)
         
-        print("=========================================================")
     }
     
     private func navigateToProfile() {
-        print("2️⃣ Navigating to Profile screen...")
         // Get navigation controller from current tab
         guard let navController = mainTabBarController.selectedViewController as? UINavigationController else {
-            print("DEBUG: selectedViewController is not a UINavigationController")
             return
         }
         
@@ -1247,16 +1188,13 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
         // Close side menu after push
         sideMenuState(expanded: false)
         
-        print("=========================================================")
     }
     
     private func transitionToRootViewController(_ viewController: UIViewController) {
         guard let window = view.window ?? UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
-            print("MainContainerViewController: No window available for transition")
             return
         }
         
-        print("MainContainerViewController: Transitioning to Login screen")
         
         UIView.transition(
             with: window,
@@ -1266,7 +1204,6 @@ extension MainContainerViewController: UIGestureRecognizerDelegate {
                 window.rootViewController = viewController
             },
             completion: { finished in
-                print("MainContainerViewController: Transition to Login completed: \(finished)")
             }
         )
     }
@@ -1304,14 +1241,6 @@ extension MainContainerViewController: UINavigationControllerDelegate {
             return "\(className)\(isAddress ? " [AddressVC]" : "")\(isMap ? " [MapVC]" : "")"
         }.joined(separator: " -> ")
         
-        print("🔄 [UINavigationControllerDelegate] didShow")
-        print("   - Current top VC: \(String(describing: type(of: viewController)))")
-        print("   - isAddressViewController: \(isAddressViewController)")
-        print("   - hasAddressViewControllerInStack: \(hasAddressViewControllerInStack)")
-        print("   - Stack count: \(navigationController.viewControllers.count)")
-        print("   - Stack: \(stackDescription)")
-        print("   - isExpanded: \(isExpanded), shadowAlpha: \(sideMenuShadowView.alpha)")
-        print("   - didOpenFromSideMenu: \(didOpenFromSideMenu)")
         
         if didOpenFromSideMenu {
             // If AddressViewController, ProfileViewController, PaymentCardViewController and OrderContainerViewController are no longer in the stack, we've fully popped back
@@ -1321,7 +1250,6 @@ extension MainContainerViewController: UINavigationControllerDelegate {
                 didOpenFromSideMenu = false
                 
                 // Always ensure side menu and overlay are completely closed
-                print("🔄 Completely back from side menu flow, ensuring side menu and overlay are closed")
                 
                 // Force close side menu and hide overlay regardless of isExpanded state
                 // This prevents overlay from remaining visible after swipe back
@@ -1337,7 +1265,6 @@ extension MainContainerViewController: UINavigationControllerDelegate {
                 // We're back to AddressViewController or ProfileViewController (from other screens)
                 // Ensure side menu is closed when returning
                 let vcName = isAddressViewController ? "AddressViewController" : "ProfileViewController"
-                print("🔄 Back to \(vcName), ensuring side menu is closed")
                 if isExpanded || sideMenuShadowView.alpha > 0 {
                     sideMenuState(expanded: false)
                 }

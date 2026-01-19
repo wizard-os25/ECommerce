@@ -186,6 +186,13 @@ final class AppDIContainer {
         return OrderDetailDIContainer(dependencies: dependencies)
     }
     
+    func makeNotificationSceneDIContainer() -> NotificationSceneDIContainer {
+        let dependencies = NotificationSceneDIContainer.Dependencies(
+            notificationDataTransferService: apiDataTransferService
+        )
+        return NotificationSceneDIContainer(dependencies: dependencies)
+    }
+    
     // MARK: - Use Cases
     
     private func makeOrderDetailUseCase() -> OrderDetailUseCase {

@@ -901,6 +901,105 @@
 		D01C331E2F1E6FEF00B9D520 /* CartSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C331D2F1E6FEF00B9D520 /* CartSceneDIContainer.swift */; };
 		D01C331F2F1E6FEF00B9D520 /* CartSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C331D2F1E6FEF00B9D520 /* CartSceneDIContainer.swift */; };
 		D01C33202F1E6FEF00B9D520 /* CartSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C331D2F1E6FEF00B9D520 /* CartSceneDIContainer.swift */; };
+		D01C332A2F1EA9F100B9D520 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33292F1EA9F100B9D520 /* Notification.swift */; };
+		D01C332B2F1EA9F100B9D520 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33292F1EA9F100B9D520 /* Notification.swift */; };
+		D01C332C2F1EA9F100B9D520 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33292F1EA9F100B9D520 /* Notification.swift */; };
+		D01C332F2F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C332D2F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift */; };
+		D01C33302F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C332D2F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift */; };
+		D01C33312F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C332D2F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift */; };
+		D01C33332F1EAA2400B9D520 /* NotificationEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33322F1EAA2400B9D520 /* NotificationEndpoints.swift */; };
+		D01C33342F1EAA2400B9D520 /* NotificationEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33322F1EAA2400B9D520 /* NotificationEndpoints.swift */; };
+		D01C33352F1EAA2400B9D520 /* NotificationEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33322F1EAA2400B9D520 /* NotificationEndpoints.swift */; };
+		D01C33372F1EAA2F00B9D520 /* DefaultNotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33362F1EAA2F00B9D520 /* DefaultNotificationRepository.swift */; };
+		D01C33382F1EAA2F00B9D520 /* DefaultNotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33362F1EAA2F00B9D520 /* DefaultNotificationRepository.swift */; };
+		D01C33392F1EAA2F00B9D520 /* DefaultNotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33362F1EAA2F00B9D520 /* DefaultNotificationRepository.swift */; };
+		D01C333B2F1EAA3E00B9D520 /* NotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C333A2F1EAA3E00B9D520 /* NotificationRepository.swift */; };
+		D01C333C2F1EAA3E00B9D520 /* NotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C333A2F1EAA3E00B9D520 /* NotificationRepository.swift */; };
+		D01C333D2F1EAA3E00B9D520 /* NotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C333A2F1EAA3E00B9D520 /* NotificationRepository.swift */; };
+		D01C333F2F1EAA4600B9D520 /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C333E2F1EAA4600B9D520 /* NotificationUseCase.swift */; };
+		D01C33402F1EAA4600B9D520 /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C333E2F1EAA4600B9D520 /* NotificationUseCase.swift */; };
+		D01C33412F1EAA4600B9D520 /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C333E2F1EAA4600B9D520 /* NotificationUseCase.swift */; };
+		D01C33452F1EAA8500B9D520 /* NotificationReadDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33422F1EAA8500B9D520 /* NotificationReadDIContainer.swift */; };
+		D01C33462F1EAA8500B9D520 /* NotificationSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33432F1EAA8500B9D520 /* NotificationSceneDIContainer.swift */; };
+		D01C33472F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33442F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift */; };
+		D01C33482F1EAA8500B9D520 /* NotificationReadDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33422F1EAA8500B9D520 /* NotificationReadDIContainer.swift */; };
+		D01C33492F1EAA8500B9D520 /* NotificationSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33432F1EAA8500B9D520 /* NotificationSceneDIContainer.swift */; };
+		D01C334A2F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33442F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift */; };
+		D01C334B2F1EAA8500B9D520 /* NotificationReadDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33422F1EAA8500B9D520 /* NotificationReadDIContainer.swift */; };
+		D01C334C2F1EAA8500B9D520 /* NotificationSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33432F1EAA8500B9D520 /* NotificationSceneDIContainer.swift */; };
+		D01C334D2F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33442F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift */; };
+		D01C33502F1EAA9E00B9D520 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C334E2F1EAA9E00B9D520 /* NotificationCell.swift */; };
+		D01C33512F1EAA9E00B9D520 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C334F2F1EAA9E00B9D520 /* NotificationViewController.swift */; };
+		D01C33522F1EAA9E00B9D520 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C334E2F1EAA9E00B9D520 /* NotificationCell.swift */; };
+		D01C33532F1EAA9E00B9D520 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C334F2F1EAA9E00B9D520 /* NotificationViewController.swift */; };
+		D01C33542F1EAA9E00B9D520 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C334E2F1EAA9E00B9D520 /* NotificationCell.swift */; };
+		D01C33552F1EAA9E00B9D520 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C334F2F1EAA9E00B9D520 /* NotificationViewController.swift */; };
+		D01C33572F1EAABD00B9D520 /* NotificationContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33562F1EAABD00B9D520 /* NotificationContainerController.swift */; };
+		D01C33582F1EAABD00B9D520 /* NotificationContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33562F1EAABD00B9D520 /* NotificationContainerController.swift */; };
+		D01C33592F1EAABD00B9D520 /* NotificationContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33562F1EAABD00B9D520 /* NotificationContainerController.swift */; };
+		D01C335B2F1EAACC00B9D520 /* NotificationReadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C335A2F1EAACC00B9D520 /* NotificationReadController.swift */; };
+		D01C335C2F1EAACC00B9D520 /* NotificationReadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C335A2F1EAACC00B9D520 /* NotificationReadController.swift */; };
+		D01C335D2F1EAACC00B9D520 /* NotificationReadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C335A2F1EAACC00B9D520 /* NotificationReadController.swift */; };
+		D01C335F2F1EAADA00B9D520 /* NotificationUnreadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C335E2F1EAADA00B9D520 /* NotificationUnreadController.swift */; };
+		D01C33602F1EAADA00B9D520 /* NotificationUnreadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C335E2F1EAADA00B9D520 /* NotificationUnreadController.swift */; };
+		D01C33612F1EAADA00B9D520 /* NotificationUnreadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C335E2F1EAADA00B9D520 /* NotificationUnreadController.swift */; };
+		D01C33632F1EAAEC00B9D520 /* NotificationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33622F1EAAEC00B9D520 /* NotificationItemModel.swift */; };
+		D01C33642F1EAAEC00B9D520 /* NotificationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33622F1EAAEC00B9D520 /* NotificationItemModel.swift */; };
+		D01C33652F1EAAEC00B9D520 /* NotificationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33622F1EAAEC00B9D520 /* NotificationItemModel.swift */; };
+		D01C33672F1EAB1E00B9D520 /* NotificationUnreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33662F1EAB1E00B9D520 /* NotificationUnreadViewController.swift */; };
+		D01C33682F1EAB1E00B9D520 /* NotificationUnreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33662F1EAB1E00B9D520 /* NotificationUnreadViewController.swift */; };
+		D01C33692F1EAB1E00B9D520 /* NotificationUnreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33662F1EAB1E00B9D520 /* NotificationUnreadViewController.swift */; };
+		D01C336B2F1EAB2700B9D520 /* NotificationReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C336A2F1EAB2700B9D520 /* NotificationReadViewController.swift */; };
+		D01C336C2F1EAB2700B9D520 /* NotificationReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C336A2F1EAB2700B9D520 /* NotificationReadViewController.swift */; };
+		D01C336D2F1EAB2700B9D520 /* NotificationReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C336A2F1EAB2700B9D520 /* NotificationReadViewController.swift */; };
+		D01C336F2F1EB08900B9D520 /* NotificationUnreadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C336E2F1EB08900B9D520 /* NotificationUnreadViewController.storyboard */; };
+		D01C33702F1EB08900B9D520 /* NotificationUnreadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C336E2F1EB08900B9D520 /* NotificationUnreadViewController.storyboard */; };
+		D01C33712F1EB08900B9D520 /* NotificationUnreadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C336E2F1EB08900B9D520 /* NotificationUnreadViewController.storyboard */; };
+		D01C33732F1EB09B00B9D520 /* NotificationReadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C33722F1EB09B00B9D520 /* NotificationReadViewController.storyboard */; };
+		D01C33742F1EB09B00B9D520 /* NotificationReadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C33722F1EB09B00B9D520 /* NotificationReadViewController.storyboard */; };
+		D01C33752F1EB09B00B9D520 /* NotificationReadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C33722F1EB09B00B9D520 /* NotificationReadViewController.storyboard */; };
+		D01C33772F1EB0AD00B9D520 /* NotificationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C33762F1EB0AD00B9D520 /* NotificationViewController.storyboard */; };
+		D01C33782F1EB0AD00B9D520 /* NotificationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C33762F1EB0AD00B9D520 /* NotificationViewController.storyboard */; };
+		D01C33792F1EB0AD00B9D520 /* NotificationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C33762F1EB0AD00B9D520 /* NotificationViewController.storyboard */; };
+		D01C33832F1EB87800B9D520 /* OrderProcessingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33802F1EB87800B9D520 /* OrderProcessingCell.swift */; };
+		D01C33842F1EB87800B9D520 /* OrderProcessingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33812F1EB87800B9D520 /* OrderProcessingViewController.swift */; };
+		D01C33852F1EB87800B9D520 /* OrderProcessingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C337E2F1EB87800B9D520 /* OrderProcessingItemModel.swift */; };
+		D01C33862F1EB87800B9D520 /* OrderProcessingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C337C2F1EB87800B9D520 /* OrderProcessingController.swift */; };
+		D01C33872F1EB87800B9D520 /* OrderProcessingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33802F1EB87800B9D520 /* OrderProcessingCell.swift */; };
+		D01C33882F1EB87800B9D520 /* OrderProcessingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33812F1EB87800B9D520 /* OrderProcessingViewController.swift */; };
+		D01C33892F1EB87800B9D520 /* OrderProcessingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C337E2F1EB87800B9D520 /* OrderProcessingItemModel.swift */; };
+		D01C338A2F1EB87800B9D520 /* OrderProcessingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C337C2F1EB87800B9D520 /* OrderProcessingController.swift */; };
+		D01C338B2F1EB87800B9D520 /* OrderProcessingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33802F1EB87800B9D520 /* OrderProcessingCell.swift */; };
+		D01C338C2F1EB87800B9D520 /* OrderProcessingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33812F1EB87800B9D520 /* OrderProcessingViewController.swift */; };
+		D01C338D2F1EB87800B9D520 /* OrderProcessingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C337E2F1EB87800B9D520 /* OrderProcessingItemModel.swift */; };
+		D01C338E2F1EB87800B9D520 /* OrderProcessingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C337C2F1EB87800B9D520 /* OrderProcessingController.swift */; };
+		D01C33902F1EB89600B9D520 /* OrderProcessingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C338F2F1EB89600B9D520 /* OrderProcessingViewController.storyboard */; };
+		D01C33912F1EB89600B9D520 /* OrderProcessingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C338F2F1EB89600B9D520 /* OrderProcessingViewController.storyboard */; };
+		D01C33922F1EB89600B9D520 /* OrderProcessingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C338F2F1EB89600B9D520 /* OrderProcessingViewController.storyboard */; };
+		D01C339A2F1EB8B800B9D520 /* OrderConfirmedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33972F1EB8B800B9D520 /* OrderConfirmedCell.swift */; };
+		D01C339B2F1EB8B800B9D520 /* OrderConfirmedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33932F1EB8B800B9D520 /* OrderConfirmedController.swift */; };
+		D01C339C2F1EB8B800B9D520 /* OrderConfirmedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33982F1EB8B800B9D520 /* OrderConfirmedViewController.swift */; };
+		D01C339D2F1EB8B800B9D520 /* OrderConfirmedItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33952F1EB8B800B9D520 /* OrderConfirmedItemModel.swift */; };
+		D01C339E2F1EB8B800B9D520 /* OrderConfirmedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33972F1EB8B800B9D520 /* OrderConfirmedCell.swift */; };
+		D01C339F2F1EB8B800B9D520 /* OrderConfirmedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33932F1EB8B800B9D520 /* OrderConfirmedController.swift */; };
+		D01C33A02F1EB8B800B9D520 /* OrderConfirmedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33982F1EB8B800B9D520 /* OrderConfirmedViewController.swift */; };
+		D01C33A12F1EB8B800B9D520 /* OrderConfirmedItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33952F1EB8B800B9D520 /* OrderConfirmedItemModel.swift */; };
+		D01C33A22F1EB8B800B9D520 /* OrderConfirmedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33972F1EB8B800B9D520 /* OrderConfirmedCell.swift */; };
+		D01C33A32F1EB8B800B9D520 /* OrderConfirmedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33932F1EB8B800B9D520 /* OrderConfirmedController.swift */; };
+		D01C33A42F1EB8B800B9D520 /* OrderConfirmedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33982F1EB8B800B9D520 /* OrderConfirmedViewController.swift */; };
+		D01C33A52F1EB8B800B9D520 /* OrderConfirmedItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33952F1EB8B800B9D520 /* OrderConfirmedItemModel.swift */; };
+		D01C33A72F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C33A62F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard */; };
+		D01C33A82F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C33A62F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard */; };
+		D01C33A92F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01C33A62F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard */; };
+		D01C33AC2F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33AA2F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift */; };
+		D01C33AD2F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33AB2F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift */; };
+		D01C33AE2F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33AA2F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift */; };
+		D01C33AF2F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33AB2F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift */; };
+		D01C33B02F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33AA2F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift */; };
+		D01C33B12F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33AB2F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift */; };
+		D01C33B32F1EBE3400B9D520 /* RelativeTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33B22F1EBE3400B9D520 /* RelativeTimeFormatter.swift */; };
+		D01C33B42F1EBE3400B9D520 /* RelativeTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33B22F1EBE3400B9D520 /* RelativeTimeFormatter.swift */; };
+		D01C33B52F1EBE3400B9D520 /* RelativeTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01C33B22F1EBE3400B9D520 /* RelativeTimeFormatter.swift */; };
 		D03ACF542F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */; };
 		D03ACF552F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */; };
 		D03ACF562F1A774700F8DD43 /* OrderContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */; };
@@ -1900,6 +1999,39 @@
 		D01C33152F1E6FE300B9D520 /* CartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartController.swift; sourceTree = "<group>"; };
 		D01C33162F1E6FE300B9D520 /* CartCoordinatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCoordinatingController.swift; sourceTree = "<group>"; };
 		D01C331D2F1E6FEF00B9D520 /* CartSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartSceneDIContainer.swift; sourceTree = "<group>"; };
+		D01C33292F1EA9F100B9D520 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		D01C332D2F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationResponseDTOs+Mapping.swift"; sourceTree = "<group>"; };
+		D01C33322F1EAA2400B9D520 /* NotificationEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEndpoints.swift; sourceTree = "<group>"; };
+		D01C33362F1EAA2F00B9D520 /* DefaultNotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationRepository.swift; sourceTree = "<group>"; };
+		D01C333A2F1EAA3E00B9D520 /* NotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRepository.swift; sourceTree = "<group>"; };
+		D01C333E2F1EAA4600B9D520 /* NotificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUseCase.swift; sourceTree = "<group>"; };
+		D01C33422F1EAA8500B9D520 /* NotificationReadDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationReadDIContainer.swift; sourceTree = "<group>"; };
+		D01C33432F1EAA8500B9D520 /* NotificationSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSceneDIContainer.swift; sourceTree = "<group>"; };
+		D01C33442F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUnreadDIContainer.swift; sourceTree = "<group>"; };
+		D01C334E2F1EAA9E00B9D520 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		D01C334F2F1EAA9E00B9D520 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		D01C33562F1EAABD00B9D520 /* NotificationContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContainerController.swift; sourceTree = "<group>"; };
+		D01C335A2F1EAACC00B9D520 /* NotificationReadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationReadController.swift; sourceTree = "<group>"; };
+		D01C335E2F1EAADA00B9D520 /* NotificationUnreadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUnreadController.swift; sourceTree = "<group>"; };
+		D01C33622F1EAAEC00B9D520 /* NotificationItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationItemModel.swift; sourceTree = "<group>"; };
+		D01C33662F1EAB1E00B9D520 /* NotificationUnreadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUnreadViewController.swift; sourceTree = "<group>"; };
+		D01C336A2F1EAB2700B9D520 /* NotificationReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationReadViewController.swift; sourceTree = "<group>"; };
+		D01C336E2F1EB08900B9D520 /* NotificationUnreadViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotificationUnreadViewController.storyboard; sourceTree = "<group>"; };
+		D01C33722F1EB09B00B9D520 /* NotificationReadViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotificationReadViewController.storyboard; sourceTree = "<group>"; };
+		D01C33762F1EB0AD00B9D520 /* NotificationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotificationViewController.storyboard; sourceTree = "<group>"; };
+		D01C337C2F1EB87800B9D520 /* OrderProcessingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProcessingController.swift; sourceTree = "<group>"; };
+		D01C337E2F1EB87800B9D520 /* OrderProcessingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProcessingItemModel.swift; sourceTree = "<group>"; };
+		D01C33802F1EB87800B9D520 /* OrderProcessingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProcessingCell.swift; sourceTree = "<group>"; };
+		D01C33812F1EB87800B9D520 /* OrderProcessingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProcessingViewController.swift; sourceTree = "<group>"; };
+		D01C338F2F1EB89600B9D520 /* OrderProcessingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OrderProcessingViewController.storyboard; sourceTree = "<group>"; };
+		D01C33932F1EB8B800B9D520 /* OrderConfirmedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmedController.swift; sourceTree = "<group>"; };
+		D01C33952F1EB8B800B9D520 /* OrderConfirmedItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmedItemModel.swift; sourceTree = "<group>"; };
+		D01C33972F1EB8B800B9D520 /* OrderConfirmedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmedCell.swift; sourceTree = "<group>"; };
+		D01C33982F1EB8B800B9D520 /* OrderConfirmedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmedViewController.swift; sourceTree = "<group>"; };
+		D01C33A62F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OrderConfirmedViewController.storyboard; sourceTree = "<group>"; };
+		D01C33AA2F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmedDIContainer.swift; sourceTree = "<group>"; };
+		D01C33AB2F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProcessingDIContainer.swift; sourceTree = "<group>"; };
+		D01C33B22F1EBE3400B9D520 /* RelativeTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeTimeFormatter.swift; sourceTree = "<group>"; };
 		D03ACF082F193B6600F8DD43 /* ECommerceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ECommerceDebug.entitlements; sourceTree = "<group>"; };
 		D03ACF532F1A774700F8DD43 /* OrderContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderContainerViewController.swift; sourceTree = "<group>"; };
 		D03ACF672F1A7F7800F8DD43 /* OrderManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderManage.swift; sourceTree = "<group>"; };
@@ -2441,6 +2573,8 @@
 		D0029C7E2F0E95E500D50804 /* NotificationScene */ = {
 			isa = PBXGroup;
 			children = (
+				D01C33222F1EA1C000B9D520 /* NotificationUnread */,
+				D01C33212F1EA1AC00B9D520 /* NotificationRead */,
 				D0029CD52F0E9F6400D50804 /* Model */,
 				D0029CD42F0E9F6000D50804 /* View */,
 				D0029CD32F0E9F5C00D50804 /* Controller */,
@@ -2585,6 +2719,7 @@
 		D0029CD32F0E9F5C00D50804 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D01C33562F1EAABD00B9D520 /* NotificationContainerController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2592,6 +2727,9 @@
 		D0029CD42F0E9F6000D50804 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D01C334E2F1EAA9E00B9D520 /* NotificationCell.swift */,
+				D01C334F2F1EAA9E00B9D520 /* NotificationViewController.swift */,
+				D01C33762F1EB0AD00B9D520 /* NotificationViewController.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2932,6 +3070,7 @@
 		D0095B7D2ECB411B00FCC7BC /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D01C33292F1EA9F100B9D520 /* Notification.swift */,
 				D01C32D12F1D244000B9D520 /* Category.swift */,
 				D01C327E2F1A9FCA00B9D520 /* OrderDetail.swift */,
 				D05141922F17C26D00C7B963 /* Order.swift */,
@@ -2954,7 +3093,6 @@
 		D0095B862ECB412800FCC7BC /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				D01C32F52F1E1C2C00B9D520 /* SearchProductsUseCase.swift */,
 				D0095B8B2ECB413D00FCC7BC /* protocol */,
 				D0095B872ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift */,
 				D0FF948A2F14E8AE006146F8 /* FetchRecentGroceryQueriesUseCase.swift */,
@@ -2969,6 +3107,8 @@
 				D0724D872F1730DB004815FB /* PaymentCardUseCase.swift */,
 				D0FF942A2F140552006146F8 /* AddressUseCase.swift */,
 				D0FF94EF2F15CE55006146F8 /* LocationListUseCase.swift */,
+				D01C333E2F1EAA4600B9D520 /* NotificationUseCase.swift */,
+				D01C32F52F1E1C2C00B9D520 /* SearchProductsUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -2992,6 +3132,7 @@
 		D0095B952ECB417B00FCC7BC /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				D01C333A2F1EAA3E00B9D520 /* NotificationRepository.swift */,
 				D01C32D52F1D246300B9D520 /* CategoriesRepository.swift */,
 				D01C32862F1AA03400B9D520 /* OrderDetailRepository.swift */,
 				D051419A2F17C28000C7B963 /* OrderRepository.swift */,
@@ -3047,6 +3188,7 @@
 				D03ACF732F1A7FB700F8DD43 /* DefaultOrderManageRepository.swift */,
 				D0FF941E2F140514006146F8 /* DefaultAddressRepository.swift */,
 				D0FF94C12F15CB0C006146F8 /* DefaultLocationListRepository.swift */,
+				D01C33362F1EAA2F00B9D520 /* DefaultNotificationRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -3054,6 +3196,7 @@
 		D0095BA62ECB426400FCC7BC /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
+				D01C332E2F1EAA1700B9D520 /* Notification */,
 				D01C32E22F1D249500B9D520 /* Category */,
 				D01C32932F1AA08F00B9D520 /* OrderDetail */,
 				D05141A32F17C2A400C7B963 /* Order */,
@@ -3107,6 +3250,11 @@
 		D0095BE22ECB435300FCC7BC /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
+				D01C33AA2F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift */,
+				D01C33AB2F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift */,
+				D01C33422F1EAA8500B9D520 /* NotificationReadDIContainer.swift */,
+				D01C33432F1EAA8500B9D520 /* NotificationSceneDIContainer.swift */,
+				D01C33442F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift */,
 				D01C331D2F1E6FEF00B9D520 /* CartSceneDIContainer.swift */,
 				D01C33092F1E1C8200B9D520 /* SearchSceneDIContainer.swift */,
 				D01C32E62F1D24C500B9D520 /* CategorySceneDIContainer.swift */,
@@ -3431,6 +3579,7 @@
 		D0095D732ECC56D200FCC7BC /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				D01C33B22F1EBE3400B9D520 /* RelativeTimeFormatter.swift */,
 				D01C32C52F1C062200B9D520 /* KeychainHelper.swift */,
 				D01C32C62F1C062200B9D520 /* TokenRefreshService.swift */,
 				D0095D742ECC56F300FCC7BC /* HelperFunction.swift */,
@@ -3595,6 +3744,7 @@
 		D00B92982F10EA3100AEE1B6 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
+				D01C33322F1EAA2400B9D520 /* NotificationEndpoints.swift */,
 				D01C32DD2F1D248900B9D520 /* CategoriesEndpoints.swift */,
 				D01C328E2F1AA06300B9D520 /* OrderDetailEndpoints.swift */,
 				D051419E2F17C29400C7B963 /* OrderEndpoints.swift */,
@@ -3744,9 +3894,160 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D01C33212F1EA1AC00B9D520 /* NotificationRead */ = {
+			isa = PBXGroup;
+			children = (
+				D01C33282F1EA1F000B9D520 /* Model */,
+				D01C33272F1EA1EC00B9D520 /* View */,
+				D01C33262F1EA1E700B9D520 /* Controller */,
+			);
+			path = NotificationRead;
+			sourceTree = "<group>";
+		};
+		D01C33222F1EA1C000B9D520 /* NotificationUnread */ = {
+			isa = PBXGroup;
+			children = (
+				D01C33252F1EA1E300B9D520 /* Model */,
+				D01C33242F1EA1DD00B9D520 /* View */,
+				D01C33232F1EA1CF00B9D520 /* Controller */,
+			);
+			path = NotificationUnread;
+			sourceTree = "<group>";
+		};
+		D01C33232F1EA1CF00B9D520 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D01C335E2F1EAADA00B9D520 /* NotificationUnreadController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D01C33242F1EA1DD00B9D520 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D01C33662F1EAB1E00B9D520 /* NotificationUnreadViewController.swift */,
+				D01C336E2F1EB08900B9D520 /* NotificationUnreadViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D01C33252F1EA1E300B9D520 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D01C33262F1EA1E700B9D520 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D01C335A2F1EAACC00B9D520 /* NotificationReadController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D01C33272F1EA1EC00B9D520 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D01C336A2F1EAB2700B9D520 /* NotificationReadViewController.swift */,
+				D01C33722F1EB09B00B9D520 /* NotificationReadViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D01C33282F1EA1F000B9D520 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D01C33622F1EAAEC00B9D520 /* NotificationItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D01C332E2F1EAA1700B9D520 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				D01C332D2F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		D01C337A2F1EB5EE00B9D520 /* OrderProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				D01C337F2F1EB87800B9D520 /* Model */,
+				D01C33822F1EB87800B9D520 /* View */,
+				D01C337D2F1EB87800B9D520 /* Controller */,
+			);
+			path = OrderProcessing;
+			sourceTree = "<group>";
+		};
+		D01C337B2F1EB72F00B9D520 /* OrderConfirmed */ = {
+			isa = PBXGroup;
+			children = (
+				D01C33962F1EB8B800B9D520 /* Model */,
+				D01C33992F1EB8B800B9D520 /* View */,
+				D01C33942F1EB8B800B9D520 /* Controller */,
+			);
+			path = OrderConfirmed;
+			sourceTree = "<group>";
+		};
+		D01C337D2F1EB87800B9D520 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D01C337C2F1EB87800B9D520 /* OrderProcessingController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D01C337F2F1EB87800B9D520 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D01C337E2F1EB87800B9D520 /* OrderProcessingItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D01C33822F1EB87800B9D520 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D01C33802F1EB87800B9D520 /* OrderProcessingCell.swift */,
+				D01C33812F1EB87800B9D520 /* OrderProcessingViewController.swift */,
+				D01C338F2F1EB89600B9D520 /* OrderProcessingViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D01C33942F1EB8B800B9D520 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D01C33932F1EB8B800B9D520 /* OrderConfirmedController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D01C33962F1EB8B800B9D520 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D01C33952F1EB8B800B9D520 /* OrderConfirmedItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D01C33992F1EB8B800B9D520 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D01C33972F1EB8B800B9D520 /* OrderConfirmedCell.swift */,
+				D01C33982F1EB8B800B9D520 /* OrderConfirmedViewController.swift */,
+				D01C33A62F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D03ACF4E2F1A76CB00F8DD43 /* OrderManageScene */ = {
 			isa = PBXGroup;
 			children = (
+				D01C337B2F1EB72F00B9D520 /* OrderConfirmed */,
+				D01C337A2F1EB5EE00B9D520 /* OrderProcessing */,
 				D03ACFC42F1A893900F8DD43 /* OrderContainer */,
 				D03ACF522F1A771B00F8DD43 /* OrderCancel */,
 				D03ACF512F1A770C00F8DD43 /* OrderDelivered */,
@@ -4874,14 +5175,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D01C33752F1EB09B00B9D520 /* NotificationReadViewController.storyboard in Resources */,
 				D0095B692ECB1D3800FCC7BC /* Localizable.strings in Resources */,
 				D03ACF9F2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard in Resources */,
 				D0095D7E2ECC58F200FCC7BC /* accounts.json in Resources */,
+				D01C33702F1EB08900B9D520 /* NotificationUnreadViewController.storyboard in Resources */,
 				D0029D202F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0FF95562F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */,
 				D0029D012F0EA4F600D50804 /* GroceryItemCell.xib in Resources */,
 				D0FF940E2F14019F006146F8 /* LocationSearchViewController.storyboard in Resources */,
 				D0095B702ECB1D4100FCC7BC /* Localizable.strings in Resources */,
+				D01C33782F1EB0AD00B9D520 /* NotificationViewController.storyboard in Resources */,
 				D03ACFC92F1A896B00F8DD43 /* OrderContainerViewController.storyboard in Resources */,
 				D0095B3B2ECB0BA700FCC7BC /* Main.storyboard in Resources */,
 				D01C32BB2F1AA4C500B9D520 /* OrderDetailOtherInfoCell.xib in Resources */,
@@ -4964,6 +5268,7 @@
 				D0029BDD2F0E742000D50804 /* ic_westernunionbank_56@3x.png in Resources */,
 				D01C327C2F1A9BC900B9D520 /* OrderDetailViewController.storyboard in Resources */,
 				D0029BDE2F0E742000D50804 /* ic_quoc_te_16@2x.png in Resources */,
+				D01C33902F1EB89600B9D520 /* OrderProcessingViewController.storyboard in Resources */,
 				D0029BDF2F0E742000D50804 /* ic_vietcombank_56@2x.png in Resources */,
 				D0029BE02F0E742000D50804 /* ic_vpbank_56@3x.png in Resources */,
 				D0029BE12F0E742000D50804 /* ic_vrbbank_56.png in Resources */,
@@ -4972,6 +5277,7 @@
 				D0724D6C2F172FEC004815FB /* PaymentCardViewController.storyboard in Resources */,
 				D0029BE32F0E742000D50804 /* ic_uobbank_56@3x.png in Resources */,
 				D0029BE42F0E742000D50804 /* ic_vpbank_56@2x.png in Resources */,
+				D01C33A72F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard in Resources */,
 				D0029BE52F0E742000D50804 /* ic_atm_noi_dia_16@3x.png in Resources */,
 				D0029CE02F0EA08000D50804 /* CartViewController.storyboard in Resources */,
 				D0029BE62F0E742000D50804 /* ic_wooribank_56.png in Resources */,
@@ -5001,16 +5307,19 @@
 				D0E6C3CC2F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
 				D05142282F19011600C7B963 /* PaymentMethodViewController.storyboard in Resources */,
 				D0FF95582F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */,
+				D01C33A82F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard in Resources */,
 				D0029B802F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
 				D0029C6D2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
 				D0029B812F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
 				D0029D332F0F46FF00D50804 /* RegisterViewController.storyboard in Resources */,
 				D0FF93E52F13ED49006146F8 /* MapViewController.storyboard in Resources */,
 				D0029D342F0F46FF00D50804 /* LoginViewController.storyboard in Resources */,
+				D01C33712F1EB08900B9D520 /* NotificationUnreadViewController.storyboard in Resources */,
 				D0029D352F0F46FF00D50804 /* SignUpViewController.storyboard in Resources */,
 				D0029B822F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
 				D0029B832F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
 				D0029B842F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
+				D01C33792F1EB0AD00B9D520 /* NotificationViewController.storyboard in Resources */,
 				D0029B852F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
 				D03ACFCB2F1A896B00F8DD43 /* OrderContainerViewController.storyboard in Resources */,
 				D0029B862F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
@@ -5067,6 +5376,7 @@
 				D05141512F179F2000C7B963 /* README.md in Resources */,
 				D0029BAC2F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
 				D0FF94322F140614006146F8 /* DividerCell.xib in Resources */,
+				D01C33732F1EB09B00B9D520 /* NotificationReadViewController.storyboard in Resources */,
 				D01C32CF2F1D1FB100B9D520 /* CategoryViewController.storyboard in Resources */,
 				D03ACF9E2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard in Resources */,
 				D0FF93D82F11FEB0006146F8 /* CardViewController.storyboard in Resources */,
@@ -5102,6 +5412,7 @@
 				D0FF94782F14E7BA006146F8 /* GroceryViewController.storyboard in Resources */,
 				D0029D1E2F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0095B2B2ECB0BA700FCC7BC /* Info.plist in Resources */,
+				D01C33922F1EB89600B9D520 /* OrderProcessingViewController.storyboard in Resources */,
 				D0095B2C2ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
 				D0029D5C2F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
 				D0029D5D2F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
@@ -5122,16 +5433,19 @@
 				D0E6C3D42F0DFEC000527962 /* HomeViewController.storyboard in Resources */,
 				D051422A2F19011600C7B963 /* PaymentMethodViewController.storyboard in Resources */,
 				D0FF95592F160DEA006146F8 /* ProfileTableViewCell.xib in Resources */,
+				D01C33A92F1EB8C600B9D520 /* OrderConfirmedViewController.storyboard in Resources */,
 				D0029C162F0E742000D50804 /* ic_viettelpay_56.png in Resources */,
 				D0029C6F2F0E74BF00D50804 /* PinterestCell.xib in Resources */,
 				D0029C172F0E742000D50804 /* ic_vietinbank_56.png in Resources */,
 				D0029D432F0F46FF00D50804 /* RegisterViewController.storyboard in Resources */,
 				D0FF93E42F13ED49006146F8 /* MapViewController.storyboard in Resources */,
 				D0029D442F0F46FF00D50804 /* LoginViewController.storyboard in Resources */,
+				D01C336F2F1EB08900B9D520 /* NotificationUnreadViewController.storyboard in Resources */,
 				D0029D452F0F46FF00D50804 /* SignUpViewController.storyboard in Resources */,
 				D0029C182F0E742000D50804 /* ic_tpbank_56@2x.png in Resources */,
 				D0029C192F0E742000D50804 /* ic_vietcapitalbank_56@3x.png in Resources */,
 				D0029C1A2F0E742000D50804 /* ic_vietbank_56@2x.png in Resources */,
+				D01C33772F1EB0AD00B9D520 /* NotificationViewController.storyboard in Resources */,
 				D0029C1B2F0E742000D50804 /* ic_vietabank_56@3x.png in Resources */,
 				D03ACFCA2F1A896B00F8DD43 /* OrderContainerViewController.storyboard in Resources */,
 				D0029C1C2F0E742000D50804 /* ic_tpbank_56@3x.png in Resources */,
@@ -5188,6 +5502,7 @@
 				D05141522F179F2000C7B963 /* README.md in Resources */,
 				D0029C422F0E742000D50804 /* ic_techcombank_56@2x.png in Resources */,
 				D0FF94302F140614006146F8 /* DividerCell.xib in Resources */,
+				D01C33742F1EB09B00B9D520 /* NotificationReadViewController.storyboard in Resources */,
 				D01C32CE2F1D1FB100B9D520 /* CategoryViewController.storyboard in Resources */,
 				D03ACF9D2F1A840B00F8DD43 /* OrderDeliveryViewController.storyboard in Resources */,
 				D0FF93D92F11FEB0006146F8 /* CardViewController.storyboard in Resources */,
@@ -5223,6 +5538,7 @@
 				D0FF94772F14E7BA006146F8 /* GroceryViewController.storyboard in Resources */,
 				D0029D1C2F0F46A700D50804 /* SplashViewController.storyboard in Resources */,
 				D0095B272ECB0BA700FCC7BC /* Info.plist in Resources */,
+				D01C33912F1EB89600B9D520 /* OrderProcessingViewController.storyboard in Resources */,
 				D0095B282ECB0BA700FCC7BC /* Assets.xcassets in Resources */,
 				D0029D622F0F4B5200D50804 /* CollectionSectionHeader.xib in Resources */,
 				D0029D632F0F4B5200D50804 /* TableSectionHeader.xib in Resources */,
@@ -5277,6 +5593,7 @@
 				D05141BD2F18156A00C7B963 /* OrderActionViewExample.swift in Sources */,
 				D05141BE2F18156A00C7B963 /* OrderActionView.swift in Sources */,
 				D00B92D02F11054F00AEE1B6 /* APIErrorParser.swift in Sources */,
+				D01C333B2F1EAA3E00B9D520 /* NotificationRepository.swift in Sources */,
 				D00B92862F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
 				D0724D802F1730BA004815FB /* DefaultPaymentCardRepository.swift in Sources */,
 				D00B92872F10E2FB00AEE1B6 /* UserDTO+Mapping.swift in Sources */,
@@ -5311,6 +5628,7 @@
 				D0095CCD2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095C262ECB43DC00FCC7BC /* EcoLoadingView.swift in Sources */,
 				D0029DC52F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */,
+				D01C336D2F1EAB2700B9D520 /* NotificationReadViewController.swift in Sources */,
 				D0FF94942F14E8CC006146F8 /* GrocerysQueriesRepository.swift in Sources */,
 				D0FF95202F15FA81006146F8 /* DefaultProfileRepository.swift in Sources */,
 				D0029CF82F0EA11A00D50804 /* CartItemCell.swift in Sources */,
@@ -5326,6 +5644,7 @@
 				D0FF94622F1487D9006146F8 /* EcoViewController.swift in Sources */,
 				D0095D552ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift in Sources */,
 				D0095D702ECC565200FCC7BC /* LocalAuthenticationContextExtensions.swift in Sources */,
+				D01C335B2F1EAACC00B9D520 /* NotificationReadController.swift in Sources */,
 				D0FF95022F15F9EA006146F8 /* ProfileModel.swift in Sources */,
 				D06C3BB52ECCA6AF00289D48 /* UIView+AddChild.swift in Sources */,
 				D0095C282ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
@@ -5370,6 +5689,8 @@
 				D0095BCD2ECB42D200FCC7BC /* Cancellable.swift in Sources */,
 				D0E6C3A52F0D06AC00527962 /* ImageCache.swift in Sources */,
 				D0FF94B82F15CAC3006146F8 /* LocationList.swift in Sources */,
+				D01C33AE2F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift in Sources */,
+				D01C33AF2F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift in Sources */,
 				D0095D6D2ECC557500FCC7BC /* NSObjectExt.swift in Sources */,
 				D0724D842F1730CC004815FB /* PaymentCardRepository.swift in Sources */,
 				D0FF94282F14053B006146F8 /* Address.swift in Sources */,
@@ -5387,6 +5708,7 @@
 				D0FF96502F163BFE006146F8 /* MobileNetV2.mlmodel in Sources */,
 				D0FF95332F15FF63006146F8 /* EditProfileViewController.swift in Sources */,
 				D0029C8E2F0E976000D50804 /* Popup4.swift in Sources */,
+				D01C33682F1EAB1E00B9D520 /* NotificationUnreadViewController.swift in Sources */,
 				D0095BFF2ECB43C500FCC7BC /* ProductsViewController.swift in Sources */,
 				D0FF94DD2F15CBAD006146F8 /* LocationListViewController.swift in Sources */,
 				D051415E2F17A4E500C7B963 /* ProductDetailCollectionViewController.swift in Sources */,
@@ -5418,6 +5740,7 @@
 				D0FF957C2F16163E006146F8 /* EditProfileController.swift in Sources */,
 				D0FF94892F14E89D006146F8 /* GroceryQuery.swift in Sources */,
 				D00B91E72F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift in Sources */,
+				D01C33412F1EAA4600B9D520 /* NotificationUseCase.swift in Sources */,
 				D01C331F2F1E6FEF00B9D520 /* CartSceneDIContainer.swift in Sources */,
 				D05141D52F189C7400C7B963 /* CheckoutViewController.swift in Sources */,
 				D01C32AB2F1AA1AD00B9D520 /* OrderDetailDIContainer.swift in Sources */,
@@ -5446,7 +5769,9 @@
 				D0FF953A2F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift in Sources */,
 				D0FF953B2F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift in Sources */,
 				D0FF953C2F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift in Sources */,
+				D01C33302F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift in Sources */,
 				D0FF953D2F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */,
+				D01C33572F1EAABD00B9D520 /* NotificationContainerController.swift in Sources */,
 				D0029BF42F0E742000D50804 /* Spacing.swift in Sources */,
 				D0029C952F0E976B00D50804 /* Popup6.swift in Sources */,
 				D03ACFBD2F1A874F00F8DD43 /* OrderDeliveryCell.swift in Sources */,
@@ -5469,8 +5794,15 @@
 				D03ACFC12F1A877300F8DD43 /* OrderPendingCell.swift in Sources */,
 				D0029BFD2F0E742000D50804 /* Colors.swift in Sources */,
 				D0029BFE2F0E742000D50804 /* EcoTextView.swift in Sources */,
+				D01C33482F1EAA8500B9D520 /* NotificationReadDIContainer.swift in Sources */,
+				D01C33492F1EAA8500B9D520 /* NotificationSceneDIContainer.swift in Sources */,
+				D01C334A2F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift in Sources */,
 				D0029BFF2F0E742000D50804 /* EcoSwitch.swift in Sources */,
 				D0029DF22F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */,
+				D01C33832F1EB87800B9D520 /* OrderProcessingCell.swift in Sources */,
+				D01C33842F1EB87800B9D520 /* OrderProcessingViewController.swift in Sources */,
+				D01C33852F1EB87800B9D520 /* OrderProcessingItemModel.swift in Sources */,
+				D01C33862F1EB87800B9D520 /* OrderProcessingController.swift in Sources */,
 				D00B92BA2F10FA1400AEE1B6 /* SignUpHeaderView.swift in Sources */,
 				D00B92BB2F10FA1400AEE1B6 /* SignUpFormView.swift in Sources */,
 				D05141DE2F18E5EE00C7B963 /* LocationData.swift in Sources */,
@@ -5499,11 +5831,15 @@
 				D0FF95E82F16375A006146F8 /* ImageSimilarityService.swift in Sources */,
 				D051419C2F17C28000C7B963 /* OrderRepository.swift in Sources */,
 				D0FF94B32F14E972006146F8 /* GrocerysResponseStorage.swift in Sources */,
+				D01C33B52F1EBE3400B9D520 /* RelativeTimeFormatter.swift in Sources */,
 				D0095D832ECC5ABD00FCC7BC /* Constant.swift in Sources */,
 				D0095B742ECB1D7B00FCC7BC /* Localize.swift in Sources */,
 				D0095E032ECB1D7B00FCC7BC /* LanguageSwitcher.swift in Sources */,
 				D0095B932ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0095BB32ECB428800FCC7BC /* DefaultProductsQueriesRepository.swift in Sources */,
+				D01C33392F1EAA2F00B9D520 /* DefaultNotificationRepository.swift in Sources */,
+				D01C33522F1EAA9E00B9D520 /* NotificationCell.swift in Sources */,
+				D01C33532F1EAA9E00B9D520 /* NotificationViewController.swift in Sources */,
 				D0FF94352F140614006146F8 /* DividerCell.swift in Sources */,
 				D0029CBE2F0E9DFF00D50804 /* GroceryItemModel.swift in Sources */,
 				D01C328D2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift in Sources */,
@@ -5529,6 +5865,7 @@
 				D0FF95E42F16373D006146F8 /* AILabelServiceType.swift in Sources */,
 				D06C3B9F2ECCA33300289D48 /* UIView+Screen.swift in Sources */,
 				D00B92202F10A6D100AEE1B6 /* EcoTextField.swift in Sources */,
+				D01C33652F1EAAEC00B9D520 /* NotificationItemModel.swift in Sources */,
 				D05141A02F17C29400C7B963 /* OrderEndpoints.swift in Sources */,
 				D01C32EB2F1D254D00B9D520 /* CategoryUseCase.swift in Sources */,
 				D05142312F19016400C7B963 /* PaymentMethodController.swift in Sources */,
@@ -5538,6 +5875,7 @@
 				D0095BC62ECB42B100FCC7BC /* Endpoint.swift in Sources */,
 				D0FF93F32F13F997006146F8 /* AddressViewController.swift in Sources */,
 				D05141372F179DE500C7B963 /* UltravisualLayout.swift in Sources */,
+				D01C33612F1EAADA00B9D520 /* NotificationUnreadController.swift in Sources */,
 				D0029C8B2F0E975900D50804 /* Popup3.swift in Sources */,
 				D0095BC72ECB42B100FCC7BC /* DataTransferService.swift in Sources */,
 				D0095BE92ECB436700FCC7BC /* ProductsSceneDIContainer.swift in Sources */,
@@ -5579,7 +5917,12 @@
 				D0029D6D2F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
 				D03ACFD52F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift in Sources */,
 				D0029CC12F0E9E2300D50804 /* GroceryCoordinatingController.swift in Sources */,
+				D01C33332F1EAA2400B9D520 /* NotificationEndpoints.swift in Sources */,
 				D0FF947F2F14E874006146F8 /* GrocerySceneDIContainer.swift in Sources */,
+				D01C339E2F1EB8B800B9D520 /* OrderConfirmedCell.swift in Sources */,
+				D01C339F2F1EB8B800B9D520 /* OrderConfirmedController.swift in Sources */,
+				D01C33A02F1EB8B800B9D520 /* OrderConfirmedViewController.swift in Sources */,
+				D01C33A12F1EB8B800B9D520 /* OrderConfirmedItemModel.swift in Sources */,
 				D0FF950E2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */,
 				D0FF94BE2F15CAF5006146F8 /* LocationListRepository.swift in Sources */,
 				D0FF95552F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */,
@@ -5595,6 +5938,7 @@
 				D0FF951E2F15FA72006146F8 /* ProfileRepository.swift in Sources */,
 				D0FF947B2F14E7FC006146F8 /* GroceryTableViewController.swift in Sources */,
 				D0FF93A22F11F978006146F8 /* CardModel.swift in Sources */,
+				D01C332C2F1EA9F100B9D520 /* Notification.swift in Sources */,
 				D0095D952ECC5B8C00FCC7BC /* AES.swift in Sources */,
 				D051421B2F18FB5C00C7B963 /* SectionHeaderView.swift in Sources */,
 				D0E6C3982F0D01EE00527962 /* ProductsResponseStorage.swift in Sources */,
@@ -5691,6 +6035,7 @@
 				D05141C22F18156A00C7B963 /* OrderActionViewExample.swift in Sources */,
 				D05141C32F18156A00C7B963 /* OrderActionView.swift in Sources */,
 				D00B92CF2F11054F00AEE1B6 /* APIErrorParser.swift in Sources */,
+				D01C333D2F1EAA3E00B9D520 /* NotificationRepository.swift in Sources */,
 				D00B92822F10E2FB00AEE1B6 /* RefreshTokenRequestDTO+Mapping.swift in Sources */,
 				D0724D812F1730BA004815FB /* DefaultPaymentCardRepository.swift in Sources */,
 				D00B92832F10E2FB00AEE1B6 /* UserDTO+Mapping.swift in Sources */,
@@ -5725,6 +6070,7 @@
 				D0E6C3B62F0DFAF700527962 /* SideMenuController.swift in Sources */,
 				D0E6C3952F0D01EE00527962 /* CoreDataStorage.xcdatamodeld in Sources */,
 				D0E6C3962F0D01EE00527962 /* ProductsResponseEntity+Mapping.swift in Sources */,
+				D01C336B2F1EAB2700B9D520 /* NotificationReadViewController.swift in Sources */,
 				D0029DC32F0F5F9000D50804 /* EcoNavigationBarController.swift in Sources */,
 				D0FF94952F14E8CC006146F8 /* GrocerysQueriesRepository.swift in Sources */,
 				D0FF95212F15FA81006146F8 /* DefaultProfileRepository.swift in Sources */,
@@ -5740,6 +6086,7 @@
 				D0FF94672F1487D9006146F8 /* EcoBaseViewController.swift in Sources */,
 				D0FF94682F1487D9006146F8 /* EcoViewController.swift in Sources */,
 				D0095D972ECC5BA300FCC7BC /* ImageCompressor.swift in Sources */,
+				D01C335C2F1EAACC00B9D520 /* NotificationReadController.swift in Sources */,
 				D0FF95002F15F9EA006146F8 /* ProfileModel.swift in Sources */,
 				D0095D7A2ECC584E00FCC7BC /* CoreUtilsKitLocalization.swift in Sources */,
 				D0029CC42F0E9E3100D50804 /* GroceryController.swift in Sources */,
@@ -5784,6 +6131,8 @@
 				D0029C9C2F0E97D200D50804 /* CategoryViewController.swift in Sources */,
 				D0FF94B62F15CAC3006146F8 /* LocationList.swift in Sources */,
 				D0029C552F0E742E00D50804 /* NSStringExtensions.swift in Sources */,
+				D01C33AC2F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift in Sources */,
+				D01C33AD2F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift in Sources */,
 				D0724D852F1730CC004815FB /* PaymentCardRepository.swift in Sources */,
 				D0FF94292F14053B006146F8 /* Address.swift in Sources */,
 				D0029C562F0E742E00D50804 /* EncodableExtensions.swift in Sources */,
@@ -5801,6 +6150,7 @@
 				D0FF95352F15FF63006146F8 /* EditProfileViewController.swift in Sources */,
 				D0029B6C2F0E742000D50804 /* EcoDivider.swift in Sources */,
 				D0029B6D2F0E742000D50804 /* Sizing.swift in Sources */,
+				D01C33672F1EAB1E00B9D520 /* NotificationUnreadViewController.swift in Sources */,
 				D0FF94DE2F15CBAD006146F8 /* LocationListViewController.swift in Sources */,
 				D05141642F17A4E500C7B963 /* ProductDetailCollectionViewController.swift in Sources */,
 				D05141652F17A4E500C7B963 /* ProductDetailViewController.swift in Sources */,
@@ -5832,6 +6182,7 @@
 				D0029B702F0E742000D50804 /* EcoHorizontalProgressView.swift in Sources */,
 				D0FF94872F14E89D006146F8 /* GroceryQuery.swift in Sources */,
 				D00B91E52F10A5DB00AEE1B6 /* SecuritySuiteUtil.swift in Sources */,
+				D01C33402F1EAA4600B9D520 /* NotificationUseCase.swift in Sources */,
 				D01C33202F1E6FEF00B9D520 /* CartSceneDIContainer.swift in Sources */,
 				D05141D42F189C7400C7B963 /* CheckoutViewController.swift in Sources */,
 				D01C32AA2F1AA1AD00B9D520 /* OrderDetailDIContainer.swift in Sources */,
@@ -5860,7 +6211,9 @@
 				D0FF95422F1606D8006146F8 /* ChangePasswordRequestDTO+Mapping.swift in Sources */,
 				D0FF95432F1606D8006146F8 /* ChangePasswordResponseDTO+Mapping.swift in Sources */,
 				D0FF95442F1606D8006146F8 /* UpdateProfileRequestDTO+Mapping.swift in Sources */,
+				D01C33312F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift in Sources */,
 				D0FF95452F1606D8006146F8 /* UpdateProfileResponseDTO+Mapping.swift in Sources */,
+				D01C33592F1EAABD00B9D520 /* NotificationContainerController.swift in Sources */,
 				D0029B7A2F0E742000D50804 /* BorderRadius.swift in Sources */,
 				D0029B7B2F0E742000D50804 /* EcoRadioButtonGroup.swift in Sources */,
 				D03ACFBE2F1A874F00F8DD43 /* OrderDeliveryCell.swift in Sources */,
@@ -5883,8 +6236,15 @@
 				D03ACFC22F1A877300F8DD43 /* OrderPendingCell.swift in Sources */,
 				D06C3B912ECCA29500289D48 /* UIView+Bounds.swift in Sources */,
 				D0095BB22ECB428800FCC7BC /* DefaultProductsRepository.swift in Sources */,
+				D01C334B2F1EAA8500B9D520 /* NotificationReadDIContainer.swift in Sources */,
+				D01C334C2F1EAA8500B9D520 /* NotificationSceneDIContainer.swift in Sources */,
+				D01C334D2F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift in Sources */,
 				D0095BA32ECB426200FCC7BC /* APIEndpoints.swift in Sources */,
 				D0029DF32F0FBEE700D50804 /* EcoNavigationBarViewController.swift in Sources */,
+				D01C338B2F1EB87800B9D520 /* OrderProcessingCell.swift in Sources */,
+				D01C338C2F1EB87800B9D520 /* OrderProcessingViewController.swift in Sources */,
+				D01C338D2F1EB87800B9D520 /* OrderProcessingItemModel.swift in Sources */,
+				D01C338E2F1EB87800B9D520 /* OrderProcessingController.swift in Sources */,
 				D00B92BC2F10FA1400AEE1B6 /* SignUpHeaderView.swift in Sources */,
 				D00B92BD2F10FA1400AEE1B6 /* SignUpFormView.swift in Sources */,
 				D05141DC2F18E5EE00C7B963 /* LocationData.swift in Sources */,
@@ -5913,11 +6273,15 @@
 				D051419B2F17C28000C7B963 /* OrderRepository.swift in Sources */,
 				D0FF94B22F14E972006146F8 /* GrocerysResponseStorage.swift in Sources */,
 				D0E6C3E52F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */,
+				D01C33B42F1EBE3400B9D520 /* RelativeTimeFormatter.swift in Sources */,
 				D0E6C3E62F0E0AF600527962 /* SegmentedControl.swift in Sources */,
 				D0095C082ECB43C500FCC7BC /* ProductsTableViewController.swift in Sources */,
 				D0095CFD2ECC212600FCC7BC /* MainCoordinatingController.swift in Sources */,
 				D0FF94332F140614006146F8 /* DividerCell.swift in Sources */,
 				D0029CA72F0E981600D50804 /* CategoryCodinatingController.swift in Sources */,
+				D01C33372F1EAA2F00B9D520 /* DefaultNotificationRepository.swift in Sources */,
+				D01C33502F1EAA9E00B9D520 /* NotificationCell.swift in Sources */,
+				D01C33512F1EAA9E00B9D520 /* NotificationViewController.swift in Sources */,
 				D01C328C2F1AA05700B9D520 /* DefaultOrderDetailRepository.swift in Sources */,
 				D0FF95732F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */,
 				D00B92A72F10ED0000AEE1B6 /* SplashCoordinatingController.swift in Sources */,
@@ -5943,6 +6307,7 @@
 				D00B92162F10A6D100AEE1B6 /* EcoTextField.swift in Sources */,
 				D05141A12F17C29400C7B963 /* OrderEndpoints.swift in Sources */,
 				D05142302F19016400C7B963 /* PaymentMethodController.swift in Sources */,
+				D01C33632F1EAAEC00B9D520 /* NotificationItemModel.swift in Sources */,
 				D0029CCC2F0E9EAB00D50804 /* GroceryItemCell.swift in Sources */,
 				D01C32ED2F1D254D00B9D520 /* CategoryUseCase.swift in Sources */,
 				D00B92692F10DF5500AEE1B6 /* LoginUseCase.swift in Sources */,
@@ -5952,6 +6317,7 @@
 				D0FF93F22F13F997006146F8 /* AddressViewController.swift in Sources */,
 				D05141362F179DE500C7B963 /* UltravisualLayout.swift in Sources */,
 				D0095D4F2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
+				D01C33602F1EAADA00B9D520 /* NotificationUnreadController.swift in Sources */,
 				D0095D0A2ECC21A000FCC7BC /* MainSceneDIContainer.swift in Sources */,
 				D06C3B932ECCA2C000289D48 /* UIView+Convert.swift in Sources */,
 				D03ACFB32F1A848100F8DD43 /* OrderPendingViewController.swift in Sources */,
@@ -5993,7 +6359,12 @@
 				D0029D612F0F4B5200D50804 /* CollectionSectionHeader.swift in Sources */,
 				D03ACFD72F1A8C1400F8DD43 /* OrderDeliveredItemModel.swift in Sources */,
 				D0029C822F0E974700D50804 /* LinkBankPopup.swift in Sources */,
+				D01C33342F1EAA2400B9D520 /* NotificationEndpoints.swift in Sources */,
 				D0FF94812F14E874006146F8 /* GrocerySceneDIContainer.swift in Sources */,
+				D01C33A22F1EB8B800B9D520 /* OrderConfirmedCell.swift in Sources */,
+				D01C33A32F1EB8B800B9D520 /* OrderConfirmedController.swift in Sources */,
+				D01C33A42F1EB8B800B9D520 /* OrderConfirmedViewController.swift in Sources */,
+				D01C33A52F1EB8B800B9D520 /* OrderConfirmedItemModel.swift in Sources */,
 				D0FF950C2F15FA0E006146F8 /* ProfileCoordinatingController.swift in Sources */,
 				D0FF94C02F15CAF5006146F8 /* LocationListRepository.swift in Sources */,
 				D0FF95572F160DEA006146F8 /* ProfileTableViewCell.swift in Sources */,
@@ -6009,6 +6380,7 @@
 				D0FF951C2F15FA72006146F8 /* ProfileRepository.swift in Sources */,
 				D0FF947C2F14E7FC006146F8 /* GroceryTableViewController.swift in Sources */,
 				D0FF93A12F11F978006146F8 /* CardModel.swift in Sources */,
+				D01C332A2F1EA9F100B9D520 /* Notification.swift in Sources */,
 				D0095B302ECB0BA700FCC7BC /* AppDelegate.swift in Sources */,
 				D051421C2F18FB5C00C7B963 /* SectionHeaderView.swift in Sources */,
 				D0095D4A2ECC506E00FCC7BC /* AttributedText.swift in Sources */,
@@ -6067,6 +6439,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D01C33872F1EB87800B9D520 /* OrderProcessingCell.swift in Sources */,
+				D01C33882F1EB87800B9D520 /* OrderProcessingViewController.swift in Sources */,
+				D01C33892F1EB87800B9D520 /* OrderProcessingItemModel.swift in Sources */,
+				D01C338A2F1EB87800B9D520 /* OrderProcessingController.swift in Sources */,
 				D0E6C3E92F0E0AF600527962 /* SegmentedPageContainer.swift in Sources */,
 				D03ACF6C2F1A7F8F00F8DD43 /* OrderManageUseCase.swift in Sources */,
 				D0FF94832F14E893006146F8 /* Grocery.swift in Sources */,
@@ -6079,6 +6455,7 @@
 				D0FF95782F161584006146F8 /* ProfileImagePickerPopup.swift in Sources */,
 				D0095B882ECB413400FCC7BC /* FetchRecentProductQueriesUseCase.swift in Sources */,
 				D0FF95052F15F9FB006146F8 /* ProfileViewController.swift in Sources */,
+				D01C333F2F1EAA4600B9D520 /* NotificationUseCase.swift in Sources */,
 				D0095B752ECB1D7B00FCC7BC /* Localize.swift in Sources */,
 				D0095E042ECB1D7B00FCC7BC /* LanguageSwitcher.swift in Sources */,
 				D03ACF6A2F1A7F7800F8DD43 /* OrderManage.swift in Sources */,
@@ -6100,6 +6477,8 @@
 				D03ACF822F1A800800F8DD43 /* OrderManageResponseDTOs+Mapping.swift in Sources */,
 				D0FF95152F15FA49006146F8 /* Profile.swift in Sources */,
 				D0029C8D2F0E976000D50804 /* Popup4.swift in Sources */,
+				D01C33542F1EAA9E00B9D520 /* NotificationCell.swift in Sources */,
+				D01C33552F1EAA9E00B9D520 /* NotificationViewController.swift in Sources */,
 				D00B924A2F10B26100AEE1B6 /* SignUpRequestDTO+Mapping.swift in Sources */,
 				D00B924B2F10B26100AEE1B6 /* SignUpResponseDTO+Mapping.swift in Sources */,
 				D0029C852F0E975300D50804 /* Popup2.swift in Sources */,
@@ -6115,9 +6494,11 @@
 				D0FF941C2F1404FF006146F8 /* AddressEndpoints.swift in Sources */,
 				D0095B462ECB0C0B00FCC7BC /* ECommerceUITestsLaunchTests.swift in Sources */,
 				D0095D562ECC516500FCC7BC /* UITapGestureRecognize+Extensions.swift in Sources */,
+				D01C336C2F1EAB2700B9D520 /* NotificationReadViewController.swift in Sources */,
 				D0095B912ECB415F00FCC7BC /* UseCase.swift in Sources */,
 				D0FF94932F14E8CC006146F8 /* GrocerysQueriesRepository.swift in Sources */,
 				D0029C6E2F0E74BF00D50804 /* PinterestCell.swift in Sources */,
+				D01C333C2F1EAA3E00B9D520 /* NotificationRepository.swift in Sources */,
 				D0095B842ECB412200FCC7BC /* Product.swift in Sources */,
 				D0095BAB2ECB427800FCC7BC /* ProductsResponseDTO+Mapping.swift in Sources */,
 				D01C32EC2F1D254D00B9D520 /* CategoryUseCase.swift in Sources */,
@@ -6126,6 +6507,10 @@
 				D061A9002F163F1F00C137EB /* CameraMode.swift in Sources */,
 				D061A9012F163F1F00C137EB /* UIViewController+Camera.swift in Sources */,
 				D06C3BAB2ECCA42B00289D48 /* UIViewController+Keyboard.swift in Sources */,
+				D01C339A2F1EB8B800B9D520 /* OrderConfirmedCell.swift in Sources */,
+				D01C339B2F1EB8B800B9D520 /* OrderConfirmedController.swift in Sources */,
+				D01C339C2F1EB8B800B9D520 /* OrderConfirmedViewController.swift in Sources */,
+				D01C339D2F1EB8B800B9D520 /* OrderConfirmedItemModel.swift in Sources */,
 				D0095D712ECC565200FCC7BC /* LocalAuthenticationContextExtensions.swift in Sources */,
 				D0095BAC2ECB427800FCC7BC /* ProductsRequestDTO+Mapping.swift in Sources */,
 				D0095B852ECB412200FCC7BC /* ProductQuery.swift in Sources */,
@@ -6168,6 +6553,7 @@
 				D00B92352F10AE2300AEE1B6 /* SignUpController.swift in Sources */,
 				D0029CFB2F0EA11A00D50804 /* CartItemCell.swift in Sources */,
 				D051416F2F17A4F000C7B963 /* ProductInfoCell.swift in Sources */,
+				D01C33642F1EAAEC00B9D520 /* NotificationItemModel.swift in Sources */,
 				D05141A92F17C2C900C7B963 /* DefaultOrderRepository.swift in Sources */,
 				D05141702F17A4F000C7B963 /* ProductGuaranteedCell.swift in Sources */,
 				D05141712F17A4F000C7B963 /* ProductImageCell.swift in Sources */,
@@ -6197,6 +6583,7 @@
 				D0095BBD2ECB42B100FCC7BC /* NetworkService.swift in Sources */,
 				D03ACFCD2F1A8BE100F8DD43 /* OrderPendingItemModel.swift in Sources */,
 				D0095D8D2ECC5B4A00FCC7BC /* KeyboardHandler.swift in Sources */,
+				D01C335D2F1EAACC00B9D520 /* NotificationReadController.swift in Sources */,
 				D0095BBE2ECB42B100FCC7BC /* Endpoint.swift in Sources */,
 				D0FF94DC2F15CBAD006146F8 /* LocationListViewController.swift in Sources */,
 				D05141B82F18156A00C7B963 /* OrderActionFlowCoordinator.swift in Sources */,
@@ -6253,10 +6640,12 @@
 				D01C329A2F1AA17900B9D520 /* OrderDetailController.swift in Sources */,
 				D0095BC02ECB42B100FCC7BC /* NetworkConfig.swift in Sources */,
 				D0FF94912F14E8C0006146F8 /* GrocerysRepository.swift in Sources */,
+				D01C33582F1EAABD00B9D520 /* NotificationContainerController.swift in Sources */,
 				D0724D982F1752EA004815FB /* PaymentCardDTOs+Mapping.swift in Sources */,
 				D05141602F17A4E500C7B963 /* ProductDetailCollectionViewController.swift in Sources */,
 				D05141612F17A4E500C7B963 /* ProductDetailViewController.swift in Sources */,
 				D0095C982ECB579900FCC7BC /* ProductCoordinatingController.swift in Sources */,
+				D01C332F2F1EAA1700B9D520 /* NotificationResponseDTOs+Mapping.swift in Sources */,
 				D00B92752F10DFBE00AEE1B6 /* UserResponseEntity+Mapping.swift in Sources */,
 				D03ACF892F1A805E00F8DD43 /* OrderDeliveredDIContainer.swift in Sources */,
 				D0029CBC2F0E9DFF00D50804 /* GroceryItemModel.swift in Sources */,
@@ -6321,17 +6710,23 @@
 				D00B92622F10D39200AEE1B6 /* LoginRequestDTO+Mapping.swift in Sources */,
 				D00B92632F10D39200AEE1B6 /* LoginResponseDTO+Mapping.swift in Sources */,
 				D0FF951D2F15FA72006146F8 /* ProfileRepository.swift in Sources */,
+				D01C33352F1EAA2400B9D520 /* NotificationEndpoints.swift in Sources */,
 				D0095D092ECC21A000FCC7BC /* MainSceneDIContainer.swift in Sources */,
 				D0095D3C2ECC4D6600FCC7BC /* UIViewController+Contacts.swift in Sources */,
 				D0095CCF2ECB7F2200FCC7BC /* SideMenuSceneDIContainer.swift in Sources */,
 				D0095D4D2ECC50A200FCC7BC /* AccountObject.swift in Sources */,
 				D01C33082F1E1C5800B9D520 /* SearchViewController.swift in Sources */,
 				D03ACFB22F1A848100F8DD43 /* OrderPendingViewController.swift in Sources */,
+				D01C33452F1EAA8500B9D520 /* NotificationReadDIContainer.swift in Sources */,
+				D01C33462F1EAA8500B9D520 /* NotificationSceneDIContainer.swift in Sources */,
+				D01C33472F1EAA8500B9D520 /* NotificationUnreadDIContainer.swift in Sources */,
 				D0029C962F0E976B00D50804 /* Popup6.swift in Sources */,
 				D0FF94C32F15CB0C006146F8 /* DefaultLocationListRepository.swift in Sources */,
 				D00B92992F10EA3100AEE1B6 /* ProductsEndpoints.swift in Sources */,
 				D00B929A2F10EA3100AEE1B6 /* GroceryEndpoints.swift in Sources */,
+				D01C335F2F1EAADA00B9D520 /* NotificationUnreadController.swift in Sources */,
 				D00B929B2F10EA3100AEE1B6 /* AuthEndpoints.swift in Sources */,
+				D01C33692F1EAB1E00B9D520 /* NotificationUnreadViewController.swift in Sources */,
 				D0E6C3A32F0D06AC00527962 /* ImageCache.swift in Sources */,
 				D0FF96052F163939006146F8 /* CameraObservable.swift in Sources */,
 				D0724D862F1730CC004815FB /* PaymentCardRepository.swift in Sources */,
@@ -6367,6 +6762,8 @@
 				D0FF95F42F1637A5006146F8 /* CameraGestureHandler.swift in Sources */,
 				D0FF94272F14053B006146F8 /* Address.swift in Sources */,
 				D0095C322ECB43DC00FCC7BC /* Alertable.swift in Sources */,
+				D01C33B02F1EB9BA00B9D520 /* OrderConfirmedDIContainer.swift in Sources */,
+				D01C33B12F1EB9BA00B9D520 /* OrderProcessingDIContainer.swift in Sources */,
 				D0095C332ECB43DC00FCC7BC /* DataTransferError+ConnectionError.swift in Sources */,
 				D0FF95192F15FA66006146F8 /* ProfileUseCase.swift in Sources */,
 				D0095C352ECB43DC00FCC7BC /* Observable.swift in Sources */,
@@ -6403,6 +6800,8 @@
 				D0095D162ECC2FFF00FCC7BC /* SideMenuLayoutManager.swift in Sources */,
 				D05141882F17C06500C7B963 /* OrderViewController.swift in Sources */,
 				D01C32FB2F1E1C4800B9D520 /* SearchController.swift in Sources */,
+				D01C33B32F1EBE3400B9D520 /* RelativeTimeFormatter.swift in Sources */,
+				D01C33382F1EAA2F00B9D520 /* DefaultNotificationRepository.swift in Sources */,
 				D01C32FC2F1E1C4800B9D520 /* SearchCoordinatingController.swift in Sources */,
 				D0095CD22ECC12A000FCC7BC /* UIViewController+Animation.swift in Sources */,
 				D0FF940C2F140189006146F8 /* LocationSearchViewController.swift in Sources */,
@@ -6448,6 +6847,7 @@
 				D0029C092F0E742000D50804 /* Spacing.swift in Sources */,
 				D0029C0A2F0E742000D50804 /* EcoAvatarView.swift in Sources */,
 				D0029C0B2F0E742000D50804 /* SFFont.swift in Sources */,
+				D01C332B2F1EA9F100B9D520 /* Notification.swift in Sources */,
 				D0FF93F42F13F997006146F8 /* AddressViewController.swift in Sources */,
 				D0029C0C2F0E742000D50804 /* Typography.swift in Sources */,
 				D03ACFF32F1A8C8300F8DD43 /* OrderContainerDIContainer.swift in Sources */,

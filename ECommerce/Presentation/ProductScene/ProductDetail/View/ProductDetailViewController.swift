@@ -33,16 +33,13 @@ final class ProductDetailViewController: EcoViewController {
     static func create(
         with productDetailController: ProductDetailController
     ) -> ProductDetailViewController {
-        print("🔵 [ProductDetailViewController] create called")
         let view = ProductDetailViewController.instantiateViewController()
         view.controller = productDetailController
-        print("   ✅ ProductDetailViewController instance created")
         return view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("🔵 [ProductDetailViewController] viewDidLoad called")
         // Ẩn TabBar ngay từ viewDidLoad để đảm bảo ẩn khi mở lần đầu
         self.tabBarController?.tabBar.isHidden = true
         setupViews()
@@ -54,7 +51,6 @@ final class ProductDetailViewController: EcoViewController {
         // ✅ QUAN TRỌNG: Gọi onViewDidLoad để trigger navigation state setup
         productDetailController.onViewDidLoad()
         
-        print("   ✅ ProductDetailViewController setup completed")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,7 +144,6 @@ final class ProductDetailViewController: EcoViewController {
         if let navBarView = navigationBarViewController?.view {
             view.bringSubviewToFront(navBarView)
             navBarView.isUserInteractionEnabled = true
-            print("✅ [ProductDetailViewController] Navigation bar brought to front")
         }
     }
     
@@ -243,12 +238,9 @@ final class ProductDetailViewController: EcoViewController {
     
     private func openAddToCardOrderCard() {
         guard let product = productDetailController.product.value else {
-            print("⚠️ [ProductDetailViewController] Product is nil, cannot open add to card")
             return
         }
         
-        print("🔵 [ProductDetailViewController] openAddToCardOrderCard called")
-        print("   📦 Product ID: \(product.id)")
         
         // Create Card Configuration - cách top 200pt
         let screenHeight = view.bounds.height
@@ -301,28 +293,22 @@ final class ProductDetailViewController: EcoViewController {
     
     private func openOrderCard() {
         guard let product = productDetailController.product.value else {
-            print("⚠️ [ProductDetailViewController] Product is nil, cannot open order")
             return
         }
         
-        print("🔵 [ProductDetailViewController] openOrderCard called")
-        print("   📦 Product ID: \(product.id)")
         
         // Check if card already exists and is still attached
         if let existingCard = cardViewController, existingCard.parent != nil {
-            print("🔵 [ProductDetailViewController] Card already exists, showing it")
             existingCard.show()
             return
         }
         
         // If card exists but is not attached (was dismissed), clean it up first
         if cardViewController != nil {
-            print("🔵 [ProductDetailViewController] Card exists but not attached, cleaning up")
             cardViewController?.detach()
             cardViewController = nil
         }
         
-        print("🔵 [ProductDetailViewController] Creating new card")
         
         // Create Card Configuration - cách top 180pt
         let screenHeight = view.bounds.height
@@ -361,13 +347,10 @@ final class ProductDetailViewController: EcoViewController {
         DispatchQueue.main.async { [weak cardVC, weak self] in
             guard let cardVC = cardVC, let self = self else { return }
             let height = self.view.bounds.height
-            print("🔵 [ProductDetailViewController] Async block - view.bounds.height: \(height)")
             if height > 0 {
                 cardVC.updateParentViewHeightIfNeeded()
-                print("🔵 [ProductDetailViewController] Calling show()")
                 cardVC.show()
             } else {
-                print("⚠️ [ProductDetailViewController] Height is 0, waiting...")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     cardVC.updateParentViewHeightIfNeeded()
                     cardVC.show()
@@ -410,11 +393,9 @@ final class ProductDetailViewController: EcoViewController {
                 switch result {
                 case .success(let order):
                     self.placedOrder = order
-                    print("✅ [ProductDetailViewController] Order placed successfully: \(order.orderId)")
                     // Open order card after successful placement
                     self.openOrderCard()
-                case .failure(let error):
-                    print("❌ [ProductDetailViewController] Order placement failed: \(error)")
+                case .failure(let error): break
                     // TODO: Show error alert
                 }
             }
@@ -506,13 +487,11 @@ extension ProductDetailViewController: OrderActionViewDelegate {
     private func pushCheckoutViewController() {
         // Get productDetailModel từ controller
         guard let productDetailModel = productDetailController.product.value else {
-            print("⚠️ [ProductDetailViewController] Product is nil, cannot push checkout")
             return
         }
         
         // Find navigation controller
         guard let navigationController = self.navigationController else {
-            print("⚠️ [ProductDetailViewController] No navigation controller found")
             return
         }
         

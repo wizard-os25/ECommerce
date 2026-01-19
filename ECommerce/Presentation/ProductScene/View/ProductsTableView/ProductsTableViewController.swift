@@ -144,8 +144,6 @@ extension ProductsTableViewController {
         // ✅ QUAN TRỌNG: Delegate đã được set từ ProductsViewController
         // didSelectRowAt sẽ được xử lý bởi ProductsViewController
         // Giữ lại method này để đảm bảo không có conflict, nhưng logic sẽ được xử lý ở view cha
-        print("🔵 [ProductsTableViewController] didSelectRowAt called - index: \(indexPath.row)")
-        print("   ℹ️ Delegate is set to ProductsViewController, will handle navigation there")
     }
 }
 

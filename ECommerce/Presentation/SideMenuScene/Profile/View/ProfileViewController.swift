@@ -299,7 +299,6 @@ final class ProfileViewController: EcoViewController {
     
     private func handleCapturedImage(_ image: UIImage) {
         // TODO: Upload image to server
-        print("[Profile] 📸 Image captured: \(image.size)")
         // Here you can add logic to upload the image
         // For now, just show success message
         showAlert(title: "success".localized(), message: "image_captured_success".localized())
@@ -355,9 +354,73 @@ extension ProfileViewController: UITableViewDataSource {
         let title = getAccountInfoCellTitle(for: indexPath.row)
         let subtitle = getAccountInfoCellSubtitle(for: indexPath.row)
         
-        cell.fill(with: title, subtitle: subtitle.isEmpty ? nil : subtitle)
+        // Special handling for email row (index 1) - show "notVerify" label if email not verified
+        if indexPath.row == 1, let user = profileController.user.value, !user.isEmailVerified {
+            cell.fill(
+                with: title,
+                subtitle: subtitle.isEmpty ? nil : subtitle,
+                showNotVerify: true,
+                onNotVerifyTap: { [weak self] in
+                    self?.handleNotVerifyEmailTap()
+                }
+            )
+        } else {
+            cell.fill(with: title, subtitle: subtitle.isEmpty ? nil : subtitle)
+        }
         
         return cell
+    }
+    
+    private func handleNotVerifyEmailTap() {
+        guard let user = profileController.user.value else { return }
+        
+        let alert = UIAlertController(
+            title: nil,
+            message: "Send verify link to this email address?",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
+            self?.resendEmailVerification()
+        })
+        
+        present(alert, animated: true)
+    }
+    
+    private func resendEmailVerification() {
+        // Show loading
+        profileController.loading.value = true
+        
+        let appDIContainer = AppDIContainer.shared
+        let authSceneDIContainer = appDIContainer.makeAuthSceneDIContainer()
+        let authRepository = authSceneDIContainer.makeAuthRepository()
+        
+        authRepository.resendEmailVerification { [weak self] result in
+            DispatchQueue.main.async {
+                self?.profileController.loading.value = false
+                
+                switch result {
+                case .success:
+                    let alert = UIAlertController(
+                        title: "Success",
+                        message: "Verification email has been sent to your email address.",
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self?.present(alert, animated: true)
+                    
+                case .failure(let error):
+                    let alert = UIAlertController(
+                        title: "Error",
+                        message: error.localizedDescription,
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self?.present(alert, animated: true)
+                }
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

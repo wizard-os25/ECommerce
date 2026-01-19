@@ -2,8 +2,8 @@ import UIKit
 
 public protocol KeyboardHandler: AnyObject {
     var bottomKeyboardConstraint: NSLayoutConstraint! { get set }
-    func keyboardWillShow(_ notification: Notification)
-    func keyboardWillHide(_ notification: Notification)
+    func keyboardWillShow(_ notification: Foundation.Notification)
+    func keyboardWillHide(_ notification: Foundation.Notification)
     func startObservingKeyboardChanges()
     func stopObservingKeyboardChanges()
 }
@@ -38,7 +38,7 @@ public extension KeyboardHandler where Self: UIViewController {
         }
     }
     
-    func keyboardWillShow(_ notification: Notification) {
+    func keyboardWillShow(_ notification: Foundation.Notification) {
         // Padding between the bottom of the view and the top of the keyboard
         var verticalPadding: CGFloat = 0
         
@@ -72,7 +72,7 @@ public extension KeyboardHandler where Self: UIViewController {
         })
     }
     
-    func keyboardWillHide(_ notification: Notification) {
+    func keyboardWillHide(_ notification: Foundation.Notification) {
         self.bottomKeyboardConstraint.constant = 0
 //
 //        UIView.animate(withDuration: 0.1, animations: { () -> Void in

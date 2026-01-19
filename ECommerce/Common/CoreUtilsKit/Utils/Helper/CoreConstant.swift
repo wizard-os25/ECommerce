@@ -7,6 +7,12 @@
 
 import Foundation
 
+// MARK: - Notification Names
+
+extension Foundation.Notification.Name {
+    static let newPushNotificationReceived = Foundation.Notification.Name(rawValue: "newPushNotificationReceived")
+}
+
 enum Constants {
 
     // MARK: - UserDefaults Keys

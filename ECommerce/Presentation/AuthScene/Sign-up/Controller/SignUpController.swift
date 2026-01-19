@@ -86,20 +86,7 @@ final class DefaultSignUpController: SignUpController {
     }
     
     private func handleSignUpSuccess(_ authResult: AuthResult) {
-        print("========== SIGN UP SUCCESS - SAVING DATA ==========")
-        print("📝 Saving session info:")
-        print("   - Access Token: \(authResult.session.accessToken.prefix(20))...")
-        print("   - Refresh Token: \(authResult.session.refreshToken.prefix(20))...")
-        print("   - Expires At: \(authResult.session.expiredAt)")
         
-        print("👤 Saving user info:")
-        print("   - User ID: \(authResult.user.id)")
-        print("   - Full Name: \(authResult.user.fullName)")
-        print("   - Email: \(authResult.user.email)")
-        print("   - Phone: \(authResult.user.phone)")
-        print("   - Avatar URL: \(authResult.user.avatarURL?.absoluteString ?? "nil")")
-        print("   - Order Count: \(authResult.user.orderCount)")
-        print("   - Member Since Days: \(authResult.user.memberSinceDays)")
         
         // Save session and user info to UserDefaults
         utilities.saveSession(
@@ -110,8 +97,6 @@ final class DefaultSignUpController: SignUpController {
         utilities.saveUser(user: authResult.user)
         utilities.saveLogging(true)
         
-        print("✅ Sign up data saved successfully")
-        print("================================================")
         
         // Send device token to server after successful signup
         AppDelegate.sendDeviceTokenToServerIfLoggedIn()
@@ -190,7 +175,6 @@ extension DefaultSignUpController {
     
     var onNavigationBarLeftItemTap: (() -> Void)? {
         { [weak self] in
-            print("🔵 [SignUpController] onNavigationBarLeftItemTap called")
             // Pop back to previous screen
             // This will be called when back button is tapped
             // The actual pop is handled by SignUpViewController's applyNavigation override
@@ -203,16 +187,9 @@ extension DefaultSignUpController {
         // Ensure leftItem is set properly
         let leftItem = EcoNavItem.back { [weak self] in
             // This will be overridden by SignUpViewController
-            print("🔵 [SignUpController] Back button action called")
             self?.onNavigationBarLeftItemTap?()
         }
         
-        print("🔵 [SignUpController] onViewDidLoad - Setting navigation state")
-        print("   - Title: \(navigationBarTitle ?? "nil")")
-        print("   - LeftItem: EXISTS (back button)")
-        print("   - RightItems count: \(navigationBarRightItems.count)")
-        print("   - Background: \(navigationBarBackground)")
-        print("   - ButtonTintColor: \(navigationBarButtonTintColor?.description ?? "nil")")
         
         navigationState.value = EcoNavigationState(
             title: navigationBarTitle,
@@ -229,7 +206,6 @@ extension DefaultSignUpController {
             collapsedHeight: navigationBarCollapsedHeight,
             scrollBehavior: navigationBarScrollBehavior
         )
-        print("✅ [SignUpController] Navigation state set")
     }
     
     func onViewWillAppear() {

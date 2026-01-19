@@ -45,7 +45,6 @@ final class SplashViewController: EcoViewController {
     
     func setCoordinatingController(_ coordinator: SplashCoordinatingController) {
         self.coordinatingController = coordinator
-        print("SplashViewController: setCoordinatingController called, coordinator = \(coordinator)")
     }
     
     private func setupViews() {
@@ -80,7 +79,6 @@ final class SplashViewController: EcoViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         // Debug: Print to verify view is loaded
-        print("SplashViewController: viewDidLoad completed, view.frame = \(view.frame), backgroundColor = \(view.backgroundColor?.description ?? "nil")")
     }
     
     // MARK: - Binding
@@ -101,27 +99,21 @@ final class SplashViewController: EcoViewController {
     }
     
     private func bindSplashSpecific() {
-        print("SplashViewController: bindSplashSpecific - coordinatingController = \(coordinatingController != nil ? "set" : "nil")")
         
         // Observe navigation to Main
         splashController.shouldNavigateToMain.observe(on: self) { [weak self] shouldNavigate in
-            print("SplashViewController: shouldNavigateToMain changed to \(shouldNavigate)")
             guard shouldNavigate else { return }
-            print("SplashViewController: Navigating to Main")
             self?.navigateToMain()
         }
         
         // Observe navigation to Login
         splashController.shouldNavigateToLogin.observe(on: self) { [weak self] shouldNavigate in
-            print("SplashViewController: shouldNavigateToLogin changed to \(shouldNavigate)")
             guard shouldNavigate else { return }
-            print("SplashViewController: Navigating to Login")
             self?.navigateToLogin()
         }
         
         // Observe animation state (if needed for UI animations)
         splashController.isAnimating.observe(on: self) { [weak self] isAnimating in
-            print("SplashViewController: isAnimating changed to \(isAnimating)")
             // Handle animation state changes if needed
             // For example, fade out splash screen
             if !isAnimating {
@@ -133,18 +125,14 @@ final class SplashViewController: EcoViewController {
     // MARK: - Navigation
     
     private func navigateToMain() {
-        print("SplashViewController: navigateToMain called, coordinatingController = \(coordinatingController != nil ? "set" : "nil")")
         guard let coordinator = coordinatingController else {
-            print("SplashViewController: ERROR - coordinatingController is nil!")
             return
         }
         coordinator.navigateToMain()
     }
     
     private func navigateToLogin() {
-        print("SplashViewController: navigateToLogin called, coordinatingController = \(coordinatingController != nil ? "set" : "nil")")
         guard let coordinator = coordinatingController else {
-            print("SplashViewController: ERROR - coordinatingController is nil!")
             return
         }
         coordinator.navigateToLogin()

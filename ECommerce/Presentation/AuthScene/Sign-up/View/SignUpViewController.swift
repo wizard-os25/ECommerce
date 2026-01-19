@@ -50,10 +50,6 @@ final class SignUpViewController: EcoViewController {
         if let navBarView = navigationBarViewController?.view {
             view.bringSubviewToFront(navBarView)
             navBarView.isUserInteractionEnabled = true
-            print("🔵 [SignUpViewController] viewDidAppear - Navigation bar brought to front")
-            print("   - navBarView.isUserInteractionEnabled: \(navBarView.isUserInteractionEnabled)")
-            print("   - navBarView.frame: \(navBarView.frame)")
-            print("   - scrollView.frame: \(scrollView.frame)")
         }
     }
     
@@ -72,15 +68,9 @@ final class SignUpViewController: EcoViewController {
         DispatchQueue.main.async { [weak self] in
             if let navBarController = self?.navigationBarViewController?.controller as? DefaultEcoNavigationBarController {
                 navBarController.onLeftItemTap = { [weak self] in
-                    print("🔵 [SignUpViewController] Back button tapped - onLeftItemTap callback")
-                    print("   - navigationController: \(self?.navigationController != nil ? "EXISTS" : "nil")")
-                    print("   - viewControllers.count: \(self?.navigationController?.viewControllers.count ?? 0)")
                     self?.navigationController?.popViewController(animated: true)
-                    print("✅ [SignUpViewController] popViewController called")
                 }
-                print("✅ [SignUpViewController] Back button callback set")
             } else {
-                print("⚠️ [SignUpViewController] navBarController is nil, cannot set callback")
             }
         }
     }

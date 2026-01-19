@@ -491,7 +491,6 @@ final class AddressViewController: EcoViewController {
             // Method 1: Get from associated object
             if let titleLabel = self.getTitleLabel(from: self.districtPickerButton) {
                 titleLabel.text = text
-                print("✅ [AddressViewController] Updated district button text to: \(text)")
                 return
             }
             
@@ -500,18 +499,15 @@ final class AddressViewController: EcoViewController {
                let contentStackView = containerView.subviews.first as? UIStackView,
                let titleLabel = contentStackView.arrangedSubviews.first as? UILabel {
                 titleLabel.text = text
-                print("✅ [AddressViewController] Updated district button text via fallback to: \(text)")
                 return
             }
             
             // Method 3: Find by tag
             if let titleLabel = self.districtPickerButton.viewWithTag(999) as? UILabel {
                 titleLabel.text = text
-                print("✅ [AddressViewController] Updated district button text via tag to: \(text)")
                 return
             }
             
-            print("⚠️ [AddressViewController] Could not find titleLabel for district button")
         }
         
         // Reset ward when district changes
@@ -536,7 +532,6 @@ final class AddressViewController: EcoViewController {
             // Method 1: Get from associated object
             if let titleLabel = self.getTitleLabel(from: self.wardPickerButton) {
                 titleLabel.text = text
-                print("✅ [AddressViewController] Updated ward button text to: \(text)")
                 return
             }
             
@@ -545,18 +540,15 @@ final class AddressViewController: EcoViewController {
                let contentStackView = containerView.subviews.first as? UIStackView,
                let titleLabel = contentStackView.arrangedSubviews.first as? UILabel {
                 titleLabel.text = text
-                print("✅ [AddressViewController] Updated ward button text via fallback to: \(text)")
                 return
             }
             
             // Method 3: Find by tag
             if let titleLabel = self.wardPickerButton.viewWithTag(999) as? UILabel {
                 titleLabel.text = text
-                print("✅ [AddressViewController] Updated ward button text via tag to: \(text)")
                 return
             }
             
-            print("⚠️ [AddressViewController] Could not find titleLabel for ward button")
         }
     }
     
@@ -574,7 +566,6 @@ final class AddressViewController: EcoViewController {
         let districts = LocationData.districts
         showLocationPicker(title: "select_district".localized(), items: districts) { [weak self] selectedItem in
             guard let self = self else { return }
-            print("✅ [AddressViewController] District selected: \(selectedItem.name) (ID: \(selectedItem.id))")
             self.selectedDistrictId = selectedItem.id
             // Update UI on main thread
             DispatchQueue.main.async {
@@ -593,7 +584,6 @@ final class AddressViewController: EcoViewController {
         let wards = LocationData.getWards(for: selectedDistrictId)
         showLocationPicker(title: "select_ward".localized(), items: wards) { [weak self] selectedItem in
             guard let self = self else { return }
-            print("✅ [AddressViewController] Ward selected: \(selectedItem.name) (ID: \(selectedItem.id))")
             self.selectedWardId = selectedItem.id
             // Update UI on main thread
             DispatchQueue.main.async {

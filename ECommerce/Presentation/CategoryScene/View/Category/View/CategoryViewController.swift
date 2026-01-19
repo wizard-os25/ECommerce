@@ -97,7 +97,6 @@ final class CategoryViewController: EcoViewController {
     private func navigateToProducts(categoryItem: CategoryItemModel) {
         // Find navigation controller
         guard let navigationController = findNavigationController() else {
-            print("⚠️ [CategoryViewController] No navigation controller found")
             return
         }
         

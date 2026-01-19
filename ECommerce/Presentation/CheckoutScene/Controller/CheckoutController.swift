@@ -134,7 +134,6 @@ final class DefaultCheckoutController: CheckoutController {
             // Nếu có productMap, sử dụng thông tin riêng cho từng item
             self.cartItems.value = cartItems.compactMap { item in
                 guard let product = productMap[item.id] else {
-                    print("⚠️ [CheckoutController] No product info found for productId: \(item.id)")
                     return nil
                 }
                 return CheckoutCartItem(
@@ -535,7 +534,6 @@ extension DefaultCheckoutController {
                     // Nếu không thể tạo payment intent (có thể do backend yêu cầu order_id hợp lệ)
                     // Hiển thị message yêu cầu user place order trước
                     let errorMessage = APIErrorParser.parseErrorMessage(from: error)
-                    print("⚠️ [CheckoutController] Cannot create setup payment intent: \(errorMessage)")
                     // Có thể hiển thị alert yêu cầu user place order trước
                     self?.handle(error: error)
                 }

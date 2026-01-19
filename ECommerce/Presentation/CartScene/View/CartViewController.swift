@@ -58,20 +58,13 @@ final class CartViewController: EcoViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("🛒 [CartViewController] ========================================")
-        print("🛒 [CartViewController] viewDidLoad")
-        print("   CartController type: \(type(of: cartController))")
         if let defaultController = cartController as? DefaultCartController {
-            print("   CartController instance ID: \(ObjectIdentifier(defaultController))")
         }
-        print("   Initial cart items count: \(cartController.cartItems.value.count)")
         
         setupViews()
         bindCartSpecific()
         cartController.didLoadView()
         
-        print("   ✅ Setup completed")
-        print("🛒 [CartViewController] ========================================")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,32 +132,21 @@ final class CartViewController: EcoViewController {
     
     private func bindCartSpecific() {
         cartController.cartItems.observe(on: self) { [weak self] items in
-            print("🛒 [CartViewController] ========================================")
-            print("🛒 [CartViewController] cartItems observer triggered")
-            print("   Items count: \(items.count)")
             if !items.isEmpty {
-                print("   Items details:")
                 items.enumerated().forEach { index, item in
-                    print("      [\(index)] ID: \(item.productId), Name: \(item.productName), Qty: \(item.quantity), Selected: \(item.isSelected)")
                 }
             } else {
-                print("   ⚠️ Cart is empty")
             }
             
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
-                print("   ✅ TableView reloaded")
                 
                 self?.updateEmptyState(isEmpty: items.isEmpty)
-                print("   ✅ Empty state updated: isEmpty = \(items.isEmpty)")
                 
                 self?.updateOrderActionView()
-                print("   ✅ OrderActionView updated")
                 
                 self?.updateNavigationBar()
-                print("   ✅ NavigationBar updated")
             }
-            print("🛒 [CartViewController] ========================================")
         }
         
         cartController.selectedItemsCount.observe(on: self) { [weak self] _ in
@@ -271,8 +253,6 @@ final class CartViewController: EcoViewController {
         if let defaultController = checkoutController as? DefaultCheckoutController {
             let productIds = selectedCartItemModels.map { $0.productId }
             defaultController.setPurchasedProductIds(productIds)
-            print("🛒 [CartViewController] Navigate to checkout with \(productIds.count) products")
-            print("   Product IDs: \(productIds)")
         }
         
         let checkoutVC = CheckoutViewController.create(with: checkoutController)
@@ -293,8 +273,6 @@ extension CartViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CartItemCell", for: indexPath) as! CartItemCell
         
         let item = cartController.cartItems.value[indexPath.row]
-        print("🛒 [CartViewController] Configuring cell at indexPath: \(indexPath.row)")
-        print("   Item: ID=\(item.productId), Name=\(item.productName), Qty=\(item.quantity)")
         cell.configure(with: item)
         
         // Add bottom spacing (8pt) except for last cell

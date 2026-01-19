@@ -171,6 +171,7 @@ final class DefaultOrderDetailController: OrderDetailController {
         state.height = navigationBarInitialHeight
         state.buttonTintColor = navigationBarButtonTintColor
         state.leftItem = navigationBarLeftItem
+        state.backButtonStyle = .simple
         navigationState.value = state
     }
 }

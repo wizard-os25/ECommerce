@@ -186,6 +186,65 @@ extension DefaultDataTransferService: DataTransferService {
     ) -> Result<T, DataTransferError> {
         do {
             guard let data = data else { return .failure(.noResponse) }
+            
+            // ✅ Xử lý trường hợp data rỗng (0 bytes) - API có thể trả về empty response với status 200
+            if data.isEmpty {
+                print("⚠️ [DataTransferService] Received empty response (0 bytes) - Cannot decode JSON")
+                let underlyingError = NSError(
+                    domain: NSCocoaErrorDomain,
+                    code: 3840, // JSON parsing error code
+                    userInfo: [NSLocalizedDescriptionKey: "Unexpected end of file"]
+                )
+                let error = DecodingError.dataCorrupted(
+                    DecodingError.Context(
+                        codingPath: [],
+                        debugDescription: "Empty response data received from server. Expected JSON but got 0 bytes.",
+                        underlyingError: underlyingError
+                    )
+                )
+                self.errorLogger.log(error: error)
+                return .failure(.parsing(error))
+            }
+            
+            // Validate data là JSON hợp lệ trước khi decode
+            let jsonString = String(data: data, encoding: .utf8) ?? ""
+            let trimmedString = jsonString.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if trimmedString.isEmpty {
+                print("⚠️ [DataTransferService] Response contains only whitespace")
+                let underlyingError = NSError(
+                    domain: NSCocoaErrorDomain,
+                    code: 3840,
+                    userInfo: [NSLocalizedDescriptionKey: "Unexpected end of file"]
+                )
+                let error = DecodingError.dataCorrupted(
+                    DecodingError.Context(
+                        codingPath: [],
+                        debugDescription: "Response contains only whitespace. Expected JSON but got empty string.",
+                        underlyingError: underlyingError
+                    )
+                )
+                self.errorLogger.log(error: error)
+                return .failure(.parsing(error))
+            }
+            
+            // Thử parse JSON để validate trước khi decode
+            do {
+                _ = try JSONSerialization.jsonObject(with: data, options: [])
+            } catch {
+                print("⚠️ [DataTransferService] Invalid JSON format: \(error.localizedDescription)")
+                print("   Response string (first 200 chars): \(String(trimmedString.prefix(200)))")
+                let decodingError = DecodingError.dataCorrupted(
+                    DecodingError.Context(
+                        codingPath: [],
+                        debugDescription: "Invalid JSON format: \(error.localizedDescription)",
+                        underlyingError: error
+                    )
+                )
+                self.errorLogger.log(error: decodingError)
+                return .failure(.parsing(decodingError))
+            }
+            
             let result: T = try decoder.decode(data)
             return .success(result)
         } catch {

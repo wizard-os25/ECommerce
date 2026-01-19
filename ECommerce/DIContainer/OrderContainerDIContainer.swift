@@ -45,6 +45,22 @@ final class OrderContainerDIContainer {
         )
     }
     
+    func makeOrderProcessingDIContainer() -> OrderProcessingDIContainer {
+        OrderProcessingDIContainer(
+            dependencies: OrderProcessingDIContainer.Dependencies(
+                orderManageUseCase: makeOrderManageUseCase()
+            )
+        )
+    }
+    
+    func makeOrderConfirmedDIContainer() -> OrderConfirmedDIContainer {
+        OrderConfirmedDIContainer(
+            dependencies: OrderConfirmedDIContainer.Dependencies(
+                orderManageUseCase: makeOrderManageUseCase()
+            )
+        )
+    }
+    
     func makeOrderCancelDIContainer() -> OrderCancelDIContainer {
         OrderCancelDIContainer(
             dependencies: OrderCancelDIContainer.Dependencies(
@@ -84,6 +100,8 @@ final class OrderContainerDIContainer {
         
         let containerController = makeOrderContainerController()
         let pendingController = makeOrderPendingDIContainer().makeOrderPendingController()
+        let processingController = makeOrderProcessingDIContainer().makeOrderProcessingController()
+        let confirmedController = makeOrderConfirmedDIContainer().makeOrderConfirmedController()
         let cancelController = makeOrderCancelDIContainer().makeOrderCancelController()
         let deliveryController = makeOrderDeliveryDIContainer().makeOrderDeliveryController()
         let deliveredController = makeOrderDeliveredDIContainer().makeOrderDeliveredController()
@@ -91,6 +109,8 @@ final class OrderContainerDIContainer {
         viewController.configure(
             with: containerController,
             pendingController: pendingController,
+            processingController: processingController,
+            confirmedController: confirmedController,
             cancelController: cancelController,
             deliveryController: deliveryController,
             deliveredController: deliveredController

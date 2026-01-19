@@ -69,11 +69,9 @@ final class LoginCoordinatingController {
     
     private func transitionToRootViewController(_ viewController: UIViewController) {
         guard let window = navigationController?.view.window ?? UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
-            print("LoginCoordinatingController: No window available for transition")
             return
         }
         
-        print("LoginCoordinatingController: Transitioning to Main screen")
         
         UIView.transition(
             with: window,
@@ -83,7 +81,6 @@ final class LoginCoordinatingController {
                 window.rootViewController = viewController
             },
             completion: { finished in
-                print("LoginCoordinatingController: Transition to Main completed: \(finished)")
             }
         )
     }

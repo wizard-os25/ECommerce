@@ -55,6 +55,7 @@ final class OrderDetailViewController: EcoViewController {
     private func bindOrderDetailSpecific() {
         orderDetailController.orderDetail.observe(on: self) { [weak self] _ in
             self?.orderDetailTableView.reloadData()
+            self?.updateCancelButtonVisibility()
         }
         
         // Observe message và check success state trong cùng observer
@@ -114,6 +115,18 @@ final class OrderDetailViewController: EcoViewController {
         cancelOrderButton.setTitleColor(.white, for: .normal)
         cancelOrderButton.layer.cornerRadius = 8
         cancelOrderButton.titleLabel?.font = Typography.fontMedium16
+        updateCancelButtonVisibility()
+    }
+    
+    private func updateCancelButtonVisibility() {
+        guard let orderDetail = orderDetailController.orderDetail.value else {
+            cancelOrderButton.isHidden = true
+            return
+        }
+        
+        // Only show cancel button for pending, confirmed, and processing statuses
+        let cancelableStatuses = ["pending", "confirmed", "processing"]
+        cancelOrderButton.isHidden = !cancelableStatuses.contains(orderDetail.orderStatus.lowercased())
     }
     
     @objc private func cancelOrderTapped() {

@@ -115,7 +115,6 @@ extension OrderCancelViewController: UITableViewDataSource {
         
         // Guard để đảm bảo có data
         guard indexPath.row < orderCancelController.items.value.count else {
-            print("⚠️ [OrderCancelViewController] Index out of range: \(indexPath.row)")
             return cell
         }
         

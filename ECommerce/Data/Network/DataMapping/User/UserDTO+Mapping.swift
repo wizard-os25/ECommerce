@@ -20,6 +20,7 @@ struct UserDTO: Decodable {
     let createdAt: String?
     let accountType: String?
     let cardInfo: [String]?
+    let isEmailVerified: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -33,6 +34,7 @@ struct UserDTO: Decodable {
         case createdAt = "createdAt"
         case accountType = "accountType"
         case cardInfo = "cardInfo"
+        case isEmailVerified = "isEmailVerified"
     }
 }
 
@@ -86,7 +88,8 @@ extension UserDTO {
             bankAccount: accountInfo,
             orderCount: orderCount,
             memberSinceDays: memberSinceDays,
-            createdAt: createdAt.flatMap { parseDate($0) }
+            createdAt: createdAt.flatMap { parseDate($0) },
+            isEmailVerified: isEmailVerified ?? false
         )
     }
 }

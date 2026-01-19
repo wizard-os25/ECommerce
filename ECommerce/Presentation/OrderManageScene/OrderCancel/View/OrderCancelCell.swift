@@ -26,7 +26,6 @@ final class OrderCancelCell: UITableViewCell {
               let paymentMethodLabel = paymentMethodLabel,
               let totalAmountLabel = totalAmountLabel,
               let createdAtLabel = createdAtLabel else {
-            print("⚠️ [OrderCancelCell] Outlets chưa được kết nối trong Storyboard. Vui lòng kiểm tra lại.")
             return
         }
         

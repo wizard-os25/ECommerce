@@ -140,7 +140,7 @@ private extension EcoBaseViewController {
         keyboardObserverTokens.removeAll()
     }
     
-    func handleKeyboardWillShow(_ notification: Notification) {
+    func handleKeyboardWillShow(_ notification: Foundation.Notification) {
         guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
             return
         }
@@ -148,7 +148,7 @@ private extension EcoBaseViewController {
         adjustScrollViewForKeyboard(keyboardHeight: keyboardFrame.height)
     }
     
-    func handleKeyboardWillHide(_ notification: Notification) {
+    func handleKeyboardWillHide(_ notification: Foundation.Notification) {
         adjustScrollViewForKeyboard(keyboardHeight: 0)
     }
     

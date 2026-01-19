@@ -34,4 +34,9 @@ protocol AuthRepository {
     func getUserInfo(
         completion: @escaping (Result<User, Error>) -> Void
     ) -> Cancellable?
+    
+    @discardableResult
+    func resendEmailVerification(
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) -> Cancellable?
 }
