@@ -61,8 +61,15 @@ final class DefaultProductsController: ProductsController {
     // AI Search mode flag
     var isAISearchMode: Bool = false
     
+    // AI Search info để hiển thị trên emptyDataLabel
+    var aiSearchLabels: [(String, Double)] = []
+    var aiSearchKeywords: [String] = []
+    
     // Flag để đánh dấu khi được push từ màn khác (search hoặc category)
     var isPushedFromOtherScreen: Bool = false
+    
+    // Flag để track state ẩn/hiện tableView
+    var isTableViewHidden: Bool = false
     
     // MARK: - Navigation Bar Configuration
     
@@ -113,11 +120,20 @@ final class DefaultProductsController: ProductsController {
         return .black
     }
     
-    /// Navigation bar left item (back button khi được push từ màn khác)
+    /// Navigation bar left item (toggle button để ẩn/hiện tableView, hoặc back button khi được push từ màn khác)
     var navigationBarLeftItem: EcoNavItem? {
-        guard isPushedFromOtherScreen else { return nil }
-        return EcoNavItem.back { [weak self] in
-            self?.didTapBack()
+        // Nếu được push từ màn khác, hiển thị back button
+        if isPushedFromOtherScreen {
+            return EcoNavItem.back { [weak self] in
+                self?.didTapBack()
+            }
+        }
+        
+        // Nếu không, hiển thị toggle button để ẩn/hiện tableView
+        // Icon: "eye" khi tableView đang hiện, "eye.slash" khi tableView đang ẩn
+        let iconName = isTableViewHidden ? "eye.slash" : "eye"
+        return EcoNavItem.icon(UIImage(systemName: iconName) ?? UIImage()) { [weak self] in
+            self?.didTapToggleTableView()
         }
     }
     
@@ -141,6 +157,9 @@ final class DefaultProductsController: ProductsController {
     
     // Callback for back button
     var onBack: (() -> Void)?
+    
+    // Callback for toggle tableView
+    var onToggleTableView: ((Bool) -> Void)?
     
     // MARK: - EcoController Output (common to all controllers)
     
@@ -189,6 +208,11 @@ final class DefaultProductsController: ProductsController {
         pages.removeAll()
         allItems.removeAll()
         items.value.removeAll()
+        
+        // Reset AI search info khi reset pages (khi thực hiện tìm kiếm thông thường)
+        isAISearchMode = false
+        aiSearchLabels = []
+        aiSearchKeywords = []
     }
     
     /// Filter items based on AI search labels using NSPredicate-like logic
@@ -196,41 +220,101 @@ final class DefaultProductsController: ProductsController {
     /// Bước 2: Dùng logic tương tự NSPredicate để filter products
     func filterItemsByLabels(_ labels: [(String, Double)]) {
         
+        print("🔍 [ProductsController] ========================================")
+        print("🔍 [ProductsController] filterItemsByLabels called")
+        print("🔍 [ProductsController] allItems count: \(allItems.count)")
+        
         // Log all labels with confidence
         for (index, (label, confidence)) in labels.enumerated() {
+            print("🔍 [ProductsController] Label \(index + 1): \(label) (confidence: \(String(format: "%.2f", confidence * 100))%)")
         }
         
-        
         guard !labels.isEmpty else {
+            print("🔍 [ProductsController] No labels, returning all items")
             items.value = allItems
+            // Reset AI search info
+            aiSearchLabels = []
+            aiSearchKeywords = []
+            isAISearchMode = false
             return
         }
         
+        // Lưu trữ AI search info để hiển thị trên emptyDataLabel
+        isAISearchMode = true
+        aiSearchLabels = labels
+        
         // BƯỚC 1: Chuẩn hóa và token hóa labels để tạo tập từ khóa
         let searchKeywords = normalizeAndTokenizeLabels(labels)
-        for (index, keyword) in searchKeywords.enumerated() {
-        }
+        aiSearchKeywords = searchKeywords
+        print("🔍 [ProductsController] Search keywords after tokenization: \(searchKeywords)")
         
         // BƯỚC 2: Filter items với logic tương tự NSPredicate
         // Mỗi keyword phải xuất hiện trong name HOẶC description (OR)
         // Item match nếu có ít nhất một keyword xuất hiện (OR giữa các keywords)
         let filteredItems = allItems.filter { item in
+            // Normalize item name và description để so sánh
+            // Xử lý diacritics và special characters
+            let normalizedName = item.name.lowercased()
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .folding(options: .diacriticInsensitive, locale: .current)
+            let normalizedDescription = item.description.lowercased()
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .folding(options: .diacriticInsensitive, locale: .current)
+            
             // Kiểm tra từng keyword: keyword xuất hiện trong name HOẶC description
-            return searchKeywords.contains { keyword in
-                let nameContains = item.name.lowercased().contains(keyword)
-                let descriptionContains = item.description.lowercased().contains(keyword)
+            let matches = searchKeywords.contains { keyword in
+                // Normalize keyword tương tự
+                let normalizedKeyword = keyword.lowercased()
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .folding(options: .diacriticInsensitive, locale: .current)
+                
+                let nameContains = normalizedName.contains(normalizedKeyword)
+                let descriptionContains = normalizedDescription.contains(normalizedKeyword)
+                
+                if nameContains || descriptionContains {
+                    print("🔍 [ProductsController] ✅ Match found: keyword '\(keyword)' (normalized: '\(normalizedKeyword)') in item '\(item.name)'")
+                    if nameContains {
+                        print("🔍 [ProductsController]   - Found in name: '\(normalizedName)'")
+                    }
+                    if descriptionContains {
+                        print("🔍 [ProductsController]   - Found in description: '\(normalizedDescription.prefix(50))...'")
+                    }
+                }
+                
                 return nameContains || descriptionContains
             }
+            
+            if !matches {
+                // Log để debug tại sao không match
+                print("🔍 [ProductsController] ❌ No match for item '\(item.name)'")
+                print("🔍 [ProductsController]   - Normalized name: '\(normalizedName)'")
+                print("🔍 [ProductsController]   - Normalized description: '\(normalizedDescription.prefix(50))...'")
+                print("🔍 [ProductsController]   - Searching for keywords: \(searchKeywords)")
+            }
+            
+            return matches
         }
+        
+        print("🔍 [ProductsController] Filtered items count: \(filteredItems.count)")
         
         // Log first few matched items for verification
         if !filteredItems.isEmpty {
+            print("🔍 [ProductsController] First few matched items:")
             for (index, item) in filteredItems.prefix(5).enumerated() {
+                print("🔍 [ProductsController]   \(index + 1). \(item.name)")
             }
             if filteredItems.count > 5 {
+                print("🔍 [ProductsController]   ... and \(filteredItems.count - 5) more items")
             }
         } else {
+            print("🔍 [ProductsController] ⚠️ No items matched!")
+            print("🔍 [ProductsController] Sample items from allItems:")
+            for (index, item) in allItems.prefix(3).enumerated() {
+                print("🔍 [ProductsController]   \(index + 1). Name: '\(item.name)', Description: '\(item.description)'")
+            }
         }
+        
+        print("🔍 [ProductsController] ========================================")
         
         items.value = filteredItems
     }
@@ -239,27 +323,40 @@ final class DefaultProductsController: ProductsController {
     private func normalizeAndTokenizeLabels(_ labels: [(String, Double)]) -> [String] {
         var keywords: Set<String> = []
         
+        print("🔍 [ProductsController] normalizeAndTokenizeLabels - Processing \(labels.count) labels")
+        
         for (label, _) in labels {
             // Chuẩn hóa: lowercase và trim whitespace
             let normalized = label.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+            print("🔍 [ProductsController]   Processing label: '\(label)' -> normalized: '\(normalized)'")
             
             // Token hóa: tách thành các từ (split by spaces, commas, hyphens, etc.)
             let tokens = normalized.components(separatedBy: CharacterSet(charactersIn: " ,-_.()[]{}"))
                 .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
                 .filter { !$0.isEmpty && $0.count > 2 } // Loại bỏ từ quá ngắn (< 3 ký tự)
             
+            print("🔍 [ProductsController]   Tokens extracted: \(tokens)")
+            
             // Thêm từng token vào tập từ khóa
             for token in tokens {
                 keywords.insert(token)
+                print("🔍 [ProductsController]   Added token: '\(token)'")
             }
             
             // Nếu label là một từ duy nhất và đủ dài, thêm cả label
             if tokens.count == 1 && normalized.count >= 3 {
                 keywords.insert(normalized)
+                print("🔍 [ProductsController]   Added full label (single word): '\(normalized)'")
+            } else if tokens.isEmpty && normalized.count >= 3 {
+                // Nếu không có tokens nào (có thể do special characters), thêm cả label nếu đủ dài
+                keywords.insert(normalized)
+                print("🔍 [ProductsController]   Added full label (no tokens): '\(normalized)'")
             }
         }
         
-        return Array(keywords)
+        let result = Array(keywords)
+        print("🔍 [ProductsController] Final keywords: \(result)")
+        return result
     }
     
     private func load(productQuery: ProductQuery, loading: Bool) {
@@ -373,6 +470,23 @@ extension DefaultProductsController {
     private func didTapBack() {
         // Callback để pop navigation controller
         onBack?()
+    }
+    
+    /// Handle toggle tableView button tap (chạy trên main thread)
+    private func didTapToggleTableView() {
+        // Đảm bảo chạy trên main thread
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            // Toggle state
+            self.isTableViewHidden.toggle()
+            
+            // Update navigation state để refresh left button icon
+            self.updateNavigationState()
+            
+            // Callback để toggle tableView trong view
+            self.onToggleTableView?(self.isTableViewHidden)
+        }
     }
 }
 

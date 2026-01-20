@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-public struct LocationSearchKeyword {
+struct LocationSearchKeyword {
     public let id: String
     public let keyword: String
     public let timestamp: Date

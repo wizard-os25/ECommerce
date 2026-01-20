@@ -115,11 +115,16 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate,
         
         // Setup nút capture
         self.captureButton.setTitle("", for: .normal)
+        captureButton.isEnabled = true
+        captureButton.isUserInteractionEnabled = true
+        captureButton.isExclusiveTouch = true // Đảm bảo button nhận touch events
         captureButton.layer.cornerRadius = captureButton.frame.height / 2
         captureButton.layer.borderWidth = 5
         captureButton.layer.borderColor = UIColor.white.cgColor
         captureButton.clipsToBounds = true
-        print("📷 [CameraVC] ✅ Capture button setup")
+        // Đảm bảo button nằm trên cùng
+        view.bringSubviewToFront(captureButton)
+        print("📷 [CameraVC] ✅ Capture button setup - enabled: \(captureButton.isEnabled), userInteractionEnabled: \(captureButton.isUserInteractionEnabled)")
         
         // Setup AI Search mode bindings (only if AI Search mode)
         if cameraMode == .aiSearch {
@@ -189,7 +194,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate,
         let showCaptureHintDisposable = showCaptureHint
             .observeOnMain(on: self) { [weak self] _ in
                 print("📷 [CameraVC] 💡 showCaptureHint received - animating button")
-                self?.animationCaptureBtnHint()
+                guard let self = self else { return }
+                // Reset state về idle khi show hint để cho phép manual capture
+                self.currentActionState = .idle
+                self.animationCaptureBtnHint()
             }
         disposalBag.add {
             showCaptureHintDisposable.dispose()
@@ -305,6 +313,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate,
 
     func animationCaptureBtnHint(repeatCount: Int = 3) {
         captureButton.isHidden = false
+        captureButton.isEnabled = true // Đảm bảo button được enable
+        captureButton.isUserInteractionEnabled = true // Đảm bảo button có thể nhận touch
         captureButton.layer.borderColor = UIColor.white.cgColor
         captureButton.transform = .identity
         
@@ -319,15 +329,49 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
     // MARK: - Actions
-    @IBAction func captureButtonTapped(_ sender: Any) {
-        // Kiểm tra state - chỉ cho phép chụp khi idle
-        guard currentActionState == .idle else {
-            print("[Capture] 🚫 Cannot capture - action in progress: \(currentActionState)")
+    @IBAction @objc func captureButtonTapped(_ sender: Any) {
+        print("📷 [CameraVC] ========================================")
+        print("📷 [CameraVC] 📸 captureButtonTapped called!")
+        print("📷 [CameraVC] 📸 Current state: \(currentActionState)")
+        print("📷 [CameraVC] 📸 Button enabled: \(captureButton.isEnabled)")
+        print("📷 [CameraVC] 📸 Button userInteractionEnabled: \(captureButton.isUserInteractionEnabled)")
+        print("📷 [CameraVC] 📸 Manual capture requested: \(manualCaptureRequested)")
+        print("📷 [CameraVC] ========================================")
+        
+        // Prevent multiple taps - disable button temporarily
+        guard !manualCaptureRequested else {
+            print("📷 [CameraVC] ⚠️ Manual capture already in progress, ignoring tap")
             return
         }
         
+        // Cho phép chụp thủ công ngay cả khi đang ở frameProcessing (sau auto detection)
+        // Reset state về idle nếu đang ở frameProcessing để cho phép manual capture
+        if currentActionState == .frameProcessing {
+            print("📷 [CameraVC] ⚠️ State is frameProcessing, resetting to idle to allow manual capture")
+            currentActionState = .idle
+        }
+        
+        // Kiểm tra state - chỉ cho phép chụp khi idle hoặc manualCapture (nếu đang retry)
+        // Nếu state không đúng, force reset về idle để cho phép capture
+        if currentActionState != .idle && currentActionState != .manualCapture {
+            print("📷 [CameraVC] 🚫 Cannot capture - action in progress: \(currentActionState)")
+            // Force reset state để cho phép capture
+            print("📷 [CameraVC] ⚠️ Force resetting state to idle")
+            currentActionState = .idle
+        }
+        
+        print("📷 [CameraVC] ✅ Allowing manual capture")
         currentActionState = .manualCapture
+        
+        // Disable button temporarily to prevent multiple taps
+        captureButton.isEnabled = false
+        
         capturePhoto(manual: true)
+        
+        // Re-enable button after a short delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            self?.captureButton.isEnabled = true
+        }
     }
 
     @IBAction func libraryBtnTapped(_ sender: Any) {
@@ -349,6 +393,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate,
         
         didAutoCapture = false
         manualCaptureRequested = false
+        // Reset action state về idle khi view appear để đảm bảo button có thể tap
+        currentActionState = .idle
+        // Đảm bảo capture button luôn enabled và có thể tương tác
+        captureButton.isEnabled = true
+        captureButton.isUserInteractionEnabled = true
 
         print("📷 [CameraVC] 🧭 Starting MotionManager for orientation tracking...")
         MotionManager.share.startMonitoringOrientation()
@@ -393,6 +442,58 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate,
             gestureHandler = CameraGestureHandler(cameraViewController: self)
             print("📷 [CameraVC] ✅ Gesture handler created")
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print("📷 [CameraVC] ========================================")
+        print("📷 [CameraVC] 👁️ viewDidAppear - Ensuring button is setup correctly")
+        print("📷 [CameraVC] ========================================")
+        
+        // Đảm bảo button được setup đúng sau khi view đã layout
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            // Đảm bảo button nằm trên cùng
+            self.view.bringSubviewToFront(self.captureButton)
+            
+            // Đảm bảo button có thể nhận touch events
+            self.captureButton.isEnabled = true
+            self.captureButton.isUserInteractionEnabled = true
+            self.captureButton.isExclusiveTouch = true
+            
+            // Thêm programmatic action như backup
+            self.captureButton.removeTarget(nil, action: nil, for: .touchUpInside)
+            self.captureButton.addTarget(self, action: #selector(self.captureButtonTapped(_:)), for: .touchUpInside)
+            
+            // Log button state
+            print("📷 [CameraVC] 📱 Capture button frame: \(self.captureButton.frame)")
+            print("📷 [CameraVC] 📱 Capture button bounds: \(self.captureButton.bounds)")
+            print("📷 [CameraVC] 📱 Capture button enabled: \(self.captureButton.isEnabled)")
+            print("📷 [CameraVC] 📱 Capture button userInteractionEnabled: \(self.captureButton.isUserInteractionEnabled)")
+            print("📷 [CameraVC] 📱 Capture button alpha: \(self.captureButton.alpha)")
+            print("📷 [CameraVC] 📱 Capture button hidden: \(self.captureButton.isHidden)")
+            
+            // Test touch bằng cách thêm tap gesture recognizer như backup
+            // Remove existing gesture recognizers first
+            if let gestures = self.captureButton.gestureRecognizers {
+                for gesture in gestures {
+                    if gesture is UITapGestureRecognizer {
+                        self.captureButton.removeGestureRecognizer(gesture)
+                    }
+                }
+            }
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleCaptureButtonTap(_:)))
+            tapGesture.numberOfTapsRequired = 1
+            self.captureButton.addGestureRecognizer(tapGesture)
+            print("📷 [CameraVC] ✅ Added tap gesture recognizer as backup")
+        }
+    }
+    
+    @objc private func handleCaptureButtonTap(_ gesture: UITapGestureRecognizer) {
+        print("📷 [CameraVC] 🎯 Tap gesture recognized on capture button!")
+        captureButtonTapped(captureButton)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -537,23 +638,65 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate,
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.previewView.layer.insertSublayer(self.previewLayer, at: 0)
+            // Đảm bảo tất cả buttons nằm trên cùng
             self.view.bringSubviewToFront(self.captureButton)
+            if let rotateButton = self.rotateButton {
+                self.view.bringSubviewToFront(rotateButton)
+            }
+            if let libraryButton = self.openLibrary {
+                self.view.bringSubviewToFront(libraryButton)
+            }
             self.previewView.layer.masksToBounds = true
+            
+            // Đảm bảo button có thể nhận touch events
+            self.captureButton.isEnabled = true
+            self.captureButton.isUserInteractionEnabled = true
+            self.captureButton.isExclusiveTouch = true
+            
+            // Thêm programmatic action như backup nếu IBAction không hoạt động
+            self.captureButton.removeTarget(nil, action: nil, for: .touchUpInside)
+            self.captureButton.addTarget(self, action: #selector(self.captureButtonTapped(_:)), for: .touchUpInside)
+            
             print("📷 [CameraVC] ✅ Preview layer added on main thread")
             print("📷 [CameraVC] 📱 Preview view bounds: \(self.previewView.bounds)")
+            print("📷 [CameraVC] 📱 Capture button frame: \(self.captureButton.frame)")
+            print("📷 [CameraVC] 📱 Capture button superview: \(self.captureButton.superview?.description ?? "nil")")
+            print("📷 [CameraVC] 📱 Capture button enabled: \(self.captureButton.isEnabled)")
+            print("📷 [CameraVC] 📱 Capture button userInteractionEnabled: \(self.captureButton.isUserInteractionEnabled)")
         }
     }
 
     // MARK: - Capture Photo
     private func capturePhoto(manual: Bool = false) {
-        guard let photoOutput = photoOutput else { return }
+        guard let photoOutput = photoOutput else {
+            print("📷 [CameraVC] ⚠️ Photo output is nil")
+            return
+        }
+        
+        // Kiểm tra xem đã có request đang chờ chưa (đặc biệt cho manual capture)
+        if manual && manualCaptureRequested {
+            print("📷 [CameraVC] ⚠️ Manual capture already requested, skipping duplicate")
+            return
+        }
+        
+        // Kiểm tra state để tránh capture khi đang xử lý
+        if currentActionState == .manualCapture && manualCaptureRequested {
+            print("📷 [CameraVC] ⚠️ Already capturing, skipping duplicate request")
+            return
+        }
+        
+        print("📷 [CameraVC] 📸 Starting photo capture...")
         let settings = AVCapturePhotoSettings()
         settings.isHighResolutionPhotoEnabled = true
         if let connection = photoOutput.connection(with: .video) {
             connection.videoOrientation = MotionManager.share.getOrientation()
         }
-        if manual { manualCaptureRequested = true }
+        if manual { 
+            manualCaptureRequested = true
+            print("📷 [CameraVC] ✅ Manual capture requested flag set")
+        }
         photoOutput.capturePhoto(with: settings, delegate: self)
+        print("📷 [CameraVC] ✅ Photo capture request sent")
     }
 
     // MARK: - Camera control
@@ -650,30 +793,66 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
                      didFinishProcessingPhoto photo: AVCapturePhoto,
                      error: Error?) {
         if let error = error {
-            print("Error processing photo: \(error)")
-            manualCaptureRequested = false
+            print("📷 [CameraVC] ❌ Error processing photo: \(error)")
+            print("📷 [CameraVC] Error domain: \((error as NSError).domain)")
+            print("📷 [CameraVC] Error code: \((error as NSError).code)")
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.manualCaptureRequested = false
+                self.currentActionState = .idle
+                // Re-enable button on error
+                self.captureButton.isEnabled = true
+            }
             return
         }
         guard let data = photo.fileDataRepresentation(),
               let image = UIImage(data: data) else {
-            manualCaptureRequested = false
+            print("📷 [CameraVC] ⚠️ Failed to get image data from photo")
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.manualCaptureRequested = false
+                self.currentActionState = .idle
+                // Re-enable button on error
+                self.captureButton.isEnabled = true
+            }
             return
         }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.capturedImage.emit(image)
             
             // In normal mode, dismiss immediately after capture
             if self.cameraMode == .normal {
+                self.capturedImage.emit(image)
                 if self.manualCaptureRequested {
                     self.manualCaptureRequested = false
                     self.dismiss(animated: true)
                 }
             } else {
-                // AI Search mode: handle as before
-                if self.manualCaptureRequested {
-                    self.manualCaptureRequested = false
-                    self.dismiss(animated: true)
+                // AI Search mode: gửi ảnh đến classifyTrigger để AI classification
+                print("📷 [CameraVC] 📸 Manual capture in AI Search mode - sending to classifyTrigger")
+                
+                // Gửi ảnh đến classifyTrigger để AI classification
+                if let viewModel = self.imViewModel {
+                    print("📷 [CameraVC] 🤖 Sending image to classifyTrigger for AI classification")
+                    viewModel.classifyTrigger.emit(image)
+                    
+                    // Emit capturedImage để trigger callback (nếu có)
+                    self.capturedImage.emit(image)
+                    
+                    // Không dismiss camera ngay, đợi kết quả classification
+                    // Kết quả sẽ được xử lý bởi topLabels observer trong CameraHelper
+                    // Camera sẽ được dismiss trong onLabelsDetected callback
+                } else {
+                    print("⚠️ [CameraVC] ViewModel not found, cannot classify image")
+                    // Fallback: emit capturedImage và dismiss nếu không có viewModel
+                    self.capturedImage.emit(image)
+                    if self.manualCaptureRequested {
+                        self.manualCaptureRequested = false
+                        self.currentActionState = .idle
+                        // Re-enable button
+                        self.captureButton.isEnabled = true
+                        self.dismiss(animated: true)
+                    }
                 }
             }
         }

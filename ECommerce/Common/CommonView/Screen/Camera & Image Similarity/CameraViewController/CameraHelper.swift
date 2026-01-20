@@ -106,22 +106,48 @@ public final class CameraHelper {
                    let viewModel = cameraVC.imViewModel {
                     print("📷 [CameraHelper] ✅ Setting up topLabels observer")
                     
-                    // Flag để tránh gọi callback nhiều lần
-                    var hasCalledCallback = false
+                    // Throttle để tránh gọi callback quá nhiều lần trong thời gian ngắn
+                    // Nhưng cho phép manual capture trigger callback ngay cả khi đã có auto detection
+                    var lastCallTime: Date?
+                    var hasCalledAutoDetection = false
+                    let throttleInterval: TimeInterval = 0.3 // Giảm xuống 0.3 giây để cho phép manual capture nhanh hơn
+                    
+                    // Track manual capture để bypass throttle
+                    var isManualCapturePending = false
+                    
+                    // Observe classifyTrigger để detect manual capture
+                    let classifyDisposable = viewModel.classifyTrigger.observeOnMain(on: cameraVC) { _ in
+                        print("📷 [CameraHelper] Manual capture detected via classifyTrigger - bypassing throttle")
+                        isManualCapturePending = true
+                        lastCallTime = nil // Reset throttle để cho phép callback ngay
+                    }
+                    cameraVC.disposalBag.add {
+                        classifyDisposable.dispose()
+                    }
                     
                     let disposable = viewModel.topLabels.observeOnMain(on: cameraVC) { labels in
-                        // Chỉ gọi callback một lần
-                        guard !hasCalledCallback else {
-                            print("⚠️ [CameraHelper] Labels callback already called, skipping duplicate")
-                            return
-                        }
-                        
                         guard !labels.isEmpty else {
                             print("⚠️ [CameraHelper] Empty labels, skipping")
                             return
                         }
                         
-                        hasCalledCallback = true
+                        // Throttle: chỉ áp dụng cho auto detection, không áp dụng cho manual capture
+                        if isManualCapturePending {
+                            // Manual capture: bypass throttle và reset flag
+                            print("📷 [CameraHelper] Processing manual capture - bypassing throttle")
+                            isManualCapturePending = false
+                            lastCallTime = nil
+                        } else {
+                            // Auto detection: áp dụng throttle
+                            let now = Date()
+                            if let lastCall = lastCallTime, now.timeIntervalSince(lastCall) < throttleInterval {
+                                print("⚠️ [CameraHelper] Throttling: too soon since last call, skipping")
+                                return
+                            }
+                            lastCallTime = now
+                            hasCalledAutoDetection = true
+                        }
+                        
                         print("📷 [CameraHelper] 🏷️ Labels detected: \(labels.count) labels")
                         for (index, (label, confidence)) in labels.enumerated() {
                             print("📷 [CameraHelper]   \(index + 1). \(label): \(String(format: "%.2f", confidence * 100))%")

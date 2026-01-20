@@ -147,7 +147,18 @@ extension CameraGestureHandler: UIGestureRecognizerDelegate {
         let touchPoint = touch.location(in: cameraVC.view)
         let previewFrame = cameraVC.previewView.frame
         
+        // Kiểm tra xem touch có vào button không
+        let touchedView = cameraVC.view.hitTest(touchPoint, with: nil)
+        if touchedView is UIButton {
+            print("[Gesture] 🚫 Ignoring gesture - touch on button: \(touchedView?.description ?? "unknown")")
+            return false // Không nhận gesture nếu touch vào button
+        }
+        
         // Chỉ nhận gesture trong preview area
-        return previewFrame.contains(touchPoint)
+        let isInPreview = previewFrame.contains(touchPoint)
+        if !isInPreview {
+            print("[Gesture] 🚫 Ignoring gesture - touch outside preview area")
+        }
+        return isInPreview
     }
 }

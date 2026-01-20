@@ -173,7 +173,7 @@ final class DefaultNetworkSessionManager: NetworkSessionManager {
         
         // Timeout tăng lên 60s để xử lý các request chậm hoặc network không ổn định
         // timeoutIntervalForRequest: thời gian đợi response từ server (60s)
-        configuration.timeoutIntervalForRequest = 60
+        configuration.timeoutIntervalForRequest = 30
         
         // timeoutIntervalForResource: tổng thời gian cho toàn bộ request (120s)
         configuration.timeoutIntervalForResource = 120

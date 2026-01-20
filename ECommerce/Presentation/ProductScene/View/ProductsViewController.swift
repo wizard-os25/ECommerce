@@ -70,8 +70,8 @@ final class ProductsViewController: EcoViewController {
         productsListContainer.isHidden = true
         
         if !isLoading {
-            productsListContainer.isHidden = productsController.isEmpty
-            emptyDataLabel.isHidden = !productsController.isEmpty
+            // Sử dụng updateUIAfterFilter để xử lý cả toggle state và AI search info
+            updateUIAfterFilter()
         }
         
         productsTableViewController?.updateLoading(isLoading)
@@ -136,6 +136,13 @@ final class ProductsViewController: EcoViewController {
             // Bind scroll để thay đổi alpha của tabBar
             bindTabBarScroll(to: tableView)
         }
+        
+        // Đảm bảo label nằm dưới tableView trong z-order
+        // Bằng cách đưa tableView lên trên label
+        if let parentView = productsListContainer.superview {
+            parentView.bringSubviewToFront(productsListContainer)
+            // Label sẽ tự động nằm dưới vì được add vào view hierarchy trước
+        }
     }
     
     /// Bind scroll để thay đổi alpha của tabBar khi scroll
@@ -192,6 +199,119 @@ final class ProductsViewController: EcoViewController {
     
     private func updateItems() {
         productsTableViewController?.reload()
+        
+        // Cập nhật UI khi items thay đổi (sau khi filter hoặc load)
+        updateUIAfterFilter()
+    }
+    
+    /// Cập nhật emptyDataLabel với thông tin AI search (luôn hiển thị để người dùng nhìn kết quả model một cách trực quan)
+    private func updateEmptyDataLabelForAISearch() {
+        guard let defaultProductsController = productsController as? DefaultProductsController else {
+            // Nếu không phải AI search mode, dùng text mặc định
+            emptyDataLabel.text = productsController.emptyDataTitle
+            emptyDataLabel.numberOfLines = 1
+            emptyDataLabel.textAlignment = .center
+            return
+        }
+        
+        // Kiểm tra xem có đang ở chế độ AI search không
+        guard defaultProductsController.isAISearchMode,
+              !defaultProductsController.aiSearchLabels.isEmpty else {
+            // Không phải AI search mode, dùng text mặc định
+            emptyDataLabel.text = productsController.emptyDataTitle
+            emptyDataLabel.numberOfLines = 1
+            emptyDataLabel.textAlignment = .center
+            return
+        }
+        
+        // Màu theme từ navigation bar
+        let themeBlueColor = Colors.tokenRainbowBlueEnd
+        let darkGreenColor = UIColor(red: 34/255.0, green: 139/255.0, blue: 34/255.0, alpha: 1.0) // Màu xanh lá hơi tối và dễ chịu
+        let redColor = UIColor.systemRed
+        
+        // Font sizes
+        let largeFont = UIFont.systemFont(ofSize: 18, weight: .bold)
+        let mediumFont = UIFont.systemFont(ofSize: 16, weight: .bold)
+        let regularFont = UIFont.systemFont(ofSize: 16, weight: .regular)
+        let italicFont = UIFont.italicSystemFont(ofSize: 16)
+        
+        // Tạo attributed string
+        let attributedString = NSMutableAttributedString()
+        
+        // 1. "MobileNetV2's result:" (chữ lớn, bold)
+        let titleText = "MobileNetV2's result:\n"
+        let titleAttributes: [NSAttributedString.Key: Any] = [
+            .font: largeFont,
+            .foregroundColor: UIColor.label
+        ]
+        attributedString.append(NSAttributedString(string: titleText, attributes: titleAttributes))
+        
+        // 2. Danh sách labels với confidence (in nghiêng, màu xanh)
+        for (index, (label, confidence)) in defaultProductsController.aiSearchLabels.enumerated() {
+            let confidencePercent = String(format: "%.1f", confidence * 100)
+            
+            // Số thứ tự và label name (normal)
+            let labelText = "\(index + 1). \(label) "
+            let labelAttributes: [NSAttributedString.Key: Any] = [
+                .font: regularFont,
+                .foregroundColor: UIColor.label
+            ]
+            attributedString.append(NSAttributedString(string: labelText, attributes: labelAttributes))
+            
+            // Confidence (in nghiêng, màu xanh)
+            let confidenceText = "(confidence: \(confidencePercent)%)\n"
+            let confidenceAttributes: [NSAttributedString.Key: Any] = [
+                .font: italicFont,
+                .foregroundColor: themeBlueColor
+            ]
+            attributedString.append(NSAttributedString(string: confidenceText, attributes: confidenceAttributes))
+        }
+        
+        // 3. "Từ khoá đã tokenization:" (chữ nhỏ hơn, bold)
+        if !defaultProductsController.aiSearchKeywords.isEmpty {
+            attributedString.append(NSAttributedString(string: "\n", attributes: [:]))
+            
+            let keywordsTitleText = "Từ khoá đã tokenization:\n"
+            let keywordsTitleAttributes: [NSAttributedString.Key: Any] = [
+                .font: mediumFont,
+                .foregroundColor: UIColor.label
+            ]
+            attributedString.append(NSAttributedString(string: keywordsTitleText, attributes: keywordsTitleAttributes))
+            
+            // Danh sách keywords
+            let keywordsText = defaultProductsController.aiSearchKeywords.joined(separator: ", ")
+            let keywordsAttributes: [NSAttributedString.Key: Any] = [
+                .font: regularFont,
+                .foregroundColor: UIColor.label
+            ]
+            attributedString.append(NSAttributedString(string: keywordsText, attributes: keywordsAttributes))
+        }
+        
+        // 4. Kết quả tìm kiếm
+        let itemCount = productsController.items.value.count
+        attributedString.append(NSAttributedString(string: "\n\n", attributes: [:]))
+        
+        if itemCount > 0 {
+            // "Tìm thấy X sản phẩm phù hợp" (in nghiêng, màu xanh lá hơi tối)
+            let resultText = "Tìm thấy \(itemCount) sản phẩm phù hợp"
+            let resultAttributes: [NSAttributedString.Key: Any] = [
+                .font: italicFont,
+                .foregroundColor: darkGreenColor
+            ]
+            attributedString.append(NSAttributedString(string: resultText, attributes: resultAttributes))
+        } else {
+            // "Không tìm thấy sản phẩm nào" (màu đỏ, in nghiêng)
+            let resultText = "Không tìm thấy sản phẩm nào"
+            let resultAttributes: [NSAttributedString.Key: Any] = [
+                .font: italicFont,
+                .foregroundColor: redColor
+            ]
+            attributedString.append(NSAttributedString(string: resultText, attributes: resultAttributes))
+        }
+        
+        emptyDataLabel.attributedText = attributedString
+        emptyDataLabel.numberOfLines = 0 // Cho phép nhiều dòng
+        emptyDataLabel.textAlignment = .left
     }
     
     // MARK: - Card Setup
@@ -210,7 +330,42 @@ final class ProductsViewController: EcoViewController {
             defaultProductsController.onBack = { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             }
+            // Setup callback for toggle tableView
+            defaultProductsController.onToggleTableView = { [weak self] isHidden in
+                self?.toggleTableView(isHidden: isHidden)
+            }
         } else {
+        }
+    }
+    
+    /// Toggle ẩn/hiện tableView (chạy trên main thread)
+    private func toggleTableView(isHidden: Bool) {
+        // Đảm bảo chạy trên main thread
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            UIView.animate(withDuration: 0.3) {
+                self.productsListContainer.isHidden = isHidden
+                self.productsListContainer.alpha = isHidden ? 0 : 1
+                
+                // Đảm bảo label luôn hiển thị để người dùng nhìn kết quả model
+                self.emptyDataLabel.isHidden = false
+                
+                // Đảm bảo label nằm dưới tableView trong z-order
+                // Khi tableView ẩn, label sẽ hiển thị phía dưới
+                if let parentView = self.productsListContainer.superview {
+                    if isHidden {
+                        // Khi tableView ẩn, đưa label lên trên để hiển thị
+                        parentView.bringSubviewToFront(self.emptyDataLabel)
+                    } else {
+                        // Khi tableView hiện, đưa tableView lên trên label
+                        parentView.bringSubviewToFront(self.productsListContainer)
+                    }
+                }
+                
+                // Cập nhật label với thông tin AI search nếu có
+                self.updateEmptyDataLabelForAISearch()
+            }
         }
     }
     
@@ -259,11 +414,22 @@ final class ProductsViewController: EcoViewController {
                     
                     // Dismiss camera sau khi filter xong
                     if let presentedVC = self.presentedViewController {
-                        presentedVC.dismiss(animated: true) {
+                        presentedVC.dismiss(animated: true) { [weak self] in
+                            guard let self = self else { return }
                             self.isDismissingCamera = false
+                            
+                            // Đảm bảo UI được cập nhật sau khi camera dismiss
+                            DispatchQueue.main.async {
+                                self.updateUIAfterFilter()
+                            }
                         }
                     } else {
                         self.isDismissingCamera = false
+                        
+                        // Đảm bảo UI được cập nhật ngay cả khi không có presentedVC
+                        DispatchQueue.main.async {
+                            self.updateUIAfterFilter()
+                        }
                     }
                 }
             },
@@ -284,12 +450,39 @@ final class ProductsViewController: EcoViewController {
         if let defaultProductsController = productsController as? DefaultProductsController {
             defaultProductsController.filterItemsByLabels(labels)
             
-            // Reload tableView sau khi filter
+            // Reload tableView và cập nhật UI sau khi filter xong
             DispatchQueue.main.async { [weak self] in
-                self?.productsTableViewController?.reload()
+                guard let self = self else { return }
+                
+                // Reload tableView
+                self.productsTableViewController?.reload()
+                
+                // Cập nhật UI (ẩn/hiện tableView và label)
+                self.updateUIAfterFilter()
             }
         } else {
         }
+    }
+    
+    /// Cập nhật UI sau khi filter (ẩn tableView nếu không có kết quả, hiển thị label với thông tin AI search)
+    private func updateUIAfterFilter() {
+        let isEmpty = productsController.isEmpty
+        let defaultProductsController = productsController as? DefaultProductsController
+        
+        // Kiểm tra xem tableView có đang bị ẩn bởi toggle button không
+        let isManuallyHidden = defaultProductsController?.isTableViewHidden ?? false
+        
+        // Ẩn tableView khi:
+        // 1. Không có kết quả (vì label nằm dưới tableView trong z-stack-order)
+        // 2. Hoặc đang bị ẩn bởi toggle button
+        productsListContainer.isHidden = isEmpty || isManuallyHidden
+        
+        // Luôn hiển thị label để người dùng nhìn kết quả model một cách trực quan
+        // Label sẽ luôn hiển thị thông tin AI search nếu có
+        emptyDataLabel.isHidden = false
+        
+        // Cập nhật nội dung label với thông tin AI search (luôn hiển thị, không chỉ khi empty)
+        updateEmptyDataLabelForAISearch()
     }
     
     private func setupProductSelection() {
