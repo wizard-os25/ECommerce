@@ -104,6 +104,16 @@ extension DefaultDataTransferService: DataTransferService {
                     
                     print("🔄 [DataTransferService] Received 401 Unauthorized, attempting auto-refresh token...")
                     
+                    // QUAN TRỌNG: Kiểm tra user có đang logged in không trước khi refresh
+                    // Nếu user đã logout, không nên refresh token
+                    let utilities = Utilities()
+                    guard utilities.isLoggedIn() else {
+                        print("⚠️ [DataTransferService] User is not logged in, skipping token refresh")
+                        let error = self.resolve(networkError: error)
+                        queue.asyncExecute { completion(.failure(error)) }
+                        return
+                    }
+                    
                     // Try to refresh token
                     let refreshResult = TokenRefreshService.shared.refreshTokenIfNeeded { refreshResult in
                         switch refreshResult {

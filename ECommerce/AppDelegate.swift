@@ -66,7 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.triggerLocalNetworkPermission()
         
         // Try to send device token if user is already logged in (app relaunch)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        // Delay lâu hơn để đảm bảo không có race condition với logout/login flow
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             AppDelegate.sendDeviceTokenToServerIfLoggedIn()
         }
     
@@ -139,8 +140,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Get access token if user is logged in
         let utilities = Utilities()
+        
+        // Kiểm tra user có đang logged in không
+        guard utilities.isLoggedIn() else {
+            print("⚠️ [AppDelegate] User is not logged in, skipping device token registration")
+            return
+        }
+        
+        // Kiểm tra access token tồn tại và không rỗng
         guard let accessToken = utilities.getAccessToken(), !accessToken.isEmpty else {
             print("⚠️ [AppDelegate] No access token, device token will be sent after login")
+            return
+        }
+        
+        // Kiểm tra session không expired (tránh gửi với token đã hết hạn)
+        if utilities.isSessionExpired() {
+            print("⚠️ [AppDelegate] Session is expired, skipping device token registration")
             return
         }
         

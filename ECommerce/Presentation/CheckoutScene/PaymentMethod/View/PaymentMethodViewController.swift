@@ -562,7 +562,7 @@ final class PaymentMethodViewController: EcoViewController, STPAuthenticationCon
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             showAuthenticationPrompt(context: context, completion: completion)
         } else {
-            // Thiết bị không hỗ trợ authentication (rất hiếm)
+            // Thiết bị không hỗ trợ authentication
             if let error = error {
             }
             completion(false)

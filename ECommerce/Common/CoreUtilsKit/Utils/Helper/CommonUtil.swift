@@ -244,7 +244,13 @@ class Utilities: NSObject {
         print("   - User Email: \(defaults.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "nil")")
         print("   - User Phone: \(defaults.string(forKey: Constants.UserDefaultsKey.userPhone) ?? "nil")")
         
-        // Clear login state
+        // QUAN TRỌNG: Clear TokenRefreshService state TRƯỚC khi clear session
+        // Điều này ngăn chặn TokenRefreshService cố refresh token cũ sau khi logout
+        print("🔄 Resetting TokenRefreshService...")
+        TokenRefreshService.shared.reset()
+        
+        // Clear login state FIRST (trước khi clear session)
+        // Điều này đảm bảo các request sau sẽ biết user đã logout
         print("🗑️ Clearing login state...")
         saveLogging(false)
         

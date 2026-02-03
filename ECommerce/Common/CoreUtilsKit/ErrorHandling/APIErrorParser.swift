@@ -22,8 +22,8 @@ struct APIErrorParser {
             return parseErrorMessage(from: networkError)
         }
         
-        // Fallback to localized description
-        return error.localizedDescription
+        // Fallback: sử dụng parseGenericError để có message thân thiện hơn
+        return parseGenericError(error)
     }
     
     /// Parse error message from DataTransferError
@@ -41,9 +41,10 @@ struct APIErrorParser {
             if let networkError = resolvedError as? NetworkError {
                 return parseErrorMessage(from: networkError)
             }
-            return resolvedError.localizedDescription
+            // Sử dụng parseGenericError để có message thân thiện hơn
+            return parseGenericError(resolvedError)
         case .noResponse:
-            return "No response from server. Please try again."
+            return "Không nhận được phản hồi từ máy chủ. Vui lòng thử lại."
         }
     }
     
@@ -59,14 +60,77 @@ struct APIErrorParser {
             // Fallback to status code based message
             return getDefaultErrorMessage(for: statusCode)
         case .notConnected:
-            return "No internet connection. Please check your network and try again."
+            return "Không có kết nối internet. Vui lòng kiểm tra mạng và thử lại."
         case .cancelled:
-            return "Request was cancelled."
+            return "Yêu cầu đã bị hủy."
         case .generic(let genericError):
-            return genericError.localizedDescription
+            return parseGenericError(genericError)
         case .urlGeneration:
-            return "Invalid request. Please try again."
+            return "Yêu cầu không hợp lệ. Vui lòng thử lại."
         }
+    }
+    
+    /// Parse generic error to get user-friendly message
+    private static func parseGenericError(_ error: Error) -> String {
+        if let nsError = error as? NSError {
+            let errorCode = nsError.code
+            let errorDomain = nsError.domain
+            
+            // Xử lý các lỗi network phổ biến
+            if errorDomain == NSURLErrorDomain {
+                switch errorCode {
+                case NSURLErrorTimedOut:
+                    return "Kết nối quá thời gian. Vui lòng kiểm tra mạng và thử lại."
+                case NSURLErrorCannotConnectToHost:
+                    return "Không thể kết nối đến máy chủ. Vui lòng thử lại sau."
+                case NSURLErrorNetworkConnectionLost:
+                    return "Kết nối mạng bị mất. Vui lòng kiểm tra mạng và thử lại."
+                case NSURLErrorCannotFindHost:
+                    return "Không tìm thấy máy chủ. Vui lòng kiểm tra kết nối mạng."
+                case NSURLErrorDNSLookupFailed:
+                    return "Lỗi kết nối mạng. Vui lòng kiểm tra kết nối và thử lại."
+                case NSURLErrorNotConnectedToInternet:
+                    return "Không có kết nối internet. Vui lòng kiểm tra mạng và thử lại."
+                case NSURLErrorInternationalRoamingOff:
+                    return "Roaming quốc tế đã tắt. Vui lòng bật roaming hoặc sử dụng Wi-Fi."
+                case NSURLErrorCallIsActive:
+                    return "Cuộc gọi đang diễn ra. Vui lòng kết thúc cuộc gọi và thử lại."
+                case NSURLErrorDataNotAllowed:
+                    return "Dữ liệu di động không được phép. Vui lòng kiểm tra cài đặt mạng."
+                case NSURLErrorRequestBodyStreamExhausted:
+                    return "Lỗi khi gửi dữ liệu. Vui lòng thử lại."
+                default:
+                    // Nếu là error code 1 hoặc các lỗi khác
+                    if errorCode == 1 {
+                        return "Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối mạng và thử lại."
+                    }
+                    return "Lỗi kết nối mạng. Vui lòng thử lại sau. (Mã lỗi: \(errorCode))"
+                }
+            }
+            
+            // Xử lý các domain khác
+            if errorDomain == "ECommerce.DataTransferError" {
+                if errorCode == 1 {
+                    return "Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối mạng và thử lại."
+                }
+            }
+            
+            // Fallback: sử dụng localized description nếu có, nếu không thì message mặc định
+            let localizedDesc = nsError.localizedDescription
+            if !localizedDesc.isEmpty && localizedDesc != "The operation could not be completed." {
+                return localizedDesc
+            }
+            
+            return "Đã xảy ra lỗi. Vui lòng thử lại sau."
+        }
+        
+        // Fallback cho các error types khác
+        let localizedDesc = error.localizedDescription
+        if !localizedDesc.isEmpty && !localizedDesc.contains("error 1") && !localizedDesc.contains("DataTransferError") {
+            return localizedDesc
+        }
+        
+        return "Đã xảy ra lỗi. Vui lòng thử lại sau."
     }
     
     /// Parse API error response structure: { "statusCode": 400, "success": false, "message": "Error message" }
@@ -142,21 +206,21 @@ struct APIErrorParser {
     private static func getDefaultErrorMessage(for statusCode: Int) -> String {
         switch statusCode {
         case 400:
-            return "Invalid request. Please check your input and try again."
+            return "Yêu cầu không hợp lệ. Vui lòng kiểm tra thông tin và thử lại."
         case 401:
-            return "Unauthorized. Please login again."
+            return "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại."
         case 403:
-            return "Access denied. Please check your credentials or contact support."
+            return "Không có quyền truy cập. Vui lòng kiểm tra tài khoản hoặc liên hệ hỗ trợ."
         case 404:
-            return "Resource not found."
+            return "Không tìm thấy tài nguyên."
         case 422:
-            return "Validation error. Please check your input."
+            return "Dữ liệu không hợp lệ. Vui lòng kiểm tra thông tin và thử lại."
         case 500:
-            return "Server error. Please try again later."
+            return "Lỗi máy chủ. Vui lòng thử lại sau."
         case 503:
-            return "Service unavailable. Please try again later."
+            return "Dịch vụ tạm thời không khả dụng. Vui lòng thử lại sau."
         default:
-            return "An error occurred. Please try again. (Error code: \(statusCode))"
+            return "Đã xảy ra lỗi. Vui lòng thử lại sau. (Mã lỗi: \(statusCode))"
         }
     }
     
@@ -164,15 +228,15 @@ struct APIErrorParser {
     private static func parseDecodingError(_ error: DecodingError) -> String {
         switch error {
         case .dataCorrupted(let context):
-            return context.debugDescription
+            return "Dữ liệu phản hồi không hợp lệ. Vui lòng thử lại sau."
         case .keyNotFound(let key, let context):
-            return "Missing field: \(key.stringValue). \(context.debugDescription)"
+            return "Thiếu trường dữ liệu: \(key.stringValue). Vui lòng thử lại sau."
         case .typeMismatch(let type, let context):
-            return "Type mismatch for field: \(context.codingPath.map { $0.stringValue }.joined(separator: ".")). Expected \(type). \(context.debugDescription)"
+            return "Lỗi định dạng dữ liệu. Vui lòng thử lại sau."
         case .valueNotFound(let type, let context):
-            return "Missing value for type \(type) at: \(context.codingPath.map { $0.stringValue }.joined(separator: "."))"
+            return "Thiếu giá trị dữ liệu. Vui lòng thử lại sau."
         @unknown default:
-            return "Failed to parse response. Please try again."
+            return "Không thể xử lý phản hồi từ máy chủ. Vui lòng thử lại."
         }
     }
 }

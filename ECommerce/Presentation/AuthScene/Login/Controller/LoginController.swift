@@ -90,14 +90,17 @@ final class DefaultLoginController: LoginController {
         utilities.saveUser(user: authResult.user)
         utilities.saveLogging(true)
         
-        // Send device token to server after successful login
-        AppDelegate.sendDeviceTokenToServerIfLoggedIn()
-        
-        // Update success state
+        // Update success state first
         isLoginSuccess.value = true
         
         // Trigger success message - View will observe and show alert using default alertable
         successMessage.value = "login_success".localized()
+        
+        // Send device token to server after successful login
+        // Delay một chút để đảm bảo session đã được lưu hoàn toàn vào Keychain
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            AppDelegate.sendDeviceTokenToServerIfLoggedIn()
+        }
     }
 }
 

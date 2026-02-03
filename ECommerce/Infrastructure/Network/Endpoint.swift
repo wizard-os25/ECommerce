@@ -120,9 +120,12 @@ extension Requestable {
         var allHeaders: [String: String] = config.headers
         headerParameters.forEach { allHeaders.updateValue($1, forKey: $0) }
         
+        // Check if this is a public endpoint (login, signup, register) - these should NOT have Bearer token
+        let isPublicEndpoint = isPublicAuthEndpoint(path: path)
+        
         // Add Bearer token from access_token if available (for authenticated requests)
-        // Only add if not already present (to allow override)
-        if allHeaders["Authorization"] == nil {
+        // Only add if not already present (to allow override) AND not a public endpoint
+        if allHeaders["Authorization"] == nil && !isPublicEndpoint {
             let utilities = Utilities()
             
             // Check if token is expired before using it
@@ -141,6 +144,8 @@ extension Requestable {
             } else {
                 print("⚠️ [Endpoint] No access token found, request will be unauthenticated")
             }
+        } else if isPublicEndpoint {
+            print("🔓 [Endpoint] Public auth endpoint detected - skipping Bearer token")
         }
 
         // Handle body parameters
@@ -180,5 +185,19 @@ private extension Encodable {
         let data = try JSONEncoder().encode(self)
         let jsonData = try JSONSerialization.jsonObject(with: data)
         return jsonData as? [String : Any]
+    }
+}
+
+/// Helper to check if an endpoint path is a public auth endpoint (login, signup, register)
+/// These endpoints should NOT have Bearer token in Authorization header
+private func isPublicAuthEndpoint(path: String) -> Bool {
+    let publicAuthPaths = [
+        "api/v1/auth/login",
+        "api/v1/auth/register",
+        "api/v1/auth/signup"
+    ]
+    
+    return publicAuthPaths.contains { publicPath in
+        path.contains(publicPath)
     }
 }

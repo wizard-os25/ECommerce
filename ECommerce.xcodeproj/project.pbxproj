@@ -6962,7 +6962,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WXAFGJMT2X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ECommerce/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "ECommerce";
+				INFOPLIST_KEY_CFBundleDisplayName = ECommerce;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Ứng dụng cần truy cập camera để chụp ảnh sản phẩm và tìm kiếm bằng hình ảnh";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Ứng dụng cần truy cập mạng local để kết nối với server phát triển";
@@ -7011,7 +7011,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WXAFGJMT2X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ECommerce/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "ECommerce";
+				INFOPLIST_KEY_CFBundleDisplayName = ECommerce;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Ứng dụng cần truy cập camera để chụp ảnh sản phẩm và tìm kiếm bằng hình ảnh";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Ứng dụng cần truy cập mạng local để kết nối với server phát triển";

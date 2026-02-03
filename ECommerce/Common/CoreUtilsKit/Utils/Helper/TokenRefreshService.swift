@@ -36,6 +36,19 @@ final class TokenRefreshService {
     func refreshTokenIfNeeded(completion: @escaping (Result<AuthSession, Error>) -> Void) -> Bool {
         print("🔄 [TokenRefreshService] Checking if token refresh is needed...")
         
+        // QUAN TRỌNG: Kiểm tra user có đang logged in không
+        // Nếu user đã logout, không cần refresh token
+        guard utilities.isLoggedIn() else {
+            print("⚠️ [TokenRefreshService] User is not logged in, skipping token refresh")
+            let error = NSError(
+                domain: "TokenRefreshService",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "User is not logged in"]
+            )
+            completion(.failure(error))
+            return false
+        }
+        
         // Check if session is expired
         if !utilities.isSessionExpired() {
             print("✅ [TokenRefreshService] Token is still valid, no refresh needed")
@@ -126,6 +139,32 @@ final class TokenRefreshService {
         }
         
         return true
+    }
+    
+    /// Reset TokenRefreshService state (called during logout)
+    /// This prevents any pending refresh operations from completing after logout
+    func reset() {
+        print("🔄 [TokenRefreshService] Resetting service state...")
+        
+        // Clear refresh queue and notify all pending callbacks with cancellation error
+        let queue = refreshQueue
+        refreshQueue.removeAll()
+        isRefreshing = false
+        
+        if !queue.isEmpty {
+            print("⚠️ [TokenRefreshService] Cancelling \(queue.count) pending refresh callbacks")
+            let error = NSError(
+                domain: "TokenRefreshService",
+                code: NSUserCancelledError,
+                userInfo: [NSLocalizedDescriptionKey: "Token refresh cancelled due to logout"]
+            )
+            
+            for completion in queue {
+                completion(.failure(error))
+            }
+        }
+        
+        print("✅ [TokenRefreshService] Service reset complete")
     }
     
     /// Force refresh token (ignore expiration check)

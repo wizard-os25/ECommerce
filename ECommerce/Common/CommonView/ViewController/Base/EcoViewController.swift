@@ -78,7 +78,9 @@ open class EcoViewController: EcoBaseViewController,
 
     open func handleError(_ error: Error?) {
         guard let error else { return }
-        showAlert(title: "error".localized(), message: error.localizedDescription)
+        // Sử dụng APIErrorParser để có message thân thiện với người dùng
+        let userFriendlyMessage = APIErrorParser.parseErrorMessage(from: error)
+        showAlert(title: "error".localized(), message: userFriendlyMessage)
     }
 
     open func applyNavigation(_ state: EcoNavigationState) {

@@ -86,8 +86,6 @@ final class DefaultSignUpController: SignUpController {
     }
     
     private func handleSignUpSuccess(_ authResult: AuthResult) {
-        
-        
         // Save session and user info to UserDefaults
         utilities.saveSession(
             accessToken: authResult.session.accessToken,
@@ -97,15 +95,17 @@ final class DefaultSignUpController: SignUpController {
         utilities.saveUser(user: authResult.user)
         utilities.saveLogging(true)
         
-        
-        // Send device token to server after successful signup
-        AppDelegate.sendDeviceTokenToServerIfLoggedIn()
-        
-        // Update success state
+        // Update success state first
         isSignUpSuccess.value = true
         
         // Trigger success message - View will observe and show alert using default alertable
         successMessage.value = "sign_up_success".localized()
+        
+        // Send device token to server after successful signup
+        // Delay một chút để đảm bảo session đã được lưu hoàn toàn vào Keychain
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            AppDelegate.sendDeviceTokenToServerIfLoggedIn()
+        }
     }
 }
 
